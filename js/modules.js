@@ -7,6 +7,6 @@ bonsaiApp.directive('register', function () {
         controller: function ($scope) {
             $scope.data = $scope.value+1;
         },
-        templateUrl: 'partials/processorRegister.html'
+        templateUrl: 'partials/component_Register.html'
     };
 });
