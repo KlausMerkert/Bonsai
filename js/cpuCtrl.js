@@ -4,6 +4,7 @@ bonsaiApp.controller('bonsaiCpuCtrl',
     function ($scope, $routeParams) {
 
         $scope.text = "Hallo Welt!";
-        $scope.value = 345678;
+        $scope.value1 = 345678;
+        $scope.value2 = 123456;
     }
 );
