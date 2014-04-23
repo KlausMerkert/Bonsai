@@ -1,11 +1,11 @@
-bonsaiApp.directive('bonsaiProcessor', function () {
+bonsaiApp.directive('register', function () {
     return {
         restrict: 'E',
         scope: {
-            data: '=register'
+            value: '='
         },
         controller: function ($scope) {
-            $scope.arg = "riansezani";
+            $scope.data = $scope.value+1;
         },
         templateUrl: 'partials/processorRegister.html'
     };
