@@ -1,8 +1,14 @@
 'use strict';
 
-angular.module('Bonsai', ['ngRoute'])
+var bonsaiApp = angular.module(
+        'Bonsai',
+        [
+            'ngAnimate',
+            'ngRoute'
+        ]
+    )
     .config(['$routeProvider', function ($routeProvider) {
         $routeProvider.
-            when('/', {templateUrl: '/index.html', controller: cpuCtrl}).
-            otherwise({templateUrl: '/index.html', controller: cpuCtrl});
+            when('/', {templateUrl: '/partials/main.html', controller: 'bonsaiCpuCtrl'}).
+            otherwise({templateUrl: '/partials/main.html', controller: 'bonsaiCpuCtrl'});
     }]);

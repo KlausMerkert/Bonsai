@@ -1,7 +1,9 @@
 'use strict';
 
-function cpuCtrl($scope, Backend, $routeParams) {
-    $scope.text = "Hallo Welt!"
-}
+bonsaiApp.controller('bonsaiCpuCtrl',
+    function ($scope, $routeParams) {
 
-cpuCtrl.$inject = ['$scope', '$routeParams'];
+        $scope.text = "Hallo Welt!";
+        $scope.value = 345678;
+    }
+);
