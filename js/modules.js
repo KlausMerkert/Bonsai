@@ -1,24 +1,54 @@
 bonsaiApp.directive('register', function () {
     return {
         restrict: 'E',
+        transclude: true,
         scope: {
-            value: '=',
-            connectionhandlers: '='
+            value: '='
+        },
+        controller: function ($scope) {
+            $scope.data = $scope.value;
+            $scope.connections = [];
+
+            $scope.toggleState = function (connection) {
+                for (var i = 0; i < $scope.connections.length; i++) {
+                    if ($scope.connections[i].handler == connection.handler) {
+                        if ($scope.connections[i].state >= 1) {
+                            $scope.connections[i].state = -1;
+                        } else {
+                            $scope.connections[i].state++;
+                        }
+                    }
+                }
+            };
+
+            this.addConnection = function (handler) {
+                $scope.connections.push({state: 0, handler: handler});
+            };
         },
         link: function ($scope, element, attrs) {
-            $scope.data = $scope.value;
-
             $scope.writeCallback = function (value) {
                 $scope.data = value;
             };
 
-            if ($scope.connectionhandlers instanceof Array) {
-                for (var i = 0; i < $scope.connectionhandlers.length; i++) {
-                    $scope.connectionhandlers[i].enroll(element, $scope.writeCallback);
-                }
+            for (var i = 0; i < $scope.connections.length; i++) {
+                $scope.connections[i].handler.enroll(element, $scope.writeCallback);
             }
         },
         templateUrl: 'partials/component_Register.html'
+    };
+});
+
+bonsaiApp.directive('connection', function () {
+    return {
+        require: '^register',
+        restrict: 'E',
+        scope: {
+            handler: '='
+        },
+        link: function ($scope, element, attrs, registerCtrl) {
+            registerCtrl.addConnection($scope.handler);
+        },
+        template: ''
     };
 });
 

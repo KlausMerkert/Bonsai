@@ -2,7 +2,9 @@
     <h1>Bonsai</h1>
 
     <div class="components">
-        <register connectionhandlers="[dataBusHandler]" value="value1"></register>
+        <register value="value1">
+            <connection handler="dataBusHandler"></connection>
+        </register>
         <register value="value2"></register>
         <bus id="dataBus" handler="dataBusHandler"></bus>
     </div>
