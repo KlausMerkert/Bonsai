@@ -1,12 +1,16 @@
-bonsaiApp.directive('register', function () {
+bonsaiApp.directive('register', function ($interval) {
     return {
         restrict: 'E',
         transclude: true,
         scope: {
-            value: '='
+            value: '=',
+            top: '=',
+            left: '='
         },
         controller: function ($scope) {
             $scope.data = $scope.value;
+            $scope.topCSS = $scope.top + 'em';
+            $scope.leftCSS = $scope.left + 'em';
             $scope.connections = [];
 
             $scope.toggleState = function (connection) {
@@ -30,9 +34,27 @@ bonsaiApp.directive('register', function () {
                 $scope.data = value;
             };
 
-            for (var i = 0; i < $scope.connections.length; i++) {
-                $scope.connections[i].handler.enroll(element, $scope.writeCallback);
-            }
+            $scope.getConnectionPositions = function (busHandler) {
+                var positions = [];
+                for (var i = 0; i < $scope.connections.length; i++) {
+                    if ($scope.connections[i].handler == busHandler) {
+                        if (i%2 == 0) {
+                            positions.push({top: $scope.top-2.55, left: $scope.left+1.4});
+                        } else {
+                            positions.push({top: $scope.top+0.12, left: $scope.left+1.4});
+                        }
+                    }
+                }
+                return positions;
+            };
+
+            // We have to wait for a very short time to enroll to the busses
+            // because the handler needs to be fully initialized.
+            $interval(function () {
+                for (var i = 0; i < $scope.connections.length; i++) {
+                    $scope.connections[i].handler.enroll(element, $scope.writeCallback, $scope.getConnectionPositions);
+                }
+            }, 1, 1);
         },
         templateUrl: 'partials/component_Register.html'
     };
@@ -77,8 +99,21 @@ bonsaiApp.directive('bus', function () {
                 return index;
             };
 
-            $scope.localHandler.enroll = function (enrollee, callback) {
-                $scope.connections.push({enrollee: enrollee, is_reading: false, callback: callback})
+            var updateVisibleParts = function () {
+                var parts = [];
+                parts.push({type: 'horizontal', top: '7em', left: '5em', width: '3em', height: '1em'});
+                parts.push({type: 'topright', top: '7em', left: '8em', width: '3em', height: '1em'});
+                $scope.visibleParts = parts;
+            };
+
+            $scope.localHandler.enroll = function (enrollee, callback, getPosition) {
+                $scope.connections.push({
+                    enrollee: enrollee,
+                    is_reading: false,
+                    callback: callback,
+                    getPosition: getPosition
+                });
+                updateVisibleParts();
             };
 
             $scope.localHandler.resign = function (resigner) {
@@ -86,6 +121,10 @@ bonsaiApp.directive('bus', function () {
                 if (index >= 0) {
                     $scope.connections.splice(index, 1);
                 }
+            };
+
+            $scope.localHandler.registerMovement = function () {
+                updateVisibleParts()
             };
 
             $scope.localHandler.startReading = function (reader) {
@@ -137,6 +176,7 @@ bonsaiApp.directive('bus', function () {
                     }
                 }
             };
-        }
+        },
+        templateUrl: 'partials/component_Bus.html'
     }
 });
