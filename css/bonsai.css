@@ -18,7 +18,14 @@ body {
     border-radius: 0.2em;
     color: rgb(0, 0, 0);
     display: inline-block;
-    position: relative;
-    top: 0.1em;
+    position: absolute;
     cursor: pointer;
+}
+
+.register .toprow {
+    top: -2.5em;
+}
+
+.register .bottomrow {
+    top: 0.1em;
 }

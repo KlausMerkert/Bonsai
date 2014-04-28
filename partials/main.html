@@ -2,12 +2,21 @@
     <h1>Bonsai</h1>
 
     <div class="components">
-        <register value="value1">
+        <register value="123456">
             <connection handler="dataBusHandler"></connection>
         </register>
-        <register value="value2"></register>
-        <bus id="dataBus" handler="dataBusHandler"></bus>
+        <register value="234567">
+            <connection handler="dataBusHandler"></connection>
+            <connection handler="adressBusHandler"></connection>
+        </register>
+        <register value="345678">
+            <connection handler="dataBusHandler"></connection>
+            <connection handler="adressBusHandler"></connection>
+        </register>
+        <bus handler="dataBusHandler"></bus>
+        <bus handler="adressBusHandler"></bus>
     </div>
+    <hr style="margin-top: 5em;"/>
     <p>{{text}}</p>
     <object data="images/CPU_Schema.svg" width="642" height="350" type="image/svg+xml"
             codebase="http://www.savarese.com/software/svgplugin/"></object>
