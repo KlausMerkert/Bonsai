@@ -39,7 +39,7 @@ bonsaiApp.directive('register', function ($interval) {
                 for (var i = 0; i < $scope.connections.length; i++) {
                     if ($scope.connections[i].handler == busHandler) {
                         if (i%2 == 0) {
-                            positions.push({top: $scope.top-2.55, left: $scope.left+1.4});
+                            positions.push({top: $scope.top-1.55, left: $scope.left+1.4});
                         } else {
                             positions.push({top: $scope.top+0.12, left: $scope.left+1.4});
                         }
