@@ -13,7 +13,7 @@ bonsaiApp.directive('bus', function () {
             $scope.active = false;
             $scope.writerIndex = -1;
 
-            var findInConnections= function (enrollee) {
+            var findInConnections = function (enrollee) {
                 var index = -1;
                 for (var i = 0; i < $scope.connections.length; i++) {
                     if ($scope.connections[i].enrollee == enrollee) {
@@ -21,6 +21,33 @@ bonsaiApp.directive('bus', function () {
                     }
                 }
                 return index;
+            };
+
+            var isInList = function (element, list) {
+                for (var i = 0; i < list.length; i++) {
+                    if (angular.equals(element, list[i])) {
+                        return true;
+                    }
+                }
+                return false;
+            };
+
+            var isInConnections = function (candidate, connections) {
+                for (var i = 0; i < connections.length; i++) {
+                    if (angular.equals(
+                        candidate.connection,
+                        connections[i].connection
+                    )) {
+                        return true;
+                    }
+                    if (angular.equals(
+                        candidate.connection,
+                        [connections[i].connection[1], connections[i].connection[0]]
+                    )) {
+                        return true;
+                    }
+                }
+                return false;
             };
 
             var getEndpoints = function () {
@@ -69,14 +96,14 @@ bonsaiApp.directive('bus', function () {
                     // Test if one of the connection point is already in one of the clusters and
                     // add the other point if it is not already in there.
                     for (var j = 0; j < clusters.length; j++) {
-                        if (clusters[j].indexOf(connections[i].connection[0]) >= 0) {
-                            if (!clusters[j].indexOf(connections[i].connection[1]) >= 0) {
+                        if (isInList(connections[i].connection[0], clusters[j])) {
+                            if (!isInList(connections[i].connection[1], clusters[j])) {
                                 clusters[j].push(connections[i].connection[1]);
                             }
                             connectionAdded = true;
                         }
-                        if (clusters[j].indexOf(connections[i].connection[1]) >= 0) {
-                            if (!clusters[j].indexOf(connections[i].connection[0]) >= 0) {
+                        if (isInList(connections[i].connection[1], clusters[j])) {
+                            if (!isInList(connections[i].connection[0], clusters[j])) {
                                 clusters[j].push(connections[i].connection[0]);
                             }
                             connectionAdded = true;
@@ -111,12 +138,12 @@ bonsaiApp.directive('bus', function () {
                 for (var k = 0; k < clusters.length; k++) {
                     var clusterMinWeight = 1000;
                     for (var l = 0; l < clusters[k].length; l++) {
-                        var weight = Math.sqrt(Math.sqrt(
+                        var weight = Math.sqrt(
                             (grid.XCoordinates[point.i] - grid.XCoordinates[clusters[k][l].i]) *
-                            (grid.XCoordinates[point.i] - grid.XCoordinates[clusters[k][l].i]) +
-                            (grid.XCoordinates[point.j] - grid.XCoordinates[clusters[k][l].j]) *
-                            (grid.XCoordinates[point.j] - grid.XCoordinates[clusters[k][l].j])
-                        ));
+                                (grid.XCoordinates[point.i] - grid.XCoordinates[clusters[k][l].i]) +
+                                (grid.XCoordinates[point.j] - grid.XCoordinates[clusters[k][l].j]) *
+                                    (grid.XCoordinates[point.j] - grid.XCoordinates[clusters[k][l].j])
+                        );
                         if (weight < clusterMinWeight) {
                             clusterMinWeight = weight;
                         }
@@ -129,74 +156,104 @@ bonsaiApp.directive('bus', function () {
             var findGoodConnections = function (alreadyFoundConnections, grid, waypoints) {
                 // find all possible waypoint connections
                 var possibleNewConnections = [];
+                var connection;
                 for (var k = 0; k < waypoints.length; k++) {
                     if (waypoints[k].j - 1 >= 0) {
-                        possibleNewConnections.push({
-                            connection: [
-                                waypoints[k],
-                                {i: waypoints[k].i, j: waypoints[k].j - 1}
-                            ],
-                            dist: grid.YCoordinates[waypoints[k].j] - grid.YCoordinates[waypoints[k].j - 1],
-                            weight: getWaypointWeight(
-                                {i: waypoints[k].i, j: waypoints[k].j - 1},
-                                grid,
-                                waypoints,
-                                alreadyFoundConnections
-                            )
-                        });
+                        connection = [
+                            waypoints[k],
+                            {i: waypoints[k].i, j: waypoints[k].j - 1}
+                        ];
+                        if (!isInConnections({connection: connection}, alreadyFoundConnections)) {
+                            possibleNewConnections.push({
+                                connection: connection,
+                                dist: grid.YCoordinates[waypoints[k].j] - grid.YCoordinates[waypoints[k].j - 1],
+                                weight: getWaypointWeight(
+                                    {i: waypoints[k].i, j: waypoints[k].j - 1},
+                                    grid,
+                                    waypoints,
+                                    alreadyFoundConnections
+                                )
+                            });
+                        }
                     }
                     if (waypoints[k].i - 1 >= 0) {
-                        possibleNewConnections.push({
-                            connection: [
-                                waypoints[k],
-                                {i: waypoints[k].i - 1, j: waypoints[k].j}
-                            ],
-                            dist: grid.XCoordinates[waypoints[k].i] - grid.XCoordinates[waypoints[k].i - 1],
-                            weight: getWaypointWeight(
-                                {i: waypoints[k].i-1, j: waypoints[k].j},
-                                grid,
-                                waypoints,
-                                alreadyFoundConnections
-                            )
-                        });
+                        connection = [
+                            waypoints[k],
+                            {i: waypoints[k].i - 1, j: waypoints[k].j}
+                        ];
+                        if (!isInConnections({connection: connection}, alreadyFoundConnections)) {
+                            possibleNewConnections.push({
+                                connection: connection,
+                                dist: grid.XCoordinates[waypoints[k].i] - grid.XCoordinates[waypoints[k].i - 1],
+                                weight: getWaypointWeight(
+                                    {i: waypoints[k].i - 1, j: waypoints[k].j},
+                                    grid,
+                                    waypoints,
+                                    alreadyFoundConnections
+                                )
+                            });
+                        }
                     }
                     if (waypoints[k].j + 1 < grid.YCoordinates.length) {
-                        possibleNewConnections.push({
-                            connection: [
-                                waypoints[k],
-                                {i: waypoints[k].i, j: waypoints[k].j + 1}
-                            ],
-                            dist: grid.YCoordinates[waypoints[k].j + 1] - grid.YCoordinates[waypoints[k].j],
-                            weight: getWaypointWeight(
-                                {i: waypoints[k].i, j: waypoints[k].j + 1},
-                                grid,
-                                waypoints,
-                                alreadyFoundConnections
-                            )
-                        });
+                        connection = [
+                            waypoints[k],
+                            {i: waypoints[k].i, j: waypoints[k].j + 1}
+                        ];
+                        if (!isInConnections({connection: connection}, alreadyFoundConnections)) {
+                            possibleNewConnections.push({
+                                connection: connection,
+                                dist: grid.YCoordinates[waypoints[k].j + 1] - grid.YCoordinates[waypoints[k].j],
+                                weight: getWaypointWeight(
+                                    {i: waypoints[k].i, j: waypoints[k].j + 1},
+                                    grid,
+                                    waypoints,
+                                    alreadyFoundConnections
+                                )
+                            });
+                        }
                     }
                     if (waypoints[k].i + 1 < grid.XCoordinates.length) {
-                        possibleNewConnections.push({
-                            connection: [
-                                waypoints[k],
-                                {i: waypoints[k].i + 1, j: waypoints[k].j}
-                            ],
-                            dist: grid.XCoordinates[waypoints[k].i + 1] - grid.XCoordinates[waypoints[k].i],
-                            weight: getWaypointWeight(
-                                {i: waypoints[k].i + 1, j: waypoints[k].j},
-                                grid,
-                                waypoints,
-                                alreadyFoundConnections
-                            )
-                        });
+                        connection = [
+                            waypoints[k],
+                            {i: waypoints[k].i + 1, j: waypoints[k].j}
+                        ];
+                        if (!isInConnections({connection: connection}, alreadyFoundConnections)) {
+                            possibleNewConnections.push({
+                                connection: connection,
+                                dist: grid.XCoordinates[waypoints[k].i + 1] - grid.XCoordinates[waypoints[k].i],
+                                weight: getWaypointWeight(
+                                    {i: waypoints[k].i + 1, j: waypoints[k].j},
+                                    grid,
+                                    waypoints,
+                                    alreadyFoundConnections
+                                )
+                            });
+                        }
                     }
                 }
-                // sort the waypoints by weight
+                // sort the connections by weight
                 possibleNewConnections.sort(function (a, b) {
-                    return (a.weight + a.dist) - (b.weight + b.dist);
+                    return (a.weight * a.dist) - (b.weight * b.dist);
                 });
-                //
-                console.log(possibleNewConnections);
+                // remove duplicate connections
+                for (var i = 0; i < possibleNewConnections.length; i++) {
+                    if (isInConnections(possibleNewConnections[i], alreadyFoundConnections)) {
+                        possibleNewConnections.splice(i, 1);
+                    }
+                }
+                if (possibleNewConnections.length > 0) {
+                    // select the connection with the smallest weight
+                    alreadyFoundConnections.push(possibleNewConnections[0]);
+                    // add the new waypoint
+                    if (!isInList(possibleNewConnections[0].connection[0], waypoints)) {
+                        waypoints.push(possibleNewConnections[0].connection[0]);
+                    }
+                    if (!isInList(possibleNewConnections[0].connection[1], waypoints)) {
+                        waypoints.push(possibleNewConnections[0].connection[1]);
+                    }
+                    // recursively add the rest of the connections
+                    alreadyFoundConnections = findGoodConnections(alreadyFoundConnections, grid, waypoints);
+                }
                 return alreadyFoundConnections;
             };
 
@@ -207,6 +264,7 @@ bonsaiApp.directive('bus', function () {
                 var grid = getGrid(endpoints);
                 // recursively find all good connections in the grid
                 var goodConnections = findGoodConnections([], grid, grid.indexEndpoints);
+                console.log(goodConnections);
                 // combine connections to parts
                 var parts = [];
 
