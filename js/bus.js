@@ -436,16 +436,26 @@ bonsaiApp.directive('bus', function () {
                 return parts;
             };
 
+            var printConnections = function (connections) {
+                var string = "";
+                for (var i = 0; i < connections.length; i++) {
+                    string = string + "(" + connections[i].connection[0].i + ", " + connections[i].connection[0].j + ") -> (" + connections[i].connection[1].i + ", " + connections[i].connection[1].j + "), ";
+                }
+                return string;
+            };
+
             var updateVisibleParts = function () {
+                console.log("_____________________");
                 // get all endpoints
                 var endpoints = getEndpoints();
                 // get the grid
                 var grid = getGrid(endpoints);
                 // recursively find all good connections in the grid
                 var goodConnections = findGoodConnections([], grid, grid.indexEndpoints);
-                console.log(goodConnections);
+                console.log(printConnections(goodConnections));
                 // combine connections to parts
                 var connectionParts = constructConnectionParts(goodConnections);
+                console.log(connectionParts);
                 // set the parts
                 $scope.visibleParts = constructParts(connectionParts, grid);
             };
