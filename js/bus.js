@@ -257,6 +257,185 @@ bonsaiApp.directive('bus', function () {
                 return alreadyFoundConnections;
             };
 
+            var getConnectionPartEndpoints = function (partlist) {
+                var endpoints = partlist[0]
+                for (var i = 1; i < partlist.length; i++) {
+                    if (angular.equals(endpoints[0],partlist[i][0])) {
+                        endpoints[0] = partlist[i][1];
+                        continue;
+                    }
+                    if (angular.equals(endpoints[0],partlist[i][1])) {
+                        endpoints[0] = partlist[i][0];
+                        continue;
+                    }
+                    if (angular.equals(endpoints[1],partlist[i][0])) {
+                        endpoints[1] = partlist[i][1];
+                        continue;
+                    }
+                    if (angular.equals(endpoints[1],partlist[i][1])) {
+                        endpoints[1] = partlist[i][0];
+                    }
+                }
+                return endpoints;
+            };
+
+            var constructConnectionParts = function (goodConnections) {
+                var connectionParts = [];
+                for (var i = 0; i < goodConnections.length; i++) {
+                    //try to append the connection to an existing part
+                    var connectionAppended = false;
+                    for (var j = 0; j < connectionParts.length; j++) {
+                        var connectionPartEndpoints = getConnectionPartEndpoints(connectionParts[j]);
+                        if (angular.equals(goodConnections[i].connection[0], connectionPartEndpoints[0]) &&
+                            (goodConnections[i].connection[1].i == connectionPartEndpoints[1].i ||
+                                goodConnections[i].connection[1].j == connectionPartEndpoints[1].j)) {
+                            connectionParts[j].push(goodConnections[i].connection);
+                            connectionAppended = true;
+                        }
+                        if (angular.equals(goodConnections[i].connection[0], connectionPartEndpoints[1]) &&
+                            (goodConnections[i].connection[1].i == connectionPartEndpoints[0].i ||
+                                goodConnections[i].connection[1].j == connectionPartEndpoints[0].j)) {
+                            connectionParts[j].push(goodConnections[i].connection);
+                            connectionAppended = true;
+                        }
+                        if (angular.equals(goodConnections[i].connection[1], connectionPartEndpoints[0]) &&
+                            (goodConnections[i].connection[0].i == connectionPartEndpoints[1].i ||
+                                goodConnections[i].connection[0].j == connectionPartEndpoints[1].j)) {
+                            connectionParts[j].push(goodConnections[i].connection);
+                            connectionAppended = true;
+                        }
+                        if (angular.equals(goodConnections[i].connection[1], connectionPartEndpoints[1]) &&
+                            (goodConnections[i].connection[0].i == connectionPartEndpoints[0].i ||
+                                goodConnections[i].connection[0].j == connectionPartEndpoints[0].j)) {
+                            connectionParts[j].push(goodConnections[i].connection);
+                            connectionAppended = true;
+                        }
+                    }
+                    // no part found to append to? create new
+                    if (!connectionAppended) {
+                        connectionParts.push([goodConnections[i].connection]);
+                    }
+                }
+                return connectionParts;
+            };
+
+            var constructParts = function (connectionParts, grid) {
+                var parts = [];
+                for (var k = 0; k < connectionParts.length; k++) {
+                    var connectionPart = connectionParts[k];
+                    // calculate min and max for the coordinates
+                    var Xmin = 1000.0;
+                    var Ymin = 1000.0;
+                    var Xmax = 0.0;
+                    var Ymax = 0.0;
+                    var indexXmin = 1000;
+                    var indexYmin = 1000;
+                    var indexXmax = 0;
+                    var indexYmax = 0;
+                    for (var i = 0; i < connectionPart.length; i++) {
+                        Xmin = Math.min(
+                            grid.XCoordinates[connectionPart[i][0].i],
+                            grid.XCoordinates[connectionPart[i][1].i],
+                            Xmin
+                        );
+                        Ymin = Math.min(
+                            grid.YCoordinates[connectionPart[i][0].j],
+                            grid.YCoordinates[connectionPart[i][1].j],
+                            Ymin
+                        );
+                        Xmax = Math.max(
+                            grid.XCoordinates[connectionPart[i][0].i],
+                            grid.XCoordinates[connectionPart[i][1].i],
+                            Xmax
+                        );
+                        Ymax = Math.max(
+                            grid.YCoordinates[connectionPart[i][0].j],
+                            grid.YCoordinates[connectionPart[i][1].j],
+                            Ymax
+                        );
+                        indexXmin = Math.min(connectionPart[i][0].i, connectionPart[i][1].i, indexXmin);
+                        indexYmin = Math.min(connectionPart[i][0].j, connectionPart[i][1].j, indexYmin);
+                        indexXmax = Math.max(connectionPart[i][0].i, connectionPart[i][1].i, indexXmax);
+                        indexYmax = Math.max(connectionPart[i][0].j, connectionPart[i][1].j, indexYmax);
+                    }
+                    // determine the type
+                    if (indexXmax == indexXmin) {
+                        parts.push({
+                            type: 'vertical',
+                            top: Ymin+'em',
+                            left: Xmin+'em',
+                            width: '0',
+                            height: (Ymax-Ymax)+'em'
+                        });
+                    } else if (indexYmax == indexYmin) {
+                        parts.push({
+                            type: 'horizontal',
+                            top: Ymin+'em',
+                            left: Xmin+'em',
+                            width: (Xmax-Xmin)+'em',
+                            height: '0'
+                        });
+                    } else { // the part must be a corner
+                        var corners = {topleft: false, topright: false, bottomright: false, bottomleft: false};
+                        for (i = 0; i < connectionPart.length; i++) {
+                            if ((connectionPart[i][0].i == indexXmin && connectionPart[i][0].j == indexYmin) ||
+                                (connectionPart[i][1].i == indexXmin && connectionPart[i][1].j == indexYmin)) {
+                                corners.topleft = true;
+                                continue;
+                            }
+                            if ((connectionPart[i][0].i == indexXmax && connectionPart[i][0].j == indexYmin) ||
+                                (connectionPart[i][1].i == indexXmax && connectionPart[i][1].j == indexYmin)) {
+                                corners.topright = true;
+                                continue;
+                            }
+                            if ((connectionPart[i][0].i == indexXmax && connectionPart[i][0].j == indexYmax) ||
+                                (connectionPart[i][1].i == indexXmax && connectionPart[i][1].j == indexYmax)) {
+                                corners.bottomright = true;
+                                continue;
+                            }
+                            if ((connectionPart[i][0].i == indexXmin && connectionPart[i][0].j == indexYmax) ||
+                                (connectionPart[i][1].i == indexXmin && connectionPart[i][1].j == indexYmax)) {
+                                corners.bottomright = true;
+                            }
+                        }
+                        if (corners.bottomleft && corners.topleft && corners.topright) {
+                            parts.push({
+                                type: 'topleft',
+                                top: Ymin+'em',
+                                left: Xmin+'em',
+                                width: (Xmax-Xmin)+'em',
+                                height: (Ymax-Ymax)+'em'
+                            });
+                        } else if (corners.topleft && corners.topright && corners.bottomright) {
+                            parts.push({
+                                type: 'topright',
+                                top: Ymin+'em',
+                                left: Xmin+'em',
+                                width: (Xmax-Xmin)+'em',
+                                height: (Ymax-Ymax)+'em'
+                            });
+                        } else if (corners.topright && corners.bottomright && corners.bottomleft) {
+                            parts.push({
+                                type: 'bottomright',
+                                top: Ymin+'em',
+                                left: Xmin+'em',
+                                width: (Xmax-Xmin)+'em',
+                                height: (Ymax-Ymax)+'em'
+                            });
+                        } else {
+                            parts.push({
+                                type: 'bottomleft',
+                                top: Ymin+'em',
+                                left: Xmin+'em',
+                                width: (Xmax-Xmin)+'em',
+                                height: (Ymax-Ymax)+'em'
+                            });
+                        }
+                    }
+                }
+                return parts;
+            };
+
             var updateVisibleParts = function () {
                 // get all endpoints
                 var endpoints = getEndpoints();
@@ -266,12 +445,9 @@ bonsaiApp.directive('bus', function () {
                 var goodConnections = findGoodConnections([], grid, grid.indexEndpoints);
                 console.log(goodConnections);
                 // combine connections to parts
-                var parts = [];
-
+                var connectionParts = constructConnectionParts(goodConnections);
                 // set the parts
-                parts.push({type: 'horizontal', top: '7em', left: '5em', width: '3em', height: '1em'});
-                parts.push({type: 'topright', top: '7em', left: '8em', width: '3em', height: '1em'});
-                $scope.visibleParts = parts;
+                $scope.visibleParts = constructParts(connectionParts, grid);
             };
 
             $scope.localHandler.enroll = function (enrollee, callback, getPositions) {
