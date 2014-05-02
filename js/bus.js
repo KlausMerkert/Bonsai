@@ -130,25 +130,27 @@ bonsaiApp.directive('bus', function () {
             };
 
             var getWaypointWeight = function (point, grid, waypoints, alreadyFoundConnections) {
-                if (waypoints.indexOf(point) >= 0) {
-                    return 0;
+                if (isInList(point, waypoints)) {
+                    return 0.01;
                 }
                 var clusters = cluster(waypoints, alreadyFoundConnections);
                 var weightSum = 0;
                 for (var k = 0; k < clusters.length; k++) {
-                    var clusterMinWeight = 1000;
-                    for (var l = 0; l < clusters[k].length; l++) {
-                        var weight = Math.sqrt(
-                            (grid.XCoordinates[point.i] - grid.XCoordinates[clusters[k][l].i]) *
-                                (grid.XCoordinates[point.i] - grid.XCoordinates[clusters[k][l].i]) +
-                                (grid.XCoordinates[point.j] - grid.XCoordinates[clusters[k][l].j]) *
-                                    (grid.XCoordinates[point.j] - grid.XCoordinates[clusters[k][l].j])
-                        );
-                        if (weight < clusterMinWeight) {
-                            clusterMinWeight = weight;
+                    if (!isInList(point, clusters[k])) {
+                        var clusterMinWeight = 1000;
+                        for (var l = 0; l < clusters[k].length; l++) {
+                            var weight = Math.sqrt(
+                                (grid.XCoordinates[point.i] - grid.XCoordinates[clusters[k][l].i]) *
+                                    (grid.XCoordinates[point.i] - grid.XCoordinates[clusters[k][l].i]) +
+                                    (grid.YCoordinates[point.j] - grid.YCoordinates[clusters[k][l].j]) *
+                                        (grid.YCoordinates[point.j] - grid.YCoordinates[clusters[k][l].j])
+                            );
+                            if (weight < clusterMinWeight) {
+                                clusterMinWeight = weight;
+                            }
                         }
+                        weightSum = weightSum + clusterMinWeight;
                     }
-                    weightSum = weightSum + clusterMinWeight;
                 }
                 return weightSum;
             };
@@ -158,17 +160,17 @@ bonsaiApp.directive('bus', function () {
                 var possibleNewConnections = [];
                 var connection;
                 for (var k = 0; k < waypoints.length; k++) {
-                    if (waypoints[k].j - 1 >= 0) {
+                    if (waypoints[k].i + 1 < grid.XCoordinates.length) {
                         connection = [
                             waypoints[k],
-                            {i: waypoints[k].i, j: waypoints[k].j - 1}
+                            {i: waypoints[k].i + 1, j: waypoints[k].j}
                         ];
                         if (!isInConnections({connection: connection}, alreadyFoundConnections)) {
                             possibleNewConnections.push({
                                 connection: connection,
-                                dist: grid.YCoordinates[waypoints[k].j] - grid.YCoordinates[waypoints[k].j - 1],
+                                dist: grid.XCoordinates[waypoints[k].i + 1] - grid.XCoordinates[waypoints[k].i],
                                 weight: getWaypointWeight(
-                                    {i: waypoints[k].i, j: waypoints[k].j - 1},
+                                    {i: waypoints[k].i + 1, j: waypoints[k].j},
                                     grid,
                                     waypoints,
                                     alreadyFoundConnections
@@ -194,6 +196,24 @@ bonsaiApp.directive('bus', function () {
                             });
                         }
                     }
+                    if (waypoints[k].j - 1 >= 0) {
+                        connection = [
+                            waypoints[k],
+                            {i: waypoints[k].i, j: waypoints[k].j - 1}
+                        ];
+                        if (!isInConnections({connection: connection}, alreadyFoundConnections)) {
+                            possibleNewConnections.push({
+                                connection: connection,
+                                dist: grid.YCoordinates[waypoints[k].j] - grid.YCoordinates[waypoints[k].j - 1],
+                                weight: getWaypointWeight(
+                                    {i: waypoints[k].i, j: waypoints[k].j - 1},
+                                    grid,
+                                    waypoints,
+                                    alreadyFoundConnections
+                                )
+                            });
+                        }
+                    }
                     if (waypoints[k].j + 1 < grid.YCoordinates.length) {
                         connection = [
                             waypoints[k],
@@ -205,24 +225,6 @@ bonsaiApp.directive('bus', function () {
                                 dist: grid.YCoordinates[waypoints[k].j + 1] - grid.YCoordinates[waypoints[k].j],
                                 weight: getWaypointWeight(
                                     {i: waypoints[k].i, j: waypoints[k].j + 1},
-                                    grid,
-                                    waypoints,
-                                    alreadyFoundConnections
-                                )
-                            });
-                        }
-                    }
-                    if (waypoints[k].i + 1 < grid.XCoordinates.length) {
-                        connection = [
-                            waypoints[k],
-                            {i: waypoints[k].i + 1, j: waypoints[k].j}
-                        ];
-                        if (!isInConnections({connection: connection}, alreadyFoundConnections)) {
-                            possibleNewConnections.push({
-                                connection: connection,
-                                dist: grid.XCoordinates[waypoints[k].i + 1] - grid.XCoordinates[waypoints[k].i],
-                                weight: getWaypointWeight(
-                                    {i: waypoints[k].i + 1, j: waypoints[k].j},
                                     grid,
                                     waypoints,
                                     alreadyFoundConnections
@@ -251,8 +253,11 @@ bonsaiApp.directive('bus', function () {
                     if (!isInList(possibleNewConnections[0].connection[1], waypoints)) {
                         waypoints.push(possibleNewConnections[0].connection[1]);
                     }
-                    // recursively add the rest of the connections
-                    alreadyFoundConnections = findGoodConnections(alreadyFoundConnections, grid, waypoints);
+                    // recursively add the rest of the connections if necessary
+                    var clusters = cluster(waypoints, alreadyFoundConnections);
+                    if (clusters.length > 1) {
+                        alreadyFoundConnections = findGoodConnections(alreadyFoundConnections, grid, waypoints);
+                    }
                 }
                 return alreadyFoundConnections;
             };
@@ -287,26 +292,23 @@ bonsaiApp.directive('bus', function () {
                     for (var j = 0; j < connectionParts.length; j++) {
                         var connectionPartEndpoints = getConnectionPartEndpoints(connectionParts[j]);
                         if (angular.equals(goodConnections[i].connection[0], connectionPartEndpoints[0]) &&
-                            (goodConnections[i].connection[1].i == connectionPartEndpoints[1].i ||
-                                goodConnections[i].connection[1].j == connectionPartEndpoints[1].j)) {
-                            connectionParts[j].push(goodConnections[i].connection);
-                            connectionAppended = true;
-                        }
-                        if (angular.equals(goodConnections[i].connection[0], connectionPartEndpoints[1]) &&
                             (goodConnections[i].connection[1].i == connectionPartEndpoints[0].i ||
                                 goodConnections[i].connection[1].j == connectionPartEndpoints[0].j)) {
                             connectionParts[j].push(goodConnections[i].connection);
                             connectionAppended = true;
-                        }
-                        if (angular.equals(goodConnections[i].connection[1], connectionPartEndpoints[0]) &&
-                            (goodConnections[i].connection[0].i == connectionPartEndpoints[1].i ||
-                                goodConnections[i].connection[0].j == connectionPartEndpoints[1].j)) {
+                        } else if (angular.equals(goodConnections[i].connection[0], connectionPartEndpoints[1]) &&
+                            (goodConnections[i].connection[1].i == connectionPartEndpoints[1].i ||
+                                goodConnections[i].connection[1].j == connectionPartEndpoints[1].j)) {
                             connectionParts[j].push(goodConnections[i].connection);
                             connectionAppended = true;
-                        }
-                        if (angular.equals(goodConnections[i].connection[1], connectionPartEndpoints[1]) &&
+                        } else if (angular.equals(goodConnections[i].connection[1], connectionPartEndpoints[0]) &&
                             (goodConnections[i].connection[0].i == connectionPartEndpoints[0].i ||
                                 goodConnections[i].connection[0].j == connectionPartEndpoints[0].j)) {
+                            connectionParts[j].push(goodConnections[i].connection);
+                            connectionAppended = true;
+                        } else if (angular.equals(goodConnections[i].connection[1], connectionPartEndpoints[1]) &&
+                            (goodConnections[i].connection[0].i == connectionPartEndpoints[1].i ||
+                                goodConnections[i].connection[0].j == connectionPartEndpoints[1].j)) {
                             connectionParts[j].push(goodConnections[i].connection);
                             connectionAppended = true;
                         }
@@ -365,7 +367,7 @@ bonsaiApp.directive('bus', function () {
                             top: Ymin+'em',
                             left: Xmin+'em',
                             width: '0',
-                            height: (Ymax-Ymax)+'em'
+                            height: (Ymax-Ymin)+'em'
                         });
                     } else if (indexYmax == indexYmin) {
                         parts.push({
@@ -404,7 +406,7 @@ bonsaiApp.directive('bus', function () {
                                 top: Ymin+'em',
                                 left: Xmin+'em',
                                 width: (Xmax-Xmin)+'em',
-                                height: (Ymax-Ymax)+'em'
+                                height: (Ymax-Ymin)+'em'
                             });
                         } else if (corners.topleft && corners.topright && corners.bottomright) {
                             parts.push({
@@ -412,7 +414,7 @@ bonsaiApp.directive('bus', function () {
                                 top: Ymin+'em',
                                 left: Xmin+'em',
                                 width: (Xmax-Xmin)+'em',
-                                height: (Ymax-Ymax)+'em'
+                                height: (Ymax-Ymin)+'em'
                             });
                         } else if (corners.topright && corners.bottomright && corners.bottomleft) {
                             parts.push({
@@ -420,7 +422,7 @@ bonsaiApp.directive('bus', function () {
                                 top: Ymin+'em',
                                 left: Xmin+'em',
                                 width: (Xmax-Xmin)+'em',
-                                height: (Ymax-Ymax)+'em'
+                                height: (Ymax-Ymin)+'em'
                             });
                         } else {
                             parts.push({
@@ -428,7 +430,7 @@ bonsaiApp.directive('bus', function () {
                                 top: Ymin+'em',
                                 left: Xmin+'em',
                                 width: (Xmax-Xmin)+'em',
-                                height: (Ymax-Ymax)+'em'
+                                height: (Ymax-Ymin)+'em'
                             });
                         }
                     }
@@ -439,7 +441,35 @@ bonsaiApp.directive('bus', function () {
             var printConnections = function (connections) {
                 var string = "";
                 for (var i = 0; i < connections.length; i++) {
-                    string = string + "(" + connections[i].connection[0].i + ", " + connections[i].connection[0].j + ") -> (" + connections[i].connection[1].i + ", " + connections[i].connection[1].j + "), ";
+                    string = string + "(" + connections[i].connection[0].i + ", " + connections[i].connection[0].j +
+                        ") -> (" + connections[i].connection[1].i + ", " + connections[i].connection[1].j + "), ";
+                }
+                return string;
+            };
+
+            var printConnectionParts = function (connections) {
+                var string = "";
+                for (var i = 0; i < connections.length; i++) {
+                    string = string + "(" + connections[i][0].i + ", " + connections[i][0].j +
+                        ") -> (" + connections[i][1].i + ", " + connections[i][1].j + "), ";
+                }
+                return string;
+            };
+
+            var printConnectionsWithWeights = function (connections) {
+                var string = "";
+                for (var i = 0; i < connections.length; i++) {
+                    string = string + "(" + connections[i].connection[0].i + ", " + connections[i].connection[0].j +
+                        ") -> (" + connections[i].connection[1].i + ", " + connections[i].connection[1].j + ") {d: " +
+                        connections[i].dist + ", w: " + connections[i].weight + "}, ";
+                }
+                return string;
+            };
+
+            var printPoints = function (points) {
+                var string = "";
+                for (var i = 0; i < points.length; i++) {
+                    string = string + "(" + points[i].i + ", " + points[i].j + "), ";
                 }
                 return string;
             };
@@ -455,9 +485,13 @@ bonsaiApp.directive('bus', function () {
                 console.log(printConnections(goodConnections));
                 // combine connections to parts
                 var connectionParts = constructConnectionParts(goodConnections);
-                console.log(connectionParts);
+                console.log("Connection Parts:");
+                for (var i = 0; i < connectionParts.length; i++) {
+                    console.log(printConnectionParts(connectionParts[i]));
+                }
                 // set the parts
                 $scope.visibleParts = constructParts(connectionParts, grid);
+                console.log($scope.visibleParts);
             };
 
             $scope.localHandler.enroll = function (enrollee, callback, getPositions) {
