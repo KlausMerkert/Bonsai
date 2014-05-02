@@ -95,19 +95,46 @@ bonsaiApp.directive('bus', function () {
                     var connectionAdded = false;
                     // Test if one of the connection point is already in one of the clusters and
                     // add the other point if it is not already in there.
-                    for (var j = 0; j < clusters.length; j++) {
-                        if (isInList(connections[i].connection[0], clusters[j])) {
+                    var j = 0;
+                    while (j < clusters.length) {
+                        if (isInList(connections[i].connection[0], clusters[j]) && !connectionAdded) {
                             if (!isInList(connections[i].connection[1], clusters[j])) {
                                 clusters[j].push(connections[i].connection[1]);
+                                // check if we should merge clusters
+                                var k = j+1;
+                                while (k < clusters.length) {
+                                    if (isInList(connections[i].connection[1], clusters[k])) {
+                                        for (var l = 0; l < clusters[k].length; l++) {
+                                            if (!isInList(clusters[k][l], clusters[j])) {
+                                                clusters[j].push(clusters[k][l]);
+                                            }
+                                        }
+                                        clusters.splice(k,1);
+                                    }
+                                    k++;
+                                }
                             }
                             connectionAdded = true;
-                        }
-                        if (isInList(connections[i].connection[1], clusters[j])) {
+                        } else if (isInList(connections[i].connection[1], clusters[j]) && !connectionAdded) {
                             if (!isInList(connections[i].connection[0], clusters[j])) {
                                 clusters[j].push(connections[i].connection[0]);
+                                // check if we should merge clusters
+                                k = j+1;
+                                while (k < clusters.length) {
+                                    if (isInList(connections[i].connection[0], clusters[k])) {
+                                        for (l = 0; l < clusters[k].length; l++) {
+                                            if (!isInList(clusters[k][l], clusters[j])) {
+                                                clusters[j].push(clusters[k][l]);
+                                            }
+                                        }
+                                        clusters.splice(k,1);
+                                    }
+                                    k++;
+                                }
                             }
                             connectionAdded = true;
                         }
+                        j++;
                     }
                     if (!connectionAdded) {
                         clusters.push([connections[i].connection[0], connections[i].connection[1]]);
@@ -117,7 +144,7 @@ bonsaiApp.directive('bus', function () {
                 for (i = 0; i < points.length; i++) {
                     var pointFound = false;
                     for (j = 0; j < clusters.length; j++) {
-                        if (clusters[j].indexOf(points[i]) >= 0) {
+                        if (isInList(points[i], clusters[j])) {
                             pointFound = true;
                         }
                     }
@@ -262,60 +289,95 @@ bonsaiApp.directive('bus', function () {
                 return alreadyFoundConnections;
             };
 
-            var getConnectionPartEndpoints = function (partlist) {
-                var endpoints = partlist[0]
-                for (var i = 1; i < partlist.length; i++) {
-                    if (angular.equals(endpoints[0],partlist[i][0])) {
-                        endpoints[0] = partlist[i][1];
-                        continue;
-                    }
-                    if (angular.equals(endpoints[0],partlist[i][1])) {
-                        endpoints[0] = partlist[i][0];
-                        continue;
-                    }
-                    if (angular.equals(endpoints[1],partlist[i][0])) {
-                        endpoints[1] = partlist[i][1];
-                        continue;
-                    }
-                    if (angular.equals(endpoints[1],partlist[i][1])) {
-                        endpoints[1] = partlist[i][0];
+            var getConnectionPartEndpoints = function (connections) {
+                var endpoints = connections[0];
+                for (var i = 1; i < connections.length; i++) {
+                    if (angular.equals(endpoints[0], connections[i][0])) {
+                        endpoints[0] = connections[i][1];
+                    } else if (angular.equals(endpoints[0], connections[i][1])) {
+                        endpoints[0] = connections[i][0];
+                    } else if (angular.equals(endpoints[1], connections[i][0])) {
+                        endpoints[1] = connections[i][1];
+                    } else if (angular.equals(endpoints[1], connections[i][1])) {
+                        endpoints[1] = connections[i][0];
                     }
                 }
                 return endpoints;
             };
 
-            var constructConnectionParts = function (goodConnections) {
+            var constructConnectionParts = function (goodConnections) { //TODO: Rewrite this!
                 var connectionParts = [];
                 for (var i = 0; i < goodConnections.length; i++) {
+                    console.log("  Connection Parts: ");
+                    console.log(connectionParts);
+                    for (var a = 0; a < connectionParts.length; a++) {
+                        console.log("   "+printConnectionParts(connectionParts[a]));
+                    }
+                    console.log("  Connection Parts: END");
                     //try to append the connection to an existing part
-                    var connectionAppended = false;
+                    var appendCandidatesPoints = [[], []];
                     for (var j = 0; j < connectionParts.length; j++) {
+                        console.log("constructing...");
                         var connectionPartEndpoints = getConnectionPartEndpoints(connectionParts[j]);
                         if (angular.equals(goodConnections[i].connection[0], connectionPartEndpoints[0]) &&
-                            (goodConnections[i].connection[1].i == connectionPartEndpoints[0].i ||
-                                goodConnections[i].connection[1].j == connectionPartEndpoints[0].j)) {
-                            connectionParts[j].push(goodConnections[i].connection);
-                            connectionAppended = true;
+                            ((goodConnections[i].connection[1].i == connectionPartEndpoints[0].i &&
+                                ((goodConnections[i].connection[1].j > connectionPartEndpoints[0].j) ==
+                                    (connectionPartEndpoints[0].j > connectionPartEndpoints[1].j))) ||
+                             (goodConnections[i].connection[1].j == connectionPartEndpoints[0].j &&
+                                ((goodConnections[i].connection[1].i > connectionPartEndpoints[0].i) ==
+                                    (connectionPartEndpoints[0].i > connectionPartEndpoints[1].i))))) {
+                            appendCandidatesPoints[1].push(j);
                         } else if (angular.equals(goodConnections[i].connection[0], connectionPartEndpoints[1]) &&
-                            (goodConnections[i].connection[1].i == connectionPartEndpoints[1].i ||
-                                goodConnections[i].connection[1].j == connectionPartEndpoints[1].j)) {
-                            connectionParts[j].push(goodConnections[i].connection);
-                            connectionAppended = true;
+                            ((goodConnections[i].connection[1].i == connectionPartEndpoints[1].i &&
+                                ((goodConnections[i].connection[1].j > connectionPartEndpoints[0].j) ==
+                                    (connectionPartEndpoints[0].j > connectionPartEndpoints[1].j))) ||
+                             (goodConnections[i].connection[1].j == connectionPartEndpoints[1].j &&
+                                ((goodConnections[i].connection[1].i > connectionPartEndpoints[0].i) ==
+                                    (connectionPartEndpoints[0].i > connectionPartEndpoints[1].i))))) {
+                            appendCandidatesPoints[1].push(j);
                         } else if (angular.equals(goodConnections[i].connection[1], connectionPartEndpoints[0]) &&
-                            (goodConnections[i].connection[0].i == connectionPartEndpoints[0].i ||
-                                goodConnections[i].connection[0].j == connectionPartEndpoints[0].j)) {
-                            connectionParts[j].push(goodConnections[i].connection);
-                            connectionAppended = true;
+                            ((goodConnections[i].connection[0].i == connectionPartEndpoints[0].i &&
+                                ((goodConnections[i].connection[0].j > connectionPartEndpoints[0].j) ==
+                                    (connectionPartEndpoints[0].j > connectionPartEndpoints[1].j))) ||
+                             (goodConnections[i].connection[0].j == connectionPartEndpoints[0].j &&
+                                ((goodConnections[i].connection[0].i > connectionPartEndpoints[0].i) ==
+                                    (connectionPartEndpoints[0].i > connectionPartEndpoints[1].i))))) {
+                            appendCandidatesPoints[0].push(j);
                         } else if (angular.equals(goodConnections[i].connection[1], connectionPartEndpoints[1]) &&
-                            (goodConnections[i].connection[0].i == connectionPartEndpoints[1].i ||
-                                goodConnections[i].connection[0].j == connectionPartEndpoints[1].j)) {
-                            connectionParts[j].push(goodConnections[i].connection);
-                            connectionAppended = true;
+                            ((goodConnections[i].connection[0].i == connectionPartEndpoints[1].i &&
+                                ((goodConnections[i].connection[0].j > connectionPartEndpoints[0].j) ==
+                                    (connectionPartEndpoints[0].j > connectionPartEndpoints[1].j))) ||
+                             (goodConnections[i].connection[0].j == connectionPartEndpoints[1].j &&
+                                ((goodConnections[i].connection[0].i > connectionPartEndpoints[0].i) ==
+                                    (connectionPartEndpoints[0].i > connectionPartEndpoints[1].i))))) {
+                            appendCandidatesPoints[0].push(j);
                         }
+                    }
+                    var connectionAppended = false;
+                    console.log(appendCandidatesPoints);
+                    if (appendCandidatesPoints[0].length == 1) {
+                        connectionParts[appendCandidatesPoints[0][0]].push([
+                            {i: goodConnections[i].connection[0].i, j: goodConnections[i].connection[0].j},
+                            {i: goodConnections[i].connection[1].i, j: goodConnections[i].connection[1].j}
+                        ]);
+                        connectionAppended = true;
+                    } else if (appendCandidatesPoints[1].length == 1) {
+                        connectionParts[appendCandidatesPoints[1][0]].push([
+                            {i: goodConnections[i].connection[0].i, j: goodConnections[i].connection[0].j},
+                            {i: goodConnections[i].connection[1].i, j: goodConnections[i].connection[1].j}
+                        ]);
+                        connectionAppended = true;
                     }
                     // no part found to append to? create new
                     if (!connectionAppended) {
-                        connectionParts.push([goodConnections[i].connection]);
+                        console.log('not appended');
+                        console.log(connectionParts);
+                        console.log(goodConnections[i].connection);
+                        connectionParts.push([
+                            [{i: goodConnections[i].connection[0].i, j: goodConnections[i].connection[0].j},
+                             {i: goodConnections[i].connection[1].i, j: goodConnections[i].connection[1].j}]
+                        ]);
+                        console.log(" "+printConnectionParts(connectionParts[connectionParts.length-1]));
                     }
                 }
                 return connectionParts;
@@ -383,17 +445,14 @@ bonsaiApp.directive('bus', function () {
                             if ((connectionPart[i][0].i == indexXmin && connectionPart[i][0].j == indexYmin) ||
                                 (connectionPart[i][1].i == indexXmin && connectionPart[i][1].j == indexYmin)) {
                                 corners.topleft = true;
-                                continue;
                             }
                             if ((connectionPart[i][0].i == indexXmax && connectionPart[i][0].j == indexYmin) ||
                                 (connectionPart[i][1].i == indexXmax && connectionPart[i][1].j == indexYmin)) {
                                 corners.topright = true;
-                                continue;
                             }
                             if ((connectionPart[i][0].i == indexXmax && connectionPart[i][0].j == indexYmax) ||
                                 (connectionPart[i][1].i == indexXmax && connectionPart[i][1].j == indexYmax)) {
                                 corners.bottomright = true;
-                                continue;
                             }
                             if ((connectionPart[i][0].i == indexXmin && connectionPart[i][0].j == indexYmax) ||
                                 (connectionPart[i][1].i == indexXmin && connectionPart[i][1].j == indexYmax)) {
@@ -485,7 +544,7 @@ bonsaiApp.directive('bus', function () {
                 console.log(printConnections(goodConnections));
                 // combine connections to parts
                 var connectionParts = constructConnectionParts(goodConnections);
-                console.log("Connection Parts:");
+                console.log("FINAL PRINT Connection Parts:");
                 for (var i = 0; i < connectionParts.length; i++) {
                     console.log(printConnectionParts(connectionParts[i]));
                 }
