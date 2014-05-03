@@ -262,7 +262,8 @@ bonsaiApp.directive('bus', function () {
                 }
                 // sort the connections by weight
                 possibleNewConnections.sort(function (a, b) {
-                    return (a.weight * a.dist) - (b.weight * b.dist);
+                    //return (a.weight * a.dist) - (b.weight * b.dist);
+                    return a.weight - b.weight;
                 });
                 // remove duplicate connections
                 for (var i = 0; i < possibleNewConnections.length; i++) {
@@ -289,96 +290,84 @@ bonsaiApp.directive('bus', function () {
                 return alreadyFoundConnections;
             };
 
-            var getConnectionPartEndpoints = function (connections) {
-                var endpoints = connections[0];
-                for (var i = 1; i < connections.length; i++) {
-                    if (angular.equals(endpoints[0], connections[i][0])) {
-                        endpoints[0] = connections[i][1];
-                    } else if (angular.equals(endpoints[0], connections[i][1])) {
-                        endpoints[0] = connections[i][0];
-                    } else if (angular.equals(endpoints[1], connections[i][0])) {
-                        endpoints[1] = connections[i][1];
-                    } else if (angular.equals(endpoints[1], connections[i][1])) {
-                        endpoints[1] = connections[i][0];
+            var constructConnectionParts = function (goodConnections, grid) {
+                // get junction points
+                var countgrid = [];
+                for (var i = 0; i < grid.XCoordinates.length; i++) {
+                    countgrid.push([]);
+                    for (var j = 0; j < grid.YCoordinates.length; j++) {
+                        countgrid[i].push(0);
                     }
                 }
-                return endpoints;
-            };
-
-            var constructConnectionParts = function (goodConnections) { //TODO: Rewrite this!
-                var connectionParts = [];
-                for (var i = 0; i < goodConnections.length; i++) {
-                    console.log("  Connection Parts: ");
-                    console.log(connectionParts);
-                    for (var a = 0; a < connectionParts.length; a++) {
-                        console.log("   "+printConnectionParts(connectionParts[a]));
-                    }
-                    console.log("  Connection Parts: END");
-                    //try to append the connection to an existing part
-                    var appendCandidatesPoints = [[], []];
-                    for (var j = 0; j < connectionParts.length; j++) {
-                        console.log("constructing...");
-                        var connectionPartEndpoints = getConnectionPartEndpoints(connectionParts[j]);
-                        if (angular.equals(goodConnections[i].connection[0], connectionPartEndpoints[0]) &&
-                            ((goodConnections[i].connection[1].i == connectionPartEndpoints[0].i &&
-                                ((goodConnections[i].connection[1].j > connectionPartEndpoints[0].j) ==
-                                    (connectionPartEndpoints[0].j > connectionPartEndpoints[1].j))) ||
-                             (goodConnections[i].connection[1].j == connectionPartEndpoints[0].j &&
-                                ((goodConnections[i].connection[1].i > connectionPartEndpoints[0].i) ==
-                                    (connectionPartEndpoints[0].i > connectionPartEndpoints[1].i))))) {
-                            appendCandidatesPoints[1].push(j);
-                        } else if (angular.equals(goodConnections[i].connection[0], connectionPartEndpoints[1]) &&
-                            ((goodConnections[i].connection[1].i == connectionPartEndpoints[1].i &&
-                                ((goodConnections[i].connection[1].j > connectionPartEndpoints[0].j) ==
-                                    (connectionPartEndpoints[0].j > connectionPartEndpoints[1].j))) ||
-                             (goodConnections[i].connection[1].j == connectionPartEndpoints[1].j &&
-                                ((goodConnections[i].connection[1].i > connectionPartEndpoints[0].i) ==
-                                    (connectionPartEndpoints[0].i > connectionPartEndpoints[1].i))))) {
-                            appendCandidatesPoints[1].push(j);
-                        } else if (angular.equals(goodConnections[i].connection[1], connectionPartEndpoints[0]) &&
-                            ((goodConnections[i].connection[0].i == connectionPartEndpoints[0].i &&
-                                ((goodConnections[i].connection[0].j > connectionPartEndpoints[0].j) ==
-                                    (connectionPartEndpoints[0].j > connectionPartEndpoints[1].j))) ||
-                             (goodConnections[i].connection[0].j == connectionPartEndpoints[0].j &&
-                                ((goodConnections[i].connection[0].i > connectionPartEndpoints[0].i) ==
-                                    (connectionPartEndpoints[0].i > connectionPartEndpoints[1].i))))) {
-                            appendCandidatesPoints[0].push(j);
-                        } else if (angular.equals(goodConnections[i].connection[1], connectionPartEndpoints[1]) &&
-                            ((goodConnections[i].connection[0].i == connectionPartEndpoints[1].i &&
-                                ((goodConnections[i].connection[0].j > connectionPartEndpoints[0].j) ==
-                                    (connectionPartEndpoints[0].j > connectionPartEndpoints[1].j))) ||
-                             (goodConnections[i].connection[0].j == connectionPartEndpoints[1].j &&
-                                ((goodConnections[i].connection[0].i > connectionPartEndpoints[0].i) ==
-                                    (connectionPartEndpoints[0].i > connectionPartEndpoints[1].i))))) {
-                            appendCandidatesPoints[0].push(j);
+                for (i = 0; i < goodConnections.length; i++) {
+                    countgrid[goodConnections[i].connection[0].i][goodConnections[i].connection[0].j]++;
+                    countgrid[goodConnections[i].connection[1].i][goodConnections[i].connection[1].j]++;
+                }
+                var junctionPoints = [];
+                for (i = 0; i < countgrid.length; i++) {
+                    for (j = 0; j < countgrid[i].length; j++) {
+                        if (countgrid[i][j] > 2) {
+                            junctionPoints.push({i: i, j: j});
                         }
                     }
-                    var connectionAppended = false;
-                    console.log(appendCandidatesPoints);
-                    if (appendCandidatesPoints[0].length == 1) {
-                        connectionParts[appendCandidatesPoints[0][0]].push([
-                            {i: goodConnections[i].connection[0].i, j: goodConnections[i].connection[0].j},
-                            {i: goodConnections[i].connection[1].i, j: goodConnections[i].connection[1].j}
-                        ]);
-                        connectionAppended = true;
-                    } else if (appendCandidatesPoints[1].length == 1) {
-                        connectionParts[appendCandidatesPoints[1][0]].push([
-                            {i: goodConnections[i].connection[0].i, j: goodConnections[i].connection[0].j},
-                            {i: goodConnections[i].connection[1].i, j: goodConnections[i].connection[1].j}
-                        ]);
-                        connectionAppended = true;
+                }
+                // begin connections at the first junction point
+                var remainingConnections = angular.copy(goodConnections);
+                var connectionParts = [];
+                for (i = 0; i < junctionPoints.length; i++) {
+                    var point = junctionPoints[i];
+                    var connectionsToFollow = [];
+                    for (j = 0; j < remainingConnections.length; j++) {
+                        if (angular.equals(point, remainingConnections[j].connection[0])) {
+                            connectionParts.push([remainingConnections[j].connection]);
+                            if (countgrid[remainingConnections[j].connection[1].i][remainingConnections[j].connection[1].j] == 2) {
+                                connectionsToFollow.push({
+                                    point: remainingConnections[j].connection[1],
+                                    part: connectionParts.length-1
+                                });
+                            }
+                            remainingConnections.splice(j, 1);
+                        } else if (angular.equals(point, remainingConnections[j].connection[1])) {
+                            connectionParts.push([remainingConnections[j].connection]);
+                            if (countgrid[remainingConnections[j].connection[0].i][remainingConnections[j].connection[0].j] == 2) {
+                                connectionsToFollow.push({
+                                    point: remainingConnections[j].connection[0],
+                                    part: connectionParts.length-1
+                                });
+                            }
+                            remainingConnections.splice(j, 1);
+                        }
                     }
-                    // no part found to append to? create new
-                    if (!connectionAppended) {
-                        console.log('not appended');
-                        console.log(connectionParts);
-                        console.log(goodConnections[i].connection);
-                        connectionParts.push([
-                            [{i: goodConnections[i].connection[0].i, j: goodConnections[i].connection[0].j},
-                             {i: goodConnections[i].connection[1].i, j: goodConnections[i].connection[1].j}]
-                        ]);
-                        console.log(" "+printConnectionParts(connectionParts[connectionParts.length-1]));
+                    while (connectionsToFollow.length > 0) {
+                        point = connectionsToFollow[0].point;
+                        for (j = 0; j < remainingConnections.length; j++) {
+                            if (angular.equals(point, remainingConnections[j].connection[0])) {
+                                connectionParts[connectionsToFollow[0].part].push(remainingConnections[j].connection);
+                                if (countgrid[remainingConnections[j].connection[1].i][remainingConnections[j].connection[1].j] != 2) {
+                                    connectionsToFollow.splice(0, 1);
+                                } else {
+                                    connectionsToFollow[0].point = remainingConnections[j].connection[1];
+                                }
+                                remainingConnections.splice(j, 1);
+                            }
+                            if (angular.equals(point, remainingConnections[j].connection[1])) {
+                                connectionParts[connectionsToFollow[0].part].push(remainingConnections[j].connection);
+                                if (countgrid[remainingConnections[j].connection[0].i][remainingConnections[j].connection[0].j] != 2) {
+                                    connectionsToFollow.splice(0, 1);
+                                } else {
+                                    connectionsToFollow[0].point = remainingConnections[j].connection[0];
+                                }
+                                remainingConnections.splice(j, 1);
+                            }
+                        }
                     }
+                }
+                if (remainingConnections.length > 0) {
+                    var junctionlessPart = [];
+                    for (i = 0; i < remainingConnections.length; i++) {
+                        junctionlessPart.push(remainingConnections[i].connection);
+                    }
+                    connectionParts.push(junctionlessPart);
                 }
                 return connectionParts;
             };
@@ -497,60 +486,17 @@ bonsaiApp.directive('bus', function () {
                 return parts;
             };
 
-            var printConnections = function (connections) {
-                var string = "";
-                for (var i = 0; i < connections.length; i++) {
-                    string = string + "(" + connections[i].connection[0].i + ", " + connections[i].connection[0].j +
-                        ") -> (" + connections[i].connection[1].i + ", " + connections[i].connection[1].j + "), ";
-                }
-                return string;
-            };
-
-            var printConnectionParts = function (connections) {
-                var string = "";
-                for (var i = 0; i < connections.length; i++) {
-                    string = string + "(" + connections[i][0].i + ", " + connections[i][0].j +
-                        ") -> (" + connections[i][1].i + ", " + connections[i][1].j + "), ";
-                }
-                return string;
-            };
-
-            var printConnectionsWithWeights = function (connections) {
-                var string = "";
-                for (var i = 0; i < connections.length; i++) {
-                    string = string + "(" + connections[i].connection[0].i + ", " + connections[i].connection[0].j +
-                        ") -> (" + connections[i].connection[1].i + ", " + connections[i].connection[1].j + ") {d: " +
-                        connections[i].dist + ", w: " + connections[i].weight + "}, ";
-                }
-                return string;
-            };
-
-            var printPoints = function (points) {
-                var string = "";
-                for (var i = 0; i < points.length; i++) {
-                    string = string + "(" + points[i].i + ", " + points[i].j + "), ";
-                }
-                return string;
-            };
-
             var updateVisibleParts = function () {
-                console.log("_____________________");
                 // get all endpoints
                 var endpoints = getEndpoints();
                 // get the grid
                 var grid = getGrid(endpoints);
                 // recursively find all good connections in the grid
                 var goodConnections = findGoodConnections([], grid, grid.indexEndpoints);
-                console.log(printConnections(goodConnections));
                 // combine connections to parts
-                var connectionParts = constructConnectionParts(goodConnections);
-                console.log("FINAL PRINT Connection Parts:");
-                for (var i = 0; i < connectionParts.length; i++) {
-                    console.log(printConnectionParts(connectionParts[i]));
-                }
+                var connectionParts = constructConnectionParts(goodConnections, grid);
                 // set the parts
                 $scope.visibleParts = constructParts(connectionParts, grid);
-                console.log($scope.visibleParts);
             };
 
             $scope.localHandler.enroll = function (enrollee, callback, getPositions) {
