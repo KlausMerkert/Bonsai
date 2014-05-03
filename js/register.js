@@ -30,7 +30,7 @@ bonsaiApp.directive('register', function ($interval) {
             };
         },
         link: function ($scope, element, attrs) {
-            $scope.writeCallback = function (value) {
+            $scope.setValue = function (value) {
                 $scope.data = value;
             };
 
@@ -52,7 +52,7 @@ bonsaiApp.directive('register', function ($interval) {
             // because the handler needs to be fully initialized.
             $interval(function () {
                 for (var i = 0; i < $scope.connections.length; i++) {
-                    $scope.connections[i].handler.enroll(element, $scope.writeCallback, $scope.getConnectionPositions);
+                    $scope.connections[i].handler.enroll(element, $scope.setValue, $scope.getConnectionPositions);
                 }
             }, 1, 1);
         },
