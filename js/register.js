@@ -16,10 +16,10 @@ bonsaiApp.directive('register', function ($interval) {
             $scope.toggleState = function (connection) {
                 for (var i = 0; i < $scope.connections.length; i++) {
                     if ($scope.connections[i].handler == connection.handler) {
-                        if ($scope.connections[i].state >= 1) {
-                            $scope.connections[i].state = -1;
+                        if ($scope.connections[i].state <= -1) {
+                            $scope.connections[i].state = 1;
                         } else {
-                            $scope.connections[i].state++;
+                            $scope.connections[i].state--;
                         }
                     }
                 }
