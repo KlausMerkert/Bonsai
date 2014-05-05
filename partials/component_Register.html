@@ -1,16 +1,19 @@
 <div class="component" ng-style="{top: topCSS, left: leftCSS}">
     <div class="register">
-        {{ data }}
         <div style="width: 0; height: 0; overflow: visible; display: inline-block; position: absolute;"
              ng-repeat="connection in connections">
-            <div ng-click="toggleState(connection)" class="connection"
+            <div ng-click="toggleState(connection)"
                  ng-class="{connection: true, toprow: $even, bottomrow: $odd}"
-                 ng-style="{left: '1.4em'}">
-                <div ng-show="connection.state == 1" style="position: relative; top: -0.1em;">&uarr;</div>
-                <div ng-show="connection.state == 0">&bull;</div>
-                <div ng-show="connection.state == -1" style="position: relative; top: -0.1em;">&darr;</div>
+                 style="left: 1.3em;">
+                <div ng-show="connection.state == 1"
+                     style="position: relative; top: -0.1em; left: 0.01em;">&uarr;</div>
+                <div ng-show="connection.state == 0"
+                     style="position: relative; top: 0.05em; left: 0.01em;">&bull;</div>
+                <div ng-show="connection.state == -1"
+                     style="position: relative; top: -0.1em; left: 0.01em;">&darr;</div>
             </div>
         </div>
+        <input type="text" ng-value="data" />
         <div style="width: 0; height: 0; display: inline-block; position: absolute;" ng-transclude></div>
     </div>
 </div>
