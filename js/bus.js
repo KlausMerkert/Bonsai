@@ -445,7 +445,7 @@ bonsaiApp.directive('bus', function () {
                             }
                             if ((connectionPart[i][0].i == indexXmin && connectionPart[i][0].j == indexYmax) ||
                                 (connectionPart[i][1].i == indexXmin && connectionPart[i][1].j == indexYmax)) {
-                                corners.bottomright = true;
+                                corners.bottomleft = true;
                             }
                         }
                         if (corners.bottomleft && corners.topleft && corners.topright) {

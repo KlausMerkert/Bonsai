@@ -41,7 +41,7 @@ bonsaiApp.directive('register', function ($interval) {
                         if (i%2 == 0) {
                             positions.push({top: $scope.top-1.15, left: $scope.left+2.1});
                         } else {
-                            positions.push({top: $scope.top+3.4, left: $scope.left+2.1});
+                            positions.push({top: $scope.top+2.9, left: $scope.left+2.1});
                         }
                     }
                 }
