@@ -2,7 +2,8 @@ bonsaiApp.directive('bus', function () {
     return {
         restrict: 'E',
         scope: {
-            handler: '='
+            handler: '=',
+            color: '='
         },
         link: function ($scope, element, attrs) {
             $scope.localHandler = $scope.handler || {};

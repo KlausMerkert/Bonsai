@@ -1,7 +1,7 @@
 <div class="component">
     <div ng-repeat="part in visibleParts">
-        <div class="bus" style="border-color: rgb(255, 0, 0);"
+        <div class="bus"
              ng-class="part.type"
-             ng-style="{top: part.top, left: part.left, width: part.width, height: part.height}"></div>
+             ng-style="{'top': part.top, 'left': part.left, 'width': part.width, 'height': part.height, 'border-color': color}"></div>
     </div>
 </div>
