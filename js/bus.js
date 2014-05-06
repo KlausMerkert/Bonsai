@@ -548,10 +548,12 @@ bonsaiApp.directive('bus', function () {
                         $scope.connections[index].is_reading = false;
                         $scope.writerIndex = index;
                         $scope.active = true;
-                        $scope.value = data;
-                        for (var i = 0; i < $scope.connections.length; i++) {
-                            if ($scope.connections[i].is_reading) {
-                                $scope.connections[i].callback($scope.value);
+                        if ($scope.value != data) {
+                            $scope.value = data;
+                            for (var i = 0; i < $scope.connections.length; i++) {
+                                if ($scope.connections[i].is_reading) {
+                                    $scope.connections[i].callback($scope.value);
+                                }
                             }
                         }
                     }

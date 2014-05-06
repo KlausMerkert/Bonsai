@@ -18,8 +18,10 @@ bonsaiApp.directive('register', function ($interval) {
                     if ($scope.connections[i].handler == connection.handler) {
                         if ($scope.connections[i].state <= -1) {
                             $scope.connections[i].state = 1;
+                            $scope.setState($scope.connections[i], $scope.connections[i].state);
                         } else {
                             $scope.connections[i].state--;
+                            $scope.setState($scope.connections[i], $scope.connections[i].state);
                         }
                     }
                 }
@@ -32,6 +34,34 @@ bonsaiApp.directive('register', function ($interval) {
         link: function ($scope, element, attrs) {
             $scope.setValue = function (value) {
                 $scope.data = value;
+                for (var i = 0; i < $scope.connections.length; i++) {
+                    if ($scope.connections[i].state == 1) {
+                        $scope.connections[i].handler.write(element, value);
+                    }
+                }
+            };
+
+            $scope.setState = function (connection, state) {
+                if (state == 1) {
+                    connection.handler.stopReading(element);
+                    connection.handler.write(element, $scope.data);
+                    for (var i = 0; i < $scope.connections.length; i++) {
+                        if (!angular.equals($scope.connections[i], connection) && $scope.connections[i].state == -1) {
+                            $scope.setValue($scope.connections[i].handler.startReading(element));
+                        }
+                    }
+                } else if (state == -1) {
+                    connection.handler.stopWriting(element);
+                    $scope.setValue(connection.handler.startReading(element));
+                } else {
+                    connection.handler.stopWriting(element);
+                    connection.handler.stopReading(element);
+                    for (i = 0; i < $scope.connections.length; i++) {
+                        if (!angular.equals($scope.connections[i], connection) && $scope.connections[i].state == -1) {
+                            $scope.setValue($scope.connections[i].handler.startReading(element));
+                        }
+                    }
+                }
             };
 
             $scope.getConnectionPositions = function (busHandler) {

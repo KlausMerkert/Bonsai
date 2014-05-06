@@ -5,15 +5,15 @@
             <div ng-click="toggleState(connection)"
                  ng-class="{connection: true, toprow: $even, bottomrow: $odd}"
                  style="left: 1.3em;">
-                <div ng-show="connection.state == 1"
+                <div ng-show="(connection.state == 1 && $even) || (connection.state == -1 && $odd)"
                      style="position: relative; top: -0.1em; left: 0.01em;">&uarr;</div>
                 <div ng-show="connection.state == 0"
                      style="position: relative; top: 0.05em; left: 0.01em;">&bull;</div>
-                <div ng-show="connection.state == -1"
+                <div ng-show="(connection.state == -1 && $even) || (connection.state == 1 && $odd)"
                      style="position: relative; top: -0.1em; left: 0.01em;">&darr;</div>
             </div>
         </div>
-        <input type="text" ng-value="data" />
+        <input type="text" ng-model="data" ng-change="setValue(data)" />
         <div style="width: 0; height: 0; display: inline-block; position: absolute;" ng-transclude></div>
     </div>
 </div>
