@@ -1,9 +1,9 @@
-<div class="component" ng-style="{top: topCSS, left: leftCSS}">
+<div class="component nospace" ng-style="{'top': topCSS, 'left': leftCSS}">
     <div class="register">
         <div style="width: 0; height: 0; overflow: visible; display: inline-block; position: absolute;"
              ng-repeat="connection in connections">
             <div ng-click="toggleState(connection)"
-                 ng-class="{connection: true, toprow: $even, bottomrow: $odd}"
+                 ng-class="{'connection': true, 'toprow': $even, 'bottomrow': $odd, 'read': connection.state == -1, 'write': connection.state == 1, 'grayback': connection.state == 0}"
                  style="left: 1.3em;">
                 <div ng-show="(connection.state == 1 && $even) || (connection.state == -1 && $odd)"
                      style="position: relative; top: -0.1em; left: 0.01em;">&uarr;</div>
@@ -11,6 +11,14 @@
                      style="position: relative; top: 0.05em; left: 0.01em;">&bull;</div>
                 <div ng-show="(connection.state == -1 && $even) || (connection.state == 1 && $odd)"
                      style="position: relative; top: -0.1em; left: 0.01em;">&darr;</div>
+            </div>
+            <div class="nospace" style="position: absolute;" ng-class="{toprow: $even, bottomrow: $odd}">
+                <div ng-class="{'busconnector': true, 'busconnectortoprow': $even, 'busconnectorbottomrow': $odd}"
+                     style="left: 1.63em;"></div>
+                <div ng-class="{'wireconnector': true, 'write': true, 'wireconnectortoprowwrite': $even, 'wireconnectorbottomrowwrite': $odd}"
+                     style="left: 2.19em;" ng-click="setState(connection, 1)"></div>
+                <div ng-class="{'wireconnector': true, 'read': true, 'wireconnectortoprowread': $even, 'wireconnectorbottomrowread': $odd}"
+                     style="left: 2.19em;" ng-click="setState(connection, -1)"></div>
             </div>
         </div>
         <input type="text" ng-model="data" ng-change="setValue(data)" />

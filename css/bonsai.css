@@ -2,6 +2,13 @@ body {
     font-family: Helvetica, Verdana, sans-serif;
 }
 
+.nospace {
+    overflow: visible;
+    width: 0;
+    height: 0;
+    display: inline-block;
+}
+
 .components {
     position: relative;
     height: 10em;
@@ -10,10 +17,6 @@ body {
 
 .component {
     position: absolute;
-    overflow: visible;
-    width: 0;
-    height: 0;
-    display: inline-block;
 }
 
 .register {
@@ -38,7 +41,6 @@ body {
 
 .register .connection {
     border: 1px solid rgb(30, 30, 30);
-    background-color: rgba(200, 200, 200, 30);
     min-width: 0.8em;
     height: 1.2em;
     line-height: 1.1em;
@@ -59,7 +61,6 @@ body {
 }
 
 .bus {
-    border-color: red;
     display: inline-block;
     position: absolute;
 }
@@ -94,4 +95,56 @@ body {
     border-bottom: 2px solid;
     border-right: 2px solid;
     border-bottom-right-radius: 0.4em;
+}
+
+.busconnector {
+    position: absolute;
+    width: 0.3em;
+    height: 0.3em;
+    background-color: rgb(0, 0, 0);
+}
+
+.busconnectortoprow {
+    top: -0.25em;
+}
+
+.busconnectorbottomrow {
+    top: 1.31em;
+}
+
+.wireconnector {
+    position: absolute;
+    width: 0.2em;
+    height: 0.2em;
+    border-radius: 0.2em;
+    border: 1px solid rgb(30, 30, 30);
+    cursor: pointer;
+}
+
+.wireconnectortoprowwrite {
+    top: 0.1em;
+}
+
+.wireconnectortoprowread {
+    top: 0.5em;
+}
+
+.wireconnectorbottomrowwrite {
+    top: 0.85em;
+}
+
+.wireconnectorbottomrowread {
+    top: 0.45em;
+}
+
+.grayback {
+     background-color: rgba(200, 200, 200, 30);
+}
+
+.read {
+    background-color: rgb(122, 222, 103);
+}
+
+.write {
+    background-color: rgb(255, 103, 97);
 }
