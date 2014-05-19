@@ -90,6 +90,40 @@ bonsaiApp.directive('register', function ($interval) {
                 }
             };
 
+            $scope.toggleRead = function (connection) {
+                for (var i = 0; i < $scope.connections.length; i++) {
+                    if ($scope.connections[i].handler == connection.handler) {
+                        var state = -1;
+                        if ($scope.connections[i].handler.isReading(element)) {
+                            state = 0;
+                        }
+                        try {
+                            $scope.setState($scope.connections[i], state);
+                            $scope.connections[i].state = state;
+                        } catch (exception) {
+                            throw exception;
+                        }
+                    }
+                }
+            };
+
+            $scope.toggleWrite = function (connection) {
+                for (var i = 0; i < $scope.connections.length; i++) {
+                    if ($scope.connections[i].handler == connection.handler) {
+                        var state = 1;
+                        if ($scope.connections[i].handler.isWriting(element)) {
+                            state = 0;
+                        }
+                        try {
+                            $scope.setState($scope.connections[i], state);
+                            $scope.connections[i].state = state;
+                        } catch (exception) {
+                            throw exception;
+                        }
+                    }
+                }
+            };
+
             $scope.getConnectionPositions = function (busHandler) {
                 var positions = [];
                 for (var i = 0; i < $scope.connections.length; i++) {

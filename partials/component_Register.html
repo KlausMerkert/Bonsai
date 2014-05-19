@@ -16,9 +16,9 @@
                 <div ng-class="{'busconnector': true, 'busconnectortoprow': $even, 'busconnectorbottomrow': $odd}"
                      style="left: 1.63em;"></div>
                 <div ng-class="{'wireconnector': true, 'write': true, 'wireconnectortoprowwrite': $even, 'wireconnectorbottomrowwrite': $odd}"
-                     style="left: 2.19em;" ng-click="setState(connection, 1)"></div>
+                     style="left: 2.19em;" ng-click="toggleWrite(connection)"></div>
                 <div ng-class="{'wireconnector': true, 'read': true, 'wireconnectortoprowread': $even, 'wireconnectorbottomrowread': $odd}"
-                     style="left: 2.19em;" ng-click="setState(connection, -1)"></div>
+                     style="left: 2.19em;" ng-click="toggleRead(connection)"></div>
             </div>
         </div>
         <input type="text" ng-model="data" ng-change="setValue(data)" />
