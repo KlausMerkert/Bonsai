@@ -5,6 +5,9 @@ bonsaiApp.controller('bonsaiCpuCtrl',
         $scope.dataBusHandler = {};
         $scope.adressBusHandler = {};
 
-        $scope.text = "Hallo Welt!";
+        $scope.errors = [];
+        $scope.$on('error', function (event, message) {
+            $scope.errors.push(message)
+        });
     }
 );
