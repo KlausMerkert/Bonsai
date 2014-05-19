@@ -15,7 +15,6 @@ var bonsaiApp = angular.module(
     }])
     .factory('$exceptionHandler', function ($injector) {
         return function (exception, cause) {
-            console.log(''+exception);
-            $injector.get('$rootScope').$broadcast('error', '' + exception);
+            $injector.get('$rootScope').$broadcast('error', exception);
         };
     });

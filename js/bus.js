@@ -527,7 +527,10 @@ bonsaiApp.directive('bus', function () {
                     $scope.connections[index].is_reading = true;
                     return $scope.value;
                 } else {
-                    throw reader + " is not enrolled to the bus an can not read.";
+                    throw NotEnrolledReadException(
+                        reader + " is not enrolled to the bus an can not read.",
+                        reader
+                    );
                 }
             };
 
@@ -542,8 +545,10 @@ bonsaiApp.directive('bus', function () {
                 var index = findInConnections(writer);
                 if (index >= 0) {
                     if ($scope.active && $scope.writerIndex != index) {
-                        throw "This bus is already occupied by " +
-                            $scope.connections[$scope.writerIndex].enrollee + ".";
+                        throw BusOccupiedException(
+                            "This bus is already occupied by enrollee no.: " + $scope.writerIndex + ".",
+                            $scope.writerIndex
+                        );
                     } else {
                         $scope.connections[index].is_reading = false;
                         $scope.writerIndex = index;
@@ -558,7 +563,10 @@ bonsaiApp.directive('bus', function () {
                         }
                     }
                 } else {
-                    throw writer + " is not enrolled to the bus an can not write.";
+                    throw NotEnrolledWriteException(
+                        writer + " is not enrolled to the bus an can not write.",
+                        writer
+                    );
                 }
             };
 

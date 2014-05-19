@@ -17,7 +17,13 @@
         </register>
     </div>
     <h2 data-i18n="_errors_">Errors</h2>
-    <p ng-repeat="error in errors">{{error}}</p>
+    <p ng-repeat="error in errors">
+        <span ng-if="error.name == 'NotEnrolledReadException' || error.name == 'NotEnrolledWriteException'">
+            {{ error.tryer }}
+        </span>
+        <span data-i18n="{{ error.localization }}"></span>
+        <span ng-if="error.name == 'BusOccupiedException'">{{ error.busNo }}</span>
+    </p>
     <hr />
     <object data="images/CPU_Schema.svg" width="642" height="350" type="image/svg+xml"
             codebase="http://www.savarese.com/software/svgplugin/"></object>
