@@ -10,6 +10,11 @@
         "description": ""
     },
     {
+        "key"        : "_clearErrors_",
+        "value"      : "clear",
+        "description": ""
+    },
+    {
         "key"        : "_BusOccupiedException_",
         "value"      : "This bus is already occupied by enrollee no.: ",
         "description": ""

@@ -10,6 +10,11 @@
         "description": ""
     },
     {
+        "key"        : "_clearErrors_",
+        "value"      : "Fehlerliste löschen",
+        "description": ""
+    },
+    {
         "key"        : "_BusOccupiedException_",
         "value"      : "Dieser Bus wird bereits belegt von Element no.: ",
         "description": ""

@@ -16,7 +16,11 @@
             <connection handler="adressBusHandler"></connection>
         </register>
     </div>
-    <h2 data-i18n="_errors_">Errors</h2>
+    <div>
+        <h2 data-i18n="_errors_" style="display: inline-block;">Errors</h2>
+        <a ng-click="errors = []" ng-show="errors.length > 0"
+           data-i18n="_clearErrors_" href="" style="font-size: 60%; margin-left: 2em;"></a>
+    </div>
     <p ng-repeat="error in errors">
         <span ng-if="error.name == 'NotEnrolledReadException' || error.name == 'NotEnrolledWriteException'">
             {{ error.tryer }}

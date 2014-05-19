@@ -49,6 +49,7 @@ bonsaiApp.directive('register', function ($interval) {
             };
 
             $scope.setState = function (connection, desiredState) {
+                window.getSelection().removeAllRanges(); // Hack to unselect the arrows to keep the color visible.
                 var readState = connection.handler.isReading(element);
                 var writeState = connection.handler.isWriting(element);
                 if (desiredState == 1) {
