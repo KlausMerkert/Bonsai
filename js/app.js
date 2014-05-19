@@ -4,7 +4,8 @@ var bonsaiApp = angular.module(
         'Bonsai',
         [
             'ngAnimate',
-            'ngRoute'
+            'ngRoute',
+            'localization'
         ]
     )
     .config(['$routeProvider', function ($routeProvider) {
