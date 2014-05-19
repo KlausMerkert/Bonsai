@@ -3,10 +3,14 @@ bonsaiApp.directive('bus', function () {
         restrict: 'E',
         scope: {
             handler: '=',
-            color: '='
+            color: '=',
+            top: '=',
+            left: '='
         },
         link: function ($scope, element, attrs) {
             $scope.localHandler = $scope.handler || {};
+            $scope.topCSS = $scope.top + 'em';
+            $scope.leftCSS = $scope.left + 'em';
 
             $scope.connections = [];
 

@@ -4,4 +4,8 @@
              ng-class="part.type"
              ng-style="{'top': part.top, 'left': part.left, 'width': part.width, 'height': part.height, 'border-color': color}"></div>
     </div>
+    <div class="label" ng-style="{'color': color, 'border-color': color, 'top': topCSS, 'left': leftCSS}">
+        <span ng-if="value">{{ value }}</span>
+        <span ng-if="!value">######</span>
+    </div>
 </div>
