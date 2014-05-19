@@ -541,6 +541,14 @@ bonsaiApp.directive('bus', function () {
                 }
             };
 
+            $scope.localHandler.isReading = function (reader) {
+                var index = findInConnections(reader);
+                if (index >= 0) {
+                    return $scope.connections[index].is_reading;
+                }
+                return false;
+            };
+
             $scope.localHandler.write = function (writer, data) {
                 var index = findInConnections(writer);
                 if (index >= 0) {
@@ -579,6 +587,16 @@ bonsaiApp.directive('bus', function () {
                         $scope.value = null;
                     }
                 }
+            };
+
+            $scope.localHandler.isWriting = function (writer) {
+                var index = findInConnections(writer);
+                if (index >= 0) {
+                    if (index == $scope.writerIndex) {
+                        return true;
+                    }
+                }
+                return false;
             };
         },
         templateUrl: 'partials/component_Bus.html'

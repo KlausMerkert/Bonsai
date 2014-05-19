@@ -16,12 +16,19 @@ bonsaiApp.directive('register', function ($interval) {
             $scope.toggleState = function (connection) {
                 for (var i = 0; i < $scope.connections.length; i++) {
                     if ($scope.connections[i].handler == connection.handler) {
-                        if ($scope.connections[i].state <= -1) {
-                            $scope.connections[i].state = 1;
-                            $scope.setState($scope.connections[i], $scope.connections[i].state);
-                        } else {
-                            $scope.connections[i].state--;
-                            $scope.setState($scope.connections[i], $scope.connections[i].state);
+                        var stateFound = false;
+                        var desiredState = $scope.connections[i].state - 1;
+                        while (!stateFound) {
+                            if (desiredState < -1) {
+                                desiredState = 1;
+                            }
+                            try {
+                                $scope.setState($scope.connections[i], desiredState);
+                                $scope.connections[i].state = desiredState;
+                                stateFound = true;
+                            } catch (exception) {
+                                desiredState--;
+                            }
                         }
                     }
                 }
@@ -41,22 +48,40 @@ bonsaiApp.directive('register', function ($interval) {
                 }
             };
 
-            $scope.setState = function (connection, state) {
-                connection.state = state;
-                if (state == 1) {
+            $scope.setState = function (connection, desiredState) {
+                var readState = connection.handler.isReading(element);
+                var writeState = connection.handler.isWriting(element);
+                if (desiredState == 1) {
                     connection.handler.stopReading(element);
-                    connection.handler.write(element, $scope.data);
-                    for (var i = 0; i < $scope.connections.length; i++) {
-                        if (!angular.equals($scope.connections[i], connection) && $scope.connections[i].state == -1) {
-                            $scope.setValue($scope.connections[i].handler.startReading(element));
+                    try {
+                        connection.handler.write(element, $scope.data);
+                        for (var i = 0; i < $scope.connections.length; i++) {
+                            if (!angular.equals($scope.connections[i], connection) && $scope.connections[i].state == -1) {
+                                $scope.setValue($scope.connections[i].handler.startReading(element));
+                            }
                         }
+                        connection.state = desiredState;
+                    } catch (exception) {
+                        if (readState) {
+                            connection.handler.startReading(element);
+                        }
+                        throw exception;
                     }
-                } else if (state == -1) {
+                } else if (desiredState == -1) {
                     connection.handler.stopWriting(element);
-                    $scope.setValue(connection.handler.startReading(element));
+                    try {
+                        $scope.setValue(connection.handler.startReading(element));
+                        connection.state = desiredState;
+                    } catch (exception) {
+                        if (writeState) {
+                            connection.handler.write(element, $scope.data);
+                        }
+                        throw exception;
+                    }
                 } else {
                     connection.handler.stopWriting(element);
                     connection.handler.stopReading(element);
+                    connection.state = desiredState;
                     for (i = 0; i < $scope.connections.length; i++) {
                         if (!angular.equals($scope.connections[i], connection) && $scope.connections[i].state == -1) {
                             $scope.setValue($scope.connections[i].handler.startReading(element));
