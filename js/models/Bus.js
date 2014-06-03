@@ -16,6 +16,18 @@ Bus.prototype.getConnections = function () {
     return this.connections;
 };
 
+Bus.prototype.setValue = function (value) {
+    this.value = value;
+    if (this.updateViewCallback) {
+        this.updateViewCallback(this.value);
+    }
+    for (var i = 0; i < this.connections.length; i++) {
+        if (this.connections[i].is_reading) {
+            this.connections[i].callback(this.value);
+        }
+    }
+};
+
 Bus.prototype.findInConnections = function (enrollee) {
     var index = -1;
     for (var i = 0; i < this.connections.length; i++) {
@@ -83,15 +95,7 @@ Bus.prototype.write = function (writer, data) {
             this.writerIndex = index;
             this.active = true;
             if (this.value != data) {
-                this.value = data;
-                if (this.updateViewCallback) {
-                    this.updateViewCallback(this.value);
-                }
-                for (var i = 0; i < this.connections.length; i++) {
-                    if (this.connections[i].is_reading) {
-                        this.connections[i].callback(this.value);
-                    }
-                }
+                this.setValue(data);
             }
         }
     } else {
@@ -108,10 +112,7 @@ Bus.prototype.stopWriting = function (writer) {
         if (index === this.writerIndex) {
             this.active = false;
             this.writerIndex = -1;
-            this.value = null;
-            if (this.updateViewCallback) {
-                this.updateViewCallback(this.value);
-            }
+            this.setValue(null);
         }
     }
 };
