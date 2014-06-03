@@ -40,3 +40,45 @@ Register.prototype.setValue = function (value) {
 Register.prototype.getValue = function () {
     return this.value;
 };
+
+Register.prototype.setState = function (connection, desiredState) {
+    var readState = connection.bus.isReading(this);
+    var writeState = connection.bus.isWriting(this);
+    if (desiredState == 1) {
+        connection.bus.stopReading(this);
+        try {
+            connection.bus.write(this, this.getValue());
+            for (var i = 0; i < this.connections.length; i++) {
+                if (!angular.equals(this.connections[i], connection) && this.connections[i].state == -1) {
+                    this.setValue(this.connections[i].bus.startReading(this));
+                }
+            }
+            connection.state = desiredState;
+        } catch (exception) {
+            if (readState) {
+                connection.bus.startReading(this);
+            }
+            throw exception;
+        }
+    } else if (desiredState == -1) {
+        connection.bus.stopWriting(this);
+        try {
+            this.setValue(connection.bus.startReading(this));
+            connection.state = desiredState;
+        } catch (exception) {
+            if (writeState) {
+                connection.bus.write(this, this.value);
+            }
+            throw exception;
+        }
+    } else {
+        connection.bus.stopWriting(this);
+        connection.bus.stopReading(this);
+        connection.state = desiredState;
+        for (i = 0; i < this.connections.length; i++) {
+            if (!angular.equals(this.connections[i], connection) && this.connections[i].state == -1) {
+                this.setValue(this.connections[i].bus.startReading(this));
+            }
+        }
+    }
+};

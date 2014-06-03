@@ -54,47 +54,7 @@ bonsaiApp.directive('register', function ($interval) {
 
             $scope.setState = function (connection, desiredState) {
                 window.getSelection().removeAllRanges(); // Hack to unselect the arrows to keep the color visible.
-                var readState = connection.bus.isReading($scope.register);
-                var writeState = connection.bus.isWriting($scope.register);
-                if (desiredState == 1) {
-                    connection.bus.stopReading($scope.register);
-                    try {
-                        connection.bus.write($scope.register, $scope.register.getValue());
-                        var connections = $scope.register.getConnections();
-                        for (var i = 0; i < connections.length; i++) {
-                            if (!angular.equals(connections[i], connection) && connections[i].state == -1) {
-                                $scope.setValue(connections[i].bus.startReading($scope.register));
-                            }
-                        }
-                        connection.state = desiredState;
-                    } catch (exception) {
-                        if (readState) {
-                            connection.bus.startReading($scope.register);
-                        }
-                        throw exception;
-                    }
-                } else if (desiredState == -1) {
-                    connection.bus.stopWriting($scope.register);
-                    try {
-                        $scope.setValue(connection.bus.startReading($scope.register));
-                        connection.state = desiredState;
-                    } catch (exception) {
-                        if (writeState) {
-                            connection.bus.write($scope.register, $scope.register.getValue());
-                        }
-                        throw exception;
-                    }
-                } else {
-                    connection.bus.stopWriting($scope.register);
-                    connection.bus.stopReading($scope.register);
-                    connection.state = desiredState;
-                    connections = $scope.register.getConnections();
-                    for (i = 0; i < connections.length; i++) {
-                        if (!angular.equals(connections[i], connection) && connections[i].state == -1) {
-                            $scope.setValue(connections[i].bus.startReading($scope.register));
-                        }
-                    }
-                }
+                $scope.register.setState(connection, desiredState);
             };
 
             $scope.toggleRead = function (connection) {
