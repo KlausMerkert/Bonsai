@@ -1,7 +1,7 @@
 <div class="component nospace" ng-style="{'top': topCSS, 'left': leftCSS}">
     <div class="register">
         <div style="width: 0; height: 0; overflow: visible; display: inline-block; position: absolute;"
-             ng-repeat="connection in connections">
+             ng-repeat="connection in register.getConnections()">
             <div ng-click="toggleState(connection)"
                  ng-class="{'connection': true, 'toprow': $even, 'bottomrow': $odd, 'read': connection.state == -1, 'write': connection.state == 1, 'grayback': connection.state == 0}"
                  style="left: 1.3em;">
@@ -21,7 +21,7 @@
                      style="left: 2.19em;" ng-click="toggleRead(connection)"></div>
             </div>
         </div>
-        <input type="text" ng-model="data" ng-change="setValue(data)" />
+        <input type="text" ng-model="data" ng-change="register.setValue(data)" />
         <div style="width: 0; height: 0; display: inline-block; position: absolute;" ng-transclude></div>
     </div>
 </div>

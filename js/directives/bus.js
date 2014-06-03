@@ -1,3 +1,5 @@
+'use strict';
+
 bonsaiApp.directive('bus', function () {
     return {
         restrict: 'E',

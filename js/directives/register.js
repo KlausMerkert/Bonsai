@@ -1,3 +1,5 @@
+'use strict';
+
 bonsaiApp.directive('register', function ($interval) {
     return {
         restrict: 'E',
@@ -9,22 +11,26 @@ bonsaiApp.directive('register', function ($interval) {
         },
         controller: function ($scope) {
             $scope.data = $scope.value;
+            console.log($scope.data);
+            $scope.register = new Register(function (data) {
+                $scope.data = data;
+            }, $scope.data);
             $scope.topCSS = $scope.top + 'em';
             $scope.leftCSS = $scope.left + 'em';
-            $scope.connections = [];
 
             $scope.toggleState = function (connection) {
-                for (var i = 0; i < $scope.connections.length; i++) {
-                    if ($scope.connections[i].handler == connection.handler) {
+                var connections = $scope.register.getConnections();
+                for (var i = 0; i < connections.length; i++) {
+                    if (connections[i].bus === connection.bus) {
                         var stateFound = false;
-                        var desiredState = $scope.connections[i].state - 1;
+                        var desiredState = connections[i].state - 1;
                         while (!stateFound) {
                             if (desiredState < -1) {
                                 desiredState = 1;
                             }
                             try {
-                                $scope.setState($scope.connections[i], desiredState);
-                                $scope.connections[i].state = desiredState;
+                                $scope.setState(connections[i], desiredState);
+                                connections[i].state = desiredState;
                                 stateFound = true;
                             } catch (exception) {
                                 desiredState--;
@@ -34,101 +40,95 @@ bonsaiApp.directive('register', function ($interval) {
                 }
             };
 
-            this.addConnection = function (handler) {
-                $scope.connections.push({state: 0, handler: handler});
+            this.addConnection = function (bus) {
+                $scope.register.addConnection(bus);
             };
         },
         link: function ($scope, element, attrs) {
+            $scope.$watch('data', function(newValue, oldValue) {
+                $scope.register.setValue(newValue);
+            });
+
             $scope.setValue = function (value) {
-                $scope.data = value;
-                for (var i = 0; i < $scope.connections.length; i++) {
-                    if ($scope.connections[i].state == 1) {
-                        $scope.connections[i].handler.write(element, value);
-                    }
-                }
+                $scope.register.setValue(value);
             };
 
             $scope.setState = function (connection, desiredState) {
                 window.getSelection().removeAllRanges(); // Hack to unselect the arrows to keep the color visible.
-                var readState = connection.handler.isReading(element);
-                var writeState = connection.handler.isWriting(element);
+                var readState = connection.bus.isReading($scope.register);
+                var writeState = connection.bus.isWriting($scope.register);
                 if (desiredState == 1) {
-                    connection.handler.stopReading(element);
+                    connection.bus.stopReading($scope.register);
                     try {
-                        connection.handler.write(element, $scope.data);
-                        for (var i = 0; i < $scope.connections.length; i++) {
-                            if (!angular.equals($scope.connections[i], connection) && $scope.connections[i].state == -1) {
-                                $scope.setValue($scope.connections[i].handler.startReading(element));
+                        connection.bus.write($scope.register, $scope.register.getValue());
+                        var connections = $scope.register.getConnections();
+                        for (var i = 0; i < connections.length; i++) {
+                            if (!angular.equals(connections[i], connection) && connections[i].state == -1) {
+                                $scope.setValue(connections[i].bus.startReading($scope.register));
                             }
                         }
                         connection.state = desiredState;
                     } catch (exception) {
                         if (readState) {
-                            connection.handler.startReading(element);
+                            connection.bus.startReading($scope.register);
                         }
                         throw exception;
                     }
                 } else if (desiredState == -1) {
-                    connection.handler.stopWriting(element);
+                    connection.bus.stopWriting($scope.register);
                     try {
-                        $scope.setValue(connection.handler.startReading(element));
+                        $scope.setValue(connection.bus.startReading($scope.register));
                         connection.state = desiredState;
                     } catch (exception) {
                         if (writeState) {
-                            connection.handler.write(element, $scope.data);
+                            connection.bus.write($scope.register, $scope.register.getValue());
                         }
                         throw exception;
                     }
                 } else {
-                    connection.handler.stopWriting(element);
-                    connection.handler.stopReading(element);
+                    connection.bus.stopWriting($scope.register);
+                    connection.bus.stopReading($scope.register);
                     connection.state = desiredState;
-                    for (i = 0; i < $scope.connections.length; i++) {
-                        if (!angular.equals($scope.connections[i], connection) && $scope.connections[i].state == -1) {
-                            $scope.setValue($scope.connections[i].handler.startReading(element));
+                    connections = $scope.register.getConnections();
+                    for (i = 0; i < connections.length; i++) {
+                        if (!angular.equals(connections[i], connection) && connections[i].state == -1) {
+                            $scope.setValue(connections[i].bus.startReading($scope.register));
                         }
                     }
                 }
             };
 
             $scope.toggleRead = function (connection) {
-                for (var i = 0; i < $scope.connections.length; i++) {
-                    if ($scope.connections[i].handler == connection.handler) {
-                        var state = -1;
-                        if ($scope.connections[i].handler.isReading(element)) {
-                            state = 0;
-                        }
-                        try {
-                            $scope.setState($scope.connections[i], state);
-                            $scope.connections[i].state = state;
-                        } catch (exception) {
-                            throw exception;
-                        }
-                    }
+                var state = -1;
+                if (connection.bus.isReading($scope.register)) { // If we are reading then we want to stop it.
+                    state = 0;
+                }
+                try {
+                    $scope.setState(connection, state);
+                    connection.state = state;
+                } catch (exception) {
+                    throw exception;
                 }
             };
 
             $scope.toggleWrite = function (connection) {
-                for (var i = 0; i < $scope.connections.length; i++) {
-                    if ($scope.connections[i].handler == connection.handler) {
-                        var state = 1;
-                        if ($scope.connections[i].handler.isWriting(element)) {
-                            state = 0;
-                        }
-                        try {
-                            $scope.setState($scope.connections[i], state);
-                            $scope.connections[i].state = state;
-                        } catch (exception) {
-                            throw exception;
-                        }
-                    }
+                var state = 1;
+                if (connection.bus.isWriting($scope.register)) { // If we are writing then we want to stop it.
+                    state = 0;
+                }
+                try {
+                    $scope.setState(connection, state);
+                    connection.state = state;
+                } catch (exception) {
+                    throw exception;
                 }
             };
 
-            $scope.getConnectionPositions = function (busHandler) {
+            $scope.getConnectionPositions = function (bus) {
                 var positions = [];
-                for (var i = 0; i < $scope.connections.length; i++) {
-                    if ($scope.connections[i].handler == busHandler) {
+                var connections = $scope.register.getConnections();
+                for (var i = 0; i < connections.length; i++) {
+                    if (connections[i].bus == bus) {
                         if (i%2 == 0) {
                             positions.push({top: $scope.top-1.2, left: $scope.left+2.08});
                         } else {
@@ -142,8 +142,9 @@ bonsaiApp.directive('register', function ($interval) {
             // We have to wait for a very short time to enroll to the busses
             // because the handler needs to be fully initialized.
             $interval(function () {
-                for (var i = 0; i < $scope.connections.length; i++) {
-                    $scope.connections[i].handler.enroll(element, $scope.setValue, $scope.getConnectionPositions);
+                var connections = $scope.register.getConnections();
+                for (var i = 0; i < connections.length; i++) {
+                    connections[i].bus.enroll($scope.register, $scope.setValue, $scope.getConnectionPositions);
                 }
             }, 1, 1);
         },
@@ -156,10 +157,10 @@ bonsaiApp.directive('connection', function () {
         require: '^register',
         restrict: 'E',
         scope: {
-            handler: '='
+            bus: '='
         },
         link: function ($scope, element, attrs, registerCtrl) {
-            registerCtrl.addConnection($scope.handler);
+            registerCtrl.addConnection($scope.bus);
         },
         template: ''
     };
