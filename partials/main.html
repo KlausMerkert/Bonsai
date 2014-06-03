@@ -2,18 +2,18 @@
     <h1>Bonsai</h1>
 
     <div class="components">
-        <bus handler="dataBusHandler" color="'rgb(0, 140, 0)'" top="0.15" left="5"></bus>
-        <bus handler="adressBusHandler" color="'rgb(0, 0, 225)'" top="6.35" left="12"></bus>
+        <bus bus="dataBus" color="'rgb(0, 140, 0)'" top="0.15" left="5"></bus>
+        <bus bus="adressBus" color="'rgb(0, 0, 225)'" top="6.35" left="12"></bus>
         <register value="123456" top="2" left="1">
-            <connection bus="dataBusHandler"></connection>
+            <connection bus="dataBus"></connection>
         </register>
         <register value="234567" top="4" left="8">
-            <connection bus="dataBusHandler"></connection>
-            <connection bus="adressBusHandler"></connection>
+            <connection bus="dataBus"></connection>
+            <connection bus="adressBus"></connection>
         </register>
         <register value="345678" top="3" left="15">
-            <connection bus="dataBusHandler"></connection>
-            <connection bus="adressBusHandler"></connection>
+            <connection bus="dataBus"></connection>
+            <connection bus="adressBus"></connection>
         </register>
     </div>
 

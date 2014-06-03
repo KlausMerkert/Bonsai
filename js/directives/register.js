@@ -143,7 +143,11 @@ bonsaiApp.directive('register', function ($interval) {
             $interval(function () {
                 var connections = $scope.register.getConnections();
                 for (var i = 0; i < connections.length; i++) {
-                    connections[i].bus.enroll($scope.register, $scope.setValue, $scope.getConnectionPositions);
+                    connections[i].bus.enrollToDirective(
+                        $scope.register,
+                        $scope.setValue,
+                        $scope.getConnectionPositions
+                    );
                 }
             }, 1, 1);
         },
