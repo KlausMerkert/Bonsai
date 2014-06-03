@@ -11,7 +11,6 @@ bonsaiApp.directive('register', function ($interval) {
         },
         controller: function ($scope) {
             $scope.data = $scope.value;
-            console.log($scope.data);
             $scope.register = new Register(function (data) {
                 $scope.data = data;
             }, $scope.data);
