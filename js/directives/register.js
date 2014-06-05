@@ -6,14 +6,31 @@ bonsaiApp.directive('register', function ($interval) {
         transclude: true,
         scope: {
             value: '=',
+            base: '=',
             top: '=',
             left: '='
         },
-        controller: function ($scope) {
+        controller: function ($scope, $filter) {
             $scope.data = $scope.value;
-            $scope.register = new Register(function (data) {
-                $scope.data = data;
-            }, $scope.data);
+            if (parseInt($scope.base) in {2:true, 8:true, 10:true, 16:true}) {
+                $scope.displayBase = $scope.base;
+            } else {
+                $scope.displayBase = 10;
+            }
+
+            $scope.dataChangeCallback = function (data) {
+                if ($scope.displayBase === 2) {
+                    $scope.data = $filter('binary')(data);
+                } else if ($scope.displayBase === 8) {
+                    $scope.data = $filter('octal')(data);
+                } else if ($scope.displayBase === 16) {
+                    $scope.data = $filter('hexadecimal')(data);
+                } else {
+                    $scope.data = data;
+                }
+            };
+
+            $scope.register = new Register($scope.dataChangeCallback, $scope.data);
             $scope.topCSS = $scope.top + 'em';
             $scope.leftCSS = $scope.left + 'em';
 
@@ -45,7 +62,58 @@ bonsaiApp.directive('register', function ($interval) {
         },
         link: function ($scope, element, attrs) {
             $scope.$watch('data', function(newValue, oldValue) {
-                $scope.register.setValue(newValue);
+                newValue = String(newValue);
+                if ($scope.displayBase === 2) {
+                    if (newValue.match(/[0,1]*/)[0] === newValue) {
+                        var convertedValue = 0;
+                        for (var i = 1; i <= newValue.length; i++) {
+                            convertedValue += parseInt(newValue[i-1]) * Math.pow(2, newValue.length - i);
+                        }
+                        $scope.register.setValue(convertedValue);
+                    } else {
+                        $scope.data = oldValue;
+                    }
+                } else if ($scope.displayBase === 8) {
+                    if (newValue.match(/[0-7]*/)[0] === newValue) {
+                        convertedValue = 0;
+                        for (i = 1; i <= newValue.length; i++) {
+                            convertedValue += parseInt(newValue[i-1]) * Math.pow(8, newValue.length - i);
+                        }
+                        $scope.register.setValue(convertedValue);
+                    } else {
+                        $scope.data = oldValue;
+                    }
+                } else if ($scope.displayBase === 16) {
+                    if (newValue.match(/[0-9,a-f]*/)[0] === newValue) {
+                        convertedValue = 0;
+                        for (i = 1; i <= newValue.length; i++) {
+                            var digit = parseInt(newValue[i-1]);
+                            if (newValue[i-1] === 'a') {
+                                digit = 10;
+                            } else if (newValue[i-1] === 'b') {
+                                digit = 11;
+                            } else if (newValue[i-1] === 'c') {
+                                digit = 12;
+                            } else if (newValue[i-1] === 'd') {
+                                digit = 13;
+                            } else if (newValue[i-1] === 'e') {
+                                digit = 14;
+                            } else if (newValue[i-1] === 'f') {
+                                digit = 15;
+                            }
+                            convertedValue += digit * Math.pow(16, newValue.length - i);
+                        }
+                        $scope.register.setValue(convertedValue);
+                    } else {
+                        $scope.data = oldValue;
+                    }
+                } else {
+                    if (newValue.match(/[0-9]*/)[0] === newValue) {
+                        $scope.register.setValue(newValue);
+                    } else {
+                        $scope.data = oldValue;
+                    }
+                }
             });
 
             $scope.setValue = function (value) {

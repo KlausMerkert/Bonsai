@@ -2,6 +2,8 @@
 
 bonsaiApp.controller('bonsaiCpuCtrl',
     function ($scope, $routeParams) {
+        $scope.base = 10;
+
         $scope.dataBus = new Bus();
         $scope.adressBus = new Bus();
 

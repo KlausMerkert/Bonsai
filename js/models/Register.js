@@ -30,7 +30,7 @@ Register.prototype.getConnections = function () {
 };
 
 Register.prototype.setValue = function (value) {
-    this.value = value;
+    this.value = parseInt(value);
     this.updateViewCallback(this.value);
     for (var i = 0; i < this.buses.length; i++) {
         if (this.buses[i].state === 1) {

@@ -5,12 +5,19 @@ bonsaiApp.directive('bus', function () {
         restrict: 'E',
         scope: {
             bus: '=',
+            base: '=',
             color: '=',
             top: '=',
             left: '='
         },
         link: function ($scope, element, attrs) {
             $scope.localBus = $scope.bus || {};
+
+            if (parseInt($scope.base) in {2:true, 8:true, 10:true, 16:true}) {
+                $scope.displayBase = $scope.base;
+            } else {
+                $scope.displayBase = 10;
+            }
             $scope.topCSS = $scope.top + 'em';
             $scope.leftCSS = $scope.left + 'em';
 

@@ -2,16 +2,16 @@
     <h1>Bonsai</h1>
 
     <div class="components">
-        <bus bus="dataBus" color="'rgb(0, 140, 0)'" top="0.85" left="5"></bus>
-        <bus bus="adressBus" color="'rgb(0, 0, 225)'" top="5.75" left="12"></bus>
-        <register value="123456" top="2" left="1">
+        <bus bus="dataBus" base="base" color="'rgb(0, 140, 0)'" top="0.85" left="5"></bus>
+        <bus bus="adressBus" base="base" color="'rgb(0, 0, 225)'" top="5.75" left="12"></bus>
+        <register value="11" base="base" top="2" left="1">
             <connection bus="dataBus"></connection>
         </register>
-        <register value="234567" top="4" left="8">
+        <register value="10" base="base" top="4" left="8">
             <connection bus="dataBus"></connection>
             <connection bus="adressBus"></connection>
         </register>
-        <register value="345678" top="3" left="15">
+        <register value="1" base="base" top="3" left="15">
             <connection bus="dataBus"></connection>
             <connection bus="adressBus"></connection>
         </register>
