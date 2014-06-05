@@ -82,3 +82,13 @@ Register.prototype.setState = function (connection, desiredState) {
         }
     }
 };
+
+Register.prototype.isReading = function () {
+    var isReading = false;
+    for (var i = 0; i < this.buses.length; i++) {
+        if (this.buses[i].state === -1) {
+            isReading = true;
+        }
+    }
+    return isReading;
+};
