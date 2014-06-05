@@ -3,7 +3,7 @@
 function Bus () {
     this.updateViewCallback = undefined;
     this.connections = [];
-    this.value = null;
+    this.value = undefined;
     this.active = false;
     this.writerIndex = -1;
 }
@@ -112,7 +112,7 @@ Bus.prototype.stopWriting = function (writer) {
         if (index === this.writerIndex) {
             this.active = false;
             this.writerIndex = -1;
-            this.setValue(null);
+            this.setValue(undefined);
         }
     }
 };

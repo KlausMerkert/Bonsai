@@ -62,56 +62,58 @@ bonsaiApp.directive('register', function ($interval) {
         },
         link: function ($scope, element, attrs) {
             $scope.$watch('data', function(newValue, oldValue) {
-                newValue = String(newValue);
-                if ($scope.displayBase === 2) {
-                    if (newValue.match(/[0,1]*/)[0] === newValue) {
-                        var convertedValue = 0;
-                        for (var i = 1; i <= newValue.length; i++) {
-                            convertedValue += parseInt(newValue[i-1]) * Math.pow(2, newValue.length - i);
-                        }
-                        $scope.register.setValue(convertedValue);
-                    } else {
-                        $scope.data = oldValue;
-                    }
-                } else if ($scope.displayBase === 8) {
-                    if (newValue.match(/[0-7]*/)[0] === newValue) {
-                        convertedValue = 0;
-                        for (i = 1; i <= newValue.length; i++) {
-                            convertedValue += parseInt(newValue[i-1]) * Math.pow(8, newValue.length - i);
-                        }
-                        $scope.register.setValue(convertedValue);
-                    } else {
-                        $scope.data = oldValue;
-                    }
-                } else if ($scope.displayBase === 16) {
-                    if (newValue.match(/[0-9,a-f]*/)[0] === newValue) {
-                        convertedValue = 0;
-                        for (i = 1; i <= newValue.length; i++) {
-                            var digit = parseInt(newValue[i-1]);
-                            if (newValue[i-1] === 'a') {
-                                digit = 10;
-                            } else if (newValue[i-1] === 'b') {
-                                digit = 11;
-                            } else if (newValue[i-1] === 'c') {
-                                digit = 12;
-                            } else if (newValue[i-1] === 'd') {
-                                digit = 13;
-                            } else if (newValue[i-1] === 'e') {
-                                digit = 14;
-                            } else if (newValue[i-1] === 'f') {
-                                digit = 15;
+                if (newValue != undefined) {
+                    newValue = String(newValue);
+                    if ($scope.displayBase === 2) {
+                        if (newValue.match(/[0,1]*/)[0] === newValue) {
+                            var convertedValue = 0;
+                            for (var i = 1; i <= newValue.length; i++) {
+                                convertedValue += parseInt(newValue[i - 1]) * Math.pow(2, newValue.length - i);
                             }
-                            convertedValue += digit * Math.pow(16, newValue.length - i);
+                            $scope.register.setValue(convertedValue);
+                        } else {
+                            $scope.data = oldValue;
                         }
-                        $scope.register.setValue(convertedValue);
+                    } else if ($scope.displayBase === 8) {
+                        if (newValue.match(/[0-7]*/)[0] === newValue) {
+                            convertedValue = 0;
+                            for (i = 1; i <= newValue.length; i++) {
+                                convertedValue += parseInt(newValue[i - 1]) * Math.pow(8, newValue.length - i);
+                            }
+                            $scope.register.setValue(convertedValue);
+                        } else {
+                            $scope.data = oldValue;
+                        }
+                    } else if ($scope.displayBase === 16) {
+                        if (newValue.match(/[0-9,a-f]*/)[0] === newValue) {
+                            convertedValue = 0;
+                            for (i = 1; i <= newValue.length; i++) {
+                                var digit = parseInt(newValue[i - 1]);
+                                if (newValue[i - 1] === 'a') {
+                                    digit = 10;
+                                } else if (newValue[i - 1] === 'b') {
+                                    digit = 11;
+                                } else if (newValue[i - 1] === 'c') {
+                                    digit = 12;
+                                } else if (newValue[i - 1] === 'd') {
+                                    digit = 13;
+                                } else if (newValue[i - 1] === 'e') {
+                                    digit = 14;
+                                } else if (newValue[i - 1] === 'f') {
+                                    digit = 15;
+                                }
+                                convertedValue += digit * Math.pow(16, newValue.length - i);
+                            }
+                            $scope.register.setValue(convertedValue);
+                        } else {
+                            $scope.data = oldValue;
+                        }
                     } else {
-                        $scope.data = oldValue;
-                    }
-                } else {
-                    if (newValue.match(/[0-9]*/)[0] === newValue) {
-                        $scope.register.setValue(newValue);
-                    } else {
-                        $scope.data = oldValue;
+                        if (newValue.match(/[0-9]*/)[0] === newValue) {
+                            $scope.register.setValue(newValue);
+                        } else {
+                            $scope.data = oldValue;
+                        }
                     }
                 }
             });
@@ -166,7 +168,7 @@ bonsaiApp.directive('register', function ($interval) {
                 return positions;
             };
 
-            // We have to wait for a very short time to enroll to the busses
+            // We have to wait for a very short time to enroll to the buses
             // because the handler needs to be fully initialized.
             $interval(function () {
                 var connections = $scope.register.getConnections();
