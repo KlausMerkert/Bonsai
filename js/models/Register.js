@@ -15,10 +15,12 @@ Register.prototype.addConnection = function (bus) {
 };
 
 Register.prototype.removeConnection = function (bus) {
-    for (var i = 0; i < this.buses.length; i++) {
+    var i = 0;
+    while (i < this.buses.length) {
         if (this.buses[i].bus === bus) {
             this.buses.splice(i, 1);
-            i--;
+        } else {
+            i++;
         }
     }
 };
