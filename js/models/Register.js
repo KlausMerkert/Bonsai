@@ -41,42 +41,42 @@ Register.prototype.getValue = function () {
     return this.value;
 };
 
-Register.prototype.setState = function (connection, desiredState) {
-    var readState = connection.bus.isReading(this);
-    var writeState = connection.bus.isWriting(this);
+Register.prototype.setState = function (busConnection, desiredState) {
+    var readState = busConnection.bus.isReading(this);
+    var writeState = busConnection.bus.isWriting(this);
     if (desiredState == 1) {
-        connection.bus.stopReading(this);
+        busConnection.bus.stopReading(this);
         try {
-            connection.bus.write(this, this.getValue());
+            busConnection.bus.write(this, this.getValue());
             for (var i = 0; i < this.buses.length; i++) {
-                if (!angular.equals(this.buses[i], connection) && this.buses[i].state == -1) {
+                if (!angular.equals(this.buses[i], busConnection) && this.buses[i].state == -1) {
                     this.setValue(this.buses[i].bus.startReading(this));
                 }
             }
-            connection.state = desiredState;
+            busConnection.state = desiredState;
         } catch (exception) {
             if (readState) {
-                connection.bus.startReading(this);
+                busConnection.bus.startReading(this);
             }
             throw exception;
         }
     } else if (desiredState == -1) {
-        connection.bus.stopWriting(this);
+        busConnection.bus.stopWriting(this);
         try {
-            this.setValue(connection.bus.startReading(this));
-            connection.state = desiredState;
+            this.setValue(busConnection.bus.startReading(this));
+            busConnection.state = desiredState;
         } catch (exception) {
             if (writeState) {
-                connection.bus.write(this, this.value);
+                busConnection.bus.write(this, this.value);
             }
             throw exception;
         }
     } else {
-        connection.bus.stopWriting(this);
-        connection.bus.stopReading(this);
-        connection.state = desiredState;
+        busConnection.bus.stopWriting(this);
+        busConnection.bus.stopReading(this);
+        busConnection.state = desiredState;
         for (i = 0; i < this.buses.length; i++) {
-            if (!angular.equals(this.buses[i], connection) && this.buses[i].state == -1) {
+            if (!angular.equals(this.buses[i], busConnection) && this.buses[i].state == -1) {
                 this.setValue(this.buses[i].bus.startReading(this));
             }
         }
