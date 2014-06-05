@@ -54,7 +54,7 @@ Bus.prototype.resign = function (resigner) {
     }
 };
 
-Bus.prototype.startReading = function (reader) {
+Bus.prototype.registerReaderAndRead = function (reader) {
     var index = this.findInConnections(reader);
     if (index >= 0) {
         this.connections[index].is_reading = true;
@@ -67,14 +67,14 @@ Bus.prototype.startReading = function (reader) {
     }
 };
 
-Bus.prototype.stopReading = function (reader) {
+Bus.prototype.unregisterReader = function (reader) {
     var index = this.findInConnections(reader);
     if (index >= 0) {
         this.connections[index].is_reading = false;
     }
 };
 
-Bus.prototype.isReading = function (reader) {
+Bus.prototype.isReader = function (reader) {
     var index = this.findInConnections(reader);
     if (index >= 0) {
         return this.connections[index].is_reading;
@@ -117,7 +117,7 @@ Bus.prototype.stopWriting = function (writer) {
     }
 };
 
-Bus.prototype.isWriting = function (writer) {
+Bus.prototype.isWriter = function (writer) {
     var index = this.findInConnections(writer);
     if (index >= 0) {
         if (index === this.writerIndex) {

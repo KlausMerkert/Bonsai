@@ -44,26 +44,26 @@ Register.prototype.getValue = function () {
 };
 
 Register.prototype.setState = function (busConnection, desiredState) {
-    var readState = busConnection.bus.isReading(this);
-    var writeState = busConnection.bus.isWriting(this);
+    var readState = busConnection.bus.isReader(this);
+    var writeState = busConnection.bus.isWriter(this);
     if (desiredState == 1) {
-        busConnection.bus.stopReading(this);
+        busConnection.bus.unregisterReader(this);
         try {
             busConnection.bus.write(this, this.getValue());
             for (var i = 0; i < this.buses.length; i++) {
                 if (!angular.equals(this.buses[i], busConnection) && this.buses[i].state == -1) {
-                    this.setValue(this.buses[i].bus.startReading(this));
+                    this.setValue(this.buses[i].bus.registerReaderAndRead(this));
                 }
             }
             busConnection.state = desiredState;
         } catch (exception) {
             if (readState) {
-                busConnection.bus.startReading(this);
+                busConnection.bus.registerReaderAndRead(this);
             }
             throw exception;
         }
     } else if (desiredState == -1) {
-        if (this.isReading()) {
+        if (this.isReader()) {
             throw RegisterIsAlreadyReadingException(
                 "This Register is already reading.",
                 this
@@ -71,7 +71,7 @@ Register.prototype.setState = function (busConnection, desiredState) {
         } else {
             busConnection.bus.stopWriting(this);
             try {
-                this.setValue(busConnection.bus.startReading(this));
+                this.setValue(busConnection.bus.registerReaderAndRead(this));
                 busConnection.state = desiredState;
             } catch (exception) {
                 if (writeState) {
@@ -82,17 +82,17 @@ Register.prototype.setState = function (busConnection, desiredState) {
         }
     } else {
         busConnection.bus.stopWriting(this);
-        busConnection.bus.stopReading(this);
+        busConnection.bus.unregisterReader(this);
         busConnection.state = desiredState;
         for (i = 0; i < this.buses.length; i++) {
             if (!angular.equals(this.buses[i], busConnection) && this.buses[i].state == -1) {
-                this.setValue(this.buses[i].bus.startReading(this));
+                this.setValue(this.buses[i].bus.registerReaderAndRead(this));
             }
         }
     }
 };
 
-Register.prototype.isReading = function () {
+Register.prototype.isReader = function () {
     var isReading = false;
     for (var i = 0; i < this.buses.length; i++) {
         if (this.buses[i].state === -1) {

@@ -129,7 +129,7 @@ bonsaiApp.directive('register', function ($interval) {
 
             $scope.toggleRead = function (connection) {
                 var state = -1;
-                if (connection.bus.isReading($scope.register)) { // If we are reading then we want to stop it.
+                if (connection.bus.isReader($scope.register)) { // If we are reading then we want to stop it.
                     state = 0;
                 }
                 try {
@@ -142,7 +142,7 @@ bonsaiApp.directive('register', function ($interval) {
 
             $scope.toggleWrite = function (connection) {
                 var state = 1;
-                if (connection.bus.isWriting($scope.register)) { // If we are writing then we want to stop it.
+                if (connection.bus.isWriter($scope.register)) { // If we are writing then we want to stop it.
                     state = 0;
                 }
                 try {
