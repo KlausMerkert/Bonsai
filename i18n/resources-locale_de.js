@@ -28,5 +28,10 @@
         "key"        : "_NotEnrolledWriteException_",
         "value"      : " ist nicht am Bus angemeldet und kann daher nicht auf den Bus schreiben.",
         "description": ""
+    },
+    {
+        "key"        : "_RegisterIsAlreadyReadingException_",
+        "value"      : "Dieses Register liest bereits von einem Bus.",
+        "description": ""
     }
 ]

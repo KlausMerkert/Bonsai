@@ -24,3 +24,12 @@ function NotEnrolledWriteException (message, tryer) {
     exception.tryer = tryer;
     return exception;
 }
+
+function RegisterIsAlreadyReadingException (message, tryer) {
+    var exception = {};
+    exception.name = 'RegisterIsAlreadyReadingException';
+    exception.localization = '_' + exception.name + '_';
+    exception.message = message;
+    exception.tryer = tryer;
+    return exception;
+}

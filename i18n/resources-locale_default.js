@@ -28,5 +28,10 @@
         "key"        : "_NotEnrolledWriteException_",
         "value"      : " is not enrolled to the bus an can not write.",
         "description": ""
+    },
+    {
+        "key"        : "_RegisterIsAlreadyReadingException_",
+        "value"      : "This Register is already reading.",
+        "description": ""
     }
 ]

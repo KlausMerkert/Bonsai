@@ -63,15 +63,22 @@ Register.prototype.setState = function (busConnection, desiredState) {
             throw exception;
         }
     } else if (desiredState == -1) {
-        busConnection.bus.stopWriting(this);
-        try {
-            this.setValue(busConnection.bus.startReading(this));
-            busConnection.state = desiredState;
-        } catch (exception) {
-            if (writeState) {
-                busConnection.bus.write(this, this.value);
+        if (this.isReading()) {
+            throw RegisterIsAlreadyReadingException(
+                "This Register is already reading.",
+                this
+            )
+        } else {
+            busConnection.bus.stopWriting(this);
+            try {
+                this.setValue(busConnection.bus.startReading(this));
+                busConnection.state = desiredState;
+            } catch (exception) {
+                if (writeState) {
+                    busConnection.bus.write(this, this.value);
+                }
+                throw exception;
             }
-            throw exception;
         }
     } else {
         busConnection.bus.stopWriting(this);
