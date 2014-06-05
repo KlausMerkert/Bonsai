@@ -3,7 +3,7 @@
 function Register(updateViewCallback, initialValue) {
     this.updateViewCallback = updateViewCallback;
     this.value = initialValue;
-    this.connections = [];
+    this.buses = [];
 }
 
 Register.prototype.addConnection = function (bus) {
@@ -11,28 +11,28 @@ Register.prototype.addConnection = function (bus) {
      * 1 means the register writes to the bus
      * 0 means the connection is inactive
      * -1 means the register reads from the bus */
-    this.connections.push({state: 0, bus: bus})
+    this.buses.push({state: 0, bus: bus})
 };
 
 Register.prototype.removeConnection = function (bus) {
-    for (var i = 0; i < this.connections.length; i++) {
-        if (this.connections[i].bus === bus) {
-            this.connections.splice(i, 1);
+    for (var i = 0; i < this.buses.length; i++) {
+        if (this.buses[i].bus === bus) {
+            this.buses.splice(i, 1);
             i--;
         }
     }
 };
 
 Register.prototype.getConnections = function () {
-    return this.connections;
+    return this.buses;
 };
 
 Register.prototype.setValue = function (value) {
     this.value = value;
     this.updateViewCallback(this.value);
-    for (var i = 0; i < this.connections.length; i++) {
-        if (this.connections[i].state === 1) {
-            this.connections[i].bus.write(this, value);
+    for (var i = 0; i < this.buses.length; i++) {
+        if (this.buses[i].state === 1) {
+            this.buses[i].bus.write(this, value);
         }
     }
 };
@@ -48,9 +48,9 @@ Register.prototype.setState = function (connection, desiredState) {
         connection.bus.stopReading(this);
         try {
             connection.bus.write(this, this.getValue());
-            for (var i = 0; i < this.connections.length; i++) {
-                if (!angular.equals(this.connections[i], connection) && this.connections[i].state == -1) {
-                    this.setValue(this.connections[i].bus.startReading(this));
+            for (var i = 0; i < this.buses.length; i++) {
+                if (!angular.equals(this.buses[i], connection) && this.buses[i].state == -1) {
+                    this.setValue(this.buses[i].bus.startReading(this));
                 }
             }
             connection.state = desiredState;
@@ -75,9 +75,9 @@ Register.prototype.setState = function (connection, desiredState) {
         connection.bus.stopWriting(this);
         connection.bus.stopReading(this);
         connection.state = desiredState;
-        for (i = 0; i < this.connections.length; i++) {
-            if (!angular.equals(this.connections[i], connection) && this.connections[i].state == -1) {
-                this.setValue(this.connections[i].bus.startReading(this));
+        for (i = 0; i < this.buses.length; i++) {
+            if (!angular.equals(this.buses[i], connection) && this.buses[i].state == -1) {
+                this.setValue(this.buses[i].bus.startReading(this));
             }
         }
     }
