@@ -15,23 +15,63 @@
         "description": ""
     },
     {
-        "key"        : "_BusOccupiedException_",
-        "value"      : "This bus is already occupied by enrollee no.: ",
+        "key"        : "_BusOccupiedException_beginning",
+        "value"      : "This bus (",
         "description": ""
     },
     {
-        "key"        : "_NotEnrolledReadException_",
-        "value"      : " is not enrolled to the bus an can not read.",
+        "key"        : "_BusOccupiedException_middle",
+        "value"      : ") is already occupied by ",
         "description": ""
     },
     {
-        "key"        : "_NotEnrolledWriteException_",
-        "value"      : " is not enrolled to the bus an can not write.",
+        "key"        : "_BusOccupiedException_end",
+        "value"      : ".",
         "description": ""
     },
     {
-        "key"        : "_RegisterIsAlreadyReadingException_",
-        "value"      : "This Register is already reading.",
+        "key"        : "_NotEnrolledReadException_beginning",
+        "value"      : "",
+        "description": ""
+    },
+    {
+        "key"        : "_NotEnrolledReadException_middle",
+        "value"      : " is not enrolled to the bus (",
+        "description": ""
+    },
+    {
+        "key"        : "_NotEnrolledReadException_end",
+        "value"      : ") and can not read.",
+        "description": ""
+    },
+    {
+        "key"        : "_NotEnrolledWriteException_beginning",
+        "value"      : "",
+        "description": ""
+    },
+    {
+        "key"        : "_NotEnrolledWriteException_middle",
+        "value"      : " is not enrolled to the bus (",
+        "description": ""
+    },
+    {
+        "key"        : "_NotEnrolledWriteException_end",
+        "value"      : ") and can not write.",
+        "description": ""
+    },
+    {
+        "key"        : "_RegisterIsAlreadyReadingException_beginning",
+        "value"      : "Register ",
+        "description": ""
+    },
+    {
+        "key"        : "_RegisterIsAlreadyReadingException_middle",
+        "value"      : " is already reading.",
+        "description": ""
+    },
+    {
+        "key"        : "_RegisterIsAlreadyReadingException_end",
+        "value"      : "",
         "description": ""
     }
 ]

@@ -15,23 +15,63 @@
         "description": ""
     },
     {
-        "key"        : "_BusOccupiedException_",
-        "value"      : "Dieser Bus wird bereits belegt von Element no.: ",
+        "key"        : "_BusOccupiedException_beginning",
+        "value"      : "Dieser Bus (",
         "description": ""
     },
     {
-        "key"        : "_NotEnrolledReadException_",
-        "value"      : " ist nicht am Bus angemeldet und kann daher nicht vom Bus lesen.",
+        "key"        : "_BusOccupiedException_middle",
+        "value"      : ") wird schon belegt von ",
         "description": ""
     },
     {
-        "key"        : "_NotEnrolledWriteException_",
-        "value"      : " ist nicht am Bus angemeldet und kann daher nicht auf den Bus schreiben.",
+        "key"        : "_BusOccupiedException_end",
+        "value"      : ".",
         "description": ""
     },
     {
-        "key"        : "_RegisterIsAlreadyReadingException_",
-        "value"      : "Dieses Register liest bereits von einem Bus.",
+        "key"        : "_NotEnrolledReadException_beginning",
+        "value"      : "",
+        "description": ""
+    },
+    {
+        "key"        : "_NotEnrolledReadException_middle",
+        "value"      : " ist nicht am Bus (",
+        "description": ""
+    },
+    {
+        "key"        : "_NotEnrolledReadException_end",
+        "value"      : ") angemeldet und kann daher nicht lesen.",
+        "description": ""
+    },
+    {
+        "key"        : "_NotEnrolledWriteException_beginning",
+        "value"      : "",
+        "description": ""
+    },
+    {
+        "key"        : "_NotEnrolledWriteException_middle",
+        "value"      : " ist nicht am Bus (",
+        "description": ""
+    },
+    {
+        "key"        : "_NotEnrolledWriteException_end",
+        "value"      : ") angemeldet und kann daher nicht schreiben.",
+        "description": ""
+    },
+    {
+        "key"        : "_RegisterIsAlreadyReadingException_beginning",
+        "value"      : "Register ",
+        "description": ""
+    },
+    {
+        "key"        : "_RegisterIsAlreadyReadingException_middle",
+        "value"      : " liest bereits von einem Bus.",
+        "description": ""
+    },
+    {
+        "key"        : "_RegisterIsAlreadyReadingException_end",
+        "value"      : "",
         "description": ""
     }
 ]

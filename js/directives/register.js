@@ -6,6 +6,7 @@ bonsaiApp.directive('register', function ($interval) {
         transclude: true,
         scope: {
             value: '=',
+            registerName: '@',
             base: '=',
             top: '=',
             left: '='
@@ -30,7 +31,7 @@ bonsaiApp.directive('register', function ($interval) {
                 }
             };
 
-            $scope.register = new Register($scope.dataChangeCallback, $scope.data);
+            $scope.register = new Register($scope.dataChangeCallback, $scope.registerName, $scope.data);
             $scope.topCSS = $scope.top + 'em';
             $scope.leftCSS = $scope.left + 'em';
 
@@ -61,6 +62,12 @@ bonsaiApp.directive('register', function ($interval) {
             };
         },
         link: function ($scope, element, attrs) {
+            attrs.$observe('registerName', function() {
+                if ($scope.registerName) {
+                    $scope.register.setName($scope.registerName);
+                }
+            });
+
             $scope.$watch('data', function(newValue, oldValue) {
                 if (newValue != undefined) {
                     newValue = String(newValue);

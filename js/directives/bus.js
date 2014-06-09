@@ -5,6 +5,7 @@ bonsaiApp.directive('bus', function () {
         restrict: 'E',
         scope: {
             bus: '=',
+            busName: '@',
             base: '=',
             color: '=',
             top: '=',
@@ -12,6 +13,12 @@ bonsaiApp.directive('bus', function () {
         },
         link: function ($scope, element, attrs) {
             $scope.localBus = $scope.bus || {};
+
+            attrs.$observe('busName', function() {
+                if ($scope.busName) {
+                    $scope.localBus.setName($scope.busName);
+                }
+            });
 
             if (parseInt($scope.base) in {2:true, 8:true, 10:true, 16:true}) {
                 $scope.displayBase = $scope.base;

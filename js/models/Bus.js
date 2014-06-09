@@ -6,10 +6,15 @@ function Bus () {
     this.value = undefined;
     this.active = false;
     this.writerIndex = -1;
+    this.name = "unnamed Bus";
 }
 
 Bus.prototype.setUpdateViewCallback = function (callbackFunction) {
     this.updateViewCallback = callbackFunction;
+};
+
+Bus.prototype.setName = function (name) {
+    this.name = name;
 };
 
 Bus.prototype.getConnections = function () {
@@ -61,8 +66,9 @@ Bus.prototype.registerReaderAndRead = function (reader) {
         return this.value;
     } else {
         throw NotEnrolledReadException(
-            reader + " is not enrolled to the bus an can not read.",
-            reader
+            reader.getName() + " is not enrolled to this bus (" + this.name + ") and can not read.",
+            reader.getName(),
+            this.name
         );
     }
 };
@@ -87,8 +93,10 @@ Bus.prototype.write = function (writer, data) {
     if (index >= 0) {
         if (this.active && this.writerIndex != index) {
             throw BusOccupiedException(
-                "This bus is already occupied by enrollee no.: " + this.writerIndex + ".",
-                this.writerIndex
+                "This bus (" + this.name + ") is already occupied by " +
+                    this.connections[this.writerIndex].enrollee.getName() + ".",
+                this.name,
+                this.connections[this.writerIndex].enrollee.getName()
             );
         } else {
             this.connections[index].is_reading = false;
@@ -100,8 +108,9 @@ Bus.prototype.write = function (writer, data) {
         }
     } else {
         throw NotEnrolledWriteException(
-            writer + " is not enrolled to the bus and can not write.",
-            writer
+            writer.getName() + " is not enrolled to the bus (" + this.name + ") and can not write.",
+            writer.getName(),
+            this.name
         );
     }
 };

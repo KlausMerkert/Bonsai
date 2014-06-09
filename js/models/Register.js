@@ -1,10 +1,19 @@
 'use strict';
 
-function Register(updateViewCallback, initialValue) {
+function Register(updateViewCallback, name, initialValue) {
     this.updateViewCallback = updateViewCallback;
+    this.name = name;
     this.value = initialValue;
     this.buses = [];
 }
+
+Register.prototype.setName = function (name) {
+    this.name = name;
+};
+
+Register.prototype.getName = function () {
+    return this.name;
+};
 
 Register.prototype.addConnection = function (bus) {
     /* Connections can have three states:
@@ -65,8 +74,8 @@ Register.prototype.setState = function (busConnection, desiredState) {
     } else if (desiredState == -1) {
         if (this.isReader()) {
             throw RegisterIsAlreadyReadingException(
-                "This Register is already reading.",
-                this
+                "Register " + this.name + " is already reading.",
+                this.name
             )
         } else {
             busConnection.bus.stopWriting(this);

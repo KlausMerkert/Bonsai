@@ -2,16 +2,16 @@
     <h1>Bonsai</h1>
 
     <div class="components">
-        <bus bus="dataBus" base="base" color="'rgb(0, 140, 0)'" top="0.85" left="5"></bus>
-        <bus bus="adressBus" base="base" color="'rgb(0, 0, 225)'" top="5.75" left="12"></bus>
-        <register value="11" base="base" top="2" left="1">
+        <bus bus="dataBus" bus-name="Datenbus" base="base" color="'rgb(0, 140, 0)'" top="0.85" left="5"></bus>
+        <bus bus="adressBus" bus-name="Adressbus" base="base" color="'rgb(0, 0, 225)'" top="5.75" left="12"></bus>
+        <register value="11" register-name="Register A" base="base" top="2" left="1">
             <connection bus="dataBus"></connection>
         </register>
-        <register value="10" base="base" top="4" left="8">
+        <register value="10" register-name="Register B" base="base" top="4" left="8">
             <connection bus="dataBus"></connection>
             <connection bus="adressBus"></connection>
         </register>
-        <register value="1" base="base" top="3" left="15">
+        <register value="1" register-name="Register C" base="base" top="3" left="15">
             <connection bus="dataBus"></connection>
             <connection bus="adressBus"></connection>
         </register>
@@ -23,11 +23,11 @@
            data-i18n="_clearErrors_" href="" style="font-size: 60%; margin-left: 2em;"></a>
     </div>
     <p ng-repeat="error in errors">
-        <span ng-if="error.name == 'NotEnrolledReadException' || error.name == 'NotEnrolledWriteException'">
-            {{ error.tryer }}
-        </span>
-        <span data-i18n="{{ error.localization }}"></span>
-        <span ng-if="error.name == 'BusOccupiedException'">{{ error.busNo }}</span>
+        <span data-i18n="{{ error.localization }}beginning"></span>
+        <span style="font-style: italic;">{{ error.actor1 }}</span>
+        <span data-i18n="{{ error.localization }}middle"></span>
+        <span style="font-style: italic;">{{ error.actor2 }}</span>
+        <span data-i18n="{{ error.localization }}end"></span>
     </p>
     <hr />
     <object data="images/CPU_Schema.svg" width="642" height="350" type="image/svg+xml"></object>
