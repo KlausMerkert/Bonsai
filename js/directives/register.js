@@ -182,7 +182,6 @@ bonsaiApp.directive('register', function ($interval) {
                 for (var i = 0; i < connections.length; i++) {
                     connections[i].bus.enrollToDirective(
                         $scope.register,
-                        $scope.setValue,
                         $scope.getConnectionPositions
                     );
                 }
