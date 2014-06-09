@@ -1,6 +1,6 @@
 'use strict';
 
-bonsaiApp.directive('control-wire', function () {
+bonsaiApp.directive('controlwire', function () {
     return {
         restrict: 'E',
         scope: {
@@ -16,7 +16,7 @@ bonsaiApp.directive('control-wire', function () {
                 }
             });
 
-            $scope.busRouter = new BusRouter($scope.localWire.getConnections(), $scope.localWire);
+            $scope.busRouter = new BusRouter([], $scope.localWire);
 
             $scope.value = 0;
 
@@ -43,6 +43,6 @@ bonsaiApp.directive('control-wire', function () {
                 $scope.updateVisibleParts();
             };
         },
-        templateUrl: 'partials/component_Wire.html'
+        templateUrl: 'partials/component_ControlWire.html'
     }
 });

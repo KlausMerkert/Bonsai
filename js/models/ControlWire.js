@@ -8,6 +8,10 @@ function ControlWire () {
     this.name = "unnamed Wire";
 }
 
+ControlWire.prototype.setUpdateViewCallback = function (callbackFunction) {
+    this.updateViewCallback = callbackFunction;
+};
+
 ControlWire.prototype.setName = function (name) {
     this.name = name;
 };
@@ -25,6 +29,7 @@ ControlWire.prototype.getConnections = function () {
 
 ControlWire.prototype.connect = function (connector) {
     this.readers.push(connector);
+    return this.readers[this.readers.length - 1];
 };
 
 ControlWire.prototype.setWriter = function (writer) {

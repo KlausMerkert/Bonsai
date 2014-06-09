@@ -2,8 +2,11 @@
     <h1>Bonsai</h1>
 
     <div class="components">
+        <controlwire wire="wire1" wire-name="Draht 1"></controlwire>
+
         <bus bus="dataBus" bus-name="Datenbus" base="base" color="'rgb(0, 140, 0)'" top="0.85" left="5"></bus>
         <bus bus="adressBus" bus-name="Adressbus" base="base" color="'rgb(0, 0, 225)'" top="5.75" left="12"></bus>
+
         <register value="11" register-name="Register A" base="base" top="2" left="1">
             <connection bus="dataBus"></connection>
         </register>
@@ -15,6 +18,8 @@
             <connection bus="dataBus"></connection>
             <connection bus="adressBus"></connection>
         </register>
+
+        <manualswitch wire="wire1" switch-name="switch 1" value="0" top="3" left="25"></manualswitch>
     </div>
 
     <div>
