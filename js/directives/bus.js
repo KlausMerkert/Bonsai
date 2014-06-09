@@ -23,7 +23,7 @@ bonsaiApp.directive('bus', function () {
 
             $scope.busRouter = new BusRouter($scope.localBus.getConnections(), $scope.localBus);
 
-            $scope.value = null;
+            $scope.value = undefined;
 
             $scope.localBus.setUpdateViewCallback(function (newValue) {
                 $scope.value = newValue;
