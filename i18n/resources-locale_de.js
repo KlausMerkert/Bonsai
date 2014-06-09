@@ -73,5 +73,35 @@
         "key"        : "_RegisterIsAlreadyReadingException_end",
         "value"      : "",
         "description": ""
+    },
+    {
+        "key"        : "_ControlWireNoWriterSpecifiedException_beginning",
+        "value"      : "Für Steuerleitung ",
+        "description": ""
+    },
+    {
+        "key"        : "_ControlWireNoWriterSpecifiedException_middle",
+        "value"      : " wurde kein schreibendes Element angegeben.",
+        "description": ""
+    },
+    {
+        "key"        : "_ControlWireNoWriterSpecifiedException_end",
+        "value"      : "Das bedeutet, dass die Steuerleitung in einem nicht-nutzbaren Zustand ist.",
+        "description": ""
+    },
+    {
+        "key"        : "_ControlWireWrongWriterException_beginning",
+        "value"      : "Die schreibende Komponente, die du angegeben hast, ist nicht die Komponente (",
+        "description": ""
+    },
+    {
+        "key"        : "_ControlWireWrongWriterException_middle",
+        "value"      : ") die zum Schreiben registriert wurde. Steuerleitung ",
+        "description": ""
+    },
+    {
+        "key"        : "_ControlWireWrongWriterException_end",
+        "value"      : " kann damit nicht beschrieben werden.",
+        "description": ""
     }
 ]

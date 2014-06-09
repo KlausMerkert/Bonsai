@@ -69,40 +69,72 @@ body {
     top: 1.27em;
 }
 
-.bus {
+.bus-type {
     display: inline-block;
     position: absolute;
 }
 
-.horizontal {
+.bus .horizontal {
     border-top: 2px solid;
 }
 
-.vertical {
+.wire .horizontal {
+    border-top: 1px solid rgba(200, 200, 200, 0.6);
+}
+
+.bus .vertical {
     border-left: 2px solid;
 }
 
-.topleft {
+.wire .vertical {
+    border-left: 1px solid rgba(200, 200, 200, 0.6);
+}
+
+.bus .topleft {
     border-top: 2px solid;
     border-left: 2px solid;
     border-top-left-radius: 0.4em;
 }
 
-.topright {
+.wire .topleft {
+    border-top: 1px solid rgba(200, 200, 200, 0.6);
+    border-left: 1px solid rgba(200, 200, 200, 0.6);
+    border-top-left-radius: 0.4em;
+}
+
+.bus .topright {
     border-top: 2px solid;
     border-right: 2px solid;
     border-top-right-radius: 0.4em;
 }
 
-.bottomleft {
+.wire .topright {
+    border-top: 1px solid rgba(200, 200, 200, 0.6);
+    border-right: 1px solid rgba(200, 200, 200, 0.6);
+    border-top-right-radius: 0.4em;
+}
+
+.bus .bottomleft {
     border-bottom: 2px solid;
     border-left: 2px solid;
     border-bottom-left-radius: 0.4em;
 }
 
-.bottomright {
+.wire .bottomleft {
+    border-bottom: 1px solid rgba(200, 200, 200, 0.6);
+    border-left: 1px solid rgba(200, 200, 200, 0.6);
+    border-bottom-left-radius: 0.4em;
+}
+
+.bus .bottomright {
     border-bottom: 2px solid;
     border-right: 2px solid;
+    border-bottom-right-radius: 0.4em;
+}
+
+.wire .bottomright {
+    border-bottom: 1px solid rgba(200, 200, 200, 0.6);
+    border-right: 1px solid rgba(200, 200, 200, 0.6);
     border-bottom-right-radius: 0.4em;
 }
 

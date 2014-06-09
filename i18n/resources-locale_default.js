@@ -73,5 +73,35 @@
         "key"        : "_RegisterIsAlreadyReadingException_end",
         "value"      : "",
         "description": ""
+    },
+    {
+        "key"        : "_ControlWireNoWriterSpecifiedException_beginning",
+        "value"      : "",
+        "description": ""
+    },
+    {
+        "key"        : "_ControlWireNoWriterSpecifiedException_middle",
+        "value"      : " has no writer specified. This means the control wire is in an illegal state.",
+        "description": ""
+    },
+    {
+        "key"        : "_ControlWireNoWriterSpecifiedException_end",
+        "value"      : "",
+        "description": ""
+    },
+    {
+        "key"        : "_ControlWireWrongWriterException_beginning",
+        "value"      : "The writer you have given does not match the writer (",
+        "description": ""
+    },
+    {
+        "key"        : "_ControlWireWrongWriterException_middle",
+        "value"      : ") of this control wire (",
+        "description": ""
+    },
+    {
+        "key"        : "_ControlWireWrongWriterException_end",
+        "value"      : ").",
+        "description": ""
     }
 ]

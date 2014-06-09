@@ -37,3 +37,23 @@ function RegisterIsAlreadyReadingException (message, tryerName) {
     exception.actor2 = "";
     return exception;
 }
+
+function ControlWireNoWriterSpecifiedException (message, wireName) {
+    var exception = {};
+    exception.name = 'ControlWireNoWriterSpecifiedException';
+    exception.localization = '_' + exception.name + '_';
+    exception.message = message;
+    exception.actor1 = wireName;
+    exception.actor2 = "";
+    return exception;
+}
+
+function ControlWireWrongWriterException (message, writerName, wireName) {
+    var exception = {};
+    exception.name = 'ControlWireWrongWriterException';
+    exception.localization = '_' + exception.name + '_';
+    exception.message = message;
+    exception.actor1 = writerName;
+    exception.actor2 = wireName;
+    return exception;
+}
