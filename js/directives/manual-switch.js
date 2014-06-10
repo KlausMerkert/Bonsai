@@ -12,11 +12,16 @@ bonsaiApp.directive('manualswitch', function ($interval) {
             left: '='
         },
         controller: function ($scope) {
-            $scope.switch = new ManualSwitch($scope.wire, $scope.value);
-            $scope.topCSS = $scope.top + 'em';
-            $scope.leftCSS = $scope.left + 'em';
+            $scope.data = $scope.value;
+            $scope.switch = new ManualSwitch(function (value) {
+                $scope.data = value;
+            }, $scope.wire, $scope.value);
+            $scope.topCSS = ($scope.top - 0.55) + 'em';
+            $scope.leftCSS = ($scope.left + 0.24) + 'em';
 
-            $scope.toggle = $scope.switch.toggle;
+            $scope.toggle = function () {
+                $scope.switch.toggle();
+            }
         },
         link: function ($scope, element, attrs) {
             attrs.$observe('switchName', function() {
@@ -25,9 +30,17 @@ bonsaiApp.directive('manualswitch', function ($interval) {
                 }
             });
 
+            $scope.$watch('data', function(newValue, oldValue) {
+                if (newValue != oldValue) {
+                    $scope.switch.setValue(newValue);
+                }
+            });
+
             $scope.getConnectionPositions = function () {
-                return [{top: $scope.top+3, left: $scope.left+2.08}];
+                return [{top: $scope.top, left: $scope.left}];
             };
+
+            $scope.switch.getPositions = $scope.getConnectionPositions;
         },
         templateUrl: 'partials/component_ManualSwitch.html'
     };

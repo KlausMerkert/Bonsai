@@ -1,6 +1,7 @@
 'use strict';
 
-function ManualSwitch (wire, value) {
+function ManualSwitch (updateViewCallback, wire, value) {
+    this.updateViewCallback = updateViewCallback;
     this.wire = wire;
     this.wire.setWriter(this);
     this.value = value;
@@ -22,4 +23,12 @@ ManualSwitch.prototype.toggle = function () {
         this.value = 0;
     }
     this.wire.write(this, this.value);
+    this.updateViewCallback(this.value);
+};
+
+ManualSwitch.prototype.setValue = function (value) {
+    if (this.value != value) {
+        this.value = value;
+        this.updateViewCallback(this.value);
+    }
 };
