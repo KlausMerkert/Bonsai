@@ -28,7 +28,7 @@ bonsaiApp.directive('bus', function () {
             $scope.topCSS = $scope.top + 'em';
             $scope.leftCSS = $scope.left + 'em';
 
-            $scope.busRouter = new BusRouter($scope.localBus.getConnections(), $scope.localBus);
+            $scope.busRouter = new BusRouter($scope.localBus.getBuses(), $scope.localBus);
 
             $scope.value = undefined;
 
@@ -41,7 +41,7 @@ bonsaiApp.directive('bus', function () {
             });
 
             $scope.updateVisibleParts = function() {
-                $scope.busRouter.setConnections($scope.localBus.getConnections());
+                $scope.busRouter.setConnections($scope.localBus.getBuses());
                 $scope.visibleParts = $scope.busRouter.updateVisibleParts();
             };
 

@@ -36,7 +36,7 @@ bonsaiApp.directive('register', function ($interval) {
             $scope.leftCSS = $scope.left + 'em';
 
             $scope.toggleState = function (connection) {
-                var connections = $scope.register.getConnections();
+                var connections = $scope.register.getBuses();
                 for (var i = 0; i < connections.length; i++) {
                     if (connections[i].bus === connection.bus) {
                         var stateFound = false;
@@ -57,8 +57,8 @@ bonsaiApp.directive('register', function ($interval) {
                 }
             };
 
-            this.addConnection = function (bus) {
-                $scope.register.addConnection(bus);
+            this.addBusConnection = function (bus, setWrite, setRead) {
+                $scope.register.addBusConnection(bus, setWrite, setRead);
             };
         },
         link: function ($scope, element, attrs) {
@@ -162,10 +162,10 @@ bonsaiApp.directive('register', function ($interval) {
 
             $scope.getConnectionPositions = function (bus) {
                 var positions = [];
-                var connections = $scope.register.getConnections();
+                var connections = $scope.register.getBuses();
                 for (var i = 0; i < connections.length; i++) {
-                    if (connections[i].bus == bus) {
-                        if (i%2 == 0) {
+                    if (connections[i].bus === bus) {
+                        if (i % 2 == 0) {
                             positions.push({top: $scope.top-1.2, left: $scope.left+2.08});
                         } else {
                             positions.push({top: $scope.top+3, left: $scope.left+2.08});
@@ -175,15 +175,59 @@ bonsaiApp.directive('register', function ($interval) {
                 return positions;
             };
 
+            $scope.getWireConnectionPositions = function (wire) {
+                var positions = [];
+                var connections = $scope.register.getBuses();
+                for (var i = 0; i < connections.length; i++) {
+                    if ((connections[i].writeWire) && (connections[i].writeWire === wire)) {
+                        if (i % 2 == 0) {
+                            positions.push({top: $scope.top-0.82, left: $scope.left+2.68});
+                        } else {
+                            positions.push({top: $scope.top+2.62, left: $scope.left+2.68});
+                        }
+                    }
+                    if ((connections[i].readWire) && (connections[i].readWire === wire)) {
+                        if (i % 2 == 0) {
+                            positions.push({top: $scope.top-0.42, left: $scope.left+2.68});
+                        } else {
+                            positions.push({top: $scope.top+2.22, left: $scope.left+2.68});
+                        }
+                    }
+                }
+                return positions;
+            };
+
             // We have to wait for a very short time to enroll to the buses
             // because the handler needs to be fully initialized.
             $interval(function () {
-                var connections = $scope.register.getConnections();
+                var connections = $scope.register.getBuses();
                 for (var i = 0; i < connections.length; i++) {
                     connections[i].bus.enrollToDirective(
                         $scope.register,
                         $scope.getConnectionPositions
                     );
+                    var writeWire = connections[i].writeWire;
+                    if (writeWire) {
+                        var writeConnector = new ReadingControlWireConnector(writeWire,
+                            function (wire) {
+                            $scope.register.setToWrite(wire);
+                        },
+                            function (wire) {
+                            $scope.register.setToDisconnected(wire);
+                        });
+                        writeWire.connectToDirective(writeConnector, $scope.getWireConnectionPositions);
+                    }
+                    var readWire = connections[i].readWire;
+                    if (readWire) {
+                        var readConnector = new ReadingControlWireConnector(readWire,
+                            function (wire) {
+                            $scope.register.setToRead(wire);
+                        },
+                            function (wire) {
+                            $scope.register.setToDisconnected(wire);
+                        });
+                        readWire.connectToDirective(readConnector, $scope.getWireConnectionPositions);
+                    }
                 }
             }, 1, 1);
         },
@@ -191,15 +235,17 @@ bonsaiApp.directive('register', function ($interval) {
     };
 });
 
-bonsaiApp.directive('connection', function () {
+bonsaiApp.directive('gate', function () {
     return {
         require: '^register',
         restrict: 'E',
         scope: {
-            bus: '='
+            bus: '=',
+            setWrite: '=',
+            setRead: '='
         },
         link: function ($scope, element, attrs, registerCtrl) {
-            registerCtrl.addConnection($scope.bus);
+            registerCtrl.addBusConnection($scope.bus, $scope.setWrite, $scope.setRead);
         },
         template: ''
     };

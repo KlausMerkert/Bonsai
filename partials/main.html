@@ -3,24 +3,30 @@
 
     <div class="components">
         <controlwire wire="wire1" wire-name="Draht 1"></controlwire>
+        <controlwire wire="wire2" wire-name="Draht 2"></controlwire>
+        <controlwire wire="wire3" wire-name="Draht 3"></controlwire>
+        <controlwire wire="wire4" wire-name="Draht 4"></controlwire>
 
         <bus bus="dataBus" bus-name="Datenbus" base="base" color="'rgb(0, 140, 0)'" top="0.85" left="5"></bus>
         <bus bus="adressBus" bus-name="Adressbus" base="base" color="'rgb(0, 0, 225)'" top="5.75" left="12"></bus>
 
         <register value="11" register-name="Register A" base="base" top="2" left="1">
-            <connection bus="dataBus"></connection>
+            <gate bus="dataBus"></gate>
         </register>
         <register value="10" register-name="Register B" base="base" top="4" left="8">
-            <connection bus="dataBus"></connection>
-            <connection bus="adressBus"></connection>
+            <gate bus="dataBus"></gate>
+            <gate bus="adressBus"></gate>
         </register>
         <register value="1" register-name="Register C" base="base" top="3" left="15">
-            <connection bus="dataBus"></connection>
-            <connection bus="adressBus"></connection>
+            <gate bus="dataBus" set-write="wire1" set-read="wire2"></gate>
+            <gate bus="adressBus" set-write="wire3" set-read="wire4"></gate>
         </register>
 
-        <manualswitch wire="wire1" switch-name="switch 1" value="0" top="3" left="25"></manualswitch>
-        <led wire="wire1" value="0" top="3" left="20"></led>
+        <manualswitch wire="wire1" switch-name="switch 1" value="0" top="1" left="25"></manualswitch>
+        <manualswitch wire="wire2" switch-name="switch 2" value="0" top="2.5" left="25"></manualswitch>
+        <led wire="wire2" value="0" top="4" left="20"></led>
+        <manualswitch wire="wire3" switch-name="switch 3" value="0" top="6.5" left="25"></manualswitch>
+        <manualswitch wire="wire4" switch-name="switch 4" value="0" top="5" left="25"></manualswitch>
     </div>
 
     <div>

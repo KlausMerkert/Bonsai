@@ -17,7 +17,7 @@ bonsaiApp.directive('manualswitch', function ($interval) {
                 $scope.data = value;
             }, $scope.wire, $scope.value);
             $scope.topCSS = ($scope.top - 0.55) + 'em';
-            $scope.leftCSS = ($scope.left + 0.24) + 'em';
+            $scope.leftCSS = ($scope.left + 0.16) + 'em';
 
             $scope.toggle = function () {
                 $scope.switch.toggle();

@@ -1,7 +1,7 @@
 <div class="component nospace" ng-style="{'top': topCSS, 'left': leftCSS}">
     <div class="register">
         <div style="width: 0; height: 0; overflow: visible; display: inline-block; position: absolute;"
-             ng-repeat="connection in register.getConnections()">
+             ng-repeat="connection in register.getBuses()">
             <div ng-click="toggleState(connection)"
                  ng-class="{'connection': true, 'toprow': $even, 'bottomrow': $odd, 'read': connection.state == -1, 'write': connection.state == 1, 'grayback': connection.state == 0}"
                  style="left: 1.3em;">

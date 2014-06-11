@@ -18,7 +18,7 @@ Bus.prototype.setName = function (name) {
     this.name = name;
 };
 
-Bus.prototype.getConnections = function () {
+Bus.prototype.getBuses = function () {
     return this.connections;
 };
 

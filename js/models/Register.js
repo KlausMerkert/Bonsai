@@ -15,12 +15,17 @@ Register.prototype.getName = function () {
     return this.name;
 };
 
-Register.prototype.addConnection = function (bus) {
+Register.prototype.addBusConnection = function (bus, writeWire, readWire) {
     /* Connections can have three states:
      * 1 means the register writes to the bus
      * 0 means the connection is inactive
      * -1 means the register reads from the bus */
-    this.buses.push({state: 0, bus: bus})
+    this.buses.push({
+        state: 0,
+        bus: bus,
+        writeWire: writeWire,
+        readWire: readWire
+    });
 };
 
 Register.prototype.removeConnection = function (bus) {
@@ -34,7 +39,7 @@ Register.prototype.removeConnection = function (bus) {
     }
 };
 
-Register.prototype.getConnections = function () {
+Register.prototype.getBuses = function () {
     return this.buses;
 };
 
@@ -97,6 +102,30 @@ Register.prototype.setState = function (busConnection, desiredState) {
             if (!angular.equals(this.buses[i], busConnection) && this.buses[i].state == -1) {
                 this.setValue(this.buses[i].bus.registerReaderAndRead(this));
             }
+        }
+    }
+};
+
+Register.prototype.setToRead = function (wire) {
+    for (var i = 0; i < this.buses.length; i++) {
+        if (this.buses[i].readWire === wire) {
+            this.setState(this.buses[i], -1);
+        }
+    }
+};
+
+Register.prototype.setToWrite = function (wire) {
+    for (var i = 0; i < this.buses.length; i++) {
+        if (this.buses[i].writeWire === wire) {
+            this.setState(this.buses[i], 1);
+        }
+    }
+};
+
+Register.prototype.setToDisconnected = function (wire) {
+    for (var i = 0; i < this.buses.length; i++) {
+        if ((this.buses[i].writeWire === wire) || (this.buses[i].readWire === wire)) {
+            this.setState(this.buses[i], 0);
         }
     }
 };

@@ -207,6 +207,10 @@ body {
     background-color: rgba(200, 200, 200, 30);
 }
 
+.switch .wireconnector {
+    background-color: rgba(200, 200, 200, 30);
+}
+
 .led {
     width: 0.5em;
     height: 0.5em;

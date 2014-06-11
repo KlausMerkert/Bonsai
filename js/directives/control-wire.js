@@ -36,7 +36,22 @@ bonsaiApp.directive('controlwire', function () {
             $scope.localWire.connectToDirective = function (connector, getPositions) {
                 var connection = $scope.localWire.connect(connector);
                 connection.getPositions = getPositions;
-                $scope.updateVisibleParts();
+                var testPositionUpdate = function () {
+                    var connections = $scope.localWire.getConnections();
+                    var allPositionsAccessible = true;
+                    for (var i = 0; i < connections.length; i++) {
+                        var positions = connections[i].getPositions($scope.localWire);
+                        if (!positions) {
+                            allPositionsAccessible = false;
+                        }
+                    }
+                    if (allPositionsAccessible) {
+                        $scope.updateVisibleParts();
+                    } else {
+                        setTimeout(testPositionUpdate, 1);
+                    }
+                };
+                testPositionUpdate();
             };
 
             $scope.localWire.registerMovement = function () {
