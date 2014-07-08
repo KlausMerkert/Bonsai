@@ -3,7 +3,7 @@
 function Memory(updateViewCallback, name) {
     this.updateViewCallback = updateViewCallback;
     this.name = name;
-    this.data = {};
+    this.content = {};
     this.address = undefined;
     this.data = undefined;
 }
@@ -42,10 +42,52 @@ Memory.prototype.setDataBusConnection = function (bus, writeWire, readWire) {
 };
 
 Memory.prototype.setAdressBusState = function (desiredState) {
-    if (desiredState > 0) {
+    if (desiredState == 1) {
         throw AddressBusConnectionCanNotBeSetToWrite(
-            "It does not make sense to write to an address bus (" + this.address.bus.name + ").",
+                "It does not make sense to write to an address bus (" + this.address.bus.name + ").",
             this.address.bus.name
         );
+    } else if (desiredState == -1) {
+        try {
+            this.setValue(this.address.bus.registerReaderAndRead(this));
+            this.address.state = desiredState;
+        } catch (exception) {
+            throw exception;
+        }
+    } else {
+        this.address.bus.unregisterReader(this);
+        this.address.state = desiredState;
+    }
+};
+
+Memory.prototype.setDataBusState = function (desiredState) {
+    var wasReading = (this.data.state == -1);
+    var wasWriting = (this.data.state == 1);
+    if (desiredState == 1) {
+        this.data.bus.unregisterReader(this);
+        try {
+            this.data.bus.write(this, this.getValue());
+            this.data.state = desiredState;
+        } catch (exception) {
+            if (wasReading) {
+                this.data.bus.registerReaderAndRead(this);
+            }
+            throw exception;
+        }
+    } else if (desiredState == -1) {
+        this.data.bus.stopWriting(this);
+        try {
+            this.setValue(this.data.bus.registerReaderAndRead(this));
+            this.data.state = desiredState;
+        } catch (exception) {
+            if (wasWriting) {
+                this.data.bus.write(this, this.value);
+            }
+            throw exception;
+        }
+    } else {
+        this.data.bus.stopWriting(this);
+        this.data.bus.unregisterReader(this);
+        this.data.state = desiredState;
     }
 };
