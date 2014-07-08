@@ -28,6 +28,10 @@ Memory.prototype.setAddressBusConnection = function (bus, readWire) {
     };
 };
 
+Memory.prototype.getAdressBus = function () {
+    return this.address.bus;
+};
+
 Memory.prototype.setDataBusConnection = function (bus, writeWire, readWire) {
     /* The data bus connection can have three states:
      * 1 means the data is written to the bus
@@ -41,10 +45,70 @@ Memory.prototype.setDataBusConnection = function (bus, writeWire, readWire) {
     };
 };
 
+Memory.prototype.getDataBus = function () {
+    return this.data.bus;
+};
+
+Memory.prototype.getDataWithContext = function (address) {
+    return [
+        {'address': undefined, 'value': undefined},
+        {'address': undefined, 'value': undefined},
+        {'address': address, 'value': this.content[address]},
+        {'address': undefined, 'value': undefined},
+        {'address': undefined, 'value': undefined}
+    ];
+};
+
+Memory.prototype.writeData = function (data) {
+    if (this.address) {
+        if (this.address.state == -1) {
+            var address = this.address.bus.registerReaderAndRead(this);
+            this.content[address] = data;
+            this.dataChangeCallback(this.getDataWithContext(address));
+        } else {
+            throw InactiveAdressBusConnection(
+                "Memory " + this.name + ": The address bus connection is not set to reading. " +
+                    "This connection needs to be set to reading to get an address from the address bus " +
+                    "which specifies where to write or read.",
+                this.name
+            )
+        }
+    } else {
+        throw NoAdressBusConnected(
+            "Memory " + this.name + ": No address bus connected. " +
+                "You have to specify an address which specifies where to write or read the data.",
+            this.name
+        );
+    }
+};
+
+Memory.prototype.readData = function () {
+    if (this.address) {
+        if (this.address.state == -1) {
+            var address = this.address.bus.registerReaderAndRead(this);
+            return this.content[address];
+        } else {
+            throw InactiveAdressBusConnection(
+                "Memory " + this.name + ": The address bus connection is not set to reading. " +
+                    "This connection needs to be set to reading to get an address from the address bus " +
+                    "which specifies where to write or read.",
+                this.name
+            )
+        }
+    } else {
+        throw NoAdressBusConnected(
+            "Memory " + this.name + ": No address bus connected. " +
+                "You have to specify an address which specifies where to write or read the data.",
+            this.name
+        );
+    }
+};
+
 Memory.prototype.setAdressBusState = function (desiredState) {
     if (desiredState == 1) {
         throw AddressBusConnectionCanNotBeSetToWrite(
-                "It does not make sense to write to an address bus (" + this.address.bus.name + ").",
+            "Memory " + this.name + "It does not make sense to write to an address bus (" +
+                this.address.bus.name + ").",
             this.address.bus.name
         );
     } else if (desiredState == -1) {
@@ -89,5 +153,40 @@ Memory.prototype.setDataBusState = function (desiredState) {
         this.data.bus.stopWriting(this);
         this.data.bus.unregisterReader(this);
         this.data.state = desiredState;
+    }
+};
+
+Memory.prototype.setToRead = function (wire) {
+    if (this.address.readWire === wire) {
+        this.setState(this.address, -1);
+    }
+    if (this.data.readWire === wire) {
+        this.setState(this.data, -1);
+    }
+};
+
+Memory.prototype.setToWrite = function (wire) {
+    if (this.data.writeWire === wire) {
+        this.setState(this.data, 1);
+    }
+};
+
+Memory.prototype.setToDisconnected = function (wire) {
+    if (this.address.readWire === wire) {
+        this.setState(this.address, 0);
+    }
+    if (this.data.readWire === wire) {
+        if ((this.data) && (this.data.writeWire) && (this.data.writeWire.isActive())) {
+            this.setState(this.data, 1)
+        } else {
+            this.setState(this.data, 0);
+        }
+    }
+    if (this.data.writeWire === wire) {
+        if ((this.data) && (this.data.readWire) && (this.data.readWire.isActive())) {
+            this.setState(this.data, -1)
+        } else {
+            this.setState(this.data, 0);
+        }
     }
 };

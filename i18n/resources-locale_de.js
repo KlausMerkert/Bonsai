@@ -106,16 +106,46 @@
     },
     {
         "key"        : "_AddressBusConnectionCanNotBeSetToWrite_beginning",
-        "value"      : "Es ergibt keinen Sinn auf vom Speicher auf einen Aressbus zu schreiben (",
+        "value"      : "Speicher ",
         "description": ""
     },
     {
         "key"        : "_AddressBusConnectionCanNotBeSetToWrite_middle",
-        "value"      : ").",
+        "value"      : ": Es ergibt keinen Sinn auf vom Speicher auf einen Aressbus zu schreiben (",
         "description": ""
     },
     {
         "key"        : "_AddressBusConnectionCanNotBeSetToWrite_end",
+        "value"      : ").",
+        "description": ""
+    },
+    {
+        "key"        : "_NoAdressBusConnected_beginning",
+        "value"      : "Speicher ",
+        "description": ""
+    },
+    {
+        "key"        : "_NoAdressBusConnected_middle",
+        "value"      : ": Kein Aressbus angeschlossen. Über den Adressbus muss eine Adresse gelesen werden können, um Daten an diese Adresse schreiben oder von dort lesen zu können.",
+        "description": ""
+    },
+    {
+        "key"        : "_NoAdressBusConnected_end",
+        "value"      : "",
+        "description": ""
+    },
+    {
+        "key"        : "_InactiveAdressBusConnection_beginning",
+        "value"      : "Speicher ",
+        "description": ""
+    },
+    {
+        "key"        : "_InactiveAdressBusConnection_middle",
+        "value"      : ": Das Gate zum Adressbus steht nicht auf lesend. Dieses Gate muss auf lesend stehen, damit der Speicher eine Adresse vom Adressbus lesen kann, die verwendet wird, um festzulegen wohin die Daten geschrieben oder von wo sie gelesen werden.",
+        "description": ""
+    },
+    {
+        "key"        : "_InactiveAdressBusConnection_end",
         "value"      : "",
         "description": ""
     }

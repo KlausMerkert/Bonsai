@@ -61,3 +61,7 @@ ControlWire.prototype.setValue = function (value) {
         this.value = value;
     }
 };
+
+ControlWire.prototype.isActive = function () {
+    return this.value > 0;
+};

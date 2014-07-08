@@ -58,12 +58,32 @@ function ControlWireWrongWriterException (message, writerName, wireName) {
     return exception;
 }
 
-function AddressBusConnectionCanNotBeSetToWrite (message, busName) {
+function AddressBusConnectionCanNotBeSetToWrite (message, memoryName, busName) {
     var exception = {};
     exception.name = 'AddressBusConnectionCanNotBeSetToWrite';
     exception.localization = '_' + exception.name + '_';
     exception.message = message;
-    exception.actor1 = busName;
+    exception.actor1 = memoryName;
+    exception.actor2 = busName;
+    return exception;
+}
+
+function NoAdressBusConnected (message, memoryName) {
+    var exception = {};
+    exception.name = 'NoAdressBusConnected';
+    exception.localization = '_' + exception.name + '_';
+    exception.message = message;
+    exception.actor1 = memoryName;
+    exception.actor2 = "";
+    return exception;
+}
+
+function InactiveAdressBusConnection (message, memoryName) {
+    var exception = {};
+    exception.name = 'InactiveAdressBusConnection';
+    exception.localization = '_' + exception.name + '_';
+    exception.message = message;
+    exception.actor1 = memoryName;
     exception.actor2 = "";
     return exception;
 }

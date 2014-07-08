@@ -106,16 +106,46 @@
     },
     {
         "key"        : "_AddressBusConnectionCanNotBeSetToWrite_beginning",
-        "value"      : "It does not make sense to write to an address bus (",
+        "value"      : "Memory ",
         "description": ""
     },
     {
         "key"        : "_AddressBusConnectionCanNotBeSetToWrite_middle",
-        "value"      : ").",
+        "value"      : ": It does not make sense to write to an address bus (",
         "description": ""
     },
     {
         "key"        : "_AddressBusConnectionCanNotBeSetToWrite_end",
+        "value"      : ").",
+        "description": ""
+    },
+    {
+        "key"        : "_NoAdressBusConnected_beginning",
+        "value"      : "Memory ",
+        "description": ""
+    },
+    {
+        "key"        : "_NoAdressBusConnected_middle",
+        "value"      : ": No address bus connected. You have to specify an address which specifies where to write or read the data.",
+        "description": ""
+    },
+    {
+        "key"        : "_NoAdressBusConnected_end",
+        "value"      : "",
+        "description": ""
+    },
+    {
+        "key"        : "_InactiveAdressBusConnection_beginning",
+        "value"      : "Memory ",
+        "description": ""
+    },
+    {
+        "key"        : "_InactiveAdressBusConnection_middle",
+        "value"      : ": The address bus connection is not set to reading. This connection needs to be set to reading to get an address from the address bus which specifies where to write or read.",
+        "description": ""
+    },
+    {
+        "key"        : "_InactiveAdressBusConnection_end",
         "value"      : "",
         "description": ""
     }
