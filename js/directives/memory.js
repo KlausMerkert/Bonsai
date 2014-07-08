@@ -114,6 +114,6 @@ bonsaiApp.directive('memory', function ($interval) {
                 }
             }, 1, 1);
         },
-        templateUrl: 'partials/component_Register.html'
+        templateUrl: 'partials/component_Memory.html'
     };
 });
