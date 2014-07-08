@@ -10,8 +10,8 @@ var bonsaiApp = angular.module(
     )
     .config(['$routeProvider', function ($routeProvider) {
         $routeProvider.
-            when('/', {templateUrl: '/partials/main.html', controller: 'bonsaiCpuCtrl'}).
-            otherwise({templateUrl: '/partials/main.html', controller: 'bonsaiCpuCtrl'});
+            when('/', {templateUrl: 'partials/main.html', controller: 'bonsaiCpuCtrl'}).
+            otherwise({templateUrl: 'partials/main.html', controller: 'bonsaiCpuCtrl'});
     }])
     .factory('$exceptionHandler', function ($injector) {
         return function (exception, cause) {
