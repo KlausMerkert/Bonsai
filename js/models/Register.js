@@ -124,8 +124,19 @@ Register.prototype.setToWrite = function (wire) {
 
 Register.prototype.setToDisconnected = function (wire) {
     for (var i = 0; i < this.buses.length; i++) {
-        if ((this.buses[i].writeWire === wire) || (this.buses[i].readWire === wire)) {
-            this.setState(this.buses[i], 0);
+        if (this.buses[i].writeWire === wire) {
+            if ((this.buses[i].readWire) && (this.buses[i].readWire.isActive())) {
+                this.setState(this.buses[i], -1)
+            } else {
+                this.setState(this.buses[i], 0);
+            }
+        }
+        if (this.buses[i].readWire === wire) {
+            if ((this.buses[i].writeWire) && (this.buses[i].writeWire.isActive())) {
+                this.setState(this.buses[i], 1);
+            } else {
+                this.setState(this.buses[i], 0);
+            }
         }
     }
 };
