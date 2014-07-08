@@ -103,5 +103,20 @@
         "key"        : "_ControlWireWrongWriterException_end",
         "value"      : " kann damit nicht beschrieben werden.",
         "description": ""
+    },
+    {
+        "key"        : "_AddressBusConnectionCanNotBeSetToWrite_beginning",
+        "value"      : "Es ergibt keinen Sinn auf vom Speicher auf einen Aressbus zu schreiben (",
+        "description": ""
+    },
+    {
+        "key"        : "_AddressBusConnectionCanNotBeSetToWrite_middle",
+        "value"      : ").",
+        "description": ""
+    },
+    {
+        "key"        : "_AddressBusConnectionCanNotBeSetToWrite_end",
+        "value"      : "",
+        "description": ""
     }
 ]

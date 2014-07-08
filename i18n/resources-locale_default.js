@@ -103,5 +103,20 @@
         "key"        : "_ControlWireWrongWriterException_end",
         "value"      : ").",
         "description": ""
+    },
+    {
+        "key"        : "_AddressBusConnectionCanNotBeSetToWrite_beginning",
+        "value"      : "It does not make sense to write to an address bus (",
+        "description": ""
+    },
+    {
+        "key"        : "_AddressBusConnectionCanNotBeSetToWrite_middle",
+        "value"      : ").",
+        "description": ""
+    },
+    {
+        "key"        : "_AddressBusConnectionCanNotBeSetToWrite_end",
+        "value"      : "",
+        "description": ""
     }
 ]

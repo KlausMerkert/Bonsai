@@ -57,3 +57,13 @@ function ControlWireWrongWriterException (message, writerName, wireName) {
     exception.actor2 = wireName;
     return exception;
 }
+
+function AddressBusConnectionCanNotBeSetToWrite (message, busName) {
+    var exception = {};
+    exception.name = 'AddressBusConnectionCanNotBeSetToWrite';
+    exception.localization = '_' + exception.name + '_';
+    exception.message = message;
+    exception.actor1 = busName;
+    exception.actor2 = "";
+    return exception;
+}
