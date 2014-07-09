@@ -36,13 +36,21 @@ bonsaiApp.directive('memory', function ($interval) {
             $scope.memory = new Memory($scope.dataChangeCallback, $scope.registerName, $scope.data);
             $scope.topCSS = $scope.top + 'em';
             $scope.leftCSS = $scope.left + 'em';
+            $scope.addressBusColor = 'rgb(122, 0, 0)';
+            $scope.dataBusColor = 'rgb(0, 0, 0)';
 
             this.addAddressBusConnection = function (bus, setRead) {
                 $scope.memory.setAddressBusConnection(bus, setRead);
+                if (($scope.memory.address) && ($scope.memory.address.bus.getColor)) {
+                    $scope.addressBusColor = $scope.memory.address.bus.getColor();
+                }
             };
 
             this.addDataBusConnection = function (bus, setWrite, setRead) {
                 $scope.memory.setDataBusConnection(bus, setWrite, setRead);
+                if (($scope.memory.data) && ($scope.memory.data.bus.getColor)) {
+                    $scope.dataBusColor = $scope.memory.data.bus.getColor();
+                }
             };
         },
         link: function ($scope, element, attrs) {
@@ -58,7 +66,7 @@ bonsaiApp.directive('memory', function ($interval) {
                     positions.push({top: $scope.top-1.2, left: $scope.left+2.08});
                 }
                 if ($scope.memory.getDataBus() === bus) {
-                    positions.push({top: $scope.top+3, left: $scope.left+2.08});
+                    positions.push({top: $scope.top+7, left: $scope.left+2.08});
                 }
                 return positions;
             };
@@ -69,10 +77,10 @@ bonsaiApp.directive('memory', function ($interval) {
                     positions.push({top: $scope.top-0.42, left: $scope.left+2.68});
                 }
                 if (($scope.memory.data.readWire) && ($scope.memory.data.readWire === wire)) {
-                    positions.push({top: $scope.top+2.22, left: $scope.left+2.68});
+                    positions.push({top: $scope.top+6.22, left: $scope.left+2.68});
                 }
                 if (($scope.memory.data.writeWire) && ($scope.memory.data.writeWire === wire)) {
-                    positions.push({top: $scope.top+2.62, left: $scope.left+2.68});
+                    positions.push({top: $scope.top+6.62, left: $scope.left+2.68});
                 }
                 return positions;
             };

@@ -54,6 +54,10 @@ bonsaiApp.directive('bus', function () {
             $scope.localBus.registerMovement = function () {
                 $scope.updateVisibleParts();
             };
+
+            $scope.localBus.getColor = function () {
+                return $scope.color;
+            };
         },
         templateUrl: 'partials/component_Bus.html'
     }
