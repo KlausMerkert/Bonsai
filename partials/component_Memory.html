@@ -21,7 +21,108 @@
                      style="left: 2.19em;" ng-click="toggleRead(connection)"></div>
             </div>
         </div>
-        <input type="text" ng-model="data" ng-readonly="register.isReader()" />
+        <table>
+            <tr style="opacity: 0.2; line-height: 0.92em;">
+                <td class="address" style="border-top: 0; border-bottom: 0;">
+                    <span ng-if="dataContext[0].address">
+                        <span ng-if="displayBase === 2">{{ dataContext[0].address | binary }}</span>
+                        <span ng-if="displayBase === 8">{{ dataContext[0].address | octal }}</span>
+                        <span ng-if="displayBase === 10">{{ dataContext[0].address }}</span>
+                        <span ng-if="displayBase === 16">{{ dataContext[0].address | hexadecimal }}</span>
+                    </span>
+                    <span ng-if="!dataContext[0].address">undefined</span>
+                </td>
+                <td class="value" style="border-top: 0; border-bottom: 0;">
+                    <span ng-if="dataContext[0].value">
+                        <span ng-if="displayBase === 2">{{ dataContext[0].value | binary }}</span>
+                        <span ng-if="displayBase === 8">{{ dataContext[0].value | octal }}</span>
+                        <span ng-if="displayBase === 10">{{ dataContext[0].value }}</span>
+                        <span ng-if="displayBase === 16">{{ dataContext[0].value | hexadecimal }}</span>
+                    </span>
+                    <span ng-if="!dataContext[0].value">undefined</span>
+                </td>
+            </tr>
+            <tr style="opacity: 0.7;">
+                <td class="address" style="border-top: 0; border-bottom: 0;">
+                    <span ng-if="dataContext[1].address">
+                        <span ng-if="displayBase === 2">{{ dataContext[1].address | binary }}</span>
+                        <span ng-if="displayBase === 8">{{ dataContext[1].address | octal }}</span>
+                        <span ng-if="displayBase === 10">{{ dataContext[1].address }}</span>
+                        <span ng-if="displayBase === 16">{{ dataContext[1].address | hexadecimal }}</span>
+                    </span>
+                    <span ng-if="!dataContext[1].address">undefined</span>
+                </td>
+                <td class="value" style="border-top: 0; border-bottom: 0;">
+                    <span ng-if="dataContext[1].value">
+                        <span ng-if="displayBase === 2">{{ dataContext[1].value | binary }}</span>
+                        <span ng-if="displayBase === 8">{{ dataContext[1].value | octal }}</span>
+                        <span ng-if="displayBase === 10">{{ dataContext[1].value }}</span>
+                        <span ng-if="displayBase === 16">{{ dataContext[1].value | hexadecimal }}</span>
+                    </span>
+                    <span ng-if="!dataContext[1].value">undefined</span>
+                </td>
+            </tr>
+            <tr>
+                <td class="address">
+                    <span ng-if="dataContext[2].address">
+                        <span ng-if="displayBase === 2">{{ dataContext[2].address | binary }}</span>
+                        <span ng-if="displayBase === 8">{{ dataContext[2].address | octal }}</span>
+                        <span ng-if="displayBase === 10">{{ dataContext[2].address }}</span>
+                        <span ng-if="displayBase === 16">{{ dataContext[2].address | hexadecimal }}</span>
+                    </span>
+                    <span ng-if="!dataContext[2].address">undefined</span>
+                </td>
+                <td class="value">
+                    <span ng-if="dataContext[2].value">
+                        <span ng-if="displayBase === 2">{{ dataContext[2].value | binary }}</span>
+                        <span ng-if="displayBase === 8">{{ dataContext[2].value | octal }}</span>
+                        <span ng-if="displayBase === 10">{{ dataContext[2].value }}</span>
+                        <span ng-if="displayBase === 16">{{ dataContext[2].value | hexadecimal }}</span>
+                    </span>
+                    <span ng-if="!dataContext[2].value">undefined</span>
+                </td>
+            </tr>
+            <tr style="opacity: 0.7;">
+                <td class="address" style="border-top: 0; border-bottom: 0;">
+                    <span ng-if="dataContext[3].address">
+                        <span ng-if="displayBase === 2">{{ dataContext[3].address | binary }}</span>
+                        <span ng-if="displayBase === 8">{{ dataContext[3].address | octal }}</span>
+                        <span ng-if="displayBase === 10">{{ dataContext[3].address }}</span>
+                        <span ng-if="displayBase === 16">{{ dataContext[3].address | hexadecimal }}</span>
+                    </span>
+                    <span ng-if="!dataContext[3].address">undefined</span>
+                </td>
+                <td class="value" style="border-top: 0; border-bottom: 0;">
+                    <span ng-if="dataContext[3].value">
+                        <span ng-if="displayBase === 2">{{ dataContext[3].value | binary }}</span>
+                        <span ng-if="displayBase === 8">{{ dataContext[3].value | octal }}</span>
+                        <span ng-if="displayBase === 10">{{ dataContext[3].value }}</span>
+                        <span ng-if="displayBase === 16">{{ dataContext[3].value | hexadecimal }}</span>
+                    </span>
+                    <span ng-if="!dataContext[3].value">undefined</span>
+                </td>
+            </tr>
+            <tr style="opacity: 0.2; line-height: 0.92em;">
+                <td class="address" style="border-top: 0; border-bottom: 0;">
+                    <span ng-if="dataContext[4].address">
+                        <span ng-if="displayBase === 2">{{ dataContext[4].address | binary }}</span>
+                        <span ng-if="displayBase === 8">{{ dataContext[4].address | octal }}</span>
+                        <span ng-if="displayBase === 10">{{ dataContext[4].address }}</span>
+                        <span ng-if="displayBase === 16">{{ dataContext[4].address | hexadecimal }}</span>
+                    </span>
+                    <span ng-if="!dataContext[4].address">undefined</span>
+                </td>
+                <td class="value" style="border-top: 0; border-bottom: 0;">
+                    <span ng-if="dataContext[4].value">
+                        <span ng-if="displayBase === 2">{{ dataContext[4].value | binary }}</span>
+                        <span ng-if="displayBase === 8">{{ dataContext[4].value | octal }}</span>
+                        <span ng-if="displayBase === 10">{{ dataContext[4].value }}</span>
+                        <span ng-if="displayBase === 16">{{ dataContext[4].value | hexadecimal }}</span>
+                    </span>
+                    <span ng-if="!dataContext[4].value">undefined</span>
+                </td>
+            </tr>
+        </table>
         <div style="width: 0; height: 0; display: inline-block; position: absolute;" ng-transclude></div>
     </div>
 </div>

@@ -5,7 +5,7 @@ bonsaiApp.controller('bonsaiCpuCtrl',
         $scope.base = 10;
 
         $scope.dataBus = new Bus();
-        $scope.adressBus = new Bus();
+        $scope.addressBus = new Bus();
 
         $scope.wire1 = new ControlWire();
         $scope.wire2 = new ControlWire();

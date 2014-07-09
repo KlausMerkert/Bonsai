@@ -37,6 +37,13 @@ bonsaiApp.directive('memory', function ($interval) {
             $scope.topCSS = $scope.top + 'em';
             $scope.leftCSS = $scope.left + 'em';
 
+            this.addAddressBusConnection = function (bus, setRead) {
+                $scope.memory.setAddressBusConnection(bus, setRead);
+            };
+
+            this.addDataBusConnection = function (bus, setWrite, setRead) {
+                $scope.memory.setDataBusConnection(bus, setWrite, setRead);
+            };
         },
         link: function ($scope, element, attrs) {
             attrs.$observe('memoryName', function() {
@@ -115,5 +122,36 @@ bonsaiApp.directive('memory', function ($interval) {
             }, 1, 1);
         },
         templateUrl: 'partials/component_Memory.html'
+    };
+});
+
+bonsaiApp.directive('addressgate', function () {
+    return {
+        require: '^memory',
+        restrict: 'E',
+        scope: {
+            bus: '=',
+            setRead: '='
+        },
+        link: function ($scope, element, attrs, registerCtrl) {
+            registerCtrl.addAddressBusConnection($scope.bus, $scope.setRead);
+        },
+        template: ''
+    };
+});
+
+bonsaiApp.directive('datagate', function () {
+    return {
+        require: '^memory',
+        restrict: 'E',
+        scope: {
+            bus: '=',
+            setWrite: '=',
+            setRead: '='
+        },
+        link: function ($scope, element, attrs, registerCtrl) {
+            registerCtrl.addDataBusConnection($scope.bus, $scope.setWrite, $scope.setRead);
+        },
+        template: ''
     };
 });

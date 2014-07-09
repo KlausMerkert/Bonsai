@@ -23,7 +23,6 @@ Memory.prototype.setAddressBusConnection = function (bus, readWire) {
     this.address = {
         state: 0,
         bus: bus,
-        //writeWire: undefined,
         readWire: readWire
     };
 };

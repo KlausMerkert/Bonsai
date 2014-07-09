@@ -48,7 +48,7 @@ body {
     text-align: center;
 }
 
-.register .connection {
+.register .connection, .memory .connection {
     border: 1px solid rgb(30, 30, 30);
     min-width: 0.8em;
     height: 1.2em;
@@ -67,6 +67,52 @@ body {
 
 .register .bottomrow {
     top: 1.27em;
+}
+
+.memory {
+    border: 1px solid rgb(30, 30, 30);
+    background-color: rgba(200, 200, 200, 30);
+    border-radius: 0.4em;
+    padding: 0.3em;
+    display: inline-block;
+    height: 5.15em;
+    line-height: 1.1em;
+}
+
+.memory table {
+    position: relative;
+    top: -0.3em;
+    font-family: monospace;
+    border-spacing: 0;
+    border-collapse: collapse;
+}
+
+.memory table td {
+    border-top: 2px solid rgb(40, 40, 40);
+    border-bottom: 2px solid rgb(40, 40, 40);
+}
+
+.memory table .address {
+    width: 4em;
+    color: rgb(122, 0, 0);
+    text-align: center;
+    padding-right: 0.3em;
+}
+
+.memory table .value {
+    width: 4em;
+    color: rgb(0, 0, 0);
+    text-align: left;
+    border-left: 1px solid rgb(40, 40, 40);
+    padding-left: 0.3em;
+}
+
+.memory .toprow {
+    top: -1.4em;
+}
+
+.memory .bottomrow {
+    top: 5.27em;
 }
 
 .bus-type {

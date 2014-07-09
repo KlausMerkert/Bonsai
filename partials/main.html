@@ -7,26 +7,27 @@
         <controlwire wire="wire3" wire-name="Draht 3"></controlwire>
         <controlwire wire="wire4" wire-name="Draht 4"></controlwire>
 
-        <bus bus="dataBus" bus-name="Datenbus" base="base" color="'rgb(0, 140, 0)'" top="0.85" left="5"></bus>
-        <bus bus="adressBus" bus-name="Adressbus" base="base" color="'rgb(0, 0, 225)'" top="5.75" left="12"></bus>
+        <bus bus="dataBus" bus-name="Datenbus" base="base" color="'rgb(0, 140, 0)'" top="5.75" left="22"></bus>
+        <bus bus="addressBus" bus-name="Adressbus" base="base" color="'rgb(0, 0, 225)'" top="0.85" left="5"></bus>
 
-        <register value="11" register-name="Register A" base="base" top="2" left="1">
+        <memory memory-name="Register A" base="base" top="2" left="1">
+            <addressgate bus="addressBus"></addressgate>
+            <datagate bus="dataBus"></datagate>
+        </memory>
+        <register value="10" register-name="Register B" base="base" top="4" left="18">
+            <gate bus="addressBus"></gate>
             <gate bus="dataBus"></gate>
         </register>
-        <register value="10" register-name="Register B" base="base" top="4" left="8">
-            <gate bus="dataBus"></gate>
-            <gate bus="adressBus"></gate>
-        </register>
-        <register value="1" register-name="Register C" base="base" top="3" left="15">
-            <gate bus="dataBus" set-write="wire1" set-read="wire2"></gate>
-            <gate bus="adressBus" set-write="wire3" set-read="wire4"></gate>
+        <register value="1" register-name="Register C" base="base" top="3" left="25">
+            <gate bus="addressBus" set-write="wire1" set-read="wire2"></gate>
+            <gate bus="dataBus" set-write="wire3" set-read="wire4"></gate>
         </register>
 
-        <manualswitch wire="wire1" switch-name="switch 1" value="0" top="1" left="25"></manualswitch>
-        <manualswitch wire="wire2" switch-name="switch 2" value="0" top="2.5" left="25"></manualswitch>
-        <led wire="wire2" value="0" top="4" left="20"></led>
-        <manualswitch wire="wire3" switch-name="switch 3" value="0" top="6.5" left="25"></manualswitch>
-        <manualswitch wire="wire4" switch-name="switch 4" value="0" top="5" left="25"></manualswitch>
+        <manualswitch wire="wire1" switch-name="switch 1" value="0" top="1" left="32"></manualswitch>
+        <manualswitch wire="wire2" switch-name="switch 2" value="0" top="2.5" left="32"></manualswitch>
+        <led wire="wire2" value="0" top="4" left="30"></led>
+        <manualswitch wire="wire3" switch-name="switch 3" value="0" top="6.5" left="32"></manualswitch>
+        <manualswitch wire="wire4" switch-name="switch 4" value="0" top="5" left="32"></manualswitch>
     </div>
 
     <div>
