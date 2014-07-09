@@ -21,13 +21,16 @@ bonsaiApp.directive('memory', function ($interval) {
              * two addresses before the current one and the corresponding values
              * the current address and the value
              * the next two addresses and the corresponding values */
-            $scope.dataContext = [
-                {"addressBus": undefined, 'value': undefined},
-                {"addressBus": undefined, 'value': undefined},
-                {"addressBus": undefined, 'value': undefined},
-                {"addressBus": undefined, 'value': undefined},
-                {"addressBus": undefined, 'value': undefined}
-            ];
+            $scope.setDataContextToUndefined = function () {
+                $scope.dataContext = [
+                    {"addressBus": undefined, 'value': undefined},
+                    {"addressBus": undefined, 'value': undefined},
+                    {"addressBus": undefined, 'value': undefined},
+                    {"addressBus": undefined, 'value': undefined},
+                    {"addressBus": undefined, 'value': undefined}
+                ];
+            };
+            $scope.setDataContextToUndefined();
 
             $scope.dataChangeCallback = function (dataContext) {
                 $scope.dataContext = dataContext;
@@ -60,6 +63,20 @@ bonsaiApp.directive('memory', function ($interval) {
                 }
             });
 
+            $scope.toggleAddressBusRead = function () {
+                if ($scope.memory.getAddressBusState() == -1) { // If we are reading then we want to stop it.
+                    $scope.memory.setAddressBusState(0);
+                    $scope.setDataContextToUndefined();
+                } else { // start reading
+                    try {
+                        var address = $scope.memory.setAddressBusState(-1);
+                        $scope.dataContext = $scope.memory.getDataWithContext(address);
+                    } catch (exception) {
+                        throw exception;
+                    }
+                }
+            };
+
             $scope.toggleDataBusState = function () {
                 var stateFound = false;
                 var desiredState = $scope.memory.getDataBusState() - 1;
@@ -67,7 +84,6 @@ bonsaiApp.directive('memory', function ($interval) {
                     if (desiredState < -1) {
                         desiredState = 1;
                     }
-                    console.log("Trying state: " + desiredState);
                     try {
                         $scope.memory.setDataBusState(desiredState);
                         stateFound = true;

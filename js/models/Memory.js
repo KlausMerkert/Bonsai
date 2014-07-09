@@ -59,7 +59,7 @@ Memory.prototype.writeData = function (data) {
         if (this.addressBus.state == -1) {
             var address = this.addressBus.bus.registerReaderAndRead(this);
             this.content[address] = data;
-            this.dataChangeCallback(this.getDataWithContext(address));
+            this.updateViewCallback(this.getDataWithContext(address));
         } else {
             throw InactiveAdressBusConnection(
                 "Memory " + this.name + ": The address bus connection is not set to reading. " +
@@ -76,6 +76,8 @@ Memory.prototype.writeData = function (data) {
         );
     }
 };
+
+Memory.prototype.setValue = Memory.prototype.writeData;
 
 Memory.prototype.readData = function () {
     if (this.addressBus) {
@@ -107,7 +109,7 @@ Memory.prototype.getAddressBusState = function () {
     return this.addressBus.state;
 };
 
-Memory.prototype.setAdressBusState = function (desiredState) {
+Memory.prototype.setAddressBusState = function (desiredState) {
     if (desiredState == 1) {
         throw AddressBusConnectionCanNotBeSetToWrite(
             "Memory " + this.name + "It does not make sense to write to an address bus (" +
@@ -116,14 +118,16 @@ Memory.prototype.setAdressBusState = function (desiredState) {
         );
     } else if (desiredState == -1) {
         try {
-            this.setValue(this.addressBus.bus.registerReaderAndRead(this));
+            var address = this.addressBus.bus.registerReaderAndRead(this);
             this.addressBus.state = desiredState;
+            return address;
         } catch (exception) {
             throw exception;
         }
     } else {
         this.addressBus.bus.unregisterReader(this);
         this.addressBus.state = desiredState;
+        return undefined;
     }
 };
 
@@ -152,7 +156,7 @@ Memory.prototype.setDataBusState = function (desiredState) {
                 }
                 throw exception;
             }
-            this.dataChangeCallback(this.getDataWithContext(address));
+            this.updateViewCallback(this.getDataWithContext(address));
         } else {
             throw InactiveAdressBusConnection(
                     "Memory " + this.name + ": The address bus connection is not set to reading. " +
