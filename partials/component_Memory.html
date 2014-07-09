@@ -1,7 +1,7 @@
 <div class="component nospace" ng-style="{'top': topCSS, 'left': leftCSS}">
     <div class="memory">
         <div style="width: 0; height: 0; overflow: visible; display: inline-block; position: absolute;"
-             ng-repeat="connection in [memory.address, memory.data]">
+             ng-repeat="connection in [memory.addressBus]">
             <div ng-click="toggleState(connection)"
                  ng-class="{'connection': true, 'toprow': $even, 'bottomrow': $odd, 'read': connection.state == -1, 'write': connection.state == 1, 'grayback': connection.state == 0}"
                  style="left: 1.3em;">
@@ -21,16 +21,37 @@
                      style="left: 2.19em;" ng-click="toggleRead(connection)"></div>
             </div>
         </div>
+        <div style="width: 0; height: 0; overflow: visible; display: inline-block; position: absolute;">
+            <div ng-click="toggleDataBusState()"
+                 class="connection bottomrow"
+                 ng-class="{'read': memory.getDataBusState() == -1, 'write': memory.getDataBusState() == 1, 'grayback': memory.getDataBusState() == 0}"
+                 style="left: 6.8em;">
+                <div ng-show="memory.getDataBusState() == -1"
+                     style="position: relative; top: -0.1em; left: 0.01em;" class="unselectable">&uarr;</div>
+                <div ng-show="memory.getDataBusState() == 0"
+                     style="position: relative; top: 0.05em; left: 0.01em;" class="unselectable">&bull;</div>
+                <div ng-show="memory.getDataBusState() == 1"
+                     style="position: relative; top: -0.1em; left: 0.01em;" class="unselectable">&darr;</div>
+            </div>
+            <div class="nospace bottomrow" style="position: absolute;">
+                <div class="busconnector busconnectorbottomrow"
+                     style="left: 7.13em;"></div>
+                <div class="wireconnector write wireconnectorbottomrowwrite"
+                     style="left: 7.69em;" ng-click="toggleDataBusWrite()"></div>
+                <div class="wireconnector read wireconnectorbottomrowread"
+                     style="left: 7.69em;" ng-click="toggleDataBusRead()"></div>
+            </div>
+        </div>
         <table>
             <tr style="opacity: 0.2; line-height: 0.92em;">
                 <td class="address" style="border-top: 0; border-bottom: 0;" ng-style="{'color': addressBusColor}">
-                    <span ng-if="dataContext[0].address">
-                        <span ng-if="displayBase === 2">{{ dataContext[0].address | binary }}</span>
-                        <span ng-if="displayBase === 8">{{ dataContext[0].address | octal }}</span>
-                        <span ng-if="displayBase === 10">{{ dataContext[0].address }}</span>
-                        <span ng-if="displayBase === 16">{{ dataContext[0].address | hexadecimal }}</span>
+                    <span ng-if="dataContext[0].addressBus">
+                        <span ng-if="displayBase === 2">{{ dataContext[0].addressBus | binary }}</span>
+                        <span ng-if="displayBase === 8">{{ dataContext[0].addressBus | octal }}</span>
+                        <span ng-if="displayBase === 10">{{ dataContext[0].addressBus }}</span>
+                        <span ng-if="displayBase === 16">{{ dataContext[0].addressBus | hexadecimal }}</span>
                     </span>
-                    <span ng-if="!dataContext[0].address">undefined</span>
+                    <span ng-if="!dataContext[0].addressBus">undefined</span>
                 </td>
                 <td class="value" style="border-top: 0; border-bottom: 0;" ng-style="{'color': dataBusColor}">
                     <span ng-if="dataContext[0].value">
@@ -44,13 +65,13 @@
             </tr>
             <tr style="opacity: 0.7;">
                 <td class="address" style="border-top: 0; border-bottom: 0;" ng-style="{'color': addressBusColor}">
-                    <span ng-if="dataContext[1].address">
-                        <span ng-if="displayBase === 2">{{ dataContext[1].address | binary }}</span>
-                        <span ng-if="displayBase === 8">{{ dataContext[1].address | octal }}</span>
-                        <span ng-if="displayBase === 10">{{ dataContext[1].address }}</span>
-                        <span ng-if="displayBase === 16">{{ dataContext[1].address | hexadecimal }}</span>
+                    <span ng-if="dataContext[1].addressBus">
+                        <span ng-if="displayBase === 2">{{ dataContext[1].addressBus | binary }}</span>
+                        <span ng-if="displayBase === 8">{{ dataContext[1].addressBus | octal }}</span>
+                        <span ng-if="displayBase === 10">{{ dataContext[1].addressBus }}</span>
+                        <span ng-if="displayBase === 16">{{ dataContext[1].addressBus | hexadecimal }}</span>
                     </span>
-                    <span ng-if="!dataContext[1].address">undefined</span>
+                    <span ng-if="!dataContext[1].addressBus">undefined</span>
                 </td>
                 <td class="value" style="border-top: 0; border-bottom: 0;" ng-style="{'color': dataBusColor}">
                     <span ng-if="dataContext[1].value">
@@ -64,13 +85,13 @@
             </tr>
             <tr>
                 <td class="address" ng-style="{'color': addressBusColor}">
-                    <span ng-if="dataContext[2].address">
-                        <span ng-if="displayBase === 2">{{ dataContext[2].address | binary }}</span>
-                        <span ng-if="displayBase === 8">{{ dataContext[2].address | octal }}</span>
-                        <span ng-if="displayBase === 10">{{ dataContext[2].address }}</span>
-                        <span ng-if="displayBase === 16">{{ dataContext[2].address | hexadecimal }}</span>
+                    <span ng-if="dataContext[2].addressBus">
+                        <span ng-if="displayBase === 2">{{ dataContext[2].addressBus | binary }}</span>
+                        <span ng-if="displayBase === 8">{{ dataContext[2].addressBus | octal }}</span>
+                        <span ng-if="displayBase === 10">{{ dataContext[2].addressBus }}</span>
+                        <span ng-if="displayBase === 16">{{ dataContext[2].addressBus | hexadecimal }}</span>
                     </span>
-                    <span ng-if="!dataContext[2].address">undefined</span>
+                    <span ng-if="!dataContext[2].addressBus">undefined</span>
                 </td>
                 <td class="value" ng-style="{'color': dataBusColor}">
                     <span ng-if="dataContext[2].value">
@@ -84,13 +105,13 @@
             </tr>
             <tr style="opacity: 0.7;">
                 <td class="address" style="border-top: 0; border-bottom: 0;" ng-style="{'color': addressBusColor}">
-                    <span ng-if="dataContext[3].address">
-                        <span ng-if="displayBase === 2">{{ dataContext[3].address | binary }}</span>
-                        <span ng-if="displayBase === 8">{{ dataContext[3].address | octal }}</span>
-                        <span ng-if="displayBase === 10">{{ dataContext[3].address }}</span>
-                        <span ng-if="displayBase === 16">{{ dataContext[3].address | hexadecimal }}</span>
+                    <span ng-if="dataContext[3].addressBus">
+                        <span ng-if="displayBase === 2">{{ dataContext[3].addressBus | binary }}</span>
+                        <span ng-if="displayBase === 8">{{ dataContext[3].addressBus | octal }}</span>
+                        <span ng-if="displayBase === 10">{{ dataContext[3].addressBus }}</span>
+                        <span ng-if="displayBase === 16">{{ dataContext[3].addressBus | hexadecimal }}</span>
                     </span>
-                    <span ng-if="!dataContext[3].address">undefined</span>
+                    <span ng-if="!dataContext[3].addressBus">undefined</span>
                 </td>
                 <td class="value" style="border-top: 0; border-bottom: 0;" ng-style="{'color': dataBusColor}">
                     <span ng-if="dataContext[3].value">
@@ -104,13 +125,13 @@
             </tr>
             <tr style="opacity: 0.2; line-height: 0.92em;">
                 <td class="address" style="border-top: 0; border-bottom: 0;" ng-style="{'color': addressBusColor}">
-                    <span ng-if="dataContext[4].address">
-                        <span ng-if="displayBase === 2">{{ dataContext[4].address | binary }}</span>
-                        <span ng-if="displayBase === 8">{{ dataContext[4].address | octal }}</span>
-                        <span ng-if="displayBase === 10">{{ dataContext[4].address }}</span>
-                        <span ng-if="displayBase === 16">{{ dataContext[4].address | hexadecimal }}</span>
+                    <span ng-if="dataContext[4].addressBus">
+                        <span ng-if="displayBase === 2">{{ dataContext[4].addressBus | binary }}</span>
+                        <span ng-if="displayBase === 8">{{ dataContext[4].addressBus | octal }}</span>
+                        <span ng-if="displayBase === 10">{{ dataContext[4].addressBus }}</span>
+                        <span ng-if="displayBase === 16">{{ dataContext[4].addressBus | hexadecimal }}</span>
                     </span>
-                    <span ng-if="!dataContext[4].address">undefined</span>
+                    <span ng-if="!dataContext[4].addressBus">undefined</span>
                 </td>
                 <td class="value" style="border-top: 0; border-bottom: 0;" ng-style="{'color': dataBusColor}">
                     <span ng-if="dataContext[4].value">
