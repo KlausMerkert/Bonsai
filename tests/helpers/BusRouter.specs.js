@@ -71,8 +71,17 @@ describe('BusRouter', function(){
             'YCoordinates': [1, 3, 3.5]
         };
         var connectionParts = router.constructConnectionParts(goodConnections, grid);
-        console.log(connectionParts);
         expect(connectionParts.length).toBe(2);
+        expect(connectionParts).toEqual([
+            [
+                [{'i': 0, 'j': 2}, {'i': 1, 'j': 2}],
+                [{'i': 1, 'j': 1}, {'i': 1, 'j': 2}]
+            ],
+            [
+                [{'i': 1, 'j': 1}, {'i': 1, 'j': 0}],
+                [{'i': 2, 'j': 0}, {'i': 1, 'j': 0}]
+            ]
+        ]);
     });
 
     it('should find two corners', function () {

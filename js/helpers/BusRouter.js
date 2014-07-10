@@ -366,10 +366,10 @@ BusRouter.prototype.constructConnectionParts = function (goodConnections, grid) 
         }
     }
     if (remainingConnections.length > 0) { // TODO: S-Shaped connections
-        //var chain = this.sortConnectionsToChain(
-        //    remainingConnections,
-        //    {'x': grid.XCoordinates.length, 'y': grid.YCoordinates.length});
-        /*var corners = this.findCorners(chain);
+        var chain = this.sortConnectionsToChain(
+            remainingConnections,
+            {'x': grid.XCoordinates.length, 'y': grid.YCoordinates.length});
+        var corners = this.findCorners(chain);
         var junctionLessPart;
         var iteration = 0;
         while ((corners.length > 1) && (iteration < remainingConnections.length)) {
@@ -393,11 +393,9 @@ BusRouter.prototype.constructConnectionParts = function (goodConnections, grid) 
             }
             connectionParts.push(junctionLessPart);
             corners = this.findCorners(chain);
-            console.log(corners.length);
             iteration++;
-        }*/
-        var chain = remainingConnections;
-        var junctionLessPart = [];
+        }
+        junctionLessPart = [];
         for (i = 0; i < chain.length; i++) {
             junctionLessPart.push(chain[i].connection);
         }
