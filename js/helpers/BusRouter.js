@@ -335,8 +335,7 @@ BusRouter.prototype.constructConnectionParts = function (goodConnections, grid) 
                         connectionsToFollow[0].point = remainingConnections[j].connection[1];
                     }
                     remainingConnections.splice(j, 1);
-                }
-                if (angular.equals(point, remainingConnections[j].connection[1])) {
+                } else if (angular.equals(point, remainingConnections[j].connection[1])) {
                     connectionParts[connectionsToFollow[0].part].push(remainingConnections[j].connection);
                     if (countgrid[remainingConnections[j].connection[0].i][remainingConnections[j].connection[0].j] != 2) {
                         connectionsToFollow.splice(0, 1);
@@ -348,7 +347,7 @@ BusRouter.prototype.constructConnectionParts = function (goodConnections, grid) 
             }
         }
     }
-    if (remainingConnections.length > 0) {
+    if (remainingConnections.length > 0) { // TODO: S-Shaped connections
         var junctionlessPart = [];
         for (i = 0; i < remainingConnections.length; i++) {
             junctionlessPart.push(remainingConnections[i].connection);
@@ -475,10 +474,14 @@ BusRouter.prototype.constructParts = function (connectionParts, grid) {
 BusRouter.prototype.updateVisibleParts = function () {
     // get all endpoints
     var endpoints = this.getEndpoints();
+    console.log("Endpoints:");
+    console.log(endpoints);
     // get the grid
     var grid = this.getGrid(endpoints);
     // recursively find all good connections in the grid
     var goodConnections = this.findGoodConnections([], grid, grid.indexEndpoints);
+    console.log("Good connections:");
+    console.log(goodConnections);
     // combine connections to parts
     var connectionParts = this.constructConnectionParts(goodConnections, grid);
     // set the parts

@@ -28,4 +28,50 @@ describe('BusRouter', function(){
             expect(router.getEndpoints()[i]).toBe(i + 1);
         }
     });
+
+    it('should construct connection parts with 3 endpoints in a 3x3 grid (K-Shaped)', function () {
+        var router = new BusRouter([], undefined);
+        var goodConnections = [
+            {'connection': [{'i': 2, 'j': 1}, {'i': 1, 'j': 1}], 'dist': 1, 'weight': 1},
+            {'connection': [{'i': 1, 'j': 1}, {'i': 1, 'j': 2}], 'dist': 1, 'weight': 1},
+            {'connection': [{'i': 1, 'j': 1}, {'i': 1, 'j': 0}], 'dist': 1, 'weight': 1},
+            {'connection': [{'i': 1, 'j': 0}, {'i': 0, 'j': 0}], 'dist': 1, 'weight': 1},
+        ];
+        var grid = {
+            'XCoordinates': [1, 2, 3],
+            'YCoordinates': [1, 3, 3.5]
+        };
+        var connectionParts = router.constructConnectionParts(goodConnections, grid);
+        expect(connectionParts.length).toBe(3);
+        var expected = [
+            [
+                [{'i': 2, 'j': 1}, {'i': 1, 'j': 1}]
+            ],
+            [
+                [{'i': 1, 'j': 1}, {'i': 1, 'j': 0}],
+                [{'i': 1, 'j': 0}, {'i': 0, 'j': 0}]
+            ],
+            [
+                [{'i': 1, 'j': 1}, {'i': 1, 'j': 2}]
+            ]
+        ];
+        expect(connectionParts).toEqual(expected);
+    });
+
+    it('should construct connection parts with 3 endpoints in a 3x3 grid (S-Shaped)', function () {
+        var router = new BusRouter([], undefined);
+        var goodConnections = [
+            {'connection': [{'i': 1, 'j': 1}, {'i': 1, 'j': 0}], 'dist': 1, 'weight': 19.88},
+            {'connection': [{'i': 2, 'j': 0}, {'i': 1, 'j': 0}], 'dist': 7, 'weight': 0.01},
+            {'connection': [{'i': 0, 'j': 2}, {'i': 1, 'j': 2}], 'dist': 11.5, 'weight': 13.5},
+            {'connection': [{'i': 1, 'j': 1}, {'i': 1, 'j': 2}], 'dist': 2, 'weight': 0.01},
+        ];
+        var grid = {
+            'XCoordinates': [1, 2, 3],
+            'YCoordinates': [1, 3, 3.5]
+        };
+        var connectionParts = router.constructConnectionParts(goodConnections, grid);
+        console.log(connectionParts);
+        expect(connectionParts.length).toBe(2);
+    });
 });
