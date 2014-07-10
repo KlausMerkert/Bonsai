@@ -41,8 +41,12 @@ bonsaiApp.directive('bus', function () {
             });
 
             $scope.updateVisibleParts = function() {
+                console.log($scope.busName);
+                console.log($scope.localBus.getBuses());
                 $scope.busRouter.setConnections($scope.localBus.getBuses());
                 $scope.visibleParts = $scope.busRouter.updateVisibleParts();
+                console.log("Result: Parts...");
+                console.log($scope.visibleParts);
             };
 
             $scope.localBus.enrollToDirective = function (enrollee, getPositions) {

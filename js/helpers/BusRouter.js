@@ -276,23 +276,41 @@ BusRouter.prototype.findGoodConnections = function (alreadyFoundConnections, gri
     return alreadyFoundConnections;
 };
 
+BusRouter.prototype.getCountGrid = function (connections, dimensions) {
+    var countGrid = [];
+    for (var i = 0; i < dimensions.x; i++) {
+        countGrid.push([]);
+        for (var j = 0; j < dimensions.y; j++) {
+            countGrid[i].push(0);
+        }
+    }
+    for (i = 0; i < connections.length; i++) {
+        countGrid[connections[i].connection[0].i][connections[i].connection[0].j]++;
+        countGrid[connections[i].connection[1].i][connections[i].connection[1].j]++;
+    }
+    return countGrid;
+};
+
 BusRouter.prototype.constructConnectionParts = function (goodConnections, grid) {
     // get junction points
-    var countgrid = [];
-    for (var i = 0; i < grid.XCoordinates.length; i++) {
-        countgrid.push([]);
+    var countGrid = this.getCountGrid(goodConnections, {x: grid.XCoordinates.length, y: grid.YCoordinates.length});
+
+    /*var countGrid = [];
+    for (var i = 0; i < grid.YCoordinates.length; i++) {
+        countGrid.push([]);
         for (var j = 0; j < grid.YCoordinates.length; j++) {
-            countgrid[i].push(0);
+            countGrid[i].push(0);
         }
     }
     for (i = 0; i < goodConnections.length; i++) {
-        countgrid[goodConnections[i].connection[0].i][goodConnections[i].connection[0].j]++;
-        countgrid[goodConnections[i].connection[1].i][goodConnections[i].connection[1].j]++;
-    }
+        countGrid[goodConnections[i].connection[0].i][goodConnections[i].connection[0].j]++;
+        countGrid[goodConnections[i].connection[1].i][goodConnections[i].connection[1].j]++;
+    }*/
+
     var junctionPoints = [];
-    for (i = 0; i < countgrid.length; i++) {
-        for (j = 0; j < countgrid[i].length; j++) {
-            if (countgrid[i][j] > 2) {
+    for (var i = 0; i < countGrid.length; i++) {
+        for (var j = 0; j < countGrid[i].length; j++) {
+            if (countGrid[i][j] > 2) {
                 junctionPoints.push({i: i, j: j});
             }
         }
@@ -306,7 +324,7 @@ BusRouter.prototype.constructConnectionParts = function (goodConnections, grid) 
         for (j = 0; j < remainingConnections.length; j++) {
             if (angular.equals(point, remainingConnections[j].connection[0])) {
                 connectionParts.push([remainingConnections[j].connection]);
-                if (countgrid[remainingConnections[j].connection[1].i][remainingConnections[j].connection[1].j] == 2) {
+                if (countGrid[remainingConnections[j].connection[1].i][remainingConnections[j].connection[1].j] == 2) {
                     connectionsToFollow.push({
                         point: remainingConnections[j].connection[1],
                         part: connectionParts.length-1
@@ -315,7 +333,7 @@ BusRouter.prototype.constructConnectionParts = function (goodConnections, grid) 
                 remainingConnections.splice(j, 1);
             } else if (angular.equals(point, remainingConnections[j].connection[1])) {
                 connectionParts.push([remainingConnections[j].connection]);
-                if (countgrid[remainingConnections[j].connection[0].i][remainingConnections[j].connection[0].j] == 2) {
+                if (countGrid[remainingConnections[j].connection[0].i][remainingConnections[j].connection[0].j] == 2) {
                     connectionsToFollow.push({
                         point: remainingConnections[j].connection[0],
                         part: connectionParts.length-1
@@ -329,7 +347,7 @@ BusRouter.prototype.constructConnectionParts = function (goodConnections, grid) 
             for (j = 0; j < remainingConnections.length; j++) {
                 if (angular.equals(point, remainingConnections[j].connection[0])) {
                     connectionParts[connectionsToFollow[0].part].push(remainingConnections[j].connection);
-                    if (countgrid[remainingConnections[j].connection[1].i][remainingConnections[j].connection[1].j] != 2) {
+                    if (countGrid[remainingConnections[j].connection[1].i][remainingConnections[j].connection[1].j] != 2) {
                         connectionsToFollow.splice(0, 1);
                     } else {
                         connectionsToFollow[0].point = remainingConnections[j].connection[1];
@@ -337,7 +355,7 @@ BusRouter.prototype.constructConnectionParts = function (goodConnections, grid) 
                     remainingConnections.splice(j, 1);
                 } else if (angular.equals(point, remainingConnections[j].connection[1])) {
                     connectionParts[connectionsToFollow[0].part].push(remainingConnections[j].connection);
-                    if (countgrid[remainingConnections[j].connection[0].i][remainingConnections[j].connection[0].j] != 2) {
+                    if (countGrid[remainingConnections[j].connection[0].i][remainingConnections[j].connection[0].j] != 2) {
                         connectionsToFollow.splice(0, 1);
                     } else {
                         connectionsToFollow[0].point = remainingConnections[j].connection[0];
@@ -348,17 +366,42 @@ BusRouter.prototype.constructConnectionParts = function (goodConnections, grid) 
         }
     }
     if (remainingConnections.length > 0) { // TODO: S-Shaped connections
-        var corners = this.findCorners(remainingConnections);
-        // count corners
-        // if corners > 1 split remainingParts
-          // find connections between the corners
-          // if this connection has more than 1 part split in the middle
-          // else split at one of the corners
-        var junctionlessPart = [];
-        for (i = 0; i < remainingConnections.length; i++) {
-            junctionlessPart.push(remainingConnections[i].connection);
+        //var chain = this.sortConnectionsToChain(
+        //    remainingConnections,
+        //    {'x': grid.XCoordinates.length, 'y': grid.YCoordinates.length});
+        /*var corners = this.findCorners(chain);
+        var junctionLessPart;
+        var iteration = 0;
+        while ((corners.length > 1) && (iteration < remainingConnections.length)) {
+            // follow the chain to the first corner
+            junctionLessPart = [];
+            for (i = 0; i < chain.length; i++) {
+                var cornerFound = false;
+                for (j = 0; j < corners.length; j++) {
+                    if (((chain[i].connection[0].i == corners[j].i) && (chain[i].connection[0].j == corners[j].j)) ||
+                        ((chain[i].connection[1].i == corners[j].i) && (chain[i].connection[1].j == corners[j].j))) {
+                        cornerFound = true;
+                    }
+                }
+                junctionLessPart.push(chain[i].connection);
+                chain.splice(i, 1);
+                if (cornerFound) {
+                    junctionLessPart.push(chain[i].connection);
+                    chain.splice(i, 1);
+                    break;
+                }
+            }
+            connectionParts.push(junctionLessPart);
+            corners = this.findCorners(chain);
+            console.log(corners.length);
+            iteration++;
+        }*/
+        var chain = remainingConnections;
+        var junctionLessPart = [];
+        for (i = 0; i < chain.length; i++) {
+            junctionLessPart.push(chain[i].connection);
         }
-        connectionParts.push(junctionlessPart);
+        connectionParts.push(junctionLessPart);
     }
     return connectionParts;
 };
@@ -390,6 +433,49 @@ BusRouter.prototype.findCorners = function (connections) {
         }
     }
     return corners;
+};
+
+BusRouter.prototype.sortConnectionsToChain = function (connections, gridDimensions) {
+    // find a start point
+    var startPoint = connections[0].connection[0];
+    var countGrid = this.getCountGrid(connections, gridDimensions);
+    for (var i = 0; i < countGrid.length; i++) {
+        for (var j = 0; j < countGrid[i].length; j++) {
+            if (countGrid[i][j] == 1) {
+                startPoint = {'i': j, 'j': i};
+                break;
+            }
+        }
+    }
+    // traverse the chain
+    var position = startPoint;
+    var chainedConnections = [];
+    var remainingConnections = angular.copy(connections);
+    while (remainingConnections.length > 0) {
+        var connectionFound = false;
+        for (i = 0; i < remainingConnections.length; i++) {
+            if ((remainingConnections[i].connection[0].i == position.i) &&
+                (remainingConnections[i].connection[0].j == position.j)) {
+                position = remainingConnections[i].connection[1];
+                chainedConnections.push(remainingConnections[i]);
+                remainingConnections.splice(i, 1);
+                connectionFound = true;
+                break;
+            } else if ((remainingConnections[i].connection[1].i == position.i) &&
+                       (remainingConnections[i].connection[1].j == position.j)) {
+                position = remainingConnections[i].connection[0];
+                chainedConnections.push(remainingConnections[i]);
+                remainingConnections.splice(i, 1);
+                connectionFound = true;
+                break;
+            }
+        }
+        if (!connectionFound) {
+            console.log("This seems to be disconnected. That should not happen!");
+            break;
+        }
+    }
+    return chainedConnections;
 };
 
 BusRouter.prototype.constructParts = function (connectionParts, grid) {

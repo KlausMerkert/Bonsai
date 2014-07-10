@@ -89,5 +89,23 @@ describe('BusRouter', function(){
             {'i': 1, 'j': 0},
             {'i': 1, 'j': 2}
         ]);
-    })
+    });
+
+    it('should order the chain correctly', function () {
+        var router = new BusRouter([], undefined);
+        var connections = [
+            {'connection': [{'i': 1, 'j': 1}, {'i': 1, 'j': 0}], 'dist': 1, 'weight': 19.88},
+            {'connection': [{'i': 2, 'j': 0}, {'i': 1, 'j': 0}], 'dist': 7, 'weight': 0.01},
+            {'connection': [{'i': 0, 'j': 2}, {'i': 1, 'j': 2}], 'dist': 11.5, 'weight': 13.5},
+            {'connection': [{'i': 1, 'j': 1}, {'i': 1, 'j': 2}], 'dist': 2, 'weight': 0.01}
+        ];
+        var chain = router.sortConnectionsToChain(connections, {'x': 3, 'y': 3});
+        expect(chain.length).toBe(4);
+        expect(chain).toEqual([
+            {'connection': [{'i': 0, 'j': 2}, {'i': 1, 'j': 2}], 'dist': 11.5, 'weight': 13.5},
+            {'connection': [{'i': 1, 'j': 1}, {'i': 1, 'j': 2}], 'dist': 2, 'weight': 0.01},
+            {'connection': [{'i': 1, 'j': 1}, {'i': 1, 'j': 0}], 'dist': 1, 'weight': 19.88},
+            {'connection': [{'i': 2, 'j': 0}, {'i': 1, 'j': 0}], 'dist': 7, 'weight': 0.01}
+        ]);
+    });
 });
