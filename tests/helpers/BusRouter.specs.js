@@ -74,4 +74,20 @@ describe('BusRouter', function(){
         console.log(connectionParts);
         expect(connectionParts.length).toBe(2);
     });
+
+    it('should find two corners', function () {
+        var router = new BusRouter([], undefined);
+        var connections = [
+            {'connection': [{'i': 1, 'j': 1}, {'i': 1, 'j': 0}], 'dist': 1, 'weight': 19.88},
+            {'connection': [{'i': 2, 'j': 0}, {'i': 1, 'j': 0}], 'dist': 7, 'weight': 0.01},
+            {'connection': [{'i': 0, 'j': 2}, {'i': 1, 'j': 2}], 'dist': 11.5, 'weight': 13.5},
+            {'connection': [{'i': 1, 'j': 1}, {'i': 1, 'j': 2}], 'dist': 2, 'weight': 0.01},
+        ];
+        var corners = router.findCorners(connections);
+        expect(corners.length).toBe(2);
+        expect(corners).toEqual([
+            {'i': 1, 'j': 0},
+            {'i': 1, 'j': 2}
+        ]);
+    })
 });

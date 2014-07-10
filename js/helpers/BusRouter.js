@@ -348,6 +348,12 @@ BusRouter.prototype.constructConnectionParts = function (goodConnections, grid) 
         }
     }
     if (remainingConnections.length > 0) { // TODO: S-Shaped connections
+        var corners = this.findCorners(remainingConnections);
+        // count corners
+        // if corners > 1 split remainingParts
+          // find connections between the corners
+          // if this connection has more than 1 part split in the middle
+          // else split at one of the corners
         var junctionlessPart = [];
         for (i = 0; i < remainingConnections.length; i++) {
             junctionlessPart.push(remainingConnections[i].connection);
@@ -355,6 +361,35 @@ BusRouter.prototype.constructConnectionParts = function (goodConnections, grid) 
         connectionParts.push(junctionlessPart);
     }
     return connectionParts;
+};
+
+BusRouter.prototype.findCorners = function (connections) {
+    var corners = [];
+    for (var i = 0; i < connections.length - 1; i++) {
+        var connI = connections[i].connection;
+        for (var j = i + 1; j < connections.length; j++) {
+            var connJ = connections[j].connection;
+            if (((connI[0].i == connJ[0].i) && (connI[0].j == connJ[0].j)) ||
+                ((connI[1].i == connJ[1].i) && (connI[1].j == connJ[1].j))) {
+                if ((Math.min(connI[0].i, connI[1].i, connJ[0].i, connJ[1].i) <
+                    Math.max(connI[0].i, connI[1].i, connJ[0].i, connJ[1].i)) &&
+                    (Math.min(connI[0].j, connI[1].j, connJ[0].j, connJ[1].j) <
+                    Math.max(connI[0].j, connI[1].j, connJ[0].j, connJ[1].j))) {
+                    // connections[i] and connections[j] form a corner. The corner is the point they share.
+                    if ((connI[0].i == connJ[0].i) && (connI[0].j == connJ[0].j)) {
+                        corners.push(connI[0]);
+                    } else if ((connI[1].i == connJ[1].i) && (connI[0].j == connJ[0].j)) {
+                        corners.push(connI[1]);
+                    } else if ((connI[0].i == connJ[0].i) && (connI[1].j == connJ[1].j)) {
+                        corners.push(connI[0]);
+                    } else {
+                        corners.push(connI[1]);
+                    }
+                }
+            }
+        }
+    }
+    return corners;
 };
 
 BusRouter.prototype.constructParts = function (connectionParts, grid) {
