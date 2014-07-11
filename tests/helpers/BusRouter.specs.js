@@ -23,6 +23,13 @@ describe('BusRouter', function(){
         expect(router.printPoint({i: 6, j: 1})).toEqual("(6, 1)");
     });
 
+    it('should be able to print point lists', function () {
+        var router = new BusRouter([], undefined);
+        expect(router.printPointList([{'i': 3, 'j': 7}, {'i': 4, 'j': 5}, {'i': 1, 'j': 2}])).toEqual(
+            "[(3, 7), (4, 5), (1, 2)]"
+        );
+    });
+
     it('should be able to print connections', function () {
         var router = new BusRouter([], undefined);
         var connections = [

@@ -9,6 +9,14 @@ BusRouter.prototype.printPoint = function (point) {
     return "(" + point.i + ", " + point.j + ")";
 };
 
+BusRouter.prototype.printPointList = function (pointList) {
+    var convertedPointList = [];
+    for (var i = 0; i < pointList.length; i++) {
+        convertedPointList.push(this.printPoint(pointList[i]));
+    }
+    return "[" + convertedPointList.join(", ") + "]"
+};
+
 BusRouter.prototype.printConnections = function (connections) {
     var points = [];
     for (var i = 0; i < connections.length; i++) {
