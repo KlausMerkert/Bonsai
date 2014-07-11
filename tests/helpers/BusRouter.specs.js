@@ -50,6 +50,18 @@ describe('BusRouter', function(){
         );
     });
 
+    it('should be able to print connectionsToFollow', function () {
+        var router = new BusRouter([], undefined);
+        var connectionsToFollow = [
+            {part: 0, point: {i: 5, j: 3}},
+            {part: 3, point: {i: 8, j: 14}},
+            {part: 0, point: {i: 1, j: 0}}
+        ];
+        expect(router.printConnectionsToFollow(connectionsToFollow)).toEqual(
+            "[(5, 3) part: 0, (8, 14) part: 3, (1, 0) part: 0]"
+        );
+    });
+
     it('should be able to collect all endpoints', function () {
         var connections = [
             {'getPositions': function () {return [1, 2, 3]}},

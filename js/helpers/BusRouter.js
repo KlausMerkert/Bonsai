@@ -34,6 +34,14 @@ BusRouter.prototype.printConnections = function (connections) {
     return "[" + points.join(", ") + "]";
 };
 
+BusRouter.prototype.printConnectionsToFollow = function (connectionsToFollow) {
+    var list = [];
+    for (var i = 0; i < connectionsToFollow.length; i++) {
+        list.push(this.printPoint(connectionsToFollow[i].point) + " part: " + connectionsToFollow[i].part);
+    }
+    return "[" + list.join(", ") + "]";
+};
+
 BusRouter.prototype.setConnections = function (connections) {
     this.connections = connections;
 };
@@ -344,7 +352,7 @@ BusRouter.prototype.constructConnectionParts = function (goodConnections, grid) 
             }
         }
     }
-    console.log(this.printPointList(junctionPoints));
+    console.log("JunctionPoints: " + this.printPointList(junctionPoints));
     // begin connections at the first junction point
     var remainingConnections = angular.copy(goodConnections);
     var connectionParts = [];
@@ -373,12 +381,15 @@ BusRouter.prototype.constructConnectionParts = function (goodConnections, grid) 
             }
         }
         while (connectionsToFollow.length > 0) {
+            console.log("Connections to follow: " + this.printConnectionsToFollow(connectionsToFollow));
+            var reducedConnectionsToFollowLength = false;
             point = connectionsToFollow[0].point;
             for (j = 0; j < remainingConnections.length; j++) {
                 if (angular.equals(point, remainingConnections[j].connection[0])) {
                     connectionParts[connectionsToFollow[0].part].push(remainingConnections[j].connection);
                     if (countGrid[remainingConnections[j].connection[1].i][remainingConnections[j].connection[1].j] != 2) {
                         connectionsToFollow.splice(0, 1);
+                        reducedConnectionsToFollowLength = true;
                     } else {
                         connectionsToFollow[0].point = remainingConnections[j].connection[1];
                     }
@@ -387,11 +398,17 @@ BusRouter.prototype.constructConnectionParts = function (goodConnections, grid) 
                     connectionParts[connectionsToFollow[0].part].push(remainingConnections[j].connection);
                     if (countGrid[remainingConnections[j].connection[0].i][remainingConnections[j].connection[0].j] != 2) {
                         connectionsToFollow.splice(0, 1);
+                        reducedConnectionsToFollowLength = true;
                     } else {
                         connectionsToFollow[0].point = remainingConnections[j].connection[0];
                     }
                     remainingConnections.splice(j, 1);
                 }
+            }
+            if (!reducedConnectionsToFollowLength) {
+                console.log("Did not reduce the connectionsToFollow.length. " +
+                    "This means it would not terminate so we exit. This should not happen!");
+                break;
             }
         }
     }
