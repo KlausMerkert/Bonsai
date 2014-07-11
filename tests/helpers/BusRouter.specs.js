@@ -17,6 +17,25 @@
  ****************************************************************************************/
 
 describe('BusRouter', function(){
+    it('should be able to print points', function () {
+        var router = new BusRouter([], undefined);
+        expect(router.printPoint({'i': 3, 'j': 7})).toEqual("(3, 7)");
+        expect(router.printPoint({i: 6, j: 1})).toEqual("(6, 1)");
+    });
+
+    it('should be able to print connections', function () {
+        var router = new BusRouter([], undefined);
+        var connections = [
+            {'connection': [{'i': 1, 'j': 1}, {'i': 1, 'j': 0}], 'dist': 1, 'weight': 19.88},
+            {'connection': [{'i': 2, 'j': 0}, {'i': 1, 'j': 0}], 'dist': 7, 'weight': 0.01},
+            {'connection': [{'i': 0, 'j': 2}, {'i': 1, 'j': 2}], 'dist': 11.5, 'weight': 13.5},
+            {'connection': [{'i': 1, 'j': 1}, {'i': 1, 'j': 2}], 'dist': 2, 'weight': 0.01},
+        ];
+        expect(router.printConnections(connections)).toEqual(
+            "[(1, 1)->(1, 0), (2, 0)->(1, 0), (0, 2)->(1, 2), (1, 1)->(1, 2)]"
+        );
+    });
+
     it('should be able to collect all endpoints', function () {
         var connections = [
             {'getPositions': function () {return [1, 2, 3]}},
@@ -55,6 +74,7 @@ describe('BusRouter', function(){
                 [{'i': 1, 'j': 1}, {'i': 1, 'j': 2}]
             ]
         ];
+        console.log(connectionParts);
         expect(connectionParts).toEqual(expected);
     });
 
@@ -117,4 +137,22 @@ describe('BusRouter', function(){
             {'connection': [{'i': 2, 'j': 0}, {'i': 1, 'j': 0}], 'dist': 7, 'weight': 0.01}
         ]);
     });
+
+    it('should create a correct count grid', function () {
+        var router = new BusRouter([], undefined);
+        var connections = [
+            {'connection': [{'i': 2, 'j': 1}, {'i': 1, 'j': 1}], 'dist': 1, 'weight': 1},
+            {'connection': [{'i': 1, 'j': 1}, {'i': 1, 'j': 2}], 'dist': 1, 'weight': 1},
+            {'connection': [{'i': 1, 'j': 1}, {'i': 1, 'j': 0}], 'dist': 1, 'weight': 1},
+            {'connection': [{'i': 1, 'j': 0}, {'i': 0, 'j': 0}], 'dist': 1, 'weight': 1},
+            {'connection': [{'i': 1, 'j': 2}, {'i': 1, 'j': 3}], 'dist': 1, 'weight': 1}
+        ];
+        var countGrid = router.getCountGrid(connections, {'x': 3, 'y': 4});
+        expect(countGrid).toEqual([
+            [1, 2, 0],
+            [0, 3, 1],
+            [0, 2, 0],
+            [0, 1, 0]
+        ]);
+    })
 });
