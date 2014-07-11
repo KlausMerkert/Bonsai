@@ -30,6 +30,13 @@ describe('BusRouter', function(){
         );
     });
 
+    it('should be able to print point lists', function () {
+        var router = new BusRouter([], undefined);
+        expect(router.printCoordinatePointList([{'top': 3, 'left': 7}, {'top': 18, 'left': 4}, {'top': 1, 'left': 2}])).toEqual(
+            "[(7, 3), (4, 18), (2, 1)]"
+        );
+    });
+
     it('should be able to print connections', function () {
         var router = new BusRouter([], undefined);
         var connections = [
