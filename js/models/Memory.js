@@ -45,13 +45,37 @@ Memory.prototype.setDataBusConnection = function (bus, writeWire, readWire) {
 };
 
 Memory.prototype.getDataWithContext = function (address) {
-    return [
+    var context = [
         {"address": undefined, 'value': undefined},
         {"address": undefined, 'value': undefined},
-        {"address": address, 'value': this.content[address]},
+        {"address": undefined, 'value': undefined},
         {"address": undefined, 'value': undefined},
         {"address": undefined, 'value': undefined}
     ];
+    var keys = Object.keys(this.content);
+    var prevPrev = undefined;
+    var prev = undefined;
+    for (var i = 0; i < keys.length; i++) {
+        if (keys[i] == address) {
+            context[0].address = prevPrev;
+            context[0].value = this.content[prevPrev];
+            context[1].address = prev;
+            context[1].value = this.content[prev];
+            context[2].address = keys[i];
+            context[2].value = this.content[keys[i]];
+            if (i + 1 < keys.length) {
+                context[3].address = keys[i + 1];
+                context[3].value = this.content[keys[i + 1]];
+            }
+            if (i + 2 < keys.length) {
+                context[4].address = keys[i + 2];
+                context[4].value = this.content[keys[i + 2]];
+            }
+        }
+        prevPrev = prev;
+        prev = keys[i];
+    }
+    return context;
 };
 
 Memory.prototype.writeData = function (data) {

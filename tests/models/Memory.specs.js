@@ -66,7 +66,7 @@ describe('Memory', function() {
         expect(context).toEqual([
             {"address": undefined, 'value': undefined},
             {"address": undefined, 'value': undefined},
-            {"address": 10, 'value': 123},
+            {"address": '10', 'value': 123},
             {"address": undefined, 'value': undefined},
             {"address": undefined, 'value': undefined}
         ]);
@@ -90,10 +90,10 @@ describe('Memory', function() {
         mem.setAddressBusState(-1);
         var data = [
             {address: 0, value: 55},
+            {address: 11, value: 0},
             {address: 7, value: 13},
             {address: 8, value: 44},
             {address: 10, value: 78},
-            {address: 11, value: 0},
             {address: 27, value: -8},
             {address: 49, value: 17},
             {address: 1556, value: 5357457},
@@ -103,6 +103,12 @@ describe('Memory', function() {
             mem.writeData(data[i].value);
             expect(mem.content[address]).toBe(data[i].value);
         }
-
+        expect(mem.getDataWithContext(10)).toEqual([
+            {"address": '7', 'value': 13},
+            {"address": '8', 'value': 44},
+            {"address": '10', 'value': 78},
+            {"address": '11', 'value': 0},
+            {"address": '27', 'value': -8}
+        ]);
     });
 });
