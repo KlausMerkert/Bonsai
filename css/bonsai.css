@@ -88,19 +88,18 @@ body {
 }
 
 .memory table td {
+    min-width: 5.5em;
     border-top: 2px solid rgb(40, 40, 40);
     border-bottom: 2px solid rgb(40, 40, 40);
 }
 
 .memory table .address {
-    width: 4em;
     text-align: center;
     padding-right: 0.3em;
 }
 
 .memory table .value {
-    width: 4em;
-    text-align: left;
+    text-align: center;
     border-left: 1px solid rgb(40, 40, 40);
     padding-left: 0.3em;
 }
