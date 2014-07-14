@@ -37,10 +37,12 @@ describe('Memory', function() {
         var addressBusMock = {
             registerReaderAndRead: function () {return 10}
         };
+        var dataBusMock = {};
         var val = 0;
         var callback = function (x) {val = x;};
         var mem = new Memory(callback, 'testMemory');
         mem.setAddressBusConnection(addressBusMock, undefined);
+        mem.setDataBusConnection(dataBusMock, undefined);
         mem.setAddressBusState(-1);
         expect(mem.getAddressBus()).toBe(addressBusMock);
         expect(mem.addressBus.state).toBe(-1);
@@ -50,6 +52,7 @@ describe('Memory', function() {
         var addressBusMock = {
             registerReaderAndRead: function () {return 10}
         };
+        var dataBusMock = {};
         var context = [
             {"address": undefined, 'value': undefined},
             {"address": undefined, 'value': undefined},
@@ -60,6 +63,7 @@ describe('Memory', function() {
         var callback = function (x) {context = x;};
         var mem = new Memory(callback, 'testMemory');
         mem.setAddressBusConnection(addressBusMock, undefined);
+        mem.setDataBusConnection(dataBusMock, undefined);
         mem.setAddressBusState(-1);
         mem.writeData(123);
         expect(mem.content[10]).toBe(123);
@@ -73,6 +77,28 @@ describe('Memory', function() {
     });
 
     it('should set value only at write', function () {
+        var addressBusMock = {
+            registerReaderAndRead: function () {return 10}
+        };
+        var dataBusMock = {};
+        var context = [
+            {"address": undefined, 'value': undefined},
+            {"address": undefined, 'value': undefined},
+            {"address": undefined, 'value': undefined},
+            {"address": undefined, 'value': undefined},
+            {"address": undefined, 'value': undefined}
+        ];
+        var callback = function (x) {context = x;};
+        var mem = new Memory(callback, 'testMemory');
+        mem.setAddressBusConnection(addressBusMock, undefined);
+        mem.setDataBusConnection(dataBusMock, undefined);
+        mem.setAddressBusState(-1);
+        expect(mem.content[10]).toBeUndefined();
+        mem.writeData(123);
+        expect(mem.content[10]).toBe(123);
+    });
+
+    it('should ignore the data bus if it is not set', function () {
         var addressBusMock = {
             registerReaderAndRead: function () {return 10}
         };
@@ -97,6 +123,7 @@ describe('Memory', function() {
         var addressBusMock = {
             registerReaderAndRead: function () {return address}
         };
+        var dataBusMock = {};
         var context = [
             {"address": undefined, 'value': undefined},
             {"address": undefined, 'value': undefined},
@@ -107,6 +134,7 @@ describe('Memory', function() {
         var callback = function (x) {context = x;};
         var mem = new Memory(callback, 'testMemory');
         mem.setAddressBusConnection(addressBusMock, undefined);
+        mem.setDataBusConnection(dataBusMock, undefined);
         mem.setAddressBusState(-1);
         var data = [
             {address: 0, value: 55},

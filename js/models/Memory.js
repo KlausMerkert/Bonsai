@@ -102,12 +102,12 @@ Memory.prototype.writeData = function (data) {
 };
 
 Memory.prototype.setValue = function (data, writingBus) {
-    if (writingBus == this.dataBus.bus) {
+    if ((this.dataBus) && (this.dataBus.bus) && (writingBus == this.dataBus.bus)) {
         this.writeData(data)
     } else if (writingBus == this.addressBus.bus) {
-        if (this.dataBus.state == -1) {
+        if ((this.dataBus) && (this.dataBus.state == -1)) {
             this.content[data] = this.dataBus.bus.registerReaderAndRead(this);
-        } else if (this.dataBus.state == 1) {
+        } else if ((this.dataBus) && (this.dataBus.state == 1)) {
             this.dataBus.bus.write(this, this.content[data]);
         }
         if (!this.content[data]) {
