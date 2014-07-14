@@ -68,12 +68,7 @@ bonsaiApp.directive('memory', function ($interval) {
                     $scope.memory.setAddressBusState(0);
                     $scope.setDataContextToUndefined();
                 } else { // start reading
-                    try {
-                        var address = $scope.memory.setAddressBusState(-1);
-                        $scope.dataContext = $scope.memory.getDataWithContext(address);
-                    } catch (exception) {
-                        throw exception;
-                    }
+                    $scope.memory.setAddressBusState(-1);
                 }
             };
 

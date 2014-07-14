@@ -72,6 +72,26 @@ describe('Memory', function() {
         ]);
     });
 
+    it('should set value only at write', function () {
+        var addressBusMock = {
+            registerReaderAndRead: function () {return 10}
+        };
+        var context = [
+            {"address": undefined, 'value': undefined},
+            {"address": undefined, 'value': undefined},
+            {"address": undefined, 'value': undefined},
+            {"address": undefined, 'value': undefined},
+            {"address": undefined, 'value': undefined}
+        ];
+        var callback = function (x) {context = x;};
+        var mem = new Memory(callback, 'testMemory');
+        mem.setAddressBusConnection(addressBusMock, undefined);
+        mem.setAddressBusState(-1);
+        expect(mem.content[10]).toBeUndefined();
+        mem.writeData(123);
+        expect(mem.content[10]).toBe(123);
+    });
+
     it('should get data with context', function () {
         var address = 10;
         var addressBusMock = {

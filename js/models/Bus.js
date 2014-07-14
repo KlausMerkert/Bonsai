@@ -29,7 +29,7 @@ Bus.prototype.setValue = function (value) {
     }
     for (var i = 0; i < this.connections.length; i++) {
         if (this.readers.indexOf(this.connections[i]) >= 0) {
-            this.connections[i].setValue(this.value);
+            this.connections[i].setValue(this.value, this);
         }
     }
 };

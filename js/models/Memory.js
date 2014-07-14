@@ -101,7 +101,21 @@ Memory.prototype.writeData = function (data) {
     }
 };
 
-Memory.prototype.setValue = Memory.prototype.writeData;
+Memory.prototype.setValue = function (data, writingBus) {
+    if (writingBus == this.dataBus.bus) {
+        this.writeData(data)
+    } else if (writingBus == this.addressBus.bus) {
+        if (this.dataBus.state == -1) {
+            this.content[data] = this.dataBus.bus.registerReaderAndRead(this);
+        } else if (this.dataBus.state == 1) {
+            this.dataBus.bus.write(this, this.content[data]);
+        }
+        if (!this.content[data]) {
+            this.content[data] = undefined;
+        }
+        this.updateViewCallback(this.getDataWithContext(data));
+    }
+};
 
 Memory.prototype.readData = function () {
     if (this.addressBus) {
@@ -144,14 +158,13 @@ Memory.prototype.setAddressBusState = function (desiredState) {
         try {
             var address = this.addressBus.bus.registerReaderAndRead(this);
             this.addressBus.state = desiredState;
-            return address;
+            this.setValue(address, this.addressBus.bus);
         } catch (exception) {
             throw exception;
         }
     } else {
         this.addressBus.bus.unregisterReader(this);
         this.addressBus.state = desiredState;
-        return undefined;
     }
 };
 
@@ -196,6 +209,7 @@ Memory.prototype.setDataBusState = function (desiredState) {
             try {
                 this.content[address] = this.dataBus.bus.registerReaderAndRead(this);
                 this.dataBus.state = desiredState;
+                this.updateViewCallback(this.getDataWithContext(address));
             } catch (exception) {
                 if (wasWriting) {
                     this.dataBus.bus.write(this, this.value);
