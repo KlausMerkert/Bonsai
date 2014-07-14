@@ -331,19 +331,6 @@ BusRouter.prototype.getCountGrid = function (connections, dimensions) {
 BusRouter.prototype.constructConnectionParts = function (goodConnections, grid) {
     // get junction points
     var countGrid = this.getCountGrid(goodConnections, {x: grid.XCoordinates.length, y: grid.YCoordinates.length});
-
-    /*var countGrid = [];
-    for (var i = 0; i < grid.YCoordinates.length; i++) {
-        countGrid.push([]);
-        for (var j = 0; j < grid.YCoordinates.length; j++) {
-            countGrid[i].push(0);
-        }
-    }
-    for (i = 0; i < goodConnections.length; i++) {
-        countGrid[goodConnections[i].connection[0].i][goodConnections[i].connection[0].j]++;
-        countGrid[goodConnections[i].connection[1].i][goodConnections[i].connection[1].j]++;
-    }*/
-
     var junctionPoints = [];
     for (var i = 0; i < countGrid.length; i++) {
         for (var j = 0; j < countGrid[i].length; j++) {
@@ -352,7 +339,6 @@ BusRouter.prototype.constructConnectionParts = function (goodConnections, grid) 
             }
         }
     }
-    console.log("JunctionPoints: " + this.printList(junctionPoints, this.printPoint));
     // begin connections at the first junction point
     var remainingConnections = angular.copy(goodConnections);
     var connectionParts = [];
@@ -362,7 +348,7 @@ BusRouter.prototype.constructConnectionParts = function (goodConnections, grid) 
         for (j = 0; j < remainingConnections.length; j++) {
             if (angular.equals(point, remainingConnections[j].connection[0])) {
                 connectionParts.push([remainingConnections[j].connection]);
-                if (countGrid[remainingConnections[j].connection[1].i][remainingConnections[j].connection[1].j] == 2) {
+                if (countGrid[remainingConnections[j].connection[1].j][remainingConnections[j].connection[1].i] == 2) {
                     connectionsToFollow.push({
                         point: remainingConnections[j].connection[1],
                         part: connectionParts.length-1
@@ -371,7 +357,7 @@ BusRouter.prototype.constructConnectionParts = function (goodConnections, grid) 
                 remainingConnections.splice(j, 1);
             } else if (angular.equals(point, remainingConnections[j].connection[1])) {
                 connectionParts.push([remainingConnections[j].connection]);
-                if (countGrid[remainingConnections[j].connection[0].i][remainingConnections[j].connection[0].j] == 2) {
+                if (countGrid[remainingConnections[j].connection[0].j][remainingConnections[j].connection[0].i] == 2) {
                     connectionsToFollow.push({
                         point: remainingConnections[j].connection[0],
                         part: connectionParts.length-1
@@ -381,7 +367,6 @@ BusRouter.prototype.constructConnectionParts = function (goodConnections, grid) 
             }
         }
         while (connectionsToFollow.length > 0) {
-            console.log("Connections to follow: " + this.printConnectionsToFollow(connectionsToFollow));
             var reducedConnectionsToFollowLength = false;
             point = connectionsToFollow[0].point;
             for (j = 0; j < remainingConnections.length; j++) {
@@ -493,13 +478,10 @@ BusRouter.prototype.sortConnectionsToChain = function (connections, gridDimensio
         }
     }
     // traverse the chain
-    console.log("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
-    console.log(this.printPoint(startPoint));
     var position = startPoint;
     var chainedConnections = [];
     var remainingConnections = angular.copy(connections);
     while (remainingConnections.length > 0) {
-        console.log(this.printConnections(remainingConnections));
         var connectionFound = false;
         for (i = 0; i < remainingConnections.length; i++) {
             if ((remainingConnections[i].connection[0].i == position.i) &&
@@ -643,12 +625,10 @@ BusRouter.prototype.constructParts = function (connectionParts, grid) {
 BusRouter.prototype.updateVisibleParts = function () {
     // get all endpoints
     var endpoints = this.getEndpoints();
-    console.log("Endpoints: " + this.printCoordinatePointList(endpoints));
     // get the grid
     var grid = this.getGrid(endpoints);
     // recursively find all good connections in the grid
     var goodConnections = this.findGoodConnections([], grid, grid.indexEndpoints);
-    console.log("Good connections: " + this.printConnections(goodConnections));
     // combine connections to parts
     var connectionParts = this.constructConnectionParts(goodConnections, grid);
     // set the parts

@@ -100,11 +100,6 @@ describe('BusRouter', function(){
                 [{'i': 1, 'j': 1}, {'i': 1, 'j': 2}]
             ]
         ];
-        console.log(router.printList(connectionParts, function (x) {
-            return router.printList(x, function (conn) {
-                return router.printPoint(conn[0]) + "->" + router.printPoint(conn[1]);
-            });
-        }));
         expect(connectionParts).toEqual(expected);
     });
 
