@@ -9,10 +9,10 @@ BusRouter.prototype.printPoint = function (point) {
     return "(" + point.i + ", " + point.j + ")";
 };
 
-BusRouter.prototype.printPointList = function (pointList) {
+BusRouter.prototype.printList = function (list, printFunction) {
     var convertedPointList = [];
-    for (var i = 0; i < pointList.length; i++) {
-        convertedPointList.push(this.printPoint(pointList[i]));
+    for (var i = 0; i < list.length; i++) {
+        convertedPointList.push(printFunction(list[i]));
     }
     return "[" + convertedPointList.join(", ") + "]"
 };
@@ -352,7 +352,7 @@ BusRouter.prototype.constructConnectionParts = function (goodConnections, grid) 
             }
         }
     }
-    console.log("JunctionPoints: " + this.printPointList(junctionPoints));
+    console.log("JunctionPoints: " + this.printList(junctionPoints, this.printPoint));
     // begin connections at the first junction point
     var remainingConnections = angular.copy(goodConnections);
     var connectionParts = [];

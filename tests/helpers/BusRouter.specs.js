@@ -25,12 +25,12 @@ describe('BusRouter', function(){
 
     it('should be able to print point lists', function () {
         var router = new BusRouter([], undefined);
-        expect(router.printPointList([{'i': 3, 'j': 7}, {'i': 4, 'j': 5}, {'i': 1, 'j': 2}])).toEqual(
+        expect(router.printList([{'i': 3, 'j': 7}, {'i': 4, 'j': 5}, {'i': 1, 'j': 2}], router.printPoint)).toEqual(
             "[(3, 7), (4, 5), (1, 2)]"
         );
     });
 
-    it('should be able to print point lists', function () {
+    it('should be able to print coordinate point lists', function () {
         var router = new BusRouter([], undefined);
         expect(router.printCoordinatePointList([{'top': 3, 'left': 7}, {'top': 18, 'left': 4}, {'top': 1, 'left': 2}])).toEqual(
             "[(7, 3), (4, 18), (2, 1)]"
@@ -100,7 +100,11 @@ describe('BusRouter', function(){
                 [{'i': 1, 'j': 1}, {'i': 1, 'j': 2}]
             ]
         ];
-        console.log(connectionParts);
+        console.log(router.printList(connectionParts, function (x) {
+            return router.printList(x, function (conn) {
+                return router.printPoint(conn[0]) + "->" + router.printPoint(conn[1]);
+            });
+        }));
         expect(connectionParts).toEqual(expected);
     });
 
