@@ -117,7 +117,7 @@ bonsaiApp.directive('memory', function ($interval) {
             $scope.getConnectionPositions = function (bus) {
                 var positions = [];
                 if ($scope.memory.getAdressBus() === bus) {
-                    positions.push({top: $scope.top-1.2, left: $scope.left+2.08});
+                    positions.push({top: $scope.top-1.2, left: $scope.left+2.78});
                 }
                 if ($scope.memory.getDataBus() === bus) {
                     positions.push({top: $scope.top+7, left: $scope.left+7.58});

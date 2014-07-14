@@ -4,7 +4,7 @@
             <div ng-click="toggleAddressBusRead()"
                  class="connection toprow"
                  ng-class="{'read': memory.getAddressBusState() == -1, 'write': memory.getAddressBusState() == 1, 'grayback': memory.getAddressBusState() == 0}"
-                 style="left: 1.3em;">
+                 style="left: 2em;">
                 <div ng-show="memory.getAddressBusState() == 1"
                      style="position: relative; top: -0.1em; left: 0.01em;" class="unselectable">&uarr;</div>
                 <div ng-show="memory.getAddressBusState() == 0"
@@ -14,9 +14,9 @@
             </div>
             <div class="nospace toprow" style="position: absolute;">
                 <div class="busconnector busconnectortoprow"
-                     style="left: 1.63em;"></div>
+                     style="left: 2.33em;"></div>
                 <div class="wireconnector read wireconnectortoprowread"
-                     style="left: 2.19em;" ng-click="toggleAddressBusRead()"></div>
+                     style="left: 2.89em;" ng-click="toggleAddressBusRead()"></div>
             </div>
         </div>
         <div style="width: 0; height: 0; overflow: visible; display: inline-block; position: absolute;">
