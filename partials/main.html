@@ -2,6 +2,8 @@
     <h1>Bonsai</h1>
 
     <div class="components">
+        <controlwire wire="wire1a" wire-name="Draht 1 A"></controlwire>
+        <controlwire wire="wire1b" wire-name="Draht 1 B"></controlwire>
         <controlwire wire="wire1" wire-name="Draht 1"></controlwire>
         <controlwire wire="wire2" wire-name="Draht 2"></controlwire>
         <controlwire wire="wire3" wire-name="Draht 3"></controlwire>
@@ -9,6 +11,10 @@
 
         <bus bus="dataBus" bus-name="Datenbus" base="base" color="'rgb(0, 140, 0)'" top="5.75" left="22"></bus>
         <bus bus="addressBus" bus-name="Adressbus" base="base" color="'rgb(0, 0, 225)'" top="0.85" left="5"></bus>
+
+        <manualswitch wire="wire1a" switch-name="switch 1 A" value="0" top="1" left="34"></manualswitch>
+        <manualswitch wire="wire1b" switch-name="switch 1 B" value="0" top="2.5" left="34"></manualswitch>
+        <andgate in-a="wire1a" in-b="wire1b" out="wire1" top="1" left="30"></andgate>
 
         <memory memory-name="Datenspeicher" base="base" top="2" left="1">
             <addressgate bus="addressBus"></addressgate>
@@ -23,8 +29,7 @@
             <gate bus="dataBus" set-write="wire3" set-read="wire4"></gate>
         </register>
 
-        <manualswitch wire="wire1" switch-name="switch 1" value="0" top="1" left="32"></manualswitch>
-        <manualswitch wire="wire2" switch-name="switch 2" value="0" top="2.5" left="32"></manualswitch>
+        <manualswitch wire="wire2" switch-name="switch 2" value="0" top="3.5" left="32"></manualswitch>
         <led wire="wire2" value="0" top="4" left="30"></led>
         <manualswitch wire="wire3" switch-name="switch 3" value="0" top="6.5" left="32"></manualswitch>
         <manualswitch wire="wire4" switch-name="switch 4" value="0" top="5" left="32"></manualswitch>
