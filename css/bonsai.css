@@ -260,3 +260,11 @@ body {
     border-radius: 0.5em;
     border: 1px solid rgb(30, 30, 30);
 }
+
+.negationcircle {
+    position: absolute;
+    width: 0.4em;
+    height: 0.4em;
+    border-radius: 0.4em;
+    border: 1px solid rgb(0, 0, 0);
+}
