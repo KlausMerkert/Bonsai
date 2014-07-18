@@ -210,22 +210,22 @@ bonsaiApp.directive('register', function ($interval) {
                     if (writeWire) {
                         var writeConnector = new ReadingControlWireConnector(writeWire,
                             function (wire) {
-                            $scope.register.setToWrite(wire);
-                        },
+                                $scope.register.setToWrite(wire);
+                            },
                             function (wire) {
-                            $scope.register.setToDisconnected(wire);
-                        });
+                                $scope.register.setToDisconnected(wire);
+                            });
                         writeWire.connectToDirective(writeConnector, $scope.getWireConnectionPositions);
                     }
                     var readWire = connections[i].readWire;
                     if (readWire) {
                         var readConnector = new ReadingControlWireConnector(readWire,
                             function (wire) {
-                            $scope.register.setToRead(wire);
-                        },
+                                $scope.register.setToRead(wire);
+                            },
                             function (wire) {
-                            $scope.register.setToDisconnected(wire);
-                        });
+                                $scope.register.setToDisconnected(wire);
+                            });
                         readWire.connectToDirective(readConnector, $scope.getWireConnectionPositions);
                     }
                 }
