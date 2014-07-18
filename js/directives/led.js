@@ -8,7 +8,8 @@ bonsaiApp.directive('led', function ($interval) {
             wire: '=',
             value: '=',
             top: '=',
-            left: '='
+            left: '=',
+            ledName: '@'
         },
         controller: function ($scope) {
             $scope.data = $scope.value;
@@ -35,6 +36,12 @@ bonsaiApp.directive('led', function ($interval) {
             $scope.$watch('data', function(newValue, oldValue) {
                 if (newValue != oldValue) {
                     $scope.led.setValue(newValue);
+                }
+            });
+
+            attrs.$observe('ledName', function() {
+                if ($scope.ledName) {
+                    $scope.led.setName($scope.ledName);
                 }
             });
 
