@@ -1,9 +1,10 @@
 'use strict';
 
-function AndGate (outWire, value) {
+function AndGate (inWireA, inWireB, outWire) {
+    this.inWireA = inWireA;
+    this.inWireB = inWireB;
     this.outWire = outWire;
     this.outWire.setWriter(this);
-    this.value = value;
     this.name = "unnamed AND";
 }
 
@@ -15,6 +16,10 @@ AndGate.prototype.setName = function (name) {
     this.name = name;
 };
 
-AndGate.prototype.setValue = function (value) {
-    this.value = value;
+AndGate.prototype.setValue = function () {
+    if ((this.inWireA.isActive()) && (this.inWireB.isActive())) {
+        this.outWire.write(this, 1);
+    } else {
+        this.outWire.write(this, 0);
+    }
 };

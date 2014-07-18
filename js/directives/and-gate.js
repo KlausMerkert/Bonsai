@@ -9,15 +9,25 @@ bonsaiApp.directive('andgate', function ($interval) {
             inB: '=',
             out: '=',
             top: '=',
-            left: '='
+            left: '=',
+            gateName: '@'
         },
         controller: function ($scope) {
-            $scope.logicGate = new AndGate($scope.out);
-            $scope.topCSS = $scope.top + 'em';
+            $scope.logicGate = new AndGate($scope.inA, $scope.inB, $scope.out);
+
+            $scope.topCSS = ($scope.top - 0.17) + 'em';
             $scope.leftCSS = $scope.left + 'em';
 
-            $scope.getConnectionPositions = function () {
-                return [{top: $scope.top, left: $scope.left}];
+            $scope.getConnectionPositions = function (wire) {
+                if (wire === $scope.inA) {
+                    return [{top: $scope.top, left: ($scope.left + 0.87)}];
+                } else if (wire === $scope.inB) {
+                    return [{top: ($scope.top + 0.7), left: ($scope.left + 0.87)}];
+                } else if (wire === $scope.out) {
+                    return [{top: ($scope.top + 0.4), left: ($scope.left - 0.14)}];
+                } else {
+                    console.log("This Wire is not connected: " + wire.getName());
+                }
             };
 
             // We have to wait for a very short time to enroll to the buses
@@ -26,6 +36,15 @@ bonsaiApp.directive('andgate', function ($interval) {
                 $scope.inA.connectToDirective($scope.logicGate, $scope.getConnectionPositions);
                 $scope.inB.connectToDirective($scope.logicGate, $scope.getConnectionPositions);
             }, 1, 1);
+        },
+        link: function ($scope, element, attrs) {
+            attrs.$observe('gateName', function() {
+                if ($scope.gateName) {
+                    $scope.logicGate.setName($scope.gateName);
+                }
+            });
+
+            $scope.logicGate.getPositions = $scope.getConnectionPositions;
         },
         templateUrl: 'partials/component_AndGate.html'
     };
