@@ -8,6 +8,7 @@
         <controlwire wire="wire2" wire-name="Draht 2"></controlwire>
         <controlwire wire="wire3" wire-name="Draht 3"></controlwire>
         <controlwire wire="wire4" wire-name="Draht 4"></controlwire>
+        <controlwire wire="wire5" wire-name="CMP Draht"></controlwire>
 
         <bus bus="dataBus" bus-name="Datenbus" base="base" color="'rgb(0, 140, 0)'" top="5.75" left="22"></bus>
         <bus bus="addressBus" bus-name="Adressbus" base="base" color="'rgb(0, 0, 225)'" top="0.85" left="5"></bus>
@@ -15,6 +16,9 @@
         <manualswitch wire="wire1a" switch-name="switch 1 A" value="0" top="1" left="34"></manualswitch>
         <manualswitch wire="wire1b" switch-name="switch 1 B" value="0" top="2.5" left="34"></manualswitch>
         <norgate in-a="wire1a" in-b="wire1b" out="wire1" top="1" left="30" gate-name="OR 1"></norgate>
+
+        <comparetozero bus="addressBus" wire="wire5" comp-name="CMP1" left="13" top="2.3"></comparetozero>
+        <led wire="wire5" led-name="CmpLed" left="13.03" top="5" value="0"></led>
 
         <memory memory-name="Datenspeicher" base="base" top="2" left="1">
             <addressgate bus="addressBus"></addressgate>
