@@ -14,6 +14,7 @@ bonsaiApp.controller('bonsaiCpuCtrl',
         $scope.wire3 = new ControlWire();
         $scope.wire4 = new ControlWire();
         $scope.wire5 = new ControlWire();
+        $scope.wire6 = new ControlWire();
 
         $scope.errors = [];
         $scope.$on('error', function (event, message) {

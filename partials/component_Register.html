@@ -21,6 +21,18 @@
                      style="left: 2.19em;" ng-click="toggleRead(connection)"></div>
             </div>
         </div>
+        <div style="width: 0; height: 0; overflow: visible; display: inline-block; position: absolute;">
+            <div class="wireconnector grayback" style="left: 3.6em; top: 0.1em;"
+                 ng-click="inc()"></div>
+            <div class="wireconnector grayback" style="left: 3.6em; top: 0.7em;"
+                 ng-click="dec()"></div>
+            <div style="position: absolute; left: 3.25em; top: -0.44em;">
+                <span style="font-size: 50%;">+</span>
+            </div>
+            <div style="position: absolute; left: 3.3em; top: 0.1em;">
+                <span style="font-size: 60%;">-</span>
+            </div>
+        </div>
         <input type="text" ng-model="data" ng-readonly="register.isReader()" />
         <div style="width: 0; height: 0; display: inline-block; position: absolute;" ng-transclude></div>
     </div>

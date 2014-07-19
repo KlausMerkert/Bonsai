@@ -9,7 +9,9 @@ bonsaiApp.directive('register', function ($interval) {
             registerName: '@',
             base: '=',
             top: '=',
-            left: '='
+            left: '=',
+            incWire: '=',
+            decWire: '='
         },
         controller: function ($scope, $filter) {
             $scope.data = $scope.value;
@@ -31,7 +33,12 @@ bonsaiApp.directive('register', function ($interval) {
                 }
             };
 
-            $scope.register = new Register($scope.dataChangeCallback, $scope.registerName, $scope.data);
+            $scope.register = new Register(
+                $scope.dataChangeCallback,
+                $scope.registerName,
+                $scope.data,
+                $scope.incWire,
+                $scope.decWire);
             $scope.topCSS = $scope.top + 'em';
             $scope.leftCSS = $scope.left + 'em';
 
@@ -160,6 +167,14 @@ bonsaiApp.directive('register', function ($interval) {
                 }
             };
 
+            $scope.inc = function () {
+                $scope.register.inc();
+            };
+
+            $scope.dec = function () {
+                $scope.register.dec();
+            };
+
             $scope.getConnectionPositions = function (bus) {
                 var positions = [];
                 var connections = $scope.register.getBuses();
@@ -193,6 +208,12 @@ bonsaiApp.directive('register', function ($interval) {
                             positions.push({top: $scope.top+2.22, left: $scope.left+2.68});
                         }
                     }
+                }
+                if (($scope.register.incWire) && ($scope.register.incWire === wire)) {
+                    positions.push({top: $scope.top+0.6, left: $scope.left+4.15});
+                }
+                if (($scope.register.decWire) && ($scope.register.decWire === wire)) {
+                    positions.push({top: $scope.top+1.2, left: $scope.left+4.15});
                 }
                 return positions;
             };
@@ -228,6 +249,26 @@ bonsaiApp.directive('register', function ($interval) {
                             });
                         readWire.connectToDirective(readConnector, $scope.getWireConnectionPositions);
                     }
+                }
+                if ($scope.incWire) {
+                    var incConnector = new ReadingControlWireConnector($scope.incWire,
+                            function (wire) {
+                                if (wire === $scope.incWire) {
+                                    $scope.register.inc(wire);
+                                }
+                            },
+                            function (wire) {});
+                    $scope.incWire.connectToDirective(incConnector, $scope.getWireConnectionPositions);
+                }
+                if ($scope.decWire) {
+                    var decConnector = new ReadingControlWireConnector($scope.decWire,
+                            function (wire) {
+                                if (wire === $scope.decWire) {
+                                    $scope.register.dec(wire);
+                                }
+                            },
+                            function (wire) {});
+                    $scope.decWire.connectToDirective(decConnector, $scope.getWireConnectionPositions);
                 }
             }, 1, 1);
         },

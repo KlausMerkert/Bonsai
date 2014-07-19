@@ -9,6 +9,7 @@
         <controlwire wire="wire3" wire-name="Draht 3"></controlwire>
         <controlwire wire="wire4" wire-name="Draht 4"></controlwire>
         <controlwire wire="wire5" wire-name="CMP Draht"></controlwire>
+        <controlwire wire="wire6" wire-name="Inc Draht"></controlwire>
 
         <bus bus="dataBus" bus-name="Datenbus" base="base" color="'rgb(0, 140, 0)'" top="5.75" left="22"></bus>
         <bus bus="addressBus" bus-name="Adressbus" base="base" color="'rgb(0, 0, 225)'" top="0.85" left="5"></bus>
@@ -24,7 +25,8 @@
             <addressgate bus="addressBus"></addressgate>
             <datagate bus="dataBus"></datagate>
         </memory>
-        <register value="10" register-name="Register B" base="base" top="4" left="18">
+        <manualswitch wire="wire6" switch-name="Inc switch" value="0" top="4" left="23"></manualswitch>
+        <register value="10" register-name="Register B" base="base" top="4" left="15" inc-wire="wire6">
             <gate bus="addressBus"></gate>
             <gate bus="dataBus"></gate>
         </register>
