@@ -42,9 +42,11 @@ ControlWire.prototype.setWriter = function (writer) {
 
 ControlWire.prototype.write = function (writer, value) {
     if ((writer === this.writer) && (this.writer)) {
-        this.setValue(value);
-        for (var i = 0; i < this.readers.length; i++) {
-            this.readers[i].setValue(this.value);
+        if (this.value != value) {
+            this.setValue(value);
+            for (var i = 0; i < this.readers.length; i++) {
+                this.readers[i].setValue(this.value);
+            }
         }
     } else {
         throw ControlWireWrongWriterException(
