@@ -362,10 +362,12 @@ a:hover {
 textarea {
     min-height: 18em;
     min-width: 25em;
+    border: 1px solid rgb(170, 170, 170);
+    padding: 1px;
 }
 
 .line-number {
     font-family: monospace;
-    width: 1.5em;
+    width: 1.4em;
     text-align: right;
 }

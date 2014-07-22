@@ -26,31 +26,39 @@ bonsaiApp.controller('bonsaiCpuCtrl',
         $scope.splitLines = function (string) {
             return string.replace(/\r\n|\n\r|\n|\r/g,"\n").split("\n")
         };
-        $scope.readFile = function (input, editor) {
-            console.log(input);
-            var file = (input.srcElement || input.target).files[0];
-            //fileReader.readAsDataUrl($scope.file, $scope)
-            //          .then(function(result) {
-            //              $scope.imageSrc = result;
-            //          });
-
-            //var file = files[0];
+        $scope.readFile = function (editorNumber) {
+            var input = document.getElementById('filename-' + $scope.editors[editorNumber].name);
+            var file = input.files[0];
             var reader = new FileReader();
             reader.addEventListener("loadend", function() {
-                editor.content = reader.result;
-                $scope.updateSaveLink(editor);
+                $scope.$apply(function () {
+                    $scope.editors[editorNumber].content = reader.result;
+                    $scope.editors[editorNumber].fileName = file.name;
+                });
             });
             console.log(file);
-            console.log(typeof file);
             reader.readAsText(file);
         };
-        $scope.updateSaveLink = function (editor) {
-            var blob = new Blob([editor.content], {type : 'text/plain'});
-            editor.saveLink = URL.createObjectURL(blob);
+        $scope.saveFile = function (editorNumber) {
+            var url;
+            var blob = new Blob([$scope.editors[editorNumber].content], {type : 'application/bonsai'});
+            if (window.webkitURL) {
+                url = window.webkitURL.createObjectURL(blob);
+            } else {
+                url = window.URL.createObjectURL(blob);
+            }
+            // initiate download by adding a <a> element and invoking a click on it
+            var downloadLink = document.createElement("a");
+            downloadLink.href = url;
+            if ($scope.editors[editorNumber].fileName) {
+                downloadLink.download = $scope.editors[editorNumber].fileName
+            } else {
+                downloadLink.download = $scope.editors[editorNumber].name + ".bonsai";
+            }
+            document.body.appendChild(downloadLink);
+            downloadLink.click();
+            document.body.removeChild(downloadLink);
         };
-        for (var i = 0; i < $scope.editors.length; i++) {
-            $scope.updateSaveLink($scope.editors[i]);
-        }
 
         $scope.dataBus = new Bus();
         $scope.addressBus = new Bus();

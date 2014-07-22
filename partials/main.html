@@ -54,14 +54,18 @@
     <div class="editor pane" ng-repeat="editor in editors"
          ng-show="selectedEditor === $index + 1" style="position: relative;">
         <label for="content-{{editor.name}}">{{ editor.name }}</label>
-        <a ng-href="editor.saveLink"><button type="button">Als Datei speichern</button></a>
+        <button type="button" ng-click="saveFile($index)">Als Datei speichern</button>
         <input type="file" id="filename-{{editor.name}}"
                ng-model="editor.filename"
-               ng-change="readFile(this, editor)" />
-        <div style="position: absolute; top: 1.7em;">
-            <div ng-repeat="line in splitLines(editor.content)" class="line-number">{{ $index }}</div>
+               ng-change="readFile($index)" />
+        <div style="position: absolute; top: 28px; overflow: hidden; ">
+            <div style="position: relative; top: 0; height: 15em;">
+                <div ng-repeat="line in splitLines(editor.content) track by $index"
+                     class="line-number">{{ $index }}</div>
+            </div>
         </div>
-        <textarea style="position: absolute; top: 1.7em; left: 1.5em;"
+        <textarea style="position: absolute; top: 25px; left: 1.5em; white-space: nowrap; overflow: auto;"
+                  onscroll="this.previousSibling.previousSibling.firstChild.nextSibling.style.top = -this.scrollTop + 'px'"
                   name="content-{{editor.name}}" id="content-{{editor.name}}">{{ editor.content }}</textarea>
     </div>
 
