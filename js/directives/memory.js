@@ -8,7 +8,8 @@ bonsaiApp.directive('memory', function ($interval) {
             memoryName: '@',
             base: '=',
             top: '=',
-            left: '='
+            left: '=',
+            content: '='
         },
         controller: function ($scope, $filter) {
             if (parseInt($scope.base) in {2:true, 8:true, 10:true, 16:true}) {
@@ -36,7 +37,20 @@ bonsaiApp.directive('memory', function ($interval) {
                 $scope.dataContext = dataContext;
             };
 
-            $scope.memory = new Memory($scope.dataChangeCallback, $scope.registerName);
+            $scope.contentChangeCallback = function (content) {
+                // We have to convert the associative array from the Memory to a multi line string.
+                var lines = [''];
+                var keys = Object.keys(content);
+                for (var i = 0; i < keys.length; i++) {
+                    while (parseInt(keys[i]) >= lines.length) {
+                        lines.push('');
+                    }
+                    lines[parseInt(keys[i])] = content[keys[i]];
+                }
+                $scope.content = lines.join("\n");
+            };
+
+            $scope.memory = new Memory($scope.dataChangeCallback, $scope.contentChangeCallback, $scope.registerName);
             $scope.topCSS = $scope.top + 'em';
             $scope.leftCSS = $scope.left + 'em';
             $scope.addressBusColor = 'rgb(122, 0, 0)';
@@ -60,6 +74,22 @@ bonsaiApp.directive('memory', function ($interval) {
             attrs.$observe('memoryName', function() {
                 if ($scope.memoryName) {
                     $scope.memory.setName($scope.memoryName);
+                }
+            });
+
+            attrs.$observe('content', function () {
+                if ($scope.content) {
+                    // We have to convert the multi line string to an associative array.
+                    var lines = $scope.content.replace(/\r\n|\n\r|\n|\r/g,"\n").split("\n");
+                    var arrayContent = {};
+                    for (var i = 0; i < lines.length; i++) {
+                        if (lines[i].length) {
+                            arrayContent[i] = parseInt(lines[i]);
+                        } else {
+                            arrayContent[i] = undefined;
+                        }
+                    }
+                    $scope.memory.setContent(arrayContent)
                 }
             });
 

@@ -1,7 +1,8 @@
 'use strict';
 
-function Memory(updateViewCallback, name) {
+function Memory(updateViewCallback, updateContentCallback, name) {
     this.updateViewCallback = updateViewCallback;
+    this.updateContentCallback = updateContentCallback;
     this.name = name;
     this.content = {};
     this.addressBus = undefined;
@@ -44,6 +45,19 @@ Memory.prototype.setDataBusConnection = function (bus, writeWire, readWire) {
     };
 };
 
+Memory.prototype.setContent = function (newContent) {
+    this.content = newContent;
+    this.updateContentCallback(this.content);
+    /* Please be aware that since we have no address here we cannot update
+     * the data context in all cases. But we try. */
+    if (this.addressBus) {
+        if (this.addressBus.state == -1) {
+            var address = this.addressBus.bus.registerReaderAndRead(this);
+            this.updateViewCallback(this.getDataWithContext(address));
+        }
+    }
+};
+
 Memory.prototype.getDataWithContext = function (address) {
     var context = [
         {"address": undefined, 'value': undefined},
@@ -84,6 +98,7 @@ Memory.prototype.writeData = function (data) {
             var address = this.addressBus.bus.registerReaderAndRead(this);
             this.content[address] = data;
             this.updateViewCallback(this.getDataWithContext(address));
+            this.updateContentCallback(this.content);
         } else {
             throw InactiveAdressBusConnection(
                 "Memory " + this.name + ": The address bus connection is not set to reading. " +
@@ -114,6 +129,7 @@ Memory.prototype.setValue = function (data, writingBus) {
             this.content[data] = undefined;
         }
         this.updateViewCallback(this.getDataWithContext(data));
+        this.updateContentCallback(this.content);
     }
 };
 
@@ -210,6 +226,7 @@ Memory.prototype.setDataBusState = function (desiredState) {
                 this.content[address] = this.dataBus.bus.registerReaderAndRead(this);
                 this.dataBus.state = desiredState;
                 this.updateViewCallback(this.getDataWithContext(address));
+                this.updateContentCallback(this.content);
             } catch (exception) {
                 if (wasWriting) {
                     this.dataBus.bus.write(this, this.value);
