@@ -77,7 +77,7 @@ bonsaiApp.directive('memory', function ($interval) {
                 }
             });
 
-            attrs.$observe('content', function () {
+            $scope.$watch('content', function () {
                 if ($scope.content) {
                     // We have to convert the multi line string to an associative array.
                     var lines = $scope.content.replace(/\r\n|\n\r|\n|\r/g,"\n").split("\n");
