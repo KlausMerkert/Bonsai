@@ -44,6 +44,12 @@ bonsaiApp.controller('bonsaiCpuCtrl',
                     'value': 0,
                     'top': 10,
                     'left': 1
+                }, {
+                    'wireId': 'testBus',
+                    'name': 'Heinrich',
+                    'value': 0,
+                    'top': 11,
+                    'left': 2
                 }
             ]
         };

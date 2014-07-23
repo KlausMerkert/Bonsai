@@ -1,4 +1,4 @@
 <div class="component nospace" ng-style="{'top': topCSS, 'left': leftCSS}">
-    <div ng-if="!value" class="led" style="background-color: rgba(200, 200, 200, 30);"></div>
-    <div ng-if="value" class="led" style="background-color: rgb(0, 255, 0);"></div>
+    <div class="led" ng-style="{'background-color': color, 'cursor': cursor}"
+         ng-mousedown="activate()" ng-mouseup="deactivate()"></div>
 </div>
