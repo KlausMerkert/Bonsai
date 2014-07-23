@@ -3,7 +3,6 @@
 function ManualSwitch (updateViewCallback, wire, value) {
     this.updateViewCallback = updateViewCallback;
     this.wire = wire;
-    this.wire.setWriter(this);
     this.value = value;
     this.name = "unnamed manual switch";
 }
@@ -19,10 +18,12 @@ ManualSwitch.prototype.setName = function (name) {
 ManualSwitch.prototype.toggle = function () {
     if (!this.value) {
         this.value = 1;
+        this.wire.write(this, this.value);
     } else {
         this.value = 0;
+        this.wire.write(this, this.value);
+        this.wire.stopWriting(this);
     }
-    this.wire.write(this, this.value);
     this.updateViewCallback(this.value);
 };
 

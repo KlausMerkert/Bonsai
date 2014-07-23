@@ -20,39 +20,42 @@
         <controlwire wire="wire3" wire-name="Draht 3"></controlwire>
         <controlwire wire="wire4" wire-name="Draht 4"></controlwire>
         <controlwire wire="wire5" wire-name="CMP Draht"></controlwire>
-        <controlwire wire="wire6" wire-name="Inc Draht"></controlwire>
+        <controlwireI wire="wire6" wire-name="Inc Draht"></controlwireI>
 
         <bus bus="dataBus" bus-name="Datenbus" max-value="255" base="base"
              color="'rgb(0, 140, 0)'" top="5.75" left="22"></bus>
         <bus bus="addressBus" bus-name="Adressbus" max-value="255" base="base"
              color="'rgb(0, 0, 225)'" top="0.85" left="5"></bus>
-        <bus bus="testBus" bus-name="Testbus"></bus>
 
-        <manualswitch wire="wire1a" switch-name="switch 1 A" value="0" top="1" left="34"></manualswitch>
-        <manualswitch wire="wire1b" switch-name="switch 1 B" value="0" top="2.5" left="34"></manualswitch>
-        <norgate in-a="wire1a" in-b="wire1b" out="wire1" top="1" left="30" gate-name="OR 1"></norgate>
+        <bus bus="testBus" bus-name="Testbus"></bus>
+        <manualswitch wire="testBus" switch-name="Lena" value="0" top="10" left="5"></manualswitch>
+        <led wire="testBus" led-name="Hugo" value="0" top="10" left="1"></led>
+
+        <manualswitchI wire="wire1a" switch-name="switch 1 A" value="0" top="1" left="34"></manualswitchI>
+        <manualswitchI wire="wire1b" switch-name="switch 1 B" value="0" top="2.5" left="34"></manualswitchI>
+        <norgateI in-a="wire1a" in-b="wire1b" out="wire1" top="1" left="30" gate-name="OR 1"></norgateI>
 
         <comparetozero bus="addressBus" wire="wire5" comp-name="CMP1" left="13" top="2.3"></comparetozero>
-        <led wire="wire5" led-name="CmpLed" left="13.03" top="5" value="0"></led>
+        <ledI wire="wire5" led-name="CmpLed" left="13.03" top="5" value="0"></ledI>
 
         <memory memory-name="Datenspeicher" base="base" top="2" left="1" content="editors[0].content">
             <addressgate bus="addressBus"></addressgate>
             <datagate bus="dataBus"></datagate>
         </memory>
-        <manualswitch wire="wire6" switch-name="Inc switch" value="0" top="4" left="23"></manualswitch>
-        <register value="10" register-name="Register B" base="base" top="4" left="15" inc-wire="wire6">
+        <manualswitchI wire="wire6" switch-name="Inc switch" value="0" top="4" left="23"></manualswitchI>
+        <register value="10" register-name="Register B" base="base" top="4" left="15">
             <gate bus="addressBus"></gate>
             <gate bus="dataBus"></gate>
         </register>
         <register value="1" register-name="Register C" base="base" top="3" left="25">
-            <gate bus="addressBus" set-write="wire1" set-read="wire2"></gate>
-            <gate bus="dataBus" set-write="wire3" set-read="wire4"></gate>
+            <gate bus="addressBus"></gate>
+            <gate bus="dataBus"></gate>
         </register>
 
-        <manualswitch wire="wire2" switch-name="switch 2" value="0" top="3.5" left="32"></manualswitch>
-        <led wire="wire2" value="0" top="4" left="30" led-name="testled"></led>
-        <manualswitch wire="wire3" switch-name="switch 3" value="0" top="6.5" left="32"></manualswitch>
-        <manualswitch wire="wire4" switch-name="switch 4" value="0" top="5" left="32"></manualswitch>
+        <manualswitchI wire="wire2" switch-name="switch 2" value="0" top="3.5" left="32"></manualswitchI>
+        <ledI wire="wire2" value="0" top="4" left="30" led-name="testled"></ledI>
+        <manualswitchI wire="wire3" switch-name="switch 3" value="0" top="6.5" left="32"></manualswitchI>
+        <manualswitchI wire="wire4" switch-name="switch 4" value="0" top="5" left="32"></manualswitchI>
     </div>
     <div class="editor pane" ng-repeat="editor in editors"
          ng-show="selectedEditor === $index + 1" style="position: relative;">

@@ -19,18 +19,6 @@ bonsaiApp.directive('led', function ($interval) {
             };
 
             $scope.led = new Led($scope.dataChangeCallback, $scope.data);
-            $scope.topCSS = ($scope.top - 0.27) + 'em';
-            $scope.leftCSS = ($scope.left - 0.27) + 'em';
-
-            $scope.getConnectionPositions = function () {
-                return [{top: $scope.top, left: $scope.left}];
-            };
-
-            // We have to wait for a very short time to enroll to the buses
-            // because the wire needs to be fully initialized.
-            $interval(function () {
-                $scope.wire.connectToDirective($scope.led, $scope.getConnectionPositions);
-            }, 1, 1);
         },
         link: function ($scope, element, attrs) {
             $scope.$watch('data', function(newValue, oldValue) {
@@ -45,9 +33,30 @@ bonsaiApp.directive('led', function ($interval) {
                 }
             });
 
+            $scope.$watch('top', function () {
+                $scope.topCSS = ($scope.top - 0.27) + 'em';
+            });
+            $scope.$watch('left', function () {
+                $scope.leftCSS = ($scope.left - 0.27) + 'em';
+            });
+
             $scope.setValue = function (value) {
                 $scope.led.setValue(value);
             };
+
+            $scope.getConnectionPositions = function () {
+                return [{top: $scope.top, left: $scope.left}];
+            };
+
+            // We have to wait for a very short time to enroll to the buses
+            // because the wire needs to be fully initialized.
+            $interval(function () {
+                $scope.wire.enrollToDirective(
+                    $scope.led,
+                    $scope.getConnectionPositions
+                );
+                $scope.wire.registerReaderAndRead($scope.led);
+            }, 1, 1);
         },
         templateUrl: 'partials/component_Led.html'
     };
