@@ -28,8 +28,12 @@ bonsaiApp.directive('bus', function () {
                 }
             });
 
-            $scope.topCSS = $scope.top + 'em';
-            $scope.leftCSS = $scope.left + 'em';
+            $scope.$watch('top', function () {
+                $scope.topCSS = $scope.top + 'em';
+            });
+            $scope.$watch('left', function () {
+                $scope.leftCSS = $scope.left + 'em';
+            });
 
             $scope.busRouter = new BusRouter($scope.localBus.getBuses(), $scope.localBus);
 
