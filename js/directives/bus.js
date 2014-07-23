@@ -14,17 +14,20 @@ bonsaiApp.directive('bus', function () {
         link: function ($scope, element, attrs) {
             $scope.localBus = $scope.bus || {};
 
-            attrs.$observe('busName', function() {
+            attrs.$observe('busName', function () {
                 if ($scope.busName) {
                     $scope.localBus.setName($scope.busName);
                 }
             });
 
-            if (parseInt($scope.base) in {2:true, 8:true, 10:true, 16:true}) {
-                $scope.displayBase = $scope.base;
-            } else {
-                $scope.displayBase = 10;
-            }
+            $scope.$watch('base', function () {
+                if (parseInt($scope.base) in {2:true, 8:true, 10:true, 16:true}) {
+                    $scope.displayBase = $scope.base;
+                } else {
+                    $scope.displayBase = 10;
+                }
+            });
+
             $scope.topCSS = $scope.top + 'em';
             $scope.leftCSS = $scope.left + 'em';
 
