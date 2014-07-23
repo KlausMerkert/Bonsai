@@ -54,28 +54,32 @@ Bus.prototype.getBuses = function () {
 
 Bus.prototype.setValue = function (value) {
     var parsedValue = parseInt(value);
-    if (isNaN(parsedValue)) {
+    if ((isNaN(parsedValue)) && (value !== undefined)) {
         throw SuppliedValueIsNotANumber(
             this.name + ": The value you supplied (" + value + ") is not a Number.",
             this.name,
             value
         )
     }
-    if (parsedValue < 0) {
+    if ((parsedValue < 0) && (value !== undefined)) {
         throw SuppliedValueIsNegative(
             this.name + ": The value you supplied (" + parsedValue + ") is negative. Only positive values are allowed.",
             this.name,
             parsedValue
         )
     }
-    if (parsedValue > this.getMax()) {
+    if ((parsedValue > this.getMax()) && (value !== undefined)) {
         throw SuppliedValueIsTooBig(
             this.name + ": The value you supplied (" + parsedValue + ") is too big. The maximum is " + this.getMax(),
             this.name,
             this.getMax()
         )
     }
-    this.value = parsedValue;
+    if (isNaN(parsedValue)) {
+        this.value = undefined;
+    } else {
+        this.value = parsedValue;
+    }
     if (this.updateViewCallback) {
         this.updateViewCallback(this.value);
     }

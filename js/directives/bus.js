@@ -37,8 +37,20 @@ bonsaiApp.directive('bus', function () {
             });
 
             $scope.$watch('maxValue', function () {
-                $scope.localBus.setMax($scope.maxValue);
+                if ($scope.maxValue) {
+                    $scope.localBus.setMax($scope.maxValue);
+                } else {
+                    $scope.localBus.setMax(1);
+                }
             });
+
+            $scope.displayWidth = function () {
+                if ($scope.localBus.getWidth() > 1) {
+                    return '2px';
+                } else {
+                    return '1px';
+                }
+            };
 
             $scope.busRouter = new BusRouter($scope.localBus.getBuses(), $scope.localBus);
 
@@ -48,8 +60,8 @@ bonsaiApp.directive('bus', function () {
                 $scope.value = newValue;
             });
 
-            $scope.$watch('value', function(newValue, oldValue) {
-                $scope.localBus.value = newValue;
+            $scope.$watch('value', function(newValue) {
+                $scope.localBus.setValue(newValue);
             });
 
             $scope.updateVisibleParts = function() {
@@ -68,7 +80,11 @@ bonsaiApp.directive('bus', function () {
             };
 
             $scope.localBus.getColor = function () {
-                return $scope.color;
+                if ($scope.color) {
+                    return $scope.color;
+                } else {
+                    return 'rgba(200, 200, 200, 0.6)';
+                }
             };
         },
         templateUrl: 'partials/component_Bus.html'
