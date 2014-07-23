@@ -5,6 +5,7 @@ bonsaiApp.directive('bus', function () {
         restrict: 'E',
         scope: {
             bus: '=',
+            maxValue: '=',
             busName: '@',
             base: '=',
             color: '=',
@@ -33,6 +34,10 @@ bonsaiApp.directive('bus', function () {
             });
             $scope.$watch('left', function () {
                 $scope.leftCSS = $scope.left + 'em';
+            });
+
+            $scope.$watch('maxValue', function () {
+                $scope.localBus.setMax($scope.maxValue);
             });
 
             $scope.busRouter = new BusRouter($scope.localBus.getBuses(), $scope.localBus);

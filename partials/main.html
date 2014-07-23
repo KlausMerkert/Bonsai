@@ -22,8 +22,10 @@
         <controlwire wire="wire5" wire-name="CMP Draht"></controlwire>
         <controlwire wire="wire6" wire-name="Inc Draht"></controlwire>
 
-        <bus bus="dataBus" bus-name="Datenbus" base="base" color="'rgb(0, 140, 0)'" top="5.75" left="22"></bus>
-        <bus bus="addressBus" bus-name="Adressbus" base="base" color="'rgb(0, 0, 225)'" top="0.85" left="5"></bus>
+        <bus bus="dataBus" bus-name="Datenbus" max-value="255" base="base"
+             color="'rgb(0, 140, 0)'" top="5.75" left="22"></bus>
+        <bus bus="addressBus" bus-name="Adressbus" max-value="255" base="base"
+             color="'rgb(0, 0, 225)'" top="0.85" left="5"></bus>
 
         <manualswitch wire="wire1a" switch-name="switch 1 A" value="0" top="1" left="34"></manualswitch>
         <manualswitch wire="wire1b" switch-name="switch 1 B" value="0" top="2.5" left="34"></manualswitch>

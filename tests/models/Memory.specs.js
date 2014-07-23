@@ -20,14 +20,14 @@ describe('Memory', function() {
     it('should be createable', function () {
         var val = 0;
         var callback = function (x) {val = x;};
-        var mem = new Memory(callback, 'testMemory');
+        var mem = new Memory(callback, undefined, 'testMemory');
         expect(mem.name).toBe('testMemory');
     });
 
     it('should return and set its name', function () {
         var val = 0;
         var callback = function (x) {val = x;};
-        var mem = new Memory(callback, 'testMemory');
+        var mem = new Memory(callback, undefined, 'testMemory');
         expect(mem.getName()).toBe('testMemory');
         mem.setName('dudeldi');
         expect(mem.getName()).toBe('dudeldi');
@@ -40,7 +40,9 @@ describe('Memory', function() {
         var dataBusMock = {};
         var val = 0;
         var callback = function (x) {val = x;};
-        var mem = new Memory(callback, 'testMemory');
+        var content = {};
+        var contentCallback = function (x) {content = x;};
+        var mem = new Memory(callback, contentCallback, 'testMemory');
         mem.setAddressBusConnection(addressBusMock, undefined);
         mem.setDataBusConnection(dataBusMock, undefined);
         mem.setAddressBusState(-1);
@@ -61,7 +63,9 @@ describe('Memory', function() {
             {"address": undefined, 'value': undefined}
         ];
         var callback = function (x) {context = x;};
-        var mem = new Memory(callback, 'testMemory');
+        var content = {};
+        var contentCallback = function (x) {content = x;};
+        var mem = new Memory(callback, contentCallback, 'testMemory');
         mem.setAddressBusConnection(addressBusMock, undefined);
         mem.setDataBusConnection(dataBusMock, undefined);
         mem.setAddressBusState(-1);
@@ -89,7 +93,9 @@ describe('Memory', function() {
             {"address": undefined, 'value': undefined}
         ];
         var callback = function (x) {context = x;};
-        var mem = new Memory(callback, 'testMemory');
+        var content = {};
+        var contentCallback = function (x) {content = x;};
+        var mem = new Memory(callback, contentCallback, 'testMemory');
         mem.setAddressBusConnection(addressBusMock, undefined);
         mem.setDataBusConnection(dataBusMock, undefined);
         mem.setAddressBusState(-1);
@@ -110,7 +116,9 @@ describe('Memory', function() {
             {"address": undefined, 'value': undefined}
         ];
         var callback = function (x) {context = x;};
-        var mem = new Memory(callback, 'testMemory');
+        var content = {};
+        var contentCallback = function (x) {content = x;};
+        var mem = new Memory(callback, contentCallback, 'testMemory');
         mem.setAddressBusConnection(addressBusMock, undefined);
         mem.setAddressBusState(-1);
         expect(mem.content[10]).toBeUndefined();
@@ -132,7 +140,9 @@ describe('Memory', function() {
             {"address": undefined, 'value': undefined}
         ];
         var callback = function (x) {context = x;};
-        var mem = new Memory(callback, 'testMemory');
+        var content = {};
+        var contentCallback = function (x) {content = x;};
+        var mem = new Memory(callback, contentCallback, 'testMemory');
         mem.setAddressBusConnection(addressBusMock, undefined);
         mem.setDataBusConnection(dataBusMock, undefined);
         mem.setAddressBusState(-1);

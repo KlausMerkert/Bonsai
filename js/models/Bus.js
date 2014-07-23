@@ -4,6 +4,7 @@ function Bus () {
     this.updateViewCallback = undefined;
     this.connections = [];
     this.readers = [];
+    this.maxValue = 1;
     this.value = undefined;
     this.active = false;
     this.writerIndex = -1;
@@ -18,12 +19,63 @@ Bus.prototype.setName = function (name) {
     this.name = name;
 };
 
+Bus.prototype.getName = function () {
+    return this.name;
+};
+
+Bus.prototype.setMax = function (maxValue) {
+    /* Values on the bus are numbers between 0 and maxValue or undefined. */
+    if (isNaN(parseInt(maxValue))) {
+        throw SuppliedMaxValueIsNotANumber(
+            this.name + ": The value you supplied (" + maxValue + ") is not a Number.",
+            this.name,
+            maxValue
+        );
+    } else {
+        this.maxValue = parseInt(maxValue);
+    }
+};
+
+Bus.prototype.getMax = function () {
+    return this.maxValue;
+};
+
+Bus.prototype.getWidth = function () {
+    var width = 1;
+    while (Math.pow(2, width) <= this.maxValue) {
+        width++;
+    }
+    return width;
+};
+
 Bus.prototype.getBuses = function () {
     return this.connections;
 };
 
 Bus.prototype.setValue = function (value) {
-    this.value = value;
+    var parsedValue = parseInt(value);
+    if (isNaN(parsedValue)) {
+        throw SuppliedValueIsNotANumber(
+            this.name + ": The value you supplied (" + value + ") is not a Number.",
+            this.name,
+            value
+        )
+    }
+    if (parsedValue < 0) {
+        throw SuppliedValueIsNegative(
+            this.name + ": The value you supplied (" + parsedValue + ") is negative. Only positive values are allowed.",
+            this.name,
+            parsedValue
+        )
+    }
+    if (parsedValue > this.getMax()) {
+        throw SuppliedValueIsTooBig(
+            this.name + ": The value you supplied (" + parsedValue + ") is too big. The maximum is " + this.getMax(),
+            this.name,
+            this.getMax()
+        )
+    }
+    this.value = parsedValue;
     if (this.updateViewCallback) {
         this.updateViewCallback(this.value);
     }

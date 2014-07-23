@@ -148,5 +148,65 @@
         "key"        : "_InactiveAdressBusConnection_end",
         "value"      : "",
         "description": ""
+    },
+    {
+        "key"        : "_SuppliedMaxValueIsNotANumber_beginning",
+        "value"      : "",
+        "description": ""
+    },
+    {
+        "key"        : "_SuppliedMaxValueIsNotANumber_middle",
+        "value"      : ": Der gegebene Wert (",
+        "description": ""
+    },
+    {
+        "key"        : "_SuppliedMaxValueIsNotANumber_end",
+        "value"      : ") ist keine Zahl. Für das Maximum sind nur Zahlen erlaubt.",
+        "description": ""
+    },
+    {
+        "key"        : "_SuppliedValueIsNotANumber_beginning",
+        "value"      : "",
+        "description": ""
+    },
+    {
+        "key"        : "_SuppliedValueIsNotANumber_middle",
+        "value"      : ": Der gegebene Wert (",
+        "description": ""
+    },
+    {
+        "key"        : "_SuppliedValueIsNotANumber_end",
+        "value"      : ") ist keine Zahl. Für diesen Wert sind nur Zahlen erlaubt.",
+        "description": ""
+    },
+    {
+        "key"        : "_SuppliedValueIsNegative_beginning",
+        "value"      : "",
+        "description": ""
+    },
+    {
+        "key"        : "_SuppliedValueIsNegative_middle",
+        "value"      : ": Der gegebene Wert (",
+        "description": ""
+    },
+    {
+        "key"        : "_SuppliedValueIsNegative_end",
+        "value"      : ") ist negativ. Für diesen Wert sind nur positive Zahlen erlaubt.",
+        "description": ""
+    },
+    {
+        "key"        : "_SuppliedValueIsTooBig_beginning",
+        "value"      : "",
+        "description": ""
+    },
+    {
+        "key"        : "_SuppliedValueIsTooBig_middle",
+        "value"      : ": Der gegebene Wert ist zu groß. Der Wert darf den eingestellten Maximalwert ",
+        "description": ""
+    },
+    {
+        "key"        : "_SuppliedValueIsTooBig_end",
+        "value"      : " nicht überschreiten.",
+        "description": ""
     }
 ]

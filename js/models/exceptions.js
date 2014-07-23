@@ -87,3 +87,43 @@ function InactiveAdressBusConnection (message, memoryName) {
     exception.actor2 = "";
     return exception;
 }
+
+function SuppliedMaxValueIsNotANumber (message, component, value) {
+    var exception = {};
+    exception.name = 'SuppliedMaxValueIsNotANumber';
+    exception.localization = '_' + exception.name + '_';
+    exception.message = message;
+    exception.actor1 = component;
+    exception.actor2 = value;
+    return exception;
+}
+
+function SuppliedValueIsNotANumber (message, component, value) {
+    var exception = {};
+    exception.name = 'SuppliedValueIsNotANumber';
+    exception.localization = '_' + exception.name + '_';
+    exception.message = message;
+    exception.actor1 = component;
+    exception.actor2 = value;
+    return exception;
+}
+
+function SuppliedValueIsNegative (message, component, value) {
+    var exception = {};
+    exception.name = 'SuppliedValueIsNegative';
+    exception.localization = '_' + exception.name + '_';
+    exception.message = message;
+    exception.actor1 = component;
+    exception.actor2 = value;
+    return exception;
+}
+
+function SuppliedValueIsTooBig (message, component, value) {
+    var exception = {};
+    exception.name = 'SuppliedValueIsTooBig';
+    exception.localization = '_' + exception.name + '_';
+    exception.message = message;
+    exception.actor1 = component;
+    exception.actor2 = value;
+    return exception;
+}

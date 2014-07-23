@@ -7,12 +7,12 @@
     <div class="label"
          ng-show="(top) && (left)"
          ng-style="{'color': color, 'border-color': color, 'top': topCSS, 'left': leftCSS}">
-        <span ng-if="value">
+        <span ng-if="!isNaN(parseInt(value))">
             <span ng-if="displayBase === 2">{{ value | binary }}</span>
             <span ng-if="displayBase === 8">{{ value | octal }}</span>
             <span ng-if="displayBase === 10">{{ value }}</span>
             <span ng-if="displayBase === 16">{{ value | hexadecimal }}</span>
         </span>
-        <span ng-if="!value">undefined</span>
+        <span ng-if="isNaN(parseInt(value))">undefined</span>
     </div>
 </div>
