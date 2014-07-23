@@ -208,5 +208,20 @@
         "key"        : "_SuppliedValueIsTooBig_end",
         "value"      : " nicht überschreiten.",
         "description": ""
+    },
+    {
+        "key"        : "_BusNotFound_beginning",
+        "value"      : "Der Bus mit der ID ",
+        "description": ""
+    },
+    {
+        "key"        : "_BusNotFound_middle",
+        "value"      : " wurde nicht gefunden.",
+        "description": ""
+    },
+    {
+        "key"        : "_BusNotFound_end",
+        "value"      : "",
+        "description": ""
     }
 ]

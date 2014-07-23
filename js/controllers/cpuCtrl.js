@@ -4,6 +4,73 @@ bonsaiApp.controller('bonsaiCpuCtrl',
     function ($scope, $routeParams) {
         $scope.base = 10;
 
+        $scope.cpu = {
+            'buses': [
+                {
+                    'id': 'dataBus',
+                    'name': 'Datenbus',
+                    'max': 255,
+                    'base': 10,
+                    'color': 'rgb(0, 140, 0)',
+                    'top': 5.75,
+                    'left': 22
+                }, {
+                    'id': 'addressBus',
+                    'name': 'Adressbus',
+                    'max': 255,
+                    'base': 10,
+                    'color': 'rgb(0, 0, 225)',
+                    'top': 5.75,
+                    'left': 22
+                }, {
+                    'id': 'testBus',
+                    'name': 'Testbus',
+                    'max': 1
+                }
+            ],
+            'manualswitches': [
+                {
+                    'wireId': 'testBus',
+                    'name': 'Lena',
+                    'value': 0,
+                    'top': 10,
+                    'left': 5
+                }
+            ],
+            'leds': [
+                {
+                    'wireId': 'testBus',
+                    'name': 'Hugo',
+                    'value': 0,
+                    'top': 10,
+                    'left': 1
+                }
+            ]
+        };
+
+        for (var i = 0; i < $scope.cpu.buses.length; i++) {
+            $scope.cpu.buses[i].object = new Bus();
+            // TODO: Remove this when refactoring is done.
+            $scope[$scope.cpu.buses[i].id] = $scope.cpu.buses[i].object;
+        }
+        $scope.findBus = function (id) {
+            for (var i = 0; i < $scope.cpu.buses.length; i++) {
+                if ($scope.cpu.buses[i].id == id) {
+                    return $scope.cpu.buses[i].object;
+                }
+            }
+            throw BusNotFound(
+                "The bus with id " + id + " was not found.",
+                id
+            );
+        };
+        for (i = 0; i < $scope.cpu.manualswitches.length; i++) {
+            $scope.cpu.manualswitches[i].wire = $scope.findBus($scope.cpu.manualswitches[i].wireId);
+        }
+        for (i = 0; i < $scope.cpu.leds.length; i++) {
+            $scope.cpu.leds[i].wire = $scope.findBus($scope.cpu.leds[i].wireId);
+        }
+
         $scope.editors = [
             {
                 'name': "Speicher",
@@ -60,9 +127,9 @@ bonsaiApp.controller('bonsaiCpuCtrl',
             document.body.removeChild(downloadLink);
         };
 
-        $scope.dataBus = new Bus();
-        $scope.addressBus = new Bus();
-        $scope.testBus = new Bus();
+        //$scope.dataBus = new Bus();
+        //$scope.addressBus = new Bus();
+        //$scope.testBus = new Bus();
 
         $scope.wire1a = new ControlWire();
         $scope.wire1b = new ControlWire();

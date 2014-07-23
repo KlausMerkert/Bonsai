@@ -208,5 +208,20 @@
         "key"        : "_SuppliedValueIsTooBig_end",
         "value"      : ".",
         "description": ""
+    },
+    {
+        "key"        : "_BusNotFound_beginning",
+        "value"      : "The bus with ID ",
+        "description": ""
+    },
+    {
+        "key"        : "_BusNotFound_middle",
+        "value"      : " was not found.",
+        "description": ""
+    },
+    {
+        "key"        : "_BusNotFound_end",
+        "value"      : "",
+        "description": ""
     }
 ]

@@ -11,17 +11,16 @@ bonsaiApp.directive('led', function ($interval) {
             left: '=',
             ledName: '@'
         },
-        controller: function ($scope) {
-            $scope.data = $scope.value;
-
+        link: function ($scope, element, attrs) {
             $scope.dataChangeCallback = function (value) {
-                $scope.data = value;
+                if (value !== undefined) {
+                    $scope.value = value;
+                }
             };
 
-            $scope.led = new Led($scope.dataChangeCallback, $scope.data);
-        },
-        link: function ($scope, element, attrs) {
-            $scope.$watch('data', function(newValue, oldValue) {
+            $scope.led = new Led($scope.dataChangeCallback, $scope.value);
+
+            $scope.$watch('value', function(newValue, oldValue) {
                 if (newValue != oldValue) {
                     $scope.led.setValue(newValue);
                 }

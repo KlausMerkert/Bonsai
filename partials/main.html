@@ -13,6 +13,18 @@
         </li>
     </ul>
     <div class="components pane" ng-show="!selectedEditor">
+        <div ng-repeat="bus in cpu.buses">
+            <bus bus="bus.object" bus-name="bus.name" max-value="bus.max" base="bus.base"
+                 color="bus.color" top="bus.top" left="bus.left"></bus>
+        </div>
+        <div ng-repeat="switch in cpu.manualswitches">
+            <manualswitch wire="switch.wire" switch-name="switch.name" value="switch.value"
+                          top="switch.top" left="switch.left"></manualswitch>
+        </div>
+        <div ng-repeat="led in cpu.leds">
+            <led wire="led.wire" led-name="led.name" value="led.value" top="led.top" left="led.left"></led>
+        </div>
+
         <controlwire wire="wire1a" wire-name="Draht 1 A"></controlwire>
         <controlwire wire="wire1b" wire-name="Draht 1 B"></controlwire>
         <controlwire wire="wire1" wire-name="Draht 1"></controlwire>
@@ -22,14 +34,10 @@
         <controlwire wire="wire5" wire-name="CMP Draht"></controlwire>
         <controlwireI wire="wire6" wire-name="Inc Draht"></controlwireI>
 
-        <bus bus="dataBus" bus-name="Datenbus" max-value="255" base="base"
-             color="'rgb(0, 140, 0)'" top="5.75" left="22"></bus>
-        <bus bus="addressBus" bus-name="Adressbus" max-value="255" base="base"
-             color="'rgb(0, 0, 225)'" top="0.85" left="5"></bus>
-
-        <bus bus="testBus" bus-name="Testbus"></bus>
-        <manualswitch wire="testBus" switch-name="Lena" value="0" top="10" left="5"></manualswitch>
-        <led wire="testBus" led-name="Hugo" value="0" top="10" left="1"></led>
+        <busI bus="dataBus" bus-name="Datenbus" max-value="255" base="base"
+             color="'rgb(0, 140, 0)'" top="5.75" left="22"></busI>
+        <busI bus="addressBus" bus-name="Adressbus" max-value="255" base="base"
+             color="'rgb(0, 0, 225)'" top="0.85" left="5"></busI>
 
         <manualswitchI wire="wire1a" switch-name="switch 1 A" value="0" top="1" left="34"></manualswitchI>
         <manualswitchI wire="wire1b" switch-name="switch 1 B" value="0" top="2.5" left="34"></manualswitchI>

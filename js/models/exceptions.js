@@ -127,3 +127,13 @@ function SuppliedValueIsTooBig (message, component, value) {
     exception.actor2 = value;
     return exception;
 }
+
+function BusNotFound (message, id) {
+    var exception = {};
+    exception.name = 'BusNotFound';
+    exception.localization = '_' + exception.name + '_';
+    exception.message = message;
+    exception.actor1 = id;
+    exception.actor2 = "";
+    return exception;
+}
