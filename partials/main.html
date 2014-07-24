@@ -26,7 +26,8 @@
         </div>
         <div ng-repeat="register in cpu.registers">
             <register register-name="{{register.name}}" value="register.value" base="register.base"
-                      top="register.top" left="register.left">
+                      top="register.top" left="register.left"
+                      inc-wire="register.incWire" dec-wire="register.decWire">
                 <div ng-repeat="gate in register.gates">
                     <gate bus="gate.bus" set-write="gate.writeWire" set-read="gate.readWire"></gate>
                 </div>

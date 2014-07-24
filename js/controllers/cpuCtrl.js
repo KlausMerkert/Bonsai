@@ -32,6 +32,12 @@ bonsaiApp.controller('bonsaiCpuCtrl',
                 }, {
                     'id': 'RegisterCdataBusGateReadWire',
                     'name': 'Register C dataBus gate read wire'
+                }, {
+                    'id': 'RegisterCIncWire',
+                    'name': 'Register C inc wire'
+                }, {
+                    'id': 'RegisterCDecWire',
+                    'name': 'Register C dec wire'
                 }
             ],
             'manualswitches': [
@@ -53,6 +59,18 @@ bonsaiApp.controller('bonsaiCpuCtrl',
                     'value': 0,
                     'top': 5,
                     'left': 32
+                }, {
+                    'wireId': 'RegisterCIncWire',
+                    'name': 'RegisterCIncWireSwitch',
+                    'value': 0,
+                    'top': 3,
+                    'left': 35
+                }, {
+                    'wireId': 'RegisterCDecWire',
+                    'name': 'RegisterCDecWireSwitch',
+                    'value': 0,
+                    'top': 4.2,
+                    'left': 35
                 }
             ],
             'leds': [
@@ -68,6 +86,12 @@ bonsaiApp.controller('bonsaiCpuCtrl',
                     'value': 0,
                     'top': 11,
                     'left': 2
+                }, {
+                    'wireId': 'RegisterCIncWire',
+                    'name': 'Register C inc wire led',
+                    'value': 0,
+                    'top': 3,
+                    'left': 33
                 }
             ],
             'registers': [
@@ -95,7 +119,9 @@ bonsaiApp.controller('bonsaiCpuCtrl',
                             'writeWireId': 'RegisterCdataBusGateWriteWire',
                             'readWireId': 'RegisterCdataBusGateReadWire'
                         }
-                    ]
+                    ],
+                    'incWireId': 'RegisterCIncWire',
+                    'decWireId': 'RegisterCDecWire'
                 }
             ]
         };
@@ -124,6 +150,12 @@ bonsaiApp.controller('bonsaiCpuCtrl',
             $scope.cpu.leds[i].wire = $scope.findBus($scope.cpu.leds[i].wireId);
         }
         for (i = 0; i < $scope.cpu.registers.length; i++) {
+            if ($scope.cpu.registers[i].incWireId) {
+                $scope.cpu.registers[i].incWire = $scope.findBus($scope.cpu.registers[i].incWireId);
+            }
+            if ($scope.cpu.registers[i].decWireId) {
+                $scope.cpu.registers[i].decWire = $scope.findBus($scope.cpu.registers[i].decWireId);
+            }
             for (j = 0; j < $scope.cpu.registers[i].gates.length; j++) {
                 $scope.cpu.registers[i].gates[j].bus = $scope.findBus($scope.cpu.registers[i].gates[j].busId);
                 if ($scope.cpu.registers[i].gates[j].writeWireId) {

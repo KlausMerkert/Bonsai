@@ -199,12 +199,60 @@ bonsaiApp.directive('register', function ($interval) {
                 $scope.setState(connection, 0);
             };
 
-            $scope.inc = function () {
-                $scope.register.inc();
+            $scope.activateInc = function () {
+                if ($scope.incWire) {
+                    $scope.incWire.unregisterReader($scope.incWireConnector);
+                    try {
+                        $scope.incWire.write($scope.incWireConnector, 1);
+                        $scope.register.inc();
+                    } catch (exception) {
+                        $scope.incWire.registerReaderAndRead($scope.incWireConnector);
+                        throw exception;
+                    }
+                } else {
+                    $scope.register.inc();
+                }
             };
 
-            $scope.dec = function () {
-                $scope.register.dec();
+            $scope.deactivateInc = function () {
+                if ($scope.incWire) {
+                    try {
+                        $scope.incWire.write($scope.incWireConnector, 0);
+                    } catch (exception) {
+                        throw exception;
+                    } finally {
+                        $scope.incWire.stopWriting($scope.incWireConnector);
+                        $scope.incWire.registerReaderAndRead($scope.incWireConnector);
+                    }
+                }
+            };
+
+            $scope.activateDec = function () {
+                if ($scope.decWire) {
+                    $scope.decWire.unregisterReader($scope.decWireConnector);
+                    try {
+                        $scope.decWire.write($scope.decWireConnector, 1);
+                        $scope.register.dec();
+                    } catch (exception) {
+                        $scope.decWire.registerReaderAndRead($scope.decWireConnector);
+                        throw exception;
+                    }
+                } else {
+                    $scope.register.dec();
+                }
+            };
+
+            $scope.deactivateDec = function () {
+                if ($scope.decWire) {
+                    try {
+                        $scope.decWire.write($scope.decWireConnector, 0);
+                    } catch (exception) {
+                        throw exception;
+                    } finally {
+                        $scope.decWire.stopWriting($scope.decWireConnector);
+                        $scope.decWire.registerReaderAndRead($scope.decWireConnector);
+                    }
+                }
             };
 
             $scope.getConnectionPositions = function (bus) {
