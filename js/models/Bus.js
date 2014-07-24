@@ -174,3 +174,11 @@ Bus.prototype.isWriter = function (writer) {
     }
     return false;
 };
+
+Bus.prototype.isNotZero = function () {
+    return !!this.value;
+};
+
+Bus.prototype.isActive = function () {
+    return (this.writerIndex != -1)
+};

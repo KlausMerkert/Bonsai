@@ -25,10 +25,10 @@
             <led wire="led.wire" led-name="{{led.name}}" value="led.value" top="led.top" left="led.left"></led>
         </div>
         <div ng-repeat="register in cpu.registers">
-            <register register-name="register.name" value="register.value" base="register.base"
+            <register register-name="{{register.name}}" value="register.value" base="register.base"
                       top="register.top" left="register.left">
                 <div ng-repeat="gate in register.gates">
-                    <gate bus="gate.bus"></gate>
+                    <gate bus="gate.bus" set-write="gate.writeWire" set-read="gate.readWire"></gate>
                 </div>
             </register>
         </div>

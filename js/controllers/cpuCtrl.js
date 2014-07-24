@@ -26,6 +26,12 @@ bonsaiApp.controller('bonsaiCpuCtrl',
                     'id': 'testBus',
                     'name': 'Testbus',
                     'max': 1
+                }, {
+                    'id': 'RegisterCdataBusGateWriteWire',
+                    'name': 'Register C dataBus gate write wire'
+                }, {
+                    'id': 'RegisterCdataBusGateReadWire',
+                    'name': 'Register C dataBus gate read wire'
                 }
             ],
             'manualswitches': [
@@ -33,8 +39,20 @@ bonsaiApp.controller('bonsaiCpuCtrl',
                     'wireId': 'testBus',
                     'name': 'Lena',
                     'value': 0,
-                    'top': 10,
+                    'top': 10.5,
                     'left': 5
+                }, {
+                    'wireId': 'RegisterCdataBusGateWriteWire',
+                    'name': 'RegisterCdataBusGateWriteWireSwitch',
+                    'value': 0,
+                    'top': 6.5,
+                    'left': 32
+                }, {
+                    'wireId': 'RegisterCdataBusGateReadWire',
+                    'name': 'RegisterCdataBusGateReadWireSwitch',
+                    'value': 0,
+                    'top': 5,
+                    'left': 32
                 }
             ],
             'leds': [
@@ -70,8 +88,13 @@ bonsaiApp.controller('bonsaiCpuCtrl',
                     'top' : 3,
                     'left': 25,
                     'gates': [
-                        {'busId': 'addressBus'},
-                        {'busId': 'dataBus'}
+                        {
+                            'busId': 'addressBus'
+                        }, {
+                            'busId': 'dataBus',
+                            'writeWireId': 'RegisterCdataBusGateWriteWire',
+                            'readWireId': 'RegisterCdataBusGateReadWire'
+                        }
                     ]
                 }
             ]
@@ -103,6 +126,12 @@ bonsaiApp.controller('bonsaiCpuCtrl',
         for (i = 0; i < $scope.cpu.registers.length; i++) {
             for (j = 0; j < $scope.cpu.registers[i].gates.length; j++) {
                 $scope.cpu.registers[i].gates[j].bus = $scope.findBus($scope.cpu.registers[i].gates[j].busId);
+                if ($scope.cpu.registers[i].gates[j].writeWireId) {
+                    $scope.cpu.registers[i].gates[j].writeWire = $scope.findBus($scope.cpu.registers[i].gates[j].writeWireId);
+                }
+                if ($scope.cpu.registers[i].gates[j].readWireId) {
+                    $scope.cpu.registers[i].gates[j].readWire = $scope.findBus($scope.cpu.registers[i].gates[j].readWireId);
+                }
             }
         }
 

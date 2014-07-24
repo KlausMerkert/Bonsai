@@ -87,7 +87,7 @@ Register.prototype.setState = function (busConnection, desiredState) {
             throw exception;
         }
     } else if (desiredState == -1) {
-        if (this.isReader()) {
+        if ((this.isReader()) && ((this.getReaders().length > 1) || (this.getReaders()[0] != busConnection.bus))) {
             throw RegisterIsAlreadyReadingException(
                 "Register " + this.name + " is already reading.",
                 this.name
@@ -135,14 +135,18 @@ Register.prototype.setToWrite = function (wire) {
 Register.prototype.setToDisconnected = function (wire) {
     for (var i = 0; i < this.buses.length; i++) {
         if (this.buses[i].writeWire === wire) {
-            if ((this.buses[i].readWire) && (this.buses[i].readWire.isActive())) {
+            if ((this.buses[i].readWire) &&
+                (this.buses[i].readWire.isActive()) &&
+                (this.buses[i].readWire.isNotZero())) {
                 this.setState(this.buses[i], -1)
             } else {
                 this.setState(this.buses[i], 0);
             }
         }
         if (this.buses[i].readWire === wire) {
-            if ((this.buses[i].writeWire) && (this.buses[i].writeWire.isActive())) {
+            if ((this.buses[i].writeWire) &&
+                (this.buses[i].writeWire.isActive()) &&
+                (this.buses[i].writeWire.isNotZero())) {
                 this.setState(this.buses[i], 1);
             } else {
                 this.setState(this.buses[i], 0);
@@ -159,4 +163,14 @@ Register.prototype.isReader = function () {
         }
     }
     return isReading;
+};
+
+Register.prototype.getReaders = function () {
+    var readers = [];
+    for (var i = 0; i < this.buses.length; i++) {
+        if (this.buses[i].state === -1) {
+            readers.push(this.buses[i].bus)
+        }
+    }
+    return readers;
 };
