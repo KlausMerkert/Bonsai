@@ -60,8 +60,10 @@ bonsaiApp.directive('bus', function () {
                 $scope.value = newValue;
             });
 
-            $scope.$watch('value', function(newValue) {
-                $scope.localBus.setValue(newValue);
+            $scope.$watch('value', function(newValue, oldValue) {
+                if (newValue != oldValue) {
+                    $scope.localBus.setValue(newValue);
+                }
             });
 
             $scope.updateVisibleParts = function() {

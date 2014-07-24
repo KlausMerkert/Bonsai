@@ -76,16 +76,18 @@ Bus.prototype.setValue = function (value) {
         )
     }
     if (isNaN(parsedValue)) {
-        this.value = undefined;
-    } else {
+        parsedValue = undefined;
+    }
+    // Only set the value and update the view if the value changed.
+    if (this.value !== parsedValue) {
         this.value = parsedValue;
-    }
-    if (this.updateViewCallback) {
-        this.updateViewCallback(this.value);
-    }
-    for (var i = 0; i < this.connections.length; i++) {
-        if (this.readers.indexOf(this.connections[i]) >= 0) {
-            this.connections[i].setValue(this.value, this);
+        if (this.updateViewCallback) {
+            this.updateViewCallback(this.value);
+        }
+        for (var i = 0; i < this.connections.length; i++) {
+            if (this.readers.indexOf(this.connections[i]) >= 0) {
+                this.connections[i].setValue(this.value, this);
+            }
         }
     }
 };
