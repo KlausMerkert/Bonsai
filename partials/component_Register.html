@@ -16,9 +16,13 @@
                 <div ng-class="{'busconnector': true, 'busconnectortoprow': $even, 'busconnectorbottomrow': $odd}"
                      style="left: 1.63em;"></div>
                 <div ng-class="{'wireconnector': true, 'write': true, 'wireconnectortoprowwrite': $even, 'wireconnectorbottomrowwrite': $odd}"
-                     style="left: 2.19em;" ng-click="toggleWrite(connection)"></div>
+                     style="left: 2.19em;"
+                     ng-mousedown="activateWriteWire(connection)"
+                     ng-mouseup="deactivateWriteWire(connection)"></div>
                 <div ng-class="{'wireconnector': true, 'read': true, 'wireconnectortoprowread': $even, 'wireconnectorbottomrowread': $odd}"
-                     style="left: 2.19em;" ng-click="toggleRead(connection)"></div>
+                     style="left: 2.19em;"
+                     ng-mousedown="activateReadWire(connection)"
+                     ng-mouseup="deactivateReadWire(connection)"></div>
             </div>
         </div>
         <div style="width: 0; height: 0; overflow: visible; display: inline-block; position: absolute;">

@@ -59,10 +59,10 @@ bonsaiApp.directive('led', function ($interval) {
             $scope.deactivate = function () {
                 try {
                     $scope.wire.write($scope.led, 0);
-                    $scope.wire.stopWriting($scope.led);
                 } catch (exception) {
                     throw exception;
                 } finally {
+                    $scope.wire.stopWriting($scope.led);
                     $scope.value = $scope.wire.registerReaderAndRead($scope.led);
                 }
             };
