@@ -51,10 +51,34 @@ bonsaiApp.controller('bonsaiCpuCtrl',
                     'top': 11,
                     'left': 2
                 }
+            ],
+            'registers': [
+                {
+                    'name': 'Register B',
+                    'value': 10,
+                    'base' : 10,
+                    'top' : 4,
+                    'left': 15,
+                    'gates': [
+                        {'busId': 'addressBus'},
+                        {'busId': 'dataBus'}
+                    ]
+                }, {
+                    'name': 'Register C',
+                    'value': 1,
+                    'base' : 10,
+                    'top' : 3,
+                    'left': 25,
+                    'gates': [
+                        {'busId': 'addressBus'},
+                        {'busId': 'dataBus'}
+                    ]
+                }
             ]
         };
 
-        for (var i = 0; i < $scope.cpu.buses.length; i++) {
+        var i, j;
+        for (i = 0; i < $scope.cpu.buses.length; i++) {
             $scope.cpu.buses[i].object = new Bus();
             // TODO: Remove this when refactoring is done.
             $scope[$scope.cpu.buses[i].id] = $scope.cpu.buses[i].object;
@@ -75,6 +99,11 @@ bonsaiApp.controller('bonsaiCpuCtrl',
         }
         for (i = 0; i < $scope.cpu.leds.length; i++) {
             $scope.cpu.leds[i].wire = $scope.findBus($scope.cpu.leds[i].wireId);
+        }
+        for (i = 0; i < $scope.cpu.registers.length; i++) {
+            for (j = 0; j < $scope.cpu.registers[i].gates.length; j++) {
+                $scope.cpu.registers[i].gates[j].bus = $scope.findBus($scope.cpu.registers[i].gates[j].busId);
+            }
         }
 
         $scope.editors = [

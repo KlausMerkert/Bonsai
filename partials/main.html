@@ -24,6 +24,14 @@
         <div ng-repeat="led in cpu.leds">
             <led wire="led.wire" led-name="{{led.name}}" value="led.value" top="led.top" left="led.left"></led>
         </div>
+        <div ng-repeat="register in cpu.registers">
+            <register register-name="register.name" value="register.value" base="register.base"
+                      top="register.top" left="register.left">
+                <div ng-repeat="gate in register.gates">
+                    <gate bus="gate.bus"></gate>
+                </div>
+            </register>
+        </div>
 
         <controlwire wire="wire1a" wire-name="Draht 1 A"></controlwire>
         <controlwire wire="wire1b" wire-name="Draht 1 B"></controlwire>
@@ -43,7 +51,7 @@
         <manualswitchI wire="wire1b" switch-name="switch 1 B" value="0" top="2.5" left="34"></manualswitchI>
         <norgateI in-a="wire1a" in-b="wire1b" out="wire1" top="1" left="30" gate-name="OR 1"></norgateI>
 
-        <comparetozero bus="addressBus" wire="wire5" comp-name="CMP1" left="13" top="2.3"></comparetozero>
+        <comparetozeroI bus="addressBus" wire="wire5" comp-name="CMP1" left="13" top="2.3"></comparetozeroI>
         <ledI wire="wire5" led-name="CmpLed" left="13.03" top="5" value="0"></ledI>
 
         <memory memory-name="Datenspeicher" base="base" top="2" left="1" content="editors[0].content">
@@ -51,14 +59,14 @@
             <datagate bus="dataBus"></datagate>
         </memory>
         <manualswitchI wire="wire6" switch-name="Inc switch" value="0" top="4" left="23"></manualswitchI>
-        <register value="10" register-name="Register B" base="base" top="4" left="15">
-            <gate bus="addressBus"></gate>
-            <gate bus="dataBus"></gate>
-        </register>
-        <register value="1" register-name="Register C" base="base" top="3" left="25">
-            <gate bus="addressBus"></gate>
-            <gate bus="dataBus"></gate>
-        </register>
+        <registerI value="10" register-name="Register B" base="base" top="4" left="15">
+            <gateI bus="addressBus"></gateI>
+            <gateI bus="dataBus"></gateI>
+        </registerI>
+        <registerI value="1" register-name="Register C" base="base" top="3" left="25">
+            <gateI bus="addressBus"></gateI>
+            <gateI bus="dataBus"></gateI>
+        </registerI>
 
         <manualswitchI wire="wire2" switch-name="switch 2" value="0" top="3.5" left="32"></manualswitchI>
         <ledI wire="wire2" value="0" top="4" left="30" led-name="testled"></ledI>
