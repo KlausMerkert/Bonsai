@@ -10,7 +10,8 @@ bonsaiApp.directive('bus', function () {
             base: '=',
             color: '=',
             top: '=',
-            left: '='
+            left: '=',
+            routes: '='
         },
         link: function ($scope, element, attrs) {
             $scope.localBus = $scope.bus || {};
@@ -60,7 +61,9 @@ bonsaiApp.directive('bus', function () {
                 }
             };
 
-            $scope.busRouter = new BusRouter($scope.localBus.getBuses(), $scope.localBus);
+            if (!$scope.routes) {
+                $scope.busRouter = new BusRouter($scope.localBus.getBuses(), $scope.localBus);
+            }
 
             $scope.value = undefined;
 
@@ -75,9 +78,20 @@ bonsaiApp.directive('bus', function () {
             });
 
             $scope.updateVisibleParts = function() {
-                $scope.busRouter.setConnections($scope.localBus.getBuses());
-                $scope.visibleParts = $scope.busRouter.updateVisibleParts();
+                if ($scope.routes) {
+                    $scope.visibleParts = $scope.routes;
+                } else {
+                    console.log($scope.busName);
+                    $scope.busRouter.setConnections($scope.localBus.getBuses());
+                    $scope.visibleParts = $scope.busRouter.updateVisibleParts();
+                }
             };
+
+            $scope.$watch('routes', function(newValue, oldValue) {
+                if (newValue != oldValue) {
+                    $scope.updateVisibleParts();
+                }
+            });
 
             $scope.localBus.enrollToDirective = function (enrollee, getPositions) {
                 var connection = $scope.localBus.enroll(enrollee);

@@ -11,7 +11,7 @@ bonsaiApp.controller('bonsaiCpuCtrl',
                     'name': 'Datenbus',
                     'max': 255,
                     'base': 10,
-                    'color': 'rgb(0, 140, 0)',
+                    'color': 'rgb(0, 0, 225)',
                     'top': 92,
                     'left': 352
                 }, {
@@ -19,9 +19,30 @@ bonsaiApp.controller('bonsaiCpuCtrl',
                     'name': 'Adressbus',
                     'max': 255,
                     'base': 10,
-                    'color': 'rgb(0, 0, 225)',
+                    'color': 'rgb(0, 140, 0)',
                     'top': 10,
-                    'left': 152
+                    'left': 152,
+                    'routes': [
+                        {
+                            'type': 'topleft',
+                            'top': '10px',
+                            'left': '51px',
+                            'width': '220px',
+                            'height': '21px'
+                        }, {
+                            'type': 'vertical',
+                            'top': '10px',
+                            'left': '273px',
+                            'width': '0',
+                            'height': '21px'
+                        }, {
+                            'type': 'topright',
+                            'top': '10px',
+                            'left': '273px',
+                            'width': '160px',
+                            'height': '21px'
+                        }
+                    ]
                 }, {
                     'id': 'testBus',
                     'name': 'Testbus',
@@ -102,7 +123,7 @@ bonsaiApp.controller('bonsaiCpuCtrl',
                     'wireId': 'DatenspeicherAddressReadWire',
                     'name': 'DatenspeicherAddressReadWireSwitch',
                     'value': 1,
-                    'top': 20,
+                    'top': 40,
                     'left': 80
                 }, {
                     'wireId': 'AndA',
@@ -201,7 +222,7 @@ bonsaiApp.controller('bonsaiCpuCtrl',
                     'name': 'Register B',
                     'value': 10,
                     'base' : 10,
-                    'top' : 64,
+                    'top' : 50,
                     'left': 240,
                     'gates': [
                         {'busId': 'addressBus'},
@@ -211,7 +232,7 @@ bonsaiApp.controller('bonsaiCpuCtrl',
                     'name': 'Register C',
                     'value': 1,
                     'base' : 10,
-                    'top' : 48,
+                    'top' : 50,
                     'left': 400,
                     'gates': [
                         {
@@ -231,8 +252,8 @@ bonsaiApp.controller('bonsaiCpuCtrl',
                     'name': "Datenspeicher",
                     'base': 10,
                     'content': "1\n2\n3",
-                    'top': 32,
-                    'left': 16,
+                    'top': 50,
+                    'left': 10,
                     'addressgate': {
                         'busId': 'addressBus',
                         'readWireId': 'DatenspeicherAddressReadWire'

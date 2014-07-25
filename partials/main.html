@@ -15,7 +15,7 @@
     <div class="components pane" ng-show="!selectedEditor">
         <div ng-repeat="bus in cpu.buses">
             <bus bus="bus.object" bus-name="{{bus.name}}" max-value="bus.max" base="bus.base"
-                 color="bus.color" top="bus.top" left="bus.left"></bus>
+                 color="bus.color" top="bus.top" left="bus.left" routes="bus.routes"></bus>
         </div>
         <div ng-repeat="switch in cpu.manualswitches">
             <manualswitch wire="switch.wire" switch-name="{{switch.name}}" value="switch.value"
