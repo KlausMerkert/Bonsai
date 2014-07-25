@@ -319,7 +319,9 @@ bonsaiApp.directive('register', function ($interval) {
                         writeWire.enrollToDirective(
                             connections[i].writeWireConnector,
                             $scope.getWireConnectionPositions);
-                        writeWire.registerReaderAndRead(connections[i].writeWireConnector);
+                        if (writeWire.registerReaderAndRead(connections[i].writeWireConnector)) {
+                            $scope.register.setToWrite(writeWire);
+                        }
                     }
                     var readWire = connections[i].readWire;
                     if (readWire) {
@@ -331,7 +333,9 @@ bonsaiApp.directive('register', function ($interval) {
                                 $scope.register.setToDisconnected(wire);
                             }, $scope.registerName + ' read wire connector for bus ' + connections[i].bus.getName());
                         readWire.enrollToDirective(connections[i].readWireConnector, $scope.getWireConnectionPositions);
-                        readWire.registerReaderAndRead(connections[i].readWireConnector);
+                        if (readWire.registerReaderAndRead(connections[i].readWireConnector)) {
+                            $scope.register.setToRead(readWire);
+                        }
                     }
                 }
                 if ($scope.incWire) {
@@ -339,28 +343,32 @@ bonsaiApp.directive('register', function ($interval) {
                         $scope.incWire,
                         function (wire) {
                             if (wire === $scope.incWire) {
-                                $scope.register.inc(wire);
+                                $scope.register.inc();
                             }
                         },
                         function (wire) {},
                         $scope.registerName + ' inc wire connector'
                     );
                     $scope.incWire.enrollToDirective($scope.incWireConnector, $scope.getWireConnectionPositions);
-                    $scope.incWire.registerReaderAndRead($scope.incWireConnector);
+                    if ($scope.incWire.registerReaderAndRead($scope.incWireConnector)) {
+                        $scope.register.inc();
+                    }
                 }
                 if ($scope.decWire) {
                     $scope.decWireConnector = new ReadingControlWireConnector(
                         $scope.decWire,
                         function (wire) {
                             if (wire === $scope.decWire) {
-                                $scope.register.dec(wire);
+                                $scope.register.dec();
                             }
                         },
                         function (wire) {},
                         $scope.registerName + ' dec wire connector'
                     );
                     $scope.decWire.enrollToDirective($scope.decWireConnector, $scope.getWireConnectionPositions);
-                    $scope.decWire.registerReaderAndRead($scope.decWireConnector);
+                    if ($scope.decWire.registerReaderAndRead($scope.decWireConnector)) {
+                        $scope.register.dec();
+                    }
                 }
             }, 1, 1);
         },
