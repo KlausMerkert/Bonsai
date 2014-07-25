@@ -12,16 +12,16 @@ bonsaiApp.controller('bonsaiCpuCtrl',
                     'max': 255,
                     'base': 10,
                     'color': 'rgb(0, 140, 0)',
-                    'top': 10,
-                    'left': 152
+                    'top': 92,
+                    'left': 352
                 }, {
                     'id': 'addressBus',
                     'name': 'Adressbus',
                     'max': 255,
                     'base': 10,
                     'color': 'rgb(0, 0, 225)',
-                    'top': 92,
-                    'left': 352
+                    'top': 10,
+                    'left': 152
                 }, {
                     'id': 'testBus',
                     'name': 'Testbus',
