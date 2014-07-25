@@ -54,38 +54,6 @@
                           set-write="memory.datagate.writeWire" set-read="memory.datagate.readWire"></datagate>
             </memory>
         </div>
-
-
-        <busI bus="dataBus" bus-name="Datenbus" max-value="255" base="base"
-             color="'rgb(0, 140, 0)'" top="5.75" left="22"></busI>
-        <busI bus="addressBus" bus-name="Adressbus" max-value="255" base="base"
-             color="'rgb(0, 0, 225)'" top="0.85" left="5"></busI>
-
-        <manualswitchI wire="wire1a" switch-name="switch 1 A" value="0" top="1" left="34"></manualswitchI>
-        <manualswitchI wire="wire1b" switch-name="switch 1 B" value="0" top="2.5" left="34"></manualswitchI>
-        <norgateI in-a="wire1a" in-b="wire1b" out="wire1" top="1" left="30" gate-name="OR 1"></norgateI>
-
-        <comparetozeroI bus="addressBus" wire="wire5" comp-name="CMP1" left="13" top="2.3"></comparetozeroI>
-        <ledI wire="wire5" led-name="CmpLed" left="13.03" top="5" value="0"></ledI>
-
-        <memoryI memory-name="Datenspeicher" base="base" top="32" left="16" content="editors[0].content">
-            <addressgateI bus="addressBus"></addressgateI>
-            <datagateI bus="dataBus"></datagateI>
-        </memoryI>
-        <manualswitchI wire="wire6" switch-name="Inc switch" value="0" top="4" left="23"></manualswitchI>
-        <registerI value="10" register-name="Register B" base="base" top="4" left="15">
-            <gateI bus="addressBus"></gateI>
-            <gateI bus="dataBus"></gateI>
-        </registerI>
-        <registerI value="1" register-name="Register C" base="base" top="3" left="25">
-            <gateI bus="addressBus"></gateI>
-            <gateI bus="dataBus"></gateI>
-        </registerI>
-
-        <manualswitchI wire="wire2" switch-name="switch 2" value="0" top="3.5" left="32"></manualswitchI>
-        <ledI wire="wire2" value="0" top="4" left="30" led-name="testled"></ledI>
-        <manualswitchI wire="wire3" switch-name="switch 3" value="0" top="6.5" left="32"></manualswitchI>
-        <manualswitchI wire="wire4" switch-name="switch 4" value="0" top="5" left="32"></manualswitchI>
     </div>
     <div class="editor pane" ng-repeat="editor in cpu.memories"
          ng-show="selectedEditor === $index + 1" style="position: relative;">
