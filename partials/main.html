@@ -28,6 +28,10 @@
             <andgate in-a="andGate.inA" in-b="andGate.inB" out="andGate.out" gate-name="andGate.name"
                      top="andGate.top" left="andGate.left"></andgate>
         </div>
+        <div ng-repeat="norGate in cpu.norGates">
+            <norgate in-a="norGate.inA" in-b="norGate.inB" out="norGate.out" gate-name="norGate.name"
+                     top="norGate.top" left="norGate.left"></norgate>
+        </div>
         <div ng-repeat="register in cpu.registers">
             <register register-name="{{register.name}}" value="register.value" base="register.base"
                       top="register.top" left="register.left"

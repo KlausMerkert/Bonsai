@@ -47,6 +47,18 @@ bonsaiApp.controller('bonsaiCpuCtrl',
                 }, {
                     'id': 'AndB',
                     'name': 'And gate B wire'
+                }, {
+                    'id': 'NorA',
+                    'name': 'Nor gate A wire'
+                }, {
+                    'id': 'NorB',
+                    'name': 'Nor gate B wire'
+                }, {
+                    'id': 'OrA',
+                    'name': 'Or gate A wire'
+                }, {
+                    'id': 'OrB',
+                    'name': 'Or gate B wire'
                 }
             ],
             'manualswitches': [
@@ -98,6 +110,18 @@ bonsaiApp.controller('bonsaiCpuCtrl',
                     'value': 0,
                     'top': 30,
                     'left': 800
+                }, {
+                    'wireId': 'NorA',
+                    'name': 'NorASwitch',
+                    'value': 0,
+                    'top': 50,
+                    'left': 800
+                }, {
+                    'wireId': 'NorB',
+                    'name': 'NorBSwitch',
+                    'value': 0,
+                    'top': 70,
+                    'left': 800
                 }
             ],
             'leds': [
@@ -119,6 +143,11 @@ bonsaiApp.controller('bonsaiCpuCtrl',
                     'value': 0,
                     'top': 48,
                     'left': 512
+                }, {
+                    'wireId': 'OrB',
+                    'name': 'Nor works correctly intication led',
+                    'top': 70,
+                    'left': 750
                 }
             ],
             'andGates': [
@@ -128,6 +157,16 @@ bonsaiApp.controller('bonsaiCpuCtrl',
                     'inBId': 'AndB',
                     'outId': undefined,
                     'top': 15,
+                    'left': 770
+                }
+            ],
+            'norGates': [
+                {
+                    'name': 'Norbert',
+                    'inAId': 'NorA',
+                    'inBId': 'NorB',
+                    'outId': 'OrB',
+                    'top': 55,
                     'left': 770
                 }
             ],
@@ -213,6 +252,17 @@ bonsaiApp.controller('bonsaiCpuCtrl',
             }
             if ($scope.cpu.andGates[i].outId) {
                 $scope.cpu.andGates[i].out = $scope.findBus($scope.cpu.andGates[i].outId);
+            }
+        }
+        for (i = 0; i < $scope.cpu.norGates.length; i++) {
+            if ($scope.cpu.norGates[i].inAId) {
+                $scope.cpu.norGates[i].inA = $scope.findBus($scope.cpu.norGates[i].inAId);
+            }
+            if ($scope.cpu.norGates[i].inBId) {
+                $scope.cpu.norGates[i].inB = $scope.findBus($scope.cpu.norGates[i].inBId);
+            }
+            if ($scope.cpu.norGates[i].outId) {
+                $scope.cpu.norGates[i].out = $scope.findBus($scope.cpu.norGates[i].outId);
             }
         }
         for (i = 0; i < $scope.cpu.registers.length; i++) {
