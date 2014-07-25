@@ -14,9 +14,9 @@
             </div>
             <div class="nospace" style="position: absolute;" ng-class="{toprow: $even, bottomrow: $odd}">
                 <div ng-class="{'busconnector': true, 'busconnectortoprow': $even, 'busconnectorbottomrow': $odd}"
-                     style="left: 1.63em;"></div>
+                     style="left: 26px;"></div>
                 <div ng-class="{'wireconnector': true, 'write': true, 'wireconnectortoprowwrite': $even, 'wireconnectorbottomrowwrite': $odd}"
-                     style="left: 2.19em;"
+                     style="left: 35px;"
                      ng-mousedown="activateWriteWire(connection)"
                      ng-mouseup="deactivateWriteWire(connection)"></div>
                 <div ng-class="{'wireconnector': true, 'read': true, 'wireconnectortoprowread': $even, 'wireconnectorbottomrowread': $odd}"
@@ -26,14 +26,14 @@
             </div>
         </div>
         <div style="width: 0; height: 0; overflow: visible; display: inline-block; position: absolute;">
-            <div class="wireconnector grayback" style="left: 3.6em; top: 0.1em;"
+            <div class="wireconnector grayback" style="left: 58px; top: 2px;"
                  ng-mousedown="activateInc()" ng-mouseup="deactivateInc()"></div>
-            <div class="wireconnector grayback" style="left: 3.6em; top: 0.7em;"
+            <div class="wireconnector grayback" style="left: 58px; top: 11px;"
                  ng-mousedown="activateDec()" ng-mouseup="deactivateDec()"></div>
-            <div style="position: absolute; left: 3.25em; top: -0.44em;">
+            <div style="position: absolute; left: 52px; top: -7px;">
                 <span style="font-size: 50%;">+</span>
             </div>
-            <div style="position: absolute; left: 3.3em; top: 0.1em;">
+            <div style="position: absolute; left: 53px; top: 2px;">
                 <span style="font-size: 60%;">-</span>
             </div>
         </div>

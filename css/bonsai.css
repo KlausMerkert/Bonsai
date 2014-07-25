@@ -47,15 +47,16 @@ a:hover {
 .register {
     border: 1px solid rgb(30, 30, 30);
     background-color: rgba(200, 200, 200, 30);
-    border-radius: 0.4em;
-    padding: 0.3em;
+    border-radius: 6px;
+    padding: 5px;
     display: inline-block;
-    height: 1.15em;
-    line-height: 1.1em;
+    height: 18px;
+    width: 53px;
+    line-height: 18px;
 }
 
 .register input {
-    width: 4em;
+    width: 53px;
     margin: 0;
     background-color: rgba(200, 200, 200, 255);
     border: 0 solid rgba(200, 200, 200, 255);
@@ -66,11 +67,11 @@ a:hover {
 
 .register .connection, .memory .connection {
     border: 1px solid rgb(30, 30, 30);
-    min-width: 0.8em;
-    height: 1.2em;
-    line-height: 1.1em;
+    min-width: 13px;
+    height: 19px;
+    line-height: 18px;
     text-align: center;
-    border-radius: 0.2em;
+    border-radius: 3px;
     color: rgb(0, 0, 0);
     display: inline-block;
     position: absolute;
@@ -78,54 +79,54 @@ a:hover {
 }
 
 .register .toprow {
-    top: -1.4em;
+    top: -22px;
 }
 
 .register .bottomrow {
-    top: 1.27em;
+    top: 20px;
 }
 
 .memory {
     border: 1px solid rgb(30, 30, 30);
     background-color: rgba(200, 200, 200, 30);
-    border-radius: 0.4em;
-    padding: 0.3em;
+    border-radius: 6px;
+    padding: 5px;
     display: inline-block;
-    height: 5.15em;
-    line-height: 1.1em;
+    height: 82px;
+    line-height: 18px;
 }
 
 .memory table {
     position: relative;
-    top: -0.3em;
+    top: -5px;
     font-family: monospace;
     border-spacing: 0;
     border-collapse: collapse;
 }
 
 .memory table td {
-    min-width: 5.5em;
+    min-width: 88px;
     border-top: 2px solid rgb(40, 40, 40);
     border-bottom: 2px solid rgb(40, 40, 40);
 }
 
 .memory table .address {
     text-align: center;
-    padding-right: 0.3em;
+    padding-right: 5px;
 }
 
 .memory table .value {
     text-align: center;
     border-left: 1px solid rgb(40, 40, 40);
-    padding-left: 0.3em;
+    padding-left: 5px;
 }
 
 .memory .toprow {
-    top: -1.4em;
+    top: -22px;
 }
 
 .memory .bottomrow {
-    top: 5.27em;
+    top: 84px;
 }
 
 .bus-type {
@@ -152,55 +153,55 @@ a:hover {
 .bus .topleft {
     border-top: 2px solid;
     border-left: 2px solid;
-    border-top-left-radius: 0.4em;
+    border-top-left-radius: 6px;
 }
 
 .wire .topleft {
     border-top: 1px solid rgba(200, 200, 200, 0.6);
     border-left: 1px solid rgba(200, 200, 200, 0.6);
-    border-top-left-radius: 0.4em;
+    border-top-left-radius: 6px;
 }
 
 .bus .topright {
     border-top: 2px solid;
     border-right: 2px solid;
-    border-top-right-radius: 0.4em;
+    border-top-right-radius: 6px;
 }
 
 .wire .topright {
     border-top: 1px solid rgba(200, 200, 200, 0.6);
     border-right: 1px solid rgba(200, 200, 200, 0.6);
-    border-top-right-radius: 0.4em;
+    border-top-right-radius: 6px;
 }
 
 .bus .bottomleft {
     border-bottom: 2px solid;
     border-left: 2px solid;
-    border-bottom-left-radius: 0.4em;
+    border-bottom-left-radius: 6px;
 }
 
 .wire .bottomleft {
     border-bottom: 1px solid rgba(200, 200, 200, 0.6);
     border-left: 1px solid rgba(200, 200, 200, 0.6);
-    border-bottom-left-radius: 0.4em;
+    border-bottom-left-radius: 6px;
 }
 
 .bus .bottomright {
     border-bottom: 2px solid;
     border-right: 2px solid;
-    border-bottom-right-radius: 0.4em;
+    border-bottom-right-radius: 6px;
 }
 
 .wire .bottomright {
     border-bottom: 1px solid rgba(200, 200, 200, 0.6);
     border-right: 1px solid rgba(200, 200, 200, 0.6);
-    border-bottom-right-radius: 0.4em;
+    border-bottom-right-radius: 6px;
 }
 
 .busconnector {
     position: absolute;
-    width: 0.3em;
-    height: 0.3em;
+    width: 5px;
+    height: 5px;
     background-color: rgb(0, 0, 0);
 }
 
@@ -214,26 +215,26 @@ a:hover {
 
 .wireconnector {
     position: absolute;
-    width: 0.2em;
-    height: 0.2em;
+    width: 3px;
+    height: 3px;
     border: 1px solid rgb(30, 30, 30);
     cursor: pointer;
 }
 
 .wireconnectortoprowwrite {
-    top: 0.1em;
+    top: 2px;
 }
 
 .wireconnectortoprowread {
-    top: 0.5em;
+    top: 9px;
 }
 
 .wireconnectorbottomrowwrite {
-    top: 0.85em;
+    top: 14px;
 }
 
 .wireconnectorbottomrowread {
-    top: 0.45em;
+    top: 7px;
 }
 
 .grayback {
@@ -259,8 +260,8 @@ a:hover {
 }
 
 .switch {
-    width: 1em;
-    height: 1em;
+    width: 16px;
+    height: 16px;
     border: 1px solid rgb(30, 30, 30);
     background-color: rgba(200, 200, 200, 30);
 }
@@ -270,17 +271,17 @@ a:hover {
 }
 
 .led {
-    width: 0.5em;
-    height: 0.5em;
-    border-radius: 0.5em;
+    width: 8px;
+    height: 8px;
+    border-radius: 8px;
     border: 1px solid rgb(30, 30, 30);
 }
 
 .negationcircle {
     position: absolute;
-    width: 0.4em;
-    height: 0.4em;
-    border-radius: 0.4em;
+    width: 6px;
+    height: 6px;
+    border-radius: 6px;
     border: 1px solid rgb(0, 0, 0);
 }
 
@@ -353,7 +354,7 @@ a:hover {
 }
 
 .pane {
-    height: 20em;
+    height: 320em;
     background-color: rgb(240, 240, 240);
     border: 1px solid rgb(170, 170, 170);
 }

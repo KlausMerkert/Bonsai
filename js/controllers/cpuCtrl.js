@@ -12,16 +12,16 @@ bonsaiApp.controller('bonsaiCpuCtrl',
                     'max': 255,
                     'base': 10,
                     'color': 'rgb(0, 140, 0)',
-                    'top': 5.75,
-                    'left': 22
+                    'top': 10,
+                    'left': 152
                 }, {
                     'id': 'addressBus',
                     'name': 'Adressbus',
                     'max': 255,
                     'base': 10,
                     'color': 'rgb(0, 0, 225)',
-                    'top': 5.75,
-                    'left': 22
+                    'top': 92,
+                    'left': 352
                 }, {
                     'id': 'testBus',
                     'name': 'Testbus',
@@ -45,32 +45,32 @@ bonsaiApp.controller('bonsaiCpuCtrl',
                     'wireId': 'testBus',
                     'name': 'Lena',
                     'value': 0,
-                    'top': 10.5,
-                    'left': 5
+                    'top': 168,
+                    'left': 80
                 }, {
                     'wireId': 'RegisterCdataBusGateWriteWire',
                     'name': 'RegisterCdataBusGateWriteWireSwitch',
                     'value': 0,
-                    'top': 6.5,
-                    'left': 32
+                    'top': 104,
+                    'left': 512
                 }, {
                     'wireId': 'RegisterCdataBusGateReadWire',
                     'name': 'RegisterCdataBusGateReadWireSwitch',
                     'value': 0,
-                    'top': 5,
-                    'left': 32
+                    'top': 80,
+                    'left': 512
                 }, {
                     'wireId': 'RegisterCIncWire',
                     'name': 'RegisterCIncWireSwitch',
                     'value': 0,
-                    'top': 3,
-                    'left': 35
+                    'top': 48,
+                    'left': 560
                 }, {
                     'wireId': 'RegisterCDecWire',
                     'name': 'RegisterCDecWireSwitch',
                     'value': 0,
-                    'top': 4.2,
-                    'left': 35
+                    'top': 67,
+                    'left': 560
                 }
             ],
             'leds': [
@@ -78,20 +78,20 @@ bonsaiApp.controller('bonsaiCpuCtrl',
                     'wireId': 'testBus',
                     'name': 'Hugo',
                     'value': 0,
-                    'top': 10,
-                    'left': 1
+                    'top': 160,
+                    'left': 16
                 }, {
                     'wireId': 'testBus',
                     'name': 'Heinrich',
                     'value': 0,
-                    'top': 11,
-                    'left': 2
+                    'top': 176,
+                    'left': 32
                 }, {
                     'wireId': 'RegisterCIncWire',
                     'name': 'Register C inc wire led',
                     'value': 0,
-                    'top': 3,
-                    'left': 33
+                    'top': 48,
+                    'left': 512
                 }
             ],
             'registers': [
@@ -99,8 +99,8 @@ bonsaiApp.controller('bonsaiCpuCtrl',
                     'name': 'Register B',
                     'value': 10,
                     'base' : 10,
-                    'top' : 4,
-                    'left': 15,
+                    'top' : 64,
+                    'left': 240,
                     'gates': [
                         {'busId': 'addressBus'},
                         {'busId': 'dataBus'}
@@ -109,8 +109,8 @@ bonsaiApp.controller('bonsaiCpuCtrl',
                     'name': 'Register C',
                     'value': 1,
                     'base' : 10,
-                    'top' : 3,
-                    'left': 25,
+                    'top' : 48,
+                    'left': 400,
                     'gates': [
                         {
                             'busId': 'addressBus'

@@ -39,8 +39,8 @@ bonsaiApp.directive('register', function ($interval) {
                 $scope.data,
                 $scope.incWire,
                 $scope.decWire);
-            $scope.topCSS = $scope.top + 'em';
-            $scope.leftCSS = $scope.left + 'em';
+            $scope.topCSS = $scope.top + 'px';
+            $scope.leftCSS = $scope.left + 'px';
 
             $scope.toggleState = function (connection) {
                 var connections = $scope.register.getBuses();
@@ -261,9 +261,9 @@ bonsaiApp.directive('register', function ($interval) {
                 for (var i = 0; i < connections.length; i++) {
                     if (connections[i].bus === bus) {
                         if (i % 2 == 0) {
-                            positions.push({top: $scope.top-1.2, left: $scope.left+2.08});
+                            positions.push({top: $scope.top-19, left: $scope.left+33});
                         } else {
-                            positions.push({top: $scope.top+3, left: $scope.left+2.08});
+                            positions.push({top: $scope.top+48, left: $scope.left+33});
                         }
                     }
                 }
@@ -276,24 +276,24 @@ bonsaiApp.directive('register', function ($interval) {
                 for (var i = 0; i < connections.length; i++) {
                     if ((connections[i].writeWire) && (connections[i].writeWire === wire)) {
                         if (i % 2 == 0) {
-                            positions.push({top: $scope.top-0.82, left: $scope.left+2.68});
+                            positions.push({top: $scope.top-13, left: $scope.left+43});
                         } else {
-                            positions.push({top: $scope.top+2.62, left: $scope.left+2.68});
+                            positions.push({top: $scope.top+42, left: $scope.left+43});
                         }
                     }
                     if ((connections[i].readWire) && (connections[i].readWire === wire)) {
                         if (i % 2 == 0) {
-                            positions.push({top: $scope.top-0.42, left: $scope.left+2.68});
+                            positions.push({top: $scope.top-7, left: $scope.left+43});
                         } else {
-                            positions.push({top: $scope.top+2.22, left: $scope.left+2.68});
+                            positions.push({top: $scope.top+36, left: $scope.left+43});
                         }
                     }
                 }
                 if (($scope.register.incWire) && ($scope.register.incWire === wire)) {
-                    positions.push({top: $scope.top+0.6, left: $scope.left+4.15});
+                    positions.push({top: $scope.top+10, left: $scope.left+66});
                 }
                 if (($scope.register.decWire) && ($scope.register.decWire === wire)) {
-                    positions.push({top: $scope.top+1.2, left: $scope.left+4.15});
+                    positions.push({top: $scope.top+19, left: $scope.left+66});
                 }
                 return positions;
             };

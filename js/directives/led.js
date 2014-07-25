@@ -40,10 +40,10 @@ bonsaiApp.directive('led', function ($interval) {
             });
 
             $scope.$watch('top', function () {
-                $scope.topCSS = ($scope.top - 0.27) + 'em';
+                $scope.topCSS = ($scope.top - 4) + 'px';
             });
             $scope.$watch('left', function () {
-                $scope.leftCSS = ($scope.left - 0.27) + 'em';
+                $scope.leftCSS = ($scope.left - 4) + 'px';
             });
 
             $scope.activate = function () {

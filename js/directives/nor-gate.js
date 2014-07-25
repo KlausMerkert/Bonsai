@@ -15,16 +15,16 @@ bonsaiApp.directive('norgate', function ($interval) {
         controller: function ($scope) {
             $scope.logicGate = new NorGate($scope.inA, $scope.inB, $scope.out);
 
-            $scope.topCSS = ($scope.top - 0.17) + 'em';
-            $scope.leftCSS = $scope.left + 'em';
+            $scope.topCSS = ($scope.top - 3) + 'px';
+            $scope.leftCSS = $scope.left + 'px';
 
             $scope.getConnectionPositions = function (wire) {
                 if (wire === $scope.inA) {
-                    return [{top: $scope.top, left: ($scope.left + 1.37)}];
+                    return [{top: $scope.top, left: ($scope.left + 22)}];
                 } else if (wire === $scope.inB) {
-                    return [{top: ($scope.top + 0.7), left: ($scope.left + 1.37)}];
+                    return [{top: ($scope.top + 11), left: ($scope.left + 22)}];
                 } else if (wire === $scope.out) {
-                    return [{top: ($scope.top + 0.4), left: ($scope.left - 0.64)}];
+                    return [{top: ($scope.top + 6), left: ($scope.left - 10)}];
                 } else {
                     console.log("This Wire is not connected: " + wire.getName());
                 }

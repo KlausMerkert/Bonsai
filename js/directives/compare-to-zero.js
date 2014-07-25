@@ -13,8 +13,8 @@ bonsaiApp.directive('comparetozero', function ($interval) {
         },
         controller: function ($scope) {
             $scope.comp = new CompareToZero($scope.bus, $scope.wire);
-            $scope.topCSS = ($scope.top + 0.2) + 'em';
-            $scope.leftCSS = ($scope.left - 0.7) + 'em';
+            $scope.topCSS = ($scope.top + 3) + 'px';
+            $scope.leftCSS = ($scope.left - 11) + 'px';
         },
         link: function ($scope, element, attrs) {
             attrs.$observe('compName', function() {
@@ -30,7 +30,7 @@ bonsaiApp.directive('comparetozero', function ($interval) {
                     ];
                 } else if (connector === $scope.wire) {
                     return [
-                        {top: $scope.top + 1.3, left: $scope.left + 0.03}
+                        {top: $scope.top + 21, left: $scope.left}
                     ];
                 }
             };

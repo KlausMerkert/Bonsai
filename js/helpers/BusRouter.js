@@ -551,17 +551,17 @@ BusRouter.prototype.constructParts = function (connectionParts, grid) {
         if (indexXmax == indexXmin) {
             parts.push({
                 type: 'vertical',
-                top: Ymin+'em',
-                left: Xmin+'em',
+                top: Ymin+'px',
+                left: Xmin+'px',
                 width: '0',
-                height: (Ymax-Ymin)+'em'
+                height: (Ymax-Ymin)+'px'
             });
         } else if (indexYmax == indexYmin) {
             parts.push({
                 type: 'horizontal',
-                top: Ymin+'em',
-                left: Xmin+'em',
-                width: (Xmax-Xmin)+'em',
+                top: Ymin+'px',
+                left: Xmin+'px',
+                width: (Xmax-Xmin)+'px',
                 height: '0'
             });
         } else { // the part must be a corner
@@ -587,34 +587,34 @@ BusRouter.prototype.constructParts = function (connectionParts, grid) {
             if (corners.bottomleft && corners.topleft && corners.topright) {
                 parts.push({
                     type: 'topleft',
-                    top: Ymin+'em',
-                    left: Xmin+'em',
-                    width: (Xmax-Xmin)+'em',
-                    height: (Ymax-Ymin)+'em'
+                    top: Ymin+'px',
+                    left: Xmin+'px',
+                    width: (Xmax-Xmin)+'px',
+                    height: (Ymax-Ymin)+'px'
                 });
             } else if (corners.topleft && corners.topright && corners.bottomright) {
                 parts.push({
                     type: 'topright',
-                    top: Ymin+'em',
-                    left: Xmin+'em',
-                    width: (Xmax-Xmin)+'em',
-                    height: (Ymax-Ymin)+'em'
+                    top: Ymin+'px',
+                    left: Xmin+'px',
+                    width: (Xmax-Xmin)+'px',
+                    height: (Ymax-Ymin)+'px'
                 });
             } else if (corners.topright && corners.bottomright && corners.bottomleft) {
                 parts.push({
                     type: 'bottomright',
-                    top: Ymin+'em',
-                    left: Xmin+'em',
-                    width: (Xmax-Xmin)+'em',
-                    height: (Ymax-Ymin)+'em'
+                    top: Ymin+'px',
+                    left: Xmin+'px',
+                    width: (Xmax-Xmin)+'px',
+                    height: (Ymax-Ymin)+'px'
                 });
             } else {
                 parts.push({
                     type: 'bottomleft',
-                    top: Ymin+'em',
-                    left: Xmin+'em',
-                    width: (Xmax-Xmin)+'em',
-                    height: (Ymax-Ymin)+'em'
+                    top: Ymin+'px',
+                    left: Xmin+'px',
+                    width: (Xmax-Xmin)+'px',
+                    height: (Ymax-Ymin)+'px'
                 });
             }
         }

@@ -35,10 +35,10 @@ bonsaiApp.directive('manualswitch', function ($interval) {
             });
 
             $scope.$watch('top', function () {
-                $scope.topCSS = ($scope.top - 0.55) + 'em';
+                $scope.topCSS = ($scope.top - 9) + 'px';
             });
             $scope.$watch('left', function () {
-                $scope.leftCSS = ($scope.left + 0.16) + 'em';
+                $scope.leftCSS = ($scope.left + 3) + 'px';
             });
 
             $scope.getConnectionPositions = function () {

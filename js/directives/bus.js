@@ -30,10 +30,10 @@ bonsaiApp.directive('bus', function () {
             });
 
             $scope.$watch('top', function () {
-                $scope.topCSS = $scope.top + 'em';
+                $scope.topCSS = $scope.top + 'px';
             });
             $scope.$watch('left', function () {
-                $scope.leftCSS = $scope.left + 'em';
+                $scope.leftCSS = $scope.left + 'px';
             });
 
             $scope.$watch('maxValue', function () {

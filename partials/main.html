@@ -55,7 +55,7 @@
         <comparetozeroI bus="addressBus" wire="wire5" comp-name="CMP1" left="13" top="2.3"></comparetozeroI>
         <ledI wire="wire5" led-name="CmpLed" left="13.03" top="5" value="0"></ledI>
 
-        <memory memory-name="Datenspeicher" base="base" top="2" left="1" content="editors[0].content">
+        <memory memory-name="Datenspeicher" base="base" top="32" left="16" content="editors[0].content">
             <addressgate bus="addressBus"></addressgate>
             <datagate bus="dataBus"></datagate>
         </memory>
@@ -82,7 +82,7 @@
                ng-model="editor.filename"
                ng-change="readFile($index)" />
         <div style="position: absolute; top: 28px; overflow: hidden; ">
-            <div style="position: relative; top: 0; height: 15em;">
+            <div style="position: relative; top: 0; height: 240px;">
                 <div ng-repeat="line in splitLines(editor.content) track by $index"
                      class="line-number">{{ $index }}</div>
             </div>

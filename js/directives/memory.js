@@ -51,8 +51,8 @@ bonsaiApp.directive('memory', function ($interval) {
             };
 
             $scope.memory = new Memory($scope.dataChangeCallback, $scope.contentChangeCallback, $scope.registerName);
-            $scope.topCSS = $scope.top + 'em';
-            $scope.leftCSS = $scope.left + 'em';
+            $scope.topCSS = $scope.top + 'px';
+            $scope.leftCSS = $scope.left + 'px';
             $scope.addressBusColor = 'rgb(122, 0, 0)';
             $scope.dataBusColor = 'rgb(0, 0, 0)';
 
@@ -142,10 +142,10 @@ bonsaiApp.directive('memory', function ($interval) {
             $scope.getConnectionPositions = function (bus) {
                 var positions = [];
                 if ($scope.memory.getAdressBus() === bus) {
-                    positions.push({top: $scope.top-1.2, left: $scope.left+2.78});
+                    positions.push({top: $scope.top-19, left: $scope.left+44});
                 }
                 if ($scope.memory.getDataBus() === bus) {
-                    positions.push({top: $scope.top+7, left: $scope.left+7.58});
+                    positions.push({top: $scope.top+112, left: $scope.left+121});
                 }
                 return positions;
             };
@@ -153,13 +153,13 @@ bonsaiApp.directive('memory', function ($interval) {
             $scope.getWireConnectionPositions = function (wire) {
                 var positions = [];
                 if (($scope.memory.addressBus.readWire) && ($scope.memory.addressBus.readWire === wire)) {
-                    positions.push({top: $scope.top-0.42, left: $scope.left+2.68});
+                    positions.push({top: $scope.top-7, left: $scope.left+43});
                 }
                 if (($scope.memory.dataBus.readWire) && ($scope.memory.dataBus.readWire === wire)) {
-                    positions.push({top: $scope.top+6.22, left: $scope.left+8.18});
+                    positions.push({top: $scope.top+100, left: $scope.left+131});
                 }
                 if (($scope.memory.dataBus.writeWire) && ($scope.memory.dataBus.writeWire === wire)) {
-                    positions.push({top: $scope.top+6.62, left: $scope.left+8.18});
+                    positions.push({top: $scope.top+106, left: $scope.left+131});
                 }
                 return positions;
             };
