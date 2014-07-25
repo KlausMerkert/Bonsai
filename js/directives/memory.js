@@ -93,6 +93,50 @@ bonsaiApp.directive('memory', function ($interval) {
                 }
             });
 
+            $scope.activateAddressBusRead = function () {
+                if ($scope.memory.addressBus.readWire) {
+                    $scope.memory.addressBus.readWire.unregisterReader(
+                        $scope.memory.addressBus.readWireConnector
+                    );
+                    try {
+                        $scope.memory.addressBus.readWire.write(
+                            $scope.memory.addressBus.readWireConnector,
+                            1
+                        );
+                        $scope.memory.setAddressBusState(-1);
+                    } catch (exception) {
+                        $scope.memory.addressBus.readWire.registerReaderAndRead(
+                            $scope.memory.addressBus.readWireConnector
+                        );
+                        throw exception;
+                    }
+                } else {
+                    $scope.memory.setAddressBusState(-1);
+                }
+            };
+
+            $scope.deactivateAddressBusRead = function () {
+                if ($scope.memory.addressBus.readWire) {
+                    try {
+                        $scope.memory.addressBus.readWire.write(
+                            $scope.memory.addressBus.readWireConnector,
+                            0
+                        );
+                    } catch (exception) {
+                        throw exception;
+                    } finally {
+                        $scope.memory.addressBus.readWire.stopWriting(
+                            $scope.memory.addressBus.readWireConnector
+                        );
+                        $scope.memory.addressBus.readWire.registerReaderAndRead(
+                            $scope.memory.addressBus.readWireConnector
+                        );
+                    }
+                }
+                $scope.memory.setAddressBusState(0);
+                $scope.setDataContextToUndefined();
+            };
+
             $scope.toggleAddressBusRead = function () {
                 if ($scope.memory.getAddressBusState() == -1) { // If we are reading then we want to stop it.
                     $scope.memory.setAddressBusState(0);
@@ -153,7 +197,7 @@ bonsaiApp.directive('memory', function ($interval) {
             $scope.getWireConnectionPositions = function (wire) {
                 var positions = [];
                 if (($scope.memory.addressBus.readWire) && ($scope.memory.addressBus.readWire === wire)) {
-                    positions.push({top: $scope.top-7, left: $scope.left+43});
+                    positions.push({top: $scope.top-7, left: $scope.left+51});
                 }
                 if (($scope.memory.dataBus.readWire) && ($scope.memory.dataBus.readWire === wire)) {
                     positions.push({top: $scope.top+100, left: $scope.left+131});
@@ -185,9 +229,9 @@ bonsaiApp.directive('memory', function ($interval) {
                         $scope.memory.addressBus.readWireConnector,
                         $scope.getWireConnectionPositions
                     );
-                    addressBusReadWire.registerReaderAndRead(
-                        $scope.memory.addressBus.readWireConnector
-                    );
+                    if (addressBusReadWire.registerReaderAndRead($scope.memory.addressBus.readWireConnector)) {
+                        $scope.memory.setToRead($scope.memory.addressBus.readWire);
+                    }
                 }
 
                 $scope.memory.getDataBus().enrollToDirective(
@@ -208,9 +252,9 @@ bonsaiApp.directive('memory', function ($interval) {
                         $scope.memory.dataBus.writeWireConnector,
                         $scope.getWireConnectionPositions
                     );
-                    dataBusWriteWire.registerReaderAndRead(
-                        $scope.memory.dataBus.writeWireConnector
-                    );
+                    if (dataBusWriteWire.registerReaderAndRead($scope.memory.dataBus.writeWireConnector)) {
+                        $scope.memory.setToWrite($scope.memory.dataBus.writeWire);
+                    }
                 }
                 var dataBusReadWire = $scope.memory.dataBus.readWire;
                 if (dataBusReadWire) {
@@ -225,9 +269,9 @@ bonsaiApp.directive('memory', function ($interval) {
                         $scope.memory.dataBus.readWireConnector,
                         $scope.getWireConnectionPositions
                     );
-                    dataBusReadWire.registerReaderAndRead(
-                        $scope.memory.dataBus.readWireConnector
-                    );
+                    if (dataBusReadWire.registerReaderAndRead($scope.memory.dataBus.readWireConnector)) {
+                        $scope.memory.setToRead($scope.memory.dataBus.readWire);
+                    }
                 }
             }, 1, 1);
         },

@@ -253,35 +253,35 @@ Memory.prototype.setDataBusState = function (desiredState) {
 
 Memory.prototype.setToRead = function (wire) {
     if (this.addressBus.readWire === wire) {
-        this.setState(this.addressBus, -1);
+        this.setAddressBusState(-1);
     }
     if (this.dataBus.readWire === wire) {
-        this.setState(this.dataBus, -1);
+        this.setDataBusState(-1);
     }
 };
 
 Memory.prototype.setToWrite = function (wire) {
     if (this.dataBus.writeWire === wire) {
-        this.setState(this.dataBus, 1);
+        this.setDataBusState(1);
     }
 };
 
 Memory.prototype.setToDisconnected = function (wire) {
     if (this.addressBus.readWire === wire) {
-        this.setState(this.addressBus, 0);
+        this.setAddressBusState(0);
     }
     if (this.dataBus.readWire === wire) {
         if ((this.dataBus) && (this.dataBus.writeWire) && (this.dataBus.writeWire.isActive())) {
-            this.setState(this.dataBus, 1)
+            this.setDataBusState(1)
         } else {
-            this.setState(this.dataBus, 0);
+            this.setDataBusState(0);
         }
     }
     if (this.dataBus.writeWire === wire) {
         if ((this.dataBus) && (this.dataBus.readWire) && (this.dataBus.readWire.isActive())) {
-            this.setState(this.dataBus, -1)
+            this.setDataBusState(-1)
         } else {
-            this.setState(this.dataBus, 0);
+            this.setDataBusState(0);
         }
     }
 };

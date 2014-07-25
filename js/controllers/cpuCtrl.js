@@ -38,6 +38,9 @@ bonsaiApp.controller('bonsaiCpuCtrl',
                 }, {
                     'id': 'RegisterCDecWire',
                     'name': 'Register C dec wire'
+                }, {
+                    'id': 'DatenspeicherAddressReadWire',
+                    'name': 'Datenspeicher Adressbus read wire'
                 }
             ],
             'manualswitches': [
@@ -71,6 +74,12 @@ bonsaiApp.controller('bonsaiCpuCtrl',
                     'value': 0,
                     'top': 67,
                     'left': 560
+                }, {
+                    'wireId': 'DatenspeicherAddressReadWire',
+                    'name': 'DatenspeicherAddressReadWireSwitch',
+                    'value': 1,
+                    'top': 20,
+                    'left': 80
                 }
             ],
             'leds': [
@@ -132,7 +141,8 @@ bonsaiApp.controller('bonsaiCpuCtrl',
                     'top': 32,
                     'left': 16,
                     'addressgate': {
-                        'busId': 'addressBus'
+                        'busId': 'addressBus',
+                        'readWireId': 'DatenspeicherAddressReadWire'
                     },
                     'datagate': {
                         'busId': 'dataBus',

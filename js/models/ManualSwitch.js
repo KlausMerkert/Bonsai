@@ -17,19 +17,24 @@ ManualSwitch.prototype.setName = function (name) {
 
 ManualSwitch.prototype.toggle = function () {
     if (!this.value) {
-        this.value = 1;
-        this.wire.write(this, this.value);
+        this.setValue(1);
     } else {
-        this.value = 0;
-        this.wire.write(this, this.value);
-        this.wire.stopWriting(this);
+        this.setValue(0);
     }
-    this.updateViewCallback(this.value);
 };
 
 ManualSwitch.prototype.setValue = function (value) {
     if (this.value != value) {
         this.value = value;
-        this.updateViewCallback(this.value);
+        try {
+            this.wire.write(this, this.value);
+        } catch (exception) {
+            throw exception;
+        } finally {
+            if (!this.value) {
+                this.wire.stopWriting(this);
+            }
+            this.updateViewCallback(this.value);
+        }
     }
 };

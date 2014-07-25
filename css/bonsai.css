@@ -90,7 +90,7 @@ a:hover {
     border: 1px solid rgb(30, 30, 30);
     background-color: rgba(200, 200, 200, 30);
     border-radius: 6px;
-    padding: 5px;
+    padding: 5px 2px;
     display: inline-block;
     height: 82px;
     line-height: 18px;
@@ -105,7 +105,7 @@ a:hover {
 }
 
 .memory table td {
-    min-width: 88px;
+    min-width: 72px;
     border-top: 2px solid rgb(40, 40, 40);
     border-bottom: 2px solid rgb(40, 40, 40);
 }
