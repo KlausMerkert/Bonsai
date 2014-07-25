@@ -239,19 +239,6 @@ bonsaiApp.controller('bonsaiCpuCtrl',
             document.body.removeChild(downloadLink);
         };
 
-        //$scope.dataBus = new Bus();
-        //$scope.addressBus = new Bus();
-        //$scope.testBus = new Bus();
-
-        $scope.wire1a = new ControlWire();
-        $scope.wire1b = new ControlWire();
-        $scope.wire1 = new ControlWire();
-        $scope.wire2 = new ControlWire();
-        $scope.wire3 = new ControlWire();
-        $scope.wire4 = new ControlWire();
-        $scope.wire5 = new ControlWire();
-        $scope.wire6 = new ControlWire();
-
         $scope.errors = [];
         $scope.$on('error', function (event, message) {
             $scope.errors.push(message)

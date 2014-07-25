@@ -174,14 +174,20 @@ bonsaiApp.directive('memory', function ($interval) {
 
                 var addressBusReadWire = $scope.memory.addressBus.readWire;
                 if (addressBusReadWire) {
-                    var addressBusReadConnector = new ReadingControlWireConnector(addressBusReadWire,
+                    $scope.memory.addressBus.readWireConnector = new ReadingControlWireConnector(addressBusReadWire,
                         function (wire) {
                         $scope.memory.setToRead(wire);
                     },
                         function (wire) {
                         $scope.memory.setToDisconnected(wire);
                     });
-                    addressBusReadWire.connectToDirective(addressBusReadConnector, $scope.getWireConnectionPositions);
+                    addressBusReadWire.enrollToDirective(
+                        $scope.memory.addressBus.readWireConnector,
+                        $scope.getWireConnectionPositions
+                    );
+                    addressBusReadWire.registerReaderAndRead(
+                        $scope.memory.addressBus.readWireConnector
+                    );
                 }
 
                 $scope.memory.getDataBus().enrollToDirective(
@@ -191,25 +197,37 @@ bonsaiApp.directive('memory', function ($interval) {
 
                 var dataBusWriteWire = $scope.memory.dataBus.writeWire;
                 if (dataBusWriteWire) {
-                    var dataBusWriteConnector = new ReadingControlWireConnector(dataBusWriteWire,
+                    $scope.memory.dataBus.writeWireConnector = new ReadingControlWireConnector(dataBusWriteWire,
                         function (wire) {
                         $scope.memory.setToWrite(wire);
                     },
                         function (wire) {
                         $scope.memory.setToDisconnected(wire);
                     });
-                    dataBusWriteWire.connectToDirective(dataBusWriteConnector, $scope.getWireConnectionPositions);
+                    dataBusWriteWire.enrollToDirective(
+                        $scope.memory.dataBus.writeWireConnector,
+                        $scope.getWireConnectionPositions
+                    );
+                    dataBusWriteWire.registerReaderAndRead(
+                        $scope.memory.dataBus.writeWireConnector
+                    );
                 }
                 var dataBusReadWire = $scope.memory.dataBus.readWire;
                 if (dataBusReadWire) {
-                    var dataBusReadConnector = new ReadingControlWireConnector(dataBusReadWire,
+                    $scope.memory.dataBus.readWireConnector = new ReadingControlWireConnector(dataBusReadWire,
                         function (wire) {
                         $scope.memory.setToRead(wire);
                     },
                         function (wire) {
                         $scope.memory.setToDisconnected(wire);
                     });
-                    dataBusReadWire.connectToDirective(dataBusReadConnector, $scope.getWireConnectionPositions);
+                    dataBusReadWire.enrollToDirective(
+                        $scope.memory.dataBus.readWireConnector,
+                        $scope.getWireConnectionPositions
+                    );
+                    dataBusReadWire.registerReaderAndRead(
+                        $scope.memory.dataBus.readWireConnector
+                    );
                 }
             }, 1, 1);
         },

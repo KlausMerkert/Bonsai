@@ -354,7 +354,7 @@ a:hover {
 }
 
 .pane {
-    height: 320em;
+    height: 320px;
     background-color: rgb(240, 240, 240);
     border: 1px solid rgb(170, 170, 170);
 }

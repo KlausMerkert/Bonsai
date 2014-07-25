@@ -53,6 +53,9 @@ Memory.prototype.setContent = function (newContent) {
     if (this.addressBus) {
         if (this.addressBus.state == -1) {
             var address = this.addressBus.bus.registerReaderAndRead(this);
+            if ((this.dataBus) && (this.dataBus.state === 1)) {
+                this.dataBus.bus.write(this, this.content[address]);
+            }
             this.updateViewCallback(this.getDataWithContext(address));
         }
     }
