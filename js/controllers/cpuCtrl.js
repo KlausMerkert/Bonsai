@@ -123,6 +123,23 @@ bonsaiApp.controller('bonsaiCpuCtrl',
                     'incWireId': 'RegisterCIncWire',
                     'decWireId': 'RegisterCDecWire'
                 }
+            ],
+            'memories': [
+                {
+                    'name': "Datenspeicher",
+                    'base': 10,
+                    'content': "1\n2\n3",
+                    'top': 32,
+                    'left': 16,
+                    'addressgate': {
+                        'busId': 'addressBus'
+                    },
+                    'datagate': {
+                        'busId': 'dataBus',
+                        'writeWireId': undefined,
+                        'readWireId': undefined
+                    }
+                }
             ]
         };
 
@@ -166,21 +183,20 @@ bonsaiApp.controller('bonsaiCpuCtrl',
                 }
             }
         }
-
-        $scope.editors = [
-            {
-                'name': "Speicher",
-                'content': "1\n2\n3"
-            },
-            {
-                'name': "Befehlsdecoder",
-                'content': "4\n5\n6\n7"
-            },
-            {
-                'name': "Mikroprogramm",
-                'content': "8\n9\n10"
+        for (i = 0; i < $scope.cpu.memories.length; i++) {
+            $scope.cpu.memories[i].addressgate.bus = $scope.findBus($scope.cpu.memories[i].addressgate.busId);
+            if ($scope.cpu.memories[i].addressgate.readWireId) {
+                $scope.cpu.memories[i].addressgate.readWire = $scope.findBus($scope.cpu.memories[i].addressgate.readWireId);
             }
-        ];
+            $scope.cpu.memories[i].datagate.bus = $scope.findBus($scope.cpu.memories[i].datagate.busId);
+            if ($scope.cpu.memories[i].datagate.writeWireId) {
+                $scope.cpu.memories[i].datagate.writeWire = $scope.findBus($scope.cpu.memories[i].datagate.writeWireId);
+            }
+            if ($scope.cpu.memories[i].datagate.readWireId) {
+                $scope.cpu.memories[i].datagate.readWire = $scope.findBus($scope.cpu.memories[i].datagate.readWireId);
+            }
+        }
+
         $scope.selectedEditor = undefined;
         $scope.selectEditor = function (index) {
             $scope.selectedEditor = index;

@@ -6,7 +6,7 @@
             <span class="content" ng-click="selectEditor(undefined)"><a href="">CPU-Ansicht</a></span>
             <span class="end"></span>
         </li>
-        <li ng-repeat="editor in editors" ng-class="{'active': selectedEditor === $index + 1}">
+        <li ng-repeat="editor in cpu.memories" ng-class="{'active': selectedEditor === $index + 1}">
             <span class="start"></span>
             <span class="content" ng-click="selectEditor($index + 1)"><a href="">{{ editor.name }}</a></span>
             <span class="end"></span>
@@ -33,6 +33,15 @@
                 </div>
             </register>
         </div>
+        <div ng-repeat="memory in cpu.memories">
+            <memory memory-name="{{memory.name}}" base="memory.base"
+                    top="memory.top" left="memory.left" content="memory.content">
+                <addressgate bus="memory.addressgate.bus"
+                             set-read="memory.addressgate.readWire"></addressgate>
+                <datagate bus="memory.datagate.bus"
+                          set-write="memory.datagate.writeWire" set-read="memory.datagate.readWire"></datagate>
+            </memory>
+        </div>
 
         <controlwire wire="wire1a" wire-name="Draht 1 A"></controlwire>
         <controlwire wire="wire1b" wire-name="Draht 1 B"></controlwire>
@@ -55,10 +64,10 @@
         <comparetozeroI bus="addressBus" wire="wire5" comp-name="CMP1" left="13" top="2.3"></comparetozeroI>
         <ledI wire="wire5" led-name="CmpLed" left="13.03" top="5" value="0"></ledI>
 
-        <memory memory-name="Datenspeicher" base="base" top="32" left="16" content="editors[0].content">
-            <addressgate bus="addressBus"></addressgate>
-            <datagate bus="dataBus"></datagate>
-        </memory>
+        <memoryI memory-name="Datenspeicher" base="base" top="32" left="16" content="editors[0].content">
+            <addressgateI bus="addressBus"></addressgateI>
+            <datagateI bus="dataBus"></datagateI>
+        </memoryI>
         <manualswitchI wire="wire6" switch-name="Inc switch" value="0" top="4" left="23"></manualswitchI>
         <registerI value="10" register-name="Register B" base="base" top="4" left="15">
             <gateI bus="addressBus"></gateI>
@@ -74,7 +83,7 @@
         <manualswitchI wire="wire3" switch-name="switch 3" value="0" top="6.5" left="32"></manualswitchI>
         <manualswitchI wire="wire4" switch-name="switch 4" value="0" top="5" left="32"></manualswitchI>
     </div>
-    <div class="editor pane" ng-repeat="editor in editors"
+    <div class="editor pane" ng-repeat="editor in cpu.memories"
          ng-show="selectedEditor === $index + 1" style="position: relative;">
         <label for="content-{{editor.name}}">{{ editor.name }}</label>
         <button type="button" ng-click="saveFile($index)">Als Datei speichern</button>
