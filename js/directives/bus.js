@@ -44,11 +44,19 @@ bonsaiApp.directive('bus', function () {
                 }
             });
 
-            $scope.displayWidth = function () {
+            $scope.displayWidth = function (highlight) {
                 if ($scope.localBus.getWidth() > 1) {
-                    return '2px';
+                    if (highlight) {
+                        return '3px';
+                    } else {
+                        return '2px';
+                    }
                 } else {
-                    return '1px';
+                    if (highlight) {
+                        return '2px';
+                    } else {
+                        return '1px';
+                    }
                 }
             };
 

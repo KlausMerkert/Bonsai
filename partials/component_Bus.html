@@ -1,5 +1,10 @@
 <div class="component nospace">
     <div ng-repeat="part in visibleParts" class="bus">
+        <div class="bus-type" style="border-color: rgba(40, 40, 255, 0.3);"
+             ng-show="localBus.isActive()" ng-class="part.type"
+             ng-style="{'top': part.top, 'left': part.left, 'width': part.width, 'height': part.height, 'border-width': displayWidth(true)}"></div>
+    </div>
+    <div ng-repeat="part in visibleParts" class="bus">
         <div class="bus-type"
              ng-class="part.type"
              ng-style="{'top': part.top, 'left': part.left, 'width': part.width, 'height': part.height, 'border-color': color, 'border-width': displayWidth()}"></div>
