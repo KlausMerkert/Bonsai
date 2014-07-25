@@ -4,7 +4,6 @@ function OrGate (inWireA, inWireB, outWire) {
     this.inWireA = inWireA;
     this.inWireB = inWireB;
     this.outWire = outWire;
-    this.outWire.setWriter(this);
     this.name = "unnamed OR";
 }
 
@@ -17,9 +16,21 @@ OrGate.prototype.setName = function (name) {
 };
 
 OrGate.prototype.setValue = function () {
-    if ((this.inWireA.isActive()) || (this.inWireB.isActive())) {
-        this.outWire.write(this, 1);
+    var stateInA = false;
+    if ((this.inWireA) && (this.inWireA.isActive()) && (this.inWireA.isNotZero())) {
+        stateInA = true;
+    }
+    var stateInB = false;
+    if ((this.inWireB) && (this.inWireB.isActive()) && (this.inWireB.isNotZero())) {
+        stateInB = true;
+    }
+    if (stateInA || stateInB) {
+        if (this.outWire) {
+            this.outWire.write(this, 1);
+        }
     } else {
-        this.outWire.write(this, 0);
+        if (this.outWire) {
+            this.outWire.write(this, 0);
+        }
     }
 };

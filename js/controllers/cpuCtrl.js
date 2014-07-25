@@ -59,6 +59,9 @@ bonsaiApp.controller('bonsaiCpuCtrl',
                 }, {
                     'id': 'OrB',
                     'name': 'Or gate B wire'
+                }, {
+                    'id': 'logic',
+                    'name': 'logic result wire'
                 }
             ],
             'manualswitches': [
@@ -148,6 +151,11 @@ bonsaiApp.controller('bonsaiCpuCtrl',
                     'name': 'Nor works correctly intication led',
                     'top': 70,
                     'left': 750
+                }, {
+                    'wireId': 'logic',
+                    'name': 'logic intication led',
+                    'top': 39,
+                    'left': 700
                 }
             ],
             'andGates': [
@@ -155,9 +163,19 @@ bonsaiApp.controller('bonsaiCpuCtrl',
                     'name': 'Andreas',
                     'inAId': 'AndA',
                     'inBId': 'AndB',
-                    'outId': undefined,
+                    'outId': 'OrA',
                     'top': 15,
                     'left': 770
+                }
+            ],
+            'orGates': [
+                {
+                    'name': 'Orphelia',
+                    'inAId': 'OrA',
+                    'inBId': 'OrB',
+                    'outId': 'logic',
+                    'top': 35,
+                    'left': 720
                 }
             ],
             'norGates': [
@@ -252,6 +270,17 @@ bonsaiApp.controller('bonsaiCpuCtrl',
             }
             if ($scope.cpu.andGates[i].outId) {
                 $scope.cpu.andGates[i].out = $scope.findBus($scope.cpu.andGates[i].outId);
+            }
+        }
+        for (i = 0; i < $scope.cpu.orGates.length; i++) {
+            if ($scope.cpu.orGates[i].inAId) {
+                $scope.cpu.orGates[i].inA = $scope.findBus($scope.cpu.orGates[i].inAId);
+            }
+            if ($scope.cpu.orGates[i].inBId) {
+                $scope.cpu.orGates[i].inB = $scope.findBus($scope.cpu.orGates[i].inBId);
+            }
+            if ($scope.cpu.orGates[i].outId) {
+                $scope.cpu.orGates[i].out = $scope.findBus($scope.cpu.orGates[i].outId);
             }
         }
         for (i = 0; i < $scope.cpu.norGates.length; i++) {

@@ -12,11 +12,17 @@ bonsaiApp.directive('orgate', function ($interval) {
             left: '=',
             gateName: '@'
         },
-        controller: function ($scope) {
+        link: function ($scope, element, attrs) {
             $scope.logicGate = new OrGate($scope.inA, $scope.inB, $scope.out);
 
             $scope.topCSS = ($scope.top - 3) + 'px';
             $scope.leftCSS = $scope.left + 'px';
+
+            attrs.$observe('gateName', function() {
+                if ($scope.gateName) {
+                    $scope.logicGate.setName($scope.gateName);
+                }
+            });
 
             $scope.getConnectionPositions = function (wire) {
                 if (wire === $scope.inA) {
@@ -33,18 +39,19 @@ bonsaiApp.directive('orgate', function ($interval) {
             // We have to wait for a very short time to enroll to the buses
             // because the wire needs to be fully initialized.
             $interval(function () {
-                $scope.inA.connectToDirective($scope.logicGate, $scope.getConnectionPositions);
-                $scope.inB.connectToDirective($scope.logicGate, $scope.getConnectionPositions);
-            }, 1, 1);
-        },
-        link: function ($scope, element, attrs) {
-            attrs.$observe('gateName', function() {
-                if ($scope.gateName) {
-                    $scope.logicGate.setName($scope.gateName);
+                if ($scope.inA) {
+                    $scope.inA.enrollToDirective($scope.logicGate, $scope.getConnectionPositions);
+                    $scope.inA.registerReaderAndRead($scope.logicGate);
                 }
-            });
-
-            $scope.logicGate.getPositions = $scope.getConnectionPositions;
+                if ($scope.inB) {
+                    $scope.inB.enrollToDirective($scope.logicGate, $scope.getConnectionPositions);
+                    $scope.inB.registerReaderAndRead($scope.logicGate);
+                }
+                if ($scope.out) {
+                    $scope.out.enrollToDirective($scope.logicGate, $scope.getConnectionPositions);
+                }
+                $scope.logicGate.setValue();
+            }, 1, 1);
         },
         templateUrl: 'partials/component_OrGate.html'
     };

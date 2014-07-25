@@ -25,11 +25,15 @@
             <led wire="led.wire" led-name="{{led.name}}" value="led.value" top="led.top" left="led.left"></led>
         </div>
         <div ng-repeat="andGate in cpu.andGates">
-            <andgate in-a="andGate.inA" in-b="andGate.inB" out="andGate.out" gate-name="andGate.name"
+            <andgate in-a="andGate.inA" in-b="andGate.inB" out="andGate.out" gate-name="{{andGate.name}}"
                      top="andGate.top" left="andGate.left"></andgate>
         </div>
+        <div ng-repeat="orGate in cpu.orGates">
+            <orgate in-a="orGate.inA" in-b="orGate.inB" out="orGate.out" gate-name="{{orGate.name}}"
+                     top="orGate.top" left="orGate.left"></orgate>
+        </div>
         <div ng-repeat="norGate in cpu.norGates">
-            <norgate in-a="norGate.inA" in-b="norGate.inB" out="norGate.out" gate-name="norGate.name"
+            <norgate in-a="norGate.inA" in-b="norGate.inB" out="norGate.out" gate-name="{{norGate.name}}"
                      top="norGate.top" left="norGate.left"></norgate>
         </div>
         <div ng-repeat="register in cpu.registers">
