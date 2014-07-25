@@ -41,6 +41,12 @@ bonsaiApp.controller('bonsaiCpuCtrl',
                 }, {
                     'id': 'DatenspeicherAddressReadWire',
                     'name': 'Datenspeicher Adressbus read wire'
+                }, {
+                    'id': 'AndA',
+                    'name': 'And gate A wire'
+                }, {
+                    'id': 'AndB',
+                    'name': 'And gate B wire'
                 }
             ],
             'manualswitches': [
@@ -80,6 +86,18 @@ bonsaiApp.controller('bonsaiCpuCtrl',
                     'value': 1,
                     'top': 20,
                     'left': 80
+                }, {
+                    'wireId': 'AndA',
+                    'name': 'AndASwitch',
+                    'value': 1,
+                    'top': 10,
+                    'left': 800
+                }, {
+                    'wireId': 'AndB',
+                    'name': 'AndBSwitch',
+                    'value': 0,
+                    'top': 30,
+                    'left': 800
                 }
             ],
             'leds': [
@@ -101,6 +119,16 @@ bonsaiApp.controller('bonsaiCpuCtrl',
                     'value': 0,
                     'top': 48,
                     'left': 512
+                }
+            ],
+            'andGates': [
+                {
+                    'name': 'Andreas',
+                    'inAId': 'AndA',
+                    'inBId': 'AndB',
+                    'outId': undefined,
+                    'top': 15,
+                    'left': 770
                 }
             ],
             'registers': [
@@ -175,6 +203,17 @@ bonsaiApp.controller('bonsaiCpuCtrl',
         }
         for (i = 0; i < $scope.cpu.leds.length; i++) {
             $scope.cpu.leds[i].wire = $scope.findBus($scope.cpu.leds[i].wireId);
+        }
+        for (i = 0; i < $scope.cpu.andGates.length; i++) {
+            if ($scope.cpu.andGates[i].inAId) {
+                $scope.cpu.andGates[i].inA = $scope.findBus($scope.cpu.andGates[i].inAId);
+            }
+            if ($scope.cpu.andGates[i].inBId) {
+                $scope.cpu.andGates[i].inB = $scope.findBus($scope.cpu.andGates[i].inBId);
+            }
+            if ($scope.cpu.andGates[i].outId) {
+                $scope.cpu.andGates[i].out = $scope.findBus($scope.cpu.andGates[i].outId);
+            }
         }
         for (i = 0; i < $scope.cpu.registers.length; i++) {
             if ($scope.cpu.registers[i].incWireId) {
