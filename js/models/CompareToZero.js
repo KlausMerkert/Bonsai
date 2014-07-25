@@ -3,7 +3,6 @@
 function CompareToZero (bus, wire) {
     this.bus = bus;
     this.wire = wire;
-    this.wire.setWriter(this);
     this.name = "unnamed CompareToZero";
 }
 
@@ -17,8 +16,12 @@ CompareToZero.prototype.setName = function (name) {
 
 CompareToZero.prototype.setValue = function () {
     if (parseInt(this.bus.registerReaderAndRead(this)) === 0) {
-        this.wire.write(this, 1);
+        if (this.wire) {
+            this.wire.write(this, 1);
+        }
     } else {
-        this.wire.write(this, 0);
+        if (this.wire) {
+            this.wire.write(this, 0);
+        }
     }
 };

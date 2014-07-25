@@ -206,11 +206,11 @@ a:hover {
 }
 
 .busconnectortoprow {
-    top: -0.25em;
+    top: -4px;
 }
 
 .busconnectorbottomrow {
-    top: 1.31em;
+    top: 20px;
 }
 
 .wireconnector {

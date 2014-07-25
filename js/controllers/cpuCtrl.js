@@ -62,6 +62,9 @@ bonsaiApp.controller('bonsaiCpuCtrl',
                 }, {
                     'id': 'logic',
                     'name': 'logic result wire'
+                }, {
+                    'id': 'compWire',
+                    'name': 'Zerocomparator result wire'
                 }
             ],
             'manualswitches': [
@@ -156,6 +159,11 @@ bonsaiApp.controller('bonsaiCpuCtrl',
                     'name': 'logic intication led',
                     'top': 39,
                     'left': 700
+                }, {
+                    'wireId': 'compWire',
+                    'name': 'comp intication led',
+                    'top': 170,
+                    'left': 300
                 }
             ],
             'andGates': [
@@ -234,6 +242,15 @@ bonsaiApp.controller('bonsaiCpuCtrl',
                         'writeWireId': undefined,
                         'readWireId': undefined
                     }
+                }
+            ],
+            'zerocomparators': [
+                {
+                    'name': 'Zero comparator 1',
+                    'busId': 'dataBus',
+                    'wireId': 'compWire',
+                    'top': 130,
+                    'left': 300
                 }
             ]
         };
@@ -322,6 +339,12 @@ bonsaiApp.controller('bonsaiCpuCtrl',
             }
             if ($scope.cpu.memories[i].datagate.readWireId) {
                 $scope.cpu.memories[i].datagate.readWire = $scope.findBus($scope.cpu.memories[i].datagate.readWireId);
+            }
+        }
+        for (i = 0; i < $scope.cpu.zerocomparators.length; i++) {
+            $scope.cpu.zerocomparators[i].bus = $scope.findBus($scope.cpu.zerocomparators[i].busId);
+            if ($scope.cpu.zerocomparators[i].wireId) {
+                $scope.cpu.zerocomparators[i].wire = $scope.findBus($scope.cpu.zerocomparators[i].wireId);
             }
         }
 

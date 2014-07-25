@@ -54,6 +54,10 @@
                           set-write="memory.datagate.writeWire" set-read="memory.datagate.readWire"></datagate>
             </memory>
         </div>
+        <div ng-repeat="comp in cpu.zerocomparators">
+            <comparetozero comp-name="comp.name" bus="comp.bus" wire="comp.wire"
+                           top="comp.top" left="comp.left"></comparetozero>
+        </div>
     </div>
     <div class="editor pane" ng-repeat="editor in cpu.memories"
          ng-show="selectedEditor === $index + 1" style="position: relative;">
