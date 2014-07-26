@@ -11,7 +11,8 @@ bonsaiApp.directive('register', function ($interval) {
             top: '=',
             left: '=',
             incWire: '=',
-            decWire: '='
+            decWire: '=',
+            clrWire: '='
         },
         controller: function ($scope, $filter) {
             $scope.data = $scope.value;
@@ -38,7 +39,9 @@ bonsaiApp.directive('register', function ($interval) {
                 $scope.registerName,
                 $scope.data,
                 $scope.incWire,
-                $scope.decWire);
+                $scope.decWire,
+                $scope.clrWire
+            );
             $scope.topCSS = $scope.top + 'px';
             $scope.leftCSS = $scope.left + 'px';
 
@@ -255,6 +258,34 @@ bonsaiApp.directive('register', function ($interval) {
                 }
             };
 
+            $scope.activateClr = function () {
+                if ($scope.clrWire) {
+                    $scope.clrWire.unregisterReader($scope.clrWireConnector);
+                    try {
+                        $scope.clrWire.write($scope.clrWireConnector, 1);
+                        $scope.register.clr();
+                    } catch (exception) {
+                        $scope.clrWire.registerReaderAndRead($scope.clrWireConnector);
+                        throw exception;
+                    }
+                } else {
+                    $scope.register.clr();
+                }
+            };
+
+            $scope.deactivateClr = function () {
+                if ($scope.clrWire) {
+                    try {
+                        $scope.clrWire.write($scope.clrWireConnector, 0);
+                    } catch (exception) {
+                        throw exception;
+                    } finally {
+                        $scope.clrWire.stopWriting($scope.clrWireConnector);
+                        $scope.clrWire.registerReaderAndRead($scope.clrWireConnector);
+                    }
+                }
+            };
+
             $scope.getConnectionPositions = function (bus) {
                 var positions = [];
                 var connections = $scope.register.getBuses();
@@ -290,10 +321,13 @@ bonsaiApp.directive('register', function ($interval) {
                     }
                 }
                 if (($scope.register.incWire) && ($scope.register.incWire === wire)) {
-                    positions.push({top: $scope.top+10, left: $scope.left+66});
+                    positions.push({top: $scope.top+8, left: $scope.left+66});
                 }
                 if (($scope.register.decWire) && ($scope.register.decWire === wire)) {
-                    positions.push({top: $scope.top+19, left: $scope.left+66});
+                    positions.push({top: $scope.top+15, left: $scope.left+66});
+                }
+                if (($scope.register.clrWire) && ($scope.register.clrWire === wire)) {
+                    positions.push({top: $scope.top+22, left: $scope.left+66});
                 }
                 return positions;
             };
@@ -368,6 +402,22 @@ bonsaiApp.directive('register', function ($interval) {
                     $scope.decWire.enrollToDirective($scope.decWireConnector, $scope.getWireConnectionPositions);
                     if ($scope.decWire.registerReaderAndRead($scope.decWireConnector)) {
                         $scope.register.dec();
+                    }
+                }
+                if ($scope.clrWire) {
+                    $scope.clrWireConnector = new ReadingControlWireConnector(
+                        $scope.clrWire,
+                        function (wire) {
+                            if (wire === $scope.clrWire) {
+                                $scope.register.clr();
+                            }
+                        },
+                        function (wire) {},
+                        $scope.registerName + ' clr wire connector'
+                    );
+                    $scope.clrWire.enrollToDirective($scope.clrWireConnector, $scope.getWireConnectionPositions);
+                    if ($scope.clrWire.registerReaderAndRead($scope.clrWireConnector)) {
+                        $scope.register.clr();
                     }
                 }
             }, 1, 1);

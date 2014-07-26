@@ -1,12 +1,13 @@
 'use strict';
 
-function Register(updateViewCallback, name, initialValue, incWire, decWire) {
+function Register(updateViewCallback, name, initialValue, incWire, decWire, clrWire) {
     this.updateViewCallback = updateViewCallback;
     this.name = name;
     this.value = initialValue;
     this.buses = [];
     this.incWire = incWire;
     this.decWire = decWire;
+    this.clrWire = clrWire;
 }
 
 Register.prototype.setName = function (name) {
@@ -65,6 +66,10 @@ Register.prototype.inc = function () {
 
 Register.prototype.dec = function () {
     this.setValue((parseInt(this.getValue()) - 1).toString());
+};
+
+Register.prototype.clr = function () {
+    this.setValue('0');
 };
 
 Register.prototype.setState = function (busConnection, desiredState) {

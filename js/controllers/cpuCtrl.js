@@ -60,6 +60,9 @@ bonsaiApp.controller('bonsaiCpuCtrl',
                     'id': 'RegisterCDecWire',
                     'name': 'Register C dec wire'
                 }, {
+                    'id': 'RegisterCClrWire',
+                    'name': 'Register C clr wire'
+                }, {
                     'id': 'DatenspeicherAddressReadWire',
                     'name': 'Datenspeicher Adressbus read wire'
                 }, {
@@ -99,13 +102,13 @@ bonsaiApp.controller('bonsaiCpuCtrl',
                     'wireId': 'RegisterCdataBusGateWriteWire',
                     'name': 'RegisterCdataBusGateWriteWireSwitch',
                     'value': 0,
-                    'top': 104,
+                    'top': 130,
                     'left': 512
                 }, {
                     'wireId': 'RegisterCdataBusGateReadWire',
                     'name': 'RegisterCdataBusGateReadWireSwitch',
                     'value': 0,
-                    'top': 80,
+                    'top': 110,
                     'left': 512
                 }, {
                     'wireId': 'RegisterCIncWire',
@@ -118,6 +121,12 @@ bonsaiApp.controller('bonsaiCpuCtrl',
                     'name': 'RegisterCDecWireSwitch',
                     'value': 0,
                     'top': 67,
+                    'left': 560
+                }, {
+                    'wireId': 'RegisterCClrWire',
+                    'name': 'RegisterCClrWireSwitch',
+                    'value': 0,
+                    'top': 87,
                     'left': 560
                 }, {
                     'wireId': 'DatenspeicherAddressReadWire',
@@ -244,7 +253,8 @@ bonsaiApp.controller('bonsaiCpuCtrl',
                         }
                     ],
                     'incWireId': 'RegisterCIncWire',
-                    'decWireId': 'RegisterCDecWire'
+                    'decWireId': 'RegisterCDecWire',
+                    'clrWireId': 'RegisterCClrWire'
                 }
             ],
             'memories': [
@@ -338,6 +348,9 @@ bonsaiApp.controller('bonsaiCpuCtrl',
             }
             if ($scope.cpu.registers[i].decWireId) {
                 $scope.cpu.registers[i].decWire = $scope.findBus($scope.cpu.registers[i].decWireId);
+            }
+            if ($scope.cpu.registers[i].clrWireId) {
+                $scope.cpu.registers[i].clrWire = $scope.findBus($scope.cpu.registers[i].clrWireId);
             }
             for (j = 0; j < $scope.cpu.registers[i].gates.length; j++) {
                 $scope.cpu.registers[i].gates[j].bus = $scope.findBus($scope.cpu.registers[i].gates[j].busId);

@@ -26,15 +26,20 @@
             </div>
         </div>
         <div style="width: 0; height: 0; overflow: visible; display: inline-block; position: absolute;">
-            <div class="wireconnector grayback" style="left: 58px; top: 2px;"
+            <div class="wireconnector grayback" style="left: 58px; top: 0;"
                  ng-mousedown="activateInc()" ng-mouseup="deactivateInc()"></div>
-            <div class="wireconnector grayback" style="left: 58px; top: 11px;"
+            <div class="wireconnector grayback" style="left: 58px; top: 7px;"
                  ng-mousedown="activateDec()" ng-mouseup="deactivateDec()"></div>
-            <div style="position: absolute; left: 52px; top: -7px;">
-                <span style="font-size: 50%;">+</span>
+            <div class="wireconnector grayback" style="left: 58px; top: 14px;"
+                 ng-mousedown="activateClr()" ng-mouseup="deactivateClr()"></div>
+            <div style="position: absolute; left: 48px; top: -10px;">
+                <span style="font-size: 50%; font-family: 'Nimbus Mono L' monospace;">+1</span>
             </div>
-            <div style="position: absolute; left: 53px; top: 2px;">
-                <span style="font-size: 60%;">-</span>
+            <div style="position: absolute; left: 48px; top: -3px;">
+                <span style="font-size: 50%; font-family: 'Nimbus Mono L' monospace;">-1</span>
+            </div>
+            <div style="position: absolute; left: 44px; top: 4px;">
+                <span style="font-size: 50%; font-family: 'Nimbus Mono L' monospace;">clr</span>
             </div>
         </div>
         <input type="text" ng-model="data" ng-readonly="register.isReader()" />
