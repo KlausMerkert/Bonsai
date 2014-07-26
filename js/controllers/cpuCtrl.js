@@ -89,6 +89,9 @@ bonsaiApp.controller('bonsaiCpuCtrl',
                 }, {
                     'id': 'compWire',
                     'name': 'Zerocomparator result wire'
+                }, {
+                    'id': 'bit0wire',
+                    'name': 'bit 0 wire'
                 }
             ],
             'manualswitches': [
@@ -194,6 +197,11 @@ bonsaiApp.controller('bonsaiCpuCtrl',
                     'name': 'comp intication led',
                     'top': 170,
                     'left': 300
+                }, {
+                    'wireId': 'bit0wire',
+                    'name': 'bit 0 wire led',
+                    'top': 270,
+                    'left': 100
                 }
             ],
             'andGates': [
@@ -255,6 +263,23 @@ bonsaiApp.controller('bonsaiCpuCtrl',
                     'incWireId': 'RegisterCIncWire',
                     'decWireId': 'RegisterCDecWire',
                     'clrWireId': 'RegisterCClrWire'
+                }
+            ],
+            'bitregisters': [
+                {
+                    'name': 'Steuerwort',
+                    'value': 10,
+                    'base' : 10,
+                    'top' : 250,
+                    'left': 240,
+                    'widegate': {
+                        'busId': 'addressBus',
+                        'writeWireId': undefined,
+                        'readWireId': undefined
+                    },
+                    'wiregates': [
+                        {'wireId': 'bit0wire'}
+                    ]
                 }
             ],
             'memories': [
@@ -360,6 +385,18 @@ bonsaiApp.controller('bonsaiCpuCtrl',
                 if ($scope.cpu.registers[i].gates[j].readWireId) {
                     $scope.cpu.registers[i].gates[j].readWire = $scope.findBus($scope.cpu.registers[i].gates[j].readWireId);
                 }
+            }
+        }
+        for (i = 0; i < $scope.cpu.bitregisters.length; i++) {
+            $scope.cpu.bitregisters[i].widegate.bus = $scope.findBus($scope.cpu.bitregisters[i].widegate.busId);
+            if ($scope.cpu.bitregisters[i].widegate.writeWireId) {
+                $scope.cpu.bitregisters[i].widegate.writeWire = $scope.findBus($scope.cpu.bitregisters[i].widegate.writeWireId);
+            }
+            if ($scope.cpu.bitregisters[i].widegate.readWireId) {
+                $scope.cpu.bitregisters[i].widegate.readWire = $scope.findBus($scope.cpu.bitregisters[i].widegate.readWireId);
+            }
+            for (j = 0; j < $scope.cpu.bitregisters[i].wiregates.length; j++) {
+                $scope.cpu.bitregisters[i].wiregates[j].wire = $scope.findBus($scope.cpu.bitregisters[i].wiregates[j].wireId);
             }
         }
         for (i = 0; i < $scope.cpu.memories.length; i++) {

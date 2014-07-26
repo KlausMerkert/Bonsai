@@ -45,6 +45,17 @@
                 </div>
             </register>
         </div>
+        <div ng-repeat="bitregister in cpu.bitregisters">
+            <bitregister register-name="{{bitregister.name}}" value="bitregister.value"
+                         top="bitregister.top" left="bitregister.left">
+                <widegate bus="bitregister.widegate.bus"
+                          set-read="bitregister.widegate.readWire"
+                          set-write="bitregister.widegate.writeWire"></widegate>
+                <div ng-repeat="wiregate in bitregister.wiregates">
+                    <wiregate wire="wiregate.wire"></wiregate>
+                </div>
+            </bitregister>
+        </div>
         <div ng-repeat="memory in cpu.memories">
             <memory memory-name="{{memory.name}}" base="memory.base"
                     top="memory.top" left="memory.left" content="memory.content">
