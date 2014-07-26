@@ -81,7 +81,6 @@ bonsaiApp.directive('bus', function () {
                 if ($scope.routes) {
                     $scope.visibleParts = $scope.routes;
                 } else {
-                    console.log($scope.busName);
                     $scope.busRouter.setConnections($scope.localBus.getBuses());
                     $scope.visibleParts = $scope.busRouter.updateVisibleParts();
                 }

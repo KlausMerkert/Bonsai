@@ -162,10 +162,25 @@ bonsaiApp.directive('memory', function ($interval) {
                 }
             };
 
-            $scope.toggleDataBusRead = function () {
-                if ($scope.memory.getDataBusState() == -1) { // If we are reading then we want to stop it.
-                    $scope.memory.setDataBusState(0);
-                } else { // start reading
+            $scope.activateDataBusRead = function () {
+                if ($scope.memory.dataBus.readWire) {
+                    $scope.memory.dataBus.readWire.unregisterReader(
+                        $scope.memory.dataBus.readWireConnector
+                    );
+                    try {
+                        $scope.memory.dataBus.readWire.write(
+                            $scope.memory.dataBus.readWireConnector,
+                            1
+                        );
+                        $scope.memory.setDataBusState(-1);
+                        $scope.dataContext[2].value = $scope.memory.readData();
+                    } catch (exception) {
+                        $scope.memory.dataBus.readWire.registerReaderAndRead(
+                            $scope.memory.dataBus.readWireConnector
+                        );
+                        throw exception;
+                    }
+                } else {
                     try {
                         $scope.memory.setDataBusState(-1);
                         $scope.dataContext[2].value = $scope.memory.readData();
@@ -175,12 +190,72 @@ bonsaiApp.directive('memory', function ($interval) {
                 }
             };
 
-            $scope.toggleDataBusWrite = function () {
-                if ($scope.memory.getDataBusState() == 1) { // If we are writing then we want to stop it.
-                    $scope.memory.setDataBusState(0);
-                } else { // start writing
-                    $scope.memory.setDataBusState(1);
+            $scope.deactivateDataBusRead = function () {
+                if ($scope.memory.dataBus.readWire) {
+                    try {
+                        $scope.memory.dataBus.readWire.write(
+                            $scope.memory.dataBus.readWireConnector,
+                            0
+                        );
+                    } catch (exception) {
+                        throw exception;
+                    } finally {
+                        $scope.memory.dataBus.readWire.stopWriting(
+                            $scope.memory.dataBus.readWireConnector
+                        );
+                        $scope.memory.dataBus.readWire.registerReaderAndRead(
+                            $scope.memory.dataBus.readWireConnector
+                        );
+                    }
                 }
+                $scope.memory.setDataBusState(0);
+            };
+
+            $scope.activateDataBusWrite = function () {
+                if ($scope.memory.dataBus.writeWire) {
+                    $scope.memory.dataBus.writeWire.unregisterReader(
+                        $scope.memory.dataBus.writeWireConnector
+                    );
+                    try {
+                        $scope.memory.dataBus.writeWire.write(
+                            $scope.memory.dataBus.writeWireConnector,
+                            1
+                        );
+                        $scope.memory.setDataBusState(1);
+                    } catch (exception) {
+                        $scope.memory.dataBus.writeWire.registerReaderAndRead(
+                            $scope.memory.dataBus.writeWireConnector
+                        );
+                        throw exception;
+                    }
+                } else {
+                    try {
+                        $scope.memory.setDataBusState(1);
+                    } catch (exception) {
+                        throw exception;
+                    }
+                }
+            };
+
+            $scope.deactivateDataBusWrite = function () {
+                if ($scope.memory.dataBus.writeWire) {
+                    try {
+                        $scope.memory.dataBus.writeWire.write(
+                            $scope.memory.dataBus.writeWireConnector,
+                            0
+                        );
+                    } catch (exception) {
+                        throw exception;
+                    } finally {
+                        $scope.memory.dataBus.writeWire.stopWriting(
+                            $scope.memory.dataBus.writeWireConnector
+                        );
+                        $scope.memory.dataBus.writeWire.registerReaderAndRead(
+                            $scope.memory.dataBus.writeWireConnector
+                        );
+                    }
+                }
+                $scope.memory.setDataBusState(0);
             };
 
             $scope.getConnectionPositions = function (bus) {

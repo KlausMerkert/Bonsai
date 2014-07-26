@@ -36,9 +36,11 @@
                 <div class="busconnector busconnectorbottomrow"
                      style="left: 114px;"></div>
                 <div class="wireconnector write wireconnectorbottomrowwrite"
-                     style="left: 123px;" ng-click="toggleDataBusWrite()"></div>
+                     style="left: 123px;"
+                     ng-mousedown="activateDataBusWrite()" ng-mouseup="deactivateDataBusWrite()"></div>
                 <div class="wireconnector read wireconnectorbottomrowread"
-                     style="left: 123px;" ng-click="toggleDataBusRead()"></div>
+                     style="left: 123px;"
+                     ng-mousedown="activateDataBusRead()" ng-mouseup="deactivateDataBusRead()"></div>
             </div>
         </div>
         <table style="margin-top: 2px;">
