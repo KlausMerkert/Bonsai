@@ -4,7 +4,12 @@ function BitRegister(updateViewCallback, name, initialValue) {
     this.updateViewCallback = updateViewCallback;
     this.name = name;
     this.value = initialValue;
-    this.buses = [];
+    this.wires = [];
+    /* 1 means the BitRegister writes to the wideBus and reads from the wires
+     * 0 means the connection to the wideBus is inactive and values from the wires are read
+     * -1 means the register reads from the wideBus and writes to the wires */
+    this.state = 0;
+    this.wideBusConnection = undefined;
 }
 
 BitRegister.prototype.setName = function (name) {
@@ -15,41 +20,45 @@ BitRegister.prototype.getName = function () {
     return this.name;
 };
 
-BitRegister.prototype.addBusConnection = function (bus, writeWire, readWire) {
-    /* Connections can have three states:
-     * 1 means the register writes to the bus
-     * 0 means the connection is inactive
-     * -1 means the register reads from the bus */
-    this.buses.push({
-        state: 0,
+BitRegister.prototype.setWideBusConnection = function (bus, writeWire, readWire) {
+    this.wideBusConnection = {
         bus: bus,
         writeWire: writeWire,
         readWire: readWire
+    };
+};
+
+BitRegister.prototype.getWideBusConnection = function () {
+    return this.wideBusConnection;
+};
+
+BitRegister.prototype.addWireConnection = function (wire, connector) {
+    this.wires.push({
+        wire: wire,
+        connector: connector
     });
 };
 
-BitRegister.prototype.removeConnection = function (bus) {
+BitRegister.prototype.removeWireConnection = function (wire) {
     var i = 0;
-    while (i < this.buses.length) {
-        if (this.buses[i].bus === bus) {
-            this.buses.splice(i, 1);
+    while (i < this.wires.length) {
+        if (this.wires[i].wire === wire) {
+            this.wires.splice(i, 1);
         } else {
             i++;
         }
     }
 };
 
-BitRegister.prototype.getBuses = function () {
-    return this.buses;
+BitRegister.prototype.getWires = function () {
+    return this.wires;
 };
 
 BitRegister.prototype.setValue = function (value) {
     this.value = value;
     this.updateViewCallback(this.value);
-    for (var i = 0; i < this.buses.length; i++) {
-        if (this.buses[i].state === 1) {
-            this.buses[i].bus.write(this, value);
-        }
+    if (this.state === 1) {
+        this.wideBusConnection.bus.write(this, value);
     }
 };
 
@@ -57,52 +66,35 @@ BitRegister.prototype.getValue = function () {
     return this.value;
 };
 
-BitRegister.prototype.setState = function (busConnection, desiredState) {
-    var readState = busConnection.bus.isReader(this);
-    var writeState = busConnection.bus.isWriter(this);
+BitRegister.prototype.setState = function (desiredState) {
+    var readState = this.wideBusConnection.bus.isReader(this);
+    var writeState = this.wideBusConnection.bus.isWriter(this);
     if (desiredState == 1) {
-        busConnection.bus.unregisterReader(this);
+        this.wideBusConnection.bus.unregisterReader(this);
         try {
-            busConnection.bus.write(this, this.getValue());
-            for (var i = 0; i < this.buses.length; i++) {
-                if (!angular.equals(this.buses[i], busConnection) && this.buses[i].state == -1) {
-                    this.setValue(this.buses[i].bus.registerReaderAndRead(this));
-                }
-            }
-            busConnection.state = desiredState;
+            this.wideBusConnection.bus.write(this, this.getValue());
+            this.state = desiredState;
         } catch (exception) {
             if (readState) {
-                busConnection.bus.registerReaderAndRead(this);
+                this.wideBusConnection.bus.registerReaderAndRead(this);
             }
             throw exception;
         }
     } else if (desiredState == -1) {
-        if ((this.isReader()) && ((this.getReaders().length > 1) || (this.getReaders()[0] != busConnection.bus))) {
-            throw RegisterIsAlreadyReadingException(
-                "Register " + this.name + " is already reading.",
-                this.name
-            )
-        } else {
-            busConnection.bus.stopWriting(this);
-            try {
-                this.setValue(busConnection.bus.registerReaderAndRead(this));
-                busConnection.state = desiredState;
-            } catch (exception) {
-                if (writeState) {
-                    busConnection.bus.write(this, this.value);
-                }
-                throw exception;
+        this.wideBusConnection.bus.stopWriting(this);
+        try {
+            this.setValue(this.wideBusConnection.bus.registerReaderAndRead(this));
+            this.state = desiredState;
+        } catch (exception) {
+            if (writeState) {
+                this.wideBusConnection.bus.write(this, this.value);
             }
+            throw exception;
         }
     } else {
-        busConnection.bus.stopWriting(this);
-        busConnection.bus.unregisterReader(this);
-        busConnection.state = desiredState;
-        for (i = 0; i < this.buses.length; i++) {
-            if (!angular.equals(this.buses[i], busConnection) && this.buses[i].state == -1) {
-                this.setValue(this.buses[i].bus.registerReaderAndRead(this));
-            }
-        }
+        this.wideBusConnection.bus.stopWriting(this);
+        this.wideBusConnection.bus.unregisterReader(this);
+        this.state = desiredState;
     }
 };
 
@@ -146,13 +138,7 @@ BitRegister.prototype.setToDisconnected = function (wire) {
 };
 
 BitRegister.prototype.isReader = function () {
-    var isReading = false;
-    for (var i = 0; i < this.buses.length; i++) {
-        if (this.buses[i].state === -1) {
-            isReading = true;
-        }
-    }
-    return isReading;
+    return (this.state === -1);
 };
 
 BitRegister.prototype.getReaders = function () {

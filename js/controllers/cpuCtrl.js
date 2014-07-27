@@ -44,6 +44,14 @@ bonsaiApp.controller('bonsaiCpuCtrl',
                         }
                     ]
                 }, {
+                    'id': 'foo',
+                    'name': 'Foo',
+                    'max': 255,
+                    'base': 10,
+                    'color': 'rgb(245, 0, 0)',
+                    'top': 292,
+                    'left': 552
+                }, {
                     'id': 'testBus',
                     'name': 'Testbus',
                     'max': 1
@@ -92,6 +100,9 @@ bonsaiApp.controller('bonsaiCpuCtrl',
                 }, {
                     'id': 'bit0wire',
                     'name': 'bit 0 wire'
+                }, {
+                    'id': 'bit1wire',
+                    'name': 'bit 1 wire'
                 }
             ],
             'manualswitches': [
@@ -200,8 +211,13 @@ bonsaiApp.controller('bonsaiCpuCtrl',
                 }, {
                     'wireId': 'bit0wire',
                     'name': 'bit 0 wire led',
-                    'top': 270,
-                    'left': 100
+                    'top': 261,
+                    'left': 170
+                }, {
+                    'wireId': 'bit1wire',
+                    'name': 'bit 1 wire led',
+                    'top': 273,
+                    'left': 170
                 }
             ],
             'andGates': [
@@ -268,17 +284,18 @@ bonsaiApp.controller('bonsaiCpuCtrl',
             'bitregisters': [
                 {
                     'name': 'Steuerwort',
-                    'value': 10,
+                    'value': 9,
                     'base' : 10,
                     'top' : 250,
                     'left': 240,
                     'widegate': {
-                        'busId': 'addressBus',
+                        'busId': 'foo',
                         'writeWireId': undefined,
                         'readWireId': undefined
                     },
                     'wiregates': [
-                        {'wireId': 'bit0wire'}
+                        {'wireId': 'bit0wire'},
+                        {'wireId': 'bit1wire'}
                     ]
                 }
             ],
@@ -303,7 +320,7 @@ bonsaiApp.controller('bonsaiCpuCtrl',
             'zerocomparators': [
                 {
                     'name': 'Zero comparator 1',
-                    'busId': 'dataBus',
+                    'busId': 'foo',
                     'wireId': 'compWire',
                     'top': 130,
                     'left': 300

@@ -65,7 +65,7 @@ a:hover {
     text-align: center;
 }
 
-.register .connection, .memory .connection {
+.register .connection, .memory .connection, .bitregister .connection {
     border: 1px solid rgb(30, 30, 30);
     min-width: 13px;
     height: 19px;
@@ -78,7 +78,7 @@ a:hover {
     cursor: pointer;
 }
 
-.register .toprow {
+.register .toprow, .bitregister .connection {
     top: -22px;
 }
 
@@ -354,7 +354,7 @@ a:hover {
 }
 
 .pane {
-    height: 320px;
+    height: 420px;
     background-color: rgb(240, 240, 240);
     border: 1px solid rgb(170, 170, 170);
 }
@@ -370,4 +370,14 @@ textarea {
     font-family: monospace;
     width: 1.4em;
     text-align: right;
+}
+
+.bitregister {
+    border: 1px solid rgb(30, 30, 30);
+    background-color: rgba(200, 200, 200, 30);
+    border-radius: 6px;
+    padding: 5px;
+    display: inline-block;
+    width: 26px;
+    line-height: 10px;
 }
