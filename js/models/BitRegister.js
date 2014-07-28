@@ -66,6 +66,36 @@ BitRegister.prototype.getValue = function () {
     return this.value;
 };
 
+BitRegister.prototype.setBit = function (index, bit) {
+    if (!((bit === 0) || (bit === 1))) {
+        console.log("Exception wrong value");
+    }
+    var oldBit = this.getBit(index);
+    if (bit !== oldBit) {
+        if (bit) {
+            this.setValue(this.value + Math.pow(2, index));
+        } else {
+            this.setValue(this.value - Math.pow(2, index));
+        }
+    }
+};
+
+BitRegister.prototype.getBit = function (index) {
+    var number = this.value;
+    var digit;
+    var binary_list = [];
+    while (number > 0) {
+        digit = number % 2;
+        number = Math.floor(number / 2);
+        binary_list.push(digit); // The binary number is reversed in this array.
+    }
+    if (index < binary_list.length) {
+        return binary_list[index];
+    } else {
+        return 0;
+    }
+};
+
 BitRegister.prototype.setState = function (desiredState) {
     var readState = this.wideBusConnection.bus.isReader(this);
     var writeState = this.wideBusConnection.bus.isWriter(this);
