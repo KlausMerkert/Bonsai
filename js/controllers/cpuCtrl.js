@@ -103,6 +103,12 @@ bonsaiApp.controller('bonsaiCpuCtrl',
                 }, {
                     'id': 'bit1wire',
                     'name': 'bit 1 wire'
+                }, {
+                    'id': 'bit2wire',
+                    'name': 'bit 2 wire'
+                }, {
+                    'id': 'bit3wire',
+                    'name': 'bit 3 wire'
                 }
             ],
             'manualswitches': [
@@ -218,6 +224,16 @@ bonsaiApp.controller('bonsaiCpuCtrl',
                     'name': 'bit 1 wire led',
                     'top': 273,
                     'left': 170
+                }, {
+                    'wireId': 'bit2wire',
+                    'name': 'bit 2 wire led',
+                    'top': 285,
+                    'left': 170
+                }, {
+                    'wireId': 'bit3wire',
+                    'name': 'bit 3 wire led',
+                    'top': 297,
+                    'left': 170
                 }
             ],
             'andGates': [
@@ -295,7 +311,9 @@ bonsaiApp.controller('bonsaiCpuCtrl',
                     },
                     'wiregates': [
                         {'wireId': 'bit0wire'},
-                        {'wireId': 'bit1wire'}
+                        {'wireId': 'bit1wire'},
+                        {'wireId': 'bit2wire'},
+                        {'wireId': 'bit3wire'}
                     ]
                 }
             ],

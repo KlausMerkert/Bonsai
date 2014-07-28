@@ -55,6 +55,9 @@ BitRegister.prototype.getWires = function () {
 };
 
 BitRegister.prototype.setValue = function (value) {
+    if (isNaN(parseInt(value))) {
+        value = 0;
+    }
     this.value = value;
     this.updateViewCallback(this.value);
     if (this.state === 1) {
@@ -68,7 +71,11 @@ BitRegister.prototype.getValue = function () {
 
 BitRegister.prototype.setBit = function (index, bit) {
     if (!((bit === 0) || (bit === 1))) {
-        console.log("Exception wrong value");
+        throw WrongValueForSingleBit(
+            this.getName() + ": " + bit + " is not a valid value for a single bit. Only 0 or 1 are allowed.",
+            this.getName(),
+            bit
+        );
     }
     var oldBit = this.getBit(index);
     if (bit !== oldBit) {

@@ -137,3 +137,13 @@ function BusNotFound (message, id) {
     exception.actor2 = "";
     return exception;
 }
+
+function WrongValueForSingleBit (message, component, value) {
+    var exception = {};
+    exception.name = 'WrongValueForSingleBit';
+    exception.localization = '_' + exception.name + '_';
+    exception.message = message;
+    exception.actor1 = component;
+    exception.actor2 = value;
+    return exception;
+}

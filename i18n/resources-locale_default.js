@@ -223,5 +223,20 @@
         "key"        : "_BusNotFound_end",
         "value"      : "",
         "description": ""
+    },
+    {
+        "key"        : "_WrongValueForSingleBit_beginning",
+        "value"      : "",
+        "description": ""
+    },
+    {
+        "key"        : "_WrongValueForSingleBit_middle",
+        "value"      : ": ",
+        "description": ""
+    },
+    {
+        "key"        : "_WrongValueForSingleBit_end",
+        "value"      : " is not a valid value for a single bit. Only 0 or 1 are allowed.",
+        "description": ""
     }
 ]
