@@ -94,8 +94,8 @@ bonsaiApp.controller('bonsaiCpuCtrl',
                     'max': 99,
                     'base': 10,
                     'color': 'rgb(155, 100, 0)',
-                    'top': 200,
-                    'left': 600
+                    'top': 10,
+                    'left': 700
                 },
                 {
                     'id': 'DecoderMPC',
@@ -104,19 +104,11 @@ bonsaiApp.controller('bonsaiCpuCtrl',
                     'base': 10,
                     'color': 'rgb(0, 140, 140)',
                     'top': 200,
-                    'left': 600
-                }, {
-                    'id': 'RegisterCdataBusGateReadWire',
-                    'name': 'Register C dataBus gate read wire',
-                    'max': 1
+                    'left': 600               
                 }, {
                     'id': 'DatenspeicherAddressReadWire',
                     'name': 'Datenspeicher Adressbus read wire',
-                    'max': 1
-                }, {
-                    'id': 'AndA',
-                    'name': 'And gate A wire',
-                    'max': 1
+                    'max': 1                
                 }, {
                     'id': 'AndB',
                     'name': 'And gate B wire',
@@ -126,17 +118,79 @@ bonsaiApp.controller('bonsaiCpuCtrl',
                     'name': 'Or gate A wire',
                     'max': 1
                 }, {
-                    'id': 's13',
-                    'name': 'Steuersignal 13',
+                    'id': 's0',
+                    'name': 'not count',
                     'max': 1
                 }, {
                     'id': 's1',
-                    'name': 'Steuersignal 1',
-                    'max': 1
+                    'name': 'clrMPC',
+                    'max': 1,
+                    'color': 'rgb(255, 255, 0)'
                 }, {
                     'id': 's2',
-                    'name': 'Steuersignal 2',
-                    'max': 1
+                    'name': 'loadMPC',
+                    'max': 1,
+                    'color': 'rgb(255, 255, 0)'
+                }, {
+                    'id': 's3',
+                    'name': 'readMem',
+                    'max': 1,
+                    'color': 'rgb(255, 255, 0)'
+                }, {
+                    'id': 's4',
+                    'name': 'writeMem',
+                    'max': 1,
+                    'color': 'rgb(255, 255, 0)'
+                 }, {
+                    'id': 's5',
+                    'name': 'incAkku',
+                    'max': 1,
+                    'color': 'rgb(255, 255, 0)'
+                }, {
+                    'id': 's6',
+                    'name': 'decAkku',
+                    'max': 1,
+                    'color': 'rgb(255, 255, 0)'
+                }, {
+                    'id': 's7',
+                    'name': 'loadAkku',
+                    'max': 1,
+                    'color': 'rgb(255, 255, 0)'
+                }, {
+                    'id': 's8',
+                    'name': 'writeAkku',
+                    'max': 1,
+                    'color': 'rgb(255, 255, 0)'
+                }, {
+                    'id': 's9',
+                    'name': 'loadPC',
+                    'max': 1,
+                    'color': 'rgb(255, 255, 0)'
+                }, {
+                    'id': 's10',
+                    'name': 'writePC',
+                    'max': 1,
+                    'color': 'rgb(255, 255, 0)'
+                }, {
+                    'id': 's11',
+                    'name': 'loadIR',
+                    'max': 1,
+                    'color': 'rgb(255, 255, 0)'
+                }, {
+                    'id': 's12',
+                    'name': 'writeIR',
+                    'max': 1,
+                    'color': 'rgb(255, 255, 0)'
+                }, {
+                    'id': 's13',
+                    'name': 'incPC',
+                    'max': 1,
+                    'color': 'rgb(255, 255, 0)'
+                }, {
+                    'id': 's14',
+                    'name': 'incPCz',
+                    'max': 1,
+                    'color': 'rgb(255, 255, 0)'
                 }, {
                     'id': 'and2A_Takt',
                     'name': 'xy',
@@ -183,22 +237,10 @@ bonsaiApp.controller('bonsaiCpuCtrl',
                             'width': '77px',
                             'height': '50px'
                         }
-                    ]
+                    ]               
                 }, {
-                    'id': 'bit0wire',
-                    'name': 'bit 0 wire'
-                }, {
-                    'id': 'bit1wire',
-                    'name': 'bit 1 wire'
-                }, {
-                    'id': 'bit2wire',
-                    'name': 'bit 2 wire'
-                }, {
-                    'id': 'bit3wire',
-                    'name': 'bit 3 wire'
-                }, {
-                    'id': 'testBus',
-                    'name': 'Testbus',
+                    'id': 'MPdata_Steuerwort',
+                    'name': 'MPdata_Steuerwort',
                     'base': 10,
                     'max': 255,
                     'color': 'rgb(200, 0, 200)',
@@ -213,60 +255,18 @@ bonsaiApp.controller('bonsaiCpuCtrl',
                 }
             ],
             'manualswitches': [
-                {
-                    'wireId': 'RegisterCdataBusGateReadWire',
-                    'name': 'RegisterCdataBusGateReadWireSwitch',
-                    'value': 0,
-                    'top': 110,
-                    'left': 512
-                }, {
+                {                
                     'wireId': 'DatenspeicherAddressReadWire',
                     'name': 'DatenspeicherAddressReadWireSwitch',
                     'value': 1,
                     'top': 40,
-                    'left': 80
-                }, {
-                    'wireId': 'AndA',
-                    'name': 'AndASwitch',
-                    'value': 1,
-                    'top': 10,
-                    'left': 800
-                }, {
-                    'wireId': 's13',
-                    'name': 'incPC',
-                    'value': 0,
-                    'top': 70,
-                    'left': 800
-                }, {
-                    'wireId': 's1',
-                    'name': 'clrMPC',
-                    'value': 0,
-                    'top': 250,
-                    'left': 800
-                }, {
-                    'wireId': 's2',
-                    'name': 'loadMPC',
-                    'value': 0,
-                    'top': 270,
-                    'left': 800
+                    'left': 80               
                 }, {
                     'wireId': 'takt',
                     'name': 'Takt',
                     'value': 0,
-                    'top': 230,
-                    'left': 800
-                }, {
-                    'wireId': 'bitregisterRead',
-                    'name': 'Bitregister Read Switch',
-                    'value': 0,
-                    'top': 315,
-                    'left': 350
-                }, {
-                    'wireId': 'bitregisterWrite',
-                    'name': 'Bitregister Write Switch',
-                    'value': 0,
-                    'top': 295,
-                    'left': 350
+                    'top': 300,
+                    'left': 710               
                 }
             ],
             'leds': [
@@ -279,33 +279,18 @@ bonsaiApp.controller('bonsaiCpuCtrl',
                     'wireId': 'compWire',
                     'name': 'comp indication led',
                     'top': 170,
-                    'left': 300
+                    'left': 300 
                 }, {
-                    'wireId': 'bit0wire',
-                    'name': 'bit 0 wire led',
-                    'top': 331,
-                    'left': 170
-                }, {
-                    'wireId': 'bit1wire',
-                    'name': 'bit 1 wire led',
-                    'top': 343,
-                    'left': 170
-                }, {
-                    'wireId': 'bit2wire',
-                    'name': 'bit 2 wire led',
-                    'top': 355,
-                    'left': 170
-                }, {
-                    'wireId': 'bit3wire',
-                    'name': 'bit 3 wire led',
-                    'top': 367,
-                    'left': 170
-                }
+                    'wireId': 's0',
+                    'name': 's0 led',
+                    'top': 62,
+                    'left': 782 
+                }              
             ],
             'andGates': [
                 {
                     'name': 'and1',
-                    'inAId': 'AndA',
+                    'inAId': 's14',
                     'inBId': 'compWire',
                     'outId': 'OrA',
                     'top': 48,
@@ -348,7 +333,10 @@ bonsaiApp.controller('bonsaiCpuCtrl',
                     'top' : 50,
                     'left': 240,
                     'gates': [
-                        {'busId': 'addressBus'}
+                        {'busId': 'addressBus',
+                         'writeWireId': 's10',
+                         'readWireId': 's9'                        
+                        }
                     ],
                     'incWireId': 'or1_ausgang',
                 }, {
@@ -362,8 +350,8 @@ bonsaiApp.controller('bonsaiCpuCtrl',
                             'busId': 'addressBus'
                         }, {
                             'busId': 'dataBus',
-                            'writeWireId': undefined,
-                            'readWireId': 'RegisterCdataBusGateReadWire'
+                            'writeWireId': 's12',
+                            'readWireId': 's11'
                         }
                     ],
                     'incWireId': undefined,
@@ -378,12 +366,12 @@ bonsaiApp.controller('bonsaiCpuCtrl',
                     'gates': [
                         {
                             'busId': 'dataBus',
-                            'writeWireId': undefined,
-                            'readWireId': undefined
+                            'writeWireId': 's8',
+                            'readWireId': 's7'
                         }
                     ],
-                    'incWireId': undefined,
-                    'decWireId': undefined
+                    'incWireId': 's5',
+                    'decWireId': 's6'
                 }, {
                     'name': 'MPC',
                     'value': 4,
@@ -399,22 +387,12 @@ bonsaiApp.controller('bonsaiCpuCtrl',
                         {
                             'busId': 'DecoderMPC',
                             'writeWireId': undefined,
-                            'readWireId': undefined
+                            'readWireId': 's2'
                         }
                     ],
                     'incWireId': 'and2out_incMPC',
-                    'decWireId': undefined
-                }, {
-                    'name': 'test Register',
-                    'value': 5,
-                    'base': 10,
-                    'top': 250,
-                    'left': 240,
-                    'gates': [
-                        {
-                            'busId': 'testBus'
-                        }
-                    ]
+                    'decWireId': undefined,
+                    'clrWireId': 's1'               
                 }
             ],
             'bitregisters': [
@@ -422,18 +400,29 @@ bonsaiApp.controller('bonsaiCpuCtrl',
                     'name': 'Steuerwort',
                     'value': 9,
                     'base' : 10,
-                    'top' : 320,
-                    'left': 240,
+                    'top' : 50,
+                    'left': 800,
                     'widegate': {
-                        'busId': 'testBus',
+                        'busId': 'MPdata_Steuerwort',
                         'writeWireId': 'bitregisterWrite',
                         'readWireId': 'bitregisterRead'
                     },
                     'wiregates': [
-                        {'wireId': 'bit0wire'},
-                        {'wireId': 'bit1wire'},
-                        {'wireId': 'bit2wire'},
-                        {'wireId': 'bit3wire'}
+                        {'wireId': 's0'},
+                        {'wireId': 's1'},
+                        {'wireId': 's2'},
+                        {'wireId': 's3'},
+                        {'wireId': 's4'},
+                        {'wireId': 's5'},
+                        {'wireId': 's6'},
+                        {'wireId': 's7'},
+                        {'wireId': 's8'},
+                        {'wireId': 's9'},
+                        {'wireId': 's10'},
+                        {'wireId': 's11'},
+                        {'wireId': 's12'},
+                        {'wireId': 's13'},
+                        {'wireId': 's14'}
                     ]
                 }
             ],
@@ -450,8 +439,8 @@ bonsaiApp.controller('bonsaiCpuCtrl',
                     },
                     'datagate': {
                         'busId': 'dataBus',
-                        'writeWireId': undefined,
-                        'readWireId': undefined
+                        'writeWireId': 's4',
+                        'readWireId': 's3'
                     }
                 },
                 {
@@ -481,7 +470,7 @@ bonsaiApp.controller('bonsaiCpuCtrl',
                         'readWireId': undefined
                     },
                     'datagate': {
-                        'busId': 'addressBus',
+                        'busId': 'MPdata_Steuerwort',
                         'writeWireId': undefined,
                         'readWireId': undefined
                     }
