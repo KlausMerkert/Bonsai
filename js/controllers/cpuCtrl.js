@@ -94,8 +94,8 @@ bonsaiApp.controller('bonsaiCpuCtrl',
                     'max': 99,
                     'base': 10,
                     'color': 'rgb(155, 100, 0)',
-                    'top': 10,
-                    'left': 700
+                    'top': 180,
+                    'left': 625
                 },
                 {
                     'id': 'DecoderMPC',
@@ -239,19 +239,13 @@ bonsaiApp.controller('bonsaiCpuCtrl',
                         }
                     ]               
                 }, {
-                    'id': 'MPdata_Steuerwort',
-                    'name': 'MPdata_Steuerwort',
+                    'id': 'MicroDataBus',
+                    'name': 'MicroDataBus',
                     'base': 10,
-                    'max': 255,
+                    'max': 16384,
                     'color': 'rgb(200, 0, 200)',
-                    'left': 260,
-                    'top': 275
-                }, {
-                    'id': 'bitregisterRead',
-                    'name': 'bitregister read wire'
-                }, {
-                    'id': 'bitregisterWrite',
-                    'name': 'bitregister write wire'
+                    'left': 760,
+                    'top': 10               
                 }
             ],
             'manualswitches': [
@@ -347,10 +341,10 @@ bonsaiApp.controller('bonsaiCpuCtrl',
                     'left': 400,
                     'gates': [
                         {
-                            'busId': 'addressBus'
+                            'busId': 'addressBus',
+                            'writeWireId': 's12',
                         }, {
                             'busId': 'dataBus',
-                            'writeWireId': 's12',
                             'readWireId': 's11'
                         }
                     ],
@@ -403,9 +397,9 @@ bonsaiApp.controller('bonsaiCpuCtrl',
                     'top' : 50,
                     'left': 800,
                     'widegate': {
-                        'busId': 'MPdata_Steuerwort',
-                        'writeWireId': 'bitregisterWrite',
-                        'readWireId': 'bitregisterRead'
+                        'busId': 'MicroDataBus',
+                        'writeWireId': undefined,
+                        'readWireId': undefined
                     },
                     'wiregates': [
                         {'wireId': 's0'},
@@ -470,7 +464,7 @@ bonsaiApp.controller('bonsaiCpuCtrl',
                         'readWireId': undefined
                     },
                     'datagate': {
-                        'busId': 'MPdata_Steuerwort',
+                        'busId': 'MicroDataBus',
                         'writeWireId': undefined,
                         'readWireId': undefined
                     }
