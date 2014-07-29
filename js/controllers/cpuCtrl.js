@@ -242,7 +242,7 @@ bonsaiApp.controller('bonsaiCpuCtrl',
                     'id': 'MicroDataBus',
                     'name': 'MicroDataBus',
                     'base': 10,
-                    'max': 16384,
+                    'max': 32767,
                     'color': 'rgb(200, 0, 200)',
                     'left': 760,
                     'top': 10               
