@@ -29,11 +29,14 @@
                      ng-mousedown="activateBit($index)" ng-mouseup="deactivateBit($index)"></div>
             </div>
         </div>
-        <div ng-repeat="bit in getBits() track by $index" style="padding: 0; margin: 0; height: 12px;">
-            <div style="display: inline-block; margin: 0; width: 10px; font-family: monospace;">{{ bit }}</div>
-            <div style="display: inline-block; margin: 0; padding-left: 2px; width: 10px; font-family: monospace; color: rgba(0, 0, 0, 0.5); text-align: right;">
-                {{ $index }}
-            </div>
+        <div ng-repeat="bit in getBits() track by $index"
+             style="padding: 0; margin: 0; height: 12px; cursor: pointer; position: absolute;"
+             ng-style="{'top': ($index * 12 + 7) + 'px'}"
+             ng-mousedown="register.setBit($index, (register.getBit($index) + 1) % 2)">
+            <div style="display: inline-block; margin: 0; width: 10px; font-family: monospace; position: absolute; left: 0;"
+                 class="unselectable">{{ bit }}</div>
+            <div style="display: inline-block; margin: 0; padding-left: 2px; width: 10px; font-family: monospace; color: rgba(0, 0, 0, 0.5); text-align: right; position: absolute; left: 10px;"
+                 class="unselectable">{{ $index }}</div>
         </div>
         <div style="width: 0; height: 0; display: inline-block; position: absolute;" ng-transclude></div>
     </div>
