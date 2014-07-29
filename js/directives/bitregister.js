@@ -72,25 +72,30 @@ bonsaiApp.directive('bitregister', function ($interval) {
             $scope.updateWires = function (throwException) {
                 var wires = $scope.register.getWires();
                 for (var i = 0; i < wires.length; i++) {
-                    if ($scope.register.getBit(i)) {
-                        try {
-                            wires[i].wire.write(wires[i].connector, 1);
-                        } catch (exception) {
-                            wires[i].wire.registerReaderAndRead(wires[i].connector);
-                            if (throwException) {
-                                throw exception;
-                            }
-                        }
+                    if ($scope.register.state === 1) {
+                        wires[i].wire.stopWriting(wires[i].connector);
+                        wires[i].wire.registerReaderAndRead(wires[i].connector);
                     } else {
-                        try {
-                            wires[i].wire.write(wires[i].connector, 0);
-                        } catch (exception) {
-                            if (throwException) {
-                                throw exception;
+                        if ($scope.register.getBit(i)) {
+                            try {
+                                wires[i].wire.write(wires[i].connector, 1);
+                            } catch (exception) {
+                                wires[i].wire.registerReaderAndRead(wires[i].connector);
+                                if (throwException) {
+                                    throw exception;
+                                }
                             }
-                        } finally {
-                            wires[i].wire.stopWriting(wires[i].connector);
-                            wires[i].wire.registerReaderAndRead(wires[i].connector);
+                        } else {
+                            try {
+                                wires[i].wire.write(wires[i].connector, 0);
+                            } catch (exception) {
+                                if (throwException) {
+                                    throw exception;
+                                }
+                            } finally {
+                                wires[i].wire.stopWriting(wires[i].connector);
+                                wires[i].wire.registerReaderAndRead(wires[i].connector);
+                            }
                         }
                     }
                 }
@@ -107,6 +112,7 @@ bonsaiApp.directive('bitregister', function ($interval) {
             $scope.setState = function (desiredState) {
                 window.getSelection().removeAllRanges(); // Hack to unselect the arrows to keep the color visible.
                 $scope.register.setState(desiredState);
+                $scope.updateWires(true);
             };
 
             $scope.activateWriteWire = function () {
