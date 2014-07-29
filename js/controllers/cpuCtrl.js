@@ -252,6 +252,20 @@ bonsaiApp.controller('bonsaiCpuCtrl',
                 }, {
                     'id': 'delayTestRight',
                     'name': 'delay Test Right'
+                }, {
+                    'id': 'FilterTop',
+                    'name': 'filter Test Top bus',
+                    'base': 10,
+                    'max': 32767,
+                    'left': 410,
+                    'top': 340
+                }, {
+                    'id': 'FilterBottom',
+                    'name': 'filter Test Bottom bus',
+                    'base': 10,
+                    'max': 32767,
+                    'left': 410,
+                    'top': 380
                 }
             ],
             'manualswitches': [
@@ -504,6 +518,16 @@ bonsaiApp.controller('bonsaiCpuCtrl',
                     'top': 400,
                     'left': 600
                 }
+            ],
+            'filters': [
+                {
+                    'name': 'Testfilter',
+                    'statement': 'x % 1000',
+                    'busTopId': 'FilterTop',
+                    'busBottomId': 'FilterBottom',
+                    'top': 370,
+                    'left': 400
+                }
             ]
         };
 
@@ -620,6 +644,14 @@ bonsaiApp.controller('bonsaiCpuCtrl',
             }
             if ($scope.cpu.delays[i].busRightId) {
                 $scope.cpu.delays[i].busRight = $scope.findBus($scope.cpu.delays[i].busRightId);
+            }
+        }
+        for (i = 0; i < $scope.cpu.filters.length; i++) {
+            if ($scope.cpu.filters[i].busTopId) {
+                $scope.cpu.filters[i].busTop = $scope.findBus($scope.cpu.filters[i].busTopId);
+            }
+            if ($scope.cpu.filters[i].busBottomId) {
+                $scope.cpu.filters[i].busBottom = $scope.findBus($scope.cpu.filters[i].busBottomId);
             }
         }
 

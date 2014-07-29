@@ -73,6 +73,10 @@
             <delay delay-name="{{delay.name}}" bus-left="delay.busLeft" bus-right="delay.busRight"
                    delay="delay.delay" top="delay.top" left="delay.left"></delay>
         </div>
+        <div ng-repeat="filter in cpu.filters">
+            <filter filter-name="{{filter.name}}" bus-top="filter.busTop" bus-bottom="filter.busBottom"
+                    statement="filter.statement" top="filter.top" left="filter.left"></filter>
+        </div>
     </div>
     <div class="editor pane" ng-repeat="editor in cpu.memories"
          ng-show="selectedEditor === $index + 1" style="position: relative;">
