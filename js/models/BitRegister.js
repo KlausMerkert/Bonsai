@@ -59,10 +59,10 @@ BitRegister.prototype.setValue = function (value) {
         value = 0;
     }
     this.value = value;
-    this.updateViewCallback(this.value);
     if (this.state === 1) {
         this.wideBusConnection.bus.write(this, value);
     }
+    this.updateViewCallback(this.value);
 };
 
 BitRegister.prototype.getValue = function () {
@@ -77,8 +77,7 @@ BitRegister.prototype.setBit = function (index, bit) {
             bit
         );
     }
-    var oldBit = this.getBit(index);
-    if (bit !== oldBit) {
+    if (bit !== this.getBit(index)) {
         if (bit) {
             this.setValue(this.value + Math.pow(2, index));
         } else {
@@ -176,14 +175,4 @@ BitRegister.prototype.setToDisconnected = function (wire) {
 
 BitRegister.prototype.isReader = function () {
     return (this.state === -1);
-};
-
-BitRegister.prototype.getReaders = function () {
-    var readers = [];
-    for (var i = 0; i < this.buses.length; i++) {
-        if (this.buses[i].state === -1) {
-            readers.push(this.buses[i].bus)
-        }
-    }
-    return readers;
 };

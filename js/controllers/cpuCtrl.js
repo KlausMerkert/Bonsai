@@ -11,9 +11,53 @@ bonsaiApp.controller('bonsaiCpuCtrl',
                     'name': 'Datenbus',
                     'max': 255,
                     'base': 10,
-                    'color': 'rgb(0, 0, 225)',
+                    'color': 'rgb(255, 0, 0)',
                     'top': 92,
-                    'left': 352
+                    'left': 352,
+                    'routes': [
+                        {
+                            'type': 'vertical',
+                            'top': '164px',
+                            'left': '129px',
+                            'width': '0',
+                            'height': '21px'
+                        },
+                        {
+                            'type': 'bottomright',
+                            'top': '100px',
+                            'left': '313px',
+                            'width': '120px',
+                            'height': '21px'
+                        },
+                        {
+                            'type': 'topleft',
+                            'top': '121px',
+                            'left': '273px',
+                            'width': '38px',
+                            'height': '42px'
+                        },
+                        {
+                            'type': 'vertical',
+                            'top': '122px',
+                            'left': '300px',
+                            'width': '0',
+                            'height': '7px'
+                        },
+                        {
+                            'type': 'topleft',
+                            'top': '185px',
+                            'left': '43px',
+                            'width': '210px',
+                            'height': '45px'
+                        },
+                        {
+                            'type': 'bottomright',
+                            'top': '165px',
+                            'left': '253px',
+                            'width': '20px',
+                            'height': '20px'
+                        }
+                    ]
                 }, {
                     'id': 'addressBus',
                     'name': 'Adressbus',
@@ -43,60 +87,103 @@ bonsaiApp.controller('bonsaiCpuCtrl',
                             'height': '21px'
                         }
                     ]
-                }, {
-                    'id': 'foo',
-                    'name': 'Foo',
-                    'max': 255,
+                },
+                {
+                    'id': 'MicroAddressBus',
+                    'name': 'MikroAdressbus',
+                    'max': 99,
                     'base': 10,
-                    'color': 'rgb(245, 0, 0)',
-                    'top': 292,
-                    'left': 552
-                }, {
-                    'id': 'testBus',
-                    'name': 'Testbus',
-                    'max': 1
-                }, {
-                    'id': 'RegisterCdataBusGateWriteWire',
-                    'name': 'Register C dataBus gate write wire'
+                    'color': 'rgb(155, 100, 0)',
+                    'top': 200,
+                    'left': 600
+                },
+                {
+                    'id': 'DecoderMPC',
+                    'name': 'BefehlsdecoderZuMPC',
+                    'max': 99,
+                    'base': 10,
+                    'color': 'rgb(0, 140, 140)',
+                    'top': 200,
+                    'left': 600
                 }, {
                     'id': 'RegisterCdataBusGateReadWire',
-                    'name': 'Register C dataBus gate read wire'
-                }, {
-                    'id': 'RegisterCIncWire',
-                    'name': 'Register C inc wire'
-                }, {
-                    'id': 'RegisterCDecWire',
-                    'name': 'Register C dec wire'
-                }, {
-                    'id': 'RegisterCClrWire',
-                    'name': 'Register C clr wire'
+                    'name': 'Register C dataBus gate read wire',
+                    'max': 1
                 }, {
                     'id': 'DatenspeicherAddressReadWire',
-                    'name': 'Datenspeicher Adressbus read wire'
+                    'name': 'Datenspeicher Adressbus read wire',
+                    'max': 1
                 }, {
                     'id': 'AndA',
-                    'name': 'And gate A wire'
+                    'name': 'And gate A wire',
+                    'max': 1
                 }, {
                     'id': 'AndB',
-                    'name': 'And gate B wire'
-                }, {
-                    'id': 'NorA',
-                    'name': 'Nor gate A wire'
-                }, {
-                    'id': 'NorB',
-                    'name': 'Nor gate B wire'
+                    'name': 'And gate B wire',
+                    'max': 1
                 }, {
                     'id': 'OrA',
-                    'name': 'Or gate A wire'
+                    'name': 'Or gate A wire',
+                    'max': 1
                 }, {
-                    'id': 'OrB',
-                    'name': 'Or gate B wire'
+                    'id': 's13',
+                    'name': 'Steuersignal 13',
+                    'max': 1
                 }, {
-                    'id': 'logic',
-                    'name': 'logic result wire'
+                    'id': 's1',
+                    'name': 'Steuersignal 1',
+                    'max': 1
+                }, {
+                    'id': 's2',
+                    'name': 'Steuersignal 2',
+                    'max': 1
+                }, {
+                    'id': 'and2A_Takt',
+                    'name': 'xy',
+                    'max': 1
+                }, {
+                    'id': 'and2B_nor1out',
+                    'name': 'uv',
+                    'max': 1
+                }, {
+                    'id': 'takt',
+                    'name': 'Takt',
+                    'max': 1
+                }, {
+                    'id': 'and2out_incMPC',
+                    'name': 'abc',
+                    'max': 1
+                }, {
+                    'id': 'or1_ausgang',
+                    'name': 'or1_ausgang result wire',
+                    'max': 1
                 }, {
                     'id': 'compWire',
-                    'name': 'Zerocomparator result wire'
+                    'name': 'Zerocomparator result wire',
+                    'max': 1,
+                    'routes': [
+                        {
+                            'type': 'vertical',
+                            'top': '150px',
+                            'left': '300px',
+                            'width': '0',
+                            'height': '16px'
+                        },
+                        {
+                            'type': 'topright',
+                            'top': '59px',
+                            'left': '365px',
+                            'width': '6px',
+                            'height': '50px'
+                        },
+                        {
+                            'type': 'bottomright',
+                            'top': '110px',
+                            'left': '301px',
+                            'width': '70px',
+                            'height': '50px'
+                        }
+                    ]
                 }, {
                     'id': 'bit0wire',
                     'name': 'bit 0 wire'
@@ -109,45 +196,23 @@ bonsaiApp.controller('bonsaiCpuCtrl',
                 }, {
                     'id': 'bit3wire',
                     'name': 'bit 3 wire'
+                }, {
+                    'id': 'testBus',
+                    'name': 'Testbus',
+                    'base': 10,
+                    'max': 255,
+                    'color': 'rgb(200, 0, 200)',
+                    'left': 260,
+                    'top': 275
                 }
             ],
             'manualswitches': [
                 {
-                    'wireId': 'testBus',
-                    'name': 'Lena',
-                    'value': 0,
-                    'top': 168,
-                    'left': 80
-                }, {
-                    'wireId': 'RegisterCdataBusGateWriteWire',
-                    'name': 'RegisterCdataBusGateWriteWireSwitch',
-                    'value': 0,
-                    'top': 130,
-                    'left': 512
-                }, {
                     'wireId': 'RegisterCdataBusGateReadWire',
                     'name': 'RegisterCdataBusGateReadWireSwitch',
                     'value': 0,
                     'top': 110,
                     'left': 512
-                }, {
-                    'wireId': 'RegisterCIncWire',
-                    'name': 'RegisterCIncWireSwitch',
-                    'value': 0,
-                    'top': 48,
-                    'left': 560
-                }, {
-                    'wireId': 'RegisterCDecWire',
-                    'name': 'RegisterCDecWireSwitch',
-                    'value': 0,
-                    'top': 67,
-                    'left': 560
-                }, {
-                    'wireId': 'RegisterCClrWire',
-                    'name': 'RegisterCClrWireSwitch',
-                    'value': 0,
-                    'top': 87,
-                    'left': 560
                 }, {
                     'wireId': 'DatenspeicherAddressReadWire',
                     'name': 'DatenspeicherAddressReadWireSwitch',
@@ -161,124 +226,115 @@ bonsaiApp.controller('bonsaiCpuCtrl',
                     'top': 10,
                     'left': 800
                 }, {
-                    'wireId': 'AndB',
-                    'name': 'AndBSwitch',
-                    'value': 0,
-                    'top': 30,
-                    'left': 800
-                }, {
-                    'wireId': 'NorA',
-                    'name': 'NorASwitch',
-                    'value': 0,
-                    'top': 50,
-                    'left': 800
-                }, {
-                    'wireId': 'NorB',
-                    'name': 'NorBSwitch',
+                    'wireId': 's13',
+                    'name': 'incPC',
                     'value': 0,
                     'top': 70,
+                    'left': 800
+                }, {
+                    'wireId': 's1',
+                    'name': 'clrMPC',
+                    'value': 0,
+                    'top': 260,
+                    'left': 800
+                }, {
+                    'wireId': 's2',
+                    'name': 'loadMPC',
+                    'value': 0,
+                    'top': 280,
+                    'left': 800
+                }, {
+                    'wireId': 'takt',
+                    'name': 'Takt',
+                    'value': 0,
+                    'top': 300,
                     'left': 800
                 }
             ],
             'leds': [
                 {
-                    'wireId': 'testBus',
-                    'name': 'Hugo',
-                    'value': 0,
-                    'top': 160,
-                    'left': 16
-                }, {
-                    'wireId': 'testBus',
-                    'name': 'Heinrich',
-                    'value': 0,
-                    'top': 176,
-                    'left': 32
-                }, {
-                    'wireId': 'RegisterCIncWire',
-                    'name': 'Register C inc wire led',
-                    'value': 0,
-                    'top': 48,
-                    'left': 512
-                }, {
-                    'wireId': 'OrB',
-                    'name': 'Nor works correctly intication led',
-                    'top': 70,
-                    'left': 750
-                }, {
-                    'wireId': 'logic',
-                    'name': 'logic intication led',
-                    'top': 39,
-                    'left': 700
+                    'wireId': 'or1_ausgang',
+                    'name': 'or1_ausgang indication led',
+                    'top': 35,
+                    'left': 312
                 }, {
                     'wireId': 'compWire',
-                    'name': 'comp intication led',
+                    'name': 'comp indication led',
                     'top': 170,
                     'left': 300
                 }, {
                     'wireId': 'bit0wire',
                     'name': 'bit 0 wire led',
-                    'top': 261,
+                    'top': 331,
                     'left': 170
                 }, {
                     'wireId': 'bit1wire',
                     'name': 'bit 1 wire led',
-                    'top': 273,
+                    'top': 343,
                     'left': 170
                 }, {
                     'wireId': 'bit2wire',
                     'name': 'bit 2 wire led',
-                    'top': 285,
+                    'top': 355,
                     'left': 170
                 }, {
                     'wireId': 'bit3wire',
                     'name': 'bit 3 wire led',
-                    'top': 297,
+                    'top': 367,
                     'left': 170
                 }
             ],
             'andGates': [
                 {
-                    'name': 'Andreas',
+                    'name': 'and1',
                     'inAId': 'AndA',
-                    'inBId': 'AndB',
+                    'inBId': 'compWire',
                     'outId': 'OrA',
-                    'top': 15,
-                    'left': 770
+                    'top': 48,
+                    'left': 350
+                },
+                {
+                    'name': 'and2',
+                    'inAId': 'takt',
+                    'inBId': 'and2B_nor1out',
+                    'outId': 'and2out_incMPC',
+                    'top': 255,
+                    'left': 680
                 }
             ],
             'orGates': [
                 {
-                    'name': 'Orphelia',
+                    'name': 'or1',
                     'inAId': 'OrA',
-                    'inBId': 'OrB',
-                    'outId': 'logic',
-                    'top': 35,
-                    'left': 720
+                    'inBId': 's13',
+                    'outId': 'or1_ausgang',
+                    'top': 53,
+                    'left': 320
                 }
             ],
             'norGates': [
                 {
-                    'name': 'Norbert',
-                    'inAId': 'NorA',
-                    'inBId': 'NorB',
-                    'outId': 'OrB',
-                    'top': 55,
-                    'left': 770
+                    'name': 'nor1',
+                    'inAId': 's1',
+                    'inBId': 's2',
+                    'outId': 'and2B_nor1out',
+                    'top': 250,
+                    'left': 730
                 }
             ],
             'registers': [
                 {
-                    'name': 'Register B',
+                    'name': 'PC',
                     'value': 10,
                     'base' : 10,
                     'top' : 50,
                     'left': 240,
                     'gates': [
-                        {'busId': 'addressBus'},
-                        {'busId': 'dataBus'}
-                    ]
+                        {'busId': 'addressBus'}
+                    ],
+                    'incWireId': 'or1_ausgang',
                 }, {
-                    'name': 'Register C',
+                    'name': 'IR',
                     'value': 1,
                     'base' : 10,
                     'top' : 50,
@@ -288,13 +344,59 @@ bonsaiApp.controller('bonsaiCpuCtrl',
                             'busId': 'addressBus'
                         }, {
                             'busId': 'dataBus',
-                            'writeWireId': 'RegisterCdataBusGateWriteWire',
+                            'writeWireId': undefined,
                             'readWireId': 'RegisterCdataBusGateReadWire'
                         }
                     ],
-                    'incWireId': 'RegisterCIncWire',
-                    'decWireId': 'RegisterCDecWire',
-                    'clrWireId': 'RegisterCClrWire'
+                    'incWireId': undefined,
+                    'decWireId': undefined,
+                    'clrWireId': undefined
+                }, {
+                    'name': 'Akku',
+                    'value': 42,
+                    'base' : 10,
+                    'top' : 250,
+                    'left': 10,
+                    'gates': [
+                        {
+                            'busId': 'dataBus',
+                            'writeWireId': undefined,
+                            'readWireId': undefined
+                        }
+                    ],
+                    'incWireId': undefined,
+                    'decWireId': undefined
+                }, {
+                    'name': 'MPC',
+                    'value': 4,
+                    'base' : 10,
+                    'top' : 250,
+                    'left': 600,
+                    'gates': [
+                        {
+                            'busId': 'MicroAddressBus',
+                            'writeWireId': undefined,
+                            'readWireId': undefined
+                        },
+                        {
+                            'busId': 'DecoderMPC',
+                            'writeWireId': undefined,
+                            'readWireId': undefined
+                        }
+                    ],
+                    'incWireId': 'and2out_incMPC',
+                    'decWireId': undefined
+                }, {
+                    'name': 'test Register',
+                    'value': 5,
+                    'base': 10,
+                    'top': 250,
+                    'left': 240,
+                    'gates': [
+                        {
+                            'busId': 'testBus'
+                        }
+                    ]
                 }
             ],
             'bitregisters': [
@@ -302,10 +404,10 @@ bonsaiApp.controller('bonsaiCpuCtrl',
                     'name': 'Steuerwort',
                     'value': 9,
                     'base' : 10,
-                    'top' : 250,
+                    'top' : 320,
                     'left': 240,
                     'widegate': {
-                        'busId': 'foo',
+                        'busId': 'testBus',
                         'writeWireId': undefined,
                         'readWireId': undefined
                     },
@@ -333,12 +435,44 @@ bonsaiApp.controller('bonsaiCpuCtrl',
                         'writeWireId': undefined,
                         'readWireId': undefined
                     }
+                },
+                {
+                    'name': "Befehlsdecoder",
+                    'base': 10,
+                    'content': "10\n20\n30\n40\n50",
+                    'top': 150,
+                    'left':400,
+                    'addressgate': {
+                        'busId': 'addressBus',
+                        'readWireId': undefined
+                    },
+                    'datagate': {
+                        'busId': 'DecoderMPC',
+                        'writeWireId': undefined,
+                        'readWireId': undefined
+                    }
+                },
+                {
+                    'name': "Mikroprogrammspeicher",
+                    'base': 10,
+                    'content': "87432\n",
+                    'top': 50,
+                    'left':600,
+                    'addressgate': {
+                        'busId': 'MicroAddressBus',
+                        'readWireId': undefined
+                    },
+                    'datagate': {
+                        'busId': 'addressBus',
+                        'writeWireId': undefined,
+                        'readWireId': undefined
+                    }
                 }
             ],
             'zerocomparators': [
                 {
                     'name': 'Zero comparator 1',
-                    'busId': 'foo',
+                    'busId': 'dataBus',
                     'wireId': 'compWire',
                     'top': 130,
                     'left': 300

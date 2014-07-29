@@ -60,16 +60,16 @@ bonsaiApp.directive('bitregister', function ($interval) {
                 }
             });
 
-            $scope.$watch('value', function(newValue, oldValue) {
+            $scope.$watch('value', function(newValue) {
                 if (typeof newValue != 'undefined') {
-                    if (newValue != oldValue) {
+                    if (newValue != $scope.register.getValue()) {
                         $scope.register.setValue(newValue);
                     }
-                    $scope.updateWires();
+                    $scope.updateWires(false);
                 }
             });
 
-            $scope.updateWires = function () {
+            $scope.updateWires = function (throwException) {
                 var wires = $scope.register.getWires();
                 for (var i = 0; i < wires.length; i++) {
                     if ($scope.register.getBit(i)) {
@@ -77,13 +77,17 @@ bonsaiApp.directive('bitregister', function ($interval) {
                             wires[i].wire.write(wires[i].connector, 1);
                         } catch (exception) {
                             wires[i].wire.registerReaderAndRead(wires[i].connector);
-                            throw exception;
+                            if (throwException) {
+                                throw exception;
+                            }
                         }
                     } else {
                         try {
                             wires[i].wire.write(wires[i].connector, 0);
                         } catch (exception) {
-                            throw exception;
+                            if (throwException) {
+                                throw exception;
+                            }
                         } finally {
                             wires[i].wire.stopWriting(wires[i].connector);
                             wires[i].wire.registerReaderAndRead(wires[i].connector);
@@ -272,9 +276,10 @@ bonsaiApp.directive('bitregister', function ($interval) {
                     if (bitWires[i].wire) {
                         bitWires[i].connector = new ReadingControlWireConnector(bitWires[i].wire,
                             function (wire) {
-                                $scope.toggleBit(wire, 1);
+                                $scope.toggleBit(wire);
                             },
-                            function (wire) {
+                            function () {
+                                $scope.updateWires(false);
                             }, $scope.registerName + ' bit connector no ' + i + ' for ' + bitWires[i].wire.getName());
                         bitWires[i].wire.enrollToDirective(
                             bitWires[i].connector,

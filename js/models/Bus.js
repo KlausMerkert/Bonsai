@@ -92,6 +92,10 @@ Bus.prototype.setValue = function (value) {
     }
 };
 
+Bus.prototype.getValue = function () {
+    return this.value;
+};
+
 Bus.prototype.enroll = function (enrollee) {
     this.connections.push(enrollee);
     return this.connections[this.connections.length - 1];
@@ -107,7 +111,9 @@ Bus.prototype.resign = function (resigner) {
 Bus.prototype.registerReaderAndRead = function (reader) {
     var index = this.connections.indexOf(reader);
     if (index >= 0) {
-        this.readers.push(reader);
+        if (this.readers.indexOf(reader) < 0) {
+            this.readers.push(reader);
+        }
         return this.value;
     } else {
         throw NotEnrolledReadException(

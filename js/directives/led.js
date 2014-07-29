@@ -20,8 +20,8 @@ bonsaiApp.directive('led', function ($interval) {
 
             $scope.led = new Led($scope.dataChangeCallback, $scope.value);
 
-            $scope.$watch('value', function(newValue, oldValue) {
-                if (newValue != oldValue) {
+            $scope.$watch('value', function(newValue) {
+                if (newValue != $scope.led.getValue()) {
                     $scope.led.setValue(newValue);
                 }
                 if (newValue) {
@@ -56,6 +56,7 @@ bonsaiApp.directive('led', function ($interval) {
                 }
                 $scope.led.setValue(1);
             };
+
             $scope.deactivate = function () {
                 try {
                     $scope.wire.write($scope.led, 0);
@@ -65,10 +66,6 @@ bonsaiApp.directive('led', function ($interval) {
                     $scope.wire.stopWriting($scope.led);
                     $scope.value = $scope.wire.registerReaderAndRead($scope.led);
                 }
-            };
-
-            $scope.setValue = function (value) {
-                $scope.led.setValue(value);
             };
 
             $scope.getConnectionPositions = function () {

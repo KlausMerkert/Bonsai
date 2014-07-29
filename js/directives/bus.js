@@ -68,11 +68,11 @@ bonsaiApp.directive('bus', function () {
             $scope.value = undefined;
 
             $scope.localBus.setUpdateViewCallback(function (newValue) {
-                $scope.value = newValue;
+                    $scope.value = newValue;
             });
 
-            $scope.$watch('value', function(newValue, oldValue) {
-                if (newValue != oldValue) {
+            $scope.$watch('value', function(newValue) {
+                if (newValue != $scope.localBus.getValue()) {
                     $scope.localBus.setValue(newValue);
                 }
             });

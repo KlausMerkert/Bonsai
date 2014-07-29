@@ -18,3 +18,7 @@ Led.prototype.setValue = function (value) {
     this.value = value;
     this.updateViewCallback(this.value);
 };
+
+Led.prototype.getValue = function () {
+    return this.value;
+};
