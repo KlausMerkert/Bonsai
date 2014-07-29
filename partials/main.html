@@ -66,8 +66,12 @@
             </memory>
         </div>
         <div ng-repeat="comp in cpu.zerocomparators">
-            <comparetozero comp-name="comp.name" bus="comp.bus" wire="comp.wire"
+            <comparetozero comp-name="{{comp.name}}" bus="comp.bus" wire="comp.wire"
                            top="comp.top" left="comp.left"></comparetozero>
+        </div>
+        <div ng-repeat="delay in cpu.delays">
+            <delay delay-name="{{delay.name}}" bus-left="delay.busLeft" bus-right="delay.busRight"
+                   delay="delay.delay" top="delay.top" left="delay.left"></delay>
         </div>
     </div>
     <div class="editor pane" ng-repeat="editor in cpu.memories"

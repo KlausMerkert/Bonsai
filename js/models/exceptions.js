@@ -147,3 +147,23 @@ function WrongValueForSingleBit (message, component, value) {
     exception.actor2 = value;
     return exception;
 }
+
+function DelayValueNotAnInteger (message, value) {
+    var exception = {};
+    exception.name = 'DelayValueNotAnInteger';
+    exception.localization = '_' + exception.name + '_';
+    exception.message = message;
+    exception.actor1 = value;
+    exception.actor2 = "";
+    return exception;
+}
+
+function DelayAlreadyOccupied (message, delayName, busName) {
+    var exception = {};
+    exception.name = 'DelayAlreadyOccupied';
+    exception.localization = '_' + exception.name + '_';
+    exception.message = message;
+    exception.actor1 = delayName;
+    exception.actor2 = busName;
+    return exception;
+}

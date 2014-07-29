@@ -246,6 +246,12 @@ bonsaiApp.controller('bonsaiCpuCtrl',
                     'color': 'rgb(200, 0, 200)',
                     'left': 760,
                     'top': 10               
+                }, {
+                    'id': 'delayTestLeft',
+                    'name': 'delay Test Left'
+                }, {
+                    'id': 'delayTestRight',
+                    'name': 'delay Test Right'
                 }
             ],
             'manualswitches': [
@@ -279,7 +285,17 @@ bonsaiApp.controller('bonsaiCpuCtrl',
                     'name': 's0 led',
                     'top': 62,
                     'left': 782 
-                }              
+                }, {
+                    'wireId': 'delayTestLeft',
+                    'name': 'Delay left led',
+                    'top': 400,
+                    'left': 550
+                }, {
+                    'wireId': 'delayTestRight',
+                    'name': 'Delay right led',
+                    'top': 400,
+                    'left': 720
+                }
             ],
             'andGates': [
                 {
@@ -478,6 +494,16 @@ bonsaiApp.controller('bonsaiCpuCtrl',
                     'top': 130,
                     'left': 300
                 }
+            ],
+            'delays': [
+                {
+                    'name': 'test Delay',
+                    'delay': 1000,
+                    'busLeftId': 'delayTestLeft',
+                    'busRightId': 'delayTestRight',
+                    'top': 400,
+                    'left': 600
+                }
             ]
         };
 
@@ -586,6 +612,14 @@ bonsaiApp.controller('bonsaiCpuCtrl',
             $scope.cpu.zerocomparators[i].bus = $scope.findBus($scope.cpu.zerocomparators[i].busId);
             if ($scope.cpu.zerocomparators[i].wireId) {
                 $scope.cpu.zerocomparators[i].wire = $scope.findBus($scope.cpu.zerocomparators[i].wireId);
+            }
+        }
+        for (i = 0; i < $scope.cpu.delays.length; i++) {
+            if ($scope.cpu.delays[i].busLeftId) {
+                $scope.cpu.delays[i].busLeft = $scope.findBus($scope.cpu.delays[i].busLeftId);
+            }
+            if ($scope.cpu.delays[i].busRightId) {
+                $scope.cpu.delays[i].busRight = $scope.findBus($scope.cpu.delays[i].busRightId);
             }
         }
 

@@ -238,5 +238,35 @@
         "key"        : "_WrongValueForSingleBit_end",
         "value"      : " is not a valid value for a single bit. Only 0 or 1 are allowed.",
         "description": ""
+    },
+    {
+        "key"        : "_DelayValueNotAnInteger_beginning",
+        "value"      : "",
+        "description": ""
+    },
+    {
+        "key"        : "_DelayValueNotAnInteger_middle",
+        "value"      : " is not an integer. For a delay only a positive number of milliseconds is allowed.",
+        "description": ""
+    },
+    {
+        "key"        : "_DelayValueNotAnInteger_end",
+        "value"      : "",
+        "description": ""
+    },
+    {
+        "key"        : "_DelayAlreadyOccupied_beginning",
+        "value"      : "This delay (",
+        "description": ""
+    },
+    {
+        "key"        : "_DelayAlreadyOccupied_middle",
+        "value"      : ") is already occupied by ",
+        "description": ""
+    },
+    {
+        "key"        : "_DelayAlreadyOccupied_end",
+        "value"      : ".",
+        "description": ""
     }
 ]

@@ -238,5 +238,35 @@
         "key"        : "_WrongValueForSingleBit_end",
         "value"      : " ist kein gültiger Wert für ein einzelnes Bit. Erlaubt sind nur 0 und 1.",
         "description": ""
+    },
+    {
+        "key"        : "_DelayValueNotAnInteger_beginning",
+        "value"      : "",
+        "description": ""
+    },
+    {
+        "key"        : "_DelayValueNotAnInteger_middle",
+        "value"      : " ist keine ganze Zahl. Die Verzögerung muss als positive ganze Zahl an Millisekunden angegeben werden.",
+        "description": ""
+    },
+    {
+        "key"        : "_DelayValueNotAnInteger_end",
+        "value"      : "",
+        "description": ""
+    },
+    {
+        "key"        : "_DelayAlreadyOccupied_beginning",
+        "value"      : "Diese Verzögerungskomponente (",
+        "description": ""
+    },
+    {
+        "key"        : "_DelayAlreadyOccupied_middle",
+        "value"      : ") wird bereits beschrieben von ",
+        "description": ""
+    },
+    {
+        "key"        : "_DelayAlreadyOccupied_end",
+        "value"      : ".",
+        "description": ""
     }
 ]

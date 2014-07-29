@@ -381,3 +381,24 @@ textarea {
     width: 26px;
     line-height: 10px;
 }
+
+.delay {
+    border: 1px solid rgb(30, 30, 30);
+    background-color: rgba(200, 200, 200, 30);
+    border-radius: 6px;
+    padding: 5px;
+    display: inline-block;
+    height: 18px;
+    width: 53px;
+    line-height: 18px;
+}
+
+.delay input {
+    width: 53px;
+    margin: 0;
+    background-color: rgba(200, 200, 200, 255);
+    border: 0 solid rgba(200, 200, 200, 255);
+    font-family: monospace;
+    color: rgb(0, 0, 0);
+    text-align: center;
+}
