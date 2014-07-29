@@ -172,15 +172,15 @@ bonsaiApp.controller('bonsaiCpuCtrl',
                         {
                             'type': 'topright',
                             'top': '59px',
-                            'left': '365px',
-                            'width': '6px',
+                            'left': '371px',
+                            'width': '7px',
                             'height': '50px'
                         },
                         {
                             'type': 'bottomright',
                             'top': '110px',
                             'left': '301px',
-                            'width': '70px',
+                            'width': '77px',
                             'height': '50px'
                         }
                     ]
@@ -241,19 +241,19 @@ bonsaiApp.controller('bonsaiCpuCtrl',
                     'wireId': 's1',
                     'name': 'clrMPC',
                     'value': 0,
-                    'top': 260,
+                    'top': 250,
                     'left': 800
                 }, {
                     'wireId': 's2',
                     'name': 'loadMPC',
                     'value': 0,
-                    'top': 280,
+                    'top': 270,
                     'left': 800
                 }, {
                     'wireId': 'takt',
                     'name': 'Takt',
                     'value': 0,
-                    'top': 300,
+                    'top': 230,
                     'left': 800
                 }, {
                     'wireId': 'bitregisterRead',
@@ -316,7 +316,7 @@ bonsaiApp.controller('bonsaiCpuCtrl',
                     'inAId': 'takt',
                     'inBId': 'and2B_nor1out',
                     'outId': 'and2out_incMPC',
-                    'top': 255,
+                    'top': 253,
                     'left': 680
                 }
             ],

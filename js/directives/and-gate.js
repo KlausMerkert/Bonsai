@@ -26,11 +26,11 @@ bonsaiApp.directive('andgate', function ($interval) {
 
             $scope.getConnectionPositions = function (wire) {
                 if (wire === $scope.inA) {
-                    return [{top: $scope.top, left: ($scope.left + 14)}];
+                    return [{top: $scope.top, left: ($scope.left + 21)}];
                 } else if (wire === $scope.inB) {
-                    return [{top: ($scope.top + 11), left: ($scope.left + 14)}];
+                    return [{top: ($scope.top + 11), left: ($scope.left + 21)}];
                 } else if (wire === $scope.out) {
-                    return [{top: ($scope.top + 6), left: ($scope.left - 2)}];
+                    return [{top: ($scope.top + 5), left: ($scope.left - 2)}];
                 } else {
                     console.log("This Wire is not connected: " + wire.getName());
                 }
