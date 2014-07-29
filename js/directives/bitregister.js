@@ -225,10 +225,10 @@ bonsaiApp.directive('bitregister', function ($interval) {
                 var positions = [];
                 var connection = $scope.register.getWideBusConnection();
                 if ((connection.writeWire) && (connection.writeWire === wire)) {
-                    positions.push({top: $scope.top-13, left: $scope.left+43});
+                    positions.push({top: $scope.top-11, left: $scope.left+26});
                 }
                 if ((connection.readWire) && (connection.readWire === wire)) {
-                    positions.push({top: $scope.top-7, left: $scope.left+43});
+                    positions.push({top: $scope.top-5, left: $scope.left+26});
                 }
                 var bitWires = $scope.register.getWires();
                 for (var i = 0; i < bitWires.length; i++) {
@@ -252,9 +252,11 @@ bonsaiApp.directive('bitregister', function ($interval) {
                     connection.writeWireConnector = new ReadingControlWireConnector(writeWire,
                         function (wire) {
                             $scope.register.setToWrite(wire);
+                            $scope.updateWires(true);
                         },
                         function (wire) {
                             $scope.register.setToDisconnected(wire);
+                            $scope.updateWires(true);
                         }, $scope.registerName + ' write wire connector for bus ' + connection.bus.getName());
                     writeWire.enrollToDirective(
                         connection.writeWireConnector,
@@ -268,9 +270,11 @@ bonsaiApp.directive('bitregister', function ($interval) {
                     connection.readWireConnector = new ReadingControlWireConnector(readWire,
                         function (wire) {
                             $scope.register.setToRead(wire);
+                            $scope.updateWires(true);
                         },
                         function (wire) {
                             $scope.register.setToDisconnected(wire);
+                            $scope.updateWires(true);
                         }, $scope.registerName + ' read wire connector for bus ' + connection.bus.getName());
                     readWire.enrollToDirective(connection.readWireConnector, $scope.getWireConnectionPositions);
                     if (readWire.registerReaderAndRead(connection.readWireConnector)) {

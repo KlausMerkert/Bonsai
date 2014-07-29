@@ -135,40 +135,34 @@ BitRegister.prototype.setState = function (desiredState) {
 };
 
 BitRegister.prototype.setToRead = function (wire) {
-    for (var i = 0; i < this.buses.length; i++) {
-        if (this.buses[i].readWire === wire) {
-            this.setState(this.buses[i], -1);
-        }
+    if (this.wideBusConnection.readWire === wire) {
+        this.setState(-1);
     }
 };
 
 BitRegister.prototype.setToWrite = function (wire) {
-    for (var i = 0; i < this.buses.length; i++) {
-        if (this.buses[i].writeWire === wire) {
-            this.setState(this.buses[i], 1);
-        }
+    if (this.wideBusConnection.writeWire === wire) {
+        this.setState(1);
     }
 };
 
 BitRegister.prototype.setToDisconnected = function (wire) {
-    for (var i = 0; i < this.buses.length; i++) {
-        if (this.buses[i].writeWire === wire) {
-            if ((this.buses[i].readWire) &&
-                (this.buses[i].readWire.isActive()) &&
-                (this.buses[i].readWire.isNotZero())) {
-                this.setState(this.buses[i], -1)
-            } else {
-                this.setState(this.buses[i], 0);
-            }
+    if (this.wideBusConnection.writeWire === wire) {
+        if ((this.wideBusConnection.readWire) &&
+            (this.wideBusConnection.readWire.isActive()) &&
+            (this.wideBusConnection.readWire.isNotZero())) {
+            this.setState(-1)
+        } else {
+            this.setState(0);
         }
-        if (this.buses[i].readWire === wire) {
-            if ((this.buses[i].writeWire) &&
-                (this.buses[i].writeWire.isActive()) &&
-                (this.buses[i].writeWire.isNotZero())) {
-                this.setState(this.buses[i], 1);
-            } else {
-                this.setState(this.buses[i], 0);
-            }
+    }
+    if (this.wideBusConnection.readWire === wire) {
+        if ((this.wideBusConnection.writeWire) &&
+            (this.wideBusConnection.writeWire.isActive()) &&
+            (this.wideBusConnection.writeWire.isNotZero())) {
+            this.setState(1);
+        } else {
+            this.setState(0);
         }
     }
 };
