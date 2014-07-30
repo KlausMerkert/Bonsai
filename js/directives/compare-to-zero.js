@@ -12,7 +12,14 @@ bonsaiApp.directive('comparetozero', function ($interval) {
             left: '='
         },
         link: function ($scope, element, attrs) {
-            $scope.comp = new CompareToZero($scope.bus, $scope.wire);
+            $scope.comp = new CompareToZero($scope.bus, $scope.wire, function (active) {
+                if (active) {
+                    $scope.color = 'rgb(255, 103, 97)';
+                } else {
+                    $scope.color = 'rgb(200, 200, 200)';
+                }
+            });
+            $scope.color = 'rgb(200, 200, 200)';
 
             $scope.topCSS = ($scope.top + 3) + 'px';
             $scope.leftCSS = ($scope.left - 8) + 'px';
