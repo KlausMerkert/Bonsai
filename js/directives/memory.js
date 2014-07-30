@@ -93,6 +93,10 @@ bonsaiApp.directive('memory', function ($interval) {
                 }
             });
 
+            $scope.isUndefined = function (value) {
+                return typeof value == 'undefined';
+            };
+
             $scope.activateAddressBusRead = function () {
                 if ($scope.memory.addressBus.readWire) {
                     $scope.memory.addressBus.readWire.unregisterReader(
