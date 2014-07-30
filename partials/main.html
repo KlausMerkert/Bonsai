@@ -21,6 +21,10 @@
             <manualswitch wire="switch.wire" switch-name="{{switch.name}}" value="switch.value"
                           top="switch.top" left="switch.left"></manualswitch>
         </div>
+        <div ng-repeat="clock in cpu.clocks">
+            <clock wire="clock.wire" clock-name="{{clock.name}}" frequency="clock.frequency"
+                   top="clock.top" left="clock.left"></clock>
+        </div>
         <div ng-repeat="led in cpu.leds">
             <led wire="led.wire" led-name="{{led.name}}" value="led.value" top="led.top" left="led.left"></led>
         </div>

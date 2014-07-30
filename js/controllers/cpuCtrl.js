@@ -269,6 +269,9 @@ bonsaiApp.controller('bonsaiCpuCtrl',
                 }, {
                     'id': 'BitRegisterRead',
                     'name': 'BitRegister read wire'
+                }, {
+                    'id': 'clockTest',
+                    'name': 'Clock test wire'
                 }
             ],
             'manualswitches': [
@@ -290,6 +293,15 @@ bonsaiApp.controller('bonsaiCpuCtrl',
                     'value': 0,
                     'top': 45,
                     'left': 850
+                }
+            ],
+            'clocks': [
+                {
+                    'wireId': 'clockTest',
+                    'name': 'Taktgeber',
+                    'frequency': 1,
+                    'top': 100,
+                    'left': 900
                 }
             ],
             'leds': [
@@ -318,6 +330,11 @@ bonsaiApp.controller('bonsaiCpuCtrl',
                     'name': 'Delay right led',
                     'top': 400,
                     'left': 720
+                }, {
+                    'wireId': 'clockTest',
+                    'name': 'Clock test led',
+                    'top': 100,
+                    'left': 870
                 }
             ],
             'andGates': [
@@ -579,6 +596,9 @@ bonsaiApp.controller('bonsaiCpuCtrl',
         };
         for (i = 0; i < $scope.cpu.manualswitches.length; i++) {
             $scope.cpu.manualswitches[i].wire = $scope.findBus($scope.cpu.manualswitches[i].wireId);
+        }
+        for (i = 0; i < $scope.cpu.clocks.length; i++) {
+            $scope.cpu.clocks[i].wire = $scope.findBus($scope.cpu.clocks[i].wireId);
         }
         for (i = 0; i < $scope.cpu.leds.length; i++) {
             $scope.cpu.leds[i].wire = $scope.findBus($scope.cpu.leds[i].wireId);
