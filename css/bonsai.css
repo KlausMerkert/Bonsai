@@ -86,6 +86,10 @@ a:hover {
     top: 20px;
 }
 
+.register .grayback:active {
+    background-color: rgb(255, 255, 255);
+}
+
 .memory {
     border: 1px solid rgb(30, 30, 30);
     background-color: rgba(200, 200, 200, 1);
@@ -219,6 +223,10 @@ a:hover {
     height: 3px;
     border: 1px solid rgb(30, 30, 30);
     cursor: pointer;
+}
+
+.wireconnector:active {
+    box-shadow: 1px 1px 1px rgba(40, 40, 255, 0.3);
 }
 
 .wireconnectortoprowwrite {
