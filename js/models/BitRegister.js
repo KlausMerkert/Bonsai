@@ -1,6 +1,6 @@
 'use strict';
 
-function BitRegister(updateViewCallback, name, initialValue) {
+function BitRegister(updateViewCallback, name, initialValue, stateChangeCallback) {
     this.updateViewCallback = updateViewCallback;
     this.name = name;
     this.value = initialValue;
@@ -10,6 +10,7 @@ function BitRegister(updateViewCallback, name, initialValue) {
      * -1 means the register reads from the wideBus and writes to the wires */
     this.state = 0;
     this.wideBusConnection = undefined;
+    this.stateChangeCallback = stateChangeCallback;
 }
 
 BitRegister.prototype.setName = function (name) {
@@ -131,6 +132,9 @@ BitRegister.prototype.setState = function (desiredState) {
         this.wideBusConnection.bus.stopWriting(this);
         this.wideBusConnection.bus.unregisterReader(this);
         this.state = desiredState;
+    }
+    if (this.stateChangeCallback) {
+        this.stateChangeCallback(this.state);
     }
 };
 

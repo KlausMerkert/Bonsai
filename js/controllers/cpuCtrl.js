@@ -266,6 +266,9 @@ bonsaiApp.controller('bonsaiCpuCtrl',
                     'max': 32767,
                     'left': 410,
                     'top': 360
+                }, {
+                    'id': 'BitRegisterRead',
+                    'name': 'BitRegister read wire'
                 }
             ],
             'manualswitches': [
@@ -281,6 +284,12 @@ bonsaiApp.controller('bonsaiCpuCtrl',
                     'value': 0,
                     'top': 300,
                     'left': 710               
+                }, {
+                    'wireId': 'BitRegisterRead',
+                    'name': 'BitRegister read switch',
+                    'value': 0,
+                    'top': 45,
+                    'left': 850
                 }
             ],
             'leds': [
@@ -451,7 +460,7 @@ bonsaiApp.controller('bonsaiCpuCtrl',
                     'widegate': {
                         'busId': 'MicroDataBus',
                         'writeWireId': undefined,
-                        'readWireId': undefined
+                        'readWireId': 'BitRegisterRead'
                     },
                     'wiregates': [
                         {'wireId': 's0'},

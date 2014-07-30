@@ -3,7 +3,7 @@
         <div style="width: 0; height: 0; overflow: visible; display: inline-block; position: absolute;">
             <div ng-click="toggleState()"
                  class="connection"
-                 ng-class="{'read': register.state == -1, 'write': register.state == 1, 'grayback': register.state == 0}"
+                 ng-style="{'background-color': gateColor}"
                  style="left: 4px;">
                 <div ng-show="register.state == 1"
                      style="position: relative; top: -0.1em; left: 0.01em;" class="unselectable">&uarr;</div>
@@ -21,8 +21,7 @@
                      ng-mouseup="deactivateWriteWire()"></div>
                 <div class="wireconnector read"
                      style="position: absolute; left: 18px; top: -13px;"
-                     ng-mousedown="activateReadWire()"
-                     ng-mouseup="deactivateReadWire()"></div>
+                     ng-mousedown="activateReadWire()"></div>
                 <div ng-repeat="bit in getBits() track by $index"
                      class="wireconnector grayback" style="left: -10px;"
                      ng-style="{'top': ($index * 12 + 4) + 'px'}"
