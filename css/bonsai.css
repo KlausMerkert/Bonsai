@@ -382,6 +382,12 @@ textarea {
     line-height: 10px;
 }
 
+.flanktriggered {
+    width: 3px;
+    height: 5px;
+    background: url("../images/Flank-triggered.svg") no-repeat;
+}
+
 .delay {
     border: 1px solid rgb(30, 30, 30);
     background-color: rgba(200, 200, 200, 30);
