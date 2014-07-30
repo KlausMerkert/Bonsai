@@ -46,7 +46,7 @@ a:hover {
 
 .register {
     border: 1px solid rgb(30, 30, 30);
-    background-color: rgba(200, 200, 200, 30);
+    background-color: rgba(200, 200, 200, 1);
     border-radius: 6px;
     padding: 5px;
     display: inline-block;
@@ -58,8 +58,8 @@ a:hover {
 .register input {
     width: 53px;
     margin: 0;
-    background-color: rgba(200, 200, 200, 255);
-    border: 0 solid rgba(200, 200, 200, 255);
+    background-color: rgba(200, 200, 200, 1);
+    border: 0 solid rgba(200, 200, 200, 1);
     font-family: monospace;
     color: rgb(0, 0, 0);
     text-align: center;
@@ -88,7 +88,7 @@ a:hover {
 
 .memory {
     border: 1px solid rgb(30, 30, 30);
-    background-color: rgba(200, 200, 200, 30);
+    background-color: rgba(200, 200, 200, 1);
     border-radius: 6px;
     padding: 5px 2px;
     display: inline-block;
@@ -263,11 +263,11 @@ a:hover {
     width: 16px;
     height: 16px;
     border: 1px solid rgb(30, 30, 30);
-    background-color: rgba(200, 200, 200, 30);
+    background-color: rgba(200, 200, 200, 1);
 }
 
 .switch .wireconnector {
-    background-color: rgba(200, 200, 200, 30);
+    background-color: rgba(200, 200, 200, 1);
 }
 
 .led {
@@ -374,7 +374,7 @@ textarea {
 
 .bitregister {
     border: 1px solid rgb(30, 30, 30);
-    background-color: rgba(200, 200, 200, 30);
+    background-color: rgba(200, 200, 200, 1);
     border-radius: 6px;
     padding: 5px;
     display: inline-block;
@@ -390,7 +390,7 @@ textarea {
 
 .delay {
     border: 1px solid rgb(30, 30, 30);
-    background-color: rgba(200, 200, 200, 30);
+    background-color: rgba(200, 200, 200, 1);
     border-radius: 6px;
     padding: 5px;
     display: inline-block;
@@ -402,8 +402,8 @@ textarea {
 .delay input {
     width: 53px;
     margin: 0;
-    background-color: rgba(200, 200, 200, 255);
-    border: 0 solid rgba(200, 200, 200, 255);
+    background-color: rgba(200, 200, 200, 1);
+    border: 0 solid rgba(200, 200, 200, 1);
     font-family: monospace;
     color: rgb(0, 0, 0);
     text-align: center;
@@ -411,7 +411,7 @@ textarea {
 
 .filter {
     border: 1px solid rgb(30, 30, 30);
-    background-color: rgba(200, 200, 200, 30);
+    background-color: rgba(200, 200, 200, 1);
     border-radius: 6px;
     padding: 5px;
     display: inline-block;
@@ -422,10 +422,29 @@ textarea {
 
 .filter input {
     margin: 0;
-    background-color: rgba(200, 200, 200, 255);
-    border: 0 solid rgba(200, 200, 200, 255);
+    background-color: rgba(200, 200, 200, 1);
+    border: 0 solid rgba(200, 200, 200, 1);
     font-family: monospace;
     color: rgb(0, 0, 0);
     text-align: center;
     width: 100px;
+}
+
+.clock {
+    width: 67px;
+    height: 18px;
+    border: 1px solid rgb(30, 30, 30);
+    background-color: rgba(200, 200, 200, 1);
+}
+
+.clock input {
+    width: 53px;
+    margin: 0;
+    background-color: rgba(200, 200, 200, 1);
+    border: 0 solid rgba(200, 200, 200, 1);
+    font-family: monospace;
+    color: rgb(0, 0, 0);
+    text-align: center;
+    position: absolute;
+    left: 14px;
 }

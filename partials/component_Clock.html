@@ -1,11 +1,14 @@
 <div class="component nospace" ng-style="{'top': topCSS, 'left': leftCSS}">
-    <div class="switch">
+    <div class="clock">
         <div style="width: 0; height: 0; overflow: visible; display: inline-block; position: absolute;">
             <div class="nospace" style="position: absolute;">
-                <div class="wireconnector" style="left: -5px; top: 6px;"></div>
+                <div class="wireconnector grayback" style="left: -5px; top: 6px;"
+                     ng-mousedown="highFlank()" ng-mouseup="lowFlank()"></div>
             </div>
         </div>
-        <div ng-style="{'background-color': value ? 'rgb(255, 0, 0)' : 'rgba(64, 0, 0, 0.3)', 'boxShadow': value ? '0, 0, 0, rgba(0, 0, 0, 0)' : '0.05em 0.05em 0.15em rgba(0, 0, 0, 0.5)'}"
-             style="width: 14px; height: 14px; margin: 1px; border-radius: 7px;"></div>
+        <div ng-style="{'background-color': value ? 'rgb(255, 0, 0)' : 'rgba(64, 0, 0, 0.3)'}"
+             ng-mousedown="highFlank()" ng-mouseup="lowFlank()" ng-mouseleave="lowFlank()"
+             style="width: 10px; height: 10px; border-radius: 7px; display: inline-block; position: absolute; top: 5px; left: 2px; cursor: pointer;"></div>
+        <input type="text" ng-model="frequency" />
     </div>
 </div>

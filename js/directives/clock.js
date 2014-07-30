@@ -38,12 +38,24 @@ bonsaiApp.directive('clock', function ($interval) {
                 }
             });
 
+            $scope.$watch('frequency', function () {
+                $scope.clock.setFrequency($scope.frequency);
+            });
+
             $scope.$watch('top', function () {
                 $scope.topCSS = ($scope.top - 9) + 'px';
             });
             $scope.$watch('left', function () {
                 $scope.leftCSS = ($scope.left + 3) + 'px';
             });
+
+            $scope.highFlank = function () {
+                $scope.clock.setValue(1);
+            };
+
+            $scope.lowFlank = function () {
+                $scope.clock.setValue(0);
+            };
 
             $scope.getConnectionPositions = function () {
                 return [{top: $scope.top, left: $scope.left}];

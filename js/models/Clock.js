@@ -22,6 +22,9 @@ Clock.prototype.setFrequency = function (newFrequency) {
         newFrequency = 1;
     }
     this.frequency = Math.abs(parseInt(newFrequency));
+    if (!this.frequency) {
+        this.frequency = 1;
+    }
 };
 
 Clock.prototype.toggle = function () {
