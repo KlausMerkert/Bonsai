@@ -268,5 +268,20 @@
         "key"        : "_DelayAlreadyOccupied_end",
         "value"      : ".",
         "description": ""
+    },
+    {
+        "key"        : "_FilterAlreadyOccupied_beginning",
+        "value"      : "Dieser Filter (",
+        "description": ""
+    },
+    {
+        "key"        : "_FilterAlreadyOccupied_middle",
+        "value"      : ") wird bereits beschrieben von ",
+        "description": ""
+    },
+    {
+        "key"        : "_FilterAlreadyOccupied_end",
+        "value"      : ".",
+        "description": ""
     }
 ]

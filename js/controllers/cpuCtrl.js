@@ -258,14 +258,14 @@ bonsaiApp.controller('bonsaiCpuCtrl',
                     'base': 10,
                     'max': 32767,
                     'left': 410,
-                    'top': 340
+                    'top': 290
                 }, {
                     'id': 'FilterBottom',
                     'name': 'filter Test Bottom bus',
                     'base': 10,
                     'max': 32767,
                     'left': 410,
-                    'top': 380
+                    'top': 360
                 }
             ],
             'manualswitches': [
@@ -417,6 +417,28 @@ bonsaiApp.controller('bonsaiCpuCtrl',
                     'incWireId': 'and2out_incMPC',
                     'decWireId': undefined,
                     'clrWireId': 's1'               
+                }, {
+                    'name': 'filter Test Top',
+                    'value': 1235,
+                    'base': 10,
+                    'top': 280,
+                    'left': 300,
+                    'gates': [
+                        {
+                            'busId': 'FilterTop'
+                        }
+                    ]
+                }, {
+                    'name': 'filter Test Bottom',
+                    'value': 1035,
+                    'base': 10,
+                    'top': 380,
+                    'left': 300,
+                    'gates': [
+                        {
+                            'busId': 'FilterBottom'
+                        }
+                    ]
                 }
             ],
             'bitregisters': [
@@ -525,7 +547,7 @@ bonsaiApp.controller('bonsaiCpuCtrl',
                     'statement': 'x % 1000',
                     'busTopId': 'FilterTop',
                     'busBottomId': 'FilterBottom',
-                    'top': 370,
+                    'top': 320,
                     'left': 400
                 }
             ]

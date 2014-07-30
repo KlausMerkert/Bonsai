@@ -55,9 +55,9 @@ bonsaiApp.directive('filter', function ($interval) {
 
             $scope.getConnectionPositions = function (bus) {
                 if (bus === $scope.busTop) {
-                    return [{top: $scope.top -4, left: ($scope.left - 2)}];
+                    return [{top: $scope.top -4, left: $scope.left}];
                 } else if (bus === $scope.busBottom) {
-                    return [{top: ($scope.top + 18), left: ($scope.left - 2)}];
+                    return [{top: ($scope.top + 31), left: $scope.left}];
                 } else {
                     console.log("This bus is not connected: " + bus.getName());
                 }

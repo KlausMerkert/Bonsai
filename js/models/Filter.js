@@ -33,20 +33,37 @@ Filter.prototype.setStatement = function (statement) {
     this.statement = statement;
 };
 
+Filter.prototype.applyFilter = function (x) {
+    return eval(this.statement);
+};
+
 Filter.prototype.setValue = function (value, bus) {
     if (this.activeBus && (this.activeBus !== bus)) {
-        throw DelayAlreadyOccupied(
-            "This delay (" + this.getName() + ") is already occupied by " + this.activeBus.getName() + ".",
+        throw FilterAlreadyOccupied(
+            "This filter (" + this.getName() + ") is already occupied by " + this.activeBus.getName() + ".",
             this.getName(),
             this.activeBus.getName()
         );
     }
     this.activeBus = bus;
-    this.value = value;
-    var delay = this;
-    setTimeout(function () {
-        delay.delayCall(value, bus);
-    }, this.delay);
+    this.value = this.applyFilter(value);
+    for (var i = 0; i < this.buses.length; i++) {
+        if (this.buses[i] !== this.activeBus) {
+            try {
+                if (typeof value != 'undefined') {
+                    this.buses[i].write(this, this.value);
+                } else {
+                    this.buses[i].stopWriting(this);
+                    this.buses[i].registerReaderAndRead(this);
+                    this.activeBus = undefined;
+                }
+            } catch (exception) {
+                this.buses[i].registerReaderAndRead(this);
+                this.activeBus = undefined;
+                throw exception;
+            }
+        }
+    }
 };
 
 Filter.prototype.getValue = function () {
