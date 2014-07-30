@@ -565,8 +565,6 @@ bonsaiApp.controller('bonsaiCpuCtrl',
         var i, j;
         for (i = 0; i < $scope.cpu.buses.length; i++) {
             $scope.cpu.buses[i].object = new Bus();
-            // TODO: Remove this when refactoring is done.
-            $scope[$scope.cpu.buses[i].id] = $scope.cpu.buses[i].object;
         }
         $scope.findBus = function (id) {
             for (var i = 0; i < $scope.cpu.buses.length; i++) {
@@ -694,22 +692,22 @@ bonsaiApp.controller('bonsaiCpuCtrl',
         $scope.splitLines = function (string) {
             return string.replace(/\r\n|\n\r|\n|\r/g,"\n").split("\n")
         };
-        $scope.readFile = function (editorNumber) {
-            var input = document.getElementById('filename-' + $scope.editors[editorNumber].name);
+        $scope.readFile = function (memoryNumber) {
+            var input = document.getElementById('filename-' + $scope.cpu.memories[memoryNumber].name);
             var file = input.files[0];
             var reader = new FileReader();
             reader.addEventListener("loadend", function() {
                 $scope.$apply(function () {
-                    $scope.editors[editorNumber].content = reader.result;
-                    $scope.editors[editorNumber].fileName = file.name;
+                    $scope.cpu.memories[memoryNumber].content = reader.result;
+                    $scope.cpu.memories[memoryNumber].fileName = file.name;
                 });
             });
             console.log(file);
             reader.readAsText(file);
         };
-        $scope.saveFile = function (editorNumber) {
+        $scope.saveFile = function (memoryNumber) {
             var url;
-            var blob = new Blob([$scope.editors[editorNumber].content], {type : 'application/bonsai'});
+            var blob = new Blob([$scope.cpu.memories[memoryNumber].content], {type : 'application/bonsai'});
             if (window.webkitURL) {
                 url = window.webkitURL.createObjectURL(blob);
             } else {
@@ -718,10 +716,10 @@ bonsaiApp.controller('bonsaiCpuCtrl',
             // initiate download by adding a <a> element and invoking a click on it
             var downloadLink = document.createElement("a");
             downloadLink.href = url;
-            if ($scope.editors[editorNumber].fileName) {
-                downloadLink.download = $scope.editors[editorNumber].fileName
+            if ($scope.cpu.memories[memoryNumber].fileName) {
+                downloadLink.download = $scope.cpu.memories[memoryNumber].fileName
             } else {
-                downloadLink.download = $scope.editors[editorNumber].name + ".bonsai";
+                downloadLink.download = $scope.cpu.memories[memoryNumber].name + ".bonsai";
             }
             document.body.appendChild(downloadLink);
             downloadLink.click();
