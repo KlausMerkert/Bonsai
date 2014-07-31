@@ -345,7 +345,8 @@ BusRouter.prototype.constructConnectionParts = function (goodConnections, grid) 
     for (i = 0; i < junctionPoints.length; i++) {
         var point = junctionPoints[i];
         var connectionsToFollow = [];
-        for (j = 0; j < remainingConnections.length; j++) {
+        j = 0;
+        while (j < remainingConnections.length) {
             if (angular.equals(point, remainingConnections[j].connection[0])) {
                 connectionParts.push([remainingConnections[j].connection]);
                 if (countGrid[remainingConnections[j].connection[1].j][remainingConnections[j].connection[1].i] == 2) {
@@ -355,6 +356,7 @@ BusRouter.prototype.constructConnectionParts = function (goodConnections, grid) 
                     });
                 }
                 remainingConnections.splice(j, 1);
+                continue;
             } else if (angular.equals(point, remainingConnections[j].connection[1])) {
                 connectionParts.push([remainingConnections[j].connection]);
                 if (countGrid[remainingConnections[j].connection[0].j][remainingConnections[j].connection[0].i] == 2) {
@@ -364,7 +366,9 @@ BusRouter.prototype.constructConnectionParts = function (goodConnections, grid) 
                     });
                 }
                 remainingConnections.splice(j, 1);
+                continue;
             }
+            j++;
         }
         while (connectionsToFollow.length > 0) {
             var reducedConnectionsToFollowLength = false;
