@@ -66,11 +66,13 @@ Clock.prototype.tick = function () {
 };
 
 Clock.prototype.start = function () {
-    this.isRunning = true;
-    var myself = this;
-    setTimeout(function () {
-        myself.doTick();
-    }, Math.floor(1000/this.frequency));
+    if (!this.isRunning) {
+        this.isRunning = true;
+        var myself = this;
+        setTimeout(function () {
+            myself.doTick();
+        }, Math.floor(1000 / this.frequency));
+    }
 };
 
 Clock.prototype.stop = function () {

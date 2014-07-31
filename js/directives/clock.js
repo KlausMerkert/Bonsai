@@ -39,7 +39,12 @@ bonsaiApp.directive('clock', function ($interval) {
             });
 
             $scope.$watch('frequency', function () {
-                $scope.clock.setFrequency($scope.frequency);
+                if (parseInt($scope.frequency)) {
+                    $scope.clock.setFrequency($scope.frequency);
+                    $scope.clock.start();
+                } else {
+                    $scope.clock.stop();
+                }
             });
 
             $scope.$watch('top', function () {
