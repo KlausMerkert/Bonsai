@@ -243,17 +243,17 @@ bonsaiApp.directive('bitregister', function ($interval) {
             };
 
             $scope.getConnectionPositions = function () {
-                return [{top: $scope.top-19, left: $scope.left+17}];
+                return [{top: $scope.top-19, left: $scope.left+31}];
             };
 
             $scope.getWireConnectionPositions = function (wire) {
                 var positions = [];
                 var connection = $scope.register.getWideBusConnection();
                 if ((connection.writeWire) && (connection.writeWire === wire)) {
-                    positions.push({top: $scope.top-11, left: $scope.left+26});
+                    positions.push({top: $scope.top-11, left: $scope.left+40});
                 }
                 if ((connection.readWire) && (connection.readWire === wire)) {
-                    positions.push({top: $scope.top-5, left: $scope.left+26});
+                    positions.push({top: $scope.top-5, left: $scope.left+40});
                 }
                 var bitWires = $scope.register.getWires();
                 for (var i = 0; i < bitWires.length; i++) {
