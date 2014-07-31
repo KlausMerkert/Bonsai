@@ -16,6 +16,7 @@ bonsaiApp.directive('bitregister', function ($interval) {
             };
 
             $scope.state = 0;
+            $scope.wireRead = true;
             $scope.stateChangeCallback = function (newStateValue) {
                 if (!($scope.gateColorIteration > 0)) {
                     $scope.state = newStateValue;
@@ -103,7 +104,7 @@ bonsaiApp.directive('bitregister', function ($interval) {
             $scope.updateWires = function (throwException) {
                 var wires = $scope.register.getWires();
                 for (var i = 0; i < wires.length; i++) {
-                    if ($scope.register.state === 1) {
+                    if (($scope.register.state === 1) || (!$scope.wireRead)) {
                         wires[i].wire.stopWriting(wires[i].connector);
                         wires[i].wire.registerReaderAndRead(wires[i].connector);
                     } else {
@@ -143,6 +144,16 @@ bonsaiApp.directive('bitregister', function ($interval) {
             $scope.setState = function (desiredState) {
                 window.getSelection().removeAllRanges(); // Hack to unselect the arrows to keep the color visible.
                 $scope.register.setState(desiredState);
+                $scope.updateWires(true);
+            };
+
+            $scope.activateWireRead = function () {
+                $scope.wireRead = true;
+                $scope.updateWires(true);
+            };
+
+            $scope.deactivateWireRead = function () {
+                $scope.wireRead = false;
                 $scope.updateWires(true);
             };
 
