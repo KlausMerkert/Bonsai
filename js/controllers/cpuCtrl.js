@@ -272,6 +272,9 @@ bonsaiApp.controller('bonsaiCpuCtrl',
                 }, {
                     'id': 'clockTest',
                     'name': 'Clock test wire'
+                }, {
+                    'id': 'routingTest',
+                    'name': 'Routing test wire'
                 }
             ],
             'manualswitches': [
@@ -335,6 +338,26 @@ bonsaiApp.controller('bonsaiCpuCtrl',
                     'name': 'Clock test led',
                     'top': 100,
                     'left': 870
+                }, {
+                    'wireId': 'routingTest',
+                    'name': 'routing test led 1',
+                    'top': 300,
+                    'left': 50
+                }, {
+                    'wireId': 'routingTest',
+                    'name': 'routing test led 2',
+                    'top': 350,
+                    'left': 80
+                }, {
+                    'wireId': 'routingTest',
+                    'name': 'routing test led 3',
+                    'top': 330,
+                    'left': 20
+                }, {
+                    'wireId': 'routingTest',
+                    'name': 'routing test led 4',
+                    'top': 370,
+                    'left': 70
                 }
             ],
             'andGates': [
