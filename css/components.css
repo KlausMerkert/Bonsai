@@ -319,21 +319,26 @@
     border: 1px solid rgb(30, 30, 30);
     background-color: rgba(200, 200, 200, 1);
     border-radius: 6px;
+    font-family: monospace;
+    font-size: 8px;
+}
+
+.filteredit {
     padding: 5px;
     display: inline-block;
     height: 18px;
-    width: 100px;
+    width: 120px;
     line-height: 18px;
 }
 
-.filter input {
+.filteredit input {
     margin: 0;
     background-color: rgba(200, 200, 200, 1);
     border: 0 solid rgba(200, 200, 200, 1);
     font-family: monospace;
     color: rgb(0, 0, 0);
     text-align: center;
-    width: 100px;
+    width: 120px;
 }
 
 .clock {

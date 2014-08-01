@@ -80,14 +80,22 @@ bonsaiApp.controller('bonsaiCpuCtrl',
                             'width': '0',
                             'height': '21px'
                         }, {
-                            'type': 'topright',
+                            'type': 'horizontal',
                             'top': '10px',
                             'left': '273px',
-                            'width': '160px',
-                            'height': '21px'
+                            'width': '106px',
+                            'height': '0'
                         }
                     ]
-                 }, {
+                }, {
+                    'id': 'unfilteredAddressBus',
+                    'name': 'ungefilterter Adressbus',
+                    'max': 255,
+                    'base': 10,
+                    'color': 'rgb(0, 220, 0)',
+                    'top': 10,
+                    'left': 435
+                }, {
                     'id': 'MicroAddressBus',
                     'name': 'MikroAdressbus',
                     'max': 99,
@@ -345,7 +353,7 @@ bonsaiApp.controller('bonsaiCpuCtrl',
                     'left': 400,
                     'gates': [
                         {
-                            'busId': 'addressBus',
+                            'busId': 'unfilteredAddressBus',
                             'writeWireId': 's12',
                             'initialState': 0
                         }, {
@@ -497,7 +505,21 @@ bonsaiApp.controller('bonsaiCpuCtrl',
                 }
             ],
             'filters': [
-
+                {
+                    'name': 'modulo 10000',
+                    'statement': 'n % 10000',
+                    'busLeftId': 'addressBus',
+                    'busRightId': 'unfilteredAddressBus',
+                    'top': 10,
+                    'left': 380
+                }, {
+                    'name': 'div 10000',
+                    'statement': 'Math.floor( n / 10000 )',
+                    'busLeftId': 'unfilteredAddressBus',
+                    'busRightId': undefined,
+                    'top': 10,
+                    'left': 470
+                }
             ],
             'clocks': [
 
@@ -621,11 +643,11 @@ bonsaiApp.controller('bonsaiCpuCtrl',
             }
         }
         for (i = 0; i < $scope.cpu.filters.length; i++) {
-            if ($scope.cpu.filters[i].busTopId) {
-                $scope.cpu.filters[i].busTop = $scope.findBus($scope.cpu.filters[i].busTopId);
+            if ($scope.cpu.filters[i].busLeftId) {
+                $scope.cpu.filters[i].busLeft = $scope.findBus($scope.cpu.filters[i].busLeftId);
             }
-            if ($scope.cpu.filters[i].busBottomId) {
-                $scope.cpu.filters[i].busBottom = $scope.findBus($scope.cpu.filters[i].busBottomId);
+            if ($scope.cpu.filters[i].busRightId) {
+                $scope.cpu.filters[i].busRight = $scope.findBus($scope.cpu.filters[i].busRightId);
             }
         }
 
