@@ -82,6 +82,8 @@
             <filter filter-name="{{filter.name}}" bus-left="filter.busLeft" bus-right="filter.busRight"
                     statement="filter.statement" top="filter.top" left="filter.left"></filter>
         </div>
+        <div ng-repeat="label in cpu.labels" style="position: absolute;"
+             ng-style="{'top': label.top + 'px', 'left': label.left + 'px'}">{{ label.text }}</div>
     </div>
     <div class="editor pane" ng-repeat="editor in cpu.memories"
          ng-show="selectedEditor === $index + 1" style="position: relative;">

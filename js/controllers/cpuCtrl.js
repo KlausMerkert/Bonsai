@@ -523,6 +523,13 @@ bonsaiApp.controller('bonsaiCpuCtrl',
                     'top': 300,
                     'left': 780
                 }
+            ],
+            'labels': [
+                {
+                    'text': 'Hallo Klaus',
+                    'top': 200,
+                    'left': 200
+                }
             ]
         };
 
