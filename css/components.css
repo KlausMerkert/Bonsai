@@ -246,6 +246,7 @@
     height: 16px;
     border: 1px solid rgb(30, 30, 30);
     background-color: rgba(200, 200, 200, 1);
+    border-radius: 6px;
 }
 
 .switch .wireconnector {
