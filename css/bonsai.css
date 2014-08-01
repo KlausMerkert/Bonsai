@@ -397,9 +397,19 @@ textarea {
 }
 
 .delay {
+    position: absolute;
+    width: 17px;
+    height: 5px;
+    background: url("../images/Delay.svg") no-repeat;
+}
+
+.delay-input {
     border: 1px solid rgb(30, 30, 30);
     background-color: rgba(200, 200, 200, 1);
     border-radius: 6px;
+    position: absolute;
+    top: 6px;
+    left: -24px;
     padding: 5px;
     display: inline-block;
     height: 18px;
@@ -407,7 +417,7 @@ textarea {
     line-height: 18px;
 }
 
-.delay input {
+.delay-input input {
     width: 53px;
     margin: 0;
     background-color: rgba(200, 200, 200, 1);

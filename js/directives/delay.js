@@ -21,6 +21,11 @@ bonsaiApp.directive('delay', function ($interval) {
                 });
             };
 
+            $scope.showValue = false;
+            $scope.toggleShowValue = function () {
+                $scope.showValue = !$scope.showValue;
+            };
+
             $scope.$watch('busLeft', function (newValue, oldValue) {
                 if (newValue !== oldValue) {
                     if (oldValue) {
@@ -47,7 +52,7 @@ bonsaiApp.directive('delay', function ($interval) {
             });
 
             $scope.$watch('top', function () {
-                $scope.topCSS = ($scope.top - 14) + 'px';
+                $scope.topCSS = ($scope.top - 2) + 'px';
             });
             $scope.$watch('left', function () {
                 $scope.leftCSS = $scope.left + 'px';
@@ -61,9 +66,9 @@ bonsaiApp.directive('delay', function ($interval) {
 
             $scope.getConnectionPositions = function (bus) {
                 if (bus === $scope.busLeft) {
-                    return [{top: $scope.top + 1, left: ($scope.left - 2)}];
+                    return [{top: $scope.top, left: ($scope.left - 2)}];
                 } else if (bus === $scope.busRight) {
-                    return [{top: ($scope.top + 1), left: ($scope.left + 66)}];
+                    return [{top: $scope.top, left: ($scope.left + 19)}];
                 } else {
                     console.log("This bus is not connected: " + bus.getName());
                 }

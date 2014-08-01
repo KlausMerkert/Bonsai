@@ -1,9 +1,10 @@
 <div class="component nospace" ng-style="{'top': topCSS, 'left': leftCSS}">
+    <div class="delay" ng-click="toggleShowValue()"></div>
     <div class="nospace" style="position: absolute;">
-        <div class="wireconnector grayback" style="left: -4px; top: 13px;"></div>
-        <div class="wireconnector grayback" style="left: 64px; top: 13px;"></div>
+        <div class="wireconnector grayback" style="left: -4px; top: 0;"></div>
+        <div class="wireconnector grayback" style="left: 17px; top: 0;"></div>
     </div>
-    <div class="delay">
+    <div class="delay-input" ng-show="showValue">
         <input type="text" ng-model="delay" />
     </div>
 </div>

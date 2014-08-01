@@ -87,8 +87,7 @@ bonsaiApp.controller('bonsaiCpuCtrl',
                             'height': '21px'
                         }
                     ]
-                },
-                {
+                 }, {
                     'id': 'MicroAddressBus',
                     'name': 'MikroAdressbus',
                     'max': 99,
@@ -96,19 +95,26 @@ bonsaiApp.controller('bonsaiCpuCtrl',
                     'color': 'rgb(155, 100, 0)',
                     'top': 180,
                     'left': 625
-                },
-                {
+                }, {
+                    'id': 'MicroDataBus',
+                    'name': 'MicroDataBus',
+                    'base': 10,
+                    'max': 32767,
+                    'color': 'rgb(200, 0, 200)',
+                    'left': 760,
+                    'top': 10
+                }, {
                     'id': 'DecoderMPC',
                     'name': 'BefehlsdecoderZuMPC',
                     'max': 99,
                     'base': 10,
                     'color': 'rgb(0, 140, 140)',
                     'top': 200,
-                    'left': 600               
+                    'left': 600
                 }, {
                     'id': 'DatenspeicherAddressReadWire',
                     'name': 'Datenspeicher Adressbus read wire',
-                    'max': 1                
+                    'max': 1
                 }, {
                     'id': 'AndB',
                     'name': 'And gate B wire',
@@ -125,72 +131,82 @@ bonsaiApp.controller('bonsaiCpuCtrl',
                     'id': 's1',
                     'name': 'clrMPC',
                     'max': 1,
-                    'color': 'rgb(255, 255, 0)'
+                    'color': 'rgb(100, 100, 255)'
                 }, {
                     'id': 's2',
                     'name': 'loadMPC',
                     'max': 1,
-                    'color': 'rgb(255, 255, 0)'
+                    'color': 'rgb(100, 255, 100)'
                 }, {
                     'id': 's3',
                     'name': 'readMem',
                     'max': 1,
-                    'color': 'rgb(255, 255, 0)'
+                    'color': 'rgb(100, 255, 100)'
                 }, {
                     'id': 's4',
                     'name': 'writeMem',
                     'max': 1,
-                    'color': 'rgb(255, 255, 0)'
+                    'color': 'rgb(255, 100, 100)'
                  }, {
                     'id': 's5',
                     'name': 'incAkku',
                     'max': 1,
-                    'color': 'rgb(255, 255, 0)'
+                    'color': 'rgb(200, 200, 0)'
                 }, {
                     'id': 's6',
                     'name': 'decAkku',
                     'max': 1,
-                    'color': 'rgb(255, 255, 0)'
+                    'color': 'rgb(200, 200, 0)'
                 }, {
                     'id': 's7',
                     'name': 'loadAkku',
                     'max': 1,
-                    'color': 'rgb(255, 255, 0)'
+                    'color': 'rgb(100, 255, 100)'
                 }, {
                     'id': 's8',
                     'name': 'writeAkku',
                     'max': 1,
-                    'color': 'rgb(255, 255, 0)'
+                    'color': 'rgb(255, 100, 100)'
                 }, {
                     'id': 's9',
                     'name': 'loadPC',
                     'max': 1,
-                    'color': 'rgb(255, 255, 0)'
+                    'color': 'rgb(100, 255, 100)'
                 }, {
                     'id': 's10',
                     'name': 'writePC',
                     'max': 1,
-                    'color': 'rgb(255, 255, 0)'
+                    'color': 'rgb(255, 100, 100)'
                 }, {
                     'id': 's11',
                     'name': 'loadIR',
                     'max': 1,
-                    'color': 'rgb(255, 255, 0)'
+                    'color': 'rgb(100, 255, 100)'
                 }, {
                     'id': 's12',
                     'name': 'writeIR',
                     'max': 1,
-                    'color': 'rgb(255, 255, 0)'
+                    'color': 'rgb(255, 100, 100)'
                 }, {
                     'id': 's13',
                     'name': 'incPC',
                     'max': 1,
-                    'color': 'rgb(255, 255, 0)'
+                    'color': 'rgb(200, 200, 0)'
                 }, {
                     'id': 's14',
                     'name': 'incPCz',
                     'max': 1,
-                    'color': 'rgb(255, 255, 0)'
+                    'color': 'rgb(200, 200, 0)'
+                 }, {
+                    'id': 'clock',
+                    'name': 'Takt',
+                    'max': 1,
+                    'color': 'rgb(100, 100, 255)'
+                 }, {
+                    'id': 'clockdelayed',
+                    'name': 'verzögerter Takt',
+                    'max' : 1,
+                    'color': 'rgb(100, 100, 255)'
                 }, {
                     'id': 'and2A_Takt',
                     'name': 'xy',
@@ -198,10 +214,6 @@ bonsaiApp.controller('bonsaiCpuCtrl',
                 }, {
                     'id': 'and2B_nor1out',
                     'name': 'uv',
-                    'max': 1
-                }, {
-                    'id': 'takt',
-                    'name': 'Takt',
                     'max': 1
                 }, {
                     'id': 'and2out_incMPC',
@@ -237,71 +249,22 @@ bonsaiApp.controller('bonsaiCpuCtrl',
                             'width': '77px',
                             'height': '50px'
                         }
-                    ]               
-                }, {
-                    'id': 'MicroDataBus',
-                    'name': 'MicroDataBus',
-                    'base': 10,
-                    'max': 32767,
-                    'color': 'rgb(200, 0, 200)',
-                    'left': 760,
-                    'top': 10               
-                }, {
-                    'id': 'delayTestLeft',
-                    'name': 'delay Test Left'
-                }, {
-                    'id': 'delayTestRight',
-                    'name': 'delay Test Right'
-                }, {
-                    'id': 'FilterTop',
-                    'name': 'filter Test Top bus',
-                    'base': 10,
-                    'max': 32767,
-                    'left': 410,
-                    'top': 290
-                }, {
-                    'id': 'FilterBottom',
-                    'name': 'filter Test Bottom bus',
-                    'base': 10,
-                    'max': 32767,
-                    'left': 410,
-                    'top': 360
-                }, {
-                    'id': 'BitRegisterRead',
-                    'name': 'BitRegister read wire'
-                }, {
-                    'id': 'clockTest',
-                    'name': 'Clock test wire'
+                    ]
                 }
             ],
             'manualswitches': [
-                {                
-                    'wireId': 'DatenspeicherAddressReadWire',
+                {
                     'name': 'DatenspeicherAddressReadWireSwitch',
+                    'wireId': 'DatenspeicherAddressReadWire',
                     'value': 1,
                     'top': 40,
-                    'left': 80               
+                    'left': 80
                 }, {
-                    'wireId': 'takt',
                     'name': 'Takt',
+                    'wireId': 'clock',
                     'value': 0,
                     'top': 300,
-                    'left': 710               
-                }, {
-                    'wireId': 'BitRegisterRead',
-                    'name': 'BitRegister read switch',
-                    'value': 0,
-                    'top': 45,
-                    'left': 850
-                }
-            ],
-            'clocks': [
-                {
-                    'wireId': 'clockTest',
-                    'name': 'Taktgeber',
-                    'frequency': 1,
-                    'top': 100,
-                    'left': 900
+                    'left': 800
                 }
             ],
             'leds': [
@@ -314,27 +277,12 @@ bonsaiApp.controller('bonsaiCpuCtrl',
                     'wireId': 'compWire',
                     'name': 'comp indication led',
                     'top': 170,
-                    'left': 300 
+                    'left': 300
                 }, {
                     'wireId': 's0',
                     'name': 's0 led',
                     'top': 62,
-                    'left': 782 
-                }, {
-                    'wireId': 'delayTestLeft',
-                    'name': 'Delay left led',
-                    'top': 400,
-                    'left': 550
-                }, {
-                    'wireId': 'delayTestRight',
-                    'name': 'Delay right led',
-                    'top': 400,
-                    'left': 720
-                }, {
-                    'wireId': 'clockTest',
-                    'name': 'Clock test led',
-                    'top': 100,
-                    'left': 870
+                    'left': 782
                 }
             ],
             'andGates': [
@@ -348,7 +296,7 @@ bonsaiApp.controller('bonsaiCpuCtrl',
                 },
                 {
                     'name': 'and2',
-                    'inAId': 'takt',
+                    'inAId': 'clockdelayed',
                     'inBId': 'and2B_nor1out',
                     'outId': 'and2out_incMPC',
                     'top': 253,
@@ -385,7 +333,7 @@ bonsaiApp.controller('bonsaiCpuCtrl',
                     'gates': [
                         {'busId': 'addressBus',
                          'writeWireId': 's10',
-                         'readWireId': 's9'                        
+                         'readWireId': 's9'
                         }
                     ],
                     'incWireId': 'or1_ausgang',
@@ -442,29 +390,7 @@ bonsaiApp.controller('bonsaiCpuCtrl',
                     ],
                     'incWireId': 'and2out_incMPC',
                     'decWireId': undefined,
-                    'clrWireId': 's1'               
-                }, {
-                    'name': 'filter Test Top',
-                    'value': 1235,
-                    'base': 10,
-                    'top': 280,
-                    'left': 300,
-                    'gates': [
-                        {
-                            'busId': 'FilterTop'
-                        }
-                    ]
-                }, {
-                    'name': 'filter Test Bottom',
-                    'value': 1035,
-                    'base': 10,
-                    'top': 380,
-                    'left': 300,
-                    'gates': [
-                        {
-                            'busId': 'FilterBottom'
-                        }
-                    ]
+                    'clrWireId': 's1'
                 }
             ],
             'bitregisters': [
@@ -477,7 +403,7 @@ bonsaiApp.controller('bonsaiCpuCtrl',
                     'widegate': {
                         'busId': 'MicroDataBus',
                         'writeWireId': undefined,
-                        'readWireId': 'BitRegisterRead'
+                        'readWireId': 'clock'
                     },
                     'wiregates': [
                         {'wireId': 's0'},
@@ -559,23 +485,19 @@ bonsaiApp.controller('bonsaiCpuCtrl',
             ],
             'delays': [
                 {
-                    'name': 'test Delay',
+                    'name': 'ClockDelay',
                     'delay': 1000,
-                    'busLeftId': 'delayTestLeft',
-                    'busRightId': 'delayTestRight',
-                    'top': 400,
-                    'left': 600
+                    'busLeftId': 'clockdelayed',
+                    'busRightId': 'clock',
+                    'top': 300,
+                    'left': 715
                 }
             ],
             'filters': [
-                {
-                    'name': 'Testfilter',
-                    'statement': 'x % 1000',
-                    'busTopId': 'FilterTop',
-                    'busBottomId': 'FilterBottom',
-                    'top': 320,
-                    'left': 400
-                }
+
+            ],
+            'clocks': [
+
             ]
         };
 
