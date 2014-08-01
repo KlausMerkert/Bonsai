@@ -128,7 +128,7 @@ Memory.prototype.setValue = function (data, writingBus) {
         } else if ((this.dataBus) && (this.dataBus.state == 1)) {
             this.dataBus.bus.write(this, this.content[data]);
         }
-        if (!this.content[data]) {
+        if (typeof this.content[data] == 'undefined') {
             this.content[data] = undefined;
         }
         this.updateViewCallback(this.getDataWithContext(data));
