@@ -45,7 +45,8 @@
                       top="register.top" left="register.left"
                       inc-wire="register.incWire" dec-wire="register.decWire" clr-wire="register.clrWire">
                 <div ng-repeat="gate in register.gates">
-                    <gate bus="gate.bus" set-write="gate.writeWire" set-read="gate.readWire"></gate>
+                    <gate bus="gate.bus" initial-state="gate.initialState"
+                          set-write="gate.writeWire" set-read="gate.readWire"></gate>
                 </div>
             </register>
         </div>

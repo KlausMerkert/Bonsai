@@ -67,8 +67,12 @@ bonsaiApp.directive('register', function ($interval) {
                 }
             };
 
-            this.addBusConnection = function (bus, setWrite, setRead) {
-                $scope.register.addBusConnection(bus, setWrite, setRead);
+            this.addBusConnection = function (bus, setWrite, setRead, initialState) {
+                initialState = parseInt(initialState);
+                if (!initialState) {
+                    initialState = 0;
+                }
+                $scope.register.addBusConnection(bus, setWrite, setRead, initialState);
             };
         },
         link: function ($scope, element, attrs) {
@@ -433,10 +437,11 @@ bonsaiApp.directive('gate', function () {
         scope: {
             bus: '=',
             setWrite: '=',
-            setRead: '='
+            setRead: '=',
+            initialState: '='
         },
         link: function ($scope, element, attrs, registerCtrl) {
-            registerCtrl.addBusConnection($scope.bus, $scope.setWrite, $scope.setRead);
+            registerCtrl.addBusConnection($scope.bus, $scope.setWrite, $scope.setRead, $scope.initialState);
         },
         template: ''
     };

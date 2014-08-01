@@ -347,6 +347,7 @@ bonsaiApp.controller('bonsaiCpuCtrl',
                         {
                             'busId': 'addressBus',
                             'writeWireId': 's12',
+                            'initialState': 0
                         }, {
                             'busId': 'dataBus',
                             'readWireId': 's11'
