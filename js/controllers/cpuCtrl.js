@@ -466,12 +466,14 @@ bonsaiApp.controller('bonsaiCpuCtrl',
                     'left':600,
                     'addressgate': {
                         'busId': 'MicroAddressBus',
-                        'readWireId': undefined
+                        'readWireId': undefined,
+                        'initialState': -1
                     },
                     'datagate': {
                         'busId': 'MicroDataBus',
                         'writeWireId': undefined,
-                        'readWireId': undefined
+                        'readWireId': undefined,
+                        'initialState': 1
                     }
                 }
             ],

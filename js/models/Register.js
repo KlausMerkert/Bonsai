@@ -18,16 +18,13 @@ Register.prototype.getName = function () {
     return this.name;
 };
 
-Register.prototype.addBusConnection = function (bus, writeWire, readWire, initialState) {
+Register.prototype.addBusConnection = function (bus, writeWire, readWire) {
     /* Connections can have three states:
      * 1 means the register writes to the bus
      * 0 means the connection is inactive
      * -1 means the register reads from the bus */
-    if (!initialState) {
-        initialState = 0;
-    }
     this.buses.push({
-        state: initialState,
+        state: 0,
         bus: bus,
         writeWire: writeWire,
         readWire: readWire

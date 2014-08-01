@@ -32,8 +32,18 @@ bonsaiApp.directive('bitregister', function ($interval) {
                 $scope.stateChangeCallback
             );
 
-            this.setBusConnection = function (bus, setWrite, setRead) {
+            this.setBusConnection = function (bus, setWrite, setRead, initialState) {
                 $scope.register.setWideBusConnection(bus, setWrite, setRead);
+                initialState = parseInt(initialState);
+                if (!initialState) {
+                    initialState = 0;
+                }
+                if (initialState < 0) {
+                    initialState = -1;
+                } else if (initialState > 0) {
+                    initialState = 1;
+                }
+                $scope.initialWideBusGateState = initialState;
             };
 
             this.addWireConnection = function (wire) {
@@ -283,6 +293,7 @@ bonsaiApp.directive('bitregister', function ($interval) {
                     $scope.register,
                     $scope.getConnectionPositions
                 );
+                $scope.register.setState($scope.initialWideBusGateState);
                 var writeWire = connection.writeWire;
                 if (writeWire) {
                     connection.writeWireConnector = new ReadingControlWireConnector(writeWire,
@@ -352,10 +363,11 @@ bonsaiApp.directive('widegate', function () {
         scope: {
             bus: '=',
             setWrite: '=',
-            setRead: '='
+            setRead: '=',
+            initialState: '='
         },
         link: function ($scope, element, attrs, registerCtrl) {
-            registerCtrl.setBusConnection($scope.bus, $scope.setWrite, $scope.setRead);
+            registerCtrl.setBusConnection($scope.bus, $scope.setWrite, $scope.setRead, $scope.initialState);
         },
         template: ''
     };

@@ -53,7 +53,7 @@
         <div ng-repeat="bitregister in cpu.bitregisters">
             <bitregister register-name="{{bitregister.name}}" value="bitregister.value"
                          top="bitregister.top" left="bitregister.left">
-                <widegate bus="bitregister.widegate.bus"
+                <widegate bus="bitregister.widegate.bus" initial-state="bitregister.widegate.initialState"
                           set-read="bitregister.widegate.readWire"
                           set-write="bitregister.widegate.writeWire"></widegate>
                 <div ng-repeat="wiregate in bitregister.wiregates">
@@ -64,9 +64,9 @@
         <div ng-repeat="memory in cpu.memories">
             <memory memory-name="{{memory.name}}" base="memory.base"
                     top="memory.top" left="memory.left" content="memory.content">
-                <addressgate bus="memory.addressgate.bus"
+                <addressgate bus="memory.addressgate.bus" initial-state="memory.addressgate.initialState"
                              set-read="memory.addressgate.readWire"></addressgate>
-                <datagate bus="memory.datagate.bus"
+                <datagate bus="memory.datagate.bus" initial-state="memory.datagate.initialState"
                           set-write="memory.datagate.writeWire" set-read="memory.datagate.readWire"></datagate>
             </memory>
         </div>
