@@ -267,12 +267,6 @@ bonsaiApp.controller('bonsaiCpuCtrl',
                     'value': 1,
                     'top': 40,
                     'left': 80
-                }, {
-                    'name': 'Takt',
-                    'wireId': 'clock',
-                    'value': 0,
-                    'top': 300,
-                    'left': 800
                 }
             ],
             'leds': [
@@ -522,7 +516,13 @@ bonsaiApp.controller('bonsaiCpuCtrl',
                 }
             ],
             'clocks': [
-
+                {
+                    'name': 'Takt',
+                    'wireId': 'clock',
+                    'frequency': 0,
+                    'top': 300,
+                    'left': 780
+                }
             ]
         };
 
