@@ -9,7 +9,7 @@ bonsaiApp.controller('bonsaiCpuCtrl',
                 {
                     'id': 'dataBus',
                     'name': 'Datenbus',
-                    'max': 255,
+                    'max': 99999,
                     'base': 10,
                     'color': 'rgb(255, 0, 0)',
                     'top': 92,
@@ -61,7 +61,7 @@ bonsaiApp.controller('bonsaiCpuCtrl',
                 }, {
                     'id': 'addressBus',
                     'name': 'Adressbus',
-                    'max': 255,
+                    'max': 9999,
                     'base': 10,
                     'color': 'rgb(0, 140, 0)',
                     'top': 10,
@@ -76,7 +76,7 @@ bonsaiApp.controller('bonsaiCpuCtrl',
                         }, {
                             'type': 'vertical',
                             'top': '10px',
-                            'left': '273px',
+                            'left': '223px',
                             'width': '0',
                             'height': '21px'
                         }, {
@@ -86,23 +86,15 @@ bonsaiApp.controller('bonsaiCpuCtrl',
                             'width': '106px',
                             'height': '0'
                         }
-                    ]
-                }, {
-                    'id': 'unfilteredAddressBus',
-                    'name': 'ungefilterter Adressbus',
-                    'max': 255,
-                    'base': 10,
-                    'color': 'rgb(0, 220, 0)',
-                    'top': 10,
-                    'left': 435
-                }, {
+                    ] 
+                 }, {
                     'id': 'MicroAddressBus',
                     'name': 'MikroAdressbus',
                     'max': 99,
                     'base': 10,
                     'color': 'rgb(155, 100, 0)',
                     'top': 180,
-                    'left': 625
+                    'left': 625               
                 }, {
                     'id': 'MicroDataBus',
                     'name': 'MicroDataBus',
@@ -111,14 +103,30 @@ bonsaiApp.controller('bonsaiCpuCtrl',
                     'color': 'rgb(200, 0, 200)',
                     'left': 760,
                     'top': 10
+                 }, {
+                    'id': 'IRout',
+                    'name': 'AusgangIR',
+                    'max': 99999,
+                    'base': 10,
+                    'color': 'rgb(0, 140, 0)',
+                    'top': 7,
+                    'left': 410
+                 }, {
+                    'id': 'opcode',
+                    'name': 'opcode',
+                    'max': 99999,
+                    'base': 10,
+                    'color': 'rgb(0, 140, 0)',
+                    'top': 100,
+                    'left': 520
                 }, {
                     'id': 'DecoderMPC',
                     'name': 'BefehlsdecoderZuMPC',
                     'max': 99,
                     'base': 10,
                     'color': 'rgb(0, 140, 140)',
-                    'top': 200,
-                    'left': 600
+                    'top': 270,
+                    'left': 540
                 }, {
                     'id': 'DatenspeicherAddressReadWire',
                     'name': 'Datenspeicher Adressbus read wire',
@@ -139,72 +147,316 @@ bonsaiApp.controller('bonsaiCpuCtrl',
                     'id': 's1',
                     'name': 'clrMPC',
                     'max': 1,
-                    'color': 'rgb(100, 100, 255)'
+                    'color': 'rgb(100, 100, 255)',
+                    'routes': [
+                        {
+                            'type': 'topleft',
+                            'top': '73px',
+                            'left': '781px',
+                            'width': '14px',
+                            'height': '160px'
+                        }, {
+                            'type': 'bottomright',
+                            'top': '202px',
+                            'left': '668px',
+                            'width': '113px',
+                            'height': '70px'
+                        }, {
+                            'type': 'horizontal',
+                            'top': '253px',
+                            'left': '752px',
+                            'width': '29px',
+                            'height': '0'
+                        }
+                    ]
                 }, {
                     'id': 's2',
-                    'name': 'loadMPC',
+                    'name': 'readMPC',
                     'max': 1,
-                    'color': 'rgb(100, 255, 100)'
+                    'color': 'rgb(100, 255, 100)',
+                    'routes': [
+                        {
+                            'type': 'topleft',
+                            'top': '86px',
+                            'left': '789px',
+                            'width': '6px',
+                            'height': '180px'
+                        }, {
+                            'type': 'bottomright',
+                            'top': '215px',
+                            'left': '646px',
+                            'width': '143px',
+                            'height': '70px'
+                         }, {
+                            'type': 'horizontal',
+                            'top': '264px',
+                            'left': '752px',
+                            'width': '37px',
+                            'height': '0'
+                        }
+                    ]
                 }, {
                     'id': 's3',
-                    'name': 'readMem',
-                    'max': 1,
-                    'color': 'rgb(100, 255, 100)'
-                }, {
-                    'id': 's4',
                     'name': 'writeMem',
                     'max': 1,
-                    'color': 'rgb(255, 100, 100)'
+                    'color': 'rgb(255, 100, 100)',
+                    'routes': [
+                        {
+                            'type': 'horizontal',
+                            'top': '98px',
+                            'left': '150px',
+                            'width': '700px',
+                            'height': '0'
+                        }, {
+                            'type': 'bottomright',
+                            'top': '106px',
+                            'left': '140px',
+                            'width': '10px',
+                            'height': '50px'
+                       
+                        }
+                    ]
+                }, {
+                    'id': 's4',
+                    'name': 'readMem',
+                    'max': 1,
+                    'color': 'rgb(100, 255, 100)',
+                    'routes': [
+                        {
+                            'type': 'horizontal',
+                            'top': '110px',
+                            'left': '150px',
+                            'width': '700px',
+                            'height': '0'
+                        }, {
+                            'type': 'bottomright',
+                            'top': '99px',
+                            'left': '140px',
+                            'width': '6px',
+                            'height': '50px'
+                       
+                        }
+                    ]
                  }, {
                     'id': 's5',
                     'name': 'incAkku',
                     'max': 1,
-                    'color': 'rgb(200, 200, 0)'
+                    'color': 'rgb(200, 200, 0)',
+                    'routes': [
+                        {
+                            'type': 'horizontal',
+                            'top': '122px',
+                            'left': '150px',
+                            'width': '700px',
+                            'height': '0'
+                        }, {
+                            'type': 'bottomright',
+                            'top': '138px',
+                            'left': '79px',
+                            'width': '6px',
+                            'height': '120px'
+                       
+                        }
+                    ]
                 }, {
                     'id': 's6',
                     'name': 'decAkku',
                     'max': 1,
-                    'color': 'rgb(200, 200, 0)'
+                    'color': 'rgb(200, 200, 0)',
+                    'routes': [
+                        {
+                            'type': 'horizontal',
+                            'top': '134px',
+                            'left': '150px',
+                            'width': '700px',
+                            'height': '0'
+                        }, {
+                            'type': 'bottomright',
+                            'top': '144px',
+                            'left': '79px',
+                            'width': '12px',
+                            'height': '120px'
+                       
+                        }
+                    ]
                 }, {
                     'id': 's7',
-                    'name': 'loadAkku',
+                    'name': 'readAkku',
                     'max': 1,
-                    'color': 'rgb(100, 255, 100)'
+                    'color': 'rgb(10, 255, 10)',
+                    'routes': [
+                        {
+                            'type': 'horizontal',
+                            'top': '146px',
+                            'left': '210px',
+                            'width': '620px',
+                            'height': '0'
+                        }, {
+                            'type': 'bottomright',
+                            'top': '160px',
+                            'left': '55px',
+                            'width': '140px',
+                            'height': '85px'
+                        }, {
+                            'type': 'topleft',
+                            'top': '146px',
+                            'left': '195px',
+                            'width': '15px',
+                            'height': '15px'                       
+                        }
+                    ]
                 }, {
                     'id': 's8',
                     'name': 'writeAkku',
                     'max': 1,
-                    'color': 'rgb(255, 100, 100)'
+                    'color': 'rgb(255, 100, 100)',
+                    'routes': [
+                        {
+                            'type': 'horizontal',
+                            'top': '158px',
+                            'left': '220px',
+                            'width': '620px',
+                            'height': '0'
+                        }, {
+                            'type': 'bottomright',
+                            'top': '168px',
+                            'left': '55px',
+                            'width': '146px',
+                            'height': '70px'
+                        }, {
+                            'type': 'topleft',
+                            'top': '158px',
+                            'left': '201px',
+                            'width': '20px',
+                            'height': '15px'                       
+                        }
+                    ]
                 }, {
                     'id': 's9',
-                    'name': 'loadPC',
+                    'name': 'readPC',
                     'max': 1,
-                    'color': 'rgb(100, 255, 100)'
+                    'color': 'rgb(100, 255, 100)',
+                    'routes': [
+                        {
+                            'type': 'bottomleft',
+                            'top': '100px',
+                            'left': '279px',
+                            'width': '550px',
+                            'height': '70px'
+                         }, {
+                            'type': 'topright',
+                            'top': '45px',
+                            'left': '236px',
+                            'width': '43px',
+                            'height': '70px'
+                                        
+                        }
+                    ]
                 }, {
                     'id': 's10',
                     'name': 'writePC',
                     'max': 1,
-                    'color': 'rgb(255, 100, 100)'
+                    'color': 'rgb(255, 100, 100)',
+                     'routes': [
+                        {
+                            'type': 'bottomleft',
+                            'top': '112px',
+                            'left': '285px',
+                            'width': '550px',
+                            'height': '70px'
+                         }, {
+                            'type': 'topright',
+                            'top': '38px',
+                            'left': '235px',
+                            'width': '50px',
+                            'height': '82px'
+                                        
+                        }
+                    ]
                 }, {
                     'id': 's11',
                     'name': 'loadIR',
                     'max': 1,
-                    'color': 'rgb(100, 255, 100)'
+                    'color': 'rgb(100, 255, 100)',
+                    'routes': [
+                        {
+                            'type': 'topright',
+                            'top': '85px',
+                            'left': '446px',
+                            'width': '144px',
+                            'height': '70px'
+                         }, {
+                            'type': 'bottomleft',
+                            'top': '155px',
+                            'left': '590px',
+                            'width': '205px',
+                            'height': '39px'
+                                        
+                        }
+                    ]
                 }, {
                     'id': 's12',
                     'name': 'writeIR',
                     'max': 1,
-                    'color': 'rgb(255, 100, 100)'
+                    'color': 'rgb(255, 100, 100)',
+                    'routes': [
+                        {
+                            'type': 'topright',
+                            'top': '38px',
+                            'left': '446px',
+                            'width': '134px',
+                            'height': '128px'
+                         }, {
+                            'type': 'bottomleft',
+                            'top': '167px',
+                            'left': '580px',
+                            'width': '215px',
+                            'height': '39px'
+                                        
+                        }
+                    ]
                 }, {
                     'id': 's13',
                     'name': 'incPC',
                     'max': 1,
-                    'color': 'rgb(200, 200, 0)'
+                    'color': 'rgb(200, 200, 0)',
+                    'routes': [
+                        {
+                            'type': 'topright',
+                            'top': '64px',
+                            'left': '292px',
+                            'width': '70px',
+                            'height': '100px'
+                         }, {
+                            'type': 'bottomleft',
+                            'top': '164px',
+                            'left': '362px',
+                            'width': '433px',
+                            'height': '54px'
+                                        
+                        }
+                    ]
                 }, {
                     'id': 's14',
                     'name': 'incPCz',
                     'max': 1,
-                    'color': 'rgb(200, 200, 0)'
+                    'color': 'rgb(200, 200, 0)',
+                    'routes': [
+                        {
+                            'type': 'topright',
+                            'top': '48px',
+                            'left': '323px',
+                            'width': '47px',
+                            'height': '100px'
+                         }, {
+                            'type': 'bottomleft',
+                            'top': '148px',
+                            'left': '370px',
+                            'width': '433px',
+                            'height': '82px'
+                                        
+                        }
+                    ]
                  }, {
                     'id': 'clock',
                     'name': 'Takt',
@@ -246,7 +498,7 @@ bonsaiApp.controller('bonsaiCpuCtrl',
                         {
                             'type': 'topright',
                             'top': '59px',
-                            'left': '371px',
+                            'left': '321px',
                             'width': '7px',
                             'height': '50px'
                         },
@@ -254,7 +506,7 @@ bonsaiApp.controller('bonsaiCpuCtrl',
                             'type': 'bottomright',
                             'top': '110px',
                             'left': '301px',
-                            'width': '77px',
+                            'width': '27px',
                             'height': '50px'
                         }
                     ]
@@ -274,7 +526,7 @@ bonsaiApp.controller('bonsaiCpuCtrl',
                     'wireId': 'or1_ausgang',
                     'name': 'or1_ausgang indication led',
                     'top': 35,
-                    'left': 312
+                    'left': 262
                 }, {
                     'wireId': 'compWire',
                     'name': 'comp indication led',
@@ -294,7 +546,7 @@ bonsaiApp.controller('bonsaiCpuCtrl',
                     'inBId': 'compWire',
                     'outId': 'OrA',
                     'top': 48,
-                    'left': 350
+                    'left': 300
                 },
                 {
                     'name': 'and2',
@@ -312,7 +564,7 @@ bonsaiApp.controller('bonsaiCpuCtrl',
                     'inBId': 's13',
                     'outId': 'or1_ausgang',
                     'top': 53,
-                    'left': 320
+                    'left': 270
                 }
             ],
             'norGates': [
@@ -321,17 +573,17 @@ bonsaiApp.controller('bonsaiCpuCtrl',
                     'inAId': 's1',
                     'inBId': 's2',
                     'outId': 'and2B_nor1out',
-                    'top': 250,
+                    'top': 253,
                     'left': 730
                 }
             ],
             'registers': [
                 {
                     'name': 'PC',
-                    'value': 10,
+                    'value': 0,
                     'base' : 10,
                     'top' : 50,
-                    'left': 240,
+                    'left': 190,
                     'gates': [
                         {'busId': 'addressBus',
                          'writeWireId': 's10',
@@ -341,13 +593,13 @@ bonsaiApp.controller('bonsaiCpuCtrl',
                     'incWireId': 'or1_ausgang',
                 }, {
                     'name': 'IR',
-                    'value': 1,
+                    'value': 40008,
                     'base' : 10,
                     'top' : 50,
                     'left': 400,
                     'gates': [
                         {
-                            'busId': 'unfilteredAddressBus',
+                            'busId': 'IRout',
                             'writeWireId': 's12',
                             'initialState': 0
                         }, {
@@ -375,7 +627,7 @@ bonsaiApp.controller('bonsaiCpuCtrl',
                     'decWireId': 's6'
                 }, {
                     'name': 'MPC',
-                    'value': 4,
+                    'value': 0,
                     'base' : 10,
                     'top' : 250,
                     'left': 600,
@@ -399,7 +651,7 @@ bonsaiApp.controller('bonsaiCpuCtrl',
             'bitregisters': [
                 {
                     'name': 'Steuerwort',
-                    'value': 9,
+                    'value': 0,
                     'base' : 10,
                     'top' : 50,
                     'left': 800,
@@ -431,7 +683,7 @@ bonsaiApp.controller('bonsaiCpuCtrl',
                 {
                     'name': "Datenspeicher",
                     'base': 10,
-                    'content': "1\n2\n3",
+                    'content': "30003\n10007\n20008\n40008\n30001\n50000\n\n3\n0",
                     'top': 50,
                     'left': 10,
                     'addressgate': {
@@ -440,18 +692,18 @@ bonsaiApp.controller('bonsaiCpuCtrl',
                     },
                     'datagate': {
                         'busId': 'dataBus',
-                        'writeWireId': 's4',
-                        'readWireId': 's3'
+                        'writeWireId': 's3',
+                        'readWireId': 's4'
                     }
                 },
                 {
                     'name': "Befehlsdecoder",
                     'base': 10,
-                    'content': "10\n20\n30\n40\n50",
+                    'content': "0\n10\n20\n30\n40\n50",
                     'top': 150,
                     'left':400,
                     'addressgate': {
-                        'busId': 'addressBus',
+                        'busId': 'opcode',
                         'readWireId': undefined
                     },
                     'datagate': {
@@ -463,7 +715,7 @@ bonsaiApp.controller('bonsaiCpuCtrl',
                 {
                     'name': "Mikroprogrammspeicher",
                     'base': 10,
-                    'content': "87432\n",
+                    'content': "1024\n3080\n1032\n4096\n4100\n4096\n\n\n\n\n4096\n4232\n4104\n12320\n4368\n4352\n2\n\n\n\n4096\n4232\n4160\n4104\n12352\n4368\n4352\n2\n\n\n4608\n2\n\n\n\n\n\n\n\n\n4096\n4104\n20488\n8192\n2\n\n\n\n\n\n5",
                     'top': 50,
                     'left':600,
                     'addressgate': {
@@ -500,20 +752,21 @@ bonsaiApp.controller('bonsaiCpuCtrl',
             ],
             'filters': [
                 {
-                    'name': 'modulo 10000',
-                    'statement': 'n % 10000',
-                    'busLeftId': 'addressBus',
-                    'busRightId': 'unfilteredAddressBus',
+                    'name': 'div10000',
+                    'statement': 'x/10000',                 
+                    'busLeftId': 'IRout',
+                    'busRightId': 'opcode',
                     'top': 10,
-                    'left': 380
-                }, {
-                    'name': 'div 10000',
-                    'statement': 'Math.floor( n / 10000 )',
-                    'busLeftId': 'unfilteredAddressBus',
-                    'busRightId': undefined,
+                    'left': 530
+                 },
+                 {
+                    'name': 'mod10000',
+                    'statement': 'x%10000',                 
+                    'busLeftId': 'IRout',
+                    'busRightId': 'addressBus',
                     'top': 10,
-                    'left': 470
-                }
+                    'left': 350
+                 }
             ],
             'clocks': [
                 {
