@@ -33,7 +33,7 @@ Filter.prototype.setStatement = function (statement) {
     this.statement = statement;
 };
 
-Filter.prototype.applyFilter = function (x) {
+Filter.prototype.applyFilter = function (n) {
     return eval(this.statement);
 };
 

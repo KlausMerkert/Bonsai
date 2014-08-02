@@ -63,11 +63,37 @@ bonsaiApp.directive('memory', function ($interval) {
                 }
             };
 
+            this.setAddressBusConnectionState = function (state) {
+                state = parseInt(state);
+                if (!state) {
+                    state = 0;
+                }
+                if (state < 0) {
+                    state = -1;
+                } else if (state > 0) {
+                    state = 0;
+                }
+                $scope.initialAddressBusState = state;
+            };
+
             this.setDataBusConnection = function (bus, setWrite, setRead) {
                 $scope.memory.setDataBusConnection(bus, setWrite, setRead);
                 if (($scope.memory.dataBus) && ($scope.memory.dataBus.bus.getColor)) {
                     $scope.dataBusColor = $scope.memory.dataBus.bus.getColor();
                 }
+            };
+
+            this.setDataBusConnectionState = function (state) {
+                state = parseInt(state);
+                if (!state) {
+                    state = 0;
+                }
+                if (state < 0) {
+                    state = -1;
+                } else if (state > 0) {
+                    state = 1;
+                }
+                $scope.initialDataBusState = state;
             };
         },
         link: function ($scope, element, attrs) {
@@ -294,6 +320,7 @@ bonsaiApp.directive('memory', function ($interval) {
                     $scope.memory,
                     $scope.getConnectionPositions
                 );
+                $scope.memory.setAddressBusState($scope.initialAddressBusState);
 
                 var addressBusReadWire = $scope.memory.addressBus.readWire;
                 if (addressBusReadWire) {
@@ -317,6 +344,7 @@ bonsaiApp.directive('memory', function ($interval) {
                     $scope.memory,
                     $scope.getConnectionPositions
                 );
+                $scope.memory.setDataBusState($scope.initialDataBusState);
 
                 var dataBusWriteWire = $scope.memory.dataBus.writeWire;
                 if (dataBusWriteWire) {
@@ -364,10 +392,12 @@ bonsaiApp.directive('addressgate', function () {
         restrict: 'E',
         scope: {
             bus: '=',
-            setRead: '='
+            setRead: '=',
+            initialState: '='
         },
         link: function ($scope, element, attrs, registerCtrl) {
             registerCtrl.setAddressBusConnection($scope.bus, $scope.setRead);
+            registerCtrl.setAddressBusConnectionState($scope.initialState);
         },
         template: ''
     };
@@ -380,10 +410,12 @@ bonsaiApp.directive('datagate', function () {
         scope: {
             bus: '=',
             setWrite: '=',
-            setRead: '='
+            setRead: '=',
+            initialState: '='
         },
         link: function ($scope, element, attrs, registerCtrl) {
             registerCtrl.setDataBusConnection($scope.bus, $scope.setWrite, $scope.setRead);
+            registerCtrl.setDataBusConnectionState($scope.initialState);
         },
         template: ''
     };

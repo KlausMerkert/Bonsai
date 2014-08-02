@@ -73,7 +73,9 @@ bonsaiApp.directive('clock', function ($interval) {
                     $scope.clock,
                     $scope.getConnectionPositions
                 );
-                $scope.clock.start();
+                if ($scope.frequency) {
+                    $scope.clock.start();
+                }
             }, 1, 1);
         },
         templateUrl: 'partials/component_Clock.html'

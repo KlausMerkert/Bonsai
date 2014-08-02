@@ -45,6 +45,8 @@ bonsaiApp.directive('register', function ($interval) {
             $scope.topCSS = $scope.top + 'px';
             $scope.leftCSS = $scope.left + 'px';
 
+            $scope.connectionsInitialStates = [];
+
             $scope.toggleState = function (connection) {
                 var connections = $scope.register.getBuses();
                 for (var i = 0; i < connections.length; i++) {
@@ -67,8 +69,12 @@ bonsaiApp.directive('register', function ($interval) {
                 }
             };
 
-            this.addBusConnection = function (bus, setWrite, setRead) {
+            this.addBusConnection = function (bus, setWrite, setRead, initialState) {
                 $scope.register.addBusConnection(bus, setWrite, setRead);
+                $scope.connectionsInitialStates.push({
+                    'bus': bus,
+                    'state': initialState
+                });
             };
         },
         link: function ($scope, element, attrs) {
@@ -341,6 +347,16 @@ bonsaiApp.directive('register', function ($interval) {
                         $scope.register,
                         $scope.getConnectionPositions
                     );
+
+                    for (var j = 0; j < $scope.connectionsInitialStates.length; j++) {
+                        if (connections[i].bus === $scope.connectionsInitialStates[j].bus) {
+                            var state = parseInt($scope.connectionsInitialStates[j].state);
+                            if ((state === -1) || (state === 0) || (state === 1)) {
+                                $scope.register.setState(connections[i], state);
+                            }
+                        }
+                    }
+
                     var writeWire = connections[i].writeWire;
                     if (writeWire) {
                         connections[i].writeWireConnector = new ReadingControlWireConnector(writeWire,
@@ -433,10 +449,11 @@ bonsaiApp.directive('gate', function () {
         scope: {
             bus: '=',
             setWrite: '=',
-            setRead: '='
+            setRead: '=',
+            initialState: '='
         },
         link: function ($scope, element, attrs, registerCtrl) {
-            registerCtrl.addBusConnection($scope.bus, $scope.setWrite, $scope.setRead);
+            registerCtrl.addBusConnection($scope.bus, $scope.setWrite, $scope.setRead, $scope.initialState);
         },
         template: ''
     };

@@ -80,11 +80,11 @@ bonsaiApp.controller('bonsaiCpuCtrl',
                             'width': '0',
                             'height': '21px'
                         }, {
-                            'type': 'topright',
+                            'type': 'horizontal',
                             'top': '10px',
                             'left': '273px',
-                            'width': '160px',
-                            'height': '21px'
+                            'width': '106px',
+                            'height': '0'
                         }
                     ] 
                  }, {
@@ -519,12 +519,6 @@ bonsaiApp.controller('bonsaiCpuCtrl',
                     'value': 1,
                     'top': 40,
                     'left': 80
-                }, {
-                    'name': 'Takt',
-                    'wireId': 'clock',
-                    'value': 0,
-                    'top': 300,
-                    'left': 800
                 }
             ],
             'leds': [
@@ -607,6 +601,7 @@ bonsaiApp.controller('bonsaiCpuCtrl',
                         {
                             'busId': 'IRout',
                             'writeWireId': 's12',
+                            'initialState': 0
                         }, {
                             'busId': 'dataBus',
                             'readWireId': 's11'
@@ -725,12 +720,14 @@ bonsaiApp.controller('bonsaiCpuCtrl',
                     'left':600,
                     'addressgate': {
                         'busId': 'MicroAddressBus',
-                        'readWireId': undefined
+                        'readWireId': undefined,
+                        'initialState': -1
                     },
                     'datagate': {
                         'busId': 'MicroDataBus',
                         'writeWireId': undefined,
-                        'readWireId': undefined
+                        'readWireId': undefined,
+                        'initialState': 1
                     }
                 }
             ],
@@ -757,23 +754,35 @@ bonsaiApp.controller('bonsaiCpuCtrl',
                 {
                     'name': 'div10000',
                     'statement': 'x/10000',                 
-                    'busTopId': 'IRout',
-                    'busBottomId': 'opcode',
+                    'busLeftId': 'IRout',
+                    'busRightId': 'opcode',
                     'top': 10,
                     'left': 530
                  },
                  {
                     'name': 'mod10000',
                     'statement': 'x%10000',                 
-                    'busTopId': 'IRout',
-                    'busBottomId': 'addressBus',
+                    'busLeftId': 'IRout',
+                    'busRightId': 'addressBus',
                     'top': 10,
                     'left': 350
                  }
-
             ],
             'clocks': [
-
+                {
+                    'name': 'Takt',
+                    'wireId': 'clock',
+                    'frequency': 0,
+                    'top': 300,
+                    'left': 780
+                }
+            ],
+            'labels': [
+                {
+                    'text': 'Hallo Klaus',
+                    'top': 200,
+                    'left': 200
+                }
             ]
         };
 
@@ -894,11 +903,11 @@ bonsaiApp.controller('bonsaiCpuCtrl',
             }
         }
         for (i = 0; i < $scope.cpu.filters.length; i++) {
-            if ($scope.cpu.filters[i].busTopId) {
-                $scope.cpu.filters[i].busTop = $scope.findBus($scope.cpu.filters[i].busTopId);
+            if ($scope.cpu.filters[i].busLeftId) {
+                $scope.cpu.filters[i].busLeft = $scope.findBus($scope.cpu.filters[i].busLeftId);
             }
-            if ($scope.cpu.filters[i].busBottomId) {
-                $scope.cpu.filters[i].busBottom = $scope.findBus($scope.cpu.filters[i].busBottomId);
+            if ($scope.cpu.filters[i].busRightId) {
+                $scope.cpu.filters[i].busRight = $scope.findBus($scope.cpu.filters[i].busRightId);
             }
         }
 

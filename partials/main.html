@@ -45,14 +45,15 @@
                       top="register.top" left="register.left"
                       inc-wire="register.incWire" dec-wire="register.decWire" clr-wire="register.clrWire">
                 <div ng-repeat="gate in register.gates">
-                    <gate bus="gate.bus" set-write="gate.writeWire" set-read="gate.readWire"></gate>
+                    <gate bus="gate.bus" initial-state="gate.initialState"
+                          set-write="gate.writeWire" set-read="gate.readWire"></gate>
                 </div>
             </register>
         </div>
         <div ng-repeat="bitregister in cpu.bitregisters">
             <bitregister register-name="{{bitregister.name}}" value="bitregister.value"
                          top="bitregister.top" left="bitregister.left">
-                <widegate bus="bitregister.widegate.bus"
+                <widegate bus="bitregister.widegate.bus" initial-state="bitregister.widegate.initialState"
                           set-read="bitregister.widegate.readWire"
                           set-write="bitregister.widegate.writeWire"></widegate>
                 <div ng-repeat="wiregate in bitregister.wiregates">
@@ -63,9 +64,9 @@
         <div ng-repeat="memory in cpu.memories">
             <memory memory-name="{{memory.name}}" base="memory.base"
                     top="memory.top" left="memory.left" content="memory.content">
-                <addressgate bus="memory.addressgate.bus"
+                <addressgate bus="memory.addressgate.bus" initial-state="memory.addressgate.initialState"
                              set-read="memory.addressgate.readWire"></addressgate>
-                <datagate bus="memory.datagate.bus"
+                <datagate bus="memory.datagate.bus" initial-state="memory.datagate.initialState"
                           set-write="memory.datagate.writeWire" set-read="memory.datagate.readWire"></datagate>
             </memory>
         </div>
@@ -78,9 +79,11 @@
                    delay="delay.delay" top="delay.top" left="delay.left"></delay>
         </div>
         <div ng-repeat="filter in cpu.filters">
-            <filter filter-name="{{filter.name}}" bus-top="filter.busTop" bus-bottom="filter.busBottom"
+            <filter filter-name="{{filter.name}}" bus-left="filter.busLeft" bus-right="filter.busRight"
                     statement="filter.statement" top="filter.top" left="filter.left"></filter>
         </div>
+        <div ng-repeat="label in cpu.labels" style="position: absolute;"
+             ng-style="{'top': label.top + 'px', 'left': label.left + 'px'}">{{ label.text }}</div>
     </div>
     <div class="editor pane" ng-repeat="editor in cpu.memories"
          ng-show="selectedEditor === $index + 1" style="position: relative;">
@@ -113,6 +116,4 @@
         <span style="font-style: italic;">{{ error.actor2 }}</span>
         <span data-i18n="{{ error.localization }}end"></span>
     </p>
-    <hr />
-    <object data="images/CPU_Schema.svg" width="642" height="350" type="image/svg+xml"></object>
 </div>
