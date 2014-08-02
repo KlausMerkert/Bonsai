@@ -128,8 +128,8 @@ bonsaiApp.controller('bonsaiCpuCtrl',
                     'max': 99999,
                     'base': 10,
                     'color': 'rgb(0, 140, 0)',
-                    'top': 100,
-                    'left': 520
+                    'top': 60,
+                    'left': 480
                 }, {
                     'id': 'DecoderMPC',
                     'name': 'BefehlsdecoderZuMPC',
@@ -691,7 +691,7 @@ bonsaiApp.controller('bonsaiCpuCtrl',
                 {
                     'name': "Datenspeicher",
                     'base': 10,
-                    'content': "30003\n10007\n20008\n40008\n30001\n50000\n\n3\n0",
+                    'content': "30003\n10007\n20008\n40008\n30001\n50000\n\n3\n2",
                     'top': 50,
                     'left': 10,
                     'addressgate': {
@@ -754,7 +754,7 @@ bonsaiApp.controller('bonsaiCpuCtrl',
             'delays': [
                 {
                     'name': 'ClockDelay',
-                    'delay': 10,
+                    'delay': 50,
                     'busLeftId': 'clockdelayed',
                     'busRightId': 'clock',
                     'top': 300,
@@ -793,6 +793,36 @@ bonsaiApp.controller('bonsaiCpuCtrl',
                     'text': 'Akku',
                     'top': 250,
                     'left': 100
+                },
+                {
+                    'text': 'MPC',
+                    'top': 250,
+                    'left': 570
+                },
+                 {
+                    'text': 'Befehlsdecoder',
+                    'top': 250,
+                    'left': 400
+                },
+                {
+                    'text': 'PC',
+                    'top': 30,
+                    'left': 195
+                },
+                {
+                    'text': 'IR',
+                    'top': 30,
+                    'left': 410
+                },
+                {
+                    'text': 'Programmspeicher',
+                    'top': 30,
+                    'left': 70
+                },
+                {
+                    'text': 'Mikroprogrammspeicher',
+                    'top': 30,
+                    'left': 655
                 }
             ]
         };
@@ -810,7 +840,7 @@ bonsaiApp.controller('bonsaiCpuCtrl',
             throw BusNotFound(
                 "The bus with id " + id + " was not found.",
                 id
-            );
+            );1
         };
         for (i = 0; i < $scope.cpu.manualswitches.length; i++) {
             $scope.cpu.manualswitches[i].wire = $scope.findBus($scope.cpu.manualswitches[i].wireId);
