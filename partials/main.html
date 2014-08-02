@@ -3,7 +3,7 @@
         <li style="margin-right: 2em;"></li>
         <li ng-class="{'active': !selectedEditor}">
             <span class="start"></span>
-            <span class="content" ng-click="selectEditor(undefined)"><a href="">CPU-Ansicht</a></span>
+            <span class="content" ng-click="selectEditor(undefined)"><a href="" data-i18n="_CpuView_"></a></span>
             <span class="end"></span>
         </li>
         <li ng-repeat="editor in cpu.memories" ng-class="{'active': selectedEditor === $index + 1}">

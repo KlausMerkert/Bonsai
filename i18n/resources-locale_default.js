@@ -5,6 +5,11 @@
         "description": ""
     },
     {
+        "key"        : "_CpuView_",
+        "value"      : "CPU view",
+        "description": ""
+    },
+    {
         "key"        : "_errors_",
         "value"      : "Errors",
         "description": ""
