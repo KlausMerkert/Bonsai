@@ -71,20 +71,15 @@ bonsaiApp.controller('bonsaiCpuCtrl',
                             'type': 'topleft',
                             'top': '10px',
                             'left': '51px',
-                            'width': '220px',
+                            'width': '340px',
                             'height': '21px'
-                        }, {
+                        },
+                        {
                             'type': 'vertical',
                             'top': '10px',
-                            'left': '223px',
+                            'left': '224px',
                             'width': '0',
                             'height': '21px'
-                        }, {
-                            'type': 'horizontal',
-                            'top': '10px',
-                            'left': '273px',
-                            'width': '106px',
-                            'height': '0'
                         }
                     ] 
                  }, {
@@ -110,7 +105,23 @@ bonsaiApp.controller('bonsaiCpuCtrl',
                     'base': 10,
                     'color': 'rgb(0, 140, 0)',
                     'top': 7,
-                    'left': 410
+                    'left': 415,
+                    'routes': [
+                        {
+                            'type': 'topright',
+                            'top': '10px',
+                            'left': '422px',
+                            'width': '12px',
+                            'height': '19px'
+                        },
+                        {
+                            'type': 'topleft',
+                            'top': '10px',
+                            'left': '434px',
+                            'width': '12px',
+                            'height': '19px'
+                        }
+                    ] 
                  }, {
                     'id': 'opcode',
                     'name': 'opcode',
@@ -127,10 +138,6 @@ bonsaiApp.controller('bonsaiCpuCtrl',
                     'color': 'rgb(0, 140, 140)',
                     'top': 270,
                     'left': 540
-                }, {
-                    'id': 'DatenspeicherAddressReadWire',
-                    'name': 'Datenspeicher Adressbus read wire',
-                    'max': 1
                 }, {
                     'id': 'AndB',
                     'name': 'And gate B wire',
@@ -513,13 +520,13 @@ bonsaiApp.controller('bonsaiCpuCtrl',
                 }
             ],
             'manualswitches': [
-                {
+                /*{
                     'name': 'DatenspeicherAddressReadWireSwitch',
                     'wireId': 'DatenspeicherAddressReadWire',
                     'value': 1,
                     'top': 40,
                     'left': 80
-                }
+                }*/
             ],
             'leds': [
                 {
@@ -635,7 +642,8 @@ bonsaiApp.controller('bonsaiCpuCtrl',
                         {
                             'busId': 'MicroAddressBus',
                             'writeWireId': undefined,
-                            'readWireId': undefined
+                            'readWireId': undefined,
+                            'initialState': 1
                         },
                         {
                             'busId': 'DecoderMPC',
@@ -688,7 +696,8 @@ bonsaiApp.controller('bonsaiCpuCtrl',
                     'left': 10,
                     'addressgate': {
                         'busId': 'addressBus',
-                        'readWireId': 'DatenspeicherAddressReadWire'
+                        'readWireId': undefined,
+                        'initialState': -1
                     },
                     'datagate': {
                         'busId': 'dataBus',
@@ -704,18 +713,20 @@ bonsaiApp.controller('bonsaiCpuCtrl',
                     'left':400,
                     'addressgate': {
                         'busId': 'opcode',
-                        'readWireId': undefined
+                        'readWireId': undefined,
+                        'initialState': -1
                     },
                     'datagate': {
                         'busId': 'DecoderMPC',
                         'writeWireId': undefined,
-                        'readWireId': undefined
+                        'readWireId': undefined,
+                        'initialState': 1
                     }
                 },
                 {
                     'name': "Mikroprogrammspeicher",
                     'base': 10,
-                    'content': "1024\n3080\n1032\n4096\n4100\n4096\n\n\n\n\n4096\n4232\n4104\n12320\n4368\n4352\n2\n\n\n\n4096\n4232\n4160\n4104\n12352\n4368\n4352\n2\n\n\n4608\n2\n\n\n\n\n\n\n\n\n4096\n4104\n20488\n8192\n2\n\n\n\n\n\n5",
+                    'content': "1024\n3080\n1032\n4096\n4100\n4096\n\n\n\n\n4096\n4232\n4104\n12320\n4368\n4352\n2\n\n\n\n4096\n4232\n4160\n4104\n12352\n4368\n4352\n2\n\n\n4608\n2\n\n\n\n\n\n\n\n\n4096\n4104\n20488\n8192\n2\n\n\n\n\n\n4096\n4101",
                     'top': 50,
                     'left':600,
                     'addressgate': {
@@ -743,7 +754,7 @@ bonsaiApp.controller('bonsaiCpuCtrl',
             'delays': [
                 {
                     'name': 'ClockDelay',
-                    'delay': 1000,
+                    'delay': 10,
                     'busLeftId': 'clockdelayed',
                     'busRightId': 'clock',
                     'top': 300,
@@ -753,19 +764,19 @@ bonsaiApp.controller('bonsaiCpuCtrl',
             'filters': [
                 {
                     'name': 'div10000',
-                    'statement': 'x/10000',                 
+                    'statement': 'n/10000',                 
                     'busLeftId': 'IRout',
                     'busRightId': 'opcode',
                     'top': 10,
-                    'left': 530
+                    'left': 450
                  },
                  {
                     'name': 'mod10000',
-                    'statement': 'x%10000',                 
-                    'busLeftId': 'IRout',
-                    'busRightId': 'addressBus',
+                    'statement': 'n%10000',                 
+                    'busLeftId': 'addressBus',
+                    'busRightId': 'IRout',
                     'top': 10,
-                    'left': 350
+                    'left': 395
                  }
             ],
             'clocks': [
@@ -779,9 +790,9 @@ bonsaiApp.controller('bonsaiCpuCtrl',
             ],
             'labels': [
                 {
-                    'text': 'Hallo Klaus',
-                    'top': 200,
-                    'left': 200
+                    'text': 'Akku',
+                    'top': 250,
+                    'left': 100
                 }
             ]
         };
