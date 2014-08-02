@@ -48,7 +48,7 @@ bonsaiApp.directive('clock', function ($interval) {
             });
 
             $scope.$watch('top', function () {
-                $scope.topCSS = ($scope.top - 9) + 'px';
+                $scope.topCSS = ($scope.top - 10) + 'px';
             });
             $scope.$watch('left', function () {
                 $scope.leftCSS = ($scope.left + 3) + 'px';
