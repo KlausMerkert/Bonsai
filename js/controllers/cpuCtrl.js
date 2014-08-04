@@ -7,146 +7,6 @@ bonsaiApp.controller('bonsaiCpuCtrl',
         $scope.cpu = {
             'buses': [
                 {
-                    'id': 'dataBus',
-                    'name': 'Datenbus',
-                    'max': 99999,
-                    'base': 10,
-                    'color': 'rgb(255, 0, 0)',
-                    'top': 92,
-                    'left': 352,
-                    'routes': [
-                        {
-                            'type': 'vertical',
-                            'top': '164px',
-                            'left': '129px',
-                            'width': '0',
-                            'height': '21px'
-                        },
-                        {
-                            'type': 'bottomright',
-                            'top': '100px',
-                            'left': '313px',
-                            'width': '120px',
-                            'height': '21px'
-                        },
-                        {
-                            'type': 'topleft',
-                            'top': '121px',
-                            'left': '273px',
-                            'width': '38px',
-                            'height': '42px'
-                        },
-                        {
-                            'type': 'vertical',
-                            'top': '122px',
-                            'left': '300px',
-                            'width': '0',
-                            'height': '7px'
-                        },
-                        {
-                            'type': 'topleft',
-                            'top': '185px',
-                            'left': '43px',
-                            'width': '210px',
-                            'height': '45px'
-                        },
-                        {
-                            'type': 'bottomright',
-                            'top': '165px',
-                            'left': '253px',
-                            'width': '20px',
-                            'height': '20px'
-                        }
-                    ]
-                }, {
-                    'id': 'addressBus',
-                    'name': 'Adressbus',
-                    'max': 9999,
-                    'base': 10,
-                    'color': 'rgb(0, 140, 0)',
-                    'top': 10,
-                    'left': 152,
-                    'routes': [
-                        {
-                            'type': 'topleft',
-                            'top': '10px',
-                            'left': '51px',
-                            'width': '340px',
-                            'height': '21px'
-                        },
-                        {
-                            'type': 'vertical',
-                            'top': '10px',
-                            'left': '224px',
-                            'width': '0',
-                            'height': '21px'
-                        }
-                    ] 
-                 }, {
-                    'id': 'MicroAddressBus',
-                    'name': 'MikroAdressbus',
-                    'max': 99,
-                    'base': 10,
-                    'color': 'rgb(155, 100, 0)',
-                    'top': 180,
-                    'left': 625               
-                }, {
-                    'id': 'MicroDataBus',
-                    'name': 'MicroDataBus',
-                    'base': 10,
-                    'max': 32767,
-                    'color': 'rgb(200, 0, 200)',
-                    'left': 760,
-                    'top': 10
-                 }, {
-                    'id': 'IRout',
-                    'name': 'AusgangIR',
-                    'max': 99999,
-                    'base': 10,
-                    'color': 'rgb(0, 140, 0)',
-                    'top': 7,
-                    'left': 415,
-                    'routes': [
-                        {
-                            'type': 'topright',
-                            'top': '10px',
-                            'left': '422px',
-                            'width': '12px',
-                            'height': '19px'
-                        },
-                        {
-                            'type': 'topleft',
-                            'top': '10px',
-                            'left': '434px',
-                            'width': '12px',
-                            'height': '19px'
-                        }
-                    ] 
-                 }, {
-                    'id': 'opcode',
-                    'name': 'opcode',
-                    'max': 99999,
-                    'base': 10,
-                    'color': 'rgb(0, 140, 0)',
-                    'top': 60,
-                    'left': 480
-                }, {
-                    'id': 'DecoderMPC',
-                    'name': 'BefehlsdecoderZuMPC',
-                    'max': 99,
-                    'base': 10,
-                    'color': 'rgb(0, 140, 140)',
-                    'top': 270,
-                    'left': 540
-                }, {
-                    'id': 'AndB',
-                    'name': 'And gate B wire',
-                    'max': 1
-                }, {
-                    'id': 'OrA',
-                    'name': 'Or gate A wire',
-                    'max': 1
-                }, {
                     'id': 's0',
                     'name': 'not count',
                     'max': 1
@@ -211,16 +71,21 @@ bonsaiApp.controller('bonsaiCpuCtrl',
                         {
                             'type': 'horizontal',
                             'top': '98px',
-                            'left': '150px',
-                            'width': '700px',
+                            'left': '210px',
+                            'width': '640px',
                             'height': '0'
                         }, {
                             'type': 'bottomright',
-                            'top': '106px',
+                            'top': '126px',
                             'left': '140px',
-                            'width': '10px',
-                            'height': '50px'
-                       
+                            'width': '47px',
+                            'height': '30px'
+                        }, {
+                            'type': 'topleft',
+                            'top': '98px',
+                            'left': '187px',
+                            'width': '31px',
+                            'height': '28px'    
                         }
                     ]
                 }, {
@@ -232,16 +97,21 @@ bonsaiApp.controller('bonsaiCpuCtrl',
                         {
                             'type': 'horizontal',
                             'top': '110px',
-                            'left': '150px',
-                            'width': '700px',
+                            'left': '210px',
+                            'width': '640px',
                             'height': '0'
                         }, {
                             'type': 'bottomright',
-                            'top': '99px',
+                            'top': '129px',
                             'left': '140px',
-                            'width': '6px',
-                            'height': '50px'
-                       
+                            'width': '39px',
+                            'height': '20px'
+                        }, {
+                            'type': 'topleft',
+                            'top': '110px',
+                            'left': '179px',
+                            'width': '31px',
+                            'height': '29px'    
                         }
                     ]
                  }, {
@@ -253,16 +123,21 @@ bonsaiApp.controller('bonsaiCpuCtrl',
                         {
                             'type': 'horizontal',
                             'top': '122px',
-                            'left': '150px',
-                            'width': '700px',
+                            'left': '270px',
+                            'width': '580px',
                             'height': '0'
                         }, {
                             'type': 'bottomright',
-                            'top': '138px',
+                            'top': '158px',
                             'left': '79px',
-                            'width': '6px',
-                            'height': '120px'
-                       
+                            'width': '158px',
+                            'height': '100px'
+                        }, {
+                            'type': 'topleft',
+                            'top': '122px',
+                            'left': '237px',
+                            'width': '33px',
+                            'height': '36px'     
                         }
                     ]
                 }, {
@@ -274,16 +149,21 @@ bonsaiApp.controller('bonsaiCpuCtrl',
                         {
                             'type': 'horizontal',
                             'top': '134px',
-                            'left': '150px',
-                            'width': '700px',
+                            'left': '270px',
+                            'width': '580px',
                             'height': '0'
                         }, {
                             'type': 'bottomright',
-                            'top': '144px',
+                            'top': '164px',
                             'left': '79px',
-                            'width': '12px',
-                            'height': '120px'
-                       
+                            'width': '166px',
+                            'height': '100px'
+                        }, {
+                            'type': 'topleft',
+                            'top': '134px',
+                            'left': '245px',
+                            'width': '25px',
+                            'height': '30px'    
                         }
                     ]
                 }, {
@@ -295,19 +175,19 @@ bonsaiApp.controller('bonsaiCpuCtrl',
                         {
                             'type': 'horizontal',
                             'top': '146px',
-                            'left': '210px',
-                            'width': '620px',
+                            'left': '268px',
+                            'width': '528px',
                             'height': '0'
                         }, {
                             'type': 'bottomright',
                             'top': '160px',
                             'left': '55px',
-                            'width': '140px',
+                            'width': '198px',
                             'height': '85px'
                         }, {
                             'type': 'topleft',
                             'top': '146px',
-                            'left': '195px',
+                            'left': '253px',
                             'width': '15px',
                             'height': '15px'                       
                         }
@@ -321,19 +201,19 @@ bonsaiApp.controller('bonsaiCpuCtrl',
                         {
                             'type': 'horizontal',
                             'top': '158px',
-                            'left': '220px',
-                            'width': '620px',
+                            'left': '280px',
+                            'width': '560px',
                             'height': '0'
                         }, {
                             'type': 'bottomright',
                             'top': '168px',
                             'left': '55px',
-                            'width': '146px',
+                            'width': '206px',
                             'height': '70px'
                         }, {
                             'type': 'topleft',
                             'top': '158px',
-                            'left': '201px',
+                            'left': '261px',
                             'width': '20px',
                             'height': '15px'                       
                         }
@@ -390,13 +270,13 @@ bonsaiApp.controller('bonsaiCpuCtrl',
                             'type': 'topright',
                             'top': '85px',
                             'left': '446px',
-                            'width': '144px',
+                            'width': '132px',
                             'height': '70px'
                          }, {
                             'type': 'bottomleft',
                             'top': '155px',
-                            'left': '590px',
-                            'width': '205px',
+                            'left': '578px',
+                            'width': '217px',
                             'height': '39px'
                                         
                         }
@@ -411,13 +291,13 @@ bonsaiApp.controller('bonsaiCpuCtrl',
                             'type': 'topright',
                             'top': '38px',
                             'left': '446px',
-                            'width': '134px',
+                            'width': '124px',
                             'height': '128px'
                          }, {
                             'type': 'bottomleft',
                             'top': '167px',
-                            'left': '580px',
-                            'width': '215px',
+                            'left': '570px',
+                            'width': '225px',
                             'height': '39px'
                                         
                         }
@@ -464,16 +344,296 @@ bonsaiApp.controller('bonsaiCpuCtrl',
                                         
                         }
                     ]
+                }, {
+                    'id': 'dataBus',
+                    'name': 'Datenbus',
+                    'max': 99999,
+                    'base': 10,
+                    'color': 'rgb(255, 0, 0)',
+                    'top': 160,
+                    'left': 175,
+                    'routes': [
+                        {
+                            'type': 'vertical',
+                            'top': '164px',
+                            'left': '129px',
+                            'width': '0',
+                            'height': '21px'
+                        },
+                        {
+                            'type': 'bottomright',
+                            'top': '100px',
+                            'left': '313px',
+                            'width': '120px',
+                            'height': '21px'
+                        },
+                        {
+                            'type': 'topleft',
+                            'top': '121px',
+                            'left': '273px',
+                            'width': '38px',
+                            'height': '42px'
+                        },
+                        {
+                            'type': 'vertical',
+                            'top': '122px',
+                            'left': '300px',
+                            'width': '0',
+                            'height': '7px'
+                        },
+                        {
+                            'type': 'topleft',
+                            'top': '185px',
+                            'left': '43px',
+                            'width': '210px',
+                            'height': '45px'
+                        },
+                        {
+                            'type': 'bottomright',
+                            'top': '165px',
+                            'left': '253px',
+                            'width': '20px',
+                            'height': '20px'
+                        }
+                    ]
+                }, {
+                    'id': 'addressBus',
+                    'name': 'Adressbus',
+                    'max': 9999,
+                    'base': 10,
+                    'color': 'rgb(0, 140, 0)',
+                    'top': -3,
+                    'left': 175,
+                    'routes': [
+                        {
+                            'type': 'topleft',
+                            'top': '21px',
+                            'left': '51px',
+                            'width': '339px',
+                            'height': '7px'
+                        },
+                        {
+                            'type': 'vertical',
+                            'top': '21px',
+                            'left': '224px',
+                            'width': '0',
+                            'height': '10px'
+                        }
+                    ] 
+                 }, {
+                    'id': 'MicroAddressBus',
+                    'name': 'MikroAdressbus',
+                    'max': 99,
+                    'base': 10,
+                    'color': 'rgb(155, 100, 0)',
+                    'top': -3,
+                    'left': 610,
+                    'routes': [
+                        {
+                            'type': 'topright',
+                            'top': '151px',
+                            'left': '620px',
+                            'width': '13px',
+                            'height': '77px'
+                        }, {
+                            'type': 'topright',
+                            'top': '21px',
+                            'left': '621px',
+                            'width': '20px',
+                            'height': '7px'
+                        }, {
+                            'type': 'topleft',
+                            'top': '21px',
+                            'left': '590px',
+                            'width': '29px',
+                            'height': '17px',
+                         }, {
+                            'type': 'bottomleft',
+                            'top': '39px',
+                            'left': '590px',
+                            'width': '28px',
+                            'height': '112px'       
+                        }
+                    ]               
+                }, {
+                    'id': 'MicroDataBus',
+                    'name': 'MicroDataBus',
+                    'base': 10,
+                    'max': 32767,
+                    'color': 'rgb(200, 0, 200)',
+                    'left': 785,
+                    'top': -3,
+                    'routes': [
+                        {
+                            'type': 'bottomright',
+                            'top': '103px',
+                            'left': '748px',
+                            'width': '23px',
+                            'height': '69px'
+                        }, {
+                            'type': 'topright',
+                            'top': '21px',
+                            'left': '810px',
+                            'width': '20px',
+                            'height': '7px'
+                        }, {
+                            'type': 'topleft',
+                            'top': '21px',
+                            'left': '771px',
+                            'width': '37px',
+                            'height': '80px',
+                         }, {
+                            'type': 'bottomleft',
+                            'top': '165px',
+                            'left': '718px',
+                            'width': '28px',
+                            'height': '7px'       
+                        }
+                    ]               
+                 }, {
+                    'id': 'IRout',
+                    'name': 'AusgangIR',
+                    'max': 99999,
+                    'base': 10,
+                    'color': 'rgb(0, 140, 0)',
+                    'top': -3,
+                    'left': 415,
+                    'routes': [
+                        {
+                            'type': 'topright',
+                            'top': '21px',
+                            'left': '422px',
+                            'width': '11px',
+                            'height': '7px'
+                        },
+                        {
+                            'type': 'topleft',
+                            'top': '21px',
+                            'left': '434px',
+                            'width': '11px',
+                            'height': '7px'
+                        }
+                    ] 
+                 }, {
+                    'id': 'opcode',
+                    'name': 'opcode',
+                    'max': 99999,
+                    'base': 10,
+                    'color': 'rgb(0, 140, 0)',
+                    'top': -3,
+                    'left': 476,
+                    'routes': [
+                        {
+                            'type': 'topright',
+                            'top': '21px',
+                            'left': '477px',
+                            'width': '11px',
+                            'height': '50px'
+                        },
+                        {
+                            'type': 'topleft',
+                            'top': '121px',
+                            'left': '442px',
+                            'width': '30px',
+                            'height': '7px'
+                        },
+                        {
+                            'type': 'bottomright',
+                            'top': '73px',
+                            'left': '474px',
+                            'width': '14px',
+                            'height': '48px'
+                        }
+                    ] 
+                }, {
+                    'id': 'DecoderMPC',
+                    'name': 'BefehlsdecoderZuMPC',
+                    'max': 99,
+                    'base': 10,
+                    'color': 'rgb(0, 140, 140)',
+                    'top': 283,
+                    'left': 570,
+                    'routes': [
+                        {
+                            'type': 'bottomright',
+                            'top': '301px',
+                            'left': '583px',
+                            'width': '50px',
+                            'height': '7px'
+                        },
+                        {
+                            'type': 'bottomleft',
+                            'top': '265px',
+                            'left': '518px',
+                            'width': '63px',
+                            'height': '43px'
+                        }
+                    ] 
+                }, {
+                    'id': 'AndB',
+                    'name': 'And gate B wire',
+                    'max': 1
+                }, {
+                    'id': 'OrA',
+                    'name': 'Or gate A wire',
+                    'max': 1
+               
                  }, {
                     'id': 'clock',
                     'name': 'Takt',
                     'max': 1,
-                    'color': 'rgb(100, 100, 255)'
+                    'color': 'rgb(100, 100, 255)',
+                    'routes': [
+                        {
+                            'type': 'topright',
+                            'top': '45px',
+                            'left': '840px',
+                            'width': '20px',
+                            'height': '200px'
+                        },
+                        {
+                            'type': 'topleft',
+                            'top': '278px',
+                            'left': '770px',
+                            'width': '30px',
+                            'height': '22px'
+                        },
+                        {
+                            'type': 'horizontal',
+                            'top': '300px',
+                            'left': '760px',
+                            'width': '19px',
+                            'height': '0px'
+                        },
+                        {
+                            'type': 'bottomright',
+                            'top': '246px',
+                            'left': '779px',
+                            'width': '81px',
+                            'height': '32px'
+                        }
+                    ] 
                  }, {
                     'id': 'clockdelayed',
                     'name': 'verzögerter Takt',
                     'max' : 1,
-                    'color': 'rgb(100, 100, 255)'
+                    'color': 'rgb(100, 100, 255)',
+                    'routes': [
+                        {
+                            'type': 'topright',
+                            'top': '253px',
+                            'left': '703px',
+                            'width': '8px',
+                            'height': '15px'
+                        },
+                        {
+                            'type': 'bottomleft',
+                            'top': '269px',
+                            'left': '711px',
+                            'width': '22px',
+                            'height': '31px'
+                        }
+                    ] 
                 }, {
                     'id': 'and2A_Takt',
                     'name': 'xy',
@@ -758,7 +918,7 @@ bonsaiApp.controller('bonsaiCpuCtrl',
                     'busLeftId': 'clockdelayed',
                     'busRightId': 'clock',
                     'top': 300,
-                    'left': 715
+                    'left': 738
                 }
             ],
             'filters': [
@@ -767,7 +927,7 @@ bonsaiApp.controller('bonsaiCpuCtrl',
                     'statement': 'n/10000',                 
                     'busLeftId': 'IRout',
                     'busRightId': 'opcode',
-                    'top': 10,
+                    'top': 21,
                     'left': 450
                  },
                  {
@@ -775,7 +935,7 @@ bonsaiApp.controller('bonsaiCpuCtrl',
                     'statement': 'n%10000',                 
                     'busLeftId': 'addressBus',
                     'busRightId': 'IRout',
-                    'top': 10,
+                    'top': 21,
                     'left': 395
                  }
             ],
@@ -791,18 +951,18 @@ bonsaiApp.controller('bonsaiCpuCtrl',
             'labels': [
                 {
                     'text': 'Akku',
-                    'top': 250,
-                    'left': 100
+                    'top': 230,
+                    'left': 10
                 },
                 {
                     'text': 'MPC',
-                    'top': 250,
-                    'left': 570
+                    'top': 230,
+                    'left': 600
                 },
                  {
                     'text': 'Befehlsdecoder',
-                    'top': 250,
-                    'left': 400
+                    'top': 130,
+                    'left': 475
                 },
                 {
                     'text': 'PC',
