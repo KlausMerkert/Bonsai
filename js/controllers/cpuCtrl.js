@@ -1000,7 +1000,7 @@ bonsaiApp.controller('bonsaiCpuCtrl',
             throw BusNotFound(
                 "The bus with id " + id + " was not found.",
                 id
-            );1
+            );
         };
         for (i = 0; i < $scope.cpu.manualswitches.length; i++) {
             $scope.cpu.manualswitches[i].wire = $scope.findBus($scope.cpu.manualswitches[i].wireId);
