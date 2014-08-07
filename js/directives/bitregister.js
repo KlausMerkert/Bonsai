@@ -167,6 +167,14 @@ bonsaiApp.directive('bitregister', function ($interval) {
                 $scope.updateWires(true);
             };
 
+            $scope.activateWireWrite = function () {
+
+            };
+
+            $scope.deactivateWireWrite = function () {
+
+            };
+
             $scope.activateWriteWire = function () {
                 var connection = $scope.register.getWideBusConnection();
                 if (connection.writeWire) {

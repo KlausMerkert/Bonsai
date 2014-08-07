@@ -13,6 +13,17 @@
                      style="position: relative; top: -0.1em; left: 0.01em;" class="unselectable">&darr;</div>
                 <div style="position: absolute; top: 8px; left: 10px;" class="flanktriggered"></div>
             </div>
+            <div class="bitconnections grayback" style="position: absolute; left: -6px; top: -9px; width: 18px;"
+                 ng-style="{'height': (getBits().length * 12 + 16) + 'px'}">
+                <div ng-repeat="bit in getBits() track by $index"
+                     style="padding: 0; margin: 0; height: 12px; cursor: pointer; position: absolute; left: 1px;"
+                     ng-style="{'top': ($index * 12 + 7) + 'px'}">
+                    <span ng-show="!wireRead || register.state == 1">&#8594;</span>
+                    <span style="padding: 0 5px; position: relative; top: 2px;"
+                          ng-show="!(!wireRead || register.state == 1) && !bit">&bull;</span>
+                    <span ng-show="!(!wireRead || register.state == 1) && bit">&#8592;</span>
+                </div>
+            </div>
             <div class="nospace" style="position: absolute;">
                 <div class="busconnector"
                      style="position: absolute; left: 23px; top: -26px;"></div>
@@ -23,9 +34,12 @@
                 <div class="wireconnector read"
                      style="position: absolute; left: 32px; top: -13px;"
                      ng-mousedown="activateReadWire()"></div>
+                <div class="wireconnector write"
+                     style="position: absolute; left: -3px; top: -13px;"
+                     ng-mousedown="activateWireWrite()" ng-mouseup="deactivateWireWrite()"></div>
                 <div class="wireconnector read"
-                     style="position: absolute; left: 3px; top: -10px;"
-                     ng-mousedown="deactivateWireRead()" ng-mouseup="activateWireRead()"></div>
+                     style="position: absolute; left: 5px; top: -13px;"
+                     ng-mousedown="activateWireRead()" ng-mouseup="deactivateWireRead()"></div>
                 <div ng-repeat="bit in getBits() track by $index"
                      class="wireconnector grayback" style="left: -10px;"
                      ng-style="{'top': ($index * 12 + 4) + 'px'}"
@@ -37,10 +51,7 @@
              ng-style="{'top': ($index * 12 + 7) + 'px'}">
             <div style="display: inline-block; position: absolute; left: -3px; top: -2px;"
                  ng-mousedown="deactivateWireRead()" ng-mouseup="activateWireRead()">
-                <span ng-show="!wireRead || register.state == 1">&#8594;</span>
-                <span style="padding: 0 5px; position: relative; top: 2px;"
-                      ng-show="!(!wireRead || register.state == 1) && !bit">&bull;</span>
-                <span ng-show="!(!wireRead || register.state == 1) && bit">&#8592;</span>
+
             </div>
             <div style="display: inline-block; margin: 0; width: 10px; font-family: monospace; position: absolute; left: 15px;"
                  ng-mousedown="register.setBit($index, (register.getBit($index) + 1) % 2)"
