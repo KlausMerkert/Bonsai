@@ -115,21 +115,19 @@ bonsaiApp.directive('bitregister', function ($interval) {
             };
 
             $scope.activateWireRead = function () {
-                for (var i = 0; i < $scope.register.getWires(); i++) {
-                    $scope.register.setToRead($scope.register.getWires()[i]);
-                }
+                $scope.register.setBitGateToRead();
             };
 
-            $scope.deactivateWire = function () {
-                for (var i = 0; i < $scope.register.getWires(); i++) {
-                    $scope.register.setToDisconnected($scope.register.getWires()[i]);
-                }
+            $scope.deactivateWireRead = function () {
+                $scope.register.setBitGateToDisconnected();
             };
 
             $scope.activateWireWrite = function () {
-                for (var i = 0; i < $scope.register.getWires(); i++) {
-                    $scope.register.setToWrite($scope.register.getWires()[i]);
-                }
+                $scope.register.setBitGateToWrite();
+            };
+
+            $scope.deactivateWireWrite = function () {
+                $scope.register.setBitGateToDisconnected();
             };
 
             $scope.activateWriteWire = function () {
