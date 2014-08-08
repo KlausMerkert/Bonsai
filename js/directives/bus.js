@@ -106,7 +106,7 @@ bonsaiApp.directive('bus', function () {
                 if ($scope.color) {
                     return $scope.color;
                 } else {
-                    return 'rgba(200, 200, 200, 0.6)';
+                    return 'rgba(140, 140, 140, 0.6)';
                 }
             };
         },
