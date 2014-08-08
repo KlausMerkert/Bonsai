@@ -72,6 +72,14 @@ BitRegister.prototype.setValue = function (value) {
     if (this.state === 1) {
         this.wideBusConnection.bus.write(this, value);
     }
+    if (this.bitWiresConnection.state == 1) {
+        for (var i = 0; i < this.bitWiresConnection.wires.length; i++) {
+            this.bitWiresConnection.wires[i].wire.write(
+                this.bitWiresConnection.wires[i].connector,
+                this.getBit(i)
+            );
+        }
+    }
     this.updateViewCallback(this.value);
 };
 
@@ -95,7 +103,10 @@ BitRegister.prototype.setBit = function (index, bit) {
         }
     }
     if (this.bitWiresConnection.state == 1) {
-        this.bitWiresConnection.wires[index].write(this, bit);
+        this.bitWiresConnection.wires[index].wire.write(
+            this.bitWiresConnection.wires[index].connector,
+            bit
+        );
     }
 };
 
