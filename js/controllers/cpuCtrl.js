@@ -677,16 +677,30 @@ bonsaiApp.controller('bonsaiCpuCtrl',
                             'height': '50px'
                         }
                     ]
+                }, {
+                    'id': 'SteuerwortWriteWire',
+                    'name': 'Steuerwort write wire',
+                    'max': 1
+                }, {
+                    'id': 'SteuerwortReadWire',
+                    'name': 'Steuerwort read wire',
+                    'max': 1
                 }
             ],
             'manualswitches': [
-                /*{
-                    'name': 'DatenspeicherAddressReadWireSwitch',
-                    'wireId': 'DatenspeicherAddressReadWire',
+                {
+                    'name': 'SteuerwortWriteWireSwitch',
+                    'wireId': 'SteuerwortWriteWire',
                     'value': 1,
-                    'top': 40,
-                    'left': 80
-                }*/
+                    'top': 10,
+                    'left': 850
+                }, {
+                    'name': 'SteuerwortReadWireSwitch',
+                    'wireId': 'SteuerwortReadWire',
+                    'value': 0,
+                    'top': 30,
+                    'left': 850
+                }
             ],
             'leds': [
                 {
@@ -820,8 +834,8 @@ bonsaiApp.controller('bonsaiCpuCtrl',
                 {
                     'name': 'Steuerwort',
                     'value': 0,
-                    'wiresReadWireId': undefined,
-                    'wiresWriteWireId': undefined,
+                    'wiresReadWireId': 'SteuerwortReadWire',
+                    'wiresWriteWireId': 'SteuerwortWriteWire',
                     'base' : 10,
                     'top' : 50,
                     'left': 800,
