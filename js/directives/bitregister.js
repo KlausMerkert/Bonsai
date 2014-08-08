@@ -302,10 +302,28 @@ bonsaiApp.directive('bitregister', function ($interval) {
                     if (bitWires[i].wire) {
                         bitWires[i].connector = new ReadingControlWireConnector(bitWires[i].wire,
                             function (wire) {
-                                $scope.register.setBit(i, wire.registerReaderAndRead($scope.register));
+                                if ($scope.register.bitWiresConnection.state == -1) {
+                                    if (wire.isActive() && wire.isNotZero()) {
+                                        var allWires = $scope.register.getWires();
+                                        for (var k = 0; k < allWires.length; k++) {
+                                            if (allWires[k].wire === wire) {
+                                                $scope.register.setBit(k, 1);
+                                            }
+                                        }
+                                    }
+                                }
                             },
                             function (wire) {
-                                $scope.register.setBit(i, wire.registerReaderAndRead($scope.register));
+                                if ($scope.register.bitWiresConnection.state == -1) {
+                                    if (wire.isActive() && !wire.isNotZero()) {
+                                        var allWires = $scope.register.getWires();
+                                        for (var k = 0; k < allWires.length; k++) {
+                                            if (allWires[k].wire === wire) {
+                                                $scope.register.setBit(k, 0);
+                                            }
+                                        }
+                                    }
+                                }
                             }, $scope.registerName + ' bit connector no ' + i + ' for ' + bitWires[i].wire.getName());
                         bitWires[i].wire.enrollToDirective(
                             bitWires[i].connector,

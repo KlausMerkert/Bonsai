@@ -69,7 +69,7 @@ BitRegister.prototype.setValue = function (value) {
         value = 0;
     }
     this.value = value;
-    if (this.state === 1) {
+    if (this.wideBusConnection.state === 1) {
         this.wideBusConnection.bus.write(this, value);
     }
     if (this.bitWiresConnection.state == 1) {
