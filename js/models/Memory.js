@@ -271,14 +271,16 @@ Memory.prototype.setToDisconnected = function (wire) {
         this.setAddressBusState(0);
     }
     if (this.dataBus.readWire === wire) {
-        if ((this.dataBus) && (this.dataBus.writeWire) && (this.dataBus.writeWire.isActive())) {
+        if ((this.dataBus) && (this.dataBus.writeWire) &&
+            (this.dataBus.writeWire.isActive()) && (this.dataBus.writeWire.isNotZero())) {
             this.setDataBusState(1)
         } else {
             this.setDataBusState(0);
         }
     }
     if (this.dataBus.writeWire === wire) {
-        if ((this.dataBus) && (this.dataBus.readWire) && (this.dataBus.readWire.isActive())) {
+        if ((this.dataBus) && (this.dataBus.readWire) &&
+            (this.dataBus.readWire.isActive()) && (this.dataBus.writeWire.isNotZero())) {
             this.setDataBusState(-1)
         } else {
             this.setDataBusState(0);
