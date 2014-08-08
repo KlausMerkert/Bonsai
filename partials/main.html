@@ -52,6 +52,7 @@
         </div>
         <div ng-repeat="bitregister in cpu.bitregisters">
             <bitregister register-name="{{bitregister.name}}" value="bitregister.value"
+                         set-wires-read="bitregister.wiresReadWire" set-wires-write="bitregister.wiresWriteWire"
                          top="bitregister.top" left="bitregister.left">
                 <widegate bus="bitregister.widegate.bus" initial-state="bitregister.widegate.initialState"
                           set-read="bitregister.widegate.readWire"

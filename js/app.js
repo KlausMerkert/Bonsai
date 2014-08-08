@@ -13,8 +13,8 @@ var bonsaiApp = angular.module(
             when('/', {templateUrl: 'partials/main.html', controller: 'bonsaiCpuCtrl'}).
             otherwise({templateUrl: 'partials/main.html', controller: 'bonsaiCpuCtrl'});
     }])
-    .factory('$exceptionHandler', function ($injector) {
+    /*.factory('$exceptionHandler', function ($injector) {
         return function (exception, cause) {
             $injector.get('$rootScope').$broadcast('error', exception);
         };
-    });
+    })*/;
