@@ -300,9 +300,9 @@ bonsaiApp.directive('bitregister', function ($interval) {
                 if (readWire) {
                     connection.readWireConnector = new ReadingControlWireConnector(readWire,
                         function (wire) {
-                            $scope.register.setToRead(wire);
+                            $scope.register.setWideBusGateToRead();
                             $interval(function () {
-                                $scope.register.setToDisconnected(wire);
+                                $scope.register.setWideBusGateToDisconnected(wire);
                             }, 0, 1);
                         },
                         function () {
