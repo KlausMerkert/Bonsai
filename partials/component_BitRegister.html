@@ -13,7 +13,9 @@
                      style="position: relative; top: -0.1em; left: 0.01em;" class="unselectable">&darr;</div>
                 <div style="position: absolute; top: 8px; left: 10px;" class="flanktriggered"></div>
             </div>
-            <div class="bitconnections grayback" style="position: absolute; left: -6px; top: -9px; width: 18px;"
+            <div ng-click="toggleBitConnectionState()"
+                 class="bitconnections" style="position: absolute; left: -6px; top: -9px; width: 18px;"
+                 ng-class="{'read': register.bitWiresConnection.state == -1, 'write': register.bitWiresConnection.state == 1, 'grayback': register.bitWiresConnection.state == 0}"
                  ng-style="{'height': (getBits().length * 12 + 16) + 'px'}">
                 <div ng-repeat="bit in getBits() track by $index"
                      style="padding: 0; margin: 0; height: 12px; cursor: pointer; position: absolute; left: 1px;"

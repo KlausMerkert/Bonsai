@@ -82,7 +82,7 @@ bonsaiApp.directive('bitregister', function ($interval) {
                             ', ' + Math.floor((222 - 200) * $scope.gateColorIteration / 20 + 200) +
                             ', ' + Math.floor(103 + (200 - 103) * (20 - $scope.gateColorIteration) / 20) + ')';
                         if ($scope.gateColorIteration <= 0) {
-                            $scope.state = 0;
+                            $scope.register.setWideBusState(0);
                         }
                         $scope.gateColorIteration--;
                     }, 30, 21);
@@ -188,14 +188,29 @@ bonsaiApp.directive('bitregister', function ($interval) {
 
             $scope.toggleWideBusState = function () {
                 var stateFound = false;
-                var desiredState = $scope.register.state - 1;
+                var desiredState = $scope.register.wideBusConnection.state + 1;
+                while (!stateFound) {
+                    if (desiredState > 1) {
+                        desiredState = -1;
+                    }
+                    try {
+                        $scope.setWideBusState(desiredState);
+                        stateFound = true;
+                    } catch (exception) {
+                        desiredState++;
+                    }
+                }
+            };
+
+            $scope.toggleBitConnectionState = function () {
+                var stateFound = false;
+                var desiredState = $scope.register.bitWiresConnection.state - 1;
                 while (!stateFound) {
                     if (desiredState < -1) {
                         desiredState = 1;
                     }
                     try {
-                        $scope.setWideBusState(desiredState);
-                        $scope.register.state = desiredState;
+                        $scope.register.setBitConnectionState(desiredState);
                         stateFound = true;
                     } catch (exception) {
                         desiredState--;
