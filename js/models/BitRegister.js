@@ -133,7 +133,10 @@ BitRegister.prototype.setWideBusState = function (desiredState) {
         this.wideBusConnection.bus.unregisterReader(this);
         try {
             this.wideBusConnection.bus.write(this, this.getValue());
-            this.wideBusConnection.state = desiredState;
+            this.wideBusConnection.state = 1;
+            if (this.wideBusStateChangeCallback) {
+                this.wideBusStateChangeCallback(1);
+            }
         } catch (exception) {
             if (readState) {
                 this.wideBusConnection.bus.registerReaderAndRead(this);
@@ -153,6 +156,9 @@ BitRegister.prototype.setWideBusState = function (desiredState) {
                 this.wideBusConnection.bus.unregisterReader(this);
                 this.setValue(busValue);
                 this.wideBusConnection.state = 0;
+                if (this.wideBusStateChangeCallback) {
+                    this.wideBusStateChangeCallback(-1);
+                }
             } catch (exception) {
                 if (writeState) {
                     this.wideBusConnection.bus.write(this, this.value);
@@ -163,10 +169,10 @@ BitRegister.prototype.setWideBusState = function (desiredState) {
     } else {
         this.wideBusConnection.bus.stopWriting(this);
         this.wideBusConnection.bus.unregisterReader(this);
-        this.wideBusConnection.state = desiredState;
-    }
-    if (this.wideBusStateChangeCallback) {
-        this.wideBusStateChangeCallback(this.wideBusConnection.state);
+        this.wideBusConnection.state = 0;
+        if (this.wideBusStateChangeCallback) {
+            this.wideBusStateChangeCallback(0);
+        }
     }
 };
 
