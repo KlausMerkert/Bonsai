@@ -140,7 +140,7 @@ BitRegister.prototype.setWideBusState = function (desiredState) {
             }
             throw exception;
         }
-    } else if (desiredState == -1) {
+    } else if ((desiredState == -1) && (this.wideBusConnection.state >= 0)) {
         if (this.bitWiresConnection.state == -1) {
             throw RegisterIsAlreadyReadingException(
                 "BitRegister " + this.name + " is already reading.",
@@ -149,8 +149,10 @@ BitRegister.prototype.setWideBusState = function (desiredState) {
         } else {
             this.wideBusConnection.bus.stopWriting(this);
             try {
-                this.setValue(this.wideBusConnection.bus.registerReaderAndRead(this));
-                this.wideBusConnection.state = desiredState;
+                var busValue = this.wideBusConnection.bus.registerReaderAndRead(this);
+                this.wideBusConnection.bus.unregisterReader(this);
+                this.setValue(busValue);
+                this.wideBusConnection.state = 0;
             } catch (exception) {
                 if (writeState) {
                     this.wideBusConnection.bus.write(this, this.value);
