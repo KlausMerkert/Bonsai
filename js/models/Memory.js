@@ -256,13 +256,35 @@ Memory.prototype.setToRead = function (wire) {
         this.setAddressBusState(-1);
     }
     if (this.dataBus.readWire === wire) {
-        this.setDataBusState(-1);
+        if ((this.dataBus.writeWire) &&
+            (this.dataBus.writeWire.isActive()) &&
+            (this.dataBus.writeWire.isNotZero())) {
+            throw GateIsAlreadyWriting(
+                this.getName() + ": The gate to bus " + this.dataBus.bus.getName() +
+                    " is already writing and therefore can not be set to read.",
+                this.getName(),
+                this.dataBus.bus.getName()
+            )
+        } else {
+            this.setDataBusState(-1);
+        }
     }
 };
 
 Memory.prototype.setToWrite = function (wire) {
     if (this.dataBus.writeWire === wire) {
-        this.setDataBusState(1);
+        if ((this.dataBus.readWire) &&
+            (this.dataBus.readWire.isActive()) &&
+            (this.dataBus.readWire.isNotZero())) {
+            throw GateIsAlreadyReading(
+                this.getName() + ": The gate to bus " + this.dataBus.bus.getName() +
+                    " is already reading and therefore can not be set to write.",
+                this.getName(),
+                this.dataBus.bus.getName()
+            )
+        } else {
+            this.setDataBusState(1);
+        }
     }
 };
 
@@ -280,7 +302,7 @@ Memory.prototype.setToDisconnected = function (wire) {
     }
     if (this.dataBus.writeWire === wire) {
         if ((this.dataBus) && (this.dataBus.readWire) &&
-            (this.dataBus.readWire.isActive()) && (this.dataBus.writeWire.isNotZero())) {
+            (this.dataBus.readWire.isActive()) && (this.dataBus.readWire.isNotZero())) {
             this.setDataBusState(-1)
         } else {
             this.setDataBusState(0);
