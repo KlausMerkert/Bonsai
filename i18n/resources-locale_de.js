@@ -288,5 +288,35 @@
         "key"        : "_FilterAlreadyOccupied_end",
         "value"      : ".",
         "description": ""
+    },
+    {
+        "key"        : "_GateIsAlreadyWriting_beginning",
+        "value"      : "",
+        "description": ""
+    },
+    {
+        "key"        : "_GateIsAlreadyWriting_middle",
+        "value"      : ": Das Gate zum Bus '",
+        "description": ""
+    },
+    {
+        "key"        : "_GateIsAlreadyWriting_end",
+        "value"      : "' ist bereits im Zustand 'schreiben' und kann daher nicht auf 'lesen' gesetzt werden.",
+        "description": ""
+    },
+    {
+        "key"        : "_GateIsAlreadyReading_beginning",
+        "value"      : "",
+        "description": ""
+    },
+    {
+        "key"        : "_GateIsAlreadyReading_middle",
+        "value"      : ": Das Gate zum Bus '",
+        "description": ""
+    },
+    {
+        "key"        : "_GateIsAlreadyReading_end",
+        "value"      : "' ist bereits im Zustand 'lesen' und kann daher nicht auf 'schreiben' gesetzt werden.",
+        "description": ""
     }
 ]

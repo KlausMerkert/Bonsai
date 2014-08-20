@@ -43,8 +43,6 @@ bonsaiApp.directive('manualswitch', function ($interval) {
                 return [{top: $scope.top, left: $scope.left}];
             };
 
-            //$scope.switch.getPositions = $scope.getConnectionPositions;
-
             // We have to wait for a very short time to enroll to the buses
             // because the handler needs to be fully initialized.
             $interval(function () {

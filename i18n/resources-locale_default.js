@@ -288,5 +288,35 @@
         "key"        : "_FilterAlreadyOccupied_end",
         "value"      : ".",
         "description": ""
+    },
+    {
+        "key"        : "_GateIsAlreadyWriting_beginning",
+        "value"      : "",
+        "description": ""
+    },
+    {
+        "key"        : "_GateIsAlreadyWriting_middle",
+        "value"      : ": The gate to bus ",
+        "description": ""
+    },
+    {
+        "key"        : "_GateIsAlreadyWriting_end",
+        "value"      : " is already writing and therefore can not be set to read.",
+        "description": ""
+    },
+    {
+        "key"        : "_GateIsAlreadyReading_beginning",
+        "value"      : "",
+        "description": ""
+    },
+    {
+        "key"        : "_GateIsAlreadyReading_middle",
+        "value"      : ": The gate to bus ",
+        "description": ""
+    },
+    {
+        "key"        : "_GateIsAlreadyReading_end",
+        "value"      : " is already reading and therefore can not be set to write.",
+        "description": ""
     }
 ]

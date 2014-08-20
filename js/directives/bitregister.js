@@ -365,7 +365,10 @@ bonsaiApp.directive('bitregister', function ($interval) {
                             }
                         },
                         function () {
-                            $scope.register.setBitGateToDisconnected();
+                            if (!($scope.register.bitWiresConnection.readWire.isActive() &&
+                                $scope.register.bitWiresConnection.readWire.isNotZero())) {
+                                $scope.register.setBitGateToDisconnected();
+                            }
                         },
                         $scope.registerName + ' write wire connector for bit connections'
                     );
@@ -388,7 +391,10 @@ bonsaiApp.directive('bitregister', function ($interval) {
                             }
                         },
                         function () {
-                            $scope.register.setBitGateToDisconnected();
+                            if (!($scope.register.bitWiresConnection.writeWire.isActive() &&
+                                $scope.register.bitWiresConnection.writeWire.isNotZero())) {
+                                $scope.register.setBitGateToDisconnected();
+                            }
                         },
                         $scope.registerName + ' read wire connector for bit connections'
                     );
