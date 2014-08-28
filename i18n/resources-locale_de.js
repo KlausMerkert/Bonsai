@@ -318,5 +318,20 @@
         "key"        : "_GateIsAlreadyReading_end",
         "value"      : "' ist bereits im Zustand 'lesen' und kann daher nicht auf 'schreiben' gesetzt werden.",
         "description": ""
+    },
+    {
+        "key"        : "_RegisterIsReadingAndCantAcceptValueChanges_beginning",
+        "value"      : "Register ",
+        "description": ""
+    },
+    {
+        "key"        : "_RegisterIsReadingAndCantAcceptValueChanges_middle",
+        "value"      : " liest bereits von einem Bus. ",
+        "description": ""
+    },
+    {
+        "key"        : "_RegisterIsReadingAndCantAcceptValueChanges_end",
+        "value"      : "Der Wert des Registers kann während des Lesens nicht geändert werden.",
+        "description": ""
     }
 ]

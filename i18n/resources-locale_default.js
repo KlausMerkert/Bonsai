@@ -318,5 +318,20 @@
         "key"        : "_GateIsAlreadyReading_end",
         "value"      : " is already reading and therefore can not be set to write.",
         "description": ""
+    },
+    {
+        "key"        : "_RegisterIsReadingAndCantAcceptValueChanges_beginning",
+        "value"      : "Register ",
+        "description": ""
+    },
+    {
+        "key"        : "_RegisterIsReadingAndCantAcceptValueChanges_middle",
+        "value"      : " is Reading from a Bus and can not accept value Changes.",
+        "description": ""
+    },
+    {
+        "key"        : "_RegisterIsReadingAndCantAcceptValueChanges_end",
+        "value"      : "",
+        "description": ""
     }
 ]

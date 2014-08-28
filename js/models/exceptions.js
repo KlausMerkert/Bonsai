@@ -197,3 +197,13 @@ function GateIsAlreadyReading (message, componentName, busName) {
     exception.actor2 = busName;
     return exception;
 }
+
+function RegisterIsReadingAndCantAcceptValueChanges (message, RegisterName) {
+    var exception = {};
+    exception.name = 'RegisterIsReadingAndCantAcceptValueChanges';
+    exception.localization = '_' + exception.name + '_';
+    exception.message = message;
+    exception.actor1 = RegisterName;
+    exception.actor2 = "";
+    return exception;
+}
