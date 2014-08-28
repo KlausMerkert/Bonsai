@@ -907,7 +907,7 @@ bonsaiApp.controller('bonsaiCpuCtrl',
                 {
                     'name': "Mikroprogrammspeicher",
                     'base': 10,
-                    'content': "1024\n3080\n1032\n4096\n4100\n4096\n\n\n\n\n4096\n4232\n4104\n12320\n4368\n4352\n2\n\n\n\n4096\n4232\n4160\n4104\n12352\n4368\n4352\n2\n\n\n4608\n2\n\n\n\n\n\n\n\n\n4096\n4104\n20488\n8192\n2\n\n\n\n\n\n4096\n4101",
+                    'content': "1024\n3080\n1032\n4096\n4100\n\n\n\n\n\n4096\n4232\n4104\n12320\n4368\n4352\n2\n\n\n\n4096\n4232\n4104\n12352\n4368\n4352\n2\n\n\n\n4608\n4096\n2\n\n\n\n\n\n\n\n12288\n4104\n20488\n2\n\n\n\n\n\n\n4101",
                     'top': 50,
                     'left':600,
                     'addressgate': {
