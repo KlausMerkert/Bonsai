@@ -242,11 +242,12 @@
 }
 
 .switch {
-    width: 16px;
-    height: 16px;
+    width: 18px;
+    height: 12px;
     border: 1px solid rgb(30, 30, 30);
     background-color: rgba(200, 200, 200, 1);
     border-radius: 6px;
+    cursor: pointer;
 }
 
 .switch .wireconnector {
