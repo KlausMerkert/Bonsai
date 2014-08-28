@@ -685,6 +685,10 @@ bonsaiApp.controller('bonsaiCpuCtrl',
                     'id': 'SteuerwortReadWire',
                     'name': 'Steuerwort read wire',
                     'max': 1
+                }, {
+                    'id': 'runClock',
+                    'name': 'Clock run wire',
+                    'max': 1
                 }
             ],
             'manualswitches': [
@@ -700,6 +704,12 @@ bonsaiApp.controller('bonsaiCpuCtrl',
                     'value': 0,
                     'top': 30,
                     'left': 850
+                }, {
+                    'name': 'ClockRuneSwitch',
+                    'wireId': 'runClock',
+                    'value': 0,
+                    'top': 297,
+                    'left': 865
                 }
             ],
             'leds': [
@@ -964,7 +974,8 @@ bonsaiApp.controller('bonsaiCpuCtrl',
                 {
                     'name': 'Takt',
                     'wireId': 'clock',
-                    'frequency': 0,
+                    'runWireId': 'runClock',
+                    'frequency': 2,
                     'top': 300,
                     'left': 780
                 }
@@ -1027,7 +1038,12 @@ bonsaiApp.controller('bonsaiCpuCtrl',
             $scope.cpu.manualswitches[i].wire = $scope.findBus($scope.cpu.manualswitches[i].wireId);
         }
         for (i = 0; i < $scope.cpu.clocks.length; i++) {
-            $scope.cpu.clocks[i].wire = $scope.findBus($scope.cpu.clocks[i].wireId);
+            if ($scope.cpu.clocks[i].wireId) {
+                $scope.cpu.clocks[i].wire = $scope.findBus($scope.cpu.clocks[i].wireId);
+            }
+            if ($scope.cpu.clocks[i].runWireId) {
+                $scope.cpu.clocks[i].runWire = $scope.findBus($scope.cpu.clocks[i].runWireId);
+            }
         }
         for (i = 0; i < $scope.cpu.leds.length; i++) {
             $scope.cpu.leds[i].wire = $scope.findBus($scope.cpu.leds[i].wireId);

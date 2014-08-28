@@ -6,6 +6,7 @@ bonsaiApp.directive('clock', function ($interval) {
         transclude: false,
         scope: {
             wire: '=',
+            runWire: '=',
             frequency: '=',
             clockName: '@',
             top: '=',
@@ -22,10 +23,6 @@ bonsaiApp.directive('clock', function ($interval) {
                 })
             };
 
-            $scope.toggle = function () {
-                $scope.clock.toggle();
-            };
-
             attrs.$observe('clockName', function() {
                 if ($scope.clockName) {
                     $scope.clock.setName($scope.clockName);
@@ -39,12 +36,7 @@ bonsaiApp.directive('clock', function ($interval) {
             });
 
             $scope.$watch('frequency', function () {
-                if (parseInt($scope.frequency)) {
-                    $scope.clock.setFrequency($scope.frequency);
-                    $scope.clock.start();
-                } else {
-                    $scope.clock.stop();
-                }
+                $scope.clock.setFrequency($scope.frequency);
             });
 
             $scope.$watch('top', function () {
@@ -62,8 +54,40 @@ bonsaiApp.directive('clock', function ($interval) {
                 $scope.clock.setValue(0);
             };
 
+            $scope.setToRun = function () {
+                if ($scope.runWire) {
+                    try {
+                        $scope.runWire.write($scope.runWireConnector, 1);
+                        $scope.clock.start()
+                    } catch (exception) {
+                        $scope.runWire.registerReaderAndRead($scope.runWireConnector);
+                        throw exception;
+                    }
+                } else {
+                    $scope.clock.start()
+                }
+            };
+
+            $scope.setToStop = function () {
+                if ($scope.runWire) {
+                    try {
+                        $scope.runWire.write($scope.runWireConnector, 0);
+                    } catch (exception) {
+                        throw exception;
+                    } finally {
+                        $scope.runWire.stopWriting($scope.runWireConnector);
+                        $scope.runWire.registerReaderAndRead($scope.runWireConnector);
+                    }
+                }
+                $scope.clock.stop()
+            };
+
             $scope.getConnectionPositions = function () {
                 return [{top: $scope.top, left: $scope.left}];
+            };
+
+            $scope.getRunWireConnectionPositions = function () {
+                return [{top: $scope.top-4, left: $scope.left+74}];
             };
 
             // We have to wait for a very short time to enroll to the buses
@@ -73,8 +97,18 @@ bonsaiApp.directive('clock', function ($interval) {
                     $scope.clock,
                     $scope.getConnectionPositions
                 );
-                if ($scope.frequency) {
-                    $scope.clock.start();
+                if ($scope.runWire) {
+                    $scope.runWireConnector = new ReadingControlWireConnector($scope.runWire,
+                        function () {
+                            $scope.clock.start();
+                        },
+                        function () {
+                            $scope.clock.stop();
+                        }, $scope.clockName + ' run wire connector');
+                    $scope.runWire.enrollToDirective($scope.runWireConnector, $scope.getRunWireConnectionPositions);
+                    if ($scope.runWire.registerReaderAndRead($scope.runWireConnector)) {
+                        $scope.clock.start();
+                    }
                 }
             }, 1, 1);
         },
