@@ -47,28 +47,6 @@ bonsaiApp.directive('register', function ($interval) {
 
             $scope.connectionsInitialStates = [];
 
-            $scope.toggleState = function (connection) {
-                var connections = $scope.register.getBuses();
-                for (var i = 0; i < connections.length; i++) {
-                    if (connections[i].bus === connection.bus) {
-                        var stateFound = false;
-                        var desiredState = connections[i].state - 1;
-                        while (!stateFound) {
-                            if (desiredState < -1) {
-                                desiredState = 1;
-                            }
-                            try {
-                                $scope.setState(connections[i], desiredState);
-                                connections[i].state = desiredState;
-                                stateFound = true;
-                            } catch (exception) {
-                                desiredState--;
-                            }
-                        }
-                    }
-                }
-            };
-
             this.addBusConnection = function (bus, setWrite, setRead, initialState) {
                 $scope.register.addBusConnection(bus, setWrite, setRead);
                 $scope.connectionsInitialStates.push({
@@ -206,6 +184,32 @@ bonsaiApp.directive('register', function ($interval) {
                     }
                 }
                 $scope.setState(connection, 0);
+            };
+
+            $scope.toggleState = function (connection) {
+                var connections = $scope.register.getBuses();
+                for (var i = 0; i < connections.length; i++) {
+                    if (connections[i].bus === connection.bus) {
+                        var stateFound = false;
+                        var desiredState = connections[i].state - 1;
+                        while (!stateFound) {
+                            if (desiredState < -1) {
+                                desiredState = 1;
+                            }
+                            try {
+                                $scope.setState(connections[i], desiredState);
+                                connections[i].state = desiredState;
+                                stateFound = true;
+                                connection.readWire.stopWriting(connection.readWireConnector);
+                                connection.readWire.registerReaderAndRead(connection.readWireConnector);
+                                connection.writeWire.stopWriting(connection.writeWireConnector);
+                                connection.writeWire.registerReaderAndRead(connection.writeWireConnector);
+                            } catch (exception) {
+                                desiredState--;
+                            }
+                        }
+                    }
+                }
             };
 
             $scope.activateInc = function () {
