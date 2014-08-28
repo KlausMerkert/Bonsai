@@ -722,7 +722,7 @@ bonsaiApp.controller('bonsaiCpuCtrl',
                     'wireId': 'and2B_nor1out',
                     'name': 'Nor Test LED',
                     'top': 245,
-                    'left': 720
+                    'left': 722
                 }
             ],
             'andGates': [

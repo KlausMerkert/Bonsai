@@ -30,7 +30,7 @@ bonsaiApp.directive('norgate', function ($interval) {
                 } else if (wire === $scope.inB) {
                     return [{top: ($scope.top + 11), left: ($scope.left + 22)}];
                 } else if (wire === $scope.out) {
-                    return [{top: ($scope.top + 5), left: ($scope.left - 10)}];
+                    return [{top: ($scope.top + 5), left: ($scope.left - 8)}];
                 } else {
                     console.log("This Wire is not connected: " + wire.getName());
                 }

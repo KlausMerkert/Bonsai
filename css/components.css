@@ -267,11 +267,12 @@
     height: 6px;
     border-radius: 6px;
     border: 1px solid rgb(0, 0, 0);
+    background-color: rgb(200, 200, 200);
 }
 
 .bitregister {
     border: 1px solid rgb(30, 30, 30);
-    background-color: rgba(200, 200, 200, 1);
+    background-color: rgb(200, 200, 200);
     border-radius: 6px;
     padding: 5px;
     display: inline-block;
