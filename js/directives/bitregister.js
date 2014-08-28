@@ -57,7 +57,7 @@ bonsaiApp.directive('bitregister', function ($interval) {
                 $scope.topCSS = $scope.top + 'px';
             });
             $scope.$watch('left', function () {
-                $scope.leftCSS = $scope.left + 'px';
+                $scope.leftCSS = ($scope.left + 16) + 'px';
             });
 
             $scope.setWiresWires = function () {
@@ -264,11 +264,11 @@ bonsaiApp.directive('bitregister', function ($interval) {
                 }
                 if (($scope.register.bitWiresConnection.writeWire) &&
                     ($scope.register.bitWiresConnection.writeWire === wire)) {
-                    positions.push({top: $scope.top-5, left: $scope.left+5});
+                    positions.push({top: $scope.top+2, left: $scope.left+5});
                 }
                 if (($scope.register.bitWiresConnection.readWire) &&
                     ($scope.register.bitWiresConnection.readWire === wire)) {
-                    positions.push({top: $scope.top-5, left: $scope.left+13});
+                    positions.push({top: $scope.top+2, left: $scope.left+13});
                 }
                 var bitWires = $scope.register.getWires();
                 for (var i = 0; i < bitWires.length; i++) {

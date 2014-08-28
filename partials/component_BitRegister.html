@@ -4,7 +4,7 @@
             <div ng-click="toggleWideBusState()"
                  class="connection"
                  ng-style="{'background-color': gateColor}"
-                 style="left: 18px;">
+                 style="left: 2px;">
                 <div ng-show="register.wideBusConnection.state == 1"
                      style="position: relative; top: -0.1em; left: 0.01em;" class="unselectable">&uarr;</div>
                 <div ng-show="register.wideBusConnection.state == 0"
@@ -14,12 +14,12 @@
                 <div style="position: absolute; top: 8px; left: 10px;" class="flanktriggered"></div>
             </div>
             <div ng-click="toggleBitConnectionState()"
-                 class="bitconnections" style="position: absolute; left: -6px; top: -9px; width: 18px;"
+                 class="bitconnections" style="position: absolute; left: -22px; top: -2px; width: 18px;"
                  ng-class="{'read': register.bitWiresConnection.state == -1, 'write': register.bitWiresConnection.state == 1, 'grayback': register.bitWiresConnection.state == 0}"
-                 ng-style="{'height': (getBits().length * 12 + 16) + 'px'}">
+                 ng-style="{'height': (getBits().length * 12 + 2) + 'px'}">
                 <div ng-repeat="bit in getBits() track by $index"
                      style="padding: 0; margin: 0; height: 12px; cursor: pointer; position: absolute; left: 1px;"
-                     ng-style="{'top': ($index * 12 + 7) + 'px'}">
+                     ng-style="{'top': ($index * 12) + 'px'}">
                     <span ng-show="register.bitWiresConnection.state == -1">&#8594;</span>
                     <span style="padding: 0 5px; position: relative; top: 2px;"
                           ng-show="register.bitWiresConnection.state == 0">&bull;</span>
@@ -28,34 +28,34 @@
             </div>
             <div class="nospace" style="position: absolute;">
                 <div class="busconnector"
-                     style="position: absolute; left: 23px; top: -26px;"></div>
+                     style="position: absolute; left: 7px; top: -26px;"></div>
                 <div class="wireconnector write"
-                     style="position: absolute; left: 32px; top: -20px;"
+                     style="position: absolute; left: 16px; top: -20px;"
                      ng-mousedown="activateWriteWire()"
                      ng-mouseup="deactivateWriteWire()"></div>
                 <div class="wireconnector read"
-                     style="position: absolute; left: 32px; top: -13px;"
+                     style="position: absolute; left: 16px; top: -13px;"
                      ng-mousedown="activateReadWire()"></div>
                 <div class="wireconnector write"
-                     style="position: absolute; left: -3px; top: -13px;"
+                     style="position: absolute; left: -19px; top: -6px;"
                      ng-mousedown="activateWireWrite()" ng-mouseup="deactivateWireWrite()"></div>
                 <div class="wireconnector read"
-                     style="position: absolute; left: 5px; top: -13px;"
+                     style="position: absolute; left: -11px; top: -6px;"
                      ng-mousedown="activateWireRead()" ng-mouseup="deactivateWireRead()"></div>
                 <div ng-repeat="bit in getBits() track by $index"
-                     class="wireconnector grayback" style="left: -10px;"
+                     class="wireconnector grayback" style="left: -26px;"
                      ng-style="{'top': ($index * 12 + 4) + 'px'}"
                      ng-mousedown="activateBit($index)" ng-mouseup="deactivateBit($index)"></div>
             </div>
         </div>
         <div ng-repeat="bit in getBits() track by $index"
              style="padding: 0; margin: 0; height: 12px; cursor: pointer; position: absolute;"
-             ng-style="{'top': ($index * 12 + 7) + 'px'}">
-            <div style="display: inline-block; margin: 0; width: 10px; font-family: monospace; position: absolute; left: 15px;"
+             ng-style="{'top': ($index * 12 + 6) + 'px'}">
+            <div style="display: inline-block; margin: 0; width: 10px; font-family: monospace; position: absolute; left: -1px;"
                  ng-style="{'color': (bit) && (register.bitWiresConnection.state == 1) ? 'rgb(255, 0, 0)' : 'rgb(0, 0, 0)'}"
                  ng-mousedown="register.setBit($index, (register.getBit($index) + 1) % 2)"
                  class="unselectable">{{ bit }}</div>
-            <div style="display: inline-block; margin: 0; padding-left: 2px; width: 10px; font-family: monospace; color: rgba(0, 0, 0, 0.5); text-align: right; position: absolute; left: 25px;"
+            <div style="display: inline-block; margin: 0; padding-left: 2px; width: 10px; font-family: monospace; color: rgba(0, 0, 0, 0.5); text-align: right; position: absolute; left: 9px;"
                  ng-mousedown="register.setBit($index, (register.getBit($index) + 1) % 2)"
                  class="unselectable">{{ $index }}</div>
         </div>
