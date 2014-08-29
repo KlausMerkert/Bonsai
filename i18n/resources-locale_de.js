@@ -11,7 +11,7 @@
     },
     {
         "key"        : "_errors_",
-        "value"      : "Fehler",
+        "value"      : "Fehler:",
         "description": ""
     },
     {
