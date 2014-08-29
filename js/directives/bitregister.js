@@ -249,6 +249,10 @@ bonsaiApp.directive('bitregister', function ($interval) {
                 }
             };
 
+            $scope.toggleBit = function (index) {
+                $scope.register.setBit(index, ($scope.register.getBit(index) + 1) % 2)
+            };
+
             $scope.getConnectionPositions = function () {
                 return [{top: $scope.top-19, left: $scope.left+31}];
             };

@@ -95,18 +95,18 @@ BitRegister.prototype.setBit = function (index, bit) {
             bit
         );
     }
+    if (this.bitWiresConnection.state == 1) {
+        this.bitWiresConnection.wires[index].wire.write(
+            this.bitWiresConnection.wires[index].connector,
+            bit
+        );
+    }
     if (bit !== this.getBit(index)) {
         if (bit) {
             this.setValue(this.value + Math.pow(2, index));
         } else {
             this.setValue(this.value - Math.pow(2, index));
         }
-    }
-    if (this.bitWiresConnection.state == 1) {
-        this.bitWiresConnection.wires[index].wire.write(
-            this.bitWiresConnection.wires[index].connector,
-            bit
-        );
     }
 };
 

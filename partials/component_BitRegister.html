@@ -53,10 +53,10 @@
              ng-style="{'top': ($index * 12 + 6) + 'px'}">
             <div style="display: inline-block; margin: 0; width: 10px; font-family: monospace; position: absolute; left: -1px;"
                  ng-style="{'color': (bit) && (register.bitWiresConnection.state == 1) ? 'rgb(255, 0, 0)' : 'rgb(0, 0, 0)'}"
-                 ng-mousedown="register.setBit($index, (register.getBit($index) + 1) % 2)"
+                 ng-mousedown="toggleBit($index)"
                  class="unselectable">{{ bit }}</div>
             <div style="display: inline-block; margin: 0; padding-left: 2px; width: 10px; font-family: monospace; color: rgba(0, 0, 0, 0.5); text-align: right; position: absolute; left: 9px;"
-                 ng-mousedown="register.setBit($index, (register.getBit($index) + 1) % 2)"
+                 ng-mousedown="toggleBit($index)"
                  class="unselectable">{{ $index }}</div>
         </div>
         <div style="width: 0; height: 0; display: inline-block; position: absolute;" ng-transclude></div>
