@@ -14,7 +14,7 @@ bonsaiApp.directive('manualswitch', function ($interval) {
         link: function ($scope, element, attrs) {
             $scope.switch = new ManualSwitch(function (value) {
                 $scope.value = value;
-            }, $scope.wire, 0);
+            }, $scope.wire, undefined);
 
             $scope.toggle = function () {
                 $scope.switch.toggle();
