@@ -104,7 +104,12 @@ bonsaiApp.directive('bus', function () {
 
             $scope.localBus.getColor = function () {
                 if ($scope.color) {
-                    return $scope.color;
+                    if ($scope.localBus.isActive()) {
+                        return $scope.color;
+                    } else {
+                        var colors = $scope.color.match(/\(([0-9]+)\s*,\s*([0-9]+)\s*,\s*([0-9]+)/);
+                        return "rgba(" + colors[1] + "," + colors[2] + "," + colors[3] + ",0.5)"
+                    }
                 } else {
                     return 'rgba(140, 140, 140, 0.6)';
                 }
