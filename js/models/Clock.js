@@ -28,10 +28,10 @@ Clock.prototype.setFrequency = function (newFrequency) {
 };
 
 Clock.prototype.toggle = function () {
-    if (!this.value) {
-        this.setValue(1);
-    } else {
+    if (this.value || !this.isRunning) {
         this.setValue(0);
+    } else {
+        this.setValue(1);
     }
 };
 
