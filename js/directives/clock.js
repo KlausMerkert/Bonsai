@@ -97,6 +97,7 @@ bonsaiApp.directive('clock', function ($interval) {
                     $scope.clock,
                     $scope.getConnectionPositions
                 );
+                $scope.clock.setValue(0);
                 if ($scope.runWire) {
                     $scope.runWireConnector = new ReadingControlWireConnector($scope.runWire,
                         function () {
