@@ -37,7 +37,7 @@ Clock.prototype.toggle = function () {
 
 Clock.prototype.setValue = function (value) {
     if (this.value != value) {
-        this.wire.write(this, this.value);
+        this.wire.write(this, value);
         this.value = value;
         this.updateViewCallback(this.value);
     }
