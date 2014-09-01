@@ -99,6 +99,10 @@
     padding-left: 5px;
 }
 
+.memory table .address span, .memory table .value span {
+    display: inline-block;
+}
+
 .memory .toprow {
     top: -22px;
 }

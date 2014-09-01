@@ -53,7 +53,7 @@ Memory.prototype.setContent = function (newContent) {
     if (this.addressBus) {
         if (this.addressBus.state == -1) {
             var address = this.addressBus.bus.registerReaderAndRead(this);
-            if ((this.dataBus) && (this.dataBus.state === 1)) {
+            if (address && (this.dataBus) && (this.dataBus.state === 1)) {
                 this.dataBus.bus.write(this, this.content[address]);
             }
             this.updateViewCallback(this.getDataWithContext(address));
@@ -99,9 +99,18 @@ Memory.prototype.writeData = function (data) {
     if (this.addressBus) {
         if (this.addressBus.state == -1) {
             var address = this.addressBus.bus.registerReaderAndRead(this);
-            this.content[address] = data;
-            this.updateViewCallback(this.getDataWithContext(address));
-            this.updateContentCallback(this.content);
+            if (typeof address != 'undefined') {
+                this.content[address] = data;
+                this.updateViewCallback(this.getDataWithContext(address));
+                this.updateContentCallback(this.content);
+            } else {
+                throw WriteToUndefinedAddress(
+                    "Memory " + this.name + ": The address which was read from the bus (" +
+                        this.addressBus.bus.getName() + ") is undefined. Nothing can be written to a undefined place.",
+                    this.getName(),
+                    this.addressBus.bus.getName()
+                )
+            }
         } else {
             throw InactiveAdressBusConnection(
                 "Memory " + this.name + ": The address bus connection is not set to reading. " +
@@ -122,7 +131,7 @@ Memory.prototype.writeData = function (data) {
 Memory.prototype.setValue = function (data, writingBus) {
     if ((this.dataBus) && (this.dataBus.bus) && (writingBus == this.dataBus.bus)) {
         this.writeData(data)
-    } else if (writingBus == this.addressBus.bus) {
+    } else if ((writingBus == this.addressBus.bus) && (typeof data != 'undefined')) {
         if ((this.dataBus) && (this.dataBus.state == -1)) {
             this.content[data] = this.dataBus.bus.registerReaderAndRead(this);
         } else if ((this.dataBus) && (this.dataBus.state == 1)) {

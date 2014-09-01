@@ -333,5 +333,20 @@
         "key"        : "_RegisterIsReadingAndCantAcceptValueChanges_end",
         "value"      : "Der Wert des Registers kann während des Lesens nicht geändert werden.",
         "description": ""
+    },
+    {
+        "key"        : "_WriteToUndefinedAddress_beginning",
+        "value"      : "Speicher ",
+        "description": ""
+    },
+    {
+        "key"        : "_WriteToUndefinedAddress_middle",
+        "value"      : ": Die Adresse, die vom Adressbus (",
+        "description": ""
+    },
+    {
+        "key"        : "_WriteToUndefinedAddress_end",
+        "value"      : ") gelesen wurde ist 'undefined'. Um zu schreiben muss eine existierende Adresse angelegt werden.",
+        "description": ""
     }
 ]

@@ -9,7 +9,8 @@ bonsaiApp.directive('memory', function ($interval) {
             base: '=',
             top: '=',
             left: '=',
-            content: '='
+            content: '=',
+            undefinedString: '='
         },
         controller: function ($scope, $filter) {
             if (parseInt($scope.base) in {2:true, 8:true, 10:true, 16:true}) {

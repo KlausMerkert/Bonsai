@@ -894,7 +894,8 @@ bonsaiApp.controller('bonsaiCpuCtrl',
                         'busId': 'dataBus',
                         'writeWireId': 's3',
                         'readWireId': 's4'
-                    }
+                    },
+                    'undefinedString': '---'
                 },
                 {
                     'name': "Befehlsdecoder",
@@ -912,7 +913,8 @@ bonsaiApp.controller('bonsaiCpuCtrl',
                         'writeWireId': undefined,
                         'readWireId': undefined,
                         'initialState': 1
-                    }
+                    },
+                    'undefinedString': ''
                 },
                 {
                     'name': "Mikroprogrammspeicher",

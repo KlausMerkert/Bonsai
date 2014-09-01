@@ -333,5 +333,20 @@
         "key"        : "_RegisterIsReadingAndCantAcceptValueChanges_end",
         "value"      : "",
         "description": ""
+    },
+    {
+        "key"        : "_WriteToUndefinedAddress_beginning",
+        "value"      : "Memory ",
+        "description": ""
+    },
+    {
+        "key"        : "_WriteToUndefinedAddress_middle",
+        "value"      : ": The address which was read from the bus (",
+        "description": ""
+    },
+    {
+        "key"        : "_WriteToUndefinedAddress_end",
+        "value"      : ") is undefined. Nothing can be written to a undefined place.",
+        "description": ""
     }
 ]

@@ -207,3 +207,13 @@ function RegisterIsReadingAndCantAcceptValueChanges (message, RegisterName) {
     exception.actor2 = "";
     return exception;
 }
+
+function WriteToUndefinedAddress (message, MemoryName, BusName) {
+    var exception = {};
+    exception.name = 'WriteToUndefinedAddress';
+    exception.localization = '_' + exception.name + '_';
+    exception.message = message;
+    exception.actor1 = MemoryName;
+    exception.actor2 = BusName;
+    return exception;
+}
