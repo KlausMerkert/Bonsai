@@ -466,10 +466,10 @@ bonsaiApp.controller('bonsaiCpuCtrl',
                     'routes': [
                         {
                             'type': 'bottomright',
-                            'top': '103px',
+                            'top': '95px',
                             'left': '748px',
                             'width': '23px',
-                            'height': '69px'
+                            'height': '7px'
                         }, {
                             'type': 'topright',
                             'top': '21px',
@@ -481,10 +481,10 @@ bonsaiApp.controller('bonsaiCpuCtrl',
                             'top': '21px',
                             'left': '771px',
                             'width': '37px',
-                            'height': '80px'
+                            'height': '72px'
                          }, {
                             'type': 'bottomleft',
-                            'top': '165px',
+                            'top': '95px',
                             'left': '718px',
                             'width': '28px',
                             'height': '7px'       
@@ -532,17 +532,17 @@ bonsaiApp.controller('bonsaiCpuCtrl',
                         },
                         {
                             'type': 'topleft',
-                            'top': '121px',
+                            'top': '200px',
                             'left': '442px',
                             'width': '30px',
-                            'height': '7px'
+                            'height': '36px'
                         },
                         {
                             'type': 'bottomright',
                             'top': '73px',
                             'left': '474px',
                             'width': '14px',
-                            'height': '48px'
+                            'height': '127px'
                         }
                     ] 
                 }, {
@@ -563,10 +563,10 @@ bonsaiApp.controller('bonsaiCpuCtrl',
                         },
                         {
                             'type': 'bottomleft',
-                            'top': '265px',
+                            'top': '298px',
                             'left': '518px',
                             'width': '63px',
-                            'height': '43px'
+                            'height': '10px'
                         }
                     ] 
                 }, {
@@ -895,13 +895,14 @@ bonsaiApp.controller('bonsaiCpuCtrl',
                         'writeWireId': 's3',
                         'readWireId': 's4'
                     },
-                    'undefinedString': '---'
+                    'undefinedString': '---',
+                    'showContext': true
                 },
                 {
                     'name': "Befehlsdecoder",
                     'base': 10,
                     'content': "0\n10\n20\n30\n40\n50",
-                    'top': 150,
+                    'top': 255,
                     'left':400,
                     'addressgate': {
                         'busId': 'opcode',
@@ -914,7 +915,8 @@ bonsaiApp.controller('bonsaiCpuCtrl',
                         'readWireId': undefined,
                         'initialState': 1
                     },
-                    'undefinedString': ''
+                    'undefinedString': '',
+                    'showContext': false
                 },
                 {
                     'name': "Mikroprogrammspeicher",
@@ -995,8 +997,8 @@ bonsaiApp.controller('bonsaiCpuCtrl',
                 },
                  {
                     'text': 'Befehlsdecoder',
-                    'top': 130,
-                    'left': 475
+                    'top': 235,
+                    'left': 460
                 },
                 {
                     'text': 'PC',

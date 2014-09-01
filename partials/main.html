@@ -63,7 +63,8 @@
             </bitregister>
         </div>
         <div ng-repeat="memory in cpu.memories">
-            <memory memory-name="{{memory.name}}" base="memory.base" undefined-string="memory.undefinedString"
+            <memory memory-name="{{memory.name}}" base="memory.base"
+                    undefined-string="memory.undefinedString" show-context="memory.showContext"
                     top="memory.top" left="memory.left" content="memory.content">
                 <addressgate bus="memory.addressgate.bus" initial-state="memory.addressgate.initialState"
                              set-read="memory.addressgate.readWire"></addressgate>

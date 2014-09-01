@@ -10,7 +10,8 @@ bonsaiApp.directive('memory', function ($interval) {
             top: '=',
             left: '=',
             content: '=',
-            undefinedString: '='
+            undefinedString: '=',
+            showContext: '='
         },
         controller: function ($scope, $filter) {
             if (parseInt($scope.base) in {2:true, 8:true, 10:true, 16:true}) {
@@ -295,7 +296,11 @@ bonsaiApp.directive('memory', function ($interval) {
                     positions.push({top: $scope.top-19, left: $scope.left+42});
                 }
                 if ($scope.memory.getDataBus() === bus) {
-                    positions.push({top: $scope.top+112, left: $scope.left+119});
+                    if ($scope.showContext) {
+                        positions.push({top: $scope.top + 112, left: $scope.left + 119});
+                    } else {
+                        positions.push({top: $scope.top + 42, left: $scope.left + 119});
+                    }
                 }
                 return positions;
             };
@@ -306,10 +311,18 @@ bonsaiApp.directive('memory', function ($interval) {
                     positions.push({top: $scope.top-7, left: $scope.left+51});
                 }
                 if (($scope.memory.dataBus.readWire) && ($scope.memory.dataBus.readWire === wire)) {
-                    positions.push({top: $scope.top+100, left: $scope.left+131});
+                    if ($scope.showContext) {
+                        positions.push({top: $scope.top + 100, left: $scope.left + 131});
+                    } else {
+                        positions.push({top: $scope.top + 30, left: $scope.left + 131});
+                    }
                 }
                 if (($scope.memory.dataBus.writeWire) && ($scope.memory.dataBus.writeWire === wire)) {
-                    positions.push({top: $scope.top+106, left: $scope.left+131});
+                    if ($scope.showContext) {
+                        positions.push({top: $scope.top + 106, left: $scope.left + 131});
+                    } else {
+                        positions.push({top: $scope.top + 36, left: $scope.left + 131});
+                    }
                 }
                 return positions;
             };

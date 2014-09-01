@@ -70,7 +70,6 @@
     border-radius: 6px;
     padding: 5px 2px;
     display: inline-block;
-    height: 82px;
     line-height: 18px;
 }
 
@@ -84,8 +83,6 @@
 
 .memory table td {
     min-width: 72px;
-    border-top: 2px solid rgb(40, 40, 40);
-    border-bottom: 2px solid rgb(40, 40, 40);
 }
 
 .memory table .address {
@@ -105,10 +102,6 @@
 
 .memory .toprow {
     top: -22px;
-}
-
-.memory .bottomrow {
-    top: 84px;
 }
 
 .bus-type {
