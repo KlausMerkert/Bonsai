@@ -102,9 +102,9 @@ bonsaiApp.directive('bus', function () {
                 $scope.updateVisibleParts();
             };
 
-            $scope.localBus.getColor = function () {
+            $scope.localBus.getColor = function (fullColor) {
                 if ($scope.color) {
-                    if ($scope.localBus.isActive()) {
+                    if ($scope.localBus.isActive() || fullColor) {
                         return $scope.color;
                     } else {
                         var colors = $scope.color.match(/\(([0-9]+)\s*,\s*([0-9]+)\s*,\s*([0-9]+)/);

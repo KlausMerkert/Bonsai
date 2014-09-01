@@ -60,7 +60,7 @@ bonsaiApp.directive('memory', function ($interval) {
             this.setAddressBusConnection = function (bus, setRead) {
                 $scope.memory.setAddressBusConnection(bus, setRead);
                 if (($scope.memory.addressBus) && ($scope.memory.addressBus.bus.getColor)) {
-                    $scope.addressBusColor = $scope.memory.addressBus.bus.getColor();
+                    $scope.addressBusColor = $scope.memory.addressBus.bus.getColor(true);
                 }
             };
 
@@ -80,7 +80,7 @@ bonsaiApp.directive('memory', function ($interval) {
             this.setDataBusConnection = function (bus, setWrite, setRead) {
                 $scope.memory.setDataBusConnection(bus, setWrite, setRead);
                 if (($scope.memory.dataBus) && ($scope.memory.dataBus.bus.getColor)) {
-                    $scope.dataBusColor = $scope.memory.dataBus.bus.getColor();
+                    $scope.dataBusColor = $scope.memory.dataBus.bus.getColor(true);
                 }
             };
 
