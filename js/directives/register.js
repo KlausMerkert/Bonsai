@@ -133,13 +133,14 @@ bonsaiApp.directive('register', function ($interval) {
                     connection.writeWire.unregisterReader(connection.writeWireConnector);
                     try {
                         connection.writeWire.write(connection.writeWireConnector, 1);
-                        $scope.setState(connection, 1);
+                        $scope.register.setToWrite(connection.writeWire);
                     } catch (exception) {
+                        connection.writeWire.stopWriting(connection.writeWireConnector);
                         connection.writeWire.registerReaderAndRead(connection.writeWireConnector);
                         throw exception;
                     }
                 } else {
-                    $scope.setState(connection, 1);
+                    $scope.register.setToWrite(connection.writeWire);
                 }
             };
 
@@ -154,7 +155,7 @@ bonsaiApp.directive('register', function ($interval) {
                         connection.writeWire.registerReaderAndRead(connection.writeWireConnector);
                     }
                 }
-                $scope.setState(connection, 0);
+                $scope.register.setToDisconnected(connection.writeWire);
             };
 
             $scope.activateReadWire = function (connection) {
@@ -162,13 +163,14 @@ bonsaiApp.directive('register', function ($interval) {
                     connection.readWire.unregisterReader(connection.readWireConnector);
                     try {
                         connection.readWire.write(connection.readWireConnector, 1);
-                        $scope.setState(connection, -1);
+                        $scope.register.setToRead(connection.readWire);
                     } catch (exception) {
+                        connection.readWire.stopWriting(connection.readWireConnector);
                         connection.readWire.registerReaderAndRead(connection.readWireConnector);
                         throw exception;
                     }
                 } else {
-                    $scope.setState(connection, -1);
+                    $scope.register.setToRead(connection.readWire);
                 }
             };
 
@@ -183,7 +185,7 @@ bonsaiApp.directive('register', function ($interval) {
                         connection.readWire.registerReaderAndRead(connection.readWireConnector);
                     }
                 }
-                $scope.setState(connection, 0);
+                $scope.register.setToDisconnected(connection.readWire);
             };
 
             $scope.toggleState = function (connection) {
