@@ -102,11 +102,16 @@ bonsaiApp.directive('bus', function () {
                 $scope.updateVisibleParts();
             };
 
-            $scope.localBus.getColor = function () {
+            $scope.localBus.getColor = function (fullColor) {
                 if ($scope.color) {
-                    return $scope.color;
+                    if ($scope.localBus.isActive() || fullColor) {
+                        return $scope.color;
+                    } else {
+                        var colors = $scope.color.match(/\(([0-9]+)\s*,\s*([0-9]+)\s*,\s*([0-9]+)/);
+                        return "rgba(" + colors[1] + "," + colors[2] + "," + colors[3] + ",0.5)"
+                    }
                 } else {
-                    return 'rgba(200, 200, 200, 0.6)';
+                    return 'rgba(140, 140, 140, 0.6)';
                 }
             };
         },

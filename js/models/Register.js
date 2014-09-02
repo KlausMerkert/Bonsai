@@ -61,14 +61,32 @@ Register.prototype.getValue = function () {
 };
 
 Register.prototype.inc = function () {
+    if (this.isReader()) {
+        throw RegisterIsReadingAndCantAcceptValueChanges(
+            "Register " + this.getName() + " is Reading from a Bus and can not accept value Changes.",
+            this.getName()
+        );
+    }
     this.setValue((parseInt(this.getValue()) + 1).toString());
 };
 
 Register.prototype.dec = function () {
+    if (this.isReader()) {
+        throw RegisterIsReadingAndCantAcceptValueChanges(
+            "Register " + this.getName() + " is Reading from a Bus and can not accept value Changes.",
+            this.getName()
+        );
+    }
     this.setValue((parseInt(this.getValue()) - 1).toString());
 };
 
 Register.prototype.clr = function () {
+    if (this.isReader()) {
+        throw RegisterIsReadingAndCantAcceptValueChanges(
+            "Register " + this.getName() + " is Reading from a Bus and can not accept value Changes.",
+            this.getName()
+        );
+    }
     this.setValue('0');
 };
 
@@ -124,7 +142,18 @@ Register.prototype.setState = function (busConnection, desiredState) {
 Register.prototype.setToRead = function (wire) {
     for (var i = 0; i < this.buses.length; i++) {
         if (this.buses[i].readWire === wire) {
-            this.setState(this.buses[i], -1);
+            if ((this.buses[i].writeWire) &&
+                (this.buses[i].writeWire.isActive()) &&
+                (this.buses[i].writeWire.isNotZero())) {
+                throw GateIsAlreadyWriting(
+                    this.getName() + ": The gate to bus " + this.buses[i].bus.getName() +
+                        " is already writing and therefore can not be set to read.",
+                    this.getName(),
+                    this.buses[i].bus.getName()
+                )
+            } else {
+                this.setState(this.buses[i], -1);
+            }
         }
     }
 };
@@ -132,7 +161,18 @@ Register.prototype.setToRead = function (wire) {
 Register.prototype.setToWrite = function (wire) {
     for (var i = 0; i < this.buses.length; i++) {
         if (this.buses[i].writeWire === wire) {
-            this.setState(this.buses[i], 1);
+            if ((this.buses[i].readWire) &&
+                (this.buses[i].readWire.isActive()) &&
+                (this.buses[i].readWire.isNotZero())) {
+                throw GateIsAlreadyReading(
+                    this.getName() + ": The gate to bus " + this.buses[i].bus.getName() +
+                        " is already reading and therefore can not be set to write.",
+                    this.getName(),
+                    this.buses[i].bus.getName()
+                )
+            } else {
+                this.setState(this.buses[i], 1);
+            }
         }
     }
 };

@@ -1,5 +1,5 @@
 <div class="component nospace" ng-style="{'top': topCSS, 'left': leftCSS}">
-    <div class="memory">
+    <div class="memory" ng-style="{height: showContext ? '82px' : '12px'}">
         <div style="width: 0; height: 0; overflow: visible; display: inline-block; position: absolute;">
             <div ng-click="toggleAddressBusRead()"
                  class="connection toprow"
@@ -22,8 +22,9 @@
         </div>
         <div style="width: 0; height: 0; overflow: visible; display: inline-block; position: absolute;">
             <div ng-click="toggleDataBusState()"
-                 class="connection bottomrow"
+                 class="connection"
                  ng-class="{'read': memory.getDataBusState() == -1, 'write': memory.getDataBusState() == 1, 'grayback': memory.getDataBusState() == 0}"
+                 ng-style="{top: showContext ? '84px' : '14px'}"
                  style="left: 109px;">
                 <div ng-show="memory.getDataBusState() == -1"
                      style="position: relative; top: -2px; left: 0;" class="unselectable">&uarr;</div>
@@ -32,7 +33,8 @@
                 <div ng-show="memory.getDataBusState() == 1"
                      style="position: relative; top: -2px; left: 0;" class="unselectable">&darr;</div>
             </div>
-            <div class="nospace bottomrow" style="position: absolute;">
+            <div class="nospace" style="position: absolute;"
+                 ng-style="{top: showContext ? '84px' : '14px'}">
                 <div class="busconnector busconnectorbottomrow"
                      style="left: 114px;"></div>
                 <div class="wireconnector write wireconnectorbottomrowwrite"
@@ -44,104 +46,105 @@
             </div>
         </div>
         <table style="margin-top: 2px;">
-            <tr style="opacity: 0.2; line-height: 14px;">
-                <td class="address" style="border-top: 0; border-bottom: 0;" ng-style="{'color': addressBusColor}">
-                    <span ng-if="!isUndefined(dataContext[0].address)">
-                        <span ng-if="displayBase === 2">{{ dataContext[0].address | binary }}</span>
-                        <span ng-if="displayBase === 8">{{ dataContext[0].address | octal }}</span>
-                        <span ng-if="displayBase === 10">{{ dataContext[0].address }}</span>
-                        <span ng-if="displayBase === 16">{{ dataContext[0].address | hexadecimal }}</span>
-                    </span>
-                    <span ng-if="isUndefined(dataContext[0].address)">undefined</span>
-                </td>
-                <td class="value" style="border-top: 0; border-bottom: 0;" ng-style="{'color': dataBusColor}">
-                    <span ng-if="!isUndefined(dataContext[0].value)">
-                        <span ng-if="displayBase === 2">{{ dataContext[0].value | binary }}</span>
-                        <span ng-if="displayBase === 8">{{ dataContext[0].value | octal }}</span>
-                        <span ng-if="displayBase === 10">{{ dataContext[0].value }}</span>
-                        <span ng-if="displayBase === 16">{{ dataContext[0].value | hexadecimal }}</span>
-                    </span>
-                    <span ng-if="isUndefined(dataContext[0].value)">undefined</span>
-                </td>
-            </tr>
-            <tr style="opacity: 0.7; line-height: 15px;">
-                <td class="address" style="border-top: 0; border-bottom: 0;" ng-style="{'color': addressBusColor}">
-                    <span ng-if="!isUndefined(dataContext[1].address)">
-                        <span ng-if="displayBase === 2">{{ dataContext[1].address | binary }}</span>
-                        <span ng-if="displayBase === 8">{{ dataContext[1].address | octal }}</span>
-                        <span ng-if="displayBase === 10">{{ dataContext[1].address }}</span>
-                        <span ng-if="displayBase === 16">{{ dataContext[1].address | hexadecimal }}</span>
-                    </span>
-                    <span ng-if="isUndefined(dataContext[1].address)">undefined</span>
-                </td>
-                <td class="value" style="border-top: 0; border-bottom: 0;" ng-style="{'color': dataBusColor}">
-                    <span ng-if="!isUndefined(dataContext[1].value)">
-                        <span ng-if="displayBase === 2">{{ dataContext[1].value | binary }}</span>
-                        <span ng-if="displayBase === 8">{{ dataContext[1].value | octal }}</span>
-                        <span ng-if="displayBase === 10">{{ dataContext[1].value }}</span>
-                        <span ng-if="displayBase === 16">{{ dataContext[1].value | hexadecimal }}</span>
-                    </span>
-                    <span ng-if="isUndefined(dataContext[1].value)">undefined</span>
-                </td>
-            </tr>
-            <tr style="line-height: 15px;">
+            <tr style="opacity: 0.2; line-height: 14px;" ng-show="showContext">
                 <td class="address" ng-style="{'color': addressBusColor}">
-                    <span ng-if="!isUndefined(dataContext[2].address)">
-                        <span ng-if="displayBase === 2">{{ dataContext[2].address | binary }}</span>
-                        <span ng-if="displayBase === 8">{{ dataContext[2].address | octal }}</span>
-                        <span ng-if="displayBase === 10">{{ dataContext[2].address }}</span>
-                        <span ng-if="displayBase === 16">{{ dataContext[2].address | hexadecimal }}</span>
+                    <span ng-show="!isUndefined(dataContext[0].address)">
+                        <span ng-show="displayBase === 2">{{ dataContext[0].address | binary }}</span>
+                        <span ng-show="displayBase === 8">{{ dataContext[0].address | octal }}</span>
+                        <span ng-show="displayBase === 10">{{ dataContext[0].address }}</span>
+                        <span ng-show="displayBase === 16">{{ dataContext[0].address | hexadecimal }}</span>
                     </span>
-                    <span ng-if="isUndefined(dataContext[2].address)">undefined</span>
+                    <span ng-show="isUndefined(dataContext[0].address)">{{ undefinedString }}</span>
                 </td>
                 <td class="value" ng-style="{'color': dataBusColor}">
-                    <span ng-if="!isUndefined(dataContext[2].value)">
-                        <span ng-if="displayBase === 2">{{ dataContext[2].value | binary }}</span>
-                        <span ng-if="displayBase === 8">{{ dataContext[2].value | octal }}</span>
-                        <span ng-if="displayBase === 10">{{ dataContext[2].value }}</span>
-                        <span ng-if="displayBase === 16">{{ dataContext[2].value | hexadecimal }}</span>
+                    <span ng-show="!isUndefined(dataContext[0].value)">
+                        <span ng-show="displayBase === 2">{{ dataContext[0].value | binary }}</span>
+                        <span ng-show="displayBase === 8">{{ dataContext[0].value | octal }}</span>
+                        <span ng-show="displayBase === 10">{{ dataContext[0].value }}</span>
+                        <span ng-show="displayBase === 16">{{ dataContext[0].value | hexadecimal }}</span>
                     </span>
-                    <span ng-if="isUndefined(dataContext[2].value)">undefined</span>
+                    <span ng-show="isUndefined(dataContext[0].value)">{{ undefinedString }}</span>
                 </td>
             </tr>
-            <tr style="opacity: 0.7; line-height: 15px;">
-                <td class="address" style="border-top: 0; border-bottom: 0;" ng-style="{'color': addressBusColor}">
-                    <span ng-if="!isUndefined(dataContext[3].address)">
-                        <span ng-if="displayBase === 2">{{ dataContext[3].address | binary }}</span>
-                        <span ng-if="displayBase === 8">{{ dataContext[3].address | octal }}</span>
-                        <span ng-if="displayBase === 10">{{ dataContext[3].address }}</span>
-                        <span ng-if="displayBase === 16">{{ dataContext[3].address | hexadecimal }}</span>
+            <tr style="opacity: 0.7; line-height: 15px;" ng-show="showContext">
+                <td class="address" ng-style="{'color': addressBusColor}">
+                    <span ng-show="!isUndefined(dataContext[1].address)">
+                        <span ng-show="displayBase === 2">{{ dataContext[1].address | binary }}</span>
+                        <span ng-show="displayBase === 8">{{ dataContext[1].address | octal }}</span>
+                        <span ng-show="displayBase === 10">{{ dataContext[1].address }}</span>
+                        <span ng-show="displayBase === 16">{{ dataContext[1].address | hexadecimal }}</span>
                     </span>
-                    <span ng-if="isUndefined(dataContext[3].address)">undefined</span>
+                    <span ng-show="isUndefined(dataContext[1].address)">{{ undefinedString }}</span>
                 </td>
-                <td class="value" style="border-top: 0; border-bottom: 0;" ng-style="{'color': dataBusColor}">
-                    <span ng-if="!isUndefined(dataContext[3].value)">
-                        <span ng-if="displayBase === 2">{{ dataContext[3].value | binary }}</span>
-                        <span ng-if="displayBase === 8">{{ dataContext[3].value | octal }}</span>
-                        <span ng-if="displayBase === 10">{{ dataContext[3].value }}</span>
-                        <span ng-if="displayBase === 16">{{ dataContext[3].value | hexadecimal }}</span>
+                <td class="value" ng-style="{'color': dataBusColor}">
+                    <span ng-show="!isUndefined(dataContext[1].value)">
+                        <span ng-show="displayBase === 2">{{ dataContext[1].value | binary }}</span>
+                        <span ng-show="displayBase === 8">{{ dataContext[1].value | octal }}</span>
+                        <span ng-show="displayBase === 10">{{ dataContext[1].value }}</span>
+                        <span ng-show="displayBase === 16">{{ dataContext[1].value | hexadecimal }}</span>
                     </span>
-                    <span ng-if="isUndefined(dataContext[3].value)">undefined</span>
+                    <span ng-show="isUndefined(dataContext[1].value)">{{ undefinedString }}</span>
                 </td>
             </tr>
-            <tr style="opacity: 0.2; line-height: 14px;">
-                <td class="address" style="border-top: 0; border-bottom: 0;" ng-style="{'color': addressBusColor}">
-                    <span ng-if="!isUndefined(dataContext[4].address)">
-                        <span ng-if="displayBase === 2">{{ dataContext[4].address | binary }}</span>
-                        <span ng-if="displayBase === 8">{{ dataContext[4].address | octal }}</span>
-                        <span ng-if="displayBase === 10">{{ dataContext[4].address }}</span>
-                        <span ng-if="displayBase === 16">{{ dataContext[4].address | hexadecimal }}</span>
+            <tr style="line-height: 15px;"
+                ng-style="{borderTop: showContext ? '2px solid rgb(40, 40, 40)' : 0, borderBottom: showContext ? '2px solid rgb(40, 40, 40)' : 0}">
+                <td class="address" ng-style="{'color': addressBusColor}">
+                    <span ng-show="!isUndefined(dataContext[2].address)">
+                        <span ng-show="displayBase === 2">{{ dataContext[2].address | binary }}</span>
+                        <span ng-show="displayBase === 8">{{ dataContext[2].address | octal }}</span>
+                        <span ng-show="displayBase === 10">{{ dataContext[2].address }}</span>
+                        <span ng-show="displayBase === 16">{{ dataContext[2].address | hexadecimal }}</span>
                     </span>
-                    <span ng-if="isUndefined(dataContext[4].address)">undefined</span>
+                    <span ng-show="isUndefined(dataContext[2].address)">{{ undefinedString }}</span>
                 </td>
-                <td class="value" style="border-top: 0; border-bottom: 0;" ng-style="{'color': dataBusColor}">
-                    <span ng-if="!isUndefined(dataContext[4].value)">
-                        <span ng-if="displayBase === 2">{{ dataContext[4].value | binary }}</span>
-                        <span ng-if="displayBase === 8">{{ dataContext[4].value | octal }}</span>
-                        <span ng-if="displayBase === 10">{{ dataContext[4].value }}</span>
-                        <span ng-if="displayBase === 16">{{ dataContext[4].value | hexadecimal }}</span>
+                <td class="value" ng-style="{'color': dataBusColor}">
+                    <span ng-show="!isUndefined(dataContext[2].value)">
+                        <span ng-show="displayBase === 2">{{ dataContext[2].value | binary }}</span>
+                        <span ng-show="displayBase === 8">{{ dataContext[2].value | octal }}</span>
+                        <span ng-show="displayBase === 10">{{ dataContext[2].value }}</span>
+                        <span ng-show="displayBase === 16">{{ dataContext[2].value | hexadecimal }}</span>
                     </span>
-                    <span ng-if="isUndefined(dataContext[4].value)">undefined</span>
+                    <span ng-show="isUndefined(dataContext[2].value)">{{ undefinedString }}</span>
+                </td>
+            </tr>
+            <tr style="opacity: 0.7; line-height: 15px;" ng-show="showContext">
+                <td class="address" ng-style="{'color': addressBusColor}">
+                    <span ng-show="!isUndefined(dataContext[3].address)">
+                        <span ng-show="displayBase === 2">{{ dataContext[3].address | binary }}</span>
+                        <span ng-show="displayBase === 8">{{ dataContext[3].address | octal }}</span>
+                        <span ng-show="displayBase === 10">{{ dataContext[3].address }}</span>
+                        <span ng-show="displayBase === 16">{{ dataContext[3].address | hexadecimal }}</span>
+                    </span>
+                    <span ng-show="isUndefined(dataContext[3].address)">{{ undefinedString }}</span>
+                </td>
+                <td class="value" ng-style="{'color': dataBusColor}">
+                    <span ng-show="!isUndefined(dataContext[3].value)">
+                        <span ng-show="displayBase === 2">{{ dataContext[3].value | binary }}</span>
+                        <span ng-show="displayBase === 8">{{ dataContext[3].value | octal }}</span>
+                        <span ng-show="displayBase === 10">{{ dataContext[3].value }}</span>
+                        <span ng-show="displayBase === 16">{{ dataContext[3].value | hexadecimal }}</span>
+                    </span>
+                    <span ng-show="isUndefined(dataContext[3].value)">{{ undefinedString }}</span>
+                </td>
+            </tr>
+            <tr style="opacity: 0.2; line-height: 14px;" ng-show="showContext">
+                <td class="address" ng-style="{'color': addressBusColor}">
+                    <span ng-show="!isUndefined(dataContext[4].address)">
+                        <span ng-show="displayBase === 2">{{ dataContext[4].address | binary }}</span>
+                        <span ng-show="displayBase === 8">{{ dataContext[4].address | octal }}</span>
+                        <span ng-show="displayBase === 10">{{ dataContext[4].address }}</span>
+                        <span ng-show="displayBase === 16">{{ dataContext[4].address | hexadecimal }}</span>
+                    </span>
+                    <span ng-show="isUndefined(dataContext[4].address)">{{ undefinedString }}</span>
+                </td>
+                <td class="value" ng-style="{'color': dataBusColor}">
+                    <span ng-show="!isUndefined(dataContext[4].value)">
+                        <span ng-show="displayBase === 2">{{ dataContext[4].value | binary }}</span>
+                        <span ng-show="displayBase === 8">{{ dataContext[4].value | octal }}</span>
+                        <span ng-show="displayBase === 10">{{ dataContext[4].value }}</span>
+                        <span ng-show="displayBase === 16">{{ dataContext[4].value | hexadecimal }}</span>
+                    </span>
+                    <span ng-show="isUndefined(dataContext[4].value)">{{ undefinedString }}</span>
                 </td>
             </tr>
         </table>

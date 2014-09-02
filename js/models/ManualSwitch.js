@@ -25,16 +25,8 @@ ManualSwitch.prototype.toggle = function () {
 
 ManualSwitch.prototype.setValue = function (value) {
     if (this.value != value) {
+        this.wire.write(this, value);
         this.value = value;
-        try {
-            this.wire.write(this, this.value);
-        } catch (exception) {
-            throw exception;
-        } finally {
-            if (!this.value) {
-                this.wire.stopWriting(this);
-            }
-            this.updateViewCallback(this.value);
-        }
+        this.updateViewCallback(this.value);
     }
 };

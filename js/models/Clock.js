@@ -3,7 +3,7 @@
 function Clock (updateViewCallback, wire, frequency) {
     this.updateViewCallback = updateViewCallback;
     this.wire = wire;
-    this.value = 0;
+    this.value = undefined;
     this.setFrequency(frequency);
     this.name = "unnamed clock generator";
     this.isRunning = false;
@@ -28,26 +28,18 @@ Clock.prototype.setFrequency = function (newFrequency) {
 };
 
 Clock.prototype.toggle = function () {
-    if (!this.value) {
-        this.setValue(1);
-    } else {
+    if (this.value || !this.isRunning) {
         this.setValue(0);
+    } else {
+        this.setValue(1);
     }
 };
 
 Clock.prototype.setValue = function (value) {
     if (this.value != value) {
+        this.wire.write(this, value);
         this.value = value;
-        try {
-            this.wire.write(this, this.value);
-        } catch (exception) {
-            throw exception;
-        } finally {
-            if (!this.value) {
-                this.wire.stopWriting(this);
-            }
-            this.updateViewCallback(this.value);
-        }
+        this.updateViewCallback(this.value);
     }
 };
 

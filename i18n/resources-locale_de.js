@@ -11,7 +11,7 @@
     },
     {
         "key"        : "_errors_",
-        "value"      : "Fehler",
+        "value"      : "Fehler:",
         "description": ""
     },
     {
@@ -287,6 +287,66 @@
     {
         "key"        : "_FilterAlreadyOccupied_end",
         "value"      : ".",
+        "description": ""
+    },
+    {
+        "key"        : "_GateIsAlreadyWriting_beginning",
+        "value"      : "",
+        "description": ""
+    },
+    {
+        "key"        : "_GateIsAlreadyWriting_middle",
+        "value"      : ": Das Gate zum Bus '",
+        "description": ""
+    },
+    {
+        "key"        : "_GateIsAlreadyWriting_end",
+        "value"      : "' ist bereits im Zustand 'schreiben' und kann daher nicht auf 'lesen' gesetzt werden.",
+        "description": ""
+    },
+    {
+        "key"        : "_GateIsAlreadyReading_beginning",
+        "value"      : "",
+        "description": ""
+    },
+    {
+        "key"        : "_GateIsAlreadyReading_middle",
+        "value"      : ": Das Gate zum Bus '",
+        "description": ""
+    },
+    {
+        "key"        : "_GateIsAlreadyReading_end",
+        "value"      : "' ist bereits im Zustand 'lesen' und kann daher nicht auf 'schreiben' gesetzt werden.",
+        "description": ""
+    },
+    {
+        "key"        : "_RegisterIsReadingAndCantAcceptValueChanges_beginning",
+        "value"      : "Register ",
+        "description": ""
+    },
+    {
+        "key"        : "_RegisterIsReadingAndCantAcceptValueChanges_middle",
+        "value"      : " liest bereits von einem Bus. ",
+        "description": ""
+    },
+    {
+        "key"        : "_RegisterIsReadingAndCantAcceptValueChanges_end",
+        "value"      : "Der Wert des Registers kann während des Lesens nicht geändert werden.",
+        "description": ""
+    },
+    {
+        "key"        : "_WriteToUndefinedAddress_beginning",
+        "value"      : "Speicher ",
+        "description": ""
+    },
+    {
+        "key"        : "_WriteToUndefinedAddress_middle",
+        "value"      : ": Die Adresse, die vom Adressbus (",
+        "description": ""
+    },
+    {
+        "key"        : "_WriteToUndefinedAddress_end",
+        "value"      : ") gelesen wurde ist 'undefined'. Um zu schreiben muss eine existierende Adresse angelegt werden.",
         "description": ""
     }
 ]

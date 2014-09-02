@@ -177,3 +177,43 @@ function FilterAlreadyOccupied (message, filterName, busName) {
     exception.actor2 = busName;
     return exception;
 }
+
+function GateIsAlreadyWriting (message, componentName, busName) {
+    var exception = {};
+    exception.name = 'GateIsAlreadyWriting';
+    exception.localization = '_' + exception.name + '_';
+    exception.message = message;
+    exception.actor1 = componentName;
+    exception.actor2 = busName;
+    return exception;
+}
+
+function GateIsAlreadyReading (message, componentName, busName) {
+    var exception = {};
+    exception.name = 'GateIsAlreadyReading';
+    exception.localization = '_' + exception.name + '_';
+    exception.message = message;
+    exception.actor1 = componentName;
+    exception.actor2 = busName;
+    return exception;
+}
+
+function RegisterIsReadingAndCantAcceptValueChanges (message, RegisterName) {
+    var exception = {};
+    exception.name = 'RegisterIsReadingAndCantAcceptValueChanges';
+    exception.localization = '_' + exception.name + '_';
+    exception.message = message;
+    exception.actor1 = RegisterName;
+    exception.actor2 = "";
+    return exception;
+}
+
+function WriteToUndefinedAddress (message, MemoryName, BusName) {
+    var exception = {};
+    exception.name = 'WriteToUndefinedAddress';
+    exception.localization = '_' + exception.name + '_';
+    exception.message = message;
+    exception.actor1 = MemoryName;
+    exception.actor2 = BusName;
+    return exception;
+}

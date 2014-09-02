@@ -70,7 +70,6 @@
     border-radius: 6px;
     padding: 5px 2px;
     display: inline-block;
-    height: 82px;
     line-height: 18px;
 }
 
@@ -84,8 +83,6 @@
 
 .memory table td {
     min-width: 72px;
-    border-top: 2px solid rgb(40, 40, 40);
-    border-bottom: 2px solid rgb(40, 40, 40);
 }
 
 .memory table .address {
@@ -99,12 +96,12 @@
     padding-left: 5px;
 }
 
-.memory .toprow {
-    top: -22px;
+.memory table .address span, .memory table .value span {
+    display: inline-block;
 }
 
-.memory .bottomrow {
-    top: 84px;
+.memory .toprow {
+    top: -22px;
 }
 
 .bus-type {
@@ -242,11 +239,12 @@
 }
 
 .switch {
-    width: 16px;
-    height: 16px;
+    width: 18px;
+    height: 12px;
     border: 1px solid rgb(30, 30, 30);
     background-color: rgba(200, 200, 200, 1);
     border-radius: 6px;
+    cursor: pointer;
 }
 
 .switch .wireconnector {
@@ -266,16 +264,22 @@
     height: 6px;
     border-radius: 6px;
     border: 1px solid rgb(0, 0, 0);
+    background-color: rgb(200, 200, 200);
 }
 
 .bitregister {
     border: 1px solid rgb(30, 30, 30);
-    background-color: rgba(200, 200, 200, 1);
+    background-color: rgb(200, 200, 200);
     border-radius: 6px;
     padding: 5px;
     display: inline-block;
-    width: 40px;
+    width: 26px;
     line-height: 10px;
+}
+
+.bitregister .bitconnections {
+    border: 1px solid rgb(30, 30, 30);
+    border-radius: 3px;
 }
 
 .flanktriggered {
@@ -297,6 +301,7 @@
     background-color: rgba(200, 200, 200, 1);
     border-radius: 6px;
     position: absolute;
+    z-index: 1000;
     top: 6px;
     left: -24px;
     padding: 5px;

@@ -1,10 +1,12 @@
 <div class="component nospace" ng-style="{'top': topCSS, 'left': leftCSS}">
     <div class="nospace" style="position: absolute;">
-        <div class="busconnector" style="left: 6px; top: -5px;"></div>
-        <div class="wireconnector grayback" style="left: 6px; top: 17px;"></div>
+        <div class="busconnector" style="left: 8px; top: -5px;"></div>
+        <div class="wireconnector grayback" style="left: 8px; top: 17px;"></div>
     </div>
-    <div style="border: 1px solid rgb(0, 0, 0); width: 15px; height: 16px; overflow: hidden;"
-         ng-style="{'background-color': color}">
-        <span style="position: relative; top: -4px; margin-left: 2px; font-size: 14px;">=0</span>
+    <div style="border: 1px solid rgb(0, 0, 0); width: 19px; height: 16px; overflow: hidden;"
+         ng-style="{'background-color': active ? 'rgb(255, 103, 97)' : 'rgb(200, 200, 200)'}">
+        <span style="position: relative; top: -4px; display: inline-block; font-size: 14px; text-align: center; width: 19px;">
+            =0<span ng-show="!active">?</span>
+        </span>
     </div>
 </div>

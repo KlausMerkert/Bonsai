@@ -446,7 +446,7 @@ bonsaiApp.controller('bonsaiCpuCtrl',
                             'top': '21px',
                             'left': '590px',
                             'width': '29px',
-                            'height': '17px',
+                            'height': '17px'
                          }, {
                             'type': 'bottomleft',
                             'top': '39px',
@@ -466,10 +466,10 @@ bonsaiApp.controller('bonsaiCpuCtrl',
                     'routes': [
                         {
                             'type': 'bottomright',
-                            'top': '103px',
+                            'top': '95px',
                             'left': '748px',
                             'width': '23px',
-                            'height': '69px'
+                            'height': '7px'
                         }, {
                             'type': 'topright',
                             'top': '21px',
@@ -481,10 +481,10 @@ bonsaiApp.controller('bonsaiCpuCtrl',
                             'top': '21px',
                             'left': '771px',
                             'width': '37px',
-                            'height': '80px',
+                            'height': '72px'
                          }, {
                             'type': 'bottomleft',
-                            'top': '165px',
+                            'top': '95px',
                             'left': '718px',
                             'width': '28px',
                             'height': '7px'       
@@ -532,17 +532,17 @@ bonsaiApp.controller('bonsaiCpuCtrl',
                         },
                         {
                             'type': 'topleft',
-                            'top': '121px',
+                            'top': '200px',
                             'left': '442px',
                             'width': '30px',
-                            'height': '7px'
+                            'height': '36px'
                         },
                         {
                             'type': 'bottomright',
                             'top': '73px',
                             'left': '474px',
                             'width': '14px',
-                            'height': '48px'
+                            'height': '127px'
                         }
                     ] 
                 }, {
@@ -563,10 +563,10 @@ bonsaiApp.controller('bonsaiCpuCtrl',
                         },
                         {
                             'type': 'bottomleft',
-                            'top': '265px',
+                            'top': '298px',
                             'left': '518px',
                             'width': '63px',
-                            'height': '43px'
+                            'height': '10px'
                         }
                     ] 
                 }, {
@@ -677,16 +677,40 @@ bonsaiApp.controller('bonsaiCpuCtrl',
                             'height': '50px'
                         }
                     ]
+                }, {
+                    'id': 'SteuerwortWriteWire',
+                    'name': 'Steuerwort write wire',
+                    'max': 1
+                }, {
+                    'id': 'SteuerwortReadWire',
+                    'name': 'Steuerwort read wire',
+                    'max': 1
+                }, {
+                    'id': 'runClock',
+                    'name': 'Clock run wire',
+                    'max': 1
                 }
             ],
             'manualswitches': [
-                /*{
-                    'name': 'DatenspeicherAddressReadWireSwitch',
-                    'wireId': 'DatenspeicherAddressReadWire',
+                {
+                    'name': 'SteuerwortWriteWireSwitch',
+                    'wireId': 'SteuerwortWriteWire',
                     'value': 1,
-                    'top': 40,
-                    'left': 80
-                }*/
+                    'top': 10,
+                    'left': 850
+                }, {
+                    'name': 'SteuerwortReadWireSwitch',
+                    'wireId': 'SteuerwortReadWire',
+                    'value': 0,
+                    'top': 30,
+                    'left': 850
+                }, {
+                    'name': 'ClockRuneSwitch',
+                    'wireId': 'runClock',
+                    'value': 0,
+                    'top': 297,
+                    'left': 865
+                }
             ],
             'leds': [
                 {
@@ -704,6 +728,11 @@ bonsaiApp.controller('bonsaiCpuCtrl',
                     'name': 's0 led',
                     'top': 62,
                     'left': 782
+                }, {
+                    'wireId': 'and2B_nor1out',
+                    'name': 'Nor Test LED',
+                    'top': 245,
+                    'left': 722
                 }
             ],
             'andGates': [
@@ -757,7 +786,7 @@ bonsaiApp.controller('bonsaiCpuCtrl',
                          'readWireId': 's9'
                         }
                     ],
-                    'incWireId': 'or1_ausgang',
+                    'incWireId': 'or1_ausgang'
                 }, {
                     'name': 'IR',
                     'value': 40008,
@@ -820,6 +849,8 @@ bonsaiApp.controller('bonsaiCpuCtrl',
                 {
                     'name': 'Steuerwort',
                     'value': 0,
+                    'wiresReadWireId': 'SteuerwortReadWire',
+                    'wiresWriteWireId': 'SteuerwortWriteWire',
                     'base' : 10,
                     'top' : 50,
                     'left': 800,
@@ -863,13 +894,15 @@ bonsaiApp.controller('bonsaiCpuCtrl',
                         'busId': 'dataBus',
                         'writeWireId': 's3',
                         'readWireId': 's4'
-                    }
+                    },
+                    'undefinedString': '---',
+                    'showContext': true
                 },
                 {
                     'name': "Befehlsdecoder",
                     'base': 10,
                     'content': "0\n10\n20\n30\n40\n50",
-                    'top': 150,
+                    'top': 255,
                     'left':400,
                     'addressgate': {
                         'busId': 'opcode',
@@ -881,12 +914,14 @@ bonsaiApp.controller('bonsaiCpuCtrl',
                         'writeWireId': undefined,
                         'readWireId': undefined,
                         'initialState': 1
-                    }
+                    },
+                    'undefinedString': '',
+                    'showContext': false
                 },
                 {
                     'name': "Mikroprogrammspeicher",
                     'base': 10,
-                    'content': "1024\n3080\n1032\n4096\n4100\n4096\n\n\n\n\n4096\n4232\n4104\n12320\n4368\n4352\n2\n\n\n\n4096\n4232\n4160\n4104\n12352\n4368\n4352\n2\n\n\n4608\n2\n\n\n\n\n\n\n\n\n4096\n4104\n20488\n8192\n2\n\n\n\n\n\n4096\n4101",
+                    'content': "1024\n3080\n1032\n4096\n4100\n\n\n\n\n\n4096\n4232\n4104\n12320\n4368\n4352\n2\n\n\n\n4096\n4232\n4104\n12352\n4368\n4352\n2\n\n\n\n4608\n4096\n2\n\n\n\n\n\n\n\n12288\n4104\n20488\n2\n\n\n\n\n\n\n4101",
                     'top': 50,
                     'left':600,
                     'addressgate': {
@@ -943,7 +978,8 @@ bonsaiApp.controller('bonsaiCpuCtrl',
                 {
                     'name': 'Takt',
                     'wireId': 'clock',
-                    'frequency': 0,
+                    'runWireId': 'runClock',
+                    'frequency': 2,
                     'top': 300,
                     'left': 780
                 }
@@ -961,8 +997,8 @@ bonsaiApp.controller('bonsaiCpuCtrl',
                 },
                  {
                     'text': 'Befehlsdecoder',
-                    'top': 130,
-                    'left': 475
+                    'top': 235,
+                    'left': 460
                 },
                 {
                     'text': 'PC',
@@ -1006,7 +1042,12 @@ bonsaiApp.controller('bonsaiCpuCtrl',
             $scope.cpu.manualswitches[i].wire = $scope.findBus($scope.cpu.manualswitches[i].wireId);
         }
         for (i = 0; i < $scope.cpu.clocks.length; i++) {
-            $scope.cpu.clocks[i].wire = $scope.findBus($scope.cpu.clocks[i].wireId);
+            if ($scope.cpu.clocks[i].wireId) {
+                $scope.cpu.clocks[i].wire = $scope.findBus($scope.cpu.clocks[i].wireId);
+            }
+            if ($scope.cpu.clocks[i].runWireId) {
+                $scope.cpu.clocks[i].runWire = $scope.findBus($scope.cpu.clocks[i].runWireId);
+            }
         }
         for (i = 0; i < $scope.cpu.leds.length; i++) {
             $scope.cpu.leds[i].wire = $scope.findBus($scope.cpu.leds[i].wireId);
@@ -1071,6 +1112,12 @@ bonsaiApp.controller('bonsaiCpuCtrl',
             }
             if ($scope.cpu.bitregisters[i].widegate.readWireId) {
                 $scope.cpu.bitregisters[i].widegate.readWire = $scope.findBus($scope.cpu.bitregisters[i].widegate.readWireId);
+            }
+            if ($scope.cpu.bitregisters[i].wiresReadWireId) {
+                $scope.cpu.bitregisters[i].wiresReadWire = $scope.findBus($scope.cpu.bitregisters[i].wiresReadWireId);
+            }
+            if ($scope.cpu.bitregisters[i].wiresWriteWireId) {
+                $scope.cpu.bitregisters[i].wiresWriteWire = $scope.findBus($scope.cpu.bitregisters[i].wiresWriteWireId);
             }
             for (j = 0; j < $scope.cpu.bitregisters[i].wiregates.length; j++) {
                 $scope.cpu.bitregisters[i].wiregates[j].wire = $scope.findBus($scope.cpu.bitregisters[i].wiregates[j].wireId);

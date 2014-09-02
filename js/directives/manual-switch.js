@@ -14,7 +14,7 @@ bonsaiApp.directive('manualswitch', function ($interval) {
         link: function ($scope, element, attrs) {
             $scope.switch = new ManualSwitch(function (value) {
                 $scope.value = value;
-            }, $scope.wire, 0);
+            }, $scope.wire, undefined);
 
             $scope.toggle = function () {
                 $scope.switch.toggle();
@@ -33,7 +33,7 @@ bonsaiApp.directive('manualswitch', function ($interval) {
             });
 
             $scope.$watch('top', function () {
-                $scope.topCSS = ($scope.top - 9) + 'px';
+                $scope.topCSS = ($scope.top - 7) + 'px';
             });
             $scope.$watch('left', function () {
                 $scope.leftCSS = ($scope.left + 3) + 'px';
@@ -42,8 +42,6 @@ bonsaiApp.directive('manualswitch', function ($interval) {
             $scope.getConnectionPositions = function () {
                 return [{top: $scope.top, left: $scope.left}];
             };
-
-            //$scope.switch.getPositions = $scope.getConnectionPositions;
 
             // We have to wait for a very short time to enroll to the buses
             // because the handler needs to be fully initialized.

@@ -52,7 +52,7 @@ Bus.prototype.getBuses = function () {
     return this.connections;
 };
 
-Bus.prototype.setValue = function (value) {
+Bus.prototype.setValue = function (value, writerIndex) {
     var parsedValue = parseInt(value);
     if ((isNaN(parsedValue)) && (value !== undefined)) {
         throw SuppliedValueIsNotANumber(
@@ -85,7 +85,8 @@ Bus.prototype.setValue = function (value) {
             this.updateViewCallback(this.value);
         }
         for (var i = 0; i < this.connections.length; i++) {
-            if (this.readers.indexOf(this.connections[i]) >= 0) {
+            if ((i != writerIndex) &&
+                (this.readers.indexOf(this.connections[i]) >= 0)) {
                 this.connections[i].setValue(this.value, this);
             }
         }
@@ -149,9 +150,7 @@ Bus.prototype.write = function (writer, data) {
             this.unregisterReader(writer);
             this.writerIndex = index;
             this.active = true;
-            if (this.value != data) {
-                this.setValue(data);
-            }
+            this.setValue(data, index);
         }
     } else {
         throw NotEnrolledWriteException(

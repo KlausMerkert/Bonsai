@@ -11,7 +11,7 @@
     },
     {
         "key"        : "_errors_",
-        "value"      : "Errors",
+        "value"      : "Errors:",
         "description": ""
     },
     {
@@ -287,6 +287,66 @@
     {
         "key"        : "_FilterAlreadyOccupied_end",
         "value"      : ".",
+        "description": ""
+    },
+    {
+        "key"        : "_GateIsAlreadyWriting_beginning",
+        "value"      : "",
+        "description": ""
+    },
+    {
+        "key"        : "_GateIsAlreadyWriting_middle",
+        "value"      : ": The gate to bus ",
+        "description": ""
+    },
+    {
+        "key"        : "_GateIsAlreadyWriting_end",
+        "value"      : " is already writing and therefore can not be set to read.",
+        "description": ""
+    },
+    {
+        "key"        : "_GateIsAlreadyReading_beginning",
+        "value"      : "",
+        "description": ""
+    },
+    {
+        "key"        : "_GateIsAlreadyReading_middle",
+        "value"      : ": The gate to bus ",
+        "description": ""
+    },
+    {
+        "key"        : "_GateIsAlreadyReading_end",
+        "value"      : " is already reading and therefore can not be set to write.",
+        "description": ""
+    },
+    {
+        "key"        : "_RegisterIsReadingAndCantAcceptValueChanges_beginning",
+        "value"      : "Register ",
+        "description": ""
+    },
+    {
+        "key"        : "_RegisterIsReadingAndCantAcceptValueChanges_middle",
+        "value"      : " is Reading from a Bus and can not accept value Changes.",
+        "description": ""
+    },
+    {
+        "key"        : "_RegisterIsReadingAndCantAcceptValueChanges_end",
+        "value"      : "",
+        "description": ""
+    },
+    {
+        "key"        : "_WriteToUndefinedAddress_beginning",
+        "value"      : "Memory ",
+        "description": ""
+    },
+    {
+        "key"        : "_WriteToUndefinedAddress_middle",
+        "value"      : ": The address which was read from the bus (",
+        "description": ""
+    },
+    {
+        "key"        : "_WriteToUndefinedAddress_end",
+        "value"      : ") is undefined. Nothing can be written to a undefined place.",
         "description": ""
     }
 ]

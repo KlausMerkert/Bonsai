@@ -22,7 +22,7 @@
                           top="switch.top" left="switch.left"></manualswitch>
         </div>
         <div ng-repeat="clock in cpu.clocks">
-            <clock wire="clock.wire" clock-name="{{clock.name}}" frequency="clock.frequency"
+            <clock wire="clock.wire" run-wire="clock.runWire" clock-name="{{clock.name}}" frequency="clock.frequency"
                    top="clock.top" left="clock.left"></clock>
         </div>
         <div ng-repeat="led in cpu.leds">
@@ -52,6 +52,7 @@
         </div>
         <div ng-repeat="bitregister in cpu.bitregisters">
             <bitregister register-name="{{bitregister.name}}" value="bitregister.value"
+                         set-wires-read="bitregister.wiresReadWire" set-wires-write="bitregister.wiresWriteWire"
                          top="bitregister.top" left="bitregister.left">
                 <widegate bus="bitregister.widegate.bus" initial-state="bitregister.widegate.initialState"
                           set-read="bitregister.widegate.readWire"
@@ -63,6 +64,7 @@
         </div>
         <div ng-repeat="memory in cpu.memories">
             <memory memory-name="{{memory.name}}" base="memory.base"
+                    undefined-string="memory.undefinedString" show-context="memory.showContext"
                     top="memory.top" left="memory.left" content="memory.content">
                 <addressgate bus="memory.addressgate.bus" initial-state="memory.addressgate.initialState"
                              set-read="memory.addressgate.readWire"></addressgate>
@@ -105,7 +107,7 @@
     </div>
 
     <div>
-        <h2 data-i18n="_errors_" style="display: inline-block;">Errors</h2>
+        <h2 data-i18n="_errors_" style="display: inline-block;">Errors:</h2>
         <a ng-click="errors = []" ng-show="errors.length > 0"
            data-i18n="_clearErrors_" href="" style="font-size: 60%; margin-left: 2em;"></a>
     </div>
