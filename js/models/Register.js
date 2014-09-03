@@ -18,6 +18,10 @@ Register.prototype.getName = function () {
     return this.name;
 };
 
+Register.prototype.setMaxValue = function (maxValue) {
+    this.maxValue = maxValue;
+};
+
 Register.prototype.addBusConnection = function (bus, writeWire, readWire) {
     /* Connections can have three states:
      * 1 means the register writes to the bus
@@ -47,11 +51,19 @@ Register.prototype.getBuses = function () {
 };
 
 Register.prototype.setValue = function (value) {
-    this.value = value;
-    this.updateViewCallback(this.value);
-    for (var i = 0; i < this.buses.length; i++) {
-        if (this.buses[i].state === 1) {
-            this.buses[i].bus.write(this, value);
+    if ((value < 0) || ((typeof this.maxValue != 'undefined') && (value > this.maxValue))) {
+        throw ValueNotInRangeZeroToMax(
+            this.getName() + ": The value you try to set is not in the Range 0 to " + this.maxValue + ".",
+            this.getName(),
+            this.maxValue
+        )
+    } else {
+        this.value = value;
+        this.updateViewCallback(this.value);
+        for (var i = 0; i < this.buses.length; i++) {
+            if (this.buses[i].state === 1) {
+                this.buses[i].bus.write(this, value);
+            }
         }
     }
 };
@@ -67,7 +79,16 @@ Register.prototype.inc = function () {
             this.getName()
         );
     }
-    this.setValue((parseInt(this.getValue()) + 1).toString());
+    if ((typeof this.maxValue == 'undefined') || (this.getValue() < this.maxValue)) {
+        this.setValue((parseInt(this.getValue()) + 1));
+    } else {
+        throw ValueIsMaxNoInc(
+            this.getName() + ": The value is " + this.getValue() +
+                " which is already the maximum value. Therefore increasing the value is not allowed.",
+            this.getName(),
+            this.getValue()
+        )
+    }
 };
 
 Register.prototype.dec = function () {
@@ -77,7 +98,16 @@ Register.prototype.dec = function () {
             this.getName()
         );
     }
-    this.setValue((parseInt(this.getValue()) - 1).toString());
+    if (this.getValue() > 0) {
+        this.setValue((parseInt(this.getValue()) - 1));
+    } else {
+        throw ZeroValueNoDec(
+            this.getName() + ": The value is " + this.getValue() +
+                " and must not be negative. So decreasing this value is not allowed.",
+            this.getName(),
+            this.getValue()
+        )
+    }
 };
 
 Register.prototype.clr = function () {
@@ -87,7 +117,7 @@ Register.prototype.clr = function () {
             this.getName()
         );
     }
-    this.setValue('0');
+    this.setValue(0);
 };
 
 Register.prototype.setState = function (busConnection, desiredState) {

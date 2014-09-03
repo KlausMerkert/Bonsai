@@ -217,3 +217,33 @@ function WriteToUndefinedAddress (message, MemoryName, BusName) {
     exception.actor2 = BusName;
     return exception;
 }
+
+function ValueIsMaxNoInc (message, componentName, value) {
+    var exception = {};
+    exception.name = 'ValueIsMaxNoInc';
+    exception.localization = '_' + exception.name + '_';
+    exception.message = message;
+    exception.actor1 = componentName;
+    exception.actor2 = value;
+    return exception;
+}
+
+function ZeroValueNoDec (message, componentName, value) {
+    var exception = {};
+    exception.name = 'ZeroValueNoDec';
+    exception.localization = '_' + exception.name + '_';
+    exception.message = message;
+    exception.actor1 = componentName;
+    exception.actor2 = value;
+    return exception;
+}
+
+function ValueNotInRangeZeroToMax (message, componentName, maxValue) {
+    var exception = {};
+    exception.name = 'ValueNotInRangeZeroToMax';
+    exception.localization = '_' + exception.name + '_';
+    exception.message = message;
+    exception.actor1 = componentName;
+    exception.actor2 = maxValue;
+    return exception;
+}

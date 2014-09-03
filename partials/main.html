@@ -41,8 +41,8 @@
                      top="norGate.top" left="norGate.left"></norgate>
         </div>
         <div ng-repeat="register in cpu.registers">
-            <register register-name="{{register.name}}" value="register.value" base="register.base"
-                      top="register.top" left="register.left"
+            <register register-name="{{register.name}}" value="register.value" max-value="register.maxValue"
+                      base="register.base" top="register.top" left="register.left"
                       inc-wire="register.incWire" dec-wire="register.decWire" clr-wire="register.clrWire">
                 <div ng-repeat="gate in register.gates">
                     <gate bus="gate.bus" initial-state="gate.initialState"
