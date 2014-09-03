@@ -1069,13 +1069,21 @@ bonsaiApp.controller('bonsaiCpuCtrl',
             if ($scope.cpu.registers[i].clrWireId) {
                 $scope.cpu.registers[i].clrWire = $scope.findBus($scope.cpu.registers[i].clrWireId);
             }
-            for (j = 0; j < $scope.cpu.registers[i].gates.length; j++) {
-                $scope.cpu.registers[i].gates[j].bus = $scope.findBus($scope.cpu.registers[i].gates[j].busId);
-                if ($scope.cpu.registers[i].gates[j].writeWireId) {
-                    $scope.cpu.registers[i].gates[j].writeWire = $scope.findBus($scope.cpu.registers[i].gates[j].writeWireId);
-                }
-                if ($scope.cpu.registers[i].gates[j].readWireId) {
-                    $scope.cpu.registers[i].gates[j].readWire = $scope.findBus($scope.cpu.registers[i].gates[j].readWireId);
+            if ($scope.cpu.registers[i].gates) {
+                for (j = 0; j < $scope.cpu.registers[i].gates.length; j++) {
+                    $scope.cpu.registers[i].gates[j].bus = $scope.findBus(
+                        $scope.cpu.registers[i].gates[j].busId
+                    );
+                    if ($scope.cpu.registers[i].gates[j].writeWireId) {
+                        $scope.cpu.registers[i].gates[j].writeWire = $scope.findBus(
+                            $scope.cpu.registers[i].gates[j].writeWireId
+                        );
+                    }
+                    if ($scope.cpu.registers[i].gates[j].readWireId) {
+                        $scope.cpu.registers[i].gates[j].readWire = $scope.findBus(
+                            $scope.cpu.registers[i].gates[j].readWireId
+                        );
+                    }
                 }
             }
         }
