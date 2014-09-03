@@ -792,7 +792,8 @@ bonsaiApp.controller('bonsaiCpuCtrl',
                         }
                     ],
                     'incWireId': 's5',
-                    'decWireId': 's6'
+                    'decWireId': 's6',
+                    'maxValue': 255
                 }, {
                     'name': 'MPC',
                     'value': 0,

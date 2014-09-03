@@ -348,5 +348,50 @@
         "key"        : "_WriteToUndefinedAddress_end",
         "value"      : ") is undefined. Nothing can be written to a undefined place.",
         "description": ""
+    },
+    {
+        "key"        : "_ValueIsMaxNoInc_beginning",
+        "value"      : "",
+        "description": ""
+    },
+    {
+        "key"        : "_ValueIsMaxNoInc_middle",
+        "value"      : ": The value is ",
+        "description": ""
+    },
+    {
+        "key"        : "_ValueIsMaxNoInc_end",
+        "value"      : " which is already the maximum value. Therefore increasing the value is not allowed.",
+        "description": ""
+    },
+    {
+        "key"        : "_ZeroValueNoDec_beginning",
+        "value"      : "",
+        "description": ""
+    },
+    {
+        "key"        : "_ZeroValueNoDec_middle",
+        "value"      : ": The value is ",
+        "description": ""
+    },
+    {
+        "key"        : "_ZeroValueNoDec_end",
+        "value"      : " and must not be negative. So decreasing this value is not allowed.",
+        "description": ""
+    },
+    {
+        "key"        : "_ValueNotInRangeZeroToMax_beginning",
+        "value"      : "",
+        "description": ""
+    },
+    {
+        "key"        : "_ValueNotInRangeZeroToMax_middle",
+        "value"      : ": The value you try to set is not in the Range 0 to ",
+        "description": ""
+    },
+    {
+        "key"        : "_ValueNotInRangeZeroToMax_end",
+        "value"      : ".",
+        "description": ""
     }
 ]

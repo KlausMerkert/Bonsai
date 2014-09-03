@@ -348,5 +348,50 @@
         "key"        : "_WriteToUndefinedAddress_end",
         "value"      : ") gelesen wurde ist 'undefined'. Um zu schreiben muss eine existierende Adresse angelegt werden.",
         "description": ""
+    },
+    {
+        "key"        : "_ValueIsMaxNoInc_beginning",
+        "value"      : "",
+        "description": ""
+    },
+    {
+        "key"        : "_ValueIsMaxNoInc_middle",
+        "value"      : ": Der Wert ist ",
+        "description": ""
+    },
+    {
+        "key"        : "_ValueIsMaxNoInc_end",
+        "value"      : ", was bereits der Maximalwert ist. Ein weiteres erhöhen über den Maximalwert ist nicht erlaubt.",
+        "description": ""
+    },
+    {
+        "key"        : "_ZeroValueNoDec_beginning",
+        "value"      : "",
+        "description": ""
+    },
+    {
+        "key"        : "_ZeroValueNoDec_middle",
+        "value"      : ": Der Wert ist ",
+        "description": ""
+    },
+    {
+        "key"        : "_ZeroValueNoDec_end",
+        "value"      : ", was breits der Minimalwert ist. Negative Werte sind nicht möglich. Daher ist eine weitere Verringerung des Werts nicht erlaubt.",
+        "description": ""
+    },
+    {
+        "key"        : "_ValueNotInRangeZeroToMax_beginning",
+        "value"      : "",
+        "description": ""
+    },
+    {
+        "key"        : "_ValueNotInRangeZeroToMax_middle",
+        "value"      : ": Der Wert liegt nicht im Bereich 0 bis ",
+        "description": ""
+    },
+    {
+        "key"        : "_ValueNotInRangeZeroToMax_end",
+        "value"      : ".",
+        "description": ""
     }
 ]

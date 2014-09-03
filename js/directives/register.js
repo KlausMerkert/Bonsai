@@ -8,6 +8,7 @@ bonsaiApp.directive('register', function ($interval) {
             value: '=',
             registerName: '@',
             base: '=',
+            maxValue: '=',
             top: '=',
             left: '=',
             incWire: '=',
@@ -71,7 +72,12 @@ bonsaiApp.directive('register', function ($interval) {
                             for (var i = 1; i <= newValue.length; i++) {
                                 convertedValue += parseInt(newValue[i - 1]) * Math.pow(2, newValue.length - i);
                             }
-                            $scope.register.setValue(convertedValue);
+                            try {
+                                $scope.register.setValue(convertedValue);
+                            } catch (exception) {
+                                $scope.data = oldValue;
+                                throw exception;
+                            }
                         } else {
                             $scope.data = oldValue;
                         }
@@ -81,7 +87,12 @@ bonsaiApp.directive('register', function ($interval) {
                             for (i = 1; i <= newValue.length; i++) {
                                 convertedValue += parseInt(newValue[i - 1]) * Math.pow(8, newValue.length - i);
                             }
-                            $scope.register.setValue(convertedValue);
+                            try {
+                                $scope.register.setValue(convertedValue);
+                            } catch (exception) {
+                                $scope.data = oldValue;
+                                throw exception;
+                            }
                         } else {
                             $scope.data = oldValue;
                         }
@@ -105,17 +116,34 @@ bonsaiApp.directive('register', function ($interval) {
                                 }
                                 convertedValue += digit * Math.pow(16, newValue.length - i);
                             }
-                            $scope.register.setValue(convertedValue);
+                            try {
+                                $scope.register.setValue(convertedValue);
+                            } catch (exception) {
+                                $scope.data = oldValue;
+                                throw exception;
+                            }
                         } else {
                             $scope.data = oldValue;
                         }
                     } else {
                         if (newValue.match(/[0-9]*/)[0] === newValue) {
-                            $scope.register.setValue(newValue);
+                            try {
+                                $scope.register.setValue(newValue);
+                            } catch (exception) {
+                                $scope.data = oldValue;
+                                throw exception;
+                            }
                         } else {
                             $scope.data = oldValue;
                         }
                     }
+                }
+            });
+
+            $scope.$watch('maxValue', function(newValue) {
+                var val = parseInt(newValue);
+                if (!isNaN(val) && val >= 0) {
+                    $scope.register.setMaxValue(val);
                 }
             });
 
