@@ -44,8 +44,12 @@ bonsaiApp.controller('bonsaiCpuCtrl',
             $scope.editMode = !$scope.editMode;
         };
 
-        $scope.loadCpu = function () {
+        $scope.clearCpu = function () {
             $scope.cpu = {};
+        };
+
+        $scope.loadCpu = function () {
+            $scope.clearCpu();
             var input = document.getElementById('cpu-filename');
             var file = input.files[0];
             var reader = new FileReader();
@@ -55,8 +59,8 @@ bonsaiApp.controller('bonsaiCpuCtrl',
                     var matcher = new BusMatcher($scope.cpu);
                     matcher.createBuses();
                     matcher.matchAllComponents();
+                    $scope.cpu = matcher.getCpu();
                     $scope.selectedEditor = undefined;
-                    console.log($scope.cpu);
                     $scope.cpuFileName = file.name;
                 });
             });

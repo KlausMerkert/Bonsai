@@ -25,6 +25,11 @@
         "description": ""
     },
     {
+        "key"        : "_clearCpuButton_",
+        "value"      : "alle Komponenten löschen",
+        "description": ""
+    },
+    {
         "key"        : "_BusOccupiedException_beginning",
         "value"      : "Dieser Bus (",
         "description": ""

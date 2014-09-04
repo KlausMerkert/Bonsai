@@ -4,6 +4,10 @@ function BusMatcher (cpu) {
     this.cpu = cpu;
 }
 
+BusMatcher.prototype.getCpu = function () {
+    return this.cpu;
+};
+
 BusMatcher.prototype.createBuses = function () {
     for (var i = 0; i < this.cpu.buses.length; i++) {
         this.cpu.buses[i].object = new Bus();

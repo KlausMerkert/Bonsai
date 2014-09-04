@@ -25,6 +25,11 @@
         "description": ""
     },
     {
+        "key"        : "_clearCpuButton_",
+        "value"      : "clear CPU",
+        "description": ""
+    },
+    {
         "key"        : "_BusOccupiedException_beginning",
         "value"      : "This bus (",
         "description": ""

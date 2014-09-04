@@ -34,18 +34,32 @@ FileSaver.prototype.save = function () {
 
 FileSaver.prototype.cpuToJson = function () {
     var removeAllBusReferences = function (o) {
-        var keys = Object.keys(o);
-        var copy = {};
-        for (var i = 0; i < keys.length; i++) {
-            if (!(o[keys[i]] instanceof Bus)) {
-                if (typeof o[keys[i]] == 'object') {
-                    copy[keys[i]] = removeAllBusReferences(o[keys[i]]);
-                } else {
-                    copy[keys[i]] = o[keys[i]];
+        var copy, i;
+        if (o instanceof Array) {
+            copy = [];
+            for (i = 0; i < o.length; i++) {
+                if (!(o[i] instanceof Bus)) {
+                    if (typeof o[i] == 'object') {
+                        copy.push(removeAllBusReferences(o[i]));
+                    } else {
+                        copy.push(o[i]);
+                    }
+                }
+            }
+        } else {
+            var keys = Object.keys(o);
+            copy = {};
+            for (i = 0; i < keys.length; i++) {
+                if (!(o[keys[i]] instanceof Bus)) {
+                    if (typeof o[keys[i]] == 'object') {
+                        copy[keys[i]] = removeAllBusReferences(o[keys[i]]);
+                    } else {
+                        copy[keys[i]] = o[keys[i]];
+                    }
                 }
             }
         }
         return copy;
     };
-    this.content = angular.toJson(removeAllBusReferences(this.content));
+    this.content = angular.toJson(removeAllBusReferences(this.content), true);
 };
