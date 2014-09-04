@@ -131,13 +131,17 @@ Memory.prototype.writeData = function (data) {
 Memory.prototype.setValue = function (data, writingBus) {
     if ((this.dataBus) && (this.dataBus.bus) && (writingBus == this.dataBus.bus)) {
         this.writeData(data)
-    } else if ((writingBus == this.addressBus.bus) && (typeof data != 'undefined')) {
-        if ((this.dataBus) && (this.dataBus.state == -1)) {
+    } else if (writingBus == this.addressBus.bus) {
+        if ((this.dataBus) && (this.dataBus.state == -1) && (typeof data != 'undefined')) {
             this.content[data] = this.dataBus.bus.registerReaderAndRead(this);
         } else if ((this.dataBus) && (this.dataBus.state == 1)) {
-            this.dataBus.bus.write(this, this.content[data]);
+            if (typeof data != 'undefined') {
+                this.dataBus.bus.write(this, this.content[data]);
+            } else {
+                this.dataBus.bus.write(this, undefined);
+            }
         }
-        if (typeof this.content[data] == 'undefined') {
+        if ((typeof data != 'undefined') && (typeof this.content[data] == 'undefined')) {
             this.content[data] = undefined;
         }
         this.updateViewCallback(this.getDataWithContext(data));
