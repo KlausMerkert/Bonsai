@@ -17,7 +17,7 @@ var bonsaiApp = angular.module(
     }])
     .factory('$exceptionHandler', function ($injector) {
         return function (exception, cause) {
-            if (exception.name) {
+            if (exception.localization) {
                 $injector.get('$rootScope').$broadcast('error', exception);
             } else {
                 throw exception;

@@ -20,6 +20,11 @@
         "description": ""
     },
     {
+        "key"        : "_saveCpuButton_",
+        "value"      : "save CPU to file",
+        "description": ""
+    },
+    {
         "key"        : "_BusOccupiedException_beginning",
         "value"      : "This bus (",
         "description": ""

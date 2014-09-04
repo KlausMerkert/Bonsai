@@ -1160,28 +1160,28 @@ bonsaiApp.controller('bonsaiCpuCtrl',
                     $scope.cpu.memories[memoryNumber].fileName = file.name;
                 });
             });
-            console.log(file);
             reader.readAsText(file);
         };
         $scope.saveFile = function (memoryNumber) {
-            var url;
-            var blob = new Blob([$scope.cpu.memories[memoryNumber].content], {type : 'application/bonsai'});
-            if (window.webkitURL) {
-                url = window.webkitURL.createObjectURL(blob);
-            } else {
-                url = window.URL.createObjectURL(blob);
-            }
-            // initiate download by adding a <a> element and invoking a click on it
-            var downloadLink = document.createElement("a");
-            downloadLink.href = url;
-            if ($scope.cpu.memories[memoryNumber].fileName) {
-                downloadLink.download = $scope.cpu.memories[memoryNumber].fileName
-            } else {
-                downloadLink.download = $scope.cpu.memories[memoryNumber].name + ".bonsai";
-            }
-            document.body.appendChild(downloadLink);
-            downloadLink.click();
-            document.body.removeChild(downloadLink);
+            var fs = new FileSaver(
+                $scope.cpu.memories[memoryNumber].content,
+                $scope.cpu.memories[memoryNumber].name + ".bonsai",
+                $scope.cpu.memories[memoryNumber].fileName
+            );
+            fs.save();
+        };
+
+        $scope.toggleEditMode = function () {
+            $scope.editMode = !$scope.editMode;
+        };
+
+        $scope.loadCpu = function () {
+
+        };
+        $scope.saveCpu = function () {
+            console.log(angular.toJson($scope.cpu));
+            var fs = new FileSaver(angular.toJson($scope.cpu), "bonsai.cpu", $scope.cpuFileName);
+            fs.save();
         };
 
         $scope.errors = [];
