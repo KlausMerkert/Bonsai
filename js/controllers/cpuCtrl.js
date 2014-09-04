@@ -1179,8 +1179,8 @@ bonsaiApp.controller('bonsaiCpuCtrl',
 
         };
         $scope.saveCpu = function () {
-            console.log(angular.toJson($scope.cpu));
-            var fs = new FileSaver(angular.toJson($scope.cpu), "bonsai.cpu", $scope.cpuFileName);
+            var fs = new FileSaver($scope.cpu, "bonsai.cpu", $scope.cpuFileName);
+            fs.cpuToJson();
             fs.save();
         };
 
