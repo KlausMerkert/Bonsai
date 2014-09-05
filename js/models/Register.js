@@ -169,9 +169,9 @@ Register.prototype.setState = function (busConnection, desiredState) {
     }
 };
 
-Register.prototype.setToRead = function (wire) {
+Register.prototype.setToRead = function (bus) {
     for (var i = 0; i < this.buses.length; i++) {
-        if (this.buses[i].readWire === wire) {
+        if (this.buses[i].bus === bus) {
             if ((this.buses[i].writeWire) &&
                 (this.buses[i].writeWire.isActive()) &&
                 (this.buses[i].writeWire.isNotZero())) {
@@ -188,9 +188,9 @@ Register.prototype.setToRead = function (wire) {
     }
 };
 
-Register.prototype.setToWrite = function (wire) {
+Register.prototype.setToWrite = function (bus) {
     for (var i = 0; i < this.buses.length; i++) {
-        if (this.buses[i].writeWire === wire) {
+        if (this.buses[i].bus === bus) {
             if ((this.buses[i].readWire) &&
                 (this.buses[i].readWire.isActive()) &&
                 (this.buses[i].readWire.isNotZero())) {
@@ -207,9 +207,9 @@ Register.prototype.setToWrite = function (wire) {
     }
 };
 
-Register.prototype.setToDisconnected = function (wire) {
+Register.prototype.setWriteToDisconnected = function (bus) {
     for (var i = 0; i < this.buses.length; i++) {
-        if (this.buses[i].writeWire === wire) {
+        if (this.buses[i].bus === bus) {
             if ((this.buses[i].readWire) &&
                 (this.buses[i].readWire.isActive()) &&
                 (this.buses[i].readWire.isNotZero())) {
@@ -218,7 +218,12 @@ Register.prototype.setToDisconnected = function (wire) {
                 this.setState(this.buses[i], 0);
             }
         }
-        if (this.buses[i].readWire === wire) {
+    }
+};
+
+Register.prototype.setReadToDisconnected = function (bus) {
+    for (var i = 0; i < this.buses.length; i++) {
+        if (this.buses[i].bus === bus) {
             if ((this.buses[i].writeWire) &&
                 (this.buses[i].writeWire.isActive()) &&
                 (this.buses[i].writeWire.isNotZero())) {
