@@ -1,12 +1,13 @@
 'use strict';
 
 bonsaiApp.controller('bonsaiCpuCtrl',
-    function ($scope, $routeParams) {
+    function ($scope, $location) {
         $scope.base = 10;
 
-        console.log($routeParams);
         var exampleGenerator = new ExampleGenerator();
-        if ($routeParams['example'] == 'registertransfer') {
+        if ($location.search()['example'] == 'singleregister') {
+            $scope.cpu = exampleGenerator.generateSingleRegister();
+        } else if ($location.search()['example'] == 'registertransfer') {
             $scope.cpu = exampleGenerator.generateRegisterTransfer();
         } else {
             $scope.cpu = exampleGenerator.generateBonsai();
