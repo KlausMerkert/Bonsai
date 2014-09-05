@@ -997,3 +997,120 @@ ExampleGenerator.prototype.generateBonsai = function () {
         ]
     };
 };
+
+ExampleGenerator.prototype.generateRegisterTransfer = function () {
+    return {
+            'buses': [
+                     {
+                    'id': 'dataBus',
+                    'name': 'Datenbus',
+                    'max': 99999,
+                    'base': 10,
+                    'color': 'rgb(255, 0, 0)',
+                    'top': 170,
+                    'left': 175,
+                    'routes': [
+                        {
+                            'type': 'bottomright',
+                            'top': '100px',
+                            'left': '275px',
+                            'width': '120px',
+                            'height': '95px'
+                        },
+                        {
+                            'type': 'topleft',
+                            'top': '195px',
+                            'left': '43px',
+                            'width': '230px',
+                            'height': '35px'
+                        }
+                    ]
+                }, {
+                    'id': 'addressBus',
+                    'name': 'Adressbus',
+                    'max': 9999,
+                    'base': 10,
+                    'color': 'rgb(0, 140, 0)',
+                    'top': -3,
+                    'left': 275,
+                    'routes': [
+                        {
+                            'type': 'topleft',
+                            'top': '21px',
+                            'left': '224px',
+                            'width': '158px',
+                            'height': '7px'
+                        },
+                        {
+                            'type': 'topright',
+                            'top': '21px',
+                            'left': '384px',
+                            'width': '11px',
+                            'height': '10px'
+                        }
+                    ]
+                 }],
+            'manualswitches': [],
+            'leds': [],
+	    'andGates': [],
+            'orGates': [],
+            'norGates': [],
+            'registers': [
+                {
+                    'name': 'PC',
+                    'value': 0,
+                    'base' : 10,
+                    'top' : 50,
+                    'left': 190,
+                    'gates': [
+                        {'busId': 'addressBus',
+                         'writeWireId': undefined,
+                         'readWireId': undefined
+                        }
+                    ],
+                    'incWireId': undefined
+                }, {
+                    'name': 'IR',
+                    'value': 23,
+                    'base' : 10,
+                    'top' : 50,
+                    'left': 362,
+                    'gates': [
+                        {
+                            'busId': 'addressBus',
+                            'writeWireId': undefined,
+                            'initialState': 0
+                        }, {
+                            'busId': 'dataBus',
+                            'readWireId': undefined
+                        }
+                    ],
+                    'incWireId': undefined,
+                    'decWireId': undefined,
+                    'clrWireId': undefined
+                }, {
+                    'name': 'Akku',
+                    'value': 42,
+                    'base' : 10,
+                    'top' : 250,
+                    'left': 10,
+                    'gates': [
+                        {
+                            'busId': 'dataBus',
+                            'writeWireId': undefined,
+                            'readWireId': undefined
+                        }
+                    ],
+                    'incWireId': undefined,
+                    'decWireId': undefined
+                }
+            ],
+            'bitregisters': [],
+            'memories': [],
+            'zerocomparators': [],
+            'delays': [],
+            'filters': [],
+            'clocks': [],
+            'labels': []
+        };
+};

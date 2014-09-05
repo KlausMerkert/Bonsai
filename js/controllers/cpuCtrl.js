@@ -4,8 +4,13 @@ bonsaiApp.controller('bonsaiCpuCtrl',
     function ($scope, $routeParams) {
         $scope.base = 10;
 
+        console.log($routeParams);
         var exampleGenerator = new ExampleGenerator();
-        $scope.cpu = exampleGenerator.generateBonsai();
+        if ($routeParams['example'] == 'registertransfer') {
+            $scope.cpu = exampleGenerator.generateRegisterTransfer();
+        } else {
+            $scope.cpu = exampleGenerator.generateBonsai();
+        }
 
         var matcher = new BusMatcher($scope.cpu);
         matcher.createBuses();
