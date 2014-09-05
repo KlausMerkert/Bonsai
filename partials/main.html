@@ -1,6 +1,7 @@
 <div>
     <ul class="tabs">
-        <li style="margin-right: 2em;"></li>
+        <li class="settings-wheel" ng-click="toggleEditMode()"></li>
+        <li style="margin-right: 0.5em;"></li>
         <li ng-class="{'active': !selectedEditor}">
             <span class="start"></span>
             <span class="content" ng-click="selectEditor(undefined)"><a href="" data-i18n="_CpuView_"></a></span>
@@ -12,6 +13,13 @@
             <span class="end"></span>
         </li>
     </ul>
+    <div class="toolbar" ng-show="editMode">
+        <button type="button" ng-click="saveCpu()" data-i18n="_saveCpuButton_">save CPU to file</button>
+        <button type="button" ng-click="clearCpu()" data-i18n="_clearCpuButton_">clear CPU</button>
+        <input type="file" id="cpu-filename"
+               ng-model="editor.filename"
+               ng-change="loadCpu()" />
+    </div>
     <div class="components pane" ng-show="!selectedEditor">
         <div ng-repeat="bus in cpu.buses">
             <bus bus="bus.object" bus-name="{{bus.name}}" max-value="bus.max" base="bus.base"

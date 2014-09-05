@@ -20,6 +20,16 @@
         "description": ""
     },
     {
+        "key"        : "_saveCpuButton_",
+        "value"      : "CPU als Datei speichern",
+        "description": ""
+    },
+    {
+        "key"        : "_clearCpuButton_",
+        "value"      : "alle Komponenten löschen",
+        "description": ""
+    },
+    {
         "key"        : "_BusOccupiedException_beginning",
         "value"      : "Dieser Bus (",
         "description": ""
