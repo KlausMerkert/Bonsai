@@ -15,6 +15,24 @@ bonsaiApp.controller('bonsaiCpuCtrl',
             $scope.cpu = exampleGenerator.generateBonsai();
         }
 
+        $scope.getMousePosition = function($event) {
+            var getOffset = function( el ) {
+                var _x = 0;
+                var _y = 0;
+                while( el && !isNaN( el.offsetLeft ) && !isNaN( el.offsetTop ) ) {
+                    _x += el.offsetLeft - el.scrollLeft;
+                    _y += el.offsetTop - el.scrollTop;
+                    el = el.offsetParent;
+                }
+                return { top: _y, left: _x };
+            };
+            if ($scope.editMode) {
+                var offset = getOffset(document.getElementById('CpuCanvas'));
+                $scope.MouseX = $event.clientX - offset.left - 1;
+                $scope.MouseY = $event.clientY - offset.top - 3;
+            }
+        };
+
         var matcher = new BusMatcher($scope.cpu);
         matcher.createBuses();
         matcher.matchAllComponents();
