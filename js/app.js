@@ -20,6 +20,9 @@ var bonsaiApp = angular.module(
             if (exception.localization) {
                 $injector.get('$rootScope').$broadcast('error', exception);
             } else {
+                if (cause) {
+                    console.log("Cause: " + cause);
+                }
                 throw exception;
             }
         };

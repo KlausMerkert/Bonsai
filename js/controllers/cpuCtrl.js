@@ -9,6 +9,8 @@ bonsaiApp.controller('bonsaiCpuCtrl',
             $scope.cpu = exampleGenerator.generateSingleRegister();
         } else if ($location.search()['example'] == 'registertransfer') {
             $scope.cpu = exampleGenerator.generateRegisterTransfer();
+        } else if ($location.search()['example'] == 'manual') {
+            $scope.cpu = exampleGenerator.generateManualBonsai();
         } else {
             $scope.cpu = exampleGenerator.generateBonsai();
         }
@@ -62,10 +64,15 @@ bonsaiApp.controller('bonsaiCpuCtrl',
             reader.addEventListener("loadend", function() {
                 $scope.$apply(function () {
                     $scope.cpu = angular.fromJson(reader.result);
-                    var matcher = new BusMatcher($scope.cpu);
-                    matcher.createBuses();
-                    matcher.matchAllComponents();
-                    $scope.cpu = matcher.getCpu();
+                    try {
+                        var matcher = new BusMatcher($scope.cpu);
+                        matcher.createBuses();
+                        matcher.matchAllComponents();
+                        $scope.cpu = matcher.getCpu();
+                    } catch (exception) {
+                        $scope.clearCpu();
+                        throw exception;
+                    }
                     $scope.selectedEditor = undefined;
                     $scope.cpuFileName = file.name;
                 });
