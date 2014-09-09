@@ -1250,7 +1250,7 @@ ExampleGenerator.prototype.generateManualBonsai = function () {
                         "top": "21px",
                         "left": "439px",
                         "width": "23px",
-                        "height": "207px"
+                        "height": "10px"
                     }
                 ]
             },
@@ -1313,15 +1313,15 @@ ExampleGenerator.prototype.generateManualBonsai = function () {
                 "name": "incPC",
                 "wireId": "incPCBus",
                 "value": 1,
-                "top": 10,
-                "left": 500
+                "top": 73,
+                "left": 298
             },
             {
                 "name": "incPCz",
                 "wireId": "incPCzBus",
                 "value": 0,
-                "top": 30,
-                "left": 500
+                "top": 48,
+                "left": 330
             }
         ],
         "leds": [
