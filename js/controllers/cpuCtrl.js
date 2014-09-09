@@ -9,6 +9,8 @@ bonsaiApp.controller('bonsaiCpuCtrl',
             $scope.cpu = exampleGenerator.generateSingleRegister();
         } else if ($location.search()['example'] == 'registertransfer') {
             $scope.cpu = exampleGenerator.generateRegisterTransfer();
+        } else if ($location.search()['example'] == 'manual') {
+            $scope.cpu = exampleGenerator.generateManualBonsai();
         } else {
             $scope.cpu = exampleGenerator.generateBonsai();
         }
