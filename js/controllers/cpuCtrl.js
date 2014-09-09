@@ -9,9 +9,29 @@ bonsaiApp.controller('bonsaiCpuCtrl',
             $scope.cpu = exampleGenerator.generateSingleRegister();
         } else if ($location.search()['example'] == 'registertransfer') {
             $scope.cpu = exampleGenerator.generateRegisterTransfer();
+        } else if ($location.search()['example'] == 'manual') {
+            $scope.cpu = exampleGenerator.generateManualBonsai();
         } else {
             $scope.cpu = exampleGenerator.generateBonsai();
         }
+
+        $scope.getMousePosition = function($event) {
+            var getOffset = function( el ) {
+                var _x = 0;
+                var _y = 0;
+                while( el && !isNaN( el.offsetLeft ) && !isNaN( el.offsetTop ) ) {
+                    _x += el.offsetLeft - el.scrollLeft;
+                    _y += el.offsetTop - el.scrollTop;
+                    el = el.offsetParent;
+                }
+                return { top: _y, left: _x };
+            };
+            if ($scope.editMode) {
+                var offset = getOffset(document.getElementById('CpuCanvas'));
+                $scope.MouseX = $event.clientX - offset.left - 1;
+                $scope.MouseY = $event.clientY - offset.top - 3;
+            }
+        };
 
         var matcher = new BusMatcher($scope.cpu);
         matcher.createBuses();
@@ -62,10 +82,15 @@ bonsaiApp.controller('bonsaiCpuCtrl',
             reader.addEventListener("loadend", function() {
                 $scope.$apply(function () {
                     $scope.cpu = angular.fromJson(reader.result);
-                    var matcher = new BusMatcher($scope.cpu);
-                    matcher.createBuses();
-                    matcher.matchAllComponents();
-                    $scope.cpu = matcher.getCpu();
+                    try {
+                        var matcher = new BusMatcher($scope.cpu);
+                        matcher.createBuses();
+                        matcher.matchAllComponents();
+                        $scope.cpu = matcher.getCpu();
+                    } catch (exception) {
+                        $scope.clearCpu();
+                        throw exception;
+                    }
                     $scope.selectedEditor = undefined;
                     $scope.cpuFileName = file.name;
                 });

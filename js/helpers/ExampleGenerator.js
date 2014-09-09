@@ -1143,3 +1143,337 @@ ExampleGenerator.prototype.generateRegisterTransfer = function () {
         'labels': []
     };
 };
+
+ExampleGenerator.prototype.generateManualBonsai = function () {
+    return  {
+        "buses": [
+            {
+                "id": "dataBus",
+                "name": "Datenbus",
+                "max": 99999,
+                "base": 10,
+                "color": "rgb(255, 0, 0)",
+                "top": 170,
+                "left": 175,
+                "routes": [
+                    {
+                        "type": "vertical",
+                        "top": "164px",
+                        "left": "129px",
+                        "width": "0",
+                        "height": "31px"
+                    },
+                    {
+                        "type": "bottomright",
+                        "top": "100px",
+                        "left": "275px",
+                        "width": "120px",
+                        "height": "95px"
+                    },
+                    {
+                        "type": "vertical",
+                        "top": "195px",
+                        "left": "318px",
+                        "width": "0",
+                        "height": "17px"
+                    },
+                    {
+                        "type": "topleft",
+                        "top": "195px",
+                        "left": "43px",
+                        "width": "230px",
+                        "height": "35px"
+                    }
+                ]
+            },
+            {
+                "id": "addressBus",
+                "name": "Adressbus",
+                "max": 9999,
+                "base": 10,
+                "color": "rgb(0, 140, 0)",
+                "top": -3,
+                "left": 175,
+                "routes": [
+                    {
+                        "type": "topleft",
+                        "top": "21px",
+                        "left": "51px",
+                        "width": "301px",
+                        "height": "7px"
+                    },
+                    {
+                        "type": "vertical",
+                        "top": "21px",
+                        "left": "224px",
+                        "width": "0",
+                        "height": "10px"
+                    }
+                ]
+            },
+            {
+                "id": "IRout",
+                "name": "AusgangIR",
+                "max": 99999,
+                "base": 10,
+                "color": "rgb(0, 140, 0)",
+                "top": -3,
+                "left": 377,
+                "routes": [
+                    {
+                        "type": "topright",
+                        "top": "21px",
+                        "left": "384px",
+                        "width": "11px",
+                        "height": "7px"
+                    },
+                    {
+                        "type": "topleft",
+                        "top": "21px",
+                        "left": "396px",
+                        "width": "11px",
+                        "height": "7px"
+                    }
+                ]
+            },
+            {
+                "id": "opcode",
+                "name": "opcode",
+                "max": 99999,
+                "base": 10,
+                "color": "rgb(0, 140, 0)",
+                "top": -3,
+                "left": 443,
+                "routes": [
+                    {
+                        "type": "topright",
+                        "top": "21px",
+                        "left": "439px",
+                        "width": "23px",
+                        "height": "10px"
+                    }
+                ]
+            },
+            {
+                "id": "AndB",
+                "name": "And gate B wire",
+                "max": 1
+            },
+            {
+                "id": "OrA",
+                "name": "Or gate A wire",
+                "max": 1
+            },
+            {
+                "id": "or1_ausgang",
+                "name": "or1_ausgang result wire",
+                "max": 1
+            },
+            {
+                "id": "incPCBus",
+                "name": "incPCBus",
+                "max": 1
+            },
+            {
+                "id": "incPCzBus",
+                "name": "incPCzBus",
+                "max": 1
+            },
+            {
+                "id": "compWire",
+                "name": "Zerocomparator result wire",
+                "max": 1,
+                "routes": [
+                    {
+                        "type": "vertical",
+                        "top": "239px",
+                        "left": "318px",
+                        "width": "0",
+                        "height": "16px"
+                    },
+                    {
+                        "type": "topright",
+                        "top": "59px",
+                        "left": "321px",
+                        "width": "15px",
+                        "height": "140px"
+                    },
+                    {
+                        "type": "bottomright",
+                        "top": "200px",
+                        "left": "319px",
+                        "width": "17px",
+                        "height": "46px"
+                    }
+                ]
+            }
+        ],
+        "manualswitches": [
+            {
+                "name": "incPC",
+                "wireId": "incPCBus",
+                "value": 1,
+                "top": 73,
+                "left": 298
+            },
+            {
+                "name": "incPCz",
+                "wireId": "incPCzBus",
+                "value": 0,
+                "top": 48,
+                "left": 330
+            }
+        ],
+        "leds": [
+            {
+                "wireId": "or1_ausgang",
+                "name": "or1_ausgang indication led",
+                "top": 35,
+                "left": 262,
+                "value": 0
+            },
+            {
+                "wireId": "compWire",
+                "name": "comp indication led",
+                "top": 259,
+                "left": 317,
+                "value": 0
+            }
+        ],
+        "andGates": [
+            {
+                "name": "and1",
+                "inAId": "incPCzBus",
+                "inBId": "compWire",
+                "outId": "OrA",
+                "top": 48,
+                "left": 300
+            }
+        ],
+        "orGates": [
+            {
+                "name": "or1",
+                "inAId": "OrA",
+                "inBId": "incPCBus",
+                "outId": "or1_ausgang",
+                "top": 53,
+                "left": 270
+            }
+        ],
+        "norGates": [],
+        "registers": [
+            {
+                "name": "PC",
+                "value": 0,
+                "base": 10,
+                "top": 50,
+                "left": 190,
+                "gates": [
+                    {
+                        "busId": "addressBus"
+                    }
+                ],
+                "incWireId": "or1_ausgang"
+            },
+            {
+                "name": "IR",
+                "value": 40008,
+                "base": 10,
+                "top": 50,
+                "left": 362,
+                "gates": [
+                    {
+                        "busId": "IRout",
+                        "initialState": 0
+                    },
+                    {
+                        "busId": "dataBus"
+                    }
+                ]
+            },
+            {
+                "name": "Akku",
+                "value": 42,
+                "base": 10,
+                "top": 250,
+                "left": 10,
+                "gates": [
+                    {
+                        "busId": "dataBus"
+                    }
+                ],
+                "maxValue": 255
+            }
+        ],
+        "bitregisters": [],
+        "memories": [
+            {
+                "name": "Datenspeicher",
+                "base": 10,
+                "content": "30003\n10007\n20008\n40008\n30001\n50000\n\n3\n2",
+                "top": 50,
+                "left": 10,
+                "addressgate": {
+                    "busId": "addressBus",
+                    "initialState": -1
+                },
+                "datagate": {
+                    "busId": "dataBus"
+                },
+                "undefinedString": "---",
+                "showContext": true
+            }
+        ],
+        "zerocomparators": [
+            {
+                "name": "Zero comparator 1",
+                "busId": "dataBus",
+                "wireId": "compWire",
+                "top": 214,
+                "left": 318
+            }
+        ],
+        "delays": [],
+        "filters": [
+            {
+                "name": "div10000",
+                "statement": "n/10000",
+                "busLeftId": "IRout",
+                "busRightId": "opcode",
+                "top": 21,
+                "left": 412
+            },
+            {
+                "name": "mod10000",
+                "statement": "n%10000",
+                "busLeftId": "addressBus",
+                "busRightId": "IRout",
+                "top": 21,
+                "left": 357
+            }
+        ],
+        "clocks": [],
+        "labels": [
+            {
+                "text": "Akku",
+                "top": 230,
+                "left": 10
+            },
+            {
+                "text": "PC",
+                "top": 30,
+                "left": 195
+            },
+            {
+                "text": "IR",
+                "top": 30,
+                "left": 372
+            },
+            {
+                "text": "Programmspeicher",
+                "top": 30,
+                "left": 70
+            }
+        ]
+    };
+};

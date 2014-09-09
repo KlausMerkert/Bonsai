@@ -15,12 +15,13 @@
     </ul>
     <div class="toolbar" ng-show="editMode">
         <button type="button" ng-click="saveCpu()" data-i18n="_saveCpuButton_">save CPU to file</button>
-        <button type="button" ng-click="clearCpu()" data-i18n="_clearCpuButton_">clear CPU</button>
+        <!--<button type="button" ng-click="clearCpu()" data-i18n="_clearCpuButton_">clear CPU</button>-->
         <input type="file" id="cpu-filename"
                ng-model="editor.filename"
                ng-change="loadCpu()" />
+        <span>({{ MouseX }}, {{ MouseY }})</span>
     </div>
-    <div class="components pane" ng-show="!selectedEditor">
+    <div class="components pane" id="CpuCanvas" ng-show="!selectedEditor" ng-mousemove="getMousePosition($event)">
         <div ng-repeat="bus in cpu.buses">
             <bus bus="bus.object" bus-name="{{bus.name}}" max-value="bus.max" base="bus.base"
                  color="bus.color" top="bus.top" left="bus.left" routes="bus.routes"></bus>
