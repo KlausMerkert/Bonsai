@@ -1357,7 +1357,7 @@ ExampleGenerator.prototype.generateManualBonsai = function () {
             {
                 "name": "incPC",
                 "wireId": "incPCBus",
-                "value": 1,
+                "value": 0,
                 "top": 73,
                 "left": 298
             },
