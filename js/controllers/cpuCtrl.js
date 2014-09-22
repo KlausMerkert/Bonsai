@@ -11,8 +11,8 @@ bonsaiApp.controller('bonsaiCpuCtrl',
             $scope.cpu = exampleGenerator.generateRegisterTransfer();
         } else if ($location.search()['example'] == 'manual') {
             $scope.cpu = exampleGenerator.generateManualBonsai();
-        } else if ($location.search()['example'] == 'and') {
-            $scope.cpu = exampleGenerator.generateAnd();
+        } else if ($location.search()['example'] == 'gates') {
+            $scope.cpu = exampleGenerator.generateGates();
         } else if ($location.search()['example'] == 'memory') {
             $scope.cpu = exampleGenerator.generateMemory();
         } else {
