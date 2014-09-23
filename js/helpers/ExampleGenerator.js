@@ -1524,70 +1524,161 @@ ExampleGenerator.prototype.generateManualBonsai = function () {
 };
 
 
-ExampleGenerator.prototype.generateAnd = function () {
+ExampleGenerator.prototype.generateGates = function () {
     return    {
-			  "buses": [
-			     {
-			      "id": "a",
-			      "name": "a",
-			      "max": 1
-			    },
-			    {
-			      "id": "b",
-			      "name": "b",
-			      "max": 1
-			    },
-			    {
-			      "id": "c",
-			      "name": "c",
-			      "max": 1
-			    }
-			  ],
-			  "manualswitches": [
-			    {
-			      "name": "Eingang A",
-			      "wireId": "a",
-			      "value": 0,
-			      "top": 40,
-			      "left": 340
-			    },
-			    {
-			      "name": "Eingang B",
-			      "wireId": "b",
-			      "value": 0,
-			      "top": 70,
-			      "left": 340
-			    }
-			  ],
-			  "leds": [
-			    {
-			      "name": "Ausgang C",       
-			      "wireId": "c",
-			      "top": 55,
-			      "left": 270,
-			      "value": 0
-			    }
-			  ],
-			  "andGates": [
-			    {
-			      "name": "and1",
-			      "inAId": "a",
-			      "inBId": "b",
-			      "outId": "c",
-			      "top": 50,
-			      "left": 300
-			    }],
-			  "orGates": [],
-			  "norGates": [],
-			  "registers": [],
-			  "bitregisters": [],
-			  "memories": [],
-			  "zerocomparators": [],
-			  "delays": [],
-			  "filters": [],
-			  "clocks": [],
-			  "labels": []
-			};    
+		  "buses": [
+		    {
+		      "id": "a0",
+		      "name": "a0",
+		      "max": 1
+		    },
+		    {
+		      "id": "b0",
+		      "name": "b0",
+		      "max": 1
+		    },
+		    {
+		      "id": "c0",
+		      "name": "c0",
+		      "max": 1
+		    },
+		    {
+		      "id": "a1",
+		      "name": "a1",
+		      "max": 1
+		    },
+		    {
+		      "id": "b1",
+		      "name": "b1",
+		      "max": 1
+		    },
+		    {
+		      "id": "c1",
+		      "name": "c1",
+		      "max": 1
+		    },
+		    {
+		      "id": "a2",
+		      "name": "a2",
+		      "max": 1
+		    },
+		    {
+		      "id": "b2",
+		      "name": "b2",
+		      "max": 1
+		    },
+		    {
+		      "id": "c2",
+		      "name": "c2",
+		      "max": 1
+		    }
+		  ],
+		  "manualswitches": [
+		    {
+		      "name": "A0",
+		      "wireId": "a0",
+		      "value": 0,
+		      "top": 40,
+		      "left": 340
+		    },
+		    {
+		      "name": "B0",
+		      "wireId": "b0",
+		      "value": 0,
+		      "top": 70,
+		      "left": 340
+		    },
+		    {
+		      "name": "A1",
+		      "wireId": "a1",
+		      "value": 0,
+		      "top": 140,
+		      "left": 340
+		    },
+		    {
+		      "name": "B1",
+		      "wireId": "b1",
+		      "value": 0,
+		      "top": 170,
+		      "left": 340
+		    },
+		    {
+		      "name": "A2",
+		      "wireId": "a2",
+		      "value": 0,
+		      "top": 240,
+		      "left": 340
+		    },
+		    {
+		      "name": "B2",
+		      "wireId": "b2",
+		      "value": 0,
+		      "top": 270,
+		      "left": 340
+		    }
+		  ],
+		  "leds": [
+		    {
+		      "name": "C0",
+		      "wireId": "c0",
+		      "top": 55,
+		      "left": 270,
+		      "value": 0
+		    },
+		    {
+		      "name": "C1",
+		      "wireId": "c1",
+		      "top": 155,
+		      "left": 270,
+		      "value": 0
+		    },
+		    {
+		      "name": "C2",
+		      "wireId": "c2",
+		      "top": 255,
+		      "left": 270,
+		      "value": 0
+		    }
+		  ],
+		  "andGates": [
+		    {
+		      "name": "and",
+		      "inAId": "a0",
+		      "inBId": "b0",
+		      "outId": "c0",
+		      "top": 50,
+		      "left": 300
+		    }
+		  ],
+		  "orGates": [
+		    {
+		      "name": "or",
+		      "inAId": "a1",
+		      "inBId": "b1",
+		      "outId": "c1",
+		      "top": 150,
+		      "left": 300
+		    }
+		  ],
+		  "norGates": [
+		    {
+		      "name": "nor",
+		      "inAId": "a2",
+		      "inBId": "b2",
+		      "outId": "c2",
+		      "top": 250,
+		      "left": 300
+		    }
+		  ],
+		  "registers": [],
+		  "bitregisters": [],
+		  "memories": [],
+		  "zerocomparators": [],
+		  "delays": [],
+		  "filters": [],
+		  "clocks": [],
+		  "labels": []
+		} 
 };    
 
 ExampleGenerator.prototype.generateMemory = function () {
