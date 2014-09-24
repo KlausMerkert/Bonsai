@@ -1526,372 +1526,371 @@ ExampleGenerator.prototype.generateManualBonsai = function () {
 
 ExampleGenerator.prototype.generateGates = function () {
     return    {
-		  "buses": [
-		    {
-		      "id": "a0",
-		      "name": "a0",
-		      "max": 1
-		    },
-		    {
-		      "id": "b0",
-		      "name": "b0",
-		      "max": 1
-		    },
-		    {
-		      "id": "c0",
-		      "name": "c0",
-		      "max": 1
-		    },
-		    {
-		      "id": "a1",
-		      "name": "a1",
-		      "max": 1
-		    },
-		    {
-		      "id": "b1",
-		      "name": "b1",
-		      "max": 1
-		    },
-		    {
-		      "id": "c1",
-		      "name": "c1",
-		      "max": 1
-		    },
-		    {
-		      "id": "a2",
-		      "name": "a2",
-		      "max": 1
-		    },
-		    {
-		      "id": "b2",
-		      "name": "b2",
-		      "max": 1
-		    },
-		    {
-		      "id": "c2",
-		      "name": "c2",
-		      "max": 1
-		    }
-		  ],
-		  "manualswitches": [
-		    {
-		      "name": "A0",
-		      "wireId": "a0",
-		      "value": 0,
-		      "top": 40,
-		      "left": 340
-		    },
-		    {
-		      "name": "B0",
-		      "wireId": "b0",
-		      "value": 0,
-		      "top": 70,
-		      "left": 340
-		    },
-		    {
-		      "name": "A1",
-		      "wireId": "a1",
-		      "value": 0,
-		      "top": 140,
-		      "left": 340
-		    },
-		    {
-		      "name": "B1",
-		      "wireId": "b1",
-		      "value": 0,
-		      "top": 170,
-		      "left": 340
-		    },
-		    {
-		      "name": "A2",
-		      "wireId": "a2",
-		      "value": 0,
-		      "top": 240,
-		      "left": 340
-		    },
-		    {
-		      "name": "B2",
-		      "wireId": "b2",
-		      "value": 0,
-		      "top": 270,
-		      "left": 340
-		    }
-		  ],
-		  "leds": [
-		    {
-		      "name": "C0",
-		      "wireId": "c0",
-		      "top": 55,
-		      "left": 270,
-		      "value": 0
-		    },
-		    {
-		      "name": "C1",
-		      "wireId": "c1",
-		      "top": 155,
-		      "left": 270,
-		      "value": 0
-		    },
-		    {
-		      "name": "C2",
-		      "wireId": "c2",
-		      "top": 255,
-		      "left": 270,
-		      "value": 0
-		    }
-		  ],
-		  "andGates": [
-		    {
-		      "name": "and",
-		      "inAId": "a0",
-		      "inBId": "b0",
-		      "outId": "c0",
-		      "top": 50,
-		      "left": 300
-		    }
-		  ],
-		  "orGates": [
-		    {
-		      "name": "or",
-		      "inAId": "a1",
-		      "inBId": "b1",
-		      "outId": "c1",
-		      "top": 150,
-		      "left": 300
-		    }
-		  ],
-		  "norGates": [
-		    {
-		      "name": "nor",
-		      "inAId": "a2",
-		      "inBId": "b2",
-		      "outId": "c2",
-		      "top": 250,
-		      "left": 300
-		    }
-		  ],
-		  "registers": [],
-		  "bitregisters": [],
-		  "memories": [],
-		  "zerocomparators": [],
-		  "delays": [],
-		  "filters": [],
-		  "clocks": [],
-		  "labels": []
-		} 
-};    
+        "buses": [
+            {
+                "id": "a0",
+                "name": "a0",
+                "max": 1
+            },
+            {
+                "id": "b0",
+                "name": "b0",
+                "max": 1
+            },
+            {
+                "id": "c0",
+                "name": "c0",
+                "max": 1
+            },
+            {
+                "id": "a1",
+                "name": "a1",
+                "max": 1
+            },
+            {
+                "id": "b1",
+                "name": "b1",
+                "max": 1
+            },
+            {
+                "id": "c1",
+                "name": "c1",
+                "max": 1
+            },
+            {
+                "id": "a2",
+                "name": "a2",
+                "max": 1
+            },
+            {
+                "id": "b2",
+                "name": "b2",
+                "max": 1
+            },
+            {
+                "id": "c2",
+                "name": "c2",
+                "max": 1
+            }
+        ],
+        "manualswitches": [
+            {
+                "name": "A0",
+                "wireId": "a0",
+                "value": 0,
+                "top": 40,
+                "left": 340
+            },
+            {
+                "name": "B0",
+                "wireId": "b0",
+                "value": 0,
+                "top": 70,
+                "left": 340
+            },
+            {
+                "name": "A1",
+                "wireId": "a1",
+                "value": 0,
+                "top": 140,
+                "left": 340
+            },
+            {
+                "name": "B1",
+                "wireId": "b1",
+                "value": 0,
+                "top": 170,
+                "left": 340
+            },
+            {
+                "name": "A2",
+                "wireId": "a2",
+                "value": 0,
+                "top": 240,
+                "left": 340
+            },
+            {
+                "name": "B2",
+                "wireId": "b2",
+                "value": 0,
+                "top": 270,
+                "left": 340
+            }
+        ],
+        "leds": [
+            {
+                "name": "C0",
+                "wireId": "c0",
+                "top": 55,
+                "left": 270,
+                "value": 0
+            },
+            {
+                "name": "C1",
+                "wireId": "c1",
+                "top": 155,
+                "left": 270,
+                "value": 0
+            },
+            {
+                "name": "C2",
+                "wireId": "c2",
+                "top": 255,
+                "left": 270,
+                "value": 0
+            }
+        ],
+        "andGates": [
+            {
+                "name": "and",
+                "inAId": "a0",
+                "inBId": "b0",
+                "outId": "c0",
+                "top": 50,
+                "left": 300
+            }
+        ],
+        "orGates": [
+            {
+                "name": "or",
+                "inAId": "a1",
+                "inBId": "b1",
+                "outId": "c1",
+                "top": 150,
+                "left": 300
+            }
+        ],
+        "norGates": [
+            {
+                "name": "nor",
+                "inAId": "a2",
+                "inBId": "b2",
+                "outId": "c2",
+                "top": 250,
+                "left": 300
+            }
+        ],
+        "registers": [],
+        "bitregisters": [],
+        "memories": [],
+        "zerocomparators": [],
+        "delays": [],
+        "filters": [],
+        "clocks": [],
+        "labels": []
+    }
+};
 
 ExampleGenerator.prototype.generateMemory = function () {
     return    {
-			  "buses": [
-			    {
-			      "id": "databus",
-			      "name": "Datenbus",
-			      "max": 99999,
-			      "base": 10,
-			      "color": "rgb(255, 0, 0)",
-			      "top": 170,
-			      "left": 150,
-			      "routes": [
-			        {
-			          "type": "bottomleft",
-			          "top": "164px",
-			          "left": "129px",
-			          "width": "71px",
-			          "height": "32px"
-			        },
-			        {
-			          "type": "topright",
-			          "top": "196px",
-			          "left": "201px",
-			          "width": "122px",
-			          "height": "32px"
-			        }
-			      ]
-			    },
-			    {
-			      "id": "addressbus",
-			      "name": "Adressbus",
-			      "max": 9999,
-			      "base": 10,
-			      "color": "rgb(0, 140, 0)",
-			      "top": -3,
-			      "left": 150,
-			      "routes": [
-			        {
-			          "type": "topleft",
-			          "top": "21px",
-			          "left": "52px",
-			          "width": "48px",
-			          "height": "7px"
-			        },
-			        {
-			          "type": "topright",
-			          "top": "21px",
-			          "left": "100px",
-			          "width": "224px",
-			          "height": "7px"
-			        }
-			      ]
-			    }
-			  ],
-			  "manualswitches": [],
-			  "leds": [],
-			  "andGates": [],
-			  "orGates": [],
-			  "norGates": [],
-			  "registers": [
-			     {
-			      "name": "Adresse",
-			      "value": 0,
-			      "base": 10,
-			      "top": 50,
-			      "left": 290,
-			      "gates": [
-			        {
-			          "busId": "addressbus",
-			          "initialState": "1"
-			        }
-			      ]
-			    },
-			    {
-			      "name": "Datum",
-			      "value": 42,
-			      "base": 10,
-			      "top": 250,
-			      "left": 290,
-			      "gates": [
-			        {
-			          "busId": "databus"
-			        }
-			      ]
-			    }
-			  ],
-			  "bitregisters": [],
-			  "memories": [
-			    {
-			      "name": "Datenspeicher",
-			      "base": 10,
-			      "content": "17\n23\n0\n42",
-			      "top": 50,
-			      "left": 10,
-			      "addressgate": {
-			        "busId": "addressbus",
-			        "initialState": -1
-			      },
-			      "datagate": {
-			        "busId": "databus"
-			      },
-			      "undefinedString": "",
-			      "showContext": true
-			    }
-			  ],
-			  "zerocomparators": [],
-			  "delays": [],
-			  "filters": [],
-			  "clocks": [],
-			  "labels": [
-			    {
-			      "text": "A",
-			      "top": 30,
-			      "left": 300
-			    },
-			    {
-			      "text": "D",
-			      "top": 230,
-			      "left": 300
-			    },
-			    {
-			      "text": "Adressbus",
-			      "top": 25,
-			      "left": 200
-			    },
-			    {
-			      "text": "Datenbus",
-			      "top": 200,
-			      "left": 200
-			    }
-			    
-			  ]
-			}   
-};    
+        "buses": [
+            {
+                "id": "databus",
+                "name": "Datenbus",
+                "max": 99999,
+                "base": 10,
+                "color": "rgb(255, 0, 0)",
+                "top": 170,
+                "left": 150,
+                "routes": [
+                    {
+                        "type": "bottomleft",
+                        "top": "164px",
+                        "left": "129px",
+                        "width": "71px",
+                        "height": "32px"
+                    },
+                    {
+                        "type": "topright",
+                        "top": "196px",
+                        "left": "201px",
+                        "width": "122px",
+                        "height": "32px"
+                    }
+                ]
+            },
+            {
+                "id": "addressbus",
+                "name": "Adressbus",
+                "max": 9999,
+                "base": 10,
+                "color": "rgb(0, 140, 0)",
+                "top": -3,
+                "left": 150,
+                "routes": [
+                    {
+                        "type": "topleft",
+                        "top": "21px",
+                        "left": "52px",
+                        "width": "48px",
+                        "height": "7px"
+                    },
+                    {
+                        "type": "topright",
+                        "top": "21px",
+                        "left": "100px",
+                        "width": "224px",
+                        "height": "7px"
+                    }
+                ]
+            }
+        ],
+        "manualswitches": [],
+        "leds": [],
+        "andGates": [],
+        "orGates": [],
+        "norGates": [],
+        "registers": [
+            {
+                "name": "Adresse",
+                "value": 0,
+                "base": 10,
+                "top": 50,
+                "left": 290,
+                "gates": [
+                    {
+                        "busId": "addressbus",
+                        "initialState": "1"
+                    }
+                ]
+            },
+            {
+                "name": "Datum",
+                "value": 42,
+                "base": 10,
+                "top": 250,
+                "left": 290,
+                "gates": [
+                    {
+                        "busId": "databus"
+                    }
+                ]
+            }
+        ],
+        "bitregisters": [],
+        "memories": [
+            {
+                "name": "Datenspeicher",
+                "base": 10,
+                "content": "17\n23\n0\n42",
+                "top": 50,
+                "left": 10,
+                "addressgate": {
+                    "busId": "addressbus",
+                    "initialState": -1
+                },
+                "datagate": {
+                    "busId": "databus"
+                },
+                "undefinedString": "",
+                "showContext": true
+            }
+        ],
+        "zerocomparators": [],
+        "delays": [],
+        "filters": [],
+        "clocks": [],
+        "labels": [
+            {
+                "text": "A",
+                "top": 30,
+                "left": 300
+            },
+            {
+                "text": "D",
+                "top": 230,
+                "left": 300
+            },
+            {
+                "text": "Adressbus",
+                "top": 25,
+                "left": 200
+            },
+            {
+                "text": "Datenbus",
+                "top": 200,
+                "left": 200
+            }
+        ]
+    }
+};
 
 ExampleGenerator.prototype.generateFilter = function () {
-  return {
-		  "buses": [
-		    {
-		      "id": "bus0",
-		      "name": "Bus links",
-		      "max": 9999,
-		      "base": 10,
-		      "color": "rgb(0, 140, 0)",
-		      "top": -3,
-		      "left": 250,
-		      "routes": [
-		        {
-		          "type": "topleft",
-		          "top": "21px",
-		          "left": "224px",
-		          "width": "70px",
-		          "height": "7px"
-		        }
-		      ]
-		    },
-		    {
-		      "id": "bus1",
-		      "name": "Bus rechts",
-		      "max": 99999,
-		      "base": 10,
-		      "color": "rgb(0, 140, 0)",
-		      "top": -3,
-		      "left": 350,
-		      "routes": [
-		        {
-		          "type": "topright",
-		          "top": "21px",
-		          "left": "326px",
-		          "width": "69px",
-		          "height": "7px"
-		        }
-		      ]
-		    }
-		  ],
-		  "registers": [
-		    {
-		      "name": "A",
-		      "value": 0,
-		      "base": 10,
-		      "top": 50,
-		      "left": 190,
-		      "gates": [
-		        {
-		          "busId": "bus0"
-		        }
-		      ]
-		    },
-		    {
-		      "name": "B",
-		      "value": 1234,
-		      "base": 10,
-		      "top": 50,
-		      "left": 362,
-		      "gates": [
-		        {
-		          "busId": "bus1",
-		          "initialState": 1
-		        }
-		      ]
-		    }
-		  ],
-		  "filters": [
-		    {
-		      "name": "filter",
-		      "statement": "n%100",
-		      "busLeftId": "bus0",
-		      "busRightId": "bus1",
-		      "top": 21,
-		      "left": 299
-		    }
-		  ]
-	}
+    return {
+        "buses": [
+            {
+                "id": "bus0",
+                "name": "Bus links",
+                "max": 9999,
+                "base": 10,
+                "color": "rgb(0, 140, 0)",
+                "top": -3,
+                "left": 250,
+                "routes": [
+                    {
+                        "type": "topleft",
+                        "top": "21px",
+                        "left": "224px",
+                        "width": "70px",
+                        "height": "7px"
+                    }
+                ]
+            },
+            {
+                "id": "bus1",
+                "name": "Bus rechts",
+                "max": 99999,
+                "base": 10,
+                "color": "rgb(0, 140, 0)",
+                "top": -3,
+                "left": 350,
+                "routes": [
+                    {
+                        "type": "topright",
+                        "top": "21px",
+                        "left": "326px",
+                        "width": "69px",
+                        "height": "7px"
+                    }
+                ]
+            }
+        ],
+        "registers": [
+            {
+                "name": "A",
+                "value": 0,
+                "base": 10,
+                "top": 50,
+                "left": 190,
+                "gates": [
+                    {
+                        "busId": "bus0"
+                    }
+                ]
+            },
+            {
+                "name": "B",
+                "value": 1234,
+                "base": 10,
+                "top": 50,
+                "left": 362,
+                "gates": [
+                    {
+                        "busId": "bus1",
+                        "initialState": 1
+                    }
+                ]
+            }
+        ],
+        "filters": [
+            {
+                "name": "filter",
+                "statement": "n%100",
+                "busLeftId": "bus0",
+                "busRightId": "bus1",
+                "top": 21,
+                "left": 299
+            }
+        ]
+    }
 };
