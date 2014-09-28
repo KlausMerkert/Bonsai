@@ -88,7 +88,8 @@
         </div>
         <div ng-repeat="delay in cpu.delays">
             <delay delay-name="{{delay.name}}" bus-left="delay.busLeft" bus-right="delay.busRight"
-                   delay="delay.delay" top="delay.top" left="delay.left"></delay>
+                   delay="delay.delay" direction="delay.direction"
+                   top="delay.top" left="delay.left"></delay>
         </div>
         <div ng-repeat="filter in cpu.filters">
             <filter filter-name="{{filter.name}}" bus-left="filter.busLeft" bus-right="filter.busRight"

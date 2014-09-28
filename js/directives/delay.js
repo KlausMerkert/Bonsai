@@ -10,6 +10,7 @@ bonsaiApp.directive('delay', function ($interval) {
             delay: '=',
             top: '=',
             left: '=',
+            direction: '=',
             delayName: '@'
         },
         link: function ($scope, element, attrs) {
@@ -26,26 +27,35 @@ bonsaiApp.directive('delay', function ($interval) {
                 $scope.showValue = !$scope.showValue;
             };
 
-            $scope.$watch('busLeft', function (newValue, oldValue) {
-                if (newValue !== oldValue) {
-                    if (oldValue) {
-                        $scope.delayObject.removeBus(oldValue);
-                    }
-                }
+            $scope.$watch('busLeft', function (newValue) {
                 if (newValue) {
-                    $scope.delayObject.addBus(newValue);
+                    $scope.busLeft.enrollToDirective($scope.delayObject, $scope.getConnectionPositions);
                 }
+                $scope.delayObject.setLeftBus(newValue);
             });
-            $scope.$watch('busRight', function (newValue, oldValue) {
-                if (newValue !== oldValue) {
-                    if (oldValue) {
-                        $scope.delayObject.removeBus(oldValue);
-                    }
-                }
+            $scope.$watch('busRight', function (newValue) {
                 if (newValue) {
-                    $scope.delayObject.addBus(newValue);
+                    $scope.busRight.enrollToDirective($scope.delayObject, $scope.getConnectionPositions);
                 }
+                $scope.delayObject.setRightBus(newValue);
             });
+
+            $scope.$watch('direction', function (newValue) {
+                if (newValue == 'left') {
+                    $scope.busRight.registerReaderAndRead($scope.filter);
+                } else {
+                    $scope.busLeft.registerReaderAndRead($scope.filter);
+                }
+                $scope.delayObject.setDirection(newValue);
+            });
+
+            $scope.setDirection = function (direction) {
+                if (direction == 'left') {
+                    $scope.direction = 'left';
+                } else {
+                    $scope.direction = 'right';
+                }
+            };
 
             $scope.$watch('delay', function () {
                 $scope.delayObject.setDelay($scope.delay);
@@ -73,19 +83,6 @@ bonsaiApp.directive('delay', function ($interval) {
                     console.log("This bus is not connected: " + bus.getName());
                 }
             };
-
-            // We have to wait for a very short time to enroll to the buses
-            // because the wire needs to be fully initialized.
-            $interval(function () {
-                if ($scope.busLeft) {
-                    $scope.busLeft.enrollToDirective($scope.delayObject, $scope.getConnectionPositions);
-                    $scope.busLeft.registerReaderAndRead($scope.delayObject);
-                }
-                if ($scope.busRight) {
-                    $scope.busRight.enrollToDirective($scope.delayObject, $scope.getConnectionPositions);
-                    $scope.busRight.registerReaderAndRead($scope.delayObject);
-                }
-            }, 1, 1);
         },
         templateUrl: 'partials/component_Delay.html'
     };

@@ -930,7 +930,8 @@ ExampleGenerator.prototype.generateBonsai = function () {
                 'busLeftId': 'clockdelayed',
                 'busRightId': 'clock',
                 'top': 300,
-                'left': 738
+                'left': 738,
+                'direction': 'left'
             }
         ],
         'filters': [

@@ -306,7 +306,7 @@
     left: -24px;
     padding: 5px;
     display: inline-block;
-    height: 18px;
+    height: 36px;
     width: 53px;
     line-height: 18px;
 }
@@ -325,8 +325,11 @@
     border: 1px solid rgb(30, 30, 30);
     background-color: rgba(200, 200, 200, 1);
     border-radius: 6px;
-    font-family: monospace;
     font-size: 8px;
+}
+
+.filter input {
+    font-family: monospace;
 }
 
 .filteredit {
@@ -357,7 +360,7 @@
 
 .clock input {
     width: 53px;
-    margin: 0;
+    margin: 1px 0 0 0;
     background-color: rgba(200, 200, 200, 1);
     border: 0 solid rgba(200, 200, 200, 1);
     border-radius: 6px;

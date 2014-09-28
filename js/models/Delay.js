@@ -2,8 +2,9 @@
 
 function Delay (delay) {
     this.value = undefined;
-    this.activeBus = undefined;
-    this.buses = [];
+    this.leftBus = undefined;
+    this.rightBus = undefined;
+    this.direction = 'right';
     this.name = "unnamed delay";
     if (isNaN(parseInt(delay))) {
         this.delay = 1;
@@ -31,33 +32,31 @@ Delay.prototype.setDelay = function (delay) {
     this.delay = parsedDelay;
 };
 
-Delay.prototype.addBus = function (bus) {
-    if (this.buses.indexOf(bus) < 0) {
-        this.buses.push(bus);
-    }
+Delay.prototype.setLeftBus = function (bus) {
+    this.leftBus = bus;
 };
 
-Delay.prototype.removeBus = function (bus) {
-    var index = this.buses.indexOf(bus);
-    if (index >= 0) {
-        this.buses.splice(index, 1);
+Delay.prototype.setRightBus = function (bus) {
+    this.rightBus = bus;
+};
+
+Delay.prototype.setDirection = function (direction) {
+    if (direction == 'left') {
+        this.direction = 'left';
+    } else {
+        this.direction = 'right';
     }
 };
 
 Delay.prototype.setValue = function (value, bus) {
-    if (this.activeBus && (this.activeBus !== bus)) {
-        throw DelayAlreadyOccupied(
-            "This delay (" + this.getName() + ") is already occupied by " + this.activeBus.getName() + ".",
-            this.getName(),
-            this.activeBus.getName()
-        );
+    if (((this.direction == 'left') && (this.rightBus === bus)) ||
+        ((this.direction != 'left') && (this.leftBus === bus))) {
+        this.value = value;
+        var delay = this;
+        setTimeout(function () {
+            delay.delayCall(value, bus);
+        }, this.delay);
     }
-    this.activeBus = bus;
-    this.value = value;
-    var delay = this;
-    setTimeout(function () {
-        delay.delayCall(value, bus);
-    }, this.delay);
 };
 
 Delay.prototype.delayCall = function (value, bus) {
@@ -65,21 +64,17 @@ Delay.prototype.delayCall = function (value, bus) {
 };
 
 Delay.prototype.delayedActions = function (value, bus) {
-    for (var i = 0; i < this.buses.length; i++) {
-        if (this.buses[i] !== bus) {
-            try {
-                if (typeof value != 'undefined') {
-                    this.buses[i].write(this, value);
-                } else {
-                    this.buses[i].stopWriting(this);
-                    this.buses[i].registerReaderAndRead(this);
-                    this.activeBus = undefined;
-                }
-            } catch (exception) {
-                this.buses[i].registerReaderAndRead(this);
-                this.activeBus = undefined;
-                throw exception;
-            }
+    if (this.direction == 'left') {
+        if (typeof value != 'undefined') {
+            this.leftBus.write(this, value);
+        } else {
+            this.leftBus.stopWriting(this);
+        }
+    } else {
+        if (typeof value != 'undefined') {
+            this.rightBus.write(this, value);
+        } else {
+            this.rightBus.stopWriting(this);
         }
     }
 };
