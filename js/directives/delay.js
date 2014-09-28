@@ -29,22 +29,22 @@ bonsaiApp.directive('delay', function ($interval) {
 
             $scope.$watch('busLeft', function (newValue) {
                 if (newValue) {
-                    $scope.busLeft.enrollToDirective($scope.delayObject, $scope.getConnectionPositions);
+                    newValue.enrollToDirective($scope.delayObject, $scope.getConnectionPositions);
                 }
                 $scope.delayObject.setLeftBus(newValue);
             });
             $scope.$watch('busRight', function (newValue) {
                 if (newValue) {
-                    $scope.busRight.enrollToDirective($scope.delayObject, $scope.getConnectionPositions);
+                    newValue.enrollToDirective($scope.delayObject, $scope.getConnectionPositions);
                 }
                 $scope.delayObject.setRightBus(newValue);
             });
 
             $scope.$watch('direction', function (newValue) {
                 if (newValue == 'left') {
-                    $scope.busRight.registerReaderAndRead($scope.filter);
+                    $scope.busRight.registerReaderAndRead($scope.delayObject);
                 } else {
-                    $scope.busLeft.registerReaderAndRead($scope.filter);
+                    $scope.busLeft.registerReaderAndRead($scope.delayObject);
                 }
                 $scope.delayObject.setDirection(newValue);
             });
