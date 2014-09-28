@@ -21,7 +21,7 @@
     },
     {
         "key"        : "_saveCpuButton_",
-        "value"      : "CPU als Datei speichern",
+        "value"      : "Schaltung als Datei speichern",
         "description": ""
     },
     {
