@@ -285,21 +285,6 @@
         "description": ""
     },
     {
-        "key"        : "_FilterAlreadyOccupied_beginning",
-        "value"      : "This filter (",
-        "description": ""
-    },
-    {
-        "key"        : "_FilterAlreadyOccupied_middle",
-        "value"      : ") is already occupied by ",
-        "description": ""
-    },
-    {
-        "key"        : "_FilterAlreadyOccupied_end",
-        "value"      : ".",
-        "description": ""
-    },
-    {
         "key"        : "_GateIsAlreadyWriting_beginning",
         "value"      : "",
         "description": ""

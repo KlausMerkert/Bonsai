@@ -92,7 +92,8 @@
         </div>
         <div ng-repeat="filter in cpu.filters">
             <filter filter-name="{{filter.name}}" bus-left="filter.busLeft" bus-right="filter.busRight"
-                    statement="filter.statement" top="filter.top" left="filter.left"></filter>
+                    statement="filter.statement" direction="filter.direction"
+                    top="filter.top" left="filter.left"></filter>
         </div>
         <div ng-repeat="label in cpu.labels" style="position: absolute;"
              ng-style="{'top': label.top + 'px', 'left': label.left + 'px'}">{{ label.text }}</div>

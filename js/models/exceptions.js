@@ -168,16 +168,6 @@ function DelayAlreadyOccupied (message, delayName, busName) {
     return exception;
 }
 
-function FilterAlreadyOccupied (message, filterName, busName) {
-    var exception = {};
-    exception.name = 'FilterAlreadyOccupied';
-    exception.localization = '_' + exception.name + '_';
-    exception.message = message;
-    exception.actor1 = filterName;
-    exception.actor2 = busName;
-    return exception;
-}
-
 function GateIsAlreadyWriting (message, componentName, busName) {
     var exception = {};
     exception.name = 'GateIsAlreadyWriting';

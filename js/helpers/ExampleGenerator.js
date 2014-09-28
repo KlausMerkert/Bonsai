@@ -940,16 +940,18 @@ ExampleGenerator.prototype.generateBonsai = function () {
                 'busLeftId': 'IRout',
                 'busRightId': 'opcode',
                 'top': 21,
-                'left': 412
-             },
-             {
+                'left': 412,
+                'direction': 'right'
+            },
+            {
                 'name': 'mod10000',
                 'statement': 'n%10000',
                 'busLeftId': 'addressBus',
                 'busRightId': 'IRout',
                 'top': 21,
-                'left': 357
-             }
+                'left': 357,
+                'direction': 'left'
+            }
         ],
         'clocks': [
             {

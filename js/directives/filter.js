@@ -10,6 +10,7 @@ bonsaiApp.directive('filter', function ($interval) {
             busRight: '=',
             top: '=',
             left: '=',
+            direction: '=',
             filterName: '@'
         },
         link: function ($scope, element, attrs) {
@@ -24,25 +25,17 @@ bonsaiApp.directive('filter', function ($interval) {
                 $scope.filter.setStatement($scope.statement);
             });
 
-            $scope.$watch('busLeft', function (newValue, oldValue) {
-                if (newValue !== oldValue) {
-                    if (oldValue) {
-                        $scope.filter.removeBus(oldValue);
-                    }
-                }
+            $scope.$watch('busLeft', function (newValue) {
                 if (newValue) {
-                    $scope.filter.addBus(newValue);
+                    $scope.busLeft.enrollToDirective($scope.filter, $scope.getConnectionPositions);
                 }
+                $scope.filter.setLeftBus(newValue);
             });
-            $scope.$watch('busRight', function (newValue, oldValue) {
-                if (newValue !== oldValue) {
-                    if (oldValue) {
-                        $scope.filter.removeBus(oldValue);
-                    }
-                }
+            $scope.$watch('busRight', function (newValue) {
                 if (newValue) {
-                    $scope.filter.addBus(newValue);
+                    $scope.busRight.enrollToDirective($scope.filter, $scope.getConnectionPositions);
                 }
+                $scope.filter.setRightBus(newValue);
             });
 
             $scope.$watch('top', function () {
@@ -58,6 +51,23 @@ bonsaiApp.directive('filter', function ($interval) {
                 }
             });
 
+            $scope.$watch('direction', function (newValue) {
+                if (newValue == 'left') {
+                    $scope.busRight.registerReaderAndRead($scope.filter);
+                } else {
+                    $scope.busLeft.registerReaderAndRead($scope.filter);
+                }
+                $scope.filter.setDirection(newValue);
+            });
+
+            $scope.setDirection = function (direction) {
+                if (direction == 'left') {
+                    $scope.direction = 'left';
+                } else {
+                    $scope.direction = 'right';
+                }
+            };
+
             $scope.getConnectionPositions = function (bus) {
                 if (bus === $scope.busLeft) {
                     return [{top: $scope.top, left: $scope.left}];
@@ -67,19 +77,6 @@ bonsaiApp.directive('filter', function ($interval) {
                     console.log("This bus is not connected: " + bus.getName());
                 }
             };
-
-            // We have to wait for a very short time to enroll to the buses
-            // because the wire needs to be fully initialized.
-            $interval(function () {
-                if ($scope.busLeft) {
-                    $scope.busLeft.enrollToDirective($scope.filter, $scope.getConnectionPositions);
-                    $scope.busLeft.registerReaderAndRead($scope.filter);
-                }
-                if ($scope.busRight) {
-                    $scope.busRight.enrollToDirective($scope.filter, $scope.getConnectionPositions);
-                    $scope.busRight.registerReaderAndRead($scope.filter);
-                }
-            }, 1, 1);
         },
         templateUrl: 'partials/component_Filter.html'
     };
