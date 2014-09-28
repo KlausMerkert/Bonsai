@@ -9,9 +9,12 @@ bonsaiApp.directive('manualswitch', function ($interval) {
             value: '=',
             switchName: '@',
             top: '=',
-            left: '='
+            left: '=',
+            color: '='
         },
         link: function ($scope, element, attrs) {
+            $scope.colorCSS = 'rgb(255, 0, 0)';
+
             $scope.switch = new ManualSwitch(function (value) {
                 $scope.value = value;
             }, $scope.wire, undefined);
@@ -37,6 +40,12 @@ bonsaiApp.directive('manualswitch', function ($interval) {
             });
             $scope.$watch('left', function () {
                 $scope.leftCSS = ($scope.left + 3) + 'px';
+            });
+
+            $scope.$watch('color', function (newValue) {
+                if (newValue) {
+                    $scope.colorCSS = $scope.color;
+                }
             });
 
             $scope.getConnectionPositions = function () {

@@ -674,7 +674,8 @@ ExampleGenerator.prototype.generateBonsai = function () {
                 'wireId': 'SteuerwortReadWire',
                 'value': 0,
                 'top': 30,
-                'left': 865
+                'left': 865,
+                'color': 'rgb(0, 100, 0)'
             }, {
                 'name': 'ClockRuneSwitch',
                 'wireId': 'runClock',
@@ -704,7 +705,8 @@ ExampleGenerator.prototype.generateBonsai = function () {
                 'wireId': 'and2B_nor1out',
                 'name': 'Nor Test LED',
                 'top': 245,
-                'left': 722
+                'left': 722,
+                'color': 'rgb(150, 180, 255)'
             }
         ],
         'andGates': [
