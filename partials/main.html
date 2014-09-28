@@ -35,7 +35,8 @@
                    top="clock.top" left="clock.left"></clock>
         </div>
         <div ng-repeat="led in cpu.leds">
-            <led wire="led.wire" led-name="{{led.name}}" value="led.value" top="led.top" left="led.left"></led>
+            <led wire="led.wire" led-name="{{led.name}}" value="led.value"
+                 top="led.top" left="led.left" color="led.color"></led>
         </div>
         <div ng-repeat="andGate in cpu.andGates">
             <andgate in-a="andGate.inA" in-b="andGate.inB" out="andGate.out" gate-name="{{andGate.name}}"

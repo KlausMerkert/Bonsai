@@ -9,6 +9,7 @@ bonsaiApp.directive('led', function ($interval) {
             value: '=',
             top: '=',
             left: '=',
+            color: '=',
             ledName: '@'
         },
         link: function ($scope, element, attrs) {
@@ -25,11 +26,21 @@ bonsaiApp.directive('led', function ($interval) {
                     $scope.led.setValue(newValue);
                 }
                 if (newValue) {
-                    $scope.color = 'rgb(0, 255, 0)';
+                    if ($scope.color) {
+                        $scope.colorCSS = $scope.color;
+                    } else {
+                        $scope.colorCSS = 'rgb(0, 255, 0)';
+                    }
                     $scope.cursor = 'arrow';
                 } else {
-                    $scope.color = 'rgba(200, 200, 200, 30)';
+                    $scope.colorCSS = 'rgba(200, 200, 200, 30)';
                     $scope.cursor = 'pointer';
+                }
+            });
+
+            $scope.$watch('color', function(newValue) {
+                if ($scope.led.getValue()) {
+                    $scope.colorCSS = newValue;
                 }
             });
 

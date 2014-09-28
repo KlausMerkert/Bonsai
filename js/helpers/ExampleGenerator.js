@@ -693,7 +693,8 @@ ExampleGenerator.prototype.generateBonsai = function () {
                 'wireId': 'compWire',
                 'name': 'comp indication led',
                 'top': 259,
-                'left': 317
+                'left': 317,
+                'color': 'rgb(255, 0, 112)'
             }, {
                 'wireId': 's0',
                 'name': 's0 led',
