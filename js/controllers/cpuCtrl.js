@@ -21,6 +21,16 @@ bonsaiApp.controller('bonsaiCpuCtrl',
             $scope.cpu = exampleGenerator.generateBonsai();
         }
 
+        $scope.$watch('cpu', function (newCpu) {
+            var componentCount = 0;
+            angular.forEach(newCpu, function (value, key) {
+                if ((key != 'labels') && (angular.isArray(value))) {
+                    componentCount += value.length;
+                }
+            });
+            $scope.componentCount = componentCount;
+        });
+
         $scope.getMousePosition = function($event) {
             var getOffset = function( el ) {
                 var _x = 0;
