@@ -1,6 +1,6 @@
 'use strict';
 
-bonsaiApp.directive('andgate', function ($interval) {
+bonsaiApp.directive('andgate', function () {
     return {
         restrict: 'E',
         transclude: false,
@@ -36,22 +36,20 @@ bonsaiApp.directive('andgate', function ($interval) {
                 }
             };
 
-            // We have to wait for a very short time to enroll to the buses
-            // because the wire needs to be fully initialized.
-            $interval(function () {
-                if ($scope.inA) {
-                    $scope.inA.enrollToDirective($scope.logicGate, $scope.getConnectionPositions);
-                    $scope.inA.registerReaderAndRead($scope.logicGate);
-                }
-                if ($scope.inB) {
-                    $scope.inB.enrollToDirective($scope.logicGate, $scope.getConnectionPositions);
-                    $scope.inB.registerReaderAndRead($scope.logicGate);
-                }
-                if ($scope.out) {
-                    $scope.out.enrollToDirective($scope.logicGate, $scope.getConnectionPositions);
-                }
-                $scope.logicGate.setValue();
-            }, 1, 1);
+            if ($scope.inA) {
+                $scope.inA.enrollToDirective($scope.logicGate, $scope.getConnectionPositions);
+                $scope.inA.registerReaderAndRead($scope.logicGate);
+            }
+            if ($scope.inB) {
+                $scope.inB.enrollToDirective($scope.logicGate, $scope.getConnectionPositions);
+                $scope.inB.registerReaderAndRead($scope.logicGate);
+            }
+            if ($scope.out) {
+                $scope.out.enrollToDirective($scope.logicGate, $scope.getConnectionPositions);
+            }
+            $scope.logicGate.setValue();
+
+            $scope.$emit('componentInitialized', $scope);
         },
         templateUrl: 'partials/component_AndGate.html'
     };
