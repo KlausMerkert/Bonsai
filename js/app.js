@@ -15,7 +15,7 @@ var bonsaiApp = angular.module(
         // use the HTML5 History API
 		$locationProvider.html5Mode(true).hashPrefix('!');
     }])
-    /*.factory('$exceptionHandler', function ($injector) {
+    .factory('$exceptionHandler', function ($injector) {
         return function (exception, cause) {
             if (exception.localization) {
                 $injector.get('$rootScope').$broadcast('error', exception);
@@ -26,4 +26,4 @@ var bonsaiApp = angular.module(
                 throw exception;
             }
         };
-    })*/;
+    });
