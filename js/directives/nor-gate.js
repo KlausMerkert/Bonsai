@@ -65,8 +65,6 @@ bonsaiApp.directive('norgate', function () {
                 }
             });
 
-            $scope.logicGate.setValue();
-
             $scope.$emit('componentInitialized', $scope);
         },
         templateUrl: 'partials/component_NorGate.html'

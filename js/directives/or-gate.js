@@ -65,8 +65,6 @@ bonsaiApp.directive('orgate', function () {
                 }
             });
 
-            $scope.logicGate.setValue();
-
             $scope.$emit('componentInitialized', $scope);
         },
         templateUrl: 'partials/component_OrGate.html'

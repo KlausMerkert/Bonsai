@@ -65,8 +65,6 @@ bonsaiApp.directive('andgate', function () {
                 }
             });
 
-            $scope.logicGate.setValue();
-
             $scope.$emit('componentInitialized', $scope);
         },
         templateUrl: 'partials/component_AndGate.html'
