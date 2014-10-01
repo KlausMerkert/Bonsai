@@ -1,6 +1,6 @@
 'use strict';
 
-bonsaiApp.directive('comparetozero', function ($interval) {
+bonsaiApp.directive('comparetozero', function () {
     return {
         restrict: 'E',
         transclude: false,
