@@ -1,6 +1,6 @@
 'use strict';
 
-bonsaiApp.directive('orgate', function ($interval) {
+bonsaiApp.directive('orgate', function () {
     return {
         restrict: 'E',
         transclude: false,
@@ -36,22 +36,38 @@ bonsaiApp.directive('orgate', function ($interval) {
                 }
             };
 
-            // We have to wait for a very short time to enroll to the buses
-            // because the wire needs to be fully initialized.
-            $interval(function () {
-                if ($scope.inA) {
-                    $scope.inA.enrollToDirective($scope.logicGate, $scope.getConnectionPositions);
-                    $scope.inA.registerReaderAndRead($scope.logicGate);
+            $scope.$watch('inA', function (newInA, oldInA) {
+                if (newInA) {
+                    newInA.enrollToDirective($scope.logicGate, $scope.getConnectionPositions);
+                    newInA.registerReaderAndRead($scope.logicGate);
                 }
-                if ($scope.inB) {
-                    $scope.inB.enrollToDirective($scope.logicGate, $scope.getConnectionPositions);
-                    $scope.inB.registerReaderAndRead($scope.logicGate);
+                if (oldInA && (newInA != oldInA)) {
+                    oldInA.resign($scope.logicGate);
                 }
-                if ($scope.out) {
-                    $scope.out.enrollToDirective($scope.logicGate, $scope.getConnectionPositions);
+            });
+
+            $scope.$watch('inB', function (newInB, oldInB) {
+                if (newInB) {
+                    newInB.enrollToDirective($scope.logicGate, $scope.getConnectionPositions);
+                    newInB.registerReaderAndRead($scope.logicGate);
                 }
-                $scope.logicGate.setValue();
-            }, 1, 1);
+                if (oldInB && (newInB != oldInB)) {
+                    oldInB.resign($scope.logicGate);
+                }
+            });
+
+            $scope.$watch('out', function (newOut, oldOut) {
+                if (newOut) {
+                    newOut.enrollToDirective($scope.logicGate, $scope.getConnectionPositions);
+                }
+                if (oldOut && (newOut != oldOut)) {
+                    oldOut.resign($scope.logicGate);
+                }
+            });
+
+            $scope.logicGate.setValue();
+
+            $scope.$emit('componentInitialized', $scope);
         },
         templateUrl: 'partials/component_OrGate.html'
     };

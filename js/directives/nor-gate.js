@@ -36,17 +36,35 @@ bonsaiApp.directive('norgate', function () {
                 }
             };
 
-            if ($scope.inA) {
-                $scope.inA.enrollToDirective($scope.logicGate, $scope.getConnectionPositions);
-                $scope.inA.registerReaderAndRead($scope.logicGate);
-            }
-            if ($scope.inB) {
-                $scope.inB.enrollToDirective($scope.logicGate, $scope.getConnectionPositions);
-                $scope.inB.registerReaderAndRead($scope.logicGate);
-            }
-            if ($scope.out) {
-                $scope.out.enrollToDirective($scope.logicGate, $scope.getConnectionPositions);
-            }
+            $scope.$watch('inA', function (newInA, oldInA) {
+                if (newInA) {
+                    newInA.enrollToDirective($scope.logicGate, $scope.getConnectionPositions);
+                    newInA.registerReaderAndRead($scope.logicGate);
+                }
+                if (oldInA && (newInA != oldInA)) {
+                    oldInA.resign($scope.logicGate);
+                }
+            });
+
+            $scope.$watch('inB', function (newInB, oldInB) {
+                if (newInB) {
+                    newInB.enrollToDirective($scope.logicGate, $scope.getConnectionPositions);
+                    newInB.registerReaderAndRead($scope.logicGate);
+                }
+                if (oldInB && (newInB != oldInB)) {
+                    oldInB.resign($scope.logicGate);
+                }
+            });
+
+            $scope.$watch('out', function (newOut, oldOut) {
+                if (newOut) {
+                    newOut.enrollToDirective($scope.logicGate, $scope.getConnectionPositions);
+                }
+                if (oldOut && (newOut != oldOut)) {
+                    oldOut.resign($scope.logicGate);
+                }
+            });
+
             $scope.logicGate.setValue();
 
             $scope.$emit('componentInitialized', $scope);
