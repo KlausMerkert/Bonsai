@@ -17,8 +17,12 @@ bonsaiApp.directive('comparetozero', function ($interval) {
             });
             $scope.active = 0;
 
-            $scope.topCSS = ($scope.top + 3) + 'px';
-            $scope.leftCSS = ($scope.left - 10) + 'px';
+            $scope.$watch('top', function () {
+                $scope.topCSS = ($scope.top + 3) + 'px';
+            });
+            $scope.$watch('left', function () {
+                $scope.leftCSS = ($scope.left - 10) + 'px';
+            });
 
             attrs.$observe('compName', function() {
                 if ($scope.compName) {
@@ -38,15 +42,27 @@ bonsaiApp.directive('comparetozero', function ($interval) {
                 }
             };
 
-            // We have to wait for a very short time to enroll to the bus
-            // because the handler needs to be fully initialized.
-            $interval(function () {
-                $scope.comp.bus.enrollToDirective($scope.comp, $scope.getConnectionPositions);
-                if ($scope.wire) {
-                    $scope.wire.enrollToDirective($scope.comp, $scope.getConnectionPositions);
+            $scope.$watch('bus', function (newBus, oldBus) {
+                if (newBus) {
+                    $scope.comp.setBus(newBus);
+                    newBus.enrollToDirective($scope.comp, $scope.getConnectionPositions);
+                    newBus.registerReaderAndRead($scope.comp);
                 }
-                $scope.comp.setValue();
-            }, 1, 1);
+                if (oldBus && (newBus != oldBus)) {
+                    oldBus.resign($scope.comp);
+                }
+            });
+
+            $scope.$watch('wire', function (newWire, oldWire) {
+                if (newWire) {
+                    newWire.enrollToDirective($scope.comp, $scope.getConnectionPositions);
+                }
+                if (oldWire && (newWire != oldWire)) {
+                    oldWire.resign($scope.comp);
+                }
+            });
+
+            $scope.$emit('componentInitialized', $scope);
         },
         templateUrl: 'partials/component_CompareToZero.html'
     };

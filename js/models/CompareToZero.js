@@ -15,19 +15,25 @@ CompareToZero.prototype.setName = function (name) {
     this.name = name;
 };
 
+CompareToZero.prototype.setBus = function (bus) {
+    this.bus = bus;
+};
+
 CompareToZero.prototype.setValue = function () {
-    if (parseInt(this.bus.registerReaderAndRead(this)) === 0) {
-        if (this.wire) {
-            this.wire.write(this, 1);
-            if (this.updateViewCallback) {
-                this.updateViewCallback(1);
+    if (this.bus) {
+        if (parseInt(this.bus.registerReaderAndRead(this)) === 0) {
+            if (this.wire) {
+                this.wire.write(this, 1);
+                if (this.updateViewCallback) {
+                    this.updateViewCallback(1);
+                }
             }
-        }
-    } else {
-        if (this.wire) {
-            this.wire.write(this, 0);
-            if (this.updateViewCallback) {
-                this.updateViewCallback(0);
+        } else {
+            if (this.wire) {
+                this.wire.write(this, 0);
+                if (this.updateViewCallback) {
+                    this.updateViewCallback(0);
+                }
             }
         }
     }
