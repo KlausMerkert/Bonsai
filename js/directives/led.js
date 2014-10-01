@@ -1,6 +1,6 @@
 'use strict';
 
-bonsaiApp.directive('led', function ($interval) {
+bonsaiApp.directive('led', function () {
     return {
         restrict: 'E',
         transclude: false,
@@ -83,15 +83,26 @@ bonsaiApp.directive('led', function ($interval) {
                 return [{top: $scope.top, left: $scope.left}];
             };
 
-            // We have to wait for a very short time to enroll to the buses
-            // because the wire needs to be fully initialized.
-            $interval(function () {
-                $scope.wire.enrollToDirective(
-                    $scope.led,
-                    $scope.getConnectionPositions
-                );
-                $scope.wire.registerReaderAndRead($scope.led);
-            }, 1, 1);
+            $scope.$watch('wire', function (newWire, oldWire) {
+                if (newWire) {
+                    newWire.enrollToDirective(
+                        $scope.led,
+                        $scope.getConnectionPositions
+                    );
+                    newWire.registerReaderAndRead($scope.led);
+                }
+                if (oldWire && (newWire != oldWire)) {
+                    oldWire.resign($scope.led);
+                }
+            });
+
+            $scope.$emit('componentInitialized', $scope);
+
+            $scope.$on('sendInitialValues', function (event, message) {
+                if ($scope.value) {
+                    $scope.activate();
+                }
+            });
         },
         templateUrl: 'partials/component_Led.html'
     };
