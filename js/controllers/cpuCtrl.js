@@ -25,7 +25,7 @@ bonsaiApp.controller('bonsaiCpuCtrl',
         $scope.$watch('cpu', function (newCpu) {
             var componentCount = 0;
             angular.forEach(newCpu, function (value, key) {
-                if ((key != 'labels') && (angular.isArray(value))) {
+                if (!(key in {'buses': '', 'labels': ''}) && (angular.isArray(value))) {
                     componentCount += value.length;
                 }
             });
