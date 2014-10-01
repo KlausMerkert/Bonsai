@@ -1,6 +1,6 @@
 'use strict';
 
-bonsaiApp.directive('manualswitch', function ($interval) {
+bonsaiApp.directive('manualswitch', function () {
     return {
         restrict: 'E',
         transclude: false,
@@ -52,15 +52,23 @@ bonsaiApp.directive('manualswitch', function ($interval) {
                 return [{top: $scope.top, left: $scope.left}];
             };
 
-            // We have to wait for a very short time to enroll to the buses
-            // because the handler needs to be fully initialized.
-            $interval(function () {
-                $scope.wire.enrollToDirective(
-                    $scope.switch,
-                    $scope.getConnectionPositions
-                );
+            $scope.$watch('wire', function (newWire, oldWire) {
+                if (newWire) {
+                    newWire.enrollToDirective(
+                        $scope.switch,
+                        $scope.getConnectionPositions
+                    );
+                }
+                if (oldWire && (newWire != oldWire)) {
+                    oldWire.resign($scope.switch);
+                }
+            });
+
+            $scope.$emit('componentInitialized', $scope);
+
+            $scope.$on('sendInitialValues', function (event, message) {
                 $scope.switch.setValue($scope.value);
-            }, 1, 1);
+            });
         },
         templateUrl: 'partials/component_ManualSwitch.html'
     };
