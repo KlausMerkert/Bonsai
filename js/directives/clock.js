@@ -90,28 +90,37 @@ bonsaiApp.directive('clock', function ($interval) {
                 return [{top: $scope.top-4, left: $scope.left+74}];
             };
 
-            // We have to wait for a very short time to enroll to the buses
-            // because the handler needs to be fully initialized.
-            $interval(function () {
-                $scope.wire.enrollToDirective(
-                    $scope.clock,
-                    $scope.getConnectionPositions
-                );
-                $scope.clock.setValue(0);
-                if ($scope.runWire) {
-                    $scope.runWireConnector = new ReadingControlWireConnector($scope.runWire,
+            $scope.$watch('wire', function (newWire, oldWire) {
+                if (newWire) {
+                    newWire.enrollToDirective(
+                        $scope.clock,
+                        $scope.getConnectionPositions
+                    );
+                }
+                if (oldWire && (newWire != oldWire)) {
+                    oldWire.resign($scope.clock);
+                }
+            });
+
+            $scope.$watch('runWire', function (newWire, oldWire) {
+                if (newWire) {
+                    $scope.runWireConnector = new ReadingControlWireConnector(newWire,
                         function () {
                             $scope.clock.start();
                         },
                         function () {
                             $scope.clock.stop();
                         }, $scope.clockName + ' run wire connector');
-                    $scope.runWire.enrollToDirective($scope.runWireConnector, $scope.getRunWireConnectionPositions);
-                    if ($scope.runWire.registerReaderAndRead($scope.runWireConnector)) {
-                        $scope.clock.start();
-                    }
+                    newWire.enrollToDirective($scope.runWireConnector, $scope.getRunWireConnectionPositions);
+                    newWire.registerReaderAndRead($scope.runWireConnector);
                 }
-            }, 1, 1);
+            });
+
+            $scope.$emit('componentInitialized', $scope);
+
+            $scope.$on('sendInitialValues', function (event, message) {
+                $scope.clock.setValue(0);
+            });
         },
         templateUrl: 'partials/component_Clock.html'
     };
