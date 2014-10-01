@@ -1,6 +1,6 @@
 'use strict';
 
-bonsaiApp.directive('delay', function ($interval) {
+bonsaiApp.directive('delay', function () {
     return {
         restrict: 'E',
         transclude: false,

@@ -1,6 +1,6 @@
 'use strict';
 
-bonsaiApp.directive('filter', function ($interval) {
+bonsaiApp.directive('filter', function () {
     return {
         restrict: 'E',
         transclude: false,

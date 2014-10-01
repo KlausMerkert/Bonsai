@@ -1,6 +1,6 @@
 'use strict';
 
-bonsaiApp.directive('register', function ($interval) {
+bonsaiApp.directive('register', function () {
     return {
         restrict: 'E',
         transclude: true,

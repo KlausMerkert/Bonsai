@@ -1,6 +1,6 @@
 'use strict';
 
-bonsaiApp.directive('clock', function ($interval) {
+bonsaiApp.directive('clock', function () {
     return {
         restrict: 'E',
         transclude: false,

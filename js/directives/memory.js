@@ -1,6 +1,6 @@
 'use strict';
 
-bonsaiApp.directive('memory', function ($interval) {
+bonsaiApp.directive('memory', function () {
     return {
         restrict: 'E',
         transclude: true,
@@ -13,7 +13,7 @@ bonsaiApp.directive('memory', function ($interval) {
             undefinedString: '=',
             showContext: '='
         },
-        controller: function ($scope, $filter) {
+        controller: function ($scope) {
             if (parseInt($scope.base) in {2:true, 8:true, 10:true, 16:true}) {
                 $scope.displayBase = $scope.base;
             } else {
