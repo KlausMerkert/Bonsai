@@ -14,15 +14,15 @@ bonsaiApp.directive('led', function () {
         },
         link: function ($scope, element, attrs) {
             $scope.dataChangeCallback = function (value) {
-                if (value !== undefined) {
+                if (typeof value != 'undefined') {
                     $scope.value = value;
                 }
             };
 
             $scope.led = new Led($scope.dataChangeCallback, $scope.value);
 
-            $scope.$watch('value', function(newValue) {
-                if (newValue != $scope.led.getValue()) {
+            $scope.$watch('value', function(newValue, oldValue) {
+                if ((typeof newValue != 'undefined') && (newValue != $scope.led.getValue())) {
                     $scope.led.setValue(newValue);
                 }
                 if (newValue) {
@@ -99,7 +99,7 @@ bonsaiApp.directive('led', function () {
             $scope.$emit('componentInitialized', $scope);
 
             $scope.$on('sendInitialValues', function (event, message) {
-                if ($scope.value) {
+                if ((typeof $scope.value != 'undefined') && $scope.value && ($scope.led.getValue() != $scope.value)) {
                     $scope.activate();
                 }
             });
