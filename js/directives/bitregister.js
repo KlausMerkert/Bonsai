@@ -36,6 +36,40 @@ bonsaiApp.directive('bitregister', function ($interval) {
 
             this.setBusConnection = function (bus, setWrite, setRead, initialState) {
                 $scope.register.setWideBusConnection(bus, setWrite, setRead);
+                if (bus) {
+                    bus.enrollToDirective(
+                        $scope.register,
+                        $scope.getConnectionPositions
+                    );
+                }
+                if (setWrite) {
+                    var writeWireConnector = new ReadingControlWireConnector(setWrite,
+                        function (wire) {
+                            $scope.register.setToWrite(wire);
+                        },
+                        function (wire) {
+                            $scope.register.setToDisconnected(wire);
+                        }, $scope.registerName + ' write wire connector for bus ' + bus.getName());
+                    $scope.register.getWideBusConnection().writeWireConnector = writeWireConnector;
+                    setWrite.enrollToDirective(
+                        writeWireConnector,
+                        $scope.getWireConnectionPositions);
+                    setWrite.registerReaderAndRead(writeWireConnector);
+                }
+                if (setRead) {
+                    var readWireConnector = new ReadingControlWireConnector(setRead,
+                        function (wire) {
+                            $scope.register.setWideBusGateToRead();
+                            $interval(function () {
+                                $scope.register.setWideBusGateToDisconnected(wire);
+                            }, 0, 1);
+                        },
+                        function () {
+                        }, $scope.registerName + ' read wire connector for bus ' + bus.getName());
+                    $scope.register.getWideBusConnection().readWireConnector = readWireConnector;
+                    setRead.enrollToDirective(readWireConnector, $scope.getWireConnectionPositions);
+                    setRead.registerReaderAndRead(readWireConnector);
+                }
                 initialState = parseInt(initialState);
                 if (!initialState) {
                     initialState = 0;
@@ -49,7 +83,37 @@ bonsaiApp.directive('bitregister', function ($interval) {
             };
 
             this.addWireConnection = function (wire) {
-                $scope.register.addWireConnection(wire);
+                var connection = $scope.register.addWireConnection(wire);
+                if (wire) {
+                    connection.connector = new ReadingControlWireConnector(wire,
+                        function (wire) {
+                            if ($scope.register.bitWiresConnection.state == -1) {
+                                if (wire.isActive() && wire.isNotZero()) {
+                                    var allWires = $scope.register.getWires();
+                                    for (var k = 0; k < allWires.length; k++) {
+                                        if (allWires[k].wire === wire) {
+                                            $scope.register.setBit(k, 1);
+                                        }
+                                    }
+                                }
+                            }
+                        },
+                        function (wire) {
+                            if ($scope.register.bitWiresConnection.state == -1) {
+                                var allWires = $scope.register.getWires();
+                                for (var k = 0; k < allWires.length; k++) {
+                                    if (allWires[k].wire === wire) {
+                                        $scope.register.setBit(k, 0);
+                                    }
+                                }
+                            }
+                        }, $scope.registerName + ' bit connector no ' + $scope.register.getWires().length + ' for ' + wire.getName());
+                    wire.enrollToDirective(
+                        connection.connector,
+                        $scope.getWireConnectionPositions
+                    );
+                    wire.registerReaderAndRead(connection.connector);
+                }
             };
         },
         link: function ($scope, element, attrs) {
@@ -98,6 +162,66 @@ bonsaiApp.directive('bitregister', function ($interval) {
                     if (newValue != $scope.register.getValue()) {
                         $scope.register.setValue(newValue);
                     }
+                }
+            });
+
+            $scope.$watch('setWiresRead', function (newWire, oldWire) {
+                if (oldWire && (newWire != oldWire)) {
+                    oldWire.resign($scope.register.bitWiresConnection.readWireConnector);
+                }
+                if (newWire) {
+                    $scope.register.bitWiresConnection.readWireConnector = new ReadingControlWireConnector(
+                        newWire,
+                        function (wire) {
+                            if (wire.isActive() && wire.isNotZero()) {
+                                $scope.register.setBitGateToRead();
+                            }
+                        },
+                        function () {
+                            if (!($scope.register.bitWiresConnection.writeWire.isActive() &&
+                                $scope.register.bitWiresConnection.writeWire.isNotZero())) {
+                                $scope.register.setBitGateToDisconnected();
+                            }
+                        },
+                        $scope.registerName + ' read wire connector for bit connections'
+                    );
+                    newWire.enrollToDirective(
+                        $scope.register.bitWiresConnection.readWireConnector,
+                        $scope.getWireConnectionPositions
+                    );
+                    $scope.register.bitWiresConnection.readWire.registerReaderAndRead(
+                        $scope.register.bitWiresConnection.readWireConnector
+                    );
+                }
+            });
+
+            $scope.$watch('setWiresWrite', function (newWire, oldWire) {
+                if (oldWire && (newWire != oldWire)) {
+                    oldWire.resign($scope.register.bitWiresConnection.writeWireConnector);
+                }
+                if (newWire) {
+                    $scope.register.bitWiresConnection.writeWireConnector = new ReadingControlWireConnector(
+                        newWire,
+                        function (wire) {
+                            if (wire.isActive() && wire.isNotZero()) {
+                                $scope.register.setBitGateToWrite();
+                            }
+                        },
+                        function () {
+                            if (!($scope.register.bitWiresConnection.readWire.isActive() &&
+                                $scope.register.bitWiresConnection.readWire.isNotZero())) {
+                                $scope.register.setBitGateToDisconnected();
+                            }
+                        },
+                        $scope.registerName + ' write wire connector for bit connections'
+                    );
+                    newWire.enrollToDirective(
+                        $scope.register.bitWiresConnection.writeWireConnector,
+                        $scope.getWireConnectionPositions
+                    );
+                    $scope.register.bitWiresConnection.writeWire.registerReaderAndRead(
+                        $scope.register.bitWiresConnection.writeWireConnector
+                    );
                 }
             });
 
@@ -283,136 +407,11 @@ bonsaiApp.directive('bitregister', function ($interval) {
                 return positions;
             };
 
-            // We have to wait for a very short time to enroll to the buses
-            // because the handler needs to be fully initialized.
-            $interval(function () {
-                var connection = $scope.register.getWideBusConnection();
-                connection.bus.enrollToDirective(
-                    $scope.register,
-                    $scope.getConnectionPositions
-                );
+            $scope.$emit('componentInitialized', $scope);
+
+            $scope.$on('sendInitialValues', function (event, message) {
                 $scope.register.setWideBusState($scope.initialWideBusGateState);
-                var writeWire = connection.writeWire;
-                if (writeWire) {
-                    connection.writeWireConnector = new ReadingControlWireConnector(writeWire,
-                        function (wire) {
-                            $scope.register.setToWrite(wire);
-                        },
-                        function (wire) {
-                            $scope.register.setToDisconnected(wire);
-                        }, $scope.registerName + ' write wire connector for bus ' + connection.bus.getName());
-                    writeWire.enrollToDirective(
-                        connection.writeWireConnector,
-                        $scope.getWireConnectionPositions);
-                    if (writeWire.registerReaderAndRead(connection.writeWireConnector)) {
-                        $scope.register.setWideBusGateToWrite();
-                    }
-                }
-                var readWire = connection.readWire;
-                if (readWire) {
-                    connection.readWireConnector = new ReadingControlWireConnector(readWire,
-                        function (wire) {
-                            $scope.register.setWideBusGateToRead();
-                            $interval(function () {
-                                $scope.register.setWideBusGateToDisconnected(wire);
-                            }, 0, 1);
-                        },
-                        function () {
-                        }, $scope.registerName + ' read wire connector for bus ' + connection.bus.getName());
-                    readWire.enrollToDirective(connection.readWireConnector, $scope.getWireConnectionPositions);
-                    if (readWire.registerReaderAndRead(connection.readWireConnector)) {
-                        $scope.register.setWideBusGateToRead();
-                    }
-                }
-                var bitWires = $scope.register.getWires();
-                for (var i = 0; i < bitWires.length; i++) {
-                    if (bitWires[i].wire) {
-                        bitWires[i].connector = new ReadingControlWireConnector(bitWires[i].wire,
-                            function (wire) {
-                                if ($scope.register.bitWiresConnection.state == -1) {
-                                    if (wire.isActive() && wire.isNotZero()) {
-                                        var allWires = $scope.register.getWires();
-                                        for (var k = 0; k < allWires.length; k++) {
-                                            if (allWires[k].wire === wire) {
-                                                $scope.register.setBit(k, 1);
-                                            }
-                                        }
-                                    }
-                                }
-                            },
-                            function (wire) {
-                                if ($scope.register.bitWiresConnection.state == -1) {
-                                    var allWires = $scope.register.getWires();
-                                    for (var k = 0; k < allWires.length; k++) {
-                                        if (allWires[k].wire === wire) {
-                                            $scope.register.setBit(k, 0);
-                                        }
-                                    }
-                                }
-                            }, $scope.registerName + ' bit connector no ' + i + ' for ' + bitWires[i].wire.getName());
-                        bitWires[i].wire.enrollToDirective(
-                            bitWires[i].connector,
-                            $scope.getWireConnectionPositions
-                        );
-                        var wireValue = bitWires[i].wire.registerReaderAndRead(bitWires[i].connector);
-                        if (typeof wireValue != 'undefined') {
-                            $scope.setBit(bitWires[i].wire, parseInt(wireValue));
-                        }
-                    }
-                }
-                if ($scope.register.bitWiresConnection.writeWire) {
-                    $scope.register.bitWiresConnection.writeWireConnector = new ReadingControlWireConnector(
-                        $scope.register.bitWiresConnection.writeWire,
-                        function (wire) {
-                            if (wire.isActive() && wire.isNotZero()) {
-                                $scope.register.setBitGateToWrite();
-                            }
-                        },
-                        function () {
-                            if (!($scope.register.bitWiresConnection.readWire.isActive() &&
-                                $scope.register.bitWiresConnection.readWire.isNotZero())) {
-                                $scope.register.setBitGateToDisconnected();
-                            }
-                        },
-                        $scope.registerName + ' write wire connector for bit connections'
-                    );
-                    $scope.register.bitWiresConnection.writeWire.enrollToDirective(
-                        $scope.register.bitWiresConnection.writeWireConnector,
-                        $scope.getWireConnectionPositions
-                    );
-                    if ($scope.register.bitWiresConnection.writeWire.registerReaderAndRead(
-                        $scope.register.bitWiresConnection.writeWireConnector
-                    )) {
-                        $scope.register.setBitGateToWrite();
-                    }
-                }
-                if ($scope.register.bitWiresConnection.readWire) {
-                    $scope.register.bitWiresConnection.readWireConnector = new ReadingControlWireConnector(
-                        $scope.register.bitWiresConnection.readWire,
-                        function (wire) {
-                            if (wire.isActive() && wire.isNotZero()) {
-                                $scope.register.setBitGateToRead();
-                            }
-                        },
-                        function () {
-                            if (!($scope.register.bitWiresConnection.writeWire.isActive() &&
-                                $scope.register.bitWiresConnection.writeWire.isNotZero())) {
-                                $scope.register.setBitGateToDisconnected();
-                            }
-                        },
-                        $scope.registerName + ' read wire connector for bit connections'
-                    );
-                    $scope.register.bitWiresConnection.readWire.enrollToDirective(
-                        $scope.register.bitWiresConnection.readWireConnector,
-                        $scope.getWireConnectionPositions
-                    );
-                    if ($scope.register.bitWiresConnection.readWire.registerReaderAndRead(
-                        $scope.register.bitWiresConnection.readWireConnector
-                    )) {
-                        $scope.register.setBitGateToRead();
-                    }
-                }
-            }, 1, 1);
+            });
         },
         templateUrl: 'partials/component_BitRegister.html'
     };

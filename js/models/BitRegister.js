@@ -38,10 +38,12 @@ BitRegister.prototype.getWideBusConnection = function () {
 };
 
 BitRegister.prototype.addWireConnection = function (wire, connector) {
-    this.bitWiresConnection.wires.push({
+    var connection = {
         wire: wire,
         connector: connector
-    });
+    };
+    this.bitWiresConnection.wires.push(connection);
+    return connection;
 };
 
 BitRegister.prototype.removeWireConnection = function (wire) {
