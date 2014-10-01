@@ -471,8 +471,6 @@ bonsaiApp.directive('register', function ($interval) {
             }
 
             $scope.$emit('componentInitialized', $scope);
-            console.log($scope.registerName);
-            console.log($scope.register.getBuses());
 
             $scope.$on('sendInitialValues', function (event, message) {
                 var connections = $scope.register.getBuses();
