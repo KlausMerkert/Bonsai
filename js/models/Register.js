@@ -27,12 +27,14 @@ Register.prototype.addBusConnection = function (bus, writeWire, readWire) {
      * 1 means the register writes to the bus
      * 0 means the connection is inactive
      * -1 means the register reads from the bus */
-    this.buses.push({
+    var connection = {
         state: 0,
         bus: bus,
         writeWire: writeWire,
         readWire: readWire
-    });
+    };
+    this.buses.push(connection);
+    return connection;
 };
 
 Register.prototype.removeConnection = function (bus) {

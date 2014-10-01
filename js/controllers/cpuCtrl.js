@@ -3,6 +3,7 @@
 bonsaiApp.controller('bonsaiCpuCtrl',
     function ($scope, $location) {
         $scope.base = 10;
+        $scope.initializedComponentCount = 0;
 
         var exampleGenerator = new ExampleGenerator();
         if ($location.search()['example'] == 'singleregister') {
@@ -29,6 +30,13 @@ bonsaiApp.controller('bonsaiCpuCtrl',
                 }
             });
             $scope.componentCount = componentCount;
+        });
+
+        $scope.$on('componentInitialized', function (event, message) {
+            $scope.initializedComponentCount++;
+            if ($scope.initializedComponentCount >= $scope.componentCount) {
+                $scope.$broadcast('sendInitialValues', true);
+            }
         });
 
         $scope.getMousePosition = function($event) {
