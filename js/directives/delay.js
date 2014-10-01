@@ -83,6 +83,8 @@ bonsaiApp.directive('delay', function ($interval) {
                     console.log("This bus is not connected: " + bus.getName());
                 }
             };
+
+            $scope.$emit('componentInitialized', $scope);
         },
         templateUrl: 'partials/component_Delay.html'
     };
