@@ -44,6 +44,8 @@ bonsaiApp.directive('norgate', function () {
                 if (oldInA && (newInA != oldInA)) {
                     oldInA.resign($scope.logicGate);
                 }
+                $scope.inAEnrolled = true;
+                $scope.checkForFinishedInitialization();
             });
 
             $scope.$watch('inB', function (newInB, oldInB) {
@@ -54,6 +56,8 @@ bonsaiApp.directive('norgate', function () {
                 if (oldInB && (newInB != oldInB)) {
                     oldInB.resign($scope.logicGate);
                 }
+                $scope.inBEnrolled = true;
+                $scope.checkForFinishedInitialization();
             });
 
             $scope.$watch('out', function (newOut, oldOut) {
@@ -63,9 +67,27 @@ bonsaiApp.directive('norgate', function () {
                 if (oldOut && (newOut != oldOut)) {
                     oldOut.resign($scope.logicGate);
                 }
+                $scope.outEnrolled = true;
+                $scope.checkForFinishedInitialization();
             });
 
-            $scope.$emit('componentInitialized', $scope);
+            $scope.checkForFinishedInitialization = function () {
+                if ($scope.controllerIsRead &&
+                    $scope.inAEnrolled &&
+                    $scope.inBEnrolled &&
+                    $scope.outEnrolled &&
+                    !$scope.initializationSuccessful) {
+                    $scope.initializationSuccessful = true;
+                    $scope.$emit('componentInitialized', $scope);
+                }
+            };
+
+            $scope.controllerIsRead = true;
+            $scope.checkForFinishedInitialization();
+
+            $scope.$on('sendInitialValues', function (event, message) {
+                $scope.logicGate.setValue();
+            });
         },
         templateUrl: 'partials/component_NorGate.html'
     };
