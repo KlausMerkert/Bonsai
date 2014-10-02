@@ -1895,7 +1895,8 @@ ExampleGenerator.prototype.generateFilter = function () {
                 "busLeftId": "bus0",
                 "busRightId": "bus1",
                 "top": 21,
-                "left": 299
+                "left": 299,
+                "direction": "left"
             }
         ]
     }

@@ -30,12 +30,18 @@ bonsaiApp.directive('filter', function () {
                     $scope.busLeft.enrollToDirective($scope.filter, $scope.getConnectionPositions);
                 }
                 $scope.filter.setLeftBus(newValue);
+                $scope.busLeftIsSet = true;
+                $scope.setDirection($scope.direction);
+                $scope.checkForFinishedInitialization();
             });
             $scope.$watch('busRight', function (newValue) {
                 if (newValue) {
                     $scope.busRight.enrollToDirective($scope.filter, $scope.getConnectionPositions);
                 }
                 $scope.filter.setRightBus(newValue);
+                $scope.busRightIsSet = true;
+                $scope.setDirection($scope.direction);
+                $scope.checkForFinishedInitialization();
             });
 
             $scope.$watch('top', function () {
@@ -52,20 +58,35 @@ bonsaiApp.directive('filter', function () {
             });
 
             $scope.$watch('direction', function (newValue) {
-                if (newValue == 'left') {
-                    $scope.busRight.registerReaderAndRead($scope.filter);
-                } else {
-                    $scope.busLeft.registerReaderAndRead($scope.filter);
+                if ($scope.busLeftIsSet && $scope.busRightIsSet) {
+                    $scope.setDirection(newValue);
                 }
-                $scope.filter.setDirection(newValue);
             });
 
             $scope.setDirection = function (direction) {
+                var input;
                 if (direction == 'left') {
                     $scope.direction = 'left';
+                    if ($scope.busRight && $scope.busRightIsSet) {
+                        input = $scope.busRight.registerReaderAndRead($scope.filter);
+                        $scope.filter.setValue(input, $scope.busRight);
+                    }
+                    if ($scope.busLeft && $scope.busLeftIsSet) {
+                        $scope.busLeft.unregisterReader($scope.filter);
+                    }
                 } else {
                     $scope.direction = 'right';
+                    if ($scope.busLeft && $scope.busLeftIsSet) {
+                        input = $scope.busLeft.registerReaderAndRead($scope.filter);
+                        $scope.filter.setValue(input, $scope.busLeft);
+                    }
+                    if ($scope.busRight && $scope.busRightIsSet) {
+                        $scope.busRight.unregisterReader($scope.filter);
+                    }
                 }
+                $scope.filter.setDirection($scope.direction);
+                $scope.directionIsSet = true;
+                $scope.checkForFinishedInitialization();
             };
 
             $scope.getConnectionPositions = function (bus) {
@@ -78,7 +99,19 @@ bonsaiApp.directive('filter', function () {
                 }
             };
 
-            $scope.$emit('componentInitialized', $scope);
+            $scope.checkForFinishedInitialization = function () {
+                if ($scope.controllerIsRead &&
+                    $scope.busLeftIsSet &&
+                    $scope.busRightIsSet &&
+                    $scope.directionIsSet &&
+                    !$scope.initializationSuccessful) {
+                    $scope.initializationSuccessful = true;
+                    $scope.$emit('componentInitialized', $scope.filter);
+                }
+            };
+
+            $scope.controllerIsRead = true;
+            $scope.checkForFinishedInitialization();
         },
         templateUrl: 'partials/component_Filter.html'
     };
