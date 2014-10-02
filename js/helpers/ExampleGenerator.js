@@ -1500,7 +1500,8 @@ ExampleGenerator.prototype.generateManualBonsai = function () {
                 "busLeftId": "addressBus",
                 "busRightId": "IRout",
                 "top": 21,
-                "left": 357
+                "left": 357,
+                "direction": "left"
             }
         ],
         "clocks": [],
