@@ -6,7 +6,7 @@
     },
     {
         "key"        : "_CpuView_",
-        "value"      : "CPU-Ansicht",
+        "value"      : "Schaltung",
         "description": ""
     },
     {
