@@ -116,11 +116,11 @@ bonsaiApp.directive('clock', function () {
                 }
             });
 
-            $scope.$emit('componentInitialized', $scope);
-
             $scope.$on('sendInitialValues', function (event, message) {
                 $scope.clock.setValue(0);
             });
+
+            $scope.$emit('componentInitialized', $scope.clock);
         },
         templateUrl: 'partials/component_Clock.html'
     };

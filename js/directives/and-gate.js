@@ -78,16 +78,16 @@ bonsaiApp.directive('andgate', function () {
                     $scope.outEnrolled &&
                     !$scope.initializationSuccessful) {
                     $scope.initializationSuccessful = true;
-                    $scope.$emit('componentInitialized', $scope);
+                    $scope.$emit('componentInitialized', $scope.logicGate);
                 }
             };
-
-            $scope.controllerIsRead = true;
-            $scope.checkForFinishedInitialization();
 
             $scope.$on('sendInitialValues', function (event, message) {
                 $scope.logicGate.setValue();
             });
+
+            $scope.controllerIsRead = true;
+            $scope.checkForFinishedInitialization();
         },
         templateUrl: 'partials/component_AndGate.html'
     };

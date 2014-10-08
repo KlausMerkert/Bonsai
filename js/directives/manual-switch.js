@@ -64,11 +64,11 @@ bonsaiApp.directive('manualswitch', function () {
                 }
             });
 
-            $scope.$emit('componentInitialized', $scope);
-
             $scope.$on('sendInitialValues', function (event, message) {
                 $scope.switch.setValue($scope.value);
             });
+
+            $scope.$emit('componentInitialized', $scope.switch);
         },
         templateUrl: 'partials/component_ManualSwitch.html'
     };

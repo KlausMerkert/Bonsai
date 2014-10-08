@@ -96,13 +96,13 @@ bonsaiApp.directive('led', function () {
                 }
             });
 
-            $scope.$emit('componentInitialized', $scope);
-
             $scope.$on('sendInitialValues', function (event, message) {
                 if ((typeof $scope.value != 'undefined') && $scope.value && ($scope.led.getValue() != $scope.value)) {
                     $scope.activate();
                 }
             });
+
+            $scope.$emit('componentInitialized', $scope.led);
         },
         templateUrl: 'partials/component_Led.html'
     };

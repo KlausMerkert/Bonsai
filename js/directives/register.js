@@ -494,8 +494,6 @@ bonsaiApp.directive('register', function () {
                 }
             });
 
-            $scope.$emit('componentInitialized', $scope);
-
             $scope.$on('sendInitialValues', function (event, message) {
                 var connections = $scope.register.getBuses();
                 for (var i = 0; i < connections.length; i++) {
@@ -509,6 +507,8 @@ bonsaiApp.directive('register', function () {
                     }
                 }
             });
+
+            $scope.$emit('componentInitialized', $scope.register);
         },
         templateUrl: 'partials/component_Register.html'
     };

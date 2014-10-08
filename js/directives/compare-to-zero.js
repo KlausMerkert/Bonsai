@@ -62,7 +62,7 @@ bonsaiApp.directive('comparetozero', function () {
                 }
             });
 
-            $scope.$emit('componentInitialized', $scope);
+            $scope.$emit('componentInitialized', $scope.comp);
         },
         templateUrl: 'partials/component_CompareToZero.html'
     };

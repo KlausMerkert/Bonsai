@@ -407,11 +407,11 @@ bonsaiApp.directive('bitregister', function ($interval) {
                 return positions;
             };
 
-            $scope.$emit('componentInitialized', $scope);
-
             $scope.$on('sendInitialValues', function (event, message) {
                 $scope.register.setWideBusState($scope.initialWideBusGateState);
             });
+
+            $scope.$emit('componentInitialized', $scope.register);
         },
         templateUrl: 'partials/component_BitRegister.html'
     };

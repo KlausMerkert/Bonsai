@@ -84,7 +84,7 @@ bonsaiApp.directive('delay', function () {
                 }
             };
 
-            $scope.$emit('componentInitialized', $scope);
+            $scope.$emit('componentInitialized', $scope.delayObject);
         },
         templateUrl: 'partials/component_Delay.html'
     };

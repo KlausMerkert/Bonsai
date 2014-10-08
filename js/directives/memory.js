@@ -401,12 +401,12 @@ bonsaiApp.directive('memory', function () {
                 return positions;
             };
 
-            $scope.$emit('componentInitialized', $scope);
-
             $scope.$on('sendInitialValues', function (event, message) {
                 $scope.memory.setAddressBusState($scope.initialAddressBusState);
                 $scope.memory.setDataBusState($scope.initialDataBusState);
             });
+
+            $scope.$emit('componentInitialized', $scope.memory);
         },
         templateUrl: 'partials/component_Memory.html'
     };
