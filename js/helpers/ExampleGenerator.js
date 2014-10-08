@@ -2444,6 +2444,7 @@ ExampleGenerator.prototype.generateControl = function () {
 			      "name": "s0 led",
 			      "top": 62,
 			      "left": 682,
+			      "color": "rgb(255, 0, 0)",
 			      "value": 0
 			    },
 			    {
@@ -2451,6 +2452,7 @@ ExampleGenerator.prototype.generateControl = function () {
 			      "name": "s1 led",
 			      "top": 74,
 			      "left": 682,
+			      "color": "rgb(255, 255, 0)",
 			      "value": 0
 			    },
 			    {
@@ -2634,7 +2636,8 @@ ExampleGenerator.prototype.generateControl = function () {
 			      "busLeftId": "IRout",
 			      "busRightId": "opcode",
 			      "top": 21,
-			      "left": 412
+			      "left": 412,
+            "direction": "right"
 			    },
 			    {
 			      "name": "mod10000",
@@ -2642,7 +2645,8 @@ ExampleGenerator.prototype.generateControl = function () {
 			      "busLeftId": "addressBus",
 			      "busRightId": "IRout",
 			      "top": 21,
-			      "left": 357
+			      "left": 357,
+            "direction": "left"
 			    }
 			  ],
 			  "clocks": [],
