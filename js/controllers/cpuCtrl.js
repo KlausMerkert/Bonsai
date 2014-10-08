@@ -97,37 +97,42 @@ bonsaiApp.controller('bonsaiCpuCtrl',
         };
 
         $scope.clearCpu = function () {
+            $scope.initializedComponentCount = 0;
             $scope.cpu = {};
         };
 
         $scope.openFilePicker = function () {
+            $scope.cpuFileName = undefined;
             document.getElementById('cpu-filename').click();
         };
 
         $scope.loadCpu = function () {
-            console.log("Hallo");
-            $scope.clearCpu();
-            var input = document.getElementById('cpu-filename');
-            var file = input.files[0];
-            var reader = new FileReader();
-            reader.addEventListener("loadend", function() {
-                $scope.$apply(function () {
-                    $scope.cpu = angular.fromJson(reader.result);
-                    try {
-                        var matcher = new BusMatcher($scope.cpu);
-                        matcher.createBuses();
-                        matcher.matchAllComponents();
-                        $scope.cpu = matcher.getCpu();
-                    } catch (exception) {
-                        $scope.clearCpu();
-                        throw exception;
-                    }
-                    $scope.selectedEditor = undefined;
-                    $scope.cpuFileName = file.name;
+            $scope.$apply(function () {
+                $scope.clearCpu();
+                var input = document.getElementById('cpu-filename');
+                var file = input.files[0];
+                var reader = new FileReader();
+                reader.addEventListener("loadend", function () {
+                    $scope.$apply(function () {
+                        $scope.initializedComponentCount = 0;
+                        $scope.cpu = angular.fromJson(reader.result);
+                        try {
+                            var matcher = new BusMatcher($scope.cpu);
+                            matcher.createBuses();
+                            matcher.matchAllComponents();
+                            $scope.cpu = matcher.getCpu();
+                        } catch (exception) {
+                            $scope.clearCpu();
+                            throw exception;
+                        }
+                        $scope.selectedEditor = undefined;
+                        $scope.cpuFileName = file.name;
+                    });
                 });
+                reader.readAsText(file);
             });
-            reader.readAsText(file);
         };
+
         $scope.saveCpu = function () {
             var fs = new FileSaver($scope.cpu, "bonsai.json", $scope.cpuFileName);
             fs.cpuToJson();
