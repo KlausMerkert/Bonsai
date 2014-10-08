@@ -1,7 +1,7 @@
 <div class="component nospace" ng-style="{'top': topCSS, 'left': leftCSS}">
     <div class="memory" ng-style="{height: showContext ? '82px' : '12px'}">
         <div style="width: 0; height: 0; overflow: visible; display: inline-block; position: absolute;">
-            <div ng-click="toggleAddressBusRead()"
+            <div ng-click="toggleAddressBusRead()" ng-mousedown="$event.preventDefault();"
                  class="connection toprow"
                  ng-class="{'read': memory.getAddressBusState() == -1, 'write': memory.getAddressBusState() == 1, 'grayback': memory.getAddressBusState() == 0}"
                  style="left: 32px;">
@@ -17,11 +17,11 @@
                      style="left: 37px;"></div>
                 <div class="wireconnector read wireconnectortoprowread"
                      style="left: 46px;"
-                     ng-mousedown="activateAddressBusRead()" ng-mouseup="deactivateAddressBusRead()"></div>
+                     ng-mousedown="activateAddressBusRead($event)" ng-mouseup="deactivateAddressBusRead()"></div>
             </div>
         </div>
         <div style="width: 0; height: 0; overflow: visible; display: inline-block; position: absolute;">
-            <div ng-click="toggleDataBusState()"
+            <div ng-click="toggleDataBusState()" ng-mousedown="$event.preventDefault();"
                  class="connection"
                  ng-class="{'read': memory.getDataBusState() == -1, 'write': memory.getDataBusState() == 1, 'grayback': memory.getDataBusState() == 0}"
                  ng-style="{top: showContext ? '84px' : '14px'}"
@@ -39,10 +39,10 @@
                      style="left: 114px;"></div>
                 <div class="wireconnector write wireconnectorbottomrowwrite"
                      style="left: 123px;"
-                     ng-mousedown="activateDataBusWrite()" ng-mouseup="deactivateDataBusWrite()"></div>
+                     ng-mousedown="activateDataBusWrite($event)" ng-mouseup="deactivateDataBusWrite()"></div>
                 <div class="wireconnector read wireconnectorbottomrowread"
                      style="left: 123px;"
-                     ng-mousedown="activateDataBusRead()" ng-mouseup="deactivateDataBusRead()"></div>
+                     ng-mousedown="activateDataBusRead($event)" ng-mouseup="deactivateDataBusRead()"></div>
             </div>
         </div>
         <table style="margin-top: 2px;">

@@ -2,7 +2,7 @@
     <div class="register">
         <div style="width: 0; height: 0; overflow: visible; display: inline-block; position: absolute;"
              ng-repeat="connection in register.getBuses()">
-            <div ng-click="toggleState(connection)"
+            <div ng-click="toggleState(connection)" ng-mousedown="$event.preventDefault();"
                  ng-class="{'connection': true, 'toprow': $even, 'bottomrow': $odd, 'read': connection.state == -1, 'write': connection.state == 1, 'grayback': connection.state == 0}"
                  style="left: 1.3em;">
                 <div ng-show="(connection.state == 1 && $even) || (connection.state == -1 && $odd)"
@@ -17,21 +17,21 @@
                      style="left: 26px;"></div>
                 <div ng-class="{'wireconnector': true, 'write': true, 'wireconnectortoprowwrite': $even, 'wireconnectorbottomrowwrite': $odd}"
                      style="left: 35px;"
-                     ng-mousedown="activateWriteWire(connection)"
+                     ng-mousedown="activateWriteWire(connection, $event)"
                      ng-mouseup="deactivateWriteWire(connection)"></div>
                 <div ng-class="{'wireconnector': true, 'read': true, 'wireconnectortoprowread': $even, 'wireconnectorbottomrowread': $odd}"
                      style="left: 2.19em;"
-                     ng-mousedown="activateReadWire(connection)"
+                     ng-mousedown="activateReadWire(connection, $event)"
                      ng-mouseup="deactivateReadWire(connection)"></div>
             </div>
         </div>
         <div style="width: 0; height: 0; overflow: visible; display: inline-block; position: absolute;">
             <div class="wireconnector grayback" style="left: 58px; top: 0;"
-                 ng-mousedown="activateInc()" ng-mouseup="deactivateInc()"></div>
+                 ng-mousedown="activateInc($event)" ng-mouseup="deactivateInc()"></div>
             <div class="wireconnector grayback" style="left: 58px; top: 7px;"
-                 ng-mousedown="activateDec()" ng-mouseup="deactivateDec()"></div>
+                 ng-mousedown="activateDec($event)" ng-mouseup="deactivateDec()"></div>
             <div class="wireconnector grayback" style="left: 58px; top: 14px;"
-                 ng-mousedown="activateClr()" ng-mouseup="deactivateClr()"></div>
+                 ng-mousedown="activateClr($event)" ng-mouseup="deactivateClr()"></div>
             <div style="position: absolute; left: 46px; top: -10px; text-align: right;">
                 <span style="font-size: 60%; font-family: 'Nimbus Mono L', monospace;">+1</span>
             </div>

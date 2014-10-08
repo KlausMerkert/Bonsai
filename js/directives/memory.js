@@ -199,7 +199,8 @@ bonsaiApp.directive('memory', function () {
                 return typeof value == 'undefined';
             };
 
-            $scope.activateAddressBusRead = function () {
+            $scope.activateAddressBusRead = function ($event) {
+                $event.preventDefault();
                 if ($scope.memory.addressBus.readWire) {
                     $scope.memory.addressBus.readWire.unregisterReader(
                         $scope.memory.addressBus.readWireConnector
@@ -268,7 +269,8 @@ bonsaiApp.directive('memory', function () {
                 }
             };
 
-            $scope.activateDataBusRead = function () {
+            $scope.activateDataBusRead = function ($event) {
+                $event.preventDefault();
                 if ($scope.memory.dataBus.readWire) {
                     $scope.memory.dataBus.readWire.unregisterReader(
                         $scope.memory.dataBus.readWireConnector
@@ -317,7 +319,8 @@ bonsaiApp.directive('memory', function () {
                 $scope.memory.setDataBusState(0);
             };
 
-            $scope.activateDataBusWrite = function () {
+            $scope.activateDataBusWrite = function ($event) {
+                $event.preventDefault();
                 if ($scope.memory.dataBus.writeWire) {
                     $scope.memory.dataBus.writeWire.unregisterReader(
                         $scope.memory.dataBus.writeWireConnector

@@ -216,7 +216,8 @@ bonsaiApp.directive('register', function () {
                 $scope.register.setState(connection, desiredState);
             };
 
-            $scope.activateWriteWire = function (connection) {
+            $scope.activateWriteWire = function (connection, $event) {
+                $event.preventDefault();
                 if (connection.writeWire) {
                     connection.writeWire.unregisterReader(connection.writeWireConnector);
                     try {
@@ -246,7 +247,8 @@ bonsaiApp.directive('register', function () {
                 $scope.register.setWriteToDisconnected(connection.bus);
             };
 
-            $scope.activateReadWire = function (connection) {
+            $scope.activateReadWire = function (connection, $event) {
+                $event.preventDefault();
                 if (connection.readWire) {
                     connection.readWire.unregisterReader(connection.readWireConnector);
                     try {
@@ -302,7 +304,8 @@ bonsaiApp.directive('register', function () {
                 }
             };
 
-            $scope.activateInc = function () {
+            $scope.activateInc = function ($event) {
+                $event.preventDefault();
                 if ($scope.incWire) {
                     $scope.incWire.unregisterReader($scope.incWireConnector);
                     try {
@@ -330,7 +333,8 @@ bonsaiApp.directive('register', function () {
                 }
             };
 
-            $scope.activateDec = function () {
+            $scope.activateDec = function ($event) {
+                $event.preventDefault();
                 if ($scope.decWire) {
                     $scope.decWire.unregisterReader($scope.decWireConnector);
                     try {
@@ -358,7 +362,8 @@ bonsaiApp.directive('register', function () {
                 }
             };
 
-            $scope.activateClr = function () {
+            $scope.activateClr = function ($event) {
+                $event.preventDefault();
                 if ($scope.clrWire) {
                     $scope.clrWire.unregisterReader($scope.clrWireConnector);
                     try {

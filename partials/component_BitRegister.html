@@ -1,7 +1,7 @@
 <div class="component nospace" ng-style="{'top': topCSS, 'left': leftCSS}">
     <div class="bitregister" ng-style="{'height': (getBits().length * 12) + 'px'}">
         <div style="width: 0; height: 0; overflow: visible; display: inline-block; position: absolute;">
-            <div ng-click="toggleWideBusState()"
+            <div ng-click="toggleWideBusState()" ng-mousedown="$event.preventDefault();"
                  class="connection"
                  ng-style="{'background-color': gateColor}"
                  style="left: 2px;">
@@ -13,7 +13,7 @@
                      style="position: relative; top: -0.1em; left: 0.01em;" class="unselectable">&darr;</div>
                 <div style="position: absolute; top: 8px; left: 10px;" class="flanktriggered"></div>
             </div>
-            <div ng-click="toggleBitConnectionState()"
+            <div ng-click="toggleBitConnectionState()" ng-mousedown="$event.preventDefault();"
                  class="bitconnections" style="position: absolute; left: -22px; top: -2px; width: 18px;"
                  ng-class="{'read': register.bitWiresConnection.state == -1, 'write': register.bitWiresConnection.state == 1, 'grayback': register.bitWiresConnection.state == 0}"
                  ng-style="{'height': (getBits().length * 12 + 2) + 'px'}">
@@ -31,21 +31,21 @@
                      style="position: absolute; left: 7px; top: -26px;"></div>
                 <div class="wireconnector write"
                      style="position: absolute; left: 16px; top: -20px;"
-                     ng-mousedown="activateWriteWire()"
+                     ng-mousedown="activateWriteWire($event)"
                      ng-mouseup="deactivateWriteWire()"></div>
                 <div class="wireconnector read"
                      style="position: absolute; left: 16px; top: -13px;"
-                     ng-mousedown="activateReadWire()"></div>
+                     ng-mousedown="activateReadWire($event)"></div>
                 <div class="wireconnector write"
                      style="position: absolute; left: -19px; top: -6px;"
-                     ng-mousedown="activateWireWrite()" ng-mouseup="deactivateWireWrite()"></div>
+                     ng-mousedown="activateWireWrite($event)" ng-mouseup="deactivateWireWrite()"></div>
                 <div class="wireconnector read"
                      style="position: absolute; left: -11px; top: -6px;"
-                     ng-mousedown="activateWireRead()" ng-mouseup="deactivateWireRead()"></div>
+                     ng-mousedown="activateWireRead($event)" ng-mouseup="deactivateWireRead()"></div>
                 <div ng-repeat="bit in getBits() track by $index"
                      class="wireconnector grayback" style="left: -26px;"
                      ng-style="{'top': ($index * 12 + 4) + 'px'}"
-                     ng-mousedown="activateBit($index)" ng-mouseup="deactivateBit($index)"></div>
+                     ng-mousedown="activateBit($index, $event)" ng-mouseup="deactivateBit($index)"></div>
             </div>
         </div>
         <div ng-repeat="bit in getBits() track by $index"
