@@ -27,6 +27,25 @@ Filter.prototype.setRightBus = function (bus) {
 
 Filter.prototype.setStatement = function (statement) {
     this.statement = statement;
+    var writeBus = undefined;
+    var readBus = undefined;
+    if (this.direction == 'left') {
+        writeBus = this.leftBus;
+        readBus = this.rightBus;
+    } else { // this.direction == 'right'
+        writeBus = this.rightBus;
+        readBus = this.leftBus;
+    }
+    if (readBus) {
+        this.value = this.applyFilter(readBus.registerReaderAndRead(this));
+        if (writeBus) {
+            if (typeof this.value != 'undefined') {
+                writeBus.write(this, this.value);
+            } else {
+                writeBus.stopWriting(this);
+            }
+        }
+    }
 };
 
 Filter.prototype.setDirection = function (direction) {
@@ -49,7 +68,7 @@ Filter.prototype.setValue = function (value, bus) {
         }
     } else { // this.direction == 'right'
         if (this.leftBus === bus) {
-            writeBus = this.rightBus
+            writeBus = this.rightBus;
         }
     }
     if (writeBus) {
