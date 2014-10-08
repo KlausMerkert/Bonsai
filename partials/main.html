@@ -13,13 +13,14 @@
             <span class="end"></span>
         </li>
     </ul>
-    <div class="toolbar" ng-show="editMode">
-        <button type="button" ng-click="saveCpu()" data-i18n="_saveCpuButton_">save CPU to file</button>
+    <div class="toolbar" ng-show="editMode" ng-mousedown="$event.preventDefault();">
         <!--<button type="button" ng-click="clearCpu()" data-i18n="_clearCpuButton_">clear CPU</button>-->
-        <input type="file" id="cpu-filename"
+        <button type="button" ng-click="saveCpu()" class="save-button" style="margin: 1px;"></button>
+        <button type="button" ng-click="openFilePicker()" class="load-button" style="margin: 1px;"></button>
+        <input type="file" id="cpu-filename" style="display: none;"
                ng-model="editor.filename"
                ng-change="loadCpu()" />
-        <span>({{ MouseX }}, {{ MouseY }})</span>
+        <span style="position: relative; top: -5px;">({{ MouseX }}, {{ MouseY }})</span>
     </div>
     <div class="components pane" id="CpuCanvas" ng-show="!selectedEditor" ng-mousemove="getMousePosition($event)">
         <div ng-repeat="bus in cpu.buses">

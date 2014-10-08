@@ -126,4 +126,25 @@ textarea {
     width: 100%;
     background-color: rgb(204, 204, 204);
     border: 1px solid rgb(170, 170, 170);
+    height: 22px;
+}
+
+.save-button {
+    background: url("../images/Save-Icon.svg") no-repeat 0 0;
+    width: 20px;
+    height: 20px;
+    display: inline-block;
+    border: 0 solid rgb(204, 204, 204);
+    padding: 0;
+    cursor: pointer;
+}
+
+.load-button {
+    background: url("../images/Load-Icon.svg") no-repeat 0 0;
+    width: 20px;
+    height: 20px;
+    display: inline-block;
+    border: 0 solid rgb(204, 204, 204);
+    padding: 0;
+    cursor: pointer;
 }

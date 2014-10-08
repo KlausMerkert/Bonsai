@@ -100,6 +100,10 @@ bonsaiApp.controller('bonsaiCpuCtrl',
             $scope.cpu = {};
         };
 
+        $scope.openFilePicker = function () {
+            document.getElementById('cpu-filename').click();
+        };
+
         $scope.loadCpu = function () {
             console.log("Hallo");
             $scope.clearCpu();
