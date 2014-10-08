@@ -20,7 +20,7 @@
         <input type="file" id="cpu-filename" style="display: none;"
                ng-model="cpuFileName"
                onchange="angular.element(this).scope().loadCpu()" />
-        <span style="position: relative; top: -5px;">({{ MouseX }}, {{ MouseY }})</span>
+        <span style="position: relative; top: -2px; float: right; margin: 1px;">({{ MouseX }}, {{ MouseY }})</span>
     </div>
     <div class="components pane" id="CpuCanvas" ng-show="!selectedEditor" ng-mousemove="getMousePosition($event)">
         <div ng-repeat="bus in cpu.buses">

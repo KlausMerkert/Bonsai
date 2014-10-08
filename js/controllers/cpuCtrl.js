@@ -103,7 +103,17 @@ bonsaiApp.controller('bonsaiCpuCtrl',
 
         $scope.openFilePicker = function () {
             $scope.cpuFileName = undefined;
-            document.getElementById('cpu-filename').click();
+            var input = document.getElementById('cpu-filename');
+            // This hack resets the input.
+            try {
+                input.value = '';
+                if(input.value){
+                    input.type = "text";
+                    input.type = "file";
+                }
+            } catch(e) {}
+            // End of the reset hack.
+            input.click();
         };
 
         $scope.loadCpu = function () {
