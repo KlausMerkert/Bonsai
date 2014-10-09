@@ -80,7 +80,17 @@ BitRegister.prototype.setBitConnectionControlWires = function (readWire, writeWi
 };
 
 BitRegister.prototype.getWires = function () {
-    return this.bitWiresConnection.wires;
+    var bitConnections = [];
+    for (var i = 0; i < this.bitWiresConnection.wires.length; i++) {
+        bitConnections.push(this.bitWiresConnection.wires[i]);
+    }
+    for (i = bitConnections.length; i < this.bitWidth; i++) {
+        bitConnections.push({
+            wire: undefined,
+            connector: undefined
+        });
+    }
+    return bitConnections;
 };
 
 BitRegister.prototype.setValue = function (value) {
@@ -114,13 +124,15 @@ BitRegister.prototype.setBit = function (index, bit) {
             bit
         );
     }
-    if (this.bitWiresConnection.state == 1) {
+    if ((this.bitWiresConnection.state == 1) &&
+        (index < this.bitWiresConnection.wires.length) &&
+        (this.bitWiresConnection.wires[index].wire)) {
         this.bitWiresConnection.wires[index].wire.write(
             this.bitWiresConnection.wires[index].connector,
             bit
         );
     }
-    if (bit !== this.getBit(index)) {
+    if ((index < this.bitWidth) && (bit !== this.getBit(index))) {
         if (bit) {
             this.setValue(this.value + Math.pow(2, index));
         } else {

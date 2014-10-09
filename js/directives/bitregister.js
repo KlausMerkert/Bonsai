@@ -370,15 +370,19 @@ bonsaiApp.directive('bitregister', function ($interval) {
 
             $scope.deactivateBit = function (index) {
                 var wires = $scope.register.getWires();
-                if ((wires.length > index) && (wires[index].wire)) {
-                    try {
-                        wires[index].wire.write(wires[index].connector, 0);
+                if (wires.length > index) {
+                    if (wires[index].wire) {
+                        try {
+                            wires[index].wire.write(wires[index].connector, 0);
+                            $scope.register.setBit(index, 0);
+                        } catch (exception) {
+                            throw exception;
+                        } finally {
+                            wires[index].wire.stopWriting(wires[index].connector);
+                            wires[index].wire.registerReaderAndRead(wires[index].connector);
+                        }
+                    } else {
                         $scope.register.setBit(index, 0);
-                    } catch (exception) {
-                        throw exception;
-                    } finally {
-                        wires[index].wire.stopWriting(wires[index].connector);
-                        wires[index].wire.registerReaderAndRead(wires[index].connector);
                     }
                 }
             };
