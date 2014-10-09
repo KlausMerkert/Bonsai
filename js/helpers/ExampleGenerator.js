@@ -834,6 +834,7 @@ ExampleGenerator.prototype.generateBonsai = function () {
                     'writeWireId': undefined,
                     'readWireId': 'clock'
                 },
+                'bitWidth': 15,
                 'wiregates': [
                     {'wireId': 's0'},
                     {'wireId': 's1'},
@@ -1905,772 +1906,773 @@ ExampleGenerator.prototype.generateFilter = function () {
 
 ExampleGenerator.prototype.generateControl = function () {
     return {
-			  "buses": [
-			    {
-			      "id": "s0",
-			      "name": "not count",
-			      "max": 1
-			    },
-			    {
-			      "id": "s1",
-			      "name": "clrMPC",
-			      "max": 1,
-			      "color": "rgb(100, 100, 255)"
-			    },
-			    {
-			      "id": "s2",
-			      "name": "readMPC",
-			      "max": 1,
-			      "color": "rgb(100, 255, 100)"
-			    },
-			    {
-			      "id": "s3",
-			      "name": "writeMem",
-			      "max": 1,
-			      "color": "rgb(255, 100, 100)",
-			      "routes": [
-			        {
-			          "type": "horizontal",
-			          "top": "98px",
-			          "left": "210px",
-			          "width": "540px",
-			          "height": "0"
-			        },
-			        {
-			          "type": "bottomright",
-			          "top": "126px",
-			          "left": "140px",
-			          "width": "47px",
-			          "height": "30px"
-			        },
-			        {
-			          "type": "topleft",
-			          "top": "98px",
-			          "left": "187px",
-			          "width": "31px",
-			          "height": "28px"
-			        }
-			      ]
-			    },
-			    {
-			      "id": "s4",
-			      "name": "readMem",
-			      "max": 1,
-			      "color": "rgb(100, 255, 100)",
-			      "routes": [
-			        {
-			          "type": "horizontal",
-			          "top": "110px",
-			          "left": "210px",
-			          "width": "540px",
-			          "height": "0"
-			        },
-			        {
-			          "type": "bottomright",
-			          "top": "129px",
-			          "left": "140px",
-			          "width": "39px",
-			          "height": "20px"
-			        },
-			        {
-			          "type": "topleft",
-			          "top": "110px",
-			          "left": "179px",
-			          "width": "31px",
-			          "height": "29px"
-			        }
-			      ]
-			    },
-			    {
-			      "id": "s5",
-			      "name": "incAkku",
-			      "max": 1,
-			      "color": "rgb(200, 200, 0)",
-			      "routes": [
-			        {
-			          "type": "horizontal",
-			          "top": "122px",
-			          "left": "270px",
-			          "width": "480px",
-			          "height": "0"
-			        },
-			        {
-			          "type": "bottomright",
-			          "top": "158px",
-			          "left": "79px",
-			          "width": "158px",
-			          "height": "100px"
-			        },
-			        {
-			          "type": "topleft",
-			          "top": "122px",
-			          "left": "237px",
-			          "width": "33px",
-			          "height": "36px"
-			        }
-			      ]
-			    },
-			    {
-			      "id": "s6",
-			      "name": "decAkku",
-			      "max": 1,
-			      "color": "rgb(200, 200, 0)",
-			      "routes": [
-			        {
-			          "type": "horizontal",
-			          "top": "134px",
-			          "left": "270px",
-			          "width": "480px",
-			          "height": "0"
-			        },
-			        {
-			          "type": "bottomright",
-			          "top": "164px",
-			          "left": "79px",
-			          "width": "166px",
-			          "height": "100px"
-			        },
-			        {
-			          "type": "topleft",
-			          "top": "134px",
-			          "left": "245px",
-			          "width": "25px",
-			          "height": "30px"
-			        }
-			      ]
-			    },
-			    {
-			      "id": "s7",
-			      "name": "readAkku",
-			      "max": 1,
-			      "color": "rgb(10, 255, 10)",
-			      "routes": [
-			        {
-			          "type": "horizontal",
-			          "top": "146px",
-			          "left": "268px",
-			          "width": "428px",
-			          "height": "0"
-			        },
-			        {
-			          "type": "bottomright",
-			          "top": "160px",
-			          "left": "55px",
-			          "width": "198px",
-			          "height": "85px"
-			        },
-			        {
-			          "type": "topleft",
-			          "top": "146px",
-			          "left": "253px",
-			          "width": "15px",
-			          "height": "15px"
-			        }
-			      ]
-			    },
-			    {
-			      "id": "s8",
-			      "name": "writeAkku",
-			      "max": 1,
-			      "color": "rgb(255, 100, 100)",
-			      "routes": [
-			        {
-			          "type": "horizontal",
-			          "top": "158px",
-			          "left": "280px",
-			          "width": "460px",
-			          "height": "0"
-			        },
-			        {
-			          "type": "bottomright",
-			          "top": "168px",
-			          "left": "55px",
-			          "width": "206px",
-			          "height": "70px"
-			        },
-			        {
-			          "type": "topleft",
-			          "top": "158px",
-			          "left": "261px",
-			          "width": "20px",
-			          "height": "15px"
-			        }
-			      ]
-			    },
-			    {
-			      "id": "s9",
-			      "name": "readPC",
-			      "max": 1,
-			      "color": "rgb(100, 255, 100)",
-			      "routes": [
-			        {
-			          "type": "bottomleft",
-			          "top": "100px",
-			          "left": "279px",
-			          "width": "450px",
-			          "height": "70px"
-			        },
-			        {
-			          "type": "topright",
-			          "top": "45px",
-			          "left": "236px",
-			          "width": "43px",
-			          "height": "70px"
-			        }
-			      ]
-			    },
-			    {
-			      "id": "s10",
-			      "name": "writePC",
-			      "max": 1,
-			      "color": "rgb(255, 100, 100)",
-			      "routes": [
-			        {
-			          "type": "bottomleft",
-			          "top": "112px",
-			          "left": "285px",
-			          "width": "450px",
-			          "height": "70px"
-			        },
-			        {
-			          "type": "topright",
-			          "top": "38px",
-			          "left": "235px",
-			          "width": "50px",
-			          "height": "82px"
-			        }
-			      ]
-			    },
-			    {
-			      "id": "s11",
-			      "name": "loadIR",
-			      "max": 1,
-			      "color": "rgb(100, 255, 100)",
-			      "routes": [
-			        {
-			          "type": "topright",
-			          "top": "85px",
-			          "left": "408px",
-			          "width": "40px",
-			          "height": "70px"
-			        },
-			        {
-			          "type": "bottomleft",
-			          "top": "155px",
-			          "left": "448px",
-			          "width": "257px",
-			          "height": "39px"
-			        }
-			      ]
-			    },
-			    {
-			      "id": "s12",
-			      "name": "writeIR",
-			      "max": 1,
-			      "color": "rgb(255, 100, 100)",
-			      "routes": [
-			        {
-			          "type": "topright",
-			          "top": "38px",
-			          "left": "408px",
-			          "width": "32px",
-			          "height": "128px"
-			        },
-			        {
-			          "type": "bottomleft",
-			          "top": "167px",
-			          "left": "440px",
-			          "width": "257px",
-			          "height": "39px"
-			        }
-			      ]
-			    },
-			    {
-			      "id": "s13",
-			      "name": "incPC",
-			      "max": 1,
-			      "color": "rgb(200, 200, 0)",
-			      "routes": [
-			        {
-			          "type": "topright",
-			          "top": "64px",
-			          "left": "292px",
-			          "width": "8px",
-			          "height": "100px"
-			        },
-			        {
-			          "type": "bottomleft",
-			          "top": "164px",
-			          "left": "300px",
-			          "width": "395px",
-			          "height": "54px"
-			        }
-			      ]
-			    },
-			    {
-			      "id": "s14",
-			      "name": "incPCz",
-			      "max": 1,
-			      "color": "rgb(200, 200, 0)",
-			      "routes": [
-			        {
-			          "type": "topright",
-			          "top": "48px",
-			          "left": "323px",
-			          "width": "21px",
-			          "height": "100px"
-			        },
-			        {
-			          "type": "bottomleft",
-			          "top": "148px",
-			          "left": "344px",
-			          "width": "359px",
-			          "height": "82px"
-			        }
-			      ]
-			    },
-			    {
-			      "id": "dataBus",
-			      "name": "Datenbus",
-			      "max": 99999,
-			      "base": 10,
-			      "color": "rgb(255, 0, 0)",
-			      "top": 170,
-			      "left": 175,
-			      "routes": [
-			        {
-			          "type": "vertical",
-			          "top": "164px",
-			          "left": "129px",
-			          "width": "0",
-			          "height": "31px"
-			        },
-			        {
-			          "type": "bottomright",
-			          "top": "100px",
-			          "left": "275px",
-			          "width": "120px",
-			          "height": "95px"
-			        },
-			        {
-			          "type": "vertical",
-			          "top": "195px",
-			          "left": "318px",
-			          "width": "0",
-			          "height": "17px"
-			        },
-			        {
-			          "type": "topleft",
-			          "top": "195px",
-			          "left": "43px",
-			          "width": "230px",
-			          "height": "35px"
-			        }
-			      ]
-			    },
-			    {
-			      "id": "addressBus",
-			      "name": "Adressbus",
-			      "max": 9999,
-			      "base": 10,
-			      "color": "rgb(0, 140, 0)",
-			      "top": -3,
-			      "left": 175,
-			      "routes": [
-			        {
-			          "type": "topleft",
-			          "top": "21px",
-			          "left": "51px",
-			          "width": "301px",
-			          "height": "7px"
-			        },
-			        {
-			          "type": "vertical",
-			          "top": "21px",
-			          "left": "224px",
-			          "width": "0",
-			          "height": "10px"
-			        }
-			      ]
-			    },
-			    {
-			      "id": "MicroDataBus",
-			      "name": "MicroDataBus",
-			      "base": 10,
-			      "max": 32767,
-			      "color": "rgb(200, 0, 200)",
-			      "left": 685,
-			      "top": -3,
-			      "routes": [
-			        {
-			          "type": "topright",
-			          "top": "21px",
-			          "left": "710px",
-			          "width": "20px",
-			          "height": "7px"
-			        }
-			      ]
-			    },
-			    {
-			      "id": "IRout",
-			      "name": "AusgangIR",
-			      "max": 99999,
-			      "base": 10,
-			      "color": "rgb(0, 140, 0)",
-			      "top": -3,
-			      "left": 377,
-			      "routes": [
-			        {
-			          "type": "topright",
-			          "top": "21px",
-			          "left": "384px",
-			          "width": "11px",
-			          "height": "7px"
-			        },
-			        {
-			          "type": "topleft",
-			          "top": "21px",
-			          "left": "396px",
-			          "width": "11px",
-			          "height": "7px"
-			        }
-			      ]
-			    },
-			    {
-			      "id": "opcode",
-			      "name": "opcode",
-			      "max": 99999,
-			      "base": 10,
-			      "color": "rgb(0, 140, 0)",
-			      "top": -3,
-			      "left": 443,
-			      "routes": [
-			        {
-			          "type": "topright",
-			          "top": "21px",
-			          "left": "439px",
-			          "width": "23px",
-			          "height": "7px"
-			        }
-			      ]
-			    },
-			    {
-			      "id": "AndB",
-			      "name": "And gate B wire",
-			      "max": 1
-			    },
-			    {
-			      "id": "OrA",
-			      "name": "Or gate A wire",
-			      "max": 1
-			    },
-			    {
-			      "id": "or1_ausgang",
-			      "name": "or1_ausgang result wire",
-			      "max": 1
-			    },
-			    {
-			      "id": "compWire",
-			      "name": "Zerocomparator result wire",
-			      "max": 1,
-			      "routes": [
-			        {
-			          "type": "vertical",
-			          "top": "239px",
-			          "left": "318px",
-			          "width": "0",
-			          "height": "16px"
-			        },
-			        {
-			          "type": "topright",
-			          "top": "59px",
-			          "left": "321px",
-			          "width": "15px",
-			          "height": "140px"
-			        },
-			        {
-			          "type": "bottomright",
-			          "top": "200px",
-			          "left": "319px",
-			          "width": "17px",
-			          "height": "46px"
-			        }
-			      ]
-			    },
-			    {
-			      "id": "SteuerwortWriteWire",
-			      "name": "Steuerwort write wire",
-			      "max": 1
-			    },
-			    {
-			      "id": "SteuerwortReadWire",
-			      "name": "Steuerwort read wire",
-			      "max": 1
-			    }
-			  ],
-			  "manualswitches": [
-			    {
-			      "name": "SteuerwortWriteWireSwitch",
-			      "wireId": "SteuerwortWriteWire",
-			      "value": 1,
-			      "top": 10,
-			      "left": 765
-			    },
-			    {
-			      "name": "SteuerwortReadWireSwitch",
-			      "wireId": "SteuerwortReadWire",
-			      "value": 0,
-			      "top": 26,
-			      "left": 765
-			    }
-			  ],
-			  "leds": [
-			    {
-			      "wireId": "or1_ausgang",
-			      "name": "or1_ausgang indication led",
-			      "top": 35,
-			      "left": 262,
-			      "value": 0
-			    },
-			    {
-			      "wireId": "compWire",
-			      "name": "comp indication led",
-			      "top": 259,
-			      "left": 317,
-			      "value": 0
-			    },
-			    {
-			      "wireId": "s0",
-			      "name": "s0 led",
-			      "top": 62,
-			      "left": 682,
-			      "color": "rgb(255, 0, 0)",
-			      "value": 0
-			    },
-			    {
-			      "wireId": "s1",
-			      "name": "s1 led",
-			      "top": 74,
-			      "left": 682,
-			      "color": "rgb(255, 255, 0)",
-			      "value": 0
-			    },
-			    {
-			      "wireId": "s2",
-			      "name": "s2 led",
-			      "top": 86,
-			      "left": 682,
-			      "value": 0
-			    }
-			  ],
-			  "andGates": [
-			    {
-			      "name": "and1",
-			      "inAId": "s14",
-			      "inBId": "compWire",
-			      "outId": "OrA",
-			      "top": 48,
-			      "left": 300
-			    }
-			  ],
-			  "orGates": [
-			    {
-			      "name": "or1",
-			      "inAId": "OrA",
-			      "inBId": "s13",
-			      "outId": "or1_ausgang",
-			      "top": 53,
-			      "left": 270
-			    }
-			  ],
-			  "norGates": [
-			    
-			  ],
-			  "registers": [
-			    {
-			      "name": "PC",
-			      "value": 0,
-			      "base": 10,
-			      "top": 50,
-			      "left": 190,
-			      "gates": [
-			        {
-			          "busId": "addressBus",
-			          "writeWireId": "s10",
-			          "readWireId": "s9"
-			        }
-			      ],
-			      "incWireId": "or1_ausgang"
-			    },
-			    {
-			      "name": "IR",
-			      "value": 40008,
-			      "base": 10,
-			      "top": 50,
-			      "left": 362,
-			      "gates": [
-			        {
-			          "busId": "IRout",
-			          "writeWireId": "s12",
-			          "initialState": 0
-			        },
-			        {
-			          "busId": "dataBus",
-			          "readWireId": "s11"
-			        }
-			      ]
-			    },
-			    {
-			      "name": "Akku",
-			      "value": 42,
-			      "base": 10,
-			      "top": 250,
-			      "left": 10,
-			      "gates": [
-			        {
-			          "busId": "dataBus",
-			          "writeWireId": "s8",
-			          "readWireId": "s7"
-			        }
-			      ],
-			      "incWireId": "s5",
-			      "decWireId": "s6",
-			      "maxValue": 255
-			    }
-			  ],
-			  "bitregisters": [
-			    {
-			      "name": "Steuerwort",
-			      "value": 0,
-			      "wiresReadWireId": "SteuerwortReadWire",
-			      "wiresWriteWireId": "SteuerwortWriteWire",
-			      "base": 10,
-			      "top": 50,
-			      "left": 700,
-			      "widegate": {
-			        "busId": "MicroDataBus"
-			      },
-			      "wiregates": [
-			        {
-			          "wireId": "s0"
-			        },
-			        {
-			          "wireId": "s1"
-			        },
-			        {
-			          "wireId": "s2"
-			        },
-			        {
-			          "wireId": "s3"
-			        },
-			        {
-			          "wireId": "s4"
-			        },
-			        {
-			          "wireId": "s5"
-			        },
-			        {
-			          "wireId": "s6"
-			        },
-			        {
-			          "wireId": "s7"
-			        },
-			        {
-			          "wireId": "s8"
-			        },
-			        {
-			          "wireId": "s9"
-			        },
-			        {
-			          "wireId": "s10"
-			        },
-			        {
-			          "wireId": "s11"
-			        },
-			        {
-			          "wireId": "s12"
-			        },
-			        {
-			          "wireId": "s13"
-			        },
-			        {
-			          "wireId": "s14"
-			        }
-			      ]
-			    }
-			  ],
-			  "memories": [
-			    {
-			      "name": "Datenspeicher",
-			      "base": 10,
-			      "content": "30003\n10007\n20008\n40008\n30001\n50000\n\n3\n2",
-			      "top": 50,
-			      "left": 10,
-			      "addressgate": {
-			        "busId": "addressBus",
-			        "initialState": -1
-			      },
-			      "datagate": {
-			        "busId": "dataBus",
-			        "writeWireId": "s3",
-			        "readWireId": "s4"
-			      },
-			      "undefinedString": "---",
-			      "showContext": true
-			    }
-			  ],
-			  "zerocomparators": [
-			    {
-			      "name": "Zero comparator 1",
-			      "busId": "dataBus",
-			      "wireId": "compWire",
-			      "top": 214,
-			      "left": 318
-			    }
-			  ],
-			  "delays": [],
-			  "filters": [
-			    {
-			      "name": "div10000",
-			      "statement": "n/10000",
-			      "busLeftId": "IRout",
-			      "busRightId": "opcode",
-			      "top": 21,
-			      "left": 412,
-            "direction": "right"
-			    },
-			    {
-			      "name": "mod10000",
-			      "statement": "n%10000",
-			      "busLeftId": "addressBus",
-			      "busRightId": "IRout",
-			      "top": 21,
-			      "left": 357,
-            "direction": "left"
-			    }
-			  ],
-			  "clocks": [],
-			  "labels": [
-			    {
-			      "text": "Akku",
-			      "top": 230,
-			      "left": 10
-			    },
-			    {
-			      "text": "PC",
-			      "top": 30,
-			      "left": 195
-			    },
-			    {
-			      "text": "IR",
-			      "top": 30,
-			      "left": 372
-			    },
-			    {
-			      "text": "Programmspeicher",
-			      "top": 30,
-			      "left": 70
-			    }
-			  ]
-			}       		    
+        "buses": [
+            {
+                "id": "s0",
+                "name": "not count",
+                "max": 1
+            },
+            {
+                "id": "s1",
+                "name": "clrMPC",
+                "max": 1,
+                "color": "rgb(100, 100, 255)"
+            },
+            {
+                "id": "s2",
+                "name": "readMPC",
+                "max": 1,
+                "color": "rgb(100, 255, 100)"
+            },
+            {
+                "id": "s3",
+                "name": "writeMem",
+                "max": 1,
+                "color": "rgb(255, 100, 100)",
+                "routes": [
+                    {
+                        "type": "horizontal",
+                        "top": "98px",
+                        "left": "210px",
+                        "width": "540px",
+                        "height": "0"
+                    },
+                    {
+                        "type": "bottomright",
+                        "top": "126px",
+                        "left": "140px",
+                        "width": "47px",
+                        "height": "30px"
+                    },
+                    {
+                        "type": "topleft",
+                        "top": "98px",
+                        "left": "187px",
+                        "width": "31px",
+                        "height": "28px"
+                    }
+                ]
+            },
+            {
+                "id": "s4",
+                "name": "readMem",
+                "max": 1,
+                "color": "rgb(100, 255, 100)",
+                "routes": [
+                    {
+                        "type": "horizontal",
+                        "top": "110px",
+                        "left": "210px",
+                        "width": "540px",
+                        "height": "0"
+                    },
+                    {
+                        "type": "bottomright",
+                        "top": "129px",
+                        "left": "140px",
+                        "width": "39px",
+                        "height": "20px"
+                    },
+                    {
+                        "type": "topleft",
+                        "top": "110px",
+                        "left": "179px",
+                        "width": "31px",
+                        "height": "29px"
+                    }
+                ]
+            },
+            {
+                "id": "s5",
+                "name": "incAkku",
+                "max": 1,
+                "color": "rgb(200, 200, 0)",
+                "routes": [
+                    {
+                        "type": "horizontal",
+                        "top": "122px",
+                        "left": "270px",
+                        "width": "480px",
+                        "height": "0"
+                    },
+                    {
+                        "type": "bottomright",
+                        "top": "158px",
+                        "left": "79px",
+                        "width": "158px",
+                        "height": "100px"
+                    },
+                    {
+                        "type": "topleft",
+                        "top": "122px",
+                        "left": "237px",
+                        "width": "33px",
+                        "height": "36px"
+                    }
+                ]
+            },
+            {
+                "id": "s6",
+                "name": "decAkku",
+                "max": 1,
+                "color": "rgb(200, 200, 0)",
+                "routes": [
+                    {
+                        "type": "horizontal",
+                        "top": "134px",
+                        "left": "270px",
+                        "width": "480px",
+                        "height": "0"
+                    },
+                    {
+                        "type": "bottomright",
+                        "top": "164px",
+                        "left": "79px",
+                        "width": "166px",
+                        "height": "100px"
+                    },
+                    {
+                        "type": "topleft",
+                        "top": "134px",
+                        "left": "245px",
+                        "width": "25px",
+                        "height": "30px"
+                    }
+                ]
+            },
+            {
+                "id": "s7",
+                "name": "readAkku",
+                "max": 1,
+                "color": "rgb(10, 255, 10)",
+                "routes": [
+                    {
+                        "type": "horizontal",
+                        "top": "146px",
+                        "left": "268px",
+                        "width": "428px",
+                        "height": "0"
+                    },
+                    {
+                        "type": "bottomright",
+                        "top": "160px",
+                        "left": "55px",
+                        "width": "198px",
+                        "height": "85px"
+                    },
+                    {
+                        "type": "topleft",
+                        "top": "146px",
+                        "left": "253px",
+                        "width": "15px",
+                        "height": "15px"
+                    }
+                ]
+            },
+            {
+                "id": "s8",
+                "name": "writeAkku",
+                "max": 1,
+                "color": "rgb(255, 100, 100)",
+                "routes": [
+                    {
+                        "type": "horizontal",
+                        "top": "158px",
+                        "left": "280px",
+                        "width": "460px",
+                        "height": "0"
+                    },
+                    {
+                        "type": "bottomright",
+                        "top": "168px",
+                        "left": "55px",
+                        "width": "206px",
+                        "height": "70px"
+                    },
+                    {
+                        "type": "topleft",
+                        "top": "158px",
+                        "left": "261px",
+                        "width": "20px",
+                        "height": "15px"
+                    }
+                ]
+            },
+            {
+                "id": "s9",
+                "name": "readPC",
+                "max": 1,
+                "color": "rgb(100, 255, 100)",
+                "routes": [
+                    {
+                        "type": "bottomleft",
+                        "top": "100px",
+                        "left": "279px",
+                        "width": "450px",
+                        "height": "70px"
+                    },
+                    {
+                        "type": "topright",
+                        "top": "45px",
+                        "left": "236px",
+                        "width": "43px",
+                        "height": "70px"
+                    }
+                ]
+            },
+            {
+                "id": "s10",
+                "name": "writePC",
+                "max": 1,
+                "color": "rgb(255, 100, 100)",
+                "routes": [
+                    {
+                        "type": "bottomleft",
+                        "top": "112px",
+                        "left": "285px",
+                        "width": "450px",
+                        "height": "70px"
+                    },
+                    {
+                        "type": "topright",
+                        "top": "38px",
+                        "left": "235px",
+                        "width": "50px",
+                        "height": "82px"
+                    }
+                ]
+            },
+            {
+                "id": "s11",
+                "name": "loadIR",
+                "max": 1,
+                "color": "rgb(100, 255, 100)",
+                "routes": [
+                    {
+                        "type": "topright",
+                        "top": "85px",
+                        "left": "408px",
+                        "width": "40px",
+                        "height": "70px"
+                    },
+                    {
+                        "type": "bottomleft",
+                        "top": "155px",
+                        "left": "448px",
+                        "width": "257px",
+                        "height": "39px"
+                    }
+                ]
+            },
+            {
+                "id": "s12",
+                "name": "writeIR",
+                "max": 1,
+                "color": "rgb(255, 100, 100)",
+                "routes": [
+                    {
+                        "type": "topright",
+                        "top": "38px",
+                        "left": "408px",
+                        "width": "32px",
+                        "height": "128px"
+                    },
+                    {
+                        "type": "bottomleft",
+                        "top": "167px",
+                        "left": "440px",
+                        "width": "257px",
+                        "height": "39px"
+                    }
+                ]
+            },
+            {
+                "id": "s13",
+                "name": "incPC",
+                "max": 1,
+                "color": "rgb(200, 200, 0)",
+                "routes": [
+                    {
+                        "type": "topright",
+                        "top": "64px",
+                        "left": "292px",
+                        "width": "8px",
+                        "height": "100px"
+                    },
+                    {
+                        "type": "bottomleft",
+                        "top": "164px",
+                        "left": "300px",
+                        "width": "395px",
+                        "height": "54px"
+                    }
+                ]
+            },
+            {
+                "id": "s14",
+                "name": "incPCz",
+                "max": 1,
+                "color": "rgb(200, 200, 0)",
+                "routes": [
+                    {
+                        "type": "topright",
+                        "top": "48px",
+                        "left": "323px",
+                        "width": "21px",
+                        "height": "100px"
+                    },
+                    {
+                        "type": "bottomleft",
+                        "top": "148px",
+                        "left": "344px",
+                        "width": "359px",
+                        "height": "82px"
+                    }
+                ]
+            },
+            {
+                "id": "dataBus",
+                "name": "Datenbus",
+                "max": 99999,
+                "base": 10,
+                "color": "rgb(255, 0, 0)",
+                "top": 170,
+                "left": 175,
+                "routes": [
+                    {
+                        "type": "vertical",
+                        "top": "164px",
+                        "left": "129px",
+                        "width": "0",
+                        "height": "31px"
+                    },
+                    {
+                        "type": "bottomright",
+                        "top": "100px",
+                        "left": "275px",
+                        "width": "120px",
+                        "height": "95px"
+                    },
+                    {
+                        "type": "vertical",
+                        "top": "195px",
+                        "left": "318px",
+                        "width": "0",
+                        "height": "17px"
+                    },
+                    {
+                        "type": "topleft",
+                        "top": "195px",
+                        "left": "43px",
+                        "width": "230px",
+                        "height": "35px"
+                    }
+                ]
+            },
+            {
+                "id": "addressBus",
+                "name": "Adressbus",
+                "max": 9999,
+                "base": 10,
+                "color": "rgb(0, 140, 0)",
+                "top": -3,
+                "left": 175,
+                "routes": [
+                    {
+                        "type": "topleft",
+                        "top": "21px",
+                        "left": "51px",
+                        "width": "301px",
+                        "height": "7px"
+                    },
+                    {
+                        "type": "vertical",
+                        "top": "21px",
+                        "left": "224px",
+                        "width": "0",
+                        "height": "10px"
+                    }
+                ]
+            },
+            {
+                "id": "MicroDataBus",
+                "name": "MicroDataBus",
+                "base": 10,
+                "max": 32767,
+                "color": "rgb(200, 0, 200)",
+                "left": 685,
+                "top": -3,
+                "routes": [
+                    {
+                        "type": "topright",
+                        "top": "21px",
+                        "left": "710px",
+                        "width": "20px",
+                        "height": "7px"
+                    }
+                ]
+            },
+            {
+                "id": "IRout",
+                "name": "AusgangIR",
+                "max": 99999,
+                "base": 10,
+                "color": "rgb(0, 140, 0)",
+                "top": -3,
+                "left": 377,
+                "routes": [
+                    {
+                        "type": "topright",
+                        "top": "21px",
+                        "left": "384px",
+                        "width": "11px",
+                        "height": "7px"
+                    },
+                    {
+                        "type": "topleft",
+                        "top": "21px",
+                        "left": "396px",
+                        "width": "11px",
+                        "height": "7px"
+                    }
+                ]
+            },
+            {
+                "id": "opcode",
+                "name": "opcode",
+                "max": 99999,
+                "base": 10,
+                "color": "rgb(0, 140, 0)",
+                "top": -3,
+                "left": 443,
+                "routes": [
+                    {
+                        "type": "topright",
+                        "top": "21px",
+                        "left": "439px",
+                        "width": "23px",
+                        "height": "7px"
+                    }
+                ]
+            },
+            {
+                "id": "AndB",
+                "name": "And gate B wire",
+                "max": 1
+            },
+            {
+                "id": "OrA",
+                "name": "Or gate A wire",
+                "max": 1
+            },
+            {
+                "id": "or1_ausgang",
+                "name": "or1_ausgang result wire",
+                "max": 1
+            },
+            {
+                "id": "compWire",
+                "name": "Zerocomparator result wire",
+                "max": 1,
+                "routes": [
+                    {
+                        "type": "vertical",
+                        "top": "239px",
+                        "left": "318px",
+                        "width": "0",
+                        "height": "16px"
+                    },
+                    {
+                        "type": "topright",
+                        "top": "59px",
+                        "left": "321px",
+                        "width": "15px",
+                        "height": "140px"
+                    },
+                    {
+                        "type": "bottomright",
+                        "top": "200px",
+                        "left": "319px",
+                        "width": "17px",
+                        "height": "46px"
+                    }
+                ]
+            },
+            {
+                "id": "SteuerwortWriteWire",
+                "name": "Steuerwort write wire",
+                "max": 1
+            },
+            {
+                "id": "SteuerwortReadWire",
+                "name": "Steuerwort read wire",
+                "max": 1
+            }
+        ],
+        "manualswitches": [
+            {
+                "name": "SteuerwortWriteWireSwitch",
+                "wireId": "SteuerwortWriteWire",
+                "value": 1,
+                "top": 10,
+                "left": 765
+            },
+            {
+                "name": "SteuerwortReadWireSwitch",
+                "wireId": "SteuerwortReadWire",
+                "value": 0,
+                "top": 26,
+                "left": 765
+            }
+        ],
+        "leds": [
+            {
+                "wireId": "or1_ausgang",
+                "name": "or1_ausgang indication led",
+                "top": 35,
+                "left": 262,
+                "value": 0
+            },
+            {
+                "wireId": "compWire",
+                "name": "comp indication led",
+                "top": 259,
+                "left": 317,
+                "value": 0
+            },
+            {
+                "wireId": "s0",
+                "name": "s0 led",
+                "top": 62,
+                "left": 682,
+                "color": "rgb(255, 0, 0)",
+                "value": 0
+            },
+            {
+                "wireId": "s1",
+                "name": "s1 led",
+                "top": 74,
+                "left": 682,
+                "color": "rgb(255, 255, 0)",
+                "value": 0
+            },
+            {
+                "wireId": "s2",
+                "name": "s2 led",
+                "top": 86,
+                "left": 682,
+                "value": 0
+            }
+        ],
+        "andGates": [
+            {
+                "name": "and1",
+                "inAId": "s14",
+                "inBId": "compWire",
+                "outId": "OrA",
+                "top": 48,
+                "left": 300
+            }
+        ],
+        "orGates": [
+            {
+                "name": "or1",
+                "inAId": "OrA",
+                "inBId": "s13",
+                "outId": "or1_ausgang",
+                "top": 53,
+                "left": 270
+            }
+        ],
+        "norGates": [
+
+        ],
+        "registers": [
+            {
+                "name": "PC",
+                "value": 0,
+                "base": 10,
+                "top": 50,
+                "left": 190,
+                "gates": [
+                    {
+                        "busId": "addressBus",
+                        "writeWireId": "s10",
+                        "readWireId": "s9"
+                    }
+                ],
+                "incWireId": "or1_ausgang"
+            },
+            {
+                "name": "IR",
+                "value": 40008,
+                "base": 10,
+                "top": 50,
+                "left": 362,
+                "gates": [
+                    {
+                        "busId": "IRout",
+                        "writeWireId": "s12",
+                        "initialState": 0
+                    },
+                    {
+                        "busId": "dataBus",
+                        "readWireId": "s11"
+                    }
+                ]
+            },
+            {
+                "name": "Akku",
+                "value": 42,
+                "base": 10,
+                "top": 250,
+                "left": 10,
+                "gates": [
+                    {
+                        "busId": "dataBus",
+                        "writeWireId": "s8",
+                        "readWireId": "s7"
+                    }
+                ],
+                "incWireId": "s5",
+                "decWireId": "s6",
+                "maxValue": 255
+            }
+        ],
+        "bitregisters": [
+            {
+                "name": "Steuerwort",
+                "value": 0,
+                "wiresReadWireId": "SteuerwortReadWire",
+                "wiresWriteWireId": "SteuerwortWriteWire",
+                "base": 10,
+                "top": 50,
+                "left": 700,
+                "widegate": {
+                    "busId": "MicroDataBus"
+                },
+                'bitWidth': 15,
+                "wiregates": [
+                    {
+                        "wireId": "s0"
+                    },
+                    {
+                        "wireId": "s1"
+                    },
+                    {
+                        "wireId": "s2"
+                    },
+                    {
+                        "wireId": "s3"
+                    },
+                    {
+                        "wireId": "s4"
+                    },
+                    {
+                        "wireId": "s5"
+                    },
+                    {
+                        "wireId": "s6"
+                    },
+                    {
+                        "wireId": "s7"
+                    },
+                    {
+                        "wireId": "s8"
+                    },
+                    {
+                        "wireId": "s9"
+                    },
+                    {
+                        "wireId": "s10"
+                    },
+                    {
+                        "wireId": "s11"
+                    },
+                    {
+                        "wireId": "s12"
+                    },
+                    {
+                        "wireId": "s13"
+                    },
+                    {
+                        "wireId": "s14"
+                    }
+                ]
+            }
+        ],
+        "memories": [
+            {
+                "name": "Datenspeicher",
+                "base": 10,
+                "content": "30003\n10007\n20008\n40008\n30001\n50000\n\n3\n2",
+                "top": 50,
+                "left": 10,
+                "addressgate": {
+                    "busId": "addressBus",
+                    "initialState": -1
+                },
+                "datagate": {
+                    "busId": "dataBus",
+                    "writeWireId": "s3",
+                    "readWireId": "s4"
+                },
+                "undefinedString": "---",
+                "showContext": true
+            }
+        ],
+        "zerocomparators": [
+            {
+                "name": "Zero comparator 1",
+                "busId": "dataBus",
+                "wireId": "compWire",
+                "top": 214,
+                "left": 318
+            }
+        ],
+        "delays": [],
+        "filters": [
+            {
+                "name": "div10000",
+                "statement": "n/10000",
+                "busLeftId": "IRout",
+                "busRightId": "opcode",
+                "top": 21,
+                "left": 412,
+                "direction": "right"
+            },
+            {
+                "name": "mod10000",
+                "statement": "n%10000",
+                "busLeftId": "addressBus",
+                "busRightId": "IRout",
+                "top": 21,
+                "left": 357,
+                "direction": "left"
+            }
+        ],
+        "clocks": [],
+        "labels": [
+            {
+                "text": "Akku",
+                "top": 230,
+                "left": 10
+            },
+            {
+                "text": "PC",
+                "top": 30,
+                "left": 195
+            },
+            {
+                "text": "IR",
+                "top": 30,
+                "left": 372
+            },
+            {
+                "text": "Programmspeicher",
+                "top": 30,
+                "left": 70
+            }
+        ]
+    }
 };

@@ -8,6 +8,7 @@ bonsaiApp.directive('bitregister', function ($interval) {
             value: '=',
             setWiresRead: '=',
             setWiresWrite: '=',
+            bitWidth: '=',
             registerName: '@',
             top: '=',
             left: '='
@@ -31,7 +32,8 @@ bonsaiApp.directive('bitregister', function ($interval) {
                 $scope.dataChangeCallback,
                 $scope.registerName,
                 $scope.value,
-                $scope.wideBusStateChangeCallback
+                $scope.wideBusStateChangeCallback,
+                $scope.bitWidth
             );
 
             this.setBusConnection = function (bus, setWrite, setRead, initialState) {
@@ -223,6 +225,10 @@ bonsaiApp.directive('bitregister', function ($interval) {
                         $scope.register.bitWiresConnection.writeWireConnector
                     );
                 }
+            });
+
+            $scope.$watch('bitWidth', function (newWidth) {
+                $scope.register.setBitWidth(newWidth);
             });
 
             $scope.getBits = function () {

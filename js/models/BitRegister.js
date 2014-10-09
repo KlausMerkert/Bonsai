@@ -1,6 +1,6 @@
 'use strict';
 
-function BitRegister(updateViewCallback, name, initialValue, wideBusStateChangeCallback) {
+function BitRegister(updateViewCallback, name, initialValue, wideBusStateChangeCallback, bitWidth) {
     this.updateViewCallback = updateViewCallback;
     this.name = name;
     this.value = initialValue;
@@ -11,6 +11,11 @@ function BitRegister(updateViewCallback, name, initialValue, wideBusStateChangeC
         state: 0
     };
     this.wideBusStateChangeCallback = wideBusStateChangeCallback;
+    if (bitWidth) {
+        this.bitWidth = bitWidth;
+    } else {
+        this.bitWidth = 0;
+    }
 }
 
 BitRegister.prototype.setName = function (name) {
@@ -37,13 +42,25 @@ BitRegister.prototype.getWideBusConnection = function () {
     return this.wideBusConnection;
 };
 
+BitRegister.prototype.setBitWidth = function (newWidth) {
+    if (newWidth) {
+        this.bitWidth = newWidth;
+    } else {
+        this.bitWidth = 0;
+    }
+};
+
 BitRegister.prototype.addWireConnection = function (wire, connector) {
-    var connection = {
-        wire: wire,
-        connector: connector
-    };
-    this.bitWiresConnection.wires.push(connection);
-    return connection;
+    if (this.bitWiresConnection.wires.length < this.bitWidth) {
+        var connection = {
+            wire: wire,
+            connector: connector
+        };
+        this.bitWiresConnection.wires.push(connection);
+        return connection;
+    } else {
+        return false;
+    }
 };
 
 BitRegister.prototype.removeWireConnection = function (wire) {
