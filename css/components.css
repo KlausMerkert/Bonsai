@@ -360,6 +360,7 @@
 
 .clock input {
     width: 53px;
+    height: 14px;
     margin: 1px 0 0 0;
     background-color: rgba(200, 200, 200, 1);
     border: 0 solid rgba(200, 200, 200, 1);
