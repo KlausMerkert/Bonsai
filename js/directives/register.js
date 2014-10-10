@@ -455,6 +455,8 @@ bonsaiApp.directive('register', function () {
                     newWire.enrollToDirective($scope.incWireConnector, $scope.getWireConnectionPositions);
                     newWire.registerReaderAndRead($scope.incWireConnector);
                 }
+                $scope.incWireInitialized = true;
+                $scope.checkForFinishedInitialization();
             });
 
             $scope.$watch('decWire', function (newWire, oldWire) {
@@ -476,6 +478,8 @@ bonsaiApp.directive('register', function () {
                     newWire.enrollToDirective($scope.decWireConnector, $scope.getWireConnectionPositions);
                     newWire.registerReaderAndRead($scope.decWireConnector);
                 }
+                $scope.decWireInitialized = true;
+                $scope.checkForFinishedInitialization();
             });
 
             $scope.$watch('clrWire', function (newWire, oldWire) {
@@ -497,7 +501,18 @@ bonsaiApp.directive('register', function () {
                     newWire.enrollToDirective($scope.clrWireConnector, $scope.getWireConnectionPositions);
                     newWire.registerReaderAndRead($scope.clrWireConnector);
                 }
+                $scope.clrWireInitialized = true;
+                $scope.checkForFinishedInitialization();
             });
+
+            $scope.checkForFinishedInitialization = function () {
+                if (($scope.controllerIsRead) &&
+                    ($scope.incWireInitialized) &&
+                    ($scope.decWireInitialized) &&
+                    ($scope.clrWireInitialized)) {
+                    $scope.$emit('componentInitialized', $scope.register);
+                }
+            };
 
             $scope.$on('sendInitialValues', function (event, message) {
                 var connections = $scope.register.getBuses();
@@ -513,7 +528,8 @@ bonsaiApp.directive('register', function () {
                 }
             });
 
-            $scope.$emit('componentInitialized', $scope.register);
+            $scope.controllerIsRead = true;
+            $scope.checkForFinishedInitialization();
         },
         templateUrl: 'partials/component_Register.html'
     };
