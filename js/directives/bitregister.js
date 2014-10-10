@@ -195,6 +195,8 @@ bonsaiApp.directive('bitregister', function ($interval) {
                         $scope.register.bitWiresConnection.readWireConnector
                     );
                 }
+                $scope.wiresReadInitialized = true;
+                $scope.checkForFinishedInitialization();
             });
 
             $scope.$watch('setWiresWrite', function (newWire, oldWire) {
@@ -225,6 +227,8 @@ bonsaiApp.directive('bitregister', function ($interval) {
                         $scope.register.bitWiresConnection.writeWireConnector
                     );
                 }
+                $scope.wiresWriteInitialized = true;
+                $scope.checkForFinishedInitialization();
             });
 
             $scope.$watch('bitWidth', function (newWidth) {
@@ -421,11 +425,20 @@ bonsaiApp.directive('bitregister', function ($interval) {
                 return positions;
             };
 
-            $scope.$on('sendInitialValues', function (event, message) {
+            $scope.checkForFinishedInitialization = function () {
+                if (($scope.controllerIsRead) &&
+                    ($scope.wiresReadInitialized) &&
+                    ($scope.wiresWriteInitialized)) {
+                    $scope.$emit('componentInitialized', $scope.register);
+                }
+            };
+
+            $scope.$on('sendInitialValues', function () {
                 $scope.register.setWideBusState($scope.initialWideBusGateState);
             });
 
-            $scope.$emit('componentInitialized', $scope.register);
+            $scope.controllerIsRead = true;
+            $scope.checkForFinishedInitialization();
         },
         templateUrl: 'partials/component_BitRegister.html'
     };
