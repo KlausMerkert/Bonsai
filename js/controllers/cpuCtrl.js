@@ -20,6 +20,8 @@ bonsaiApp.controller('bonsaiCpuCtrl',
             $scope.cpu = exampleGenerator.generateMemory();
         } else if ($location.search()['example'] == 'control') {
             $scope.cpu = exampleGenerator.generateControl();
+        } else if ($location.search()['example'] == 'trafficlights') {
+            $scope.cpu = exampleGenerator.generateTrafficLights();
         } else {
             $scope.cpu = exampleGenerator.generateBonsai();
         }

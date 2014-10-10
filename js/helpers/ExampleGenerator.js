@@ -2675,3 +2675,143 @@ ExampleGenerator.prototype.generateControl = function () {
         ]
     }
 };
+
+ExampleGenerator.prototype.generateTrafficLights = function () {
+    return {
+        "buses": [
+            {
+                "id": "s0",
+                "name": "red",
+                "max": 1
+            },
+            {
+                "id": "s1",
+                "name": "yellow",
+                "max": 1,
+                "color": "rgb(100, 100, 255)"
+            },
+            {
+                "id": "s2",
+                "name": "green",
+                "max": 1,
+                "color": "rgb(100, 255, 100)"
+            },
+            {
+                "id": "MicroDataBus",
+                "name": "MicroDataBus",
+                "base": 10,
+                "max": 32767,
+                "color": "rgb(200, 0, 200)",
+                "left": 685,
+                "top": -3,
+                "routes": [
+                    {
+                        "type": "topright",
+                        "top": "21px",
+                        "left": "710px",
+                        "width": "20px",
+                        "height": "7px"
+                    },
+                    {
+                        "type": "topleft",
+                        "top": "21px",
+                        "left": "596px",
+                        "width": "112px",
+                        "height": "7px"
+                    }
+                ]
+            },
+            {
+                "id": "SteuerwortWriteWire",
+                "name": "Steuerwort write wire",
+                "max": 1
+            },
+            {
+                "id": "SteuerwortReadWire",
+                "name": "Steuerwort read wire",
+                "max": 1
+            }
+        ],
+        "manualswitches": [
+            {
+                "name": "SteuerwortWriteWireSwitch",
+                "wireId": "SteuerwortWriteWire",
+                "value": 1,
+                "top": 10,
+                "left": 765
+            },
+            {
+                "name": "SteuerwortReadWireSwitch",
+                "wireId": "SteuerwortReadWire",
+                "value": 0,
+                "top": 26,
+                "left": 765
+            }
+        ],
+        "leds": [
+            {
+                "wireId": "s0",
+                "name": "s0 led",
+                "top": 62,
+                "left": 682,
+                "color": "rgb(255, 0, 0)",
+                "value": 0
+            },
+            {
+                "wireId": "s1",
+                "name": "s1 led",
+                "top": 74,
+                "left": 682,
+                "color": "rgb(255, 255, 0)",
+                "value": 0
+            },
+            {
+                "wireId": "s2",
+                "name": "s2 led",
+                "top": 86,
+                "left": 682,
+                "value": 0
+            }
+        ],
+        "registers": [
+            {
+                "name": "Steuerwort",
+                "value": 0,
+                "base": 10,
+                "top": 50,
+                "left": 562,
+                "gates": [
+                    {
+                        "busId": "MicroDataBus"
+                    }
+                ]
+            }
+        ],
+        "bitregisters": [
+            {
+                "name": "Steuerwort",
+                "value": 0,
+                "wiresReadWireId": "SteuerwortReadWire",
+                "wiresWriteWireId": "SteuerwortWriteWire",
+                "base": 10,
+                "top": 50,
+                "left": 700,
+                "widegate": {
+                    "busId": "MicroDataBus"
+                },
+                "bitWidth": 3,
+                "wiregates": [
+                    {
+                        "wireId": "s0"
+                    },
+                    {
+                        "wireId": "s1"
+                    },
+                    {
+                        "wireId": "s2"
+                    }
+                ]
+            }
+        ]
+    };
+};
