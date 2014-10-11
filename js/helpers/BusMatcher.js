@@ -9,8 +9,10 @@ BusMatcher.prototype.getCpu = function () {
 };
 
 BusMatcher.prototype.createBuses = function () {
-    for (var i = 0; i < this.cpu.buses.length; i++) {
-        this.cpu.buses[i].object = new Bus();
+    if (this.cpu.buses) {
+        for (var i = 0; i < this.cpu.buses.length; i++) {
+            this.cpu.buses[i].object = new Bus();
+        }
     }
 };
 
@@ -141,16 +143,18 @@ BusMatcher.prototype.matchRegisters = function () {
 BusMatcher.prototype.matchBitRegisters = function () {
     if (this.cpu.bitregisters) {
         for (var i = 0; i < this.cpu.bitregisters.length; i++) {
-            this.cpu.bitregisters[i].widegate.bus = this.findBus(this.cpu.bitregisters[i].widegate.busId);
-            if (this.cpu.bitregisters[i].widegate.writeWireId) {
-                this.cpu.bitregisters[i].widegate.writeWire = this.findBus(
-                    this.cpu.bitregisters[i].widegate.writeWireId
-                );
-            }
-            if (this.cpu.bitregisters[i].widegate.readWireId) {
-                this.cpu.bitregisters[i].widegate.readWire = this.findBus(
-                    this.cpu.bitregisters[i].widegate.readWireId
-                );
+            if (this.cpu.bitregisters[i].widegate) {
+                this.cpu.bitregisters[i].widegate.bus = this.findBus(this.cpu.bitregisters[i].widegate.busId);
+                if (this.cpu.bitregisters[i].widegate.writeWireId) {
+                    this.cpu.bitregisters[i].widegate.writeWire = this.findBus(
+                        this.cpu.bitregisters[i].widegate.writeWireId
+                    );
+                }
+                if (this.cpu.bitregisters[i].widegate.readWireId) {
+                    this.cpu.bitregisters[i].widegate.readWire = this.findBus(
+                        this.cpu.bitregisters[i].widegate.readWireId
+                    );
+                }
             }
             if (this.cpu.bitregisters[i].wiresReadWireId) {
                 this.cpu.bitregisters[i].wiresReadWire = this.findBus(
@@ -162,11 +166,13 @@ BusMatcher.prototype.matchBitRegisters = function () {
                     this.cpu.bitregisters[i].wiresWriteWireId
                 );
             }
-            for (var j = 0; j < this.cpu.bitregisters[i].wiregates.length; j++) {
-                if (this.cpu.bitregisters[i].wiregates[j].wireId) {
-                    this.cpu.bitregisters[i].wiregates[j].wire = this.findBus(
-                        this.cpu.bitregisters[i].wiregates[j].wireId
-                    );
+            if (this.cpu.bitregisters[i].wiregates) {
+                for (var j = 0; j < this.cpu.bitregisters[i].wiregates.length; j++) {
+                    if (this.cpu.bitregisters[i].wiregates[j].wireId) {
+                        this.cpu.bitregisters[i].wiregates[j].wire = this.findBus(
+                            this.cpu.bitregisters[i].wiregates[j].wireId
+                        );
+                    }
                 }
             }
         }
