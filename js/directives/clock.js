@@ -100,9 +100,11 @@ bonsaiApp.directive('clock', function () {
                 if (oldWire && (newWire != oldWire)) {
                     oldWire.resign($scope.clock);
                 }
+                $scope.outEnrolled = true;
+                $scope.checkForFinishedInitialization();
             });
 
-            $scope.$watch('runWire', function (newWire, oldWire) {
+            $scope.$watch('runWire', function (newWire) {
                 if (newWire) {
                     $scope.runWireConnector = new ReadingControlWireConnector(newWire,
                         function () {
@@ -114,13 +116,26 @@ bonsaiApp.directive('clock', function () {
                     newWire.enrollToDirective($scope.runWireConnector, $scope.getRunWireConnectionPositions);
                     newWire.registerReaderAndRead($scope.runWireConnector);
                 }
+                $scope.runWireEnrolled = true;
+                $scope.checkForFinishedInitialization();
             });
+
+            $scope.checkForFinishedInitialization = function () {
+                if ($scope.controllerIsRead &&
+                    $scope.runWireEnrolled &&
+                    $scope.outEnrolled &&
+                    !$scope.initializationSuccessful) {
+                    $scope.initializationSuccessful = true;
+                    $scope.$emit('componentInitialized', $scope.clock);
+                }
+            };
 
             $scope.$on('sendInitialValues', function (event, message) {
                 $scope.clock.setValue(0);
             });
 
-            $scope.$emit('componentInitialized', $scope.clock);
+            $scope.controllerIsRead = true;
+            $scope.checkForFinishedInitialization();
         },
         templateUrl: 'partials/component_Clock.html'
     };
