@@ -51,6 +51,8 @@ bonsaiApp.directive('comparetozero', function () {
                 if (oldBus && (newBus != oldBus)) {
                     oldBus.resign($scope.comp);
                 }
+                $scope.busEnrolled = true;
+                $scope.checkForFinishedInitialization();
             });
 
             $scope.$watch('wire', function (newWire, oldWire) {
@@ -60,9 +62,22 @@ bonsaiApp.directive('comparetozero', function () {
                 if (oldWire && (newWire != oldWire)) {
                     oldWire.resign($scope.comp);
                 }
+                $scope.wireEnrolled = true;
+                $scope.checkForFinishedInitialization();
             });
 
-            $scope.$emit('componentInitialized', $scope.comp);
+            $scope.checkForFinishedInitialization = function () {
+                if ($scope.controllerIsRead &&
+                    $scope.wireEnrolled &&
+                    $scope.busEnrolled &&
+                    !$scope.initializationSuccessful) {
+                    $scope.initializationSuccessful = true;
+                    $scope.$emit('componentInitialized', $scope.comp);
+                }
+            };
+
+            $scope.controllerIsRead = true;
+            $scope.checkForFinishedInitialization();
         },
         templateUrl: 'partials/component_CompareToZero.html'
     };

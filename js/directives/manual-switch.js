@@ -62,13 +62,25 @@ bonsaiApp.directive('manualswitch', function () {
                 if (oldWire && (newWire != oldWire)) {
                     oldWire.resign($scope.switch);
                 }
+                $scope.wireEnrolled = true;
+                $scope.checkForFinishedInitialization();
             });
+
+            $scope.checkForFinishedInitialization = function () {
+                if ($scope.controllerIsRead &&
+                    $scope.wireEnrolled &&
+                    !$scope.initializationSuccessful) {
+                    $scope.initializationSuccessful = true;
+                    $scope.$emit('componentInitialized', $scope.switch);
+                }
+            };
 
             $scope.$on('sendInitialValues', function (event, message) {
                 $scope.switch.setValue($scope.value);
             });
 
-            $scope.$emit('componentInitialized', $scope.switch);
+            $scope.controllerIsRead = true;
+            $scope.checkForFinishedInitialization();
         },
         templateUrl: 'partials/component_ManualSwitch.html'
     };

@@ -32,12 +32,16 @@ bonsaiApp.directive('delay', function () {
                     newValue.enrollToDirective($scope.delayObject, $scope.getConnectionPositions);
                 }
                 $scope.delayObject.setLeftBus(newValue);
+                $scope.leftWireEnrolled = true;
+                $scope.checkForFinishedInitialization();
             });
             $scope.$watch('busRight', function (newValue) {
                 if (newValue) {
                     newValue.enrollToDirective($scope.delayObject, $scope.getConnectionPositions);
                 }
                 $scope.delayObject.setRightBus(newValue);
+                $scope.rightWireEnrolled = true;
+                $scope.checkForFinishedInitialization();
             });
 
             $scope.$watch('direction', function (newValue) {
@@ -84,7 +88,18 @@ bonsaiApp.directive('delay', function () {
                 }
             };
 
-            $scope.$emit('componentInitialized', $scope.delayObject);
+            $scope.checkForFinishedInitialization = function () {
+                if ($scope.controllerIsRead &&
+                    $scope.leftWireEnrolled &&
+                    $scope.rightWireEnrolled &&
+                    !$scope.initializationSuccessful) {
+                    $scope.initializationSuccessful = true;
+                    $scope.$emit('componentInitialized', $scope.delayObject);
+                }
+            };
+
+            $scope.controllerIsRead = true;
+            $scope.checkForFinishedInitialization();
         },
         templateUrl: 'partials/component_Delay.html'
     };

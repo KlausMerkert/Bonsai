@@ -94,7 +94,18 @@ bonsaiApp.directive('led', function () {
                 if (oldWire && (newWire != oldWire)) {
                     oldWire.resign($scope.led);
                 }
+                $scope.wireEnrolled = true;
+                $scope.checkForFinishedInitialization();
             });
+
+            $scope.checkForFinishedInitialization = function () {
+                if ($scope.controllerIsRead &&
+                    $scope.wireEnrolled &&
+                    !$scope.initializationSuccessful) {
+                    $scope.initializationSuccessful = true;
+                    $scope.$emit('componentInitialized', $scope.led);
+                }
+            };
 
             $scope.$on('sendInitialValues', function (event, message) {
                 if ((typeof $scope.value != 'undefined') && $scope.value && ($scope.led.getValue() != $scope.value)) {
@@ -102,7 +113,8 @@ bonsaiApp.directive('led', function () {
                 }
             });
 
-            $scope.$emit('componentInitialized', $scope.led);
+            $scope.controllerIsRead = true;
+            $scope.checkForFinishedInitialization();
         },
         templateUrl: 'partials/component_Led.html'
     };
