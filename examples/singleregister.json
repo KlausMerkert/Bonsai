@@ -1,0 +1,25 @@
+{   "buses": [],
+    "manualswitches": [],
+    "leds": [],
+    "andGates": [],
+    "orGates": [],
+    "norGates": [],
+    "registers": [
+        {
+            "name": "PC",
+            "value": 7,
+            "base": 10,
+            "top": 50,
+            "left": 190,
+            "gates": [],
+            "maxValue": 42
+        }
+    ],
+    "bitregisters": [],
+    "memories": [],
+    "zerocomparators": [],
+    "delays": [],
+    "filters": [],
+    "clocks": [],
+    "labels": []
+}

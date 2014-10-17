@@ -1,29 +1,37 @@
 'use strict';
 
 bonsaiApp.controller('bonsaiCpuCtrl',
-    function ($scope, $location) {
+    function ($scope, $location, ExampleStorage) {
         $scope.base = 10;
         $scope.initializedComponentCount = 0;
 
-        var exampleGenerator = new ExampleGenerator();
-        if ($location.search()['example'] == 'singleregister') {
-            $scope.cpu = exampleGenerator.generateSingleRegister();
-        } else if ($location.search()['example'] == 'registertransfer') {
-            $scope.cpu = exampleGenerator.generateRegisterTransfer();
-        } else if ($location.search()['example'] == 'manual') {
-            $scope.cpu = exampleGenerator.generateManualBonsai();
-        } else if ($location.search()['example'] == 'gates') {
-            $scope.cpu = exampleGenerator.generateGates();
-        } else if ($location.search()['example'] == 'filter') {
-            $scope.cpu = exampleGenerator.generateFilter();
-        } else if ($location.search()['example'] == 'memory') {
-            $scope.cpu = exampleGenerator.generateMemory();
-        } else if ($location.search()['example'] == 'control') {
-            $scope.cpu = exampleGenerator.generateControl();
-        } else if ($location.search()['example'] == 'trafficlights') {
-            $scope.cpu = exampleGenerator.generateTrafficLights();
-        } else {
+        $scope.loadBonsai = function () {
+            var exampleGenerator = new ExampleGenerator();
             $scope.cpu = exampleGenerator.generateBonsai();
+            var matcher = new BusMatcher($scope.cpu);
+            matcher.createBuses();
+            matcher.matchAllComponents();
+            $scope.selectedEditor = undefined;
+        };
+
+        $scope.cpu = {};
+        if ($location.search()['example']) {
+            ExampleStorage.loadExample($location.search()['example']).success(function (data) {
+                $scope.initializedComponentCount = 0;
+                $scope.cpu = angular.fromJson(data);
+                try {
+                    var matcher = new BusMatcher($scope.cpu);
+                    matcher.createBuses();
+                    matcher.matchAllComponents();
+                    $scope.cpu = matcher.getCpu();
+                } catch (exception) {
+                    $scope.clearCpu();
+                    throw exception;
+                }
+                $scope.selectedEditor = undefined;
+            }).error($scope.loadBonsai);
+        } else {
+            $scope.loadBonsai();
         }
 
         $scope.$watch('cpu', function (newCpu) {
@@ -61,11 +69,6 @@ bonsaiApp.controller('bonsaiCpuCtrl',
             }
         };
 
-        var matcher = new BusMatcher($scope.cpu);
-        matcher.createBuses();
-        matcher.matchAllComponents();
-
-        $scope.selectedEditor = undefined;
         $scope.selectEditor = function (index) {
             $scope.selectedEditor = index;
         };
