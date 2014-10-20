@@ -1,0 +1,177 @@
+body {
+  font-size: 16pt;
+  line-height: 140%;
+  background: rgb(216, 216, 216) url("../images/Mountains.svg") repeat-x center top fixed;
+  background-size: auto 100%;
+  margin: 0;
+  padding: 0;
+}
+
+h1, h2, h3, h4, h5 {
+  font-family: 'Marcellus SC', serif;
+  margin-top: 2em;
+}
+
+pre {
+  background-color: rgb(255, 255, 224);
+  font-size: 50%;
+  overflow: scroll;
+}
+
+code {
+  white-space: pre;
+  font-size: 50%;
+  overflow: scroll;
+}
+
+strong {
+  font-family: 'Open Sans Condensed', 'Verdana', 'Arial', 'Helvetica', sans-serif;
+  font-weight: 700;
+}
+
+p {
+  -moz-hyphens: auto;
+  -webkit-hyphens: auto;
+  -ms-hyphens: auto;
+  hyphens: auto;
+  text-align: justify;
+}
+
+.quote {
+  font-family: 'Nothing You Could Do', sans-serif;
+  font-size: 120%;
+}
+
+.bigbutton {
+  background-color: rgb(9, 76, 121);
+  color: rgb(255, 255, 255);
+  padding: 3em;
+  cursor: pointer;
+  margin: 1em auto;
+  text-align: center;
+  box-shadow: 0.15em 0.25em 0.5em rgba(0, 0, 0, 0.5);
+  -moz-border-radius: 0.25em;
+  border-radius: 0.25em;
+}
+
+.bigbutton a {
+  color: rgb(217, 236, 255);
+  font-size: 150%;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+.bigbutton:hover {
+  background-color: rgb(154, 52, 84);
+}
+
+.textarea {
+  width: 100%;
+}
+
+.textwidth {
+  width: calc(100% - 2em);
+  max-width: 40em;
+  margin: auto;
+  padding: 1em;
+}
+
+.pagebar {
+  background-color: rgb(248, 248, 248);
+  max-width: 100%;
+  padding-top: 3em;
+  padding-bottom: 3em;
+  margin: 3em 0;
+}
+
+.opaquebar {
+  background-color: rgba(230, 230, 230, 0.8);
+  max-width: 100%;
+  padding-top: 3em;
+  padding-bottom: 3em;
+  margin: 3em 0;
+}
+
+#logo {
+  background: url("../images/Bonsai-logo.svg") no-repeat;
+  height: 55px;
+  width: 55px;
+  display: inline-block;
+  margin: 0 0.2em 0 0.5em;
+}
+
+#thPath {
+  font-size: 80%;
+}
+
+.thSep {
+  margin: 0 2px;
+}
+
+#thMainTitle {
+  font-size: 26pt;
+  font-family: 'Marcellus SC', serif;
+}
+
+#thPageTitle {
+  color: rgb(154, 52, 84);
+  font-size: 26pt;
+  font-family: 'Marcellus SC', serif;
+}
+
+#thPathCurrent {
+  color: rgb(154, 52, 84);
+}
+
+#thMenuCurrent {
+  color: rgb(154, 52, 84);
+}
+
+#footer {
+  clear: both;
+  width: calc(100% - 2em);
+  background-color: rgb(170, 170, 170);
+  position: relative;
+  top: 70px;
+  padding: 1em;
+  margin: 0;
+  font-size: 10pt;
+}
+
+#footer div {
+  /*list-style-type: none;*/
+  display: inline-block;
+  margin-left: 2em;
+  float: right;
+}
+
+a img {
+    border-width: 0;
+}
+
+ul li {
+    list-style-type: square;
+    margin-bottom: 0.5em;
+}
+
+ol li {
+    list-style-type: decimal;
+    margin-bottom:0.5em;
+}
+
+li li {
+    list-style-type: circle;
+    margin-bottom: 0.25em;
+}
+
+@media projection {
+    .screen {
+        display: none;
+    }
+
+    .projection {
+        display: block;
+        padding: 65px 200px 0 24px;
+        page-break-after: always;
+    }
+}
