@@ -11,7 +11,9 @@
         </li>
         <li ng-repeat="editor in cpu.memories" ng-class="{'active': selectedEditor === $index + 1}">
             <span class="start"></span>
-            <span class="content" ng-click="selectEditor($index + 1)"><a href="">{{ editor.name }}</a></span>
+            <span class="content" ng-click="selectEditor($index + 1)">
+                <a style="cursor: pointer;">{{ editor.name }}</a>
+            </span>
             <span class="end"></span>
         </li>
     </ul>
