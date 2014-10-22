@@ -29,7 +29,21 @@ var bonsaiApp = angular.module(
             }
         };
     })
-    .run(function ($rootScope, $window, $document, localize) {
+    .run(function ($rootScope, $window, $document, $location, localize) {
+        // Menu structure
+        var menu = {
+            'documentation': {
+                'micro': true
+            },
+            'development': {
+                'plan': true,
+                'github': true,
+                'js': true,
+                'angular': true,
+                'jasmine': true
+            },
+            'demo': true
+        };
         // root scope functions
         $rootScope.getLanguages = function () {
             return ['en', 'de'];
@@ -38,6 +52,25 @@ var bonsaiApp = angular.module(
             localize.setLanguage(newLang);
             $rootScope.$broadcast('langChange', newLang);
         });
+        $rootScope.$watch(
+            function () {
+                return $location.path();
+            },
+            function (path) {
+                var pathParts = path.split('/');
+                var currentMenu = menu;
+                for (var i = 0; i < pathParts.length; i++) {
+                    if (pathParts[i]) {
+                        if (currentMenu[pathParts[i]]) {
+                            currentMenu = currentMenu[pathParts[i]]
+                        } else {
+                            currentMenu = undefined;
+                        }
+                    }
+                }
+                $rootScope.menu = currentMenu;
+            }
+        );
         // initialization
         if (!$rootScope.language) {
             $rootScope.language = $window.navigator.userLanguage ||
@@ -47,5 +80,5 @@ var bonsaiApp = angular.module(
                 $rootScope.language = $rootScope.language.substr(0, 2);
             }
         }
-        $rootScope.menu = true;
+        $rootScope.menu = menu;
     });

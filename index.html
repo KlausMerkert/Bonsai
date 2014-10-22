@@ -56,7 +56,7 @@
     <script type="text/javascript" src="/js/controllers/pageCtrl.js"></script>
     <script type="text/javascript" src="/js/helpers/parallax.js"></script>
 </head>
-<body>
+<body ng-class="{'background': menu}">
     <div id="parallaxbackgroundone" ng-show="menu"></div>
     <div id="parallaxbackgroundtwo" ng-show="menu"></div>
     <div ng-show="menu" style="position: absolute; top: 0; left: 0; width: 100%; height: 55px; background-color: rgb(248, 248, 248);">
@@ -95,7 +95,7 @@
             <span id="thPath"><span><span id="thPathCurrent">Bonsai</span></span></span>
         </div>
     </div>
-    <div ng-view style="position: relative; top: 85px;" class="textarea"></div>
+    <div ng-view style="position: relative;" ng-style="{'top': menu ? '85px' : '0'}" class="textarea"></div>
     <div id="footer" ng-show="menu">
         <div style="float: left;"><a ng-href="/impressum/" data-i18n="_impressum_">Impressum</a></div>
         <div style="float: left;"><a ng-href="/newPages/">neue Seiten</a></div>
