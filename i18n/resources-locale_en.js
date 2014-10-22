@@ -5,6 +5,11 @@
         "description": ""
     },
     {
+        "key"        : "_impressum_",
+        "value"      : "About",
+        "description": ""
+    },
+    {
         "key"        : "_CpuView_",
         "value"      : "Circuit",
         "description": ""

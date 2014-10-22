@@ -5,6 +5,11 @@
         "description": ""
     },
     {
+        "key"        : "_impressum_",
+        "value"      : "Impressum",
+        "description": ""
+    },
+    {
         "key"        : "_CpuView_",
         "value"      : "Schaltung",
         "description": ""

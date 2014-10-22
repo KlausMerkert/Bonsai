@@ -28,4 +28,24 @@ var bonsaiApp = angular.module(
                 throw exception;
             }
         };
+    })
+    .run(function ($rootScope, $window, $document, localize) {
+        // root scope functions
+        $rootScope.getLanguages = function () {
+            return ['en', 'de'];
+        };
+        $rootScope.$watch('language', function (newLang) {
+            localize.setLanguage(newLang);
+            $rootScope.$broadcast('langChange', newLang);
+        });
+        // initialization
+        if (!$rootScope.language) {
+            $rootScope.language = $window.navigator.userLanguage ||
+                $window.navigator.language ||
+                $document.getElementsByTagName('html')[0].lang;
+            if ($rootScope.language && ($rootScope.language.length > 2)) {
+                $rootScope.language = $rootScope.language.substr(0, 2);
+            }
+        }
+        $rootScope.menu = true;
     });
