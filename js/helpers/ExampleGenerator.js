@@ -968,37 +968,37 @@ ExampleGenerator.prototype.generateBonsai = function () {
         'labels': [
             {
                 'text': 'Akku',
-                'top': 230,
+                'top': 226,
                 'left': 10
             },
             {
                 'text': 'MPC',
-                'top': 230,
+                'top': 226,
                 'left': 600
             },
              {
                 'text': 'Befehlsdecoder',
-                'top': 230,
+                'top': 226,
                 'left': 500
             },
             {
                 'text': 'PC',
-                'top': 30,
+                'top': 26,
                 'left': 195
             },
             {
                 'text': 'IR',
-                'top': 30,
+                'top': 26,
                 'left': 372
             },
             {
                 'text': 'Programmspeicher',
-                'top': 30,
+                'top': 26,
                 'left': 70
             },
             {
                 'text': 'Mikroprogrammspeicher',
-                'top': 30,
+                'top': 26,
                 'left': 655
             }
         ]

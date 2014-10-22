@@ -115,6 +115,6 @@ bonsaiApp.directive('bus', function () {
                 }
             };
         },
-        templateUrl: 'partials/component_Bus.html'
+        templateUrl: '/partials/component_Bus.html'
     }
 });

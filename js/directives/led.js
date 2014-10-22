@@ -116,6 +116,6 @@ bonsaiApp.directive('led', function () {
             $scope.controllerIsRead = true;
             $scope.checkForFinishedInitialization();
         },
-        templateUrl: 'partials/component_Led.html'
+        templateUrl: '/partials/component_Led.html'
     };
 });

@@ -89,6 +89,6 @@ bonsaiApp.directive('orgate', function () {
             $scope.controllerIsRead = true;
             $scope.checkForFinishedInitialization();
         },
-        templateUrl: 'partials/component_OrGate.html'
+        templateUrl: '/partials/component_OrGate.html'
     };
 });

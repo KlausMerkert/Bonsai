@@ -7,9 +7,20 @@ body {
   padding: 0;
 }
 
-h1, h2, h3, h4, h5 {
-  font-family: 'Marcellus SC', serif;
-  margin-top: 2em;
+#parallaxbackgroundone {
+    position: fixed;
+    width: 100%;
+    height: 600px;
+    bottom: -711px;
+    background: url('../images/TreesBack.svg') 50% 50% repeat-x;
+}
+
+#parallaxbackgroundtwo {
+    position: fixed;
+    width: 100%;
+    height: 600px;
+    bottom: -355px;
+    background: url('../images/TreesFront.svg') 50% 50% repeat-x;
 }
 
 pre {
@@ -108,7 +119,7 @@ p {
   margin: 0 2px;
 }
 
-#thMainTitle {
+#main-title {
   font-size: 26pt;
   font-family: 'Marcellus SC', serif;
 }

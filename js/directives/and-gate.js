@@ -89,6 +89,6 @@ bonsaiApp.directive('andgate', function () {
             $scope.controllerIsRead = true;
             $scope.checkForFinishedInitialization();
         },
-        templateUrl: 'partials/component_AndGate.html'
+        templateUrl: '/partials/component_AndGate.html'
     };
 });

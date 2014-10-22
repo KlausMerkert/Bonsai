@@ -44,7 +44,7 @@ bonsaiApp.controller('bonsaiCpuCtrl',
             $scope.componentCount = componentCount;
         });
 
-        $scope.$on('componentInitialized', function (event, message) {
+        $scope.$on('componentInitialized', function () {
             $scope.initializedComponentCount++;
             if ($scope.initializedComponentCount >= $scope.componentCount) {
                 $scope.$broadcast('sendInitialValues', true);

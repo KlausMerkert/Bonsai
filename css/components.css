@@ -88,12 +88,14 @@
 .memory table .address {
     text-align: center;
     padding-right: 5px;
+    font-size: 13px;
 }
 
 .memory table .value {
     text-align: center;
     border-left: 1px solid rgb(40, 40, 40);
     padding-left: 5px;
+    font-size: 13px;
 }
 
 .memory table .address span, .memory table .value span {

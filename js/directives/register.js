@@ -531,7 +531,7 @@ bonsaiApp.directive('register', function () {
             $scope.controllerIsRead = true;
             $scope.checkForFinishedInitialization();
         },
-        templateUrl: 'partials/component_Register.html'
+        templateUrl: '/partials/component_Register.html'
     };
 });
 

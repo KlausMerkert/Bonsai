@@ -51,11 +51,11 @@
         <div ng-repeat="bit in getBits() track by $index"
              style="padding: 0; margin: 0; height: 12px; cursor: pointer; position: absolute;"
              ng-style="{'top': ($index * 12 + 6) + 'px'}">
-            <div style="display: inline-block; margin: 0; width: 10px; font-family: monospace; position: absolute; left: -1px;"
+            <div style="display: inline-block; margin: 0; width: 10px; font-family: monospace; font-size: 13px; position: absolute; left: -1px;"
                  ng-style="{'color': (bit) && (register.bitWiresConnection.state == 1) ? 'rgb(255, 0, 0)' : 'rgb(0, 0, 0)'}"
                  ng-mousedown="toggleBit($index)"
                  class="unselectable">{{ bit }}</div>
-            <div style="display: inline-block; margin: 0; padding-left: 2px; width: 10px; font-family: monospace; color: rgba(0, 0, 0, 0.5); text-align: right; position: absolute; left: 9px;"
+            <div style="display: inline-block; margin: 0; padding-left: 2px; width: 10px; font-family: monospace; font-size: 13px; color: rgba(0, 0, 0, 0.5); text-align: right; position: absolute; left: 9px;"
                  ng-mousedown="toggleBit($index)"
                  class="unselectable">{{ $index }}</div>
         </div>
