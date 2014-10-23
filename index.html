@@ -69,19 +69,11 @@
         <div style="position: absolute; bottom: -1px; left: 50%; overflow: visible;">
             <div style="position: relative; left: -50%; white-space: nowrap;">
                 <ul class="tabs">
-                    <li>
+                    <li ng-repeat="item in menu">
                         <span class="start"></span>
-                        <span class="content"><a ng-href="/documentation/">Dokumentation</a></span>
-                        <span class="end"></span>
-                    </li>
-                    <li>
-                        <span class="start"></span>
-                        <span class="content"><a ng-href="/development/">Entwicklung</a></span>
-                        <span class="end"></span>
-                    </li>
-                    <li>
-                        <span class="start"></span>
-                        <span class="content"><a ng-href="/bonsai/">Demo</a></span>
+                        <span class="content">
+                            <a ng-href="{{ item.link }}"><span data-i18n="{{ item.title }}"></span></a>
+                        </span>
                         <span class="end"></span>
                     </li>
                 </ul>

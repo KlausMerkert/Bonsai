@@ -31,19 +31,48 @@ var bonsaiApp = angular.module(
     })
     .run(function ($rootScope, $window, $document, $location, localize) {
         // Menu structure
-        var menu = {
-            'documentation': {
-                'micro': true
+        var menu = [
+            {
+                'title': "_documentation_",
+                'link': '/documentation/',
+                'submenu': [
+                    {
+                        'title': "_micro_",
+                        'link': '/documentation/micro/'
+                    }
+                ]
             },
-            'development': {
-                'plan': true,
-                'github': true,
-                'js': true,
-                'angular': true,
-                'jasmine': true
+            {
+                'title': "_development_",
+                'link': '/development/',
+                'submenu': [
+                    {
+                        'title': "_plan_",
+                        'link': '/development/plan/'
+                    },
+                    {
+                        'title': "_github_",
+                        'link': '/development/github/'
+                    },
+                    {
+                        'title': "_js_",
+                        'link': '/development/js/'
+                    },
+                    {
+                        'title': "_angular_",
+                        'link': '/development/angular/'
+                    },
+                    {
+                        'title': "_jasmine_",
+                        'link': '/development/jasmine/'
+                    }
+                ]
             },
-            'demo': true
-        };
+            {
+                'title': "_demo_",
+                'link': '/bonsai/'
+            }
+        ];
         // root scope functions
         $rootScope.getLanguages = function () {
             return ['en', 'de'];
@@ -61,10 +90,8 @@ var bonsaiApp = angular.module(
                 var currentMenu = menu;
                 for (var i = 0; i < pathParts.length; i++) {
                     if (pathParts[i]) {
-                        if (currentMenu[pathParts[i]]) {
-                            currentMenu = currentMenu[pathParts[i]]
-                        } else {
-                            currentMenu = undefined;
+                        if (currentMenu[i].submenu) {
+                            currentMenu = currentMenu[i].submenu
                         }
                     }
                 }

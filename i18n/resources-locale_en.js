@@ -10,6 +10,51 @@
         "description": ""
     },
     {
+        "key"        : "_documentation_",
+        "value"      : "Documentation",
+        "description": ""
+    },
+    {
+        "key"        : "_micro_",
+        "value"      : "Micro Programm",
+        "description": ""
+    },
+    {
+        "key"        : "_development_",
+        "value"      : "Development",
+        "description": ""
+    },
+    {
+        "key"        : "_plan_",
+        "value"      : "Plan",
+        "description": ""
+    },
+    {
+        "key"        : "_github_",
+        "value"      : "gitHub",
+        "description": ""
+    },
+    {
+        "key"        : "_js_",
+        "value"      : "JavaScript",
+        "description": ""
+    },
+    {
+        "key"        : "_angular_",
+        "value"      : "Angular",
+        "description": ""
+    },
+    {
+        "key"        : "_jasmine_",
+        "value"      : "Jasmine",
+        "description": ""
+    },
+    {
+        "key"        : "_demo_",
+        "value"      : "Demo",
+        "description": ""
+    },
+    {
         "key"        : "_CpuView_",
         "value"      : "Circuit",
         "description": ""
