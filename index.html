@@ -101,7 +101,8 @@
         <div style="float: left;"><a ng-href="/newPages/">neue Seiten</a></div>
         <div><span id="thCounter">1348</span> Aufrufe</div>
         <div>Letzte Änderung dieser Seite: <span id="thChange">15.08.2014 16:13:16</span></div>
-        <div>Autor: <span id="thAuthor">Johannes Merkert</span></div>
+        <div ng-show="author">Autor: {{ author }}</div>
+        <div ng-hide="author">kein Autor</div>
         <div style="float: none; clear: both;"></div>
     </div>
 </body>

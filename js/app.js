@@ -69,6 +69,7 @@ var bonsaiApp = angular.module(
                     }
                 }
                 $rootScope.menu = currentMenu;
+                $rootScope.author = undefined;
             }
         );
         // initialization
