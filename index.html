@@ -94,7 +94,10 @@
     <div ng-show="menu" style="width: 100%; background-color: rgb(170, 170, 170); position: absolute; top: 55px; left: 0;">
         <div style="padding: 0;" class="textarea textwidth">
             <span style="font-size: 80%;" data-i18n="_path_">Pfad:</span>
-            <span id="thPath"><span><span id="thPathCurrent">Bonsai</span></span></span>
+            <span class="path"><a ng-href="/">Bonsai</a>
+            <span ng-repeat="pathPart in navigationPath">/<a ng-if="!$last"
+                ng-href="pathPart.link" data-i18n="{{ pathPart.title }}"></a><span class="pathCurrent"
+                ng-if="$last" data-i18n="{{ pathPart.title }}"></span></span></span>
         </div>
     </div>
     <div ng-view style="position: relative;" ng-style="{'top': menu.length > 0 ? '85px' : '0'}" class="textarea"></div>

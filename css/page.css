@@ -114,12 +114,8 @@ p {
     margin: 0 0.2em 0 0.5em;
 }
 
-#thPath {
+.path {
     font-size: 80%;
-}
-
-.thSep {
-    margin: 0 2px;
 }
 
 #main-title {
@@ -127,17 +123,17 @@ p {
     font-family: 'Marcellus SC', serif;
 }
 
-#thPageTitle {
+.pageTitle {
     color: rgb(154, 52, 84);
     font-size: 26pt;
     font-family: 'Marcellus SC', serif;
+    width: calc(100% - 2em);
+    max-width: 24.5em;
+    margin: auto;
+    padding: 1em;
 }
 
-#thPathCurrent {
-    color: rgb(154, 52, 84);
-}
-
-#thMenuCurrent {
+.pathCurrent {
     color: rgb(154, 52, 84);
 }
 

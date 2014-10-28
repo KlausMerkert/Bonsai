@@ -103,15 +103,18 @@ var bonsaiApp = angular.module(
             function (path) {
                 var pathParts = path.split('/');
                 var currentMenu = menu;
+                var navigationPath = [];
                 for (var i = 0; i < pathParts.length; i++) {
                     if (pathParts[i]) {
                         for (var j = 0; j < currentMenu.length; j++) {
                             if ((currentMenu[j].name == pathParts[i]) && (currentMenu[j].submenu)) {
+                                navigationPath.push({'title': currentMenu[j].title, 'link': currentMenu[j].link});
                                 currentMenu = currentMenu[j].submenu;
                             }
                         }
                     }
                 }
+                $rootScope.navigationPath = navigationPath;
                 $rootScope.menu = currentMenu;
                 $rootScope.author = undefined;
             }
