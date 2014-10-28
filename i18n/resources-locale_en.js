@@ -65,6 +65,11 @@
         "description": ""
     },
     {
+        "key"        : "_path_",
+        "value"      : "Path: ",
+        "description": ""
+    },
+    {
         "key"        : "_author_",
         "value"      : "Author: ",
         "description": ""
