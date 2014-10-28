@@ -1,0 +1,93 @@
+<div ng-init="author = 'Johannes Merkert'"></div>
+<div ng-show="lang == 'de'">
+    <div class="textwidth">
+        <p lang="de-1996">Die Bonsai-Simulationssoftware steht unter der <a href="http://www.gnu.org/copyleft/gpl.html">GPL
+            v.3</a> und kann von <a href="https://github.com/KlausMerkert/Bonsai">unserem Repository bei GitHub</a>
+            herunter geladen werden. Wir strukturieren das Repository nach <a
+                    href="http://nvie.com/posts/a-successful-git-branching-model/">Git-Flow</a>, was bedeutet, dass die
+            neueste stabile Version immer im <a href="https://github.com/KlausMerkert/Bonsai/tree/master">master</a>-Branch
+            zum Download bereit steht. Die aktuelle Entwicklerversion findest du im Branch <a
+                    href="https://github.com/KlausMerkert/Bonsai/tree/develop">develop</a>. Es kann unfertige Features,
+            an denen aktuell entwickelt wird, in Branches mit dem Präfix "feature/" geben. Bitte halte dich an diese
+            Strukturen für deine eigenen Entwicklungen an <em>Bonsai</em>, wenn du vorhast, zum Projekt beizutragen.</p>
+    </div>
+
+    <div class="pagebar">
+        <div class="textwidth">
+            <a name="installation"></a>
+
+            <h2>Installationsanleitung</h2>
+
+            <p lang="de-1996">Du kannst <em>Bonsai</em> von deinem eigenen Webserver ausliefern. Da die Software
+                komplett in JavaScript geschrieben ist und dieser Code eigentlich nur auf Clientseite ausgeführt wird,
+                hat <em>Bonsai</em> keine besonderen Voraussetzungen an deinen Webserver. Wir haben <em>Bonsai</em> mit
+                Nginx und Apache getestet, aber es wird mit jedem Webserver laufen, der statische Dateien ausliefern
+                kann. Bitte beachte die <a href="https://docs.angularjs.org/tutorial/step_05"><span
+                        lang="en">Angular</span>-Dokumentation</a>, falls du vorhast, das JavaScript zu minimieren.
+                <span lang="en">Angular</span> benutzt Variablennamen für <span lang="en">dependency injection</span>
+                und hat daher Probleme, wenn der Minifyer die Variablennamen verkürzt.</p>
+
+            <p lang="de-1996">Wir empfehlen die neueste stabile Version per Git zu installieren:
+            </p>
+            <pre>$ git clone https://github.com/KlausMerkert/Bonsai.git</pre>
+            Updates können dann ganz leicht mit
+            <pre>$ git pull</pre>
+            installiert werden.
+            <p lang="de-1996">Du kannst aber auch einfach das <a
+                    href="https://github.com/KlausMerkert/Bonsai/archive/master.zip">.zip-Archiv</a> herunter laden und
+                in deinen Webspace entpacken.</p>
+        </div>
+    </div>
+
+    <div class="opaquebar">
+        <div class="textwidth">
+            <a name="developmentsetup"></a>
+
+            <h2>Entwicklersetup</h2>
+
+            <p lang="de-1996">Um an <em>Bonsai</em> zu entwickeln, solltest du einen lokalen Webserver installieren.
+                <em>Bonsai</em> wird nicht richtig funktionieren, wenn du nur index.html mit deinem Browser öffnest, da
+                moderne Browser aus Sicherheitsgründen keine weiteren Dateien von der Festplatte nachladen.</p>
+
+            <p lang="de-1996">Rufe index.html auf localhost auf, um Bonsai zu starten. Die Unittests kannst du
+                ausführen, indem du jasmine.html ausführst.</p>
+        </div>
+    </div>
+
+    <div class="pagebar">
+        <div class="textwidth">
+            <a name="codestructure"></a>
+
+            <h2>Strukturierung des Codes</h2>
+
+            <p lang="de-1996"><em>Bonsai</em> nutzt eine klare Trennung von <span lang="en">Models</span>, <span
+                    lang="en">Views</span> und Controllern (siehe <a
+                    href="https://de.wikipedia.org/wiki/Model_View_Controller">MVC bei Wikipedia</a>). <span lang="en">Models</span>
+                sind alle ohne anzeigerelevante Teile im "models/" Ordner implementiert. Wir emulieren Klassen mit
+                Objekt Prototypen, weil JavaScript kein "class"-Schlüsselwort kennt. Ein Blick in den Quelltext der
+                <span lang="en">Models</span> wird dir die klassenartige Struktur deutlich machen (<a
+                        href="https://github.com/KlausMerkert/Bonsai/blob/master/js/models/Register.js">Beispiel</a>).
+            </p>
+
+            <p lang="de-1996">Um die verschiedenen Einzelteile der CPU auch anzuzeigen, benutzen wir <a
+                    href="https://docs.angularjs.org/guide/directive">Direktiven</a>. Angular bietet die Möglichkeit
+                diese selbstdefinierten HTML-Elemente zu erzeugen und damit gewissermaßen für jedes Einzelteil einen
+                eigenen abgeschlossenen View zu definieren. Jede Direktive hat dafür eigene Controller (<a
+                        href="https://github.com/KlausMerkert/Bonsai/blob/master/js/directives/register.js">Beispiel</a>)
+                und ein HTML-<span lang="en">File</span> als <span lang="en">View</span> (<a
+                        href="https://github.com/KlausMerkert/Bonsai/blob/master/partials/component_Register.html">Beispiel</a>).
+            </p>
+
+            <p lang="de-1996">Zusätzlich zu den Einzelteilen gibt es einen <a
+                    href="https://github.com/KlausMerkert/Bonsai/blob/master/js/controllers/cpuCtrl.js">Controller</a>,
+                der den Rahmen für alle Einzelteile bereit stellt und Busse und Verbindungsleitungen initialisiert. Der
+                zugehörige <a href="https://github.com/KlausMerkert/Bonsai/blob/master/partials/main.html">View</a>
+                definiert die sichtbare und funktionale Struktur der CPU.</p>
+
+            <p lang="de-1996">Für weitere Informationen zum Code, verwende das <a
+                    href="https://github.com/KlausMerkert/Bonsai/wiki">Wiki</a> (englisch).</p>
+        </div>
+    </div>
+
+    <div style="width: 300px; height: 400px; background: url('/images/Bonsai-logo-topf.svg') no-repeat; margin: 0.6em auto;"></div>
+</div>

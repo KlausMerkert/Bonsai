@@ -2,31 +2,31 @@
   font-family: 'Open Sans Condensed';
   font-style: normal;
   font-weight: 300;
-  src: local('Open Sans Cond Light'), local('OpenSans-CondensedLight'), url('OpensansCondensed300.woff') format('woff');
+  src: local('Open Sans Cond Light'), local('OpenSans-CondensedLight'), url('../downloads/OpensansCondensed300.woff') format('woff');
 }
 @font-face {
   font-family: 'Open Sans Condensed';
   font-style: normal;
   font-weight: 700;
-  src: local('Open Sans Condensed Bold'), local('OpenSans-CondensedBold'), url('OpensansCondensed700.woff') format('woff');
+  src: local('Open Sans Condensed Bold'), local('OpenSans-CondensedBold'), url('../downloads/OpensansCondensed700.woff') format('woff');
 }
 @font-face {
   font-family: 'Open Sans Condensed';
   font-style: italic;
   font-weight: 300;
-  src: local('Open Sans Cond Light Italic'), local('OpenSans-CondensedLightItalic'), url('OpensansCondensed300Italic.woff') format('woff');
+  src: local('Open Sans Cond Light Italic'), local('OpenSans-CondensedLightItalic'), url('../downloads/OpensansCondensed300Italic.woff') format('woff');
 }
 
 @font-face {
   font-family: 'Marcellus SC';
   font-style: normal;
   font-weight: 400;
-  src: local('Marcellus SC'), local('MarcellusSC-Regular'), url('MarcellusSC.woff') format('woff');
+  src: local('Marcellus SC'), local('MarcellusSC-Regular'), url('../downloads/MarcellusSC.woff') format('woff');
 }
 
 @font-face {
   font-family: 'Nothing You Could Do';
   font-style: normal;
   font-weight: 400;
-  src: local('Nothing You Could Do'), local('NothingYouCouldDo'), url('NothingYouCouldDo.woff') format('woff');
+  src: local('Nothing You Could Do'), local('NothingYouCouldDo'), url('../downloads/NothingYouCouldDo.woff') format('woff');
 }

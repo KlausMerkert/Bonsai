@@ -12,6 +12,8 @@ var bonsaiApp = angular.module(
         $routeProvider.
             when('/', {templateUrl: '/partials/introduction.html', controller: 'bonsaiPageCtrl'}).
             when('/documentation/', {templateUrl: '/partials/documentation.html', controller: 'bonsaiPageCtrl'}).
+            when('/documentation/micro/', {templateUrl: '/partials/documentation_micro.html', controller: 'bonsaiPageCtrl'}).
+            when('/development/', {templateUrl: '/partials/development.html', controller: 'bonsaiPageCtrl'}).
             when('/bonsai/', {templateUrl: '/partials/main.html', controller: 'bonsaiCpuCtrl'}).
             otherwise({templateUrl: '/partials/introduction.html', controller: 'bonsaiPageCtrl'});
         // use the HTML5 History API
@@ -33,42 +35,51 @@ var bonsaiApp = angular.module(
         // Menu structure
         var menu = [
             {
+                'name': "documentation",
                 'title': "_documentation_",
                 'link': '/documentation/',
                 'submenu': [
                     {
+                        'name': "micro",
                         'title': "_micro_",
                         'link': '/documentation/micro/'
                     }
                 ]
             },
             {
+                'name': "development",
                 'title': "_development_",
                 'link': '/development/',
                 'submenu': [
                     {
+                        'name': "plan",
                         'title': "_plan_",
                         'link': '/development/plan/'
                     },
                     {
+                        'name': "github",
                         'title': "_github_",
                         'link': '/development/github/'
                     },
                     {
+                        'name': "js",
                         'title': "_js_",
                         'link': '/development/js/'
                     },
                     {
+                        'name': "angular",
                         'title': "_angular_",
                         'link': '/development/angular/'
                     },
                     {
+                        'name': "jasmine",
                         'title': "_jasmine_",
                         'link': '/development/jasmine/'
                     }
                 ]
             },
             {
+                'name': "demo",
                 'title': "_demo_",
                 'link': '/bonsai/'
             }
@@ -90,8 +101,12 @@ var bonsaiApp = angular.module(
                 var currentMenu = menu;
                 for (var i = 0; i < pathParts.length; i++) {
                     if (pathParts[i]) {
-                        if (currentMenu[i].submenu) {
-                            currentMenu = currentMenu[i].submenu
+                        console.log(pathParts[i]);
+                        for (var j = 0; j < currentMenu.length; j++) {
+                            console.log(currentMenu[j].name);
+                            if ((currentMenu[j].name == pathParts[i]) && (currentMenu[j].submenu)) {
+                                currentMenu = currentMenu[j].submenu;
+                            }
                         }
                     }
                 }

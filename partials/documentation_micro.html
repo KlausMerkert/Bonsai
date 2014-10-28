@@ -1,0 +1,159 @@
+<div ng-init="author = 'Klaus Merkert'"></div>
+<div ng-show="lang == 'de'">
+
+<div class="textwidth">
+  <h4>Beispiel für eine Mikroprogrammierung</h4>
+  <p><img src="/images/page/BonsaiSchema0.gif" width="888" height="317" alt="Bonsai Schema"></p>
+</div>
+
+<div class="opaquebar">
+  <div class="textwidth">
+     <p>Eine konkrete Mikroprogrammierung hängt von der Hardware und den zu realisierenden
+     Maschinenbefehlen ab. Die Hardware sei durch obiges Schema gegeben. Die Maschinenbefehle
+     sind hier die
+     <a href="http://inf-schule.de/rechner/bonsai/sprachen/maschinensprache/bonsaimaschinensprache">Bonsai-Befehle</a>
+     inc, dec, jmp, tst und hlt codiert mit
+     den Opcodes 1,2,3,4 und 5.</p>
+
+
+     <p>Es gibt folgende Steuersignale:</p>
+     <ul><li>1 - clrMPC - der Mikroprogrammzähler wird auf Null gesetzt</li>
+       <li>2 - readMPC - der Mikroprogrammzähler liest vom Befehlsdecoder</li>
+       <li>3 - writeMem - der Programmspeicher schreibt auf den Datenbus</li>
+       <li>4 - readMem - der Programmspeicher liest vom Datenbus</li>
+       <li>5 - incAccu - der Akkumulator wird um 1 erhöht</li>
+       <li>6 - decAccu - der Akkumulator wird um 1 erniedrigt</li>
+       <li>7 - readAccu - der Akkumulator liest vom Datenbus</li>
+       <li>8 - writeAccu - der Akkumulator schreibt auf den Datenbus</li>
+       <li>9 - readPC - der Programmzähler liest vom Adressbus</li>
+       <li>10 - writePC - der Programmzähler schreibt auf den Adressbus</li>
+       <li>11 - readIR - das Befehlsregister liest vom Datenbus</li>
+       <li>12 - writeIR - das Befehlsregister schreibt auf den Adressbus</li>
+       <li>13 - incPC - das Befehlsregister wird um 1 erhöht</li>
+       <li>14 - incPCz - das Befehlsregister wird um 1 erhöht, falls eine Null auf dem Datenbus liegt</li>
+     </ul><p>Schreib- und Lesebefehle sind dabei immer vom Bauteil in Richtung Bus zu verstehen. So bedeutet zum
+     Beispiel <em>writeMem</em>, dass der Speicher auf den Datenbus schreibt. Da gleichzeitiges Schreiben auf den
+     Bus einen Buskonflikt hervorruft, wird als Kennfarbe für Schreiben <em>rot</em> verwendet. Entsprechend steht
+     <em>grün</em> für Lesen.</p>
+  </div>
+</div>
+
+<div class="pagebar">
+  <div class="textwidth">
+     <p>Bevor ein Befehl abgearbeitet werden kann, wird er aus dem Programmspeicher in das Befehlsregister
+        gebracht. Dazu wird der Programmspeicher mit der vom Programmzähler (PC) gelieferten Adresse angesprochen.
+        Die Adresse muss eine bestimmte Zeit am Adressport anliegen bevor das dazu passende Datum am Datenport zur
+        Verfügung steht. Will man ganz auf der sicheren Seite sein, so kann man die Adresse einen Takt vor dem
+        Registertransfer anlegen. Es folgt mit 'Speicher schreibt' und 'IR liest' der eigentliche Transfer über den
+        Datenbus. Zur sicheren Übertragung ist es notwendig, dass das Lesesignal vor dem Schreibsignal weggenommen wird.
+        Nimmt man beide Signale 'gleichzeitig' weg, so kann es sein, dass das Schreiben doch eine winzige Zeitspanne
+        zuerst beendet wird und das Befehlsregister einen undefinierten Wert vom Datenbus übernimmt. Die <em>Befehl-Hole-Phase</em>
+        (fetch-cycle) sieht dann so aus:
+     </p>
+     <code>writePC | writePC, writeMem, readIR | writePC, writeMem</code>
+     <p>
+       Für das gleichzeitige Anliegen der Signale writePC, writeMem und readIR müssen genau die Bits 10, 3 und 11 gesetzt
+       sein. Damit wird das <em>Steuerwort</em> durch 2<sup>10</sup> + 2<sup>3</sup> + 2<sup>11</sup> =
+       1024 + 8 + 2048 = 3080 codiert. Der codierte Befehl-Hole-Zyklus sieht dann so aus:
+     </p>
+     <code>1024 | 3080 | 1032</code>
+     <p>
+       Das sind die ersten drei <em>Steuerwörter</em> im Mikroprogramm, das mit Adresse 0 im Mikroprogrammzähler (MPC)
+       startet. Mit der ansteigenden Flanke des Takt-Signals wird das Steuerwort 0 in das <em>Steuerwortregister</em>
+       geladen. Die ansteigende Flanke löst auch das Hochzählen des MPCs aus. Damit besteht die Gefahr, dass die am
+       Mikroprogrammspeicher anliegende Adresse während des Transfers geändert wird. Um dem vorzubeugen, wird das Inc-Signal
+       mit einer Verzögerungsleitung etwas verzögert (eingestellt 50ms). Die Verzögerung ist nach Anklicken der Leitung
+       einstellbar. So kann der ganze Vorgang in Ruhe beobachtet werden. Das lesende Tor des Steuerwortregisters ist
+       wegen dieser Funktionalität flankenempfindlich.
+     </p>
+  </div>
+</div>
+
+<div class="opaquebar">
+  <div class="textwidth">
+     <p>
+       Es schließt sich nun die <em>Befehl-Decodier-Phase</em> an. In dieser Phase wird die zum Opcode passende
+       Einsprungadresse im Mikroprogramm ermittelt und in den Mikroprogrammzähler geladen. Dazu muss zunächst das
+       Befehlsregister IR schreiben (writeIR), um über einen Filter, der die 10 000er-Stelle herausfiltert, den Opcode des Befehls
+       als Adresse an den Befehlsdecoder anlegen. Wieder gilt, dass zunächst aus Vorsicht die Adresse ein Takt früher
+       angelegt wird. Im nächsten Takt wird die vom Befehlsdecoder gelieferte Einsprungstelle in den MPC geladen.
+       Das dazu notwendige Steuersignal <em>readMPC</em> blockiert über ein UND-Gatter die ansteigende Flanke des Takt-Signals
+       am Inc-Eingang des MPC. Damit wird ein Konflikt zwischen Lesen und Hochzählen beseitigt. Die blockierende 0 kommt
+       dabei von einem NOR-Gatter genau dann, wenn eines oder beide der Signale <em>readMPC</em>, <em>clrMPC</em>
+       den Wert 1 hat. Hier liegt eine
+       <a href="http://en.wikipedia.org/wiki/Race_condition">race-condition</a>
+       vor, denn die 'Blockade-Null' muss vor der 'Hochzähl-Eins' am UND-Gatter anliegen. Die Verzögerungsleitung
+       muss also so eingestellt sein, dass die endliche Laufzeit durch das NOR-Gatter sicher übertroffen wird.
+       Wird dem Befehlsdecoder durch Wegnahme des Signals writeIR seine Adresse genommen, so wird der Datenausgang
+       den Wert <em>undefined</em> annehmen. Sollte der MPC noch lesen, so kommt ein fehlerhafter Wert in den MPC.
+       Es liegt hier ebenfalls eine <a href="http://en.wikipedia.org/wiki/Race_condition">race-condition</a> vor.
+       Man könnte das writeIR-Signal verzögern, um die Adresse sicher lang genug anliegen zu lassen. In der Praxis
+       gab es bisher keine Probleme, vielleicht weil der Opcode-Filter eine Verzögerung bewirkt. Hier muss man beobachten!
+       Damit wird die <em>Befehl-Decodier-Phase</em> zu:
+     </p>
+     <code>
+writeIR	| writeIR, readMPC
+2<sup>12</sup>    	| 2<sup>12</sup> + 2<sup>2</sup>
+4096	| 4100
+     </code>
+  </div>
+</div>
+
+<div class="pagebar">
+  <div class="textwidth">
+     <p>Nach der Befehl-Hole- und der Befehl-DecodierPhase folgt die <em>Befehl-Ausführphase</em> für die
+        verschiedenen Befehle. Zunächst soll der inc-Befehl mit dem Opcode 1 entwickelt werden. Da nur im Akku
+        hochgezählt werden kann, muss das Datum in den Akku transportiert, hochgezählt und zurück transportiert werden.
+        Außerdem darf nicht vergessen werden, den PC hochzuzählen. Zum Schluss erfolgt ein Rücksprung auf die
+        Befehl-Hole-Phase, dh. der MPC wird auf Null gesetzt. Die vorher erwähnten Prinzipien wie 'Adresse an Speicher
+        einen Takt vor dem Zugriff anlegen' und 'Lesen vor dem Schreiben zurücknehmen' sollen auch hier beachtet werden.
+        So kommt man etwa zu folgender Folge von Steuerwörtern, die im Mikroprogramm ab Adresse 10 gespeichert werden:
+      </p>
+      <code>wrIR | wrIR, wrMem, rdAccu | wrIR, wrMem | wrIR, incAccu, incPC | wrIR, wrAccu, rdMem | wrIR, wrAccu, clrMPC
+12   | 12,   3,     7      | 12,   3     | 12,   5,       13    | 12,   8,      4     | 12,   8,      1
+4096 | 4232                | 4104        | 12320                | 4368                | 4354</code>
+      <p>Leider enthält diese Folge einen nur sehr schwer zu durchschauenden Fehler, der aber durchaus realistisch ist.
+         Das letzte Steuerwort der Folge enthält das Steuersignal wrIR und setzt mit clrMPC den MPC auf Null.
+         Das nächste Steuerwort 0 enthält das Signal wrPC. wrPC und wrIR zusammen führen zu einem Buskonflikt. Man mag
+         einwenden, dass das alte und das neue Steuerwort nicht gleichzeitig gültig sind. Das ist richtig und doch
+         müssen sowohl im 'richtigen elektrischen Leben' als auch in der Simulation die Bits des Steuerworts teilweise
+         verändert werden. Das führt unter Umständen zu Übergangszuständen, die weder dem alten noch dem neuen Steuerwort
+         entsprechen. So könnte Signal 10 <b>und</b> Signal 12 kurzzeitig gleichzeitig 1 sein. Im wirklichen Leben
+         würden zwei Register gleichzeitig den Bus beschreiben, was zu Kurzschlüssen führen kann. Wenn dieser Zustand
+         nur sehr kurz auftritt, so wird nichts kaputt gehen. Trotzdem wird die Stromaufnahme der CPU höher sein. In der
+         Simulation wird die Situation verhindert und führt zu einer Fehlermeldung. Sie kommt auch tatsächlich vor, weil
+         die Bits des Steuerwortregisters in der Reihenfolge 0,1,2,..,14 gewechselt werden. So wird also Signal 10 <b>neu</b>
+         zu 1 während Signal 12 <b>noch</b> 1 ist.
+         Verändert man obige Folge so, dass die beiden Signale durch einen Zwischentakt getrennt werden, so kann der Fehler
+         nicht auftreten:
+      </p>
+      <code>wrIR | wrIR, wrMem, rdAccu | wrIR, wrMem | wrIR, incAccu, incPC | wrIR, wrAccu, rdMem | wrIR, wrAccu | clrMPC
+12   | 12,   3,     7      | 12,   3     | 12,   5,       13    | 12,   8,      4     | 12,   8 	| 1
+4096 | 4232                | 4104        | 12320                | 4368                | 4352 		| 2</code>
+      <p>Die Folge von Steuerwörtern für den dec-Befehl unterscheidet sich nur an einer Stelle:</p>
+      <code>wrIR | wrIR, wrMem, rdAccu | wrIR, wrMem | wrIR, decAccu, incPC | wrIR, wrAccu, rdMem | wrIR, wrAccu | clrMPC
+12   | 12,   3,     7      | 12,   3     | 12,   6,       13    | 12,   8,      4     | 12,   8 	| 1
+4096 | 4232                | 4104        | 12352                | 4368                | 4352 		| 2</code>
+      <p>Beim jmp-Befehl mit dem Opcode 3 muss lediglich der Adressteil des Befehls in den PC geladen werden:</p>
+      <code>wrIR, rdPC | wrIR | clrMPC
+12,   9    | 12	  | 1
+4608       | 4096 | 2</code>
+      <p>Um den Test-Befehl zu realisieren muss das entsprechende Datum an den Datenbus gelegt werden, damit die
+         Nullentdeckung arbeiten kann. Die oben erwähnten Prinzipien sind einzuhalten:
+      </p>
+      <code>wrIR, incPC | wrIR, wrMem | wrIR, wrMem, incPCz | clrMPC
+12,   13    | 12,   3     | 12,   3,     14     | 1
+12288       | 4104        | 20488               | 2</code>
+      <p>Es fehlt der hlt-Befehl mit Opcode 5. Hier soll der Rücksprung auf MPC=0 und ein Hochzählen des MPC
+         gleichermaßen vermieden werden. Das kann erreicht werden, wenn immer wieder der MPC geladen wird:
+      </p>
+      <code>wrIR, readMPC, notCount
+12, 2, 0
+4101</code>
+      <p>Das Signal 0, das nicht das <i>Operationswerk</i> beeinflusst, könnte z.B. zum Stoppen des Taktgenerators dienen</p>
+      <p><a href="mp0.txt">mp0.txt</a></p>
+  </div>
+</div>
+
+<div style="width: 300px; height: 400px; background: url('/images/Bonsai-logo-topf.svg') no-repeat; margin: 0.6em auto;"></div>
+</div>
