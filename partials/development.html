@@ -1,5 +1,5 @@
 <div ng-init="author = 'Johannes Merkert'"></div>
-<div ng-show="lang == 'de'">
+<div ng-if="language == 'de'">
     <div class="textwidth">
         <p lang="de-1996">Die Bonsai-Simulationssoftware steht unter der <a href="http://www.gnu.org/copyleft/gpl.html">GPL
             v.3</a> und kann von <a href="https://github.com/KlausMerkert/Bonsai">unserem Repository bei GitHub</a>
@@ -86,6 +86,86 @@
 
             <p lang="de-1996">Für weitere Informationen zum Code, verwende das <a
                     href="https://github.com/KlausMerkert/Bonsai/wiki">Wiki</a> (englisch).</p>
+        </div>
+    </div>
+
+    <div style="width: 300px; height: 400px; background: url('/images/Bonsai-logo-topf.svg') no-repeat; margin: 0.6em auto;"></div>
+</div>
+<div ng-if="language == 'en'">
+
+    <div class="textwidth">
+        <p lang="en">Bonsai is licensed under the <a href="http://www.gnu.org/copyleft/gpl.html">GPL v.3</a> and can be
+            downloaded from <a href="https://github.com/KlausMerkert/Bonsai">GitHub</a>. We are using <a
+                    href="http://nvie.com/posts/a-successful-git-branching-model/">git flow</a> so the <a
+                    href="https://github.com/KlausMerkert/Bonsai/tree/master">master</a>-branch in the git repository is
+            always the latest stable version. If you want to checkout the latest development version use the <a
+                    href="https://github.com/KlausMerkert/Bonsai/tree/develop">develop</a> branch. There might be
+            feature branches with unfinished features in branches with the prefix 'feature/'. Please use this structure
+            for your own development of Bonsai if you are planning to contribute to the project.</p>
+    </div>
+
+    <div class="pagebar">
+        <div class="textwidth">
+            <a name="installation"></a>
+
+            <h2>Installation instructions</h2>
+
+            <p lang="en">You are free to serve a version of <em>Bonsai</em> from your own webserver. As <em>Bonsai</em>
+                is written entirely in JavaScript there are no special requirements for the webserver. We tested it with
+                Nginx and Apache but it will most certainly work with other webservers too.
+                Please see the <a href="https://docs.angularjs.org/tutorial/step_05">angular documentation</a> if you
+                are planning to minify the JavaScript. Angular uses variable names for dependency injection and
+                therefore does not allow renaming of variables during minify.</p>
+
+            <p lang="en">
+                We recommend to checkout the repository on your webserver with
+            </p>
+            <pre>$ git clone https://github.com/KlausMerkert/Bonsai.git</pre>
+            If you do that you can install updates by typing
+            <pre>$ git pull</pre>
+
+            <p lang="de-1996">However you may also just copy the files via FTP. Download an archive with all files from
+                <a href="https://github.com/KlausMerkert/Bonsai/archive/master.zip">here</a>.</p>
+        </div>
+    </div>
+
+    <div class="opaquebar">
+        <div class="textwidth">
+            <a name="developmentsetup"></a>
+
+            <h2>Development Setup</h2>
+
+            <p lang="en">For developing Bonsai install a webserver locally. Bonsai will not work if you just open
+                index.html with your browser because modern browsers prevent the loading of all necessary files from
+                your harddrive due to security reasons.</p>
+
+            <p lang="en">Call index.html to start Bonsai and jasmine.html to run the unittests.</p>
+        </div>
+    </div>
+
+    <div class="pagebar">
+        <div class="textwidth">
+            <a name="codestructure"></a>
+
+            <h2>Code Structure</h2>
+
+            <p lang="en"><em>Bonsai</em> uses a clear separation of models, views and controllers. Models are imlemented
+                without display related information in the model subdirectory. We are emulating classes with object
+                prototypes as JavaScript has no 'class' keyword. If you look into the source code of the models you will
+                notice that the class like structure gets very clear.</p>
+
+            <p lang="en">For displaying the different components of the CPU we are using directives. Angular offers the
+                possibility to define these custom HTML-elements which gives us the possibility to implement all
+                components with their own small controllers and views.</p>
+
+            <p lang="en">In addition to the components implemented as directives we have a <a
+                    href="https://github.com/KlausMerkert/Bonsai/blob/master/js/controllers/cpuCtrl.js">cpu
+                controller</a> which initializes everything. This controller is accompanied by the <a
+                    href="https://github.com/KlausMerkert/Bonsai/blob/master/partials/main.html">main partial</a> which
+                defines the visible and invisible structure of the CPU.</p>
+
+            <p lang="en">For additional information about the code structure and the concepts we are using see the <a
+                    href="https://github.com/KlausMerkert/Bonsai/wiki">Wiki</a>.</p>
         </div>
     </div>
 

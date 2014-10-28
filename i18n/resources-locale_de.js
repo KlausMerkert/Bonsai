@@ -60,6 +60,16 @@
         "description": ""
     },
     {
+        "key"        : "_lastChange_",
+        "value"      : "Letzte Änderung dieser Seite: ",
+        "description": ""
+    },
+    {
+        "key"        : "_author_",
+        "value"      : "Autor: ",
+        "description": ""
+    },
+    {
         "key"        : "_CpuView_",
         "value"      : "Schaltung",
         "description": ""

@@ -60,6 +60,16 @@
         "description": ""
     },
     {
+        "key"        : "_lastChange_",
+        "value"      : "Last change: ",
+        "description": ""
+    },
+    {
+        "key"        : "_author_",
+        "value"      : "Author: ",
+        "description": ""
+    },
+    {
         "key"        : "_CpuView_",
         "value"      : "Circuit",
         "description": ""

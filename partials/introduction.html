@@ -1,5 +1,5 @@
 <div ng-init="author = 'Johannes Merkert'"></div>
-<div ng-show="lang == 'de'">
+<div ng-show="language == 'de'">
     <div class="textwidth">
         <p class="quote" lang="de-1996">
             Wenn du schon immer davon geträumt hast, deinen eigenen Prozessor zu entwickeln,
@@ -80,6 +80,79 @@
                 unterstützt.
                 Wenn du Fragen hast, zögere nicht <a href="mailto:klaus@merkert.info">uns zu schreiben</a>.</p>
             <h4>Entwickler, Designer und Übersetzer:</h4>
+            <ul>
+                <li><a href="https://github.com/KlausMerkert">Klaus Merkert</a></li>
+                <li><a href="http://johannes.merkert.info">Johannes Merkert</a></li>
+                <li>...</li>
+            </ul>
+        </div>
+    </div>
+
+    <div style="width: 300px; height: 400px; background: url('/images/Bonsai-logo-topf.svg') no-repeat; margin: 0.6em auto;"></div>
+</div>
+<div ng-show="language == 'en'">
+
+    <div class="textwidth">
+        <p class="quote" lang="en">Have you ever dreamt of creating your own computer architecture? Now you can!</p>
+    </div>
+
+    <div class="pagebar" style="padding-top: 1em;">
+        <div style="width: 500px; height: 270px; background: url('/images/page/Bonsai-teaser-schematic.svg') no-repeat; margin: 0.5em auto;"></div>
+        <p lang="en" class="textwidth">The Bonsai Computer is the simplest computer we could imagine and it makes it
+            easy to understand how computers work. And if you manage to understand it you can use it as the perfect
+            starting point for your own design.</p>
+    </div>
+
+    <div class="textwidth">
+        <p lang="en">You can try the Bonsai without the need to install anything right in your Browser:</p>
+
+        <div class="bigbutton" style="clear: both; width: 13em;">
+            <a ng-href="/demo/">Start Bonsai</a>
+        </div>
+
+        <p lang="en">
+            You saw it running and you want to know how it works? Go to the
+            <a ng-href="/documentation/">documentation</a>.
+        </p>
+    </div>
+
+    <div class="pagebar">
+        <div class="textwidth">
+            <p lang="en">There is also a real hardware version of the Bonsai. Here is a video of the assembly of the
+                hardware:<br>
+                <iframe width="560" height="315" style="margin-left: calc(20em - 280px); border: 0 solid gray;"
+                        src="//www.youtube.com/embed/lNZ9I6A67ro" allowfullscreen=""></iframe>
+            </p>
+        </div>
+    </div>
+
+    <div class="opaquebar">
+        <div class="textwidth">
+            <p lang="en">The Bonsai simulation is free software and licensed under the <a
+                    href="http://www.gnu.org/copyleft/gpl.html">GPL v.3</a>. If you are interested how it works go to
+                our <a ng-href="/development/">developer section</a> and check out the <a
+                        href="https://github.com/KlausMerkert/Bonsai">sourcecode on GitHub</a>. If you find a bug please
+                report it to our <a href="https://github.com/KlausMerkert/Bonsai/issues">issue tracker</a> or if that is
+                too complicated for you
+                write an email to <a href="mailto:klaus@merkert.info">klaus@merkert.info</a>.</p>
+
+            <p lang="en">Bonsai is based on <a href="https://angularjs.org/">AngularJs</a> and you are free to <a
+                    ng-href="/development/#installation">install it on your
+                own server</a>.</p>
+
+            <p lang="en">Bonsai is available in English and <a href="http://bonsai.pinyto.de">German</a>. If you are
+                missing your
+                language, help us by <a ng-href="/development/translation/">adding your translation</a>.</p>
+        </div>
+    </div>
+
+    <div class="pagebar">
+        <div class="textwidth">
+            <p lang="en">Bonsai is maintained by <a href="https://github.com/KlausMerkert">Klaus Merkert</a>
+                together with <a href="http://www.inf-schule.de/">inf-schule</a> and funded by
+                <a href="http://fit.informatik.uni-kl.de/">Verein zur Förderung der Informatik (FIT) </a>.
+                If you have any questions do not hesitate to <a href="mailto:klaus@merkert.info">contact us</a>.
+            </p><h4>Developers, Designers and Translators:</h4>
             <ul>
                 <li><a href="https://github.com/KlausMerkert">Klaus Merkert</a></li>
                 <li><a href="http://johannes.merkert.info">Johannes Merkert</a></li>

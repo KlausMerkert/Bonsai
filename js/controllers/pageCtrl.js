@@ -2,8 +2,8 @@
 
 bonsaiApp.controller('bonsaiPageCtrl',
     function ($scope, $rootScope) {
-        $scope.lang = 'de';
         $rootScope.viewsCount = 42;
+        $rootScope.lastChange = Date.now();
 
         $scope.$watch('author', function (author) {
             $rootScope.author = author;

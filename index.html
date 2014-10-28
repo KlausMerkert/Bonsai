@@ -91,8 +91,12 @@
     <div id="footer" ng-show="menu">
         <div style="float: left;"><a ng-href="/impressum/" data-i18n="_impressum_">Impressum</a></div>
         <div ng-show="viewsCount">{{ viewsCount }} <span data-i18n="_views_">Aufrufe</span></div>
-        <div>Letzte Änderung dieser Seite: <span id="thChange">15.08.2014 16:13:16</span></div>
-        <div ng-show="author">Autor: {{ author }}</div>
+        <div ng-show="lastChange">
+            <span data-i18n="_lastChange_">Letzte Änderung dieser Seite: </span>
+            <span ng-show="language == 'de'">{{ lastChange | date : "d.M.yyyy h:mm:ss" }}</span>
+            <span ng-hide="language == 'de'">{{ lastChange | date : "medium" }}</span>
+        </div>
+        <div ng-show="author"><span data-i18n="_author_">Autor: </span>{{ author }}</div>
         <div ng-hide="author">kein Autor</div>
         <div style="float: none; clear: both;"></div>
     </div>
