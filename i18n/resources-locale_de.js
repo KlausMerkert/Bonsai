@@ -55,6 +55,11 @@
         "description": ""
     },
     {
+        "key"        : "_views_",
+        "value"      : "Aufrufe",
+        "description": ""
+    },
+    {
         "key"        : "_CpuView_",
         "value"      : "Schaltung",
         "description": ""

@@ -90,8 +90,7 @@
     <div ng-view style="position: relative;" ng-style="{'top': menu ? '85px' : '0'}" class="textarea"></div>
     <div id="footer" ng-show="menu">
         <div style="float: left;"><a ng-href="/impressum/" data-i18n="_impressum_">Impressum</a></div>
-        <div style="float: left;"><a ng-href="/newPages/">neue Seiten</a></div>
-        <div><span id="thCounter">1348</span> Aufrufe</div>
+        <div ng-show="viewsCount">{{ viewsCount }} <span data-i18n="_views_">Aufrufe</span></div>
         <div>Letzte Änderung dieser Seite: <span id="thChange">15.08.2014 16:13:16</span></div>
         <div ng-show="author">Autor: {{ author }}</div>
         <div ng-hide="author">kein Autor</div>

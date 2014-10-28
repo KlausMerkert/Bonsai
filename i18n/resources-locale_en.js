@@ -55,6 +55,11 @@
         "description": ""
     },
     {
+        "key"        : "_views_",
+        "value"      : "views",
+        "description": ""
+    },
+    {
         "key"        : "_CpuView_",
         "value"      : "Circuit",
         "description": ""

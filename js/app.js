@@ -101,9 +101,7 @@ var bonsaiApp = angular.module(
                 var currentMenu = menu;
                 for (var i = 0; i < pathParts.length; i++) {
                     if (pathParts[i]) {
-                        console.log(pathParts[i]);
                         for (var j = 0; j < currentMenu.length; j++) {
-                            console.log(currentMenu[j].name);
                             if ((currentMenu[j].name == pathParts[i]) && (currentMenu[j].submenu)) {
                                 currentMenu = currentMenu[j].submenu;
                             }
