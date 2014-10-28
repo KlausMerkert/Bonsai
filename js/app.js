@@ -79,14 +79,18 @@ var bonsaiApp = angular.module(
                 ]
             },
             {
-                'name': "demo",
+                'name': "bonsai",
                 'title': "_demo_",
-                'link': '/bonsai/'
+                'link': '/bonsai/',
+                'submenu': []
             }
         ];
         // root scope functions
         $rootScope.getLanguages = function () {
             return ['en', 'de'];
+        };
+        $rootScope.setLanguage = function (lang) {
+            $rootScope.language = lang;
         };
         $rootScope.$watch('language', function (newLang) {
             localize.setLanguage(newLang);

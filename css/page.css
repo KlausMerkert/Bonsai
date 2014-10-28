@@ -189,3 +189,7 @@ li li {
         page-break-after: always;
     }
 }
+
+.selected-lang {
+    color: rgba(0, 0, 0, 0.5);
+}

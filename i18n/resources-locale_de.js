@@ -65,6 +65,11 @@
         "description": ""
     },
     {
+        "key"        : "_language_",
+        "value"      : "Sprache: ",
+        "description": ""
+    },
+    {
         "key"        : "_path_",
         "value"      : "Pfad: ",
         "description": ""
