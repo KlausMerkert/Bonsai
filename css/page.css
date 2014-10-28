@@ -85,7 +85,7 @@ p {
 
 .textwidth {
     width: calc(100% - 2em);
-    max-width: 40em;
+    max-width: 42em;
     margin: auto;
     padding: 1em;
 }
