@@ -1,0 +1,77 @@
+{
+  "buses": [
+    {
+      "id": "bus0",
+      "name": "Bus links",
+      "max": 9999,
+      "base": 10,
+      "color": "rgb(0, 140, 0)",
+      "top": -3,
+      "left": 250,
+      "routes": [
+        {
+          "type": "topleft",
+          "top": "21px",
+          "left": "224px",
+          "width": "70px",
+          "height": "7px"
+        }
+      ]
+    },
+    {
+      "id": "bus1",
+      "name": "Bus rechts",
+      "max": 99999,
+      "base": 10,
+      "color": "rgb(0, 140, 0)",
+      "top": -3,
+      "left": 350,
+      "routes": [
+        {
+          "type": "topright",
+          "top": "21px",
+          "left": "326px",
+          "width": "69px",
+          "height": "7px"
+        }
+      ]
+    }
+  ],
+  "registers": [
+    {
+      "name": "A",
+      "value": 0,
+      "base": 10,
+      "top": 50,
+      "left": 190,
+      "gates": [
+        {
+          "busId": "bus0"
+        }
+      ]
+    },
+    {
+      "name": "B",
+      "value": 1234,
+      "base": 10,
+      "top": 50,
+      "left": 362,
+      "gates": [
+        {
+          "busId": "bus1",
+          "initialState": 1
+        }
+      ]
+    }
+  ],
+  "filters": [
+    {
+      "name": "filter",
+      "statement": "n%100",
+      "busLeftId": "bus0",
+      "busRightId": "bus1",
+      "top": 21,
+      "left": 299
+    }
+  ]
+}

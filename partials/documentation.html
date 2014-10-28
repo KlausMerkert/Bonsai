@@ -9,4 +9,205 @@
             aufgebaut. Alle Beispiele sind interaktiv. Eventuelle Fehler werden in einer Fehlerliste angezeigt.
         </p>
     </div>
+
+    <div id="register" class="pagebar">
+        <div class="textwidth">
+            <h2>Register</h2>
+
+            <p>Ein Register ist eine einfache Komponente, die in einer CPU an mehreren Stellen verwendet wird. Register
+                speichern ganze Zahlen, die dann in der CPU verwendet werden können. Im folgenden Beispiel siehst du ein
+                Register, das den Wert 7 speichert. Indem du auf die kleinen grauen Quadrate an der rechten Kante des
+                Registers drückst, kannst du den gespeicherten Wert um 1 erhöhen und verringern oder auf 0 setzen.</p>
+            <iframe src="http://bonsai.pinyto.de/bonsai/?example=singleregister" height="550"
+                    style="width: 100%; border: 0 solid black; overflow: scroll-y; background-color: rgb(255, 255, 255);">
+                Das Beispiel gibt es &lt;a href="http://bonsai.pinyto.de/bonsai/?example=singleregister"&gt;hier&lt;/a&gt;.
+            </iframe>
+            <p>Du kannst den Wert eines Registers direkt ändern, wenn du auf die Anzeige der Zahl klickst. Register
+                können positive ganze Zahlen bis zu einer festgelegten Obergrenze speichern. Wie groß ist diese Grenze
+                im Beispiel? Gibt es eine untere Grenze?</p>
+        </div>
+    </div>
+
+    <div id="registertransfer" class="pagebar">
+        <div class="textwidth">
+            <h2>Register und Busse</h2>
+
+            <p>Register können über Busse ihre Inhalte austauschen. Dazu können Register auf einen Bus schreiben oder
+                von einem Bus lesen.
+                Solange ein Register schreibt, ist der Registerinhalt auf dem Bus verfügbar. Es kann immer nur ein
+                Register auf den Bus
+                schreiben. Beliebig viele Register können vom Bus lesen. Ein Register kann auch inaktiv sein, also weder
+                lesen noch schreiben.
+                Ein Bus, der nicht beschrieben wird, ist inaktiv. Er enthält keinen Wert.</p>
+
+            <p>Den Zustand eines Busses kann man teilweise an seiner Farbe ablesen. Ein inaktiver Bus erscheint blass.
+                Ein Bus, der eine
+                Null enthält, erscheint kräftig. Ein Bus, der einen Wert größer Null enthält, hat einen blauen
+                Schatten.</p>
+
+            <p>Die <i>Tore</i> eines Registers lassen sich über die <i>Steuereingänge</i>, das sind die roten und grünen
+                Quadrate, beeinflussen.
+                Die Farbe rot steht für das Schreiben auf den Bus, die Farbe grün für das Lesen. Ein Mausklick betätigt
+                einen Steuereingang.
+                Will man den Zustand dauerhaft erhalten, so zieht man die Maus mit gedrückter linker Taste aus dem
+                Steuereingang heraus und lässt
+                erst dort los. Ein Klick in das Innere schaltet die Zustände in der Reihenfolge Lesen - Schreiben -
+                inaktiv - Lesen - ..
+                durch.</p>
+            <iframe src="http://bonsai.pinyto.de/bonsai/?example=registertransfer" height="550"
+                    style="width: 100%; border: 0 solid black; overflow: scroll-y; background-color: rgb(255, 255, 255);">
+                Das Beispiel gibt es &lt;a href="http://bonsai.pinyto.de/?example=registertransfer/"&gt;hier&lt;/a&gt;.
+            </iframe>
+            <p><a href="/downloads/RegisterUndBusse.txt">RegisterUndBusse.txt</a></p>
+        </div>
+    </div>
+
+    <div id="memory" class="pagebar">
+        <div class="textwidth">
+            <h2>Speicher</h2>
+
+            <p>Der <i>Speicher</i> enthält in den einzelnen Zellen Daten in Form von Zahlen. Eine einzelne <i>Speicherzelle</i>
+                wird über ihre
+                <i>Adresse</i> angesprochen. Eine Zelle kann beschrieben und ausgelesen werden.</p>
+            <iframe src="http://bonsai.pinyto.de/bonsai/?example=memory" height="550"
+                    style="width: 100%; border: 0 solid black; overflow: scroll-y; background-color: rgb(255, 255, 255);">
+                Das Beispiel gibt es &lt;a href="http://bonsai.pinyto.de/?example=memory"&gt;hier&lt;/a&gt;.
+            </iframe>
+            <p><a href="/downloads/memory.txt">memory.txt</a></p>
+        </div>
+    </div>
+
+    <div id="gates" class="pagebar">
+        <div class="textwidth">
+            <h2>Schalter, Gatter, Leuchtdioden</h2>
+
+            <p>Das <i>Und-Gatter</i> hat zwei Eingänge und einen Ausgang. An den Eingängen dürfen nur die Werte 0 oder 1
+                anliegen.
+                <i>Schalter</i> liefern je nach Stellung den Wert 0 oder den Wert 1. Eine <i>Leuchtdiode</i>
+                (<a href="http://de.wikipedia.org/wiki/Leuchtdiode">LED</a>) hat einen Eingang, der nur 0 oder 1
+                verarbeiten
+                kann. Bei einer 1 am Eingang leuchtet die <i>LED</i>, bei einer 0 bleibt sie dunkel. Gatter, Schalter
+                und LEDs werden durch
+                einfache Leitungen verbunden. Einfache Leitungen in der Simulation sind Busse, die nur die Werte 0 oder
+                1 annehmen können.</p>
+
+            <p>Warum heißt das Und-Gatter
+                <a href="http://de.wikipedia.org/wiki/Und-Gatter">Und-Gatter</a>?
+                Nun, eine 1 am Ausgang erhält man nur, wenn eine 1 am einen <b>und</b>
+                eine 1 am anderen Eingang anliegt.</p>
+
+            <p>Ein Und-Gatter kann als <i>Datentor</i> für eine 1 aufgefasst werden. Dazu nimmt man z.B. den Eingang A
+                als <i>Torsteuerung</i> und
+                den Eingang B als <i>Dateneingang</i> an. Eine 1 am Dateneingang kann das Tor nur passieren, wenn eine 1
+                an der Torsteuerung
+                anliegt. Liegt eine 0 an der Torsteuerung an, so kommt eine 1 nicht durch das Tor. Ausprobieren!</p>
+
+            <p>Außer zweier UND-Gatter (AND) werden im Bonsai-Computer auch ein ODER-Gatter (OR) und ein
+                Nicht-ODER-Gatter (NOR)
+                verwendet.</p>
+            <iframe src="http://bonsai.pinyto.de/bonsai/?example=gates" height="550"
+                    style="width: 100%; border: 0 solid black; overflow: scroll-y; background-color: rgb(255, 255, 255);">
+                Das Beispiel gibt es &lt;a href="http://bonsai.pinyto.de/?example=gates"&gt;hier&lt;/a&gt;.
+            </iframe>
+            <p>Der Bonsai-Baukasten bietet auch die Möglichkeit, 'Schaltungen' im
+                <a href="http://de.wikipedia.org/wiki/JavaScript_Object_Notation">JSON</a>-Format abzuspeichern und
+                einzuladen.
+                Den Edit-Modus schaltet man durch einen Klick auf das Zahnrad ein und aus.
+                Ein einfaches Beispiel findet sich in der Datei <a href="/downloads/switchled.txt">switchled.txt</a>, die man lokal
+                abspeichern und
+                einladen kann. Die Struktur dieser Schaltungsdateien sollte weitgehend selbsterklärend sein.</p>
+
+            <p><a href="/downloads/gates.txt">gates.txt</a>, <a href="/downloads/norRSFF.txt">norRSFF.txt</a>,
+                <a href="/downloads/switchled.txt">switchled.txt</a></p>
+        </div>
+    </div>
+
+    <div class="pagebar">
+        <div class="textwidth">
+            <h2 id="filter">Filter</h2>
+
+            <p>Der Bonsai-Baukasten bietet die Möglichkeit, aus einer Zahl n gewisse Informationen wie bestimmte
+                Dezimalstellen
+                herauszufiltern. Formal ist ein <i>Filter</i> eine Funktion, die einer Zahl n einen Funktionswert f(n)
+                zuordnet. Die
+                Funktionsvorschrift lässt sich nach einem Klick auf das Filtersymbol editieren. Sie muss gültiges
+                JavaScript sein.</p>
+            <iframe src="http://bonsai.pinyto.de/bonsai/?example=filter" height="550"
+                    style="width: 100%; border: 0 solid black; overflow: scroll-y; background-color: rgb(255, 255, 255);">
+                Das Beispiel gibt es &lt;a href="http://bonsai.pinyto.de/?example=filter"&gt;hier&lt;/a&gt;.
+            </iframe>
+            <p><a href="/downloads/filter.txt">filter.txt</a></p>
+        </div>
+    </div>
+
+    <div id="manual" class="pagebar">
+        <div class="textwidth">
+            <h2>Operationswerk</h2>
+
+            <p>Das Operationswerk ermöglicht es, ein Maschinenprogramm zu speichern und durchzuführen.
+                Allerdings müssen 'von außen' die <i>Steuersignale</i> gesetzt werden.</p>
+            <iframe src="http://bonsai.pinyto.de/bonsai/?example=manual" height="550"
+                    style="width: 100%; border: 0 solid black; overflow: scroll-y; background-color: rgb(255, 255, 255);">
+                Das Beispiel gibt es &lt;a href="http://bonsai.pinyto.de/?example=manual"&gt;hier&lt;/a&gt;.
+            </iframe>
+            <p>Bestandteile des Operationswerks:</p>
+            <ul>
+                <li>Speicher, um das Maschinenprogramm und die Daten zu speichern</li>
+                <li>Programmzeiger PC (program counter), um die aktuelle Position im Programm anzuzeigen</li>
+                <li>Befehlsregister IR (instruction register), um Opcode und Adresse des aktuellen Befehls zu liefern
+                </li>
+                <li>Akku, um die einfachen Rechenoperation +1 und -1 zu ermöglichen</li>
+                <li>Nullentdeckungslogik, um zusammen mit Gattern ein unbedingtes und ein bedingtes Hochzählen des PCs
+                    zu ermöglichen
+                </li>
+                <li>Adressbus</li>
+                <li>Datenbus</li>
+            </ul>
+        </div>
+    </div>
+
+    <div id="bitregister" class="pagebar">
+        <div class="textwidth">
+            <h2>Bit-Register</h2>
+
+            <p>Das Bit-Register ist eine Sonderform eine Registers, die an einem Tor einzelne Bits ausgeben oder
+                einlesen
+                kann. Weiterhin besonders ist die <i>Flankensteuerung</i> des Leseeingangs am anderen Tor. Die
+                Flankensteuerung bewirkt, dass genau mit der steigenden Flanke der Businhalt übernommen wird. Spätere
+                Änderungen am Bus werden trotz anliegendem Steuersignal nicht berücksichtigt.</p>
+            <iframe src="http://bonsai.pinyto.de/bonsai/?example=trafficlights" height="550"
+                    style="width: 100%; border: 0 solid black; overflow: scroll-y; background-color: rgb(255, 255, 255);">
+                Das Beispiel gibt es &lt;a href="http://bonsai.pinyto.de/?example=trafficlights"&gt;hier&lt;/a&gt;.
+            </iframe>
+            <p>bb</p>
+        </div>
+    </div>
+
+    <div id="traffic" class="pagebar">
+        <div class="textwidth">
+            <h2>Ampelsteuerung</h2>
+
+            <p>Mit einem Bit-Register, einem Speicher, einem Adress-Register und einem Taktgeber lässt sich eine
+                einfache Ampelsteuerung aufbauen.</p>
+            <iframe src="http://bonsai.pinyto.de/bonsai/?example=trafficlight" height="550"
+                    style="width: 100%; border: 0 solid black; overflow: scroll-y; background-color: rgb(255, 255, 255);">
+                Das Beispiel gibt es &lt;a href="http://bonsai.pinyto.de/?example=trafficlight"&gt;hier&lt;/a&gt;.
+            </iframe>
+            <p>Wie könnte eine erweiterte 'Ampelsteuerung' das Operationswerk ergänzen?</p>
+        </div>
+    </div>
+
+    <div id="control" class="pagebar">
+        <div class="textwidth">
+            <h2>Operationswerk mit Controlboard</h2>
+
+            <p>aaa</p>
+            <iframe src="http://bonsai.pinyto.de/bonsai/?example=control" height="550"
+                    style="width: 100%; border: 0 solid black; overflow: scroll-y; background-color: rgb(255, 255, 255);">
+                Das Beispiel gibt es &lt;a href="http://bonsai.pinyto.de/?example=control"&gt;hier&lt;/a&gt;.
+            </iframe>
+            <p>bb</p>
+        </div>
+    </div>
+
 </div>

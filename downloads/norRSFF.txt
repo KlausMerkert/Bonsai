@@ -1,0 +1,144 @@
+{
+  "buses": [
+    {
+      "id": "a0",
+      "name": "a0",
+      "max": 1
+    },
+    {
+      "id": "b0",
+      "name": "b0",
+      "max": 1,
+      "routes": [
+        {
+          "type": "horizontal",
+          "top": "105px",
+          "left": "275px",
+          "width": "15px",
+          "height": "0px"
+        },
+        {
+          "type": "topleft",
+          "top": "90px",
+          "left": "282px",
+          "width": "40px",
+          "height": "15px"
+        },
+        {
+          "type": "topright",
+          "top": "60px",
+          "left": "322px",
+          "width": "15px",
+          "height": "15px"
+        },
+        {
+          "type": "bottomright",
+          "top": "75px",
+          "left": "322px",
+          "width": "15px",
+          "height": "15px"
+        }
+      ]
+    },
+    {
+      "id": "a1",
+      "name": "a1",
+      "max": 1,
+      "routes": [
+        {
+          "type": "horizontal",
+          "top": "55px",
+          "left": "275px",
+          "width": "15px",
+          "height": "0px"
+        },
+        {
+          "type": "bottomleft",
+          "top": "55px",
+          "left": "282px",
+          "width": "40px",
+          "height": "15px"
+        },
+        {
+          "type": "topright",
+          "top": "70px",
+          "left": "322px",
+          "width": "5px",
+          "height": "15px"
+        },
+        {
+          "type": "bottomright",
+          "top": "85px",
+          "left": "322px",
+          "width": "5px",
+          "height": "15px"
+        }
+      ]
+    },
+    {
+      "id": "b1",
+      "name": "b1",
+      "max": 1
+    }
+  ],
+  "manualswitches": [
+    {
+      "name": "A0",
+      "wireId": "a0",
+      "value": 0,
+      "top": 50,
+      "left": 340
+    },
+    {
+      "name": "B1",
+      "wireId": "b1",
+      "value": 0,
+      "top": 111,
+      "left": 340
+    }
+  ],
+  "leds": [
+    {
+      "name": "C0",
+      "wireId": "a1",
+      "top": 55,
+      "left": 270,
+      "value": 0
+    },
+    {
+      "name": "C1",
+      "wireId": "b0",
+      "top": 105,
+      "left": 270,
+      "value": 0
+    }
+  ],
+  "andGates": [],
+  "orGates": [],
+  "norGates": [
+    {
+      "name": "nor0",
+      "inAId": "a0",
+      "inBId": "b0",
+      "outId": "a1",
+      "top": 50,
+      "left": 300
+    },
+    {
+      "name": "nor1",
+      "inAId": "a1",
+      "inBId": "b1",
+      "outId": "b0",
+      "top": 100,
+      "left": 300
+    }
+  ],
+  "registers": [],
+  "bitregisters": [],
+  "memories": [],
+  "zerocomparators": [],
+  "delays": [],
+  "filters": [],
+  "clocks": [],
+  "labels": []
+}

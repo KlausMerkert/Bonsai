@@ -1,0 +1,27 @@
+{
+  "manualswitches": [
+    {
+      "name": "S0",
+      "wireId": "bus0",
+      "value": 0,
+      "top": 40,
+      "left": 340
+    }
+  ],
+  "buses": [
+    {
+      "id": "bus0",
+      "name": "Bus 0",
+      "max": 1
+    }    
+  ],
+  "leds": [
+    {
+      "name": "led",
+      "wireId": "bus0",
+      "top": 55,
+      "left": 270,
+      "value": 0
+    }
+  ]
+}
