@@ -55,6 +55,11 @@
         "description": ""
     },
     {
+        "key"        : "_assembler_",
+        "value"      : "Assembler",
+        "description": ""
+    },
+    {
         "key"        : "_views_",
         "value"      : "Aufrufe",
         "description": ""
