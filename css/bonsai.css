@@ -128,7 +128,7 @@ textarea {
 }
 
 .toolbar {
-    width: 100%;
+    width: calc(100% - 2px);
     background-color: rgb(204, 204, 204);
     border: 1px solid rgb(170, 170, 170);
     height: 22px;
@@ -158,7 +158,7 @@ textarea {
 .error-console {
     background-color: rgb(204, 204, 204);
     border: 1px solid rgb(170, 170, 170);
-    width: 100%;
+    width: calc(100% - 10px);
     padding: 0 4px;
 }
 
