@@ -123,16 +123,20 @@
                   ng-model="editor.content">{{ editor.content }}</textarea>
     </div>
 
-    <div>
-        <h2 data-i18n="_errors_" style="display: inline-block;">Errors:</h2>
-        <a ng-click="errors = []" ng-show="errors.length > 0"
-           data-i18n="_clearErrors_" href="" style="font-size: 60%; margin-left: 2em;"></a>
+    <div class="error-console">
+        <div>
+            <h2 data-i18n="_errors_" style="display: inline-block;">Errors:</h2>
+            <a ng-click="errors = []" ng-show="errors.length > 0"
+               data-i18n="_clearErrors_" href="" style="font-size: 60%; margin-left: 2em;"></a>
+        </div>
+        <ul style="padding: 0; margin: 0;">
+            <li ng-repeat="error in errors" ng-style="{'background-color': $even ? 'rgb(214, 214, 214)' : 'inherited'}">
+                <span data-i18n="{{ error.localization }}beginning"></span>
+                <span style="font-style: italic;">{{ error.actor1 }}</span>
+                <span data-i18n="{{ error.localization }}middle"></span>
+                <span style="font-style: italic;">{{ error.actor2 }}</span>
+                <span data-i18n="{{ error.localization }}end"></span>
+            </li>
+        </ul>
     </div>
-    <p ng-repeat="error in errors">
-        <span data-i18n="{{ error.localization }}beginning"></span>
-        <span style="font-style: italic;">{{ error.actor1 }}</span>
-        <span data-i18n="{{ error.localization }}middle"></span>
-        <span style="font-style: italic;">{{ error.actor2 }}</span>
-        <span data-i18n="{{ error.localization }}end"></span>
-    </p>
 </div>

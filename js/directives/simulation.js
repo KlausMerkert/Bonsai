@@ -8,6 +8,16 @@ bonsaiApp.directive('simulation', function () {
             example: '@'
         },
         controller: ['$scope', 'ExampleStorage', function ($scope, ExampleStorage) {
+            $scope.calculateComponentCount = function (cpu) {
+                var componentCount = 0;
+                angular.forEach(cpu, function (value, key) {
+                    if (!(key in {'buses': '', 'labels': ''}) && (angular.isArray(value))) {
+                        componentCount += value.length;
+                    }
+                });
+                return componentCount;
+            };
+
             $scope.loadBonsai = function () {
                 var exampleGenerator = new ExampleGenerator();
                 $scope.cpu = exampleGenerator.generateBonsai();
@@ -15,6 +25,7 @@ bonsaiApp.directive('simulation', function () {
                 matcher.createBuses();
                 matcher.matchAllComponents();
                 $scope.selectedEditor = undefined;
+                $scope.loaded = true;
             };
 
             $scope.loadExample = function (exampleName) {
@@ -26,6 +37,8 @@ bonsaiApp.directive('simulation', function () {
                         matcher.createBuses();
                         matcher.matchAllComponents();
                         $scope.cpu = matcher.getCpu();
+                        $scope.componentCount = $scope.calculateComponentCount($scope.cpu);
+                        $scope.loaded = true;
                     } catch (exception) {
                         $scope.clearCpu();
                         throw exception;
@@ -37,31 +50,22 @@ bonsaiApp.directive('simulation', function () {
         link: function ($scope, element, attrs) {
             $scope.base = 10;
             $scope.initializedComponentCount = 0;
-
             $scope.cpu = {};
-            if ($scope.example) {
-                $scope.loadExample($scope.example);
-            } else {
-                $scope.loadBonsai();
-            }
 
             attrs.$observe('example', function() {
                 if ($scope.example) {
                     $scope.loadExample($scope.example);
+                } else if (!$scope.loaded) {
+                    $scope.loadBonsai();
                 }
             });
 
             $scope.$watch('cpu', function (newCpu) {
-                var componentCount = 0;
-                angular.forEach(newCpu, function (value, key) {
-                    if (!(key in {'buses': '', 'labels': ''}) && (angular.isArray(value))) {
-                        componentCount += value.length;
-                    }
-                });
-                $scope.componentCount = componentCount;
+                $scope.componentCount = $scope.calculateComponentCount(newCpu);
             });
 
-            $scope.$on('componentInitialized', function () {
+            $scope.$on('componentInitialized', function (event) {
+                event.stopPropagation();
                 $scope.initializedComponentCount++;
                 if ($scope.initializedComponentCount >= $scope.componentCount) {
                     $scope.$broadcast('sendInitialValues', true);
