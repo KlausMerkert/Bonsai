@@ -59,16 +59,16 @@ p {
 .bigbutton {
     background-color: rgb(9, 76, 121);
     color: rgb(255, 255, 255);
-    padding: 3em;
+    padding: 2em;
     cursor: pointer;
-    margin: 1em auto;
+    margin: 0.6em auto;
     text-align: center;
     box-shadow: 0.15em 0.25em 0.5em rgba(0, 0, 0, 0.5);
     -moz-border-radius: 0.25em;
     border-radius: 0.25em;
 }
 
-.bigbutton a {
+a .bigbutton {
     color: rgb(217, 236, 255);
     font-size: 150%;
     font-weight: bold;
