@@ -1,7 +1,9 @@
 'use strict';
 
 bonsaiApp.controller('bonsaiCpuCtrl',
-    function ($scope) {
-
+    function ($scope, $routeParams) {
+        if ('example' in $routeParams) {
+            $scope.example = $routeParams['example'];
+        }
     }
 );

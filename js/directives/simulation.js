@@ -24,13 +24,15 @@ bonsaiApp.directive('simulation', function () {
                 var matcher = new BusMatcher($scope.cpu);
                 matcher.createBuses();
                 matcher.matchAllComponents();
+                $scope.cpu = matcher.getCpu();
+                $scope.componentCount = $scope.calculateComponentCount($scope.cpu);
                 $scope.selectedEditor = undefined;
                 $scope.loaded = true;
             };
 
             $scope.loadExample = function (exampleName) {
                 ExampleStorage.loadExample(exampleName).success(function (data) {
-                    $scope.initializedComponentCount = 0;
+                    $scope.initializedComponents = [];
                     $scope.cpu = angular.fromJson(data);
                     try {
                         var matcher = new BusMatcher($scope.cpu);
@@ -49,7 +51,7 @@ bonsaiApp.directive('simulation', function () {
         }],
         link: function ($scope, element, attrs) {
             $scope.base = 10;
-            $scope.initializedComponentCount = 0;
+            $scope.initializedComponents = [];
             $scope.cpu = {};
 
             attrs.$observe('example', function() {
@@ -64,10 +66,10 @@ bonsaiApp.directive('simulation', function () {
                 $scope.componentCount = $scope.calculateComponentCount(newCpu);
             });
 
-            $scope.$on('componentInitialized', function (event) {
+            $scope.$on('componentInitialized', function (event, modelObject) {
+                $scope.initializedComponents.push(modelObject);
                 event.stopPropagation();
-                $scope.initializedComponentCount++;
-                if ($scope.initializedComponentCount >= $scope.componentCount) {
+                if ($scope.initializedComponents.length >= $scope.componentCount) {
                     $scope.$broadcast('sendInitialValues', true);
                 }
             });
@@ -150,13 +152,14 @@ bonsaiApp.directive('simulation', function () {
                     var reader = new FileReader();
                     reader.addEventListener("loadend", function () {
                         $scope.$apply(function () {
-                            $scope.initializedComponentCount = 0;
+                            $scope.initializedComponents = [];
                             $scope.cpu = angular.fromJson(reader.result);
                             try {
                                 var matcher = new BusMatcher($scope.cpu);
                                 matcher.createBuses();
                                 matcher.matchAllComponents();
                                 $scope.cpu = matcher.getCpu();
+                                $scope.componentCount = $scope.calculateComponentCount($scope.cpu);
                             } catch (exception) {
                                 $scope.clearCpu();
                                 throw exception;
