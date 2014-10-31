@@ -172,10 +172,9 @@ bonsaiApp.directive('memory', function () {
                 }
             });
 
-            $scope.$watch('content', function () {
-                if ($scope.content) {
-                    // We have to convert the multi line string to an associative array.
-                    var lines = $scope.content.replace(/\r\n|\n\r|\n|\r/g,"\n").split("\n");
+            $scope.setContent = function (content) {
+                // We have to convert the multi line string to an associative array.
+                    var lines = content.replace(/\r\n|\n\r|\n|\r/g,"\n").split("\n");
                     var arrayContent = {};
                     for (var i = 0; i < lines.length; i++) {
                         if (lines[i].length) {
@@ -185,6 +184,11 @@ bonsaiApp.directive('memory', function () {
                         }
                     }
                     $scope.memory.setContent(arrayContent)
+            };
+
+            $scope.$watch('content', function () {
+                if ($scope.content) {
+                    $scope.setContent($scope.content);
                 }
             });
 
@@ -409,6 +413,7 @@ bonsaiApp.directive('memory', function () {
                 $scope.memory.setDataBusState($scope.initialDataBusState);
             });
 
+            $scope.setContent($scope.content);
             $scope.$emit('componentInitialized', $scope.memory);
         },
         templateUrl: '/partials/component_Memory.html'
