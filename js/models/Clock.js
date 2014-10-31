@@ -18,10 +18,10 @@ Clock.prototype.setName = function (name) {
 };
 
 Clock.prototype.setFrequency = function (newFrequency) {
-    if (isNaN(parseInt(newFrequency))) {
+    if (isNaN(parseFloat(newFrequency))) {
         newFrequency = 1;
     }
-    this.frequency = Math.abs(parseInt(newFrequency));
+    this.frequency = parseFloat(newFrequency);
     if (!this.frequency) {
         this.frequency = 1;
     }
