@@ -55,21 +55,21 @@ Bus.prototype.getBuses = function () {
 Bus.prototype.setValue = function (value, writerIndex) {
     var parsedValue = parseInt(value);
     if ((isNaN(parsedValue)) && (value !== undefined)) {
-        throw SuppliedValueIsNotANumber(
+        throw SuppliedValueIsNotANumber(this,
             this.name + ": The value you supplied (" + value + ") is not a Number.",
             this.name,
             value
         )
     }
     if ((parsedValue < 0) && (value !== undefined)) {
-        throw SuppliedValueIsNegative(
+        throw SuppliedValueIsNegative(this,
             this.name + ": The value you supplied (" + parsedValue + ") is negative. Only positive values are allowed.",
             this.name,
             parsedValue
         )
     }
     if ((parsedValue > this.getMax()) && (value !== undefined)) {
-        throw SuppliedValueIsTooBig(
+        throw SuppliedValueIsTooBig(this,
             this.name + ": The value you supplied (" + parsedValue + ") is too big. The maximum is " + this.getMax(),
             this.name,
             this.getMax()
@@ -117,7 +117,7 @@ Bus.prototype.registerReaderAndRead = function (reader) {
         }
         return this.value;
     } else {
-        throw NotEnrolledReadException(
+        throw NotEnrolledReadException(this,
             reader.getName() + " is not enrolled to this bus (" + this.name + ") and can not read.",
             reader.getName(),
             this.name
@@ -140,7 +140,7 @@ Bus.prototype.write = function (writer, data) {
     var index = this.connections.indexOf(writer);
     if (index >= 0) {
         if (this.active && this.writerIndex != index) {
-            throw BusOccupiedException(
+            throw BusOccupiedException(this,
                 "This bus (" + this.name + ") is already occupied by " +
                     this.connections[this.writerIndex].getName() + ".",
                 this.name,
@@ -153,7 +153,7 @@ Bus.prototype.write = function (writer, data) {
             this.setValue(data, index);
         }
     } else {
-        throw NotEnrolledWriteException(
+        throw NotEnrolledWriteException(this,
             writer.getName() + " is not enrolled to the bus (" + this.name + ") and can not write.",
             writer.getName(),
             this.name

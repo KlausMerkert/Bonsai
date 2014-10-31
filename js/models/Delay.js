@@ -24,7 +24,7 @@ Delay.prototype.setName = function (name) {
 Delay.prototype.setDelay = function (delay) {
     var parsedDelay = parseInt(delay);
     if ((isNaN(parsedDelay)) || (parsedDelay < 0)) {
-        throw DelayValueNotAnInteger(
+        throw DelayValueNotAnInteger(this,
             delay + " is not an integer. For a delay only a positive number of milliseconds is allowed.",
             delay
         );

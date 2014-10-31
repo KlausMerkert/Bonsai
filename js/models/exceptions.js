@@ -1,5 +1,6 @@
-function BusOccupiedException (message, busName, occupyerName) {
+function BusOccupiedException (thrower, message, busName, occupyerName) {
     var exception = {};
+    exception.thrower = thrower;
     exception.name = 'BusOccupiedException';
     exception.localization = '_' + exception.name + '_';
     exception.message = message;
@@ -8,8 +9,9 @@ function BusOccupiedException (message, busName, occupyerName) {
     return exception;
 }
 
-function NotEnrolledReadException (message, tryerName, busName) {
+function NotEnrolledReadException (thrower, message, tryerName, busName) {
     var exception = {};
+    exception.thrower = thrower;
     exception.name = 'NotEnrolledReadException';
     exception.localization = '_' + exception.name + '_';
     exception.message = message;
@@ -18,8 +20,9 @@ function NotEnrolledReadException (message, tryerName, busName) {
     return exception;
 }
 
-function NotEnrolledWriteException (message, tryerName, busName) {
+function NotEnrolledWriteException (thrower, message, tryerName, busName) {
     var exception = {};
+    exception.thrower = thrower;
     exception.name = 'NotEnrolledWriteException';
     exception.localization = '_' + exception.name + '_';
     exception.message = message;
@@ -28,8 +31,9 @@ function NotEnrolledWriteException (message, tryerName, busName) {
     return exception;
 }
 
-function RegisterIsAlreadyReadingException (message, tryerName) {
+function RegisterIsAlreadyReadingException (thrower, message, tryerName) {
     var exception = {};
+    exception.thrower = thrower;
     exception.name = 'RegisterIsAlreadyReadingException';
     exception.localization = '_' + exception.name + '_';
     exception.message = message;
@@ -38,28 +42,9 @@ function RegisterIsAlreadyReadingException (message, tryerName) {
     return exception;
 }
 
-function ControlWireNoWriterSpecifiedException (message, wireName) {
+function AddressBusConnectionCanNotBeSetToWrite (thrower, message, memoryName, busName) {
     var exception = {};
-    exception.name = 'ControlWireNoWriterSpecifiedException';
-    exception.localization = '_' + exception.name + '_';
-    exception.message = message;
-    exception.actor1 = wireName;
-    exception.actor2 = "";
-    return exception;
-}
-
-function ControlWireWrongWriterException (message, writerName, wireName) {
-    var exception = {};
-    exception.name = 'ControlWireWrongWriterException';
-    exception.localization = '_' + exception.name + '_';
-    exception.message = message;
-    exception.actor1 = writerName;
-    exception.actor2 = wireName;
-    return exception;
-}
-
-function AddressBusConnectionCanNotBeSetToWrite (message, memoryName, busName) {
-    var exception = {};
+    exception.thrower = thrower;
     exception.name = 'AddressBusConnectionCanNotBeSetToWrite';
     exception.localization = '_' + exception.name + '_';
     exception.message = message;
@@ -68,8 +53,9 @@ function AddressBusConnectionCanNotBeSetToWrite (message, memoryName, busName) {
     return exception;
 }
 
-function NoAdressBusConnected (message, memoryName) {
+function NoAdressBusConnected (thrower, message, memoryName) {
     var exception = {};
+    exception.thrower = thrower;
     exception.name = 'NoAdressBusConnected';
     exception.localization = '_' + exception.name + '_';
     exception.message = message;
@@ -78,8 +64,9 @@ function NoAdressBusConnected (message, memoryName) {
     return exception;
 }
 
-function InactiveAdressBusConnection (message, memoryName) {
+function InactiveAdressBusConnection (thrower, message, memoryName) {
     var exception = {};
+    exception.thrower = thrower;
     exception.name = 'InactiveAdressBusConnection';
     exception.localization = '_' + exception.name + '_';
     exception.message = message;
@@ -88,8 +75,9 @@ function InactiveAdressBusConnection (message, memoryName) {
     return exception;
 }
 
-function SuppliedMaxValueIsNotANumber (message, component, value) {
+function SuppliedMaxValueIsNotANumber (thrower, message, component, value) {
     var exception = {};
+    exception.thrower = thrower;
     exception.name = 'SuppliedMaxValueIsNotANumber';
     exception.localization = '_' + exception.name + '_';
     exception.message = message;
@@ -98,8 +86,9 @@ function SuppliedMaxValueIsNotANumber (message, component, value) {
     return exception;
 }
 
-function SuppliedValueIsNotANumber (message, component, value) {
+function SuppliedValueIsNotANumber (thrower, message, component, value) {
     var exception = {};
+    exception.thrower = thrower;
     exception.name = 'SuppliedValueIsNotANumber';
     exception.localization = '_' + exception.name + '_';
     exception.message = message;
@@ -108,8 +97,9 @@ function SuppliedValueIsNotANumber (message, component, value) {
     return exception;
 }
 
-function SuppliedValueIsNegative (message, component, value) {
+function SuppliedValueIsNegative (thrower, message, component, value) {
     var exception = {};
+    exception.thrower = thrower;
     exception.name = 'SuppliedValueIsNegative';
     exception.localization = '_' + exception.name + '_';
     exception.message = message;
@@ -118,8 +108,9 @@ function SuppliedValueIsNegative (message, component, value) {
     return exception;
 }
 
-function SuppliedValueIsTooBig (message, component, value) {
+function SuppliedValueIsTooBig (thrower, message, component, value) {
     var exception = {};
+    exception.thrower = thrower;
     exception.name = 'SuppliedValueIsTooBig';
     exception.localization = '_' + exception.name + '_';
     exception.message = message;
@@ -128,8 +119,9 @@ function SuppliedValueIsTooBig (message, component, value) {
     return exception;
 }
 
-function BusNotFound (message, id) {
+function BusNotFound (thrower, message, id) {
     var exception = {};
+    exception.thrower = thrower;
     exception.name = 'BusNotFound';
     exception.localization = '_' + exception.name + '_';
     exception.message = message;
@@ -138,8 +130,9 @@ function BusNotFound (message, id) {
     return exception;
 }
 
-function WrongValueForSingleBit (message, component, value) {
+function WrongValueForSingleBit (thrower, message, component, value) {
     var exception = {};
+    exception.thrower = thrower;
     exception.name = 'WrongValueForSingleBit';
     exception.localization = '_' + exception.name + '_';
     exception.message = message;
@@ -148,8 +141,9 @@ function WrongValueForSingleBit (message, component, value) {
     return exception;
 }
 
-function DelayValueNotAnInteger (message, value) {
+function DelayValueNotAnInteger (thrower, message, value) {
     var exception = {};
+    exception.thrower = thrower;
     exception.name = 'DelayValueNotAnInteger';
     exception.localization = '_' + exception.name + '_';
     exception.message = message;
@@ -158,8 +152,9 @@ function DelayValueNotAnInteger (message, value) {
     return exception;
 }
 
-function DelayAlreadyOccupied (message, delayName, busName) {
+function DelayAlreadyOccupied (thrower, message, delayName, busName) {
     var exception = {};
+    exception.thrower = thrower;
     exception.name = 'DelayAlreadyOccupied';
     exception.localization = '_' + exception.name + '_';
     exception.message = message;
@@ -168,8 +163,9 @@ function DelayAlreadyOccupied (message, delayName, busName) {
     return exception;
 }
 
-function GateIsAlreadyWriting (message, componentName, busName) {
+function GateIsAlreadyWriting (thrower, message, componentName, busName) {
     var exception = {};
+    exception.thrower = thrower;
     exception.name = 'GateIsAlreadyWriting';
     exception.localization = '_' + exception.name + '_';
     exception.message = message;
@@ -178,8 +174,9 @@ function GateIsAlreadyWriting (message, componentName, busName) {
     return exception;
 }
 
-function GateIsAlreadyReading (message, componentName, busName) {
+function GateIsAlreadyReading (thrower, message, componentName, busName) {
     var exception = {};
+    exception.thrower = thrower;
     exception.name = 'GateIsAlreadyReading';
     exception.localization = '_' + exception.name + '_';
     exception.message = message;
@@ -188,8 +185,9 @@ function GateIsAlreadyReading (message, componentName, busName) {
     return exception;
 }
 
-function RegisterIsReadingAndCantAcceptValueChanges (message, RegisterName) {
+function RegisterIsReadingAndCantAcceptValueChanges (thrower, message, RegisterName) {
     var exception = {};
+    exception.thrower = thrower;
     exception.name = 'RegisterIsReadingAndCantAcceptValueChanges';
     exception.localization = '_' + exception.name + '_';
     exception.message = message;
@@ -198,8 +196,9 @@ function RegisterIsReadingAndCantAcceptValueChanges (message, RegisterName) {
     return exception;
 }
 
-function WriteToUndefinedAddress (message, MemoryName, BusName) {
+function WriteToUndefinedAddress (thrower, message, MemoryName, BusName) {
     var exception = {};
+    exception.thrower = thrower;
     exception.name = 'WriteToUndefinedAddress';
     exception.localization = '_' + exception.name + '_';
     exception.message = message;
@@ -208,8 +207,9 @@ function WriteToUndefinedAddress (message, MemoryName, BusName) {
     return exception;
 }
 
-function ValueIsMaxNoInc (message, componentName, value) {
+function ValueIsMaxNoInc (thrower, message, componentName, value) {
     var exception = {};
+    exception.thrower = thrower;
     exception.name = 'ValueIsMaxNoInc';
     exception.localization = '_' + exception.name + '_';
     exception.message = message;
@@ -218,8 +218,9 @@ function ValueIsMaxNoInc (message, componentName, value) {
     return exception;
 }
 
-function ZeroValueNoDec (message, componentName, value) {
+function ZeroValueNoDec (thrower, message, componentName, value) {
     var exception = {};
+    exception.thrower = thrower;
     exception.name = 'ZeroValueNoDec';
     exception.localization = '_' + exception.name + '_';
     exception.message = message;
@@ -228,8 +229,9 @@ function ZeroValueNoDec (message, componentName, value) {
     return exception;
 }
 
-function ValueNotInRangeZeroToMax (message, componentName, maxValue) {
+function ValueNotInRangeZeroToMax (thrower, message, componentName, maxValue) {
     var exception = {};
+    exception.thrower = thrower;
     exception.name = 'ValueNotInRangeZeroToMax';
     exception.localization = '_' + exception.name + '_';
     exception.message = message;

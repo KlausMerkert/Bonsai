@@ -104,7 +104,7 @@ Memory.prototype.writeData = function (data) {
                 this.updateViewCallback(this.getDataWithContext(address));
                 this.updateContentCallback(this.content);
             } else {
-                throw WriteToUndefinedAddress(
+                throw WriteToUndefinedAddress(this,
                     "Memory " + this.name + ": The address which was read from the bus (" +
                         this.addressBus.bus.getName() + ") is undefined. Nothing can be written to a undefined place.",
                     this.getName(),
@@ -112,7 +112,7 @@ Memory.prototype.writeData = function (data) {
                 )
             }
         } else {
-            throw InactiveAdressBusConnection(
+            throw InactiveAdressBusConnection(this,
                 "Memory " + this.name + ": The address bus connection is not set to reading. " +
                     "This connection needs to be set to reading to get an address from the address bus " +
                     "which specifies where to write or read.",
@@ -120,7 +120,7 @@ Memory.prototype.writeData = function (data) {
             )
         }
     } else {
-        throw NoAdressBusConnected(
+        throw NoAdressBusConnected(this,
             "Memory " + this.name + ": No address bus connected. " +
                 "You have to specify an address which specifies where to write or read the data.",
             this.name
@@ -155,7 +155,7 @@ Memory.prototype.readData = function () {
             var address = this.addressBus.bus.registerReaderAndRead(this);
             return this.content[address];
         } else {
-            throw InactiveAdressBusConnection(
+            throw InactiveAdressBusConnection(this,
                 "Memory " + this.name + ": The address bus connection is not set to reading. " +
                     "This connection needs to be set to reading to get an address from the address bus " +
                     "which specifies where to write or read.",
@@ -163,7 +163,7 @@ Memory.prototype.readData = function () {
             )
         }
     } else {
-        throw NoAdressBusConnected(
+        throw NoAdressBusConnected(this,
             "Memory " + this.name + ": No address bus connected. " +
                 "You have to specify an address which specifies where to write or read the data.",
             this.name
@@ -181,7 +181,7 @@ Memory.prototype.getAddressBusState = function () {
 
 Memory.prototype.setAddressBusState = function (desiredState) {
     if (desiredState == 1) {
-        throw AddressBusConnectionCanNotBeSetToWrite(
+        throw AddressBusConnectionCanNotBeSetToWrite(this,
             "Memory " + this.name + "It does not make sense to write to an address bus (" +
                 this.addressBus.bus.name + ").",
             this.addressBus.bus.name
@@ -227,7 +227,7 @@ Memory.prototype.setDataBusState = function (desiredState) {
             }
             this.updateViewCallback(this.getDataWithContext(address));
         } else {
-            throw InactiveAdressBusConnection(
+            throw InactiveAdressBusConnection(this,
                     "Memory " + this.name + ": The address bus connection is not set to reading. " +
                     "This connection needs to be set to reading to get an address from the address bus " +
                     "which specifies where to write or read.",
@@ -250,7 +250,7 @@ Memory.prototype.setDataBusState = function (desiredState) {
                 throw exception;
             }
         } else {
-            throw InactiveAdressBusConnection(
+            throw InactiveAdressBusConnection(this,
                     "Memory " + this.name + ": The address bus connection is not set to reading. " +
                     "This connection needs to be set to reading to get an address from the address bus " +
                     "which specifies where to write or read.",
@@ -272,7 +272,7 @@ Memory.prototype.setToRead = function (wire) {
         if ((this.dataBus.writeWire) &&
             (this.dataBus.writeWire.isActive()) &&
             (this.dataBus.writeWire.isNotZero())) {
-            throw GateIsAlreadyWriting(
+            throw GateIsAlreadyWriting(this,
                 this.getName() + ": The gate to bus " + this.dataBus.bus.getName() +
                     " is already writing and therefore can not be set to read.",
                 this.getName(),
@@ -289,7 +289,7 @@ Memory.prototype.setToWrite = function (wire) {
         if ((this.dataBus.readWire) &&
             (this.dataBus.readWire.isActive()) &&
             (this.dataBus.readWire.isNotZero())) {
-            throw GateIsAlreadyReading(
+            throw GateIsAlreadyReading(this,
                 this.getName() + ": The gate to bus " + this.dataBus.bus.getName() +
                     " is already reading and therefore can not be set to write.",
                 this.getName(),

@@ -176,7 +176,7 @@ BitRegister.prototype.setWideBusState = function (desiredState) {
         }
     } else if ((desiredState == -1) && (this.wideBusConnection.state >= 0)) {
         if (this.bitWiresConnection.state == -1) {
-            throw RegisterIsAlreadyReadingException(
+            throw RegisterIsAlreadyReadingException(this,
                 "BitRegister " + this.name + " is already reading.",
                 this.name
             )
@@ -238,7 +238,7 @@ BitRegister.prototype.setBitConnectionState = function (desiredState) {
         }
     } else if (desiredState == -1) {
         if (this.wideBusConnection.state == -1) {
-            throw RegisterIsAlreadyReadingException(
+            throw RegisterIsAlreadyReadingException(this,
                 "BitRegister " + this.name + " is already reading.",
                 this.name
             )
@@ -295,7 +295,7 @@ BitRegister.prototype.setBitGateToRead = function () {
         for (var i = 0; i < this.bitWiresConnection.wires.length; i++) {
             bitWireNames.push(this.bitWiresConnection.wires[i].wire.getName());
         }
-        throw GateIsAlreadyWriting(
+        throw GateIsAlreadyWriting(this,
             this.getName() + ": The gate to the attached Bit Wires (" + bitWireNames.join(', ') +
                 ") is already writing and therefore can not be set to read.",
             this.getName(),
@@ -314,7 +314,7 @@ BitRegister.prototype.setBitGateToWrite = function () {
         for (var i = 0; i < this.bitWiresConnection.wires.length; i++) {
             bitWireNames.push(this.bitWiresConnection.wires[i].wire.getName());
         }
-        throw GateIsAlreadyReading(
+        throw GateIsAlreadyReading(this,
             this.getName() + ": The gate to the attached Bit Wires (" + bitWireNames.join(', ') +
                 ") is already reading and therefore can not be set to write.",
             this.getName(),
@@ -333,7 +333,7 @@ BitRegister.prototype.setWideBusGateToRead = function () {
     if ((this.wideBusConnection.writeWire) &&
         (this.wideBusConnection.writeWire.isActive()) &&
         (this.wideBusConnection.writeWire.isNotZero())) {
-        throw GateIsAlreadyWriting(
+        throw GateIsAlreadyWriting(this,
             this.getName() + ": The gate to bus " + this.wideBusConnection.bus.getName() +
                 " is already writing and therefore can not be set to read.",
             this.getName(),
@@ -348,7 +348,7 @@ BitRegister.prototype.setWideBusGateToWrite = function () {
     if ((this.wideBusConnection.readWire) &&
         (this.wideBusConnection.readWire.isActive()) &&
         (this.wideBusConnection.readWire.isNotZero())) {
-        throw GateIsAlreadyReading(
+        throw GateIsAlreadyReading(this,
             this.getName() + ": The gate to bus " + this.wideBusConnection.bus.getName() +
                 " is already reading and therefore can not be set to write.",
             this.getName(),

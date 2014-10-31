@@ -180,7 +180,22 @@ bonsaiApp.directive('simulation', function () {
 
             $scope.errors = [];
             $scope.$on('error', function (event, message) {
-                $scope.errors.push(message)
+                var oneOfMyComponents = false;
+                for (var i = 0; i < $scope.initializedComponents.length; i++) {
+                    if (message.thrower == $scope.initializedComponents[i]) {
+                        oneOfMyComponents = true;
+                    }
+                }
+                if ($scope.cpu['buses']) {
+                    for (i = 0; i < $scope.cpu['buses'].length; i++) {
+                        if (message.thrower == $scope.cpu['buses'][i].object) {
+                            oneOfMyComponents = true;
+                        }
+                    }
+                }
+                if (oneOfMyComponents) {
+                    $scope.errors.push(message);
+                }
             });
         },
         templateUrl: '/partials/simulation.html'

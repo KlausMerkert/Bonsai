@@ -54,7 +54,7 @@ Register.prototype.getBuses = function () {
 
 Register.prototype.setValue = function (value) {
     if ((value < 0) || ((typeof this.maxValue != 'undefined') && (value > this.maxValue))) {
-        throw ValueNotInRangeZeroToMax(
+        throw ValueNotInRangeZeroToMax(this,
             this.getName() + ": The value you try to set is not in the Range 0 to " + this.maxValue + ".",
             this.getName(),
             this.maxValue
@@ -76,7 +76,7 @@ Register.prototype.getValue = function () {
 
 Register.prototype.inc = function () {
     if (this.isReader()) {
-        throw RegisterIsReadingAndCantAcceptValueChanges(
+        throw RegisterIsReadingAndCantAcceptValueChanges(this,
             "Register " + this.getName() + " is Reading from a Bus and can not accept value Changes.",
             this.getName()
         );
@@ -84,7 +84,7 @@ Register.prototype.inc = function () {
     if ((typeof this.maxValue == 'undefined') || (this.getValue() < this.maxValue)) {
         this.setValue((parseInt(this.getValue()) + 1));
     } else {
-        throw ValueIsMaxNoInc(
+        throw ValueIsMaxNoInc(this,
             this.getName() + ": The value is " + this.getValue() +
                 " which is already the maximum value. Therefore increasing the value is not allowed.",
             this.getName(),
@@ -95,7 +95,7 @@ Register.prototype.inc = function () {
 
 Register.prototype.dec = function () {
     if (this.isReader()) {
-        throw RegisterIsReadingAndCantAcceptValueChanges(
+        throw RegisterIsReadingAndCantAcceptValueChanges(this,
             "Register " + this.getName() + " is Reading from a Bus and can not accept value Changes.",
             this.getName()
         );
@@ -103,7 +103,7 @@ Register.prototype.dec = function () {
     if (this.getValue() > 0) {
         this.setValue((parseInt(this.getValue()) - 1));
     } else {
-        throw ZeroValueNoDec(
+        throw ZeroValueNoDec(this,
             this.getName() + ": The value is " + this.getValue() +
                 " and must not be negative. So decreasing this value is not allowed.",
             this.getName(),
@@ -114,7 +114,7 @@ Register.prototype.dec = function () {
 
 Register.prototype.clr = function () {
     if (this.isReader()) {
-        throw RegisterIsReadingAndCantAcceptValueChanges(
+        throw RegisterIsReadingAndCantAcceptValueChanges(this,
             "Register " + this.getName() + " is Reading from a Bus and can not accept value Changes.",
             this.getName()
         );
@@ -143,7 +143,7 @@ Register.prototype.setState = function (busConnection, desiredState) {
         }
     } else if (desiredState == -1) {
         if ((this.isReader()) && ((this.getReaders().length > 1) || (this.getReaders()[0] != busConnection.bus))) {
-            throw RegisterIsAlreadyReadingException(
+            throw RegisterIsAlreadyReadingException(this,
                 "Register " + this.name + " is already reading.",
                 this.name
             )
@@ -177,7 +177,7 @@ Register.prototype.setToRead = function (bus) {
             if ((this.buses[i].writeWire) &&
                 (this.buses[i].writeWire.isActive()) &&
                 (this.buses[i].writeWire.isNotZero())) {
-                throw GateIsAlreadyWriting(
+                throw GateIsAlreadyWriting(this,
                     this.getName() + ": The gate to bus " + this.buses[i].bus.getName() +
                         " is already writing and therefore can not be set to read.",
                     this.getName(),
@@ -196,7 +196,7 @@ Register.prototype.setToWrite = function (bus) {
             if ((this.buses[i].readWire) &&
                 (this.buses[i].readWire.isActive()) &&
                 (this.buses[i].readWire.isNotZero())) {
-                throw GateIsAlreadyReading(
+                throw GateIsAlreadyReading(this,
                     this.getName() + ": The gate to bus " + this.buses[i].bus.getName() +
                         " is already reading and therefore can not be set to write.",
                     this.getName(),
