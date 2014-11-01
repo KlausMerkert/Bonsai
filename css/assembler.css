@@ -1,0 +1,37 @@
+.assembler-pane {
+    max-width: 500px;
+    float: left;
+    background-color: rgb(240, 240, 240);
+    padding: 5px;
+    margin: 10px;
+}
+
+.assembler-pane h3 {
+    font-family: 'Open Sans Condensed', 'Verdana', 'Arial', 'Helvetica', sans-serif;
+    margin: 0;
+    padding: 0;
+    font-size: 20px;
+    font-weight: 300;
+}
+
+.assembler-pane .editor {
+    border: 1px solid rgb(170, 170, 170);
+    background-color: rgb(204, 204, 204);
+    font-family: monospace, sans-serif;
+    padding: 2px;
+}
+
+.editor .instruction {
+    color: rgb(154, 52, 84);
+    font-weight: bold;
+}
+
+.editor .codecompletion {
+    color: rgba(57, 57, 57, 0.3);
+    font-weight: bold;
+}
+
+.editor .address {
+    color: rgb(0, 0, 0);
+    font-weight: normal;
+}

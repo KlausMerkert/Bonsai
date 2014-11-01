@@ -85,6 +85,21 @@
         "description": ""
     },
     {
+        "key"        : "_assemblerHeading_",
+        "value"      : "Assembler",
+        "description": ""
+    },
+    {
+        "key"        : "_program_",
+        "value"      : "Programm:",
+        "description": ""
+    },
+    {
+        "key"        : "_data_",
+        "value"      : "Daten:",
+        "description": ""
+    },
+    {
         "key"        : "_CpuView_",
         "value"      : "Schaltung",
         "description": ""

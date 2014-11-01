@@ -1,3 +1,16 @@
-<div>
-    Assembler
+<div style="padding: 5px;">
+    <h2 data-i18n="_assemblerHeading_"></h2>
+    <div class="assembler-pane">
+        <h3 data-i18n="_program_"></h3>
+        <div class="editor">
+            <div ng-repeat="line in program">
+                <span contenteditable="true" class="instruction">{{ line.instruction }}</span>
+                <span class="instruction-codecompletion">{{ line.codecompletion }}</span>
+                <span contenteditable="true" class="address">{{ line.address }}</span>
+            </div>
+        </div>
+    </div>
+    <div class="assembler-pane">
+        <h3 data-i18n="_data_"></h3>
+    </div>
 </div>
