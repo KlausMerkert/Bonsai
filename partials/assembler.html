@@ -2,15 +2,22 @@
     <h2 data-i18n="_assemblerHeading_"></h2>
     <div class="assembler-pane">
         <h3 data-i18n="_program_"></h3>
-        <div class="editor">
+        <div class="editor" contenteditable="true" ng-keypress="editProgram($event)">
             <div ng-repeat="line in program">
-                <span contenteditable="true" class="instruction">{{ line.instruction }}</span>
-                <span class="instruction-codecompletion">{{ line.codecompletion }}</span>
-                <span contenteditable="true" class="address">{{ line.address }}</span>
+                <span class="instruction">{{ line.instruction }}</span><span
+                    class="instruction-codecompletion">{{ line.codecompletion }}</span> <span
+                    class="address">{{ line.address }}</span>
             </div>
         </div>
     </div>
     <div class="assembler-pane">
         <h3 data-i18n="_data_"></h3>
+        <div>
+            <div style="width: 0; height: 0; overflow: visible;">
+                <div class="editor" style="font-weight: bold; color: red; white-space: pre-wrap; word-wrap: break-word; width: 390px; max-width: 390px; min-height: 250px;">{{ data }}</div>
+            </div>
+            <textarea ng-model="data" class="editor"
+                      style="background-color: rgba(0, 0, 0, 0); color: rgba(0, 0, 0, 0.5); width: 390px; max-width: 390px; min-height: 250px; white-space: pre-wrap; word-wrap: break-word;"></textarea>
+        </div>
     </div>
 </div>

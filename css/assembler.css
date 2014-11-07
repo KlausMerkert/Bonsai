@@ -18,7 +18,10 @@
     border: 1px solid rgb(170, 170, 170);
     background-color: rgb(204, 204, 204);
     font-family: monospace, sans-serif;
+    font-size: 12px;
+    line-height: 16px;
     padding: 2px;
+    margin: 0;
 }
 
 .editor .instruction {
@@ -26,7 +29,7 @@
     font-weight: bold;
 }
 
-.editor .codecompletion {
+.editor .instruction-codecompletion {
     color: rgba(57, 57, 57, 0.3);
     font-weight: bold;
 }
