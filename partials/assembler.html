@@ -1,30 +1,33 @@
 <div style="padding: 5px;">
     <h2 data-i18n="_assemblerHeading_"></h2>
     <div class="assembler-pane">
-        <h3 data-i18n="_program_"></h3>
+        <h3><label for="program" data-i18n="_program_"></label></h3>
         <div>
             <div style="width: 0; height: 0; overflow: visible;">
-                <div class="editor" style="word-wrap: break-word; width: 390px; max-width: 390px; min-height: 250px;">
+                <div class="editor" id="formattedProgram"
+                     style="word-wrap: break-word; width: 390px; max-width: 390px; min-height: 250px;">
                     <div ng-repeat="line in formattedProgram" style="width: 100%;"
                          ng-style="{'background-color': line.correct ? '' : 'rgba(255, 0, 0, 0.2)' }">
-                        <span style="font-weight: bold; color: red;">{{ line.command }}</span><span
+                        <span style="font-weight: bold; color: rgb(168, 0, 56);">{{ line.command }}</span><span
                             style="font-weight: bold; color: rgba(128, 128, 128, 0.5);">{{ line.completion }}</span>
                         <span>{{ line.address }}</span>
                         <span ng-hide="line.address">&nbsp;</span>
                     </div>
+                    <div>&nbsp;</div>
                 </div>
             </div>
-            <textarea ng-model="program" class="editor"
-                      style="background-color: rgba(0, 0, 0, 0); color: rgba(0, 0, 0, 0.5); width: 390px; max-width: 390px; min-height: 250px; white-space: pre-wrap; word-wrap: break-word;"></textarea>
+            <textarea ng-model="program" class="editor" ng-trim="false"
+                      ng-style="{'height': programHeight}" id="program"
+                      style="background-color: rgba(0, 0, 0, 0); color: rgba(0, 0, 0, 0.5); width: 390px; max-width: 390px; min-height: 250px; white-space: pre-wrap; word-wrap: break-word; resize: none; overflow: hidden;"></textarea>
         </div>
     </div>
     <div class="assembler-pane">
-        <h3 data-i18n="_data_"></h3>
+        <h3><label for="data" data-i18n="_data_"></label></h3>
         <div>
             <div style="width: 0; height: 0; overflow: visible;">
-                <div class="editor" style="font-weight: bold; color: blue; white-space: pre-wrap; word-wrap: break-word; width: 390px; max-width: 390px; min-height: 250px;">{{ data }}</div>
+                <div class="editor" style="font-weight: bold; color: rgb(9, 76, 121); white-space: pre-wrap; word-wrap: break-word; width: 390px; max-width: 390px; min-height: 250px;">{{ data }}</div>
             </div>
-            <textarea ng-model="data" class="editor"
+            <textarea ng-model="data" class="editor" id="data"
                       style="background-color: rgba(0, 0, 0, 0); color: rgba(0, 0, 0, 0.5); width: 390px; max-width: 390px; min-height: 250px; white-space: pre-wrap; word-wrap: break-word;"></textarea>
         </div>
     </div>

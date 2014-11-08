@@ -1,7 +1,7 @@
 'use strict';
 
 bonsaiApp.controller('bonsaiAssemblerCtrl',
-    function ($scope) {
+    function ($scope, $timeout) {
         $scope.splitLines = function (string) {
             return string.replace(/\r\n|\n\r|\n|\r/g, "\n").split("\n")
         };
@@ -104,16 +104,22 @@ bonsaiApp.controller('bonsaiAssemblerCtrl',
                                         }
                                     }
                                 }
-                                $scope.formattedProgram.push({
-                                    command: '',
-                                    completion: '',
-                                    address: ''
-                                })
                             }
+                            $scope.formattedProgram.push({
+                                command: '',
+                                completion: '',
+                                address: ''
+                            });
                         }
                     }
                 }
             });
+        });
+
+        $scope.$watch('formattedProgram', function () {
+            $timeout(function () {
+                $scope.programHeight = document.getElementById('formattedProgram').clientHeight - 4 + 'px';
+            }, 0);
         });
 
         $scope.$watch('data', function (newText, oldText) {
