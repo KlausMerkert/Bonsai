@@ -1,7 +1,7 @@
 'use strict';
 
 bonsaiApp.controller('bonsaiAssemblerCtrl',
-    function ($scope, $timeout) {
+    function ($scope) {
         $scope.splitLines = function (string) {
             return string.replace(/\r\n|\n\r|\n|\r/g, "\n").split("\n")
         };
