@@ -11,10 +11,10 @@
                         <span style="font-weight: bold; color: rgb(168, 0, 56);">{{ line.command }}</span><span
                             style="font-weight: bold; color: rgba(128, 128, 128, 0.5);">{{ line.completion }}</span>
                         <span>{{ line.address }}</span>
-                        <span ng-hide="line.address">&nbsp;</span>
-                        <span ng-show="$index == nextExecutionPosition">
-                            <<<<<
-                        </span>
+                        <span ng-hide="isNumber(line.address)">&nbsp;</span>
+                        <img ng-show="$index == nextExecutionPosition"
+                             style="height: 12px;"
+                             src="/images/currentLine.svg" />
                     </div>
                     <div>&nbsp;</div>
                 </div>

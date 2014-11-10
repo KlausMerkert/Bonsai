@@ -6,6 +6,10 @@ bonsaiApp.controller('bonsaiAssemblerCtrl',
             return string.replace(/\r\n|\n\r|\n|\r/g, "\n").split("\n")
         };
 
+        $scope.isNumber = function (data) {
+            return angular.isNumber(parseInt(data));
+        };
+
         $scope.program = "tst 1\njmp 5\ndec 1\ninc 0\njmp 0\njmp 5";
         $scope.data = "3\n5";
 
