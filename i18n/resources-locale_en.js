@@ -100,6 +100,11 @@
         "description": ""
     },
     {
+        "key"        : "_executeProgram_",
+        "value"      : "Execute:",
+        "description": ""
+    },
+    {
         "key"        : "_CpuView_",
         "value"      : "Circuit",
         "description": ""

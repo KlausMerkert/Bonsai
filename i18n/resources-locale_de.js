@@ -100,6 +100,11 @@
         "description": ""
     },
     {
+        "key"        : "_executeProgram_",
+        "value"      : "Ausführen:",
+        "description": ""
+    },
+    {
         "key"        : "_CpuView_",
         "value"      : "Schaltung",
         "description": ""
