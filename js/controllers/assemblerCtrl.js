@@ -157,6 +157,7 @@ bonsaiApp.controller('bonsaiAssemblerCtrl',
 
         $scope.startAutomaticExecution = function () {
             $scope.executionRunning = true;
+            $scope.automaticStep();
         };
 
         $scope.pauseAutomaticExecution = function () {
@@ -237,6 +238,13 @@ bonsaiApp.controller('bonsaiAssemblerCtrl',
                         $scope.nextExecutionPosition += 2;
                     }
                 }
+            }
+        };
+
+        $scope.automaticStep = function () {
+            if ($scope.executionRunning) {
+                $scope.step();
+                $timeout($scope.automaticStep, 0);
             }
         };
 
