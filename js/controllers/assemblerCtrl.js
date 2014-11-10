@@ -240,10 +240,6 @@ bonsaiApp.controller('bonsaiAssemblerCtrl',
             }
         };
 
-        $scope.inExecution = function () {
-            return angular.isNumber($scope.executionPosition);
-        };
-
         $scope.errors = [];
     }
 );
