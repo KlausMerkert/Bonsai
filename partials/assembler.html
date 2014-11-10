@@ -12,6 +12,7 @@
                             style="font-weight: bold; color: rgba(128, 128, 128, 0.5);">{{ line.completion }}</span>
                         <span>{{ line.address }}</span>
                         <span ng-hide="line.address">&nbsp;</span>
+                        <span ng-show="$index == executionPosition"><<<<<</span>
                     </div>
                     <div>&nbsp;</div>
                 </div>

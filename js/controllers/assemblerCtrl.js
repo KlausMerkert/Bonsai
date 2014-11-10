@@ -136,10 +136,18 @@ bonsaiApp.controller('bonsaiAssemblerCtrl',
 
         $scope.stopAndReset = function () {
             $scope.executionRunning = false;
+            $scope.executionPosition = undefined;
         };
 
         $scope.step = function () {
-
+            if (angular.isNumber($scope.executionPosition)) {
+                $scope.executionPosition++;
+            } else {
+                $scope.executionPosition = 0;
+            }
+            if ($scope.executionPosition >= $scope.formattedProgram.length) {
+                $scope.stopAndReset();
+            }
         };
     }
 );
