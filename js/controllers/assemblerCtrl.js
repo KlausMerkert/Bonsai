@@ -125,5 +125,21 @@ bonsaiApp.controller('bonsaiAssemblerCtrl',
         $scope.$watch('data', function (newText, oldText) {
 
         });
+
+        $scope.startAutomaticExecution = function () {
+            $scope.executionRunning = true;
+        };
+
+        $scope.pauseAutomaticExecution = function () {
+            $scope.executionRunning = false;
+        };
+
+        $scope.stopAndReset = function () {
+            $scope.executionRunning = false;
+        };
+
+        $scope.step = function () {
+
+        };
     }
 );
