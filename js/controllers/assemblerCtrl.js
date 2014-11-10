@@ -6,8 +6,8 @@ bonsaiApp.controller('bonsaiAssemblerCtrl',
             return string.replace(/\r\n|\n\r|\n|\r/g, "\n").split("\n")
         };
 
-        $scope.program = "inc 14\ndec 12";
-        $scope.data = "Hallo\nWelt!";
+        $scope.program = "tst 1\njmp 5\ndec 1\ninc 0\njmp 0\njmp 5";
+        $scope.data = "3\n5";
 
         $scope.$watch('program', function (newText, oldText) {
             var lines = $scope.splitLines(newText);
@@ -122,9 +122,38 @@ bonsaiApp.controller('bonsaiAssemblerCtrl',
             }, 0);
         });
 
-        $scope.$watch('data', function (newText, oldText) {
-
+        $scope.$watch('data', function (newText) {
+            var number, line, newlinePosition;
+            var dataArray = [];
+            while (newText.indexOf("\n") >= 0) {
+                newlinePosition = newText.indexOf("\n");
+                line = newText.slice(0, newlinePosition);
+                newText = newText.slice(newlinePosition + 1);
+                number = parseInt(line);
+                if (isNaN(number)) {
+                    number = 0;
+                }
+                dataArray.push(number);
+            }
+            number = parseInt(newText);
+            if (isNaN(number)) {
+                number = 0;
+            }
+            dataArray.push(number);
+            $scope.data = $scope.convertListedData(dataArray);
+            $scope.listedData = dataArray;
         });
+
+        $scope.convertListedData = function (data) {
+            var string = '';
+            for (var i = 0; i < data.length; i++) {
+                string = string + data[i];
+                if (i < data.length - 1) {
+                    string = string + "\n";
+                }
+            }
+            return string;
+        };
 
         $scope.startAutomaticExecution = function () {
             $scope.executionRunning = true;
@@ -137,17 +166,84 @@ bonsaiApp.controller('bonsaiAssemblerCtrl',
         $scope.stopAndReset = function () {
             $scope.executionRunning = false;
             $scope.executionPosition = undefined;
+            $scope.nextExecutionPosition = undefined;
         };
 
         $scope.step = function () {
             if (angular.isNumber($scope.executionPosition)) {
-                $scope.executionPosition++;
+                $scope.executionPosition = $scope.nextExecutionPosition;
             } else {
-                $scope.executionPosition = 0;
+                $scope.executionPosition = -1;
+                $scope.nextExecutionPosition = 0;
             }
             if ($scope.executionPosition >= $scope.formattedProgram.length) {
                 $scope.stopAndReset();
+                return null;
+            }
+            if ($scope.executionPosition < 0) {
+                return null;
+            }
+            var command = $scope.formattedProgram[$scope.executionPosition];
+            if (command.correct) {
+                if (command.command == 'inc') {
+                    if (command.address >= $scope.listedData.length) {
+                        $scope.errors.push({
+                            lineNo: $scope.executionPosition,
+                            message: '_addressNotInDataError_'
+                        });
+                        return null;
+                    }
+                    $scope.listedData[parseInt(command.address)]++;
+                    $scope.data = $scope.convertListedData($scope.listedData);
+                    $scope.nextExecutionPosition++;
+                } else if (command.command == 'dec') {
+                    if (command.address >= $scope.listedData.length) {
+                        $scope.errors.push({
+                            lineNo: $scope.executionPosition,
+                            message: '_addressNotInDataError_'
+                        });
+                        return null;
+                    }
+                    $scope.listedData[parseInt(command.address)]--;
+                    $scope.data = $scope.convertListedData($scope.listedData);
+                    $scope.nextExecutionPosition++;
+                } else if (command.command == 'jmp') {
+                    if (0 < command.address >= $scope.formattedProgram.length) {
+                        $scope.errors.push({
+                            lineNo: $scope.executionPosition,
+                            message: '_addressNotInProgramError_'
+                        });
+                        return null;
+                    }
+                    $scope.nextExecutionPosition = parseInt(command.address);
+                } else if (command.command == 'tst') {
+                    if ($scope.listedData[parseInt(command.address)] == 0) {
+                        if ($scope.nextExecutionPosition + 1 >= $scope.formattedProgram.length) {
+                            $scope.errors.push({
+                                lineNo: $scope.executionPosition,
+                                message: '_addressNotInProgramError_'
+                            });
+                            return null;
+                        }
+                        $scope.nextExecutionPosition++;
+                    } else {
+                        if ($scope.nextExecutionPosition + 2 >= $scope.formattedProgram.length) {
+                            $scope.errors.push({
+                                lineNo: $scope.executionPosition,
+                                message: '_addressNotInProgramError_'
+                            });
+                            return null;
+                        }
+                        $scope.nextExecutionPosition += 2;
+                    }
+                }
             }
         };
+
+        $scope.inExecution = function () {
+            return angular.isNumber($scope.executionPosition);
+        };
+
+        $scope.errors = [];
     }
 );

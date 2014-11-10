@@ -105,6 +105,21 @@
         "description": ""
     },
     {
+        "key"        : "_errorInLine_",
+        "value"      : "Fehler in Zeile",
+        "description": ""
+    },
+    {
+        "key"        : "_addressNotInDataError_",
+        "value"      : "Diese Adresse ist nicht im Datenspeicher. Du musst den Datenspeicher mit einer Zahl initialisieren, bevor du ihn benutzen kannst.",
+        "description": ""
+    },
+    {
+        "key"        : "_addressNotInProgramError_",
+        "value"      : "Das Sprungziel ist nicht im Programm.",
+        "description": ""
+    },
+    {
         "key"        : "_CpuView_",
         "value"      : "Schaltung",
         "description": ""

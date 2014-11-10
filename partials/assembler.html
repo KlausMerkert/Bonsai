@@ -12,7 +12,9 @@
                             style="font-weight: bold; color: rgba(128, 128, 128, 0.5);">{{ line.completion }}</span>
                         <span>{{ line.address }}</span>
                         <span ng-hide="line.address">&nbsp;</span>
-                        <span ng-show="$index == executionPosition"><<<<<</span>
+                        <span ng-show="$index == nextExecutionPosition">
+                            <<<<<
+                        </span>
                     </div>
                     <div>&nbsp;</div>
                 </div>
@@ -59,5 +61,18 @@
                 ◼
             </span>
         </button>
+    </div>
+    <div style="clear: both;"></div>
+    <div class="assembler-pane" ng-show="errors.length > 0">
+        <h3 style="float: left;" data-i18n="_errors_"></h3>
+        <a style="float: right; font-size: 50%; cursor: pointer" ng-click="errors = []" data-i18n="_clearErrors_"></a>
+        <div style="clear: both;"></div>
+        <ul style="padding: 0; margin: 0; font-size: 80%;">
+            <li ng-repeat="error in errors" style="list-style-type: none; margin: 0;">
+                <span data-i18n="_errorInLine_"></span>
+                {{ error.lineNo }}:
+                <span style="color: rgb(110, 16, 46); font-weight: bold;" data-i18n="{{ error.message }}"></span>
+            </li>
+        </ul>
     </div>
 </div>

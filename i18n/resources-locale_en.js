@@ -105,6 +105,21 @@
         "description": ""
     },
     {
+        "key"        : "_errorInLine_",
+        "value"      : "Error in line",
+        "description": ""
+    },
+    {
+        "key"        : "_addressNotInDataError_",
+        "value"      : "This address is not in the data. You have to initialize the data storage with something.",
+        "description": ""
+    },
+    {
+        "key"        : "_addressNotInProgramError_",
+        "value"      : "This address is not in the program.",
+        "description": ""
+    },
+    {
         "key"        : "_CpuView_",
         "value"      : "Circuit",
         "description": ""
