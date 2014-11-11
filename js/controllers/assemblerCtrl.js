@@ -7,7 +7,19 @@ bonsaiApp.controller('bonsaiAssemblerCtrl',
         };
 
         $scope.isNumber = function (data) {
+            if (isNaN(parseInt(data))) {
+                return false;
+            }
             return angular.isNumber(parseInt(data));
+        };
+
+        $scope.getLineNumbers = function (dataString) {
+            var lines = $scope.splitLines(dataString);
+            var lineNumbers = [];
+            for (var i = 0; i < lines.length; i++) {
+                lineNumbers.push(i);
+            }
+            return lineNumbers;
         };
 
         $scope.program = "tst 1\njmp 5\ndec 1\ninc 0\njmp 0\njmp 5";

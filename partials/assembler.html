@@ -2,7 +2,13 @@
     <h2 data-i18n="_assemblerHeading_"></h2>
     <div class="assembler-pane">
         <h3><label for="program" data-i18n="_program_"></label></h3>
-        <div>
+        <div style="float: left; padding: 3px 2px 0 0;">
+            <div ng-repeat="line in formattedProgram"
+                 style="font-family: monospace, sans-serif; font-size: 12px; line-height: 16px; color: rgb(106, 106, 106); text-align: right;">
+                {{ $index }}
+            </div>
+        </div>
+        <div style="float: left;">
             <div style="width: 0; height: 0; overflow: visible;">
                 <div class="editor" id="formattedProgram"
                      style="word-wrap: break-word; width: 390px; max-width: 390px; min-height: 250px;">
@@ -26,7 +32,13 @@
     </div>
     <div class="assembler-pane">
         <h3><label for="data" data-i18n="_data_"></label></h3>
-        <div>
+        <div style="float: left; padding: 3px 2px 0 0;">
+            <div ng-repeat="lineNo in getLineNumbers(data)"
+                 style="font-family: monospace, sans-serif; font-size: 12px; line-height: 16px; color: rgb(106, 106, 106); text-align: right;">
+                {{ $index }}
+            </div>
+        </div>
+        <div style="float: left;">
             <div style="width: 0; height: 0; overflow: visible;">
                 <div class="editor" style="font-weight: bold; color: rgb(9, 76, 121); white-space: pre-wrap; word-wrap: break-word; width: 390px; max-width: 390px; min-height: 250px;">{{ data }}</div>
             </div>
