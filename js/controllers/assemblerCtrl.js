@@ -30,7 +30,7 @@ bonsaiApp.controller('bonsaiAssemblerCtrl',
             $scope.formattedProgram = [];
             angular.forEach(lines, function (line, index) {
                 var matches = line.match(/^(inc|dec|tst|jmp)[ \t](\d+)$/);
-                if (matches) { // complete and correct line
+                if (matches) { // complete and correct line for commands with addresses
                     $scope.formattedProgram.push({
                         command: matches[1],
                         completion: '',
@@ -39,8 +39,8 @@ bonsaiApp.controller('bonsaiAssemblerCtrl',
                     });
                     return null;
                 }
-                matches = line.match(/^(hlt)$/);
-                if (matches) {
+                matches = line.match(/^(hlt)[ \t]*$/);
+                if (matches) { // complete and correct line for hlt command
                     $scope.formattedProgram.push({
                         command: matches[1],
                         completion: '',
@@ -58,8 +58,8 @@ bonsaiApp.controller('bonsaiAssemblerCtrl',
                     });
                     return null;
                 }
-                matches = line.match(/^(in?|de?|ts?|jm?)$/);
-                if (matches) { // incomplete line without completion
+                matches = line.match(/^(in?|de?|ts?|jm?|hl?)$/);
+                if (matches) { // incomplete line with completion
                     var completion = '';
                     if (matches[1] == 'in') {
                         completion = 'c'
@@ -85,6 +85,12 @@ bonsaiApp.controller('bonsaiAssemblerCtrl',
                     if (matches[1] == 'j') {
                         completion = 'mp'
                     }
+                    if (matches[1] == 'hl') {
+                        completion = 't'
+                    }
+                    if (matches[1] == 'h') {
+                        completion = 'lt'
+                    }
                     $scope.formattedProgram.push({
                         command: matches[1],
                         completion: completion,
@@ -93,9 +99,9 @@ bonsaiApp.controller('bonsaiAssemblerCtrl',
                     return null;
                 }
                 if ((oldText) && ($scope.splitLines(oldText)[index])) {
-                    matches = $scope.splitLines(oldText)[index].match(/^(in?|de?|ts?|jm?)$/);
+                    matches = $scope.splitLines(oldText)[index].match(/^(in?|de?|ts?|jm?|hl?)$/);
                     if (matches) {
-                        var numberMatches = line.match(/^(in?|de?|ts?|jm?)([ \t]+)?(\d+)?$/);
+                        var numberMatches = line.match(/^(in?|de?|ts?|jm?|hl?)([ \t]+)?(\d+)?$/);
                         if (numberMatches) {
                             var insertCommand = function (lineNumber, command, address) {
                                 var countedLines = 0;
@@ -130,6 +136,9 @@ bonsaiApp.controller('bonsaiAssemblerCtrl',
                             }
                             if (numberMatches[1][0] == 'j') {
                                 insertCommand(index, 'jmp', address);
+                            }
+                            if (numberMatches[1][0] == 'h') {
+                                insertCommand(index, 'hlt', '');
                             }
                         }
                     }
