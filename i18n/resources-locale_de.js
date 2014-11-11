@@ -110,6 +110,11 @@
         "description": ""
     },
     {
+        "key"        : "_programCounter_",
+        "value"      : "Programmzähler:",
+        "description": ""
+    },
+    {
         "key"        : "_addressNotInDataError_",
         "value"      : "Diese Adresse ist nicht im Datenspeicher. Du musst den Datenspeicher mit einer Zahl initialisieren, bevor du ihn benutzen kannst.",
         "description": ""

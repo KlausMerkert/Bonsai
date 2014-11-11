@@ -190,6 +190,13 @@ bonsaiApp.controller('bonsaiAssemblerCtrl',
             $scope.listedData = dataArray;
         });
 
+        $scope.$watch('nextExecutionPosition', function (newValue) {
+            if (!(angular.isNumber(newValue) || typeof newValue == 'undefined')) {
+                $scope.executionPosition = undefined;
+                $scope.nextExecutionPosition = undefined;
+            }
+        });
+
         $scope.convertListedData = function (data) {
             var string = '';
             for (var i = 0; i < data.length; i++) {
