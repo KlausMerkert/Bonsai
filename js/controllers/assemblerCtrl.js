@@ -39,7 +39,7 @@ bonsaiApp.controller('bonsaiAssemblerCtrl',
                     });
                     return null;
                 }
-                matches = line.match(/^(hlt)[ \t]*(;.*)?$/);
+                matches = line.match(/^(hlt)[ \t]*([ \t];.*)?$/);
                 if (matches) { // complete and correct line for hlt command
                     $scope.formattedProgram.push({
                         command: matches[1],
