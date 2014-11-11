@@ -29,7 +29,7 @@ bonsaiApp.controller('bonsaiAssemblerCtrl',
             var lines = $scope.splitLines(newText);
             $scope.formattedProgram = [];
             angular.forEach(lines, function (line, index) {
-                var matches = line.match(/^(inc|dec|tst|jmp)[ \t](\d+)$/);
+                var matches = line.match(/^(inc|dec|tst|jmp)[ \t](\d+)([ \t]+;.*)?$/);
                 if (matches) { // complete and correct line for commands with addresses
                     $scope.formattedProgram.push({
                         command: matches[1],
@@ -39,10 +39,20 @@ bonsaiApp.controller('bonsaiAssemblerCtrl',
                     });
                     return null;
                 }
-                matches = line.match(/^(hlt)[ \t]*$/);
+                matches = line.match(/^(hlt)[ \t]*(;.*)?$/);
                 if (matches) { // complete and correct line for hlt command
                     $scope.formattedProgram.push({
                         command: matches[1],
+                        completion: '',
+                        address: '',
+                        correct: true
+                    });
+                    return null;
+                }
+                matches = line.match(/^[ \t]*;(.*)$/);
+                if (matches) { // comment
+                    $scope.formattedProgram.push({
+                        command: '',
                         completion: '',
                         address: '',
                         correct: true
@@ -112,7 +122,7 @@ bonsaiApp.controller('bonsaiAssemblerCtrl',
                                             delIndex = $scope.program.length - 1;
                                         }
                                         $scope.program = $scope.program.slice(0, i) +
-                                            command + ' ' + address +
+                                            command + ' ' + address + "\n" +
                                             $scope.program.slice(delIndex + 1);
                                         return null;
                                     }
