@@ -273,6 +273,9 @@ bonsaiApp.controller('bonsaiAssemblerCtrl',
                         }
                         $scope.nextExecutionPosition += 2;
                     }
+                } else if (command.command == 'hlt') {
+                    $scope.stopAndReset();
+                    return null;
                 }
             }
         };
