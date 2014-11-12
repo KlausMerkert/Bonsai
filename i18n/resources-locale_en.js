@@ -55,6 +55,11 @@
         "description": ""
     },
     {
+        "key"        : "_circuit_",
+        "value"      : "Circuit",
+        "description": ""
+    },
+    {
         "key"        : "_assembler_",
         "value"      : "Assembler",
         "description": ""
