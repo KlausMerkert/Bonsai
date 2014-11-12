@@ -304,6 +304,70 @@ bonsaiApp.controller('bonsaiAssemblerCtrl',
             }
         };
 
+        $scope.openFilePicker = function () {
+            $scope.cpuFileName = undefined;
+            var input = document.getElementById('filename');
+            // This hack resets the input.
+            try {
+                input.value = '';
+                if(input.value){
+                    input.type = "text";
+                    input.type = "file";
+                }
+            } catch(e) {}
+            // End of the reset hack.
+            input.click();
+        };
+
+        $scope.load = function () {
+            $scope.$apply(function () {
+                $scope.stopAndReset();
+                var input = document.getElementById('filename');
+                var file = input.files[0];
+                var reader = new FileReader();
+                reader.addEventListener("loadend", function () {
+                    $scope.$apply(function () {
+                        var lines = $scope.splitLines(reader.result);
+                        $scope.program = '';
+                        $scope.data = '';
+                        for (var i = 0; i < lines.length; i++) {
+                            var dataMatches = lines[i].match(/^[ \t]*#(.*)?$/);
+                            if (dataMatches) {
+                                if ($scope.data.length > 0) {
+                                    $scope.data = $scope.data + "\n" + dataMatches[1];
+                                } else {
+                                    $scope.data = dataMatches[1];
+                                }
+                            } else {
+                                if ($scope.program.length > 0) {
+                                    if (!(i == lines.length -1 && lines[i].length == 0)) {
+                                        $scope.program = $scope.program + "\n" + lines[i];
+                                    }
+                                } else {
+                                    $scope.program = lines[i];
+                                }
+                            }
+                        }
+                        $scope.assemblerFileName = file.name;
+                    });
+                });
+                reader.readAsText(file);
+            });
+        };
+
+        $scope.save = function () {
+            var content = $scope.program + "\n";
+            var dataLines = $scope.splitLines($scope.data);
+            for (var i = 0; i < dataLines.length; i++) {
+                content = content + '#' + dataLines[i];
+                if (i < dataLines.length - 1) {
+                    content = content + "\n";
+                }
+            }
+            var fs = new FileSaver(content, "program.bon", $scope.assemblerFileName);
+            fs.save();
+        };
+
         $scope.errors = [];
     }
 );
