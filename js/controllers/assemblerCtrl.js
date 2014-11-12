@@ -169,24 +169,53 @@ bonsaiApp.controller('bonsaiAssemblerCtrl',
         });
 
         $scope.$watch('data', function (newText) {
-            var number, line, newlinePosition;
+            var number, separationMatches, show;
             var dataArray = [];
             while (newText.indexOf("\n") >= 0) {
-                newlinePosition = newText.indexOf("\n");
-                line = newText.slice(0, newlinePosition);
-                newText = newText.slice(newlinePosition + 1);
-                number = parseInt(line);
+                separationMatches = newText.match(/^(\d*)[ \t]*(;[^\n]*)?(\n([\s\S]*))?$/);
+                if (separationMatches) {
+                    number = parseInt(separationMatches[1]);
+                    newText = separationMatches[4];
+                    show = true;
+                    if (isNaN(number)) {
+                        number = 0;
+                        show = false;
+                    }
+                    dataArray.push({
+                        number: number,
+                        correct: true,
+                        show: show
+                    });
+                } else {
+                    separationMatches = newText.match(/^([^\n]*)(\n([\s\S]*))?$/);
+                    newText = separationMatches[3];
+                    dataArray.push({
+                        number: 0,
+                        correct: false,
+                        show: false
+                    });
+                }
+            }
+            separationMatches = newText.match(/^(\d*)[ \t]*(;[^\n]*)?(\n([\s\S]*))?$/);
+            if (separationMatches) {
+                number = parseInt(separationMatches[1]);
+                show = true;
                 if (isNaN(number)) {
                     number = 0;
+                    show = false;
                 }
-                dataArray.push(number);
+                dataArray.push({
+                    number: number,
+                    correct: true,
+                    show: show
+                });
+            } else {
+                dataArray.push({
+                    number: 0,
+                    correct: false,
+                    show: false
+                });
             }
-            number = parseInt(newText);
-            if (isNaN(number)) {
-                number = 0;
-            }
-            dataArray.push(number);
-            $scope.data = $scope.convertListedData(dataArray);
             $scope.listedData = dataArray;
         });
 
@@ -198,14 +227,35 @@ bonsaiApp.controller('bonsaiAssemblerCtrl',
         });
 
         $scope.convertListedData = function (data) {
-            var string = '';
-            for (var i = 0; i < data.length; i++) {
-                string = string + data[i];
+            var lines = $scope.splitLines($scope.data);
+            var matches, newData = '';
+            for (var i = 0; i < lines.length; i++) {
+                matches = lines[i].match(/^(\d*)([ \t]*)(;.*)?$/);
+                if (matches) {
+                    if (i < data.length && data[i].show) {
+                        newData = newData + data[i].number;
+                    } else {
+                        newData = newData + matches[1];
+                    }
+                    if (matches[3]) {
+                        newData = newData + matches[2] + matches[3];
+                    }
+                } else {
+                    newData = newData + lines[i];
+                }
                 if (i < data.length - 1) {
-                    string = string + "\n";
+                    newData = newData + "\n";
                 }
             }
-            return string;
+            i++;
+            while (i < data.length) {
+                newData = newData + data[i].length;
+                if (i < data.length - 1) {
+                    newData = newData + "\n";
+                }
+                i++;
+            }
+            return newData;
         };
 
         $scope.startAutomaticExecution = function () {
@@ -247,7 +297,7 @@ bonsaiApp.controller('bonsaiAssemblerCtrl',
                         });
                         return null;
                     }
-                    $scope.listedData[parseInt(command.address)]++;
+                    $scope.listedData[parseInt(command.address)].number++;
                     $scope.data = $scope.convertListedData($scope.listedData);
                     $scope.nextExecutionPosition++;
                 } else if (command.command == 'dec') {
@@ -258,7 +308,7 @@ bonsaiApp.controller('bonsaiAssemblerCtrl',
                         });
                         return null;
                     }
-                    $scope.listedData[parseInt(command.address)]--;
+                    $scope.listedData[parseInt(command.address)].number--;
                     $scope.data = $scope.convertListedData($scope.listedData);
                     $scope.nextExecutionPosition++;
                 } else if (command.command == 'jmp') {
@@ -271,7 +321,7 @@ bonsaiApp.controller('bonsaiAssemblerCtrl',
                     }
                     $scope.nextExecutionPosition = parseInt(command.address);
                 } else if (command.command == 'tst') {
-                    if ($scope.listedData[parseInt(command.address)] == 0) {
+                    if ($scope.listedData[parseInt(command.address)].number == 0) {
                         if ($scope.nextExecutionPosition + 1 >= $scope.formattedProgram.length) {
                             $scope.errors.push({
                                 lineNo: $scope.executionPosition,

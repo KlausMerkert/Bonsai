@@ -40,7 +40,15 @@
         </div>
         <div style="float: left;">
             <div style="width: 0; height: 0; overflow: visible;">
-                <div class="editor" style="font-weight: bold; color: rgb(9, 76, 121); white-space: pre-wrap; word-wrap: break-word; width: 390px; max-width: 390px; min-height: 250px;">{{ data }}</div>
+                <div class="editor" style="word-wrap: break-word; width: 390px; max-width: 390px; min-height: 250px;">
+                    <div ng-repeat="dataLine in listedData" style="width: 100%;"
+                         ng-style="{'background-color': dataLine.correct ? '' : 'rgba(255, 0, 0, 0.2)' }">
+                        <span ng-show="dataLine.show" style="font-weight: bold; color: rgb(9, 76, 121);">
+                            {{ dataLine.number }}
+                        </span>
+                        <span ng-hide="dataLine.show">&nbsp;</span>
+                    </div>
+                </div>
             </div>
             <textarea ng-model="data" class="editor" id="data"
                       style="background-color: rgba(0, 0, 0, 0); color: rgba(0, 0, 0, 0.5); width: 390px; max-width: 390px; min-height: 250px; white-space: pre-wrap; word-wrap: break-word;"></textarea>
