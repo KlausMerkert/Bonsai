@@ -76,6 +76,15 @@
         <label data-i18n="_programCounter_" style="font-size: 80%;"></label>
         <input type="number" ng-model="nextExecutionPosition" style="width: 4em;" />
     </div>
+    <div class="assembler-pane">
+        <h3 data-i18n="_loadAndSave_"></h3>
+        <button style="padding: 0 0 0 1px; line-height: 9px;">
+            <img src="/images/Load-Icon.svg" alt="load" style="height: 17px;" />
+        </button>
+        <button style="padding: 0 0 0 1px; line-height: 9px;">
+            <img src="/images/Save-Icon.svg" alt="save" style="height: 17px;" />
+        </button>
+    </div>
     <div style="clear: both;"></div>
     <div class="assembler-pane" ng-show="errors.length > 0">
         <h3 style="float: left;" data-i18n="_errors_"></h3>
