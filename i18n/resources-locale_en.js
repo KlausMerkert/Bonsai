@@ -120,6 +120,11 @@
         "description": ""
     },
     {
+        "key"        : "_executionSpeed_",
+        "value"      : "Execution speed:",
+        "description": ""
+    },
+    {
         "key"        : "_loadAndSave_",
         "value"      : "Load/Save:",
         "description": ""

@@ -1,0 +1,14 @@
+<div ng-mouseup="stopDrag($event)" ng-mousemove="drag($event)" style="padding: 3px 0;">
+    <div style="width: 0; height: 0; overflow: visible; z-index: 2;">
+        <div style="width: 5px; height: 10px; border-radius: 5px; background-color: rgb(40, 40, 40); position: relative; cursor: ew-resize;"
+             ng-style="{'left': (position + 2) + 'px'}"
+             ng-mousedown="startDrag($event)" ng-mouseup="stopDrag($event)" ng-mousemove="drag($event)">
+            <div ng-show="dragging"
+                 style="position: relative; top: 10px; left: -25px; background-color: rgba(40, 40, 40, 0.9); color: rgb(200, 200, 200); border-radius: 2px; padding: 4px 2px; font-family: monospace; font-size: 12px; text-align: center; width: 50px; line-height: 12px;">
+                {{ displayValue | number : 1 }}
+            </div>
+        </div>
+    </div>
+    <div style="width: calc(100% - 4px); height: 4px; border-radius: 2px; background-color: rgba(98, 98, 98, 0.3); margin: 3px 2px; z-index: 1;"
+         ng-mousedown="startDrag($event)"></div>
+</div>

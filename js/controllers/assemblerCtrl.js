@@ -350,7 +350,7 @@ bonsaiApp.controller('bonsaiAssemblerCtrl',
         $scope.automaticStep = function () {
             if ($scope.executionRunning) {
                 $scope.step();
-                $timeout($scope.automaticStep, 0);
+                $timeout($scope.automaticStep, $scope.delayTime);
             }
         };
 
@@ -418,6 +418,15 @@ bonsaiApp.controller('bonsaiAssemblerCtrl',
             fs.save();
         };
 
+        $scope.fourRoot = function (x) {
+            return Math.sqrt(Math.sqrt(Math.sqrt(Math.sqrt(x))));
+        };
+
+        $scope.square = function (x) {
+            return x*x;
+        };
+
+        $scope.delayTime = 0;
         $scope.errors = [];
 
         $rootScope.viewsCount = 42;

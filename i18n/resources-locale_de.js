@@ -120,6 +120,11 @@
         "description": ""
     },
     {
+        "key"        : "_executionSpeed_",
+        "value"      : "Geschwindigkeit:",
+        "description": ""
+    },
+    {
         "key"        : "_loadAndSave_",
         "value"      : "Laden/Speichern:",
         "description": ""

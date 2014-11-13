@@ -83,8 +83,13 @@
                 ◼
             </span>
         </button>
-        <label data-i18n="_programCounter_" style="font-size: 80%;"></label>
-        <input type="number" min="0" ng-model="nextExecutionPosition" style="width: 4em;" />
+        <label for="programCounter" data-i18n="_programCounter_" style="font-size: 80%;"></label>
+        <input id="programCounter" type="number" min="0" ng-model="nextExecutionPosition" style="width: 4em;" />
+        <div>
+            <div data-i18n="_executionSpeed_" style="font-size: 80%;"></div>
+            <slider model="delayTime" value-min="5000" value-max="0" display-min="0.2" display-max="2000"
+                    scaling-function="fourRoot" display-scaling-function="square"></slider>
+        </div>
     </div>
     <div class="assembler-pane">
         <h3 data-i18n="_loadAndSave_"></h3>
