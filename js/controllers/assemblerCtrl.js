@@ -14,6 +14,9 @@ bonsaiApp.controller('bonsaiAssemblerCtrl',
         };
 
         $scope.getLineNumbers = function (dataString) {
+            if (!angular.isString(dataString)) {
+                dataString = '';
+            }
             var lines = $scope.splitLines(dataString);
             var lineNumbers = [];
             for (var i = 0; i < lines.length; i++) {
@@ -424,6 +427,49 @@ bonsaiApp.controller('bonsaiAssemblerCtrl',
 
         $scope.square = function (x) {
             return x*x;
+        };
+
+        $scope.compile = function () {
+            var dataOffset = $scope.formattedProgram.length;
+            var compiled = '';
+            angular.forEach($scope.formattedProgram, function (programLine) {
+                var address = parseInt(programLine.address);
+                var opcode = '0';
+                if (programLine.command == 'dec') {
+                    opcode = '1';
+                    address = address + dataOffset;
+                }
+                if (programLine.command == 'inc') {
+                    opcode = '2';
+                    address = address + dataOffset;
+                }
+                if (programLine.command == 'jmp') {
+                    opcode = '3';
+                }
+                if (programLine.command == 'tst') {
+                    opcode = '4';
+                    address = address + dataOffset;
+                }
+                if (programLine.command == 'hlt') {
+                    opcode = '5';
+                }
+                if (isNaN(address)) {
+                    address = '0000';
+                } else {
+                    address = address.toString();
+                }
+                while (address.length < 4) {
+                    address = '0' + address;
+                }
+                compiled = compiled + opcode + address + "\n"
+            });
+            angular.forEach($scope.listedData, function (dataLine, index) {
+                compiled = compiled + dataLine.number.toString();
+                if (index < $scope.listedData.length - 1) {
+                    compiled = compiled + "\n";
+                }
+            });
+            $scope.compiledProgram = compiled;
         };
 
         $scope.delayTime = 0;

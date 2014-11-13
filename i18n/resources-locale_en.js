@@ -130,6 +130,11 @@
         "description": ""
     },
     {
+        "key"        : "_compile_",
+        "value"      : "Compile:",
+        "description": ""
+    },
+    {
         "key"        : "_addressNotInDataError_",
         "value"      : "This address is not in the data. You have to initialize the data storage with something.",
         "description": ""

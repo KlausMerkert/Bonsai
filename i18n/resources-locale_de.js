@@ -130,6 +130,11 @@
         "description": ""
     },
     {
+        "key"        : "_compile_",
+        "value"      : "Übersetzen (compile):",
+        "description": ""
+    },
+    {
         "key"        : "_addressNotInDataError_",
         "value"      : "Diese Adresse ist nicht im Datenspeicher. Du musst den Datenspeicher mit einer Zahl initialisieren, bevor du ihn benutzen kannst.",
         "description": ""
