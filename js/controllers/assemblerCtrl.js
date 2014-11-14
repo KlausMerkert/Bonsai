@@ -1,7 +1,7 @@
 'use strict';
 
 bonsaiApp.controller('bonsaiAssemblerCtrl',
-    function ($scope, $timeout, $rootScope) {
+    function ($scope, $timeout, $rootScope, BinaryProgram) {
         $scope.splitLines = function (string) {
             return string.replace(/\r\n|\n\r|\n|\r/g, "\n").split("\n")
         };
@@ -470,6 +470,7 @@ bonsaiApp.controller('bonsaiAssemblerCtrl',
                 }
             });
             $scope.compiledProgram = compiled;
+            BinaryProgram.setProgram(compiled);
         };
 
         $scope.delayTime = 0;

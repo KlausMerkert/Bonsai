@@ -7,7 +7,7 @@ bonsaiApp.directive('simulation', function () {
         scope: {
             example: '@'
         },
-        controller: ['$scope', 'ExampleStorage', function ($scope, ExampleStorage) {
+        controller: ['$scope', 'ExampleStorage', function ($scope, ExampleStorage, BinaryProgram) {
             $scope.calculateComponentCount = function (cpu) {
                 var componentCount = 0;
                 angular.forEach(cpu, function (value, key) {
@@ -48,6 +48,10 @@ bonsaiApp.directive('simulation', function () {
                     $scope.selectedEditor = undefined;
                 }).error($scope.loadBonsai);
             };
+
+            $scope.hasBinaryProgram = function () {
+                return BinaryProgram.hasProgram();
+            }
         }],
         link: function ($scope, element, attrs) {
             $scope.base = 10;
@@ -99,7 +103,24 @@ bonsaiApp.directive('simulation', function () {
             $scope.splitLines = function (string) {
                 return string.replace(/\r\n|\n\r|\n|\r/g,"\n").split("\n")
             };
-            $scope.readFile = function (memoryNumber) {
+            $scope.openFilePickerForMemory = function (editorName, index) {
+                $scope.cpuFileName = undefined;
+                var input = document.getElementById('filename-'+editorName);
+                // This hack resets the input.
+                try {
+                    input.value = '';
+                    if(input.value){
+                        input.type = "text";
+                        input.type = "file";
+                    }
+                } catch(e) {}
+                // End of the reset hack.
+                $scope.readMemoryNumber = index;
+                input.click();
+            };
+            $scope.readFile = function () {
+                var memoryNumber = $scope.readMemoryNumber;
+                $scope.readMemoryNumber = undefined;
                 var input = document.getElementById('filename-' + $scope.cpu.memories[memoryNumber].name);
                 var file = input.files[0];
                 var reader = new FileReader();
