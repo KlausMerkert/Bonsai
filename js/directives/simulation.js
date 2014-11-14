@@ -7,7 +7,7 @@ bonsaiApp.directive('simulation', function () {
         scope: {
             example: '@'
         },
-        controller: ['$scope', 'ExampleStorage', function ($scope, ExampleStorage, BinaryProgram) {
+        controller: ['$scope', 'ExampleStorage', 'BinaryProgram', function ($scope, ExampleStorage, BinaryProgram) {
             $scope.calculateComponentCount = function (cpu) {
                 var componentCount = 0;
                 angular.forEach(cpu, function (value, key) {
@@ -51,7 +51,11 @@ bonsaiApp.directive('simulation', function () {
 
             $scope.hasBinaryProgram = function () {
                 return BinaryProgram.hasProgram();
-            }
+            };
+
+            $scope.loadFromAssembler = function (memoryNumber) {
+                $scope.cpu.memories[memoryNumber].content = BinaryProgram.getProgram();
+            };
         }],
         link: function ($scope, element, attrs) {
             $scope.base = 10;

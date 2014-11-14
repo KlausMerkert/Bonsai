@@ -107,8 +107,13 @@
     <div class="editor pane" ng-repeat="editor in cpu.memories"
          ng-show="selectedEditor === $index + 1" style="position: relative;">
         <label for="content-{{editor.name}}" style="position: relative; top: -4px;">{{ editor.name }}</label>
-        <button type="button" ng-click="saveFile($index)" class="save-button" style="margin: 4px 1px 1px 1em;"></button>
-        <button type="button" ng-click="openFilePickerForMemory(editor.name, $index)" class="load-button" style="margin: 4px 1px 1px 1px;"></button>
+        <button type="button" ng-click="saveFile($index)" class="save-button"
+                style="margin: 4px 1px 1px 1em;"></button>
+        <button type="button" ng-click="openFilePickerForMemory(editor.name, $index)" class="load-button"
+                style="margin: 4px 1px 1px 1px;"></button>
+        <button type="button" ng-show="hasBinaryProgram()" class="compile-button"
+                style="margin: 4px 1px 1px 1px;" ng-click="loadFromAssembler($index)">
+        </button>
         <input type="file" id="filename-{{editor.name}}" style="display: none;"
                ng-model="editor.filename"
                onchange="angular.element(this).scope().readFile()" />

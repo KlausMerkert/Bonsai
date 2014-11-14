@@ -155,6 +155,17 @@ textarea {
     cursor: pointer;
 }
 
+.compile-button {
+    background: url("../images/Compile-Icon.svg") no-repeat 0 0;
+    background-size: 18px;
+    width: 20px;
+    height: 20px;
+    display: inline-block;
+    border: 0 solid rgb(204, 204, 204);
+    padding: 0;
+    cursor: pointer;
+}
+
 .error-console {
     background-color: rgb(204, 204, 204);
     border: 1px solid rgb(170, 170, 170);
