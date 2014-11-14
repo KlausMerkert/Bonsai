@@ -25,7 +25,7 @@ bonsaiApp.controller('bonsaiAssemblerCtrl',
             return lineNumbers;
         };
 
-        $scope.program = "tst 1\njmp 5\ndec 1\ninc 0\njmp 0\nhlt";
+        $scope.program = "tst 1\njmp 3\njmp 6\ndec 1\ninc 0\njmp 0\nhlt";
         $scope.data = "3\n5";
 
         $scope.$watch('program', function (newText, oldText) {
@@ -325,15 +325,6 @@ bonsaiApp.controller('bonsaiAssemblerCtrl',
                     $scope.nextExecutionPosition = parseInt(command.address);
                 } else if (command.command == 'tst') {
                     if ($scope.listedData[parseInt(command.address)].number == 0) {
-                        if ($scope.nextExecutionPosition + 1 >= $scope.formattedProgram.length) {
-                            $scope.errors.push({
-                                lineNo: $scope.executionPosition,
-                                message: '_addressNotInProgramError_'
-                            });
-                            return null;
-                        }
-                        $scope.nextExecutionPosition++;
-                    } else {
                         if ($scope.nextExecutionPosition + 2 >= $scope.formattedProgram.length) {
                             $scope.errors.push({
                                 lineNo: $scope.executionPosition,
@@ -342,6 +333,15 @@ bonsaiApp.controller('bonsaiAssemblerCtrl',
                             return null;
                         }
                         $scope.nextExecutionPosition += 2;
+                    } else {
+                        if ($scope.nextExecutionPosition + 1 >= $scope.formattedProgram.length) {
+                            $scope.errors.push({
+                                lineNo: $scope.executionPosition,
+                                message: '_addressNotInProgramError_'
+                            });
+                            return null;
+                        }
+                        $scope.nextExecutionPosition++;
                     }
                 } else if (command.command == 'hlt') {
                     $scope.stopAndReset();
@@ -435,11 +435,11 @@ bonsaiApp.controller('bonsaiAssemblerCtrl',
             angular.forEach($scope.formattedProgram, function (programLine) {
                 var address = parseInt(programLine.address);
                 var opcode = '0';
-                if (programLine.command == 'dec') {
+                if (programLine.command == 'inc') {
                     opcode = '1';
                     address = address + dataOffset;
                 }
-                if (programLine.command == 'inc') {
+                if (programLine.command == 'dec') {
                     opcode = '2';
                     address = address + dataOffset;
                 }
