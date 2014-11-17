@@ -1,0 +1,119 @@
+<div ng-init="author = 'Klaus Merkert'"></div>
+
+<div ng-show="language == 'de'">
+    <h2 class="pageTitle">Planung</h2>
+
+    <div class="pagebar">
+        <div class="textwidth">
+            <h4>Lastenheft</h4>
+
+            <p>Es ist auf Basis des bestehenden DOS-Programms
+                <a href="http://www.hsg-kl.de/faecher/inf/material/bonsai/bonsai22/index.php">bonsai22</a>
+                zur Erarbeitung der Grundelemente der
+                <a href="http://de.wikipedia.org/wiki/Rechnerarchitektur">Rechnerarchitektur</a>
+                eine webbasierte neue und erweiterte Version zu entwickeln.
+                Das Programm wird als freie Software unter der
+                <a href="http://de.wikipedia.org/wiki/GNU_General_Public_License">GNU General Public License</a>
+                entwickelt.
+            </p>
+
+            <p>Stichworte:</p>
+            <ol>
+                <li>CPU-Ebene von
+                    <a href="http://www.hsg-kl.de/faecher/inf/material/bonsai/bonsai22/index.php">bonsai22</a>
+                    ist vorrangig zu erstellen
+                </li>
+                <li>Dateiformat als Text, Plattform-unabhängig, kompatibel mit bestehenden Dateien</li>
+                <li>Sprachen sollen wählbar sein</li>
+                <li>View muss für Beamer in Größe skalierbar sein</li>
+                <li>Farben müssen einstellbar sein</li>
+                <li>Assemblerebene wünschenswert</li>
+                <li>Hardware-Simulation wünschenswert</li>
+                <li>Erweiterungsmöglichkeiten für Assemblersprache wünschenswert</li>
+                <li>Erweiterungsmöglichkeiten des Operationswerks (z.B. ALU) wünschenswert</li>
+            </ol>
+        </div>
+    </div>
+
+    <div class="textwidth">
+        <div style="width: 500px; height: 270px; background: url('/images/page/Bonsai-teaser-schematic.svg') no-repeat; margin: 0.5em auto;"></div>
+    </div>
+
+    <div class="pagebar">
+        <div class="textwidth">
+            <h4>Pflichtenheft</h4>
+
+            <p>Die Anforderungen des <a href="http://de.wikipedia.org/wiki/Lastenheft">Lastenhefts</a> werden durch eine
+                <a href="http://de.wikipedia.org/wiki/ECMAScript">Javascript</a>-Lösung in Schritten erbracht.</p>
+
+            <p>Erster Schritt ist die Realisierung der CPU-Ebene.</p>
+
+            <p>Der zweite Schritt erweitert auf die Funktionalität des bestehenden bonsai22-Programms.</p>
+
+            <p>Der dritte Schritt fügt die Simulation der realen Hardware hinzu.</p>
+
+            <p>Der vierte Schritt ermöglicht Erweiterungen des Operationswerks und der Assemblersprache.</p>
+            <ol>
+                <li>Es wird ein objektorientiertes
+                    <a href="http://de.wikipedia.org/wiki/Model_View_Controller">MVC</a>-Konzept
+                    verwendet.
+                </li>
+                <li>View wird mit html, svg-Grafiken und CSS gestaltet.</li>
+                <li>Model wird in clientseitigem Javascript geschrieben.</li>
+                <li>Es wird das Framework <a href="http://de.wikipedia.org/wiki/AngularJS">AngularJS</a> verwendet.</li>
+                <li>Die Module werden in <a href="http://de.wikipedia.org/wiki/Komponententest">Unit-Tests</a> getestet.
+                </li>
+                <li>Quelltexte werden in einem öffentlichen Repository gehalten.</li>
+                <li>Es wird eine Projekt-Homepage erstellt.</li>
+            </ol>
+        </div>
+    </div>
+
+    <div class="textwidth">
+        <h4>Links</h4>
+        <ul>
+            <li><a href="http://addyosmani.com/resources/essentialjsdesignpatterns/book/#observerpatternjavascript">The
+                Observer Pattern</a> - JavaScript
+            </li>
+            <li><a href="http://www.hsg-kl.de/faecher/inf/bonsai/simulation/index.php">Registertransfer in Python</a>
+            </li>
+            <li><a href="http://de.wikipedia.org/wiki/Lastenheft">Lastenheft</a> - wikipedia</li>
+            <li><a href="http://de.wikipedia.org/wiki/Pflichtenheft">Pflichtenheft</a> - wikipedia</li>
+            <li><a href="http://de.wikipedia.org/wiki/Document_Object_Model">Document_Object_Model</a> - wikipedia</li>
+            <li><a href="http://de.wikipedia.org/wiki/ECMAScript">JavaScript/ECMAScript</a> - wikipedia</li>
+            <li><a href="http://de.wikipedia.org/wiki/AngularJS">AngularJS</a> - wikipedia</li>
+            <li><a href="http://jorshasaur.us/simple-observer-pattern-in-angular/">Simple Observer Pattern in
+                Angular</a></li>
+            <li><a href="http://de.wikipedia.org/wiki/Prototypenbasierte_Programmierung">Prototypenbasierte
+                Programmierung</a> - wikipedia
+            </li>
+            <li><a href="http://jsplumbtoolkit.com/demo/home/jquery.html">JSPLUMB</a></li>
+            <li><a href="https://www.youtube.com/watch?v=xISG4nGTQYE">Making your own 4 bit computer from
+                transistors</a> - youtube
+            </li>
+            <li><a href="https://www.youtube.com/watch?v=cNN_tTXABUA">See How the CPU Works In One Lesson,
+                Scott-CPU </a> - youtube
+            </li>
+            <li><a href="http://www.buthowdoitknow.com/">www.buthowdoitknow.com</a></li>
+            <li><a href="http://visual6502.org/docs/6502_in_action_14_web.pdf">6502 in Action</a></li>
+            <li><a href="http://skilldrick.github.io/easy6502/#first-program">Easy 6502</a></li>
+            <li>
+                <a href="http://www.heise.de/developer/artikel/Unit-Tests-mit-dem-JavaScript-Framework-Jasmine-1709077.html">
+                    Unit-Tests-mit-dem-JavaScript-Framework-Jasmine</a>
+            </li>
+            <li><a href="http://www.yworks.com/de/products_yed_about.html">yEd Graph Editor</a></li>
+            <li><a href="http://en.wikipedia.org/wiki/Umbrello_UML_Modeller">Umbrello_UML_Modeller</a> -
+                en.wikipedia.org
+            </li>
+            <li><a href="http://de.wikipedia.org/wiki/Bootstrap_%28Framework%29">Bootstrap-Framework</a> - wikipedia
+            </li>
+        </ul>
+    </div>
+
+</div>
+
+<div ng-show="language == 'en'">
+    <h2 class="pageTitle">Plan</h2>
+
+
+</div>

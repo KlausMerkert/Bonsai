@@ -14,6 +14,11 @@ var bonsaiApp = angular.module(
             when('/documentation/', {templateUrl: '/partials/documentation.html', controller: 'bonsaiPageCtrl'}).
             when('/documentation/micro/', {templateUrl: '/partials/documentation_micro.html', controller: 'bonsaiPageCtrl'}).
             when('/development/', {templateUrl: '/partials/development.html', controller: 'bonsaiPageCtrl'}).
+            when('/development/plan/', {templateUrl: '/partials/development_plan.html', controller: 'bonsaiPageCtrl'}).
+            when('/development/github/', {templateUrl: '/partials/development_github.html', controller: 'bonsaiPageCtrl'}).
+            when('/development/js/', {templateUrl: '/partials/development_js.html', controller: 'bonsaiPageCtrl'}).
+            when('/development/angular/', {templateUrl: '/partials/development_angular.html', controller: 'bonsaiPageCtrl'}).
+            when('/development/jasmine/', {templateUrl: '/partials/development_jasmine.html', controller: 'bonsaiPageCtrl'}).
             when('/bonsai/', {templateUrl: '/partials/main.html', controller: 'bonsaiCpuCtrl'}).
             when('/circuit/', {templateUrl: '/partials/circuit.html', controller: 'bonsaiPageCtrl'}).
             when('/assembler/', {templateUrl: '/partials/assembler.html', controller: 'bonsaiAssemblerCtrl'}).
