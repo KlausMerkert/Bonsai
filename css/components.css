@@ -50,6 +50,7 @@
     display: inline-block;
     position: absolute;
     cursor: pointer;
+    overflow: hidden;
 }
 
 .register .toprow, .bitregister .connection {
