@@ -127,6 +127,7 @@ a .bigbutton {
     color: rgb(154, 52, 84);
     font-size: 26pt;
     font-family: 'Marcellus SC', serif;
+    font-weight: 300;
     width: calc(100% - 2em);
     max-width: 24.5em;
     margin: auto;
