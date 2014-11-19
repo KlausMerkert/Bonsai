@@ -22,6 +22,7 @@ var bonsaiApp = angular.module(
             when('/bonsai/', {templateUrl: '/partials/main.html', controller: 'bonsaiCpuCtrl'}).
             when('/circuit/', {templateUrl: '/partials/circuit.html', controller: 'bonsaiPageCtrl'}).
             when('/assembler/', {templateUrl: '/partials/assembler.html', controller: 'bonsaiAssemblerCtrl'}).
+            when('/bonsai/assembler/', {templateUrl: '/partials/assembler.html', controller: 'bonsaiAssemblerCtrl'}).
             otherwise({templateUrl: '/partials/introduction.html', controller: 'bonsaiPageCtrl'});
         // use the HTML5 History API
 		$locationProvider.html5Mode(true).hashPrefix('!');

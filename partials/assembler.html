@@ -1,7 +1,7 @@
 <div ng-init="author = 'Johannes Merkert'"></div>
 
 <div class="textwidth">
-    <h2 class="pageTitle" data-i18n="_assemblerHeading_"></h2>
+    <h2 class="pageTitle" data-i18n="_assemblerHeading_" ng-if="menu.length > 0"></h2>
     <div class="assembler-pane">
         <h3><label for="program" data-i18n="_program_"></label></h3>
         <div style="float: left; padding: 3px 2px 0 0;">
@@ -136,7 +136,7 @@
     <div style="clear: both;"></div>
 </div>
 
-<div ng-if="language == 'de'">
+<div ng-if="language == 'de' && menu.length > 0">
     <div class="pagebar">
         <div class="textwidth">
             <p>Wenn ein Maschinenprogramm assembliert wurde, kann dieses in einen Speicher in der
@@ -145,7 +145,7 @@
     </div>
 </div>
 
-<div ng-if="language == 'en'">
+<div ng-if="language == 'en' && menu.length > 0">
     <div class="pagebar">
         <div class="textwidth">
             <p>If machine code was created it can be loaded into a memory in the
