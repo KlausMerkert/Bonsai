@@ -94,12 +94,6 @@ var bonsaiApp = angular.module(
                 'name': "circuit",
                 'title': "_circuit_",
                 'link': '/circuit/'
-            },
-            {
-                'name': "bonsai",
-                'title': "_demo_",
-                'link': '/bonsai/',
-                'submenu': []
             }
         ];
         // root scope functions
@@ -119,7 +113,15 @@ var bonsaiApp = angular.module(
             },
             function (path) {
                 var pathParts = path.split('/');
-                var currentMenu = menu;
+                var currentMenu = [];
+                angular.forEach(menu, function(menuEntry) {
+                    if (menuEntry.name == pathParts[1]) {
+                        currentMenu = menu;
+                    }
+                });
+                if (path == '/') {
+                    currentMenu = menu;
+                }
                 var navigationPath = [];
                 for (var i = 0; i < pathParts.length; i++) {
                     if (pathParts[i]) {
