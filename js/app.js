@@ -1,29 +1,100 @@
 'use strict';
 
+// Menu structure
+var menu = [
+    {
+        'name': "documentation",
+        'title': "_documentation_",
+        'link': '/documentation/',
+        'partial': 'documentation.html',
+        'submenu': [
+            {
+                'name': "micro",
+                'title': "_micro_",
+                'link': '/documentation/micro/',
+                'partial': 'documentation_micro.html'
+            }
+        ]
+    },
+    {
+        'name': "development",
+        'title': "_development_",
+        'link': '/development/',
+        'partial': 'development.html',
+        'submenu': [
+            {
+                'name': "plan",
+                'title': "_plan_",
+                'link': '/development/plan/',
+                'partial': 'development_plan.html'
+            },
+            {
+                'name': "github",
+                'title': "_github_",
+                'link': '/development/github/',
+                'partial': 'development_github.html'
+            },
+            {
+                'name': "js",
+                'title': "_js_",
+                'link': '/development/js/',
+                'partial': 'development_js.html'
+            },
+            {
+                'name': "angular",
+                'title': "_angular_",
+                'link': '/development/angular/',
+                'partial': 'development_angular.html'
+            },
+            {
+                'name': "jasmine",
+                'title': "_jasmine_",
+                'link': '/development/jasmine/',
+                'partial': 'development_jasmine.html'
+            }
+        ]
+    },
+    {
+        'name': "assembler",
+        'title': "_assembler_",
+        'link': '/assembler/'
+    },
+    {
+        'name': "circuit",
+        'title': "_circuit_",
+        'link': '/circuit/',
+        'partial': 'circuit.html'
+    }
+];
+
 var bonsaiApp = angular.module(
         'Bonsai',
         [
             'ngAnimate',
             'ngRoute',
-            'localization'
+            'localization',
+            'ServerServices'
         ]
     )
     .config(['$routeProvider', '$locationProvider', function ($routeProvider, $locationProvider) {
+        $routeProvider.when('/', {templateUrl: '/partials/introduction.html', controller: 'bonsaiPageCtrl'});
+        var registerMenuRoutes = function(menu) {
+            for (var i = 0; i < menu.length; i++) {
+                if (menu[i].link && menu[i].partial) {
+                    $routeProvider.
+                        when(menu[i].link, {templateUrl: '/partials/' + menu[i].partial, controller: 'bonsaiPageCtrl'});
+                }
+                if (menu[i].submenu) {
+                    registerMenuRoutes(menu[i].submenu);
+                }
+            }
+        };
+        registerMenuRoutes(menu);
         $routeProvider.
-            when('/', {templateUrl: '/partials/introduction.html', controller: 'bonsaiPageCtrl'}).
-            when('/documentation/', {templateUrl: '/partials/documentation.html', controller: 'bonsaiPageCtrl'}).
-            when('/documentation/micro/', {templateUrl: '/partials/documentation_micro.html', controller: 'bonsaiPageCtrl'}).
-            when('/development/', {templateUrl: '/partials/development.html', controller: 'bonsaiPageCtrl'}).
-            when('/development/plan/', {templateUrl: '/partials/development_plan.html', controller: 'bonsaiPageCtrl'}).
-            when('/development/github/', {templateUrl: '/partials/development_github.html', controller: 'bonsaiPageCtrl'}).
-            when('/development/js/', {templateUrl: '/partials/development_js.html', controller: 'bonsaiPageCtrl'}).
-            when('/development/angular/', {templateUrl: '/partials/development_angular.html', controller: 'bonsaiPageCtrl'}).
-            when('/development/jasmine/', {templateUrl: '/partials/development_jasmine.html', controller: 'bonsaiPageCtrl'}).
             when('/bonsai/', {templateUrl: '/partials/main.html', controller: 'bonsaiCpuCtrl'}).
-            when('/circuit/', {templateUrl: '/partials/circuit.html', controller: 'bonsaiPageCtrl'}).
             when('/assembler/', {templateUrl: '/partials/assembler.html', controller: 'bonsaiAssemblerCtrl'}).
-            when('/bonsai/assembler/', {templateUrl: '/partials/assembler.html', controller: 'bonsaiAssemblerCtrl'}).
-            otherwise({templateUrl: '/partials/introduction.html', controller: 'bonsaiPageCtrl'});
+            when('/bonsai/assembler/', {templateUrl: '/partials/assembler.html', controller: 'bonsaiAssemblerCtrl'});
+        $routeProvider.otherwise({templateUrl: '/partials/introduction.html', controller: 'bonsaiPageCtrl'});
         // use the HTML5 History API
 		$locationProvider.html5Mode(true).hashPrefix('!');
     }])
@@ -39,64 +110,7 @@ var bonsaiApp = angular.module(
             }
         };
     })
-    .run(function ($rootScope, $window, $document, $location, localize) {
-        // Menu structure
-        var menu = [
-            {
-                'name': "documentation",
-                'title': "_documentation_",
-                'link': '/documentation/',
-                'submenu': [
-                    {
-                        'name': "micro",
-                        'title': "_micro_",
-                        'link': '/documentation/micro/'
-                    }
-                ]
-            },
-            {
-                'name': "development",
-                'title': "_development_",
-                'link': '/development/',
-                'submenu': [
-                    {
-                        'name': "plan",
-                        'title': "_plan_",
-                        'link': '/development/plan/'
-                    },
-                    {
-                        'name': "github",
-                        'title': "_github_",
-                        'link': '/development/github/'
-                    },
-                    {
-                        'name': "js",
-                        'title': "_js_",
-                        'link': '/development/js/'
-                    },
-                    {
-                        'name': "angular",
-                        'title': "_angular_",
-                        'link': '/development/angular/'
-                    },
-                    {
-                        'name': "jasmine",
-                        'title': "_jasmine_",
-                        'link': '/development/jasmine/'
-                    }
-                ]
-            },
-            {
-                'name': "assembler",
-                'title': "_assembler_",
-                'link': '/assembler/'
-            },
-            {
-                'name': "circuit",
-                'title': "_circuit_",
-                'link': '/circuit/'
-            }
-        ];
+    .run(function ($rootScope, $window, $document, $location, localize, PageCounter) {
         // root scope functions
         $rootScope.getLanguages = function () {
             return ['en', 'de'];
@@ -108,11 +122,39 @@ var bonsaiApp = angular.module(
             localize.setLanguage(newLang);
             $rootScope.$broadcast('langChange', newLang);
         });
+        var findPartial = function (path) {
+            if (path == '/') {
+                return 'introduction.html';
+            }
+            var findPartialInMenu = function(path, menu) {
+                for (var i = 0; i < menu.length; i++) {
+                    if (menu[i].link == path) {
+                        return menu[i].partial
+                    }
+                    if (menu[i].submenu) {
+                        var found = findPartialInMenu(path, menu[i].submenu);
+                        if (found) {
+                            return found;
+                        }
+                    }
+                }
+                return false;
+            };
+            return findPartialInMenu(path, menu);
+        };
         $rootScope.$watch(
             function () {
                 return $location.path();
             },
             function (path) {
+                PageCounter.count(path, findPartial(path)).success(function (data) {
+                    if (data.count) {
+                        $rootScope.viewsCount = data.count;
+                    }
+                    if (data.last_change) {
+                        $rootScope.lastChange = data.last_change;
+                    }
+                });
                 var pathParts = path.split('/');
                 var currentMenu = [];
                 angular.forEach(menu, function(menuEntry) {
@@ -135,6 +177,7 @@ var bonsaiApp = angular.module(
                     }
                 }
                 $rootScope.navigationPath = navigationPath;
+                $rootScope.currentPath = path;
                 $rootScope.menu = currentMenu;
                 $rootScope.author = undefined;
             }

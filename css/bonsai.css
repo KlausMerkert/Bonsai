@@ -48,6 +48,10 @@ a:hover {
     z-index: 1;
 }
 
+.tabs li .menu-start-current {
+    background-image: url("../images/tabStartActive.svg");
+}
+
 .tabs li .content {
     background-color: rgb(204, 204, 204);
     font-weight: 300;
@@ -80,6 +84,7 @@ a:hover {
 .tabs li.active .content {
     background-color: rgb(9, 76, 121);
     border-top: 1px solid rgb(9, 76, 121);
+    color: rgb(255, 255, 255);
     z-index: 6;
 }
 
