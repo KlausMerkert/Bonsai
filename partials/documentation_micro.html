@@ -244,28 +244,27 @@ writeIR	| writeIR, readMPC
         <p>
             After the fetch cycle the <em>decode command phase starts</em>. In this phase the correct jump target in
             the micro program gets determined and loaded into the micro program counter.<br />
-            First
-
-            <strong>Hallo Karo!</strong>
-
-       Es schließt sich nun die <em>Befehl-Decodier-Phase</em> an. In dieser Phase wird die zum Opcode passende
-       Einsprungadresse im Mikroprogramm ermittelt und in den Mikroprogrammzähler geladen. Dazu muss zunächst das
-       Befehlsregister IR schreiben (writeIR), um über einen Filter, der die 10 000er-Stelle herausfiltert, den Opcode des Befehls
-       als Adresse an den Befehlsdecoder anlegen. Wieder gilt, dass zunächst aus Vorsicht die Adresse ein Takt früher
-       angelegt wird. Im nächsten Takt wird die vom Befehlsdecoder gelieferte Einsprungstelle in den MPC geladen.
-       Das dazu notwendige Steuersignal <em>readMPC</em> blockiert über ein UND-Gatter die ansteigende Flanke des Takt-Signals
-       am Inc-Eingang des MPC. Damit wird ein Konflikt zwischen Lesen und Hochzählen beseitigt. Die blockierende 0 kommt
-       dabei von einem NOR-Gatter genau dann, wenn eines oder beide der Signale <em>readMPC</em>, <em>clrMPC</em>
-       den Wert 1 hat. Hier liegt eine
-       <a href="http://en.wikipedia.org/wiki/Race_condition">race-condition</a>
-       vor, denn die 'Blockade-Null' muss vor der 'Hochzähl-Eins' am UND-Gatter anliegen. Die Verzögerungsleitung
-       muss also so eingestellt sein, dass die endliche Laufzeit durch das NOR-Gatter sicher übertroffen wird.
-       Wird dem Befehlsdecoder durch Wegnahme des Signals writeIR seine Adresse genommen, so wird der Datenausgang
-       den Wert <em>undefined</em> annehmen. Sollte der MPC noch lesen, so kommt ein fehlerhafter Wert in den MPC.
-       Es liegt hier ebenfalls eine <a href="http://en.wikipedia.org/wiki/Race_condition">race-condition</a> vor.
-       Man könnte das writeIR-Signal verzögern, um die Adresse sicher lang genug anliegen zu lassen. In der Praxis
-       gab es bisher keine Probleme, vielleicht weil der Opcode-Filter eine Verzögerung bewirkt. Hier muss man beobachten!
-       Damit wird die <em>Befehl-Decodier-Phase</em> zu:
+            First the instruction register (IR) must write to the bus (writeIR). The filter extracts the 10.000-digit
+            which is the opcode. The instruction decoder uses this opcode in its address input. Once again one clock
+            cycle is waited before the decoded command is read because the instruction decoder might need some time to
+            expose the right value at its output gate.<br />
+            In this next clock cycle the MPC reads the decoded command which is used as jump target in the micro
+            program. The control signal for this (readMPC) blocks with an AND-gate the increasing of the MPC which
+            would normally be triggered by the flank of the clock signal. This logic prevents a conflict between read
+            and increase. The blocking 0 comes from a NOR-gate if <em>readMPC</em> or <em>clrMPC</em> have a value of 1.
+            This would normally lead to a <a href="http://en.wikipedia.org/wiki/Race_condition">race-condition</a>
+            because the blocking 0 must reach the AND-gate before the increasing 1. A delay element prevents this which
+            delays the clock signal for the right amount of time so that the blocking 0 arrives first at the AND-gate.
+        </p>
+        <p>
+            If the instruction decoder looses its address through a 0 at writeIR the output would jump to undefined.
+            If the MPC reads at this time this undefined value would reach it and cause further problems. This is also
+            a <a href="http://en.wikipedia.org/wiki/Race_condition">race-condition</a>. It would be possible to delay
+            the writeIR-signal and solve this issue this way. However the problem does not occur at the moment and it
+            works even without a delay.
+        </p>
+        <p>
+            All this leads to a decode command phase of:
      </p>
      <code>
 writeIR	| writeIR, readMPC
@@ -275,58 +274,70 @@ writeIR	| writeIR, readMPC
   </div>
 </div>
 
+    <div class="textwidth">
+        <h2>Execute Command Phase</h2>
+    </div>
+
 <div class="pagebar">
   <div class="textwidth">
-     <p>Nach der Befehl-Hole- und der Befehl-DecodierPhase folgt die <em>Befehl-Ausführphase</em> für die
-        verschiedenen Befehle. Zunächst soll der inc-Befehl mit dem Opcode 1 entwickelt werden. Da nur im Akku
-        hochgezählt werden kann, muss das Datum in den Akku transportiert, hochgezählt und zurück transportiert werden.
-        Außerdem darf nicht vergessen werden, den PC hochzuzählen. Zum Schluss erfolgt ein Rücksprung auf die
-        Befehl-Hole-Phase, dh. der MPC wird auf Null gesetzt. Die vorher erwähnten Prinzipien wie 'Adresse an Speicher
-        einen Takt vor dem Zugriff anlegen' und 'Lesen vor dem Schreiben zurücknehmen' sollen auch hier beachtet werden.
-        So kommt man etwa zu folgender Folge von Steuerwörtern, die im Mikroprogramm ab Adresse 10 gespeichert werden:
+     <p>
+         After the decode command phase the <em>execute command phase</em> follows. What happens in this phase
+         depends on the command.<br />
+         First the inc command (opcode 1): This command uses the Accu to increase by one. So the data has to be
+         transported into the Accu, increased there and transported back. The command also increases the PC by one.
+         After that the next command can be fetched so the micro program has to be set to the beginning of this phase
+         (MPC 0).<br />
+         The previously mentioned principles like 'set the address at the memory one clock tick before reading the
+         data' and 'stop reading before stopping to write to the bus' have to be considered. This leads to the
+         following control words which get stored in the micro program beginning with address 10:
       </p>
       <code>wrIR | wrIR, wrMem, rdAccu | wrIR, wrMem | wrIR, incAccu, incPC | wrIR, wrAccu, rdMem | wrIR, wrAccu, clrMPC
 12   | 12,   3,     7      | 12,   3     | 12,   5,       13    | 12,   8,      4     | 12,   8,      1
 4096 | 4232                | 4104        | 12320                | 4368                | 4354</code>
-      <p>Leider enthält diese Folge einen nur sehr schwer zu durchschauenden Fehler, der aber durchaus realistisch ist.
-         Das letzte Steuerwort der Folge enthält das Steuersignal wrIR und setzt mit clrMPC den MPC auf Null.
-         Das nächste Steuerwort 0 enthält das Signal wrPC. wrPC und wrIR zusammen führen zu einem Buskonflikt. Man mag
-         einwenden, dass das alte und das neue Steuerwort nicht gleichzeitig gültig sind. Das ist richtig und doch
-         müssen sowohl im 'richtigen elektrischen Leben' als auch in der Simulation die Bits des Steuerworts teilweise
-         verändert werden. Das führt unter Umständen zu Übergangszuständen, die weder dem alten noch dem neuen Steuerwort
-         entsprechen. So könnte Signal 10 <b>und</b> Signal 12 kurzzeitig gleichzeitig 1 sein. Im wirklichen Leben
-         würden zwei Register gleichzeitig den Bus beschreiben, was zu Kurzschlüssen führen kann. Wenn dieser Zustand
-         nur sehr kurz auftritt, so wird nichts kaputt gehen. Trotzdem wird die Stromaufnahme der CPU höher sein. In der
-         Simulation wird die Situation verhindert und führt zu einer Fehlermeldung. Sie kommt auch tatsächlich vor, weil
-         die Bits des Steuerwortregisters in der Reihenfolge 0,1,2,..,14 gewechselt werden. So wird also Signal 10 <b>neu</b>
-         zu 1 während Signal 12 <b>noch</b> 1 ist.
-         Verändert man obige Folge so, dass die beiden Signale durch einen Zwischentakt getrennt werden, so kann der Fehler
-         nicht auftreten:
+      <p>
+          Sadly this sequence of signals lead to a nasty error which is not easy to spot but realistic for real
+          hardware. The last control word contains the signal wrIR and sets the MPC to 0 with clrMPC. The next control
+          word (which is 0) contains wrPC. wrPC and wrIR lead to a bus conflict if they are active at the same time.
+          <br />One might argue that the old and the new control word are not active at the same time. That is in
+          principle correct but in the 'real electric life' and in this simulation the bits of the control word
+          register do not change at exactly the same time. This can lead to situations that some bits of the old and
+          some bits of the new control word are active for very little parts of a millisecond. It is for example
+          possible that Signal 10 <strong>and</strong> Signal 12 are both active for a very short time. In the real
+          electric life this leads to two registers which write to the same bus at the same time resulting in a short
+          circuit with high currents. This might overheat the cpu or even destroy it. In the simulation a short circuit
+          is impossible but an error gets displayed. The error in the simulation occurs because it changes the wire
+          outputs of the control word register sequentially from 0 to 14. That leads to Signal 10 being 1
+          (<strong>new</strong>) while Signal 12 is <strong>still</strong> 1.<br />
+          This problem can be prevented by inserting an additional clock cycle at the end of the phase:
       </p>
       <code>wrIR | wrIR, wrMem, rdAccu | wrIR, wrMem | wrIR, incAccu, incPC | wrIR, wrAccu, rdMem | wrIR, wrAccu | clrMPC
 12   | 12,   3,     7      | 12,   3     | 12,   5,       13    | 12,   8,      4     | 12,   8 	| 1
 4096 | 4232                | 4104        | 12320                | 4368                | 4352 		| 2</code>
-      <p>Die Folge von Steuerwörtern für den dec-Befehl unterscheidet sich nur an einer Stelle:</p>
+      <p>The sequence of signals changes only slightly for the dec-command (opcode 2):</p>
       <code>wrIR | wrIR, wrMem, rdAccu | wrIR, wrMem | wrIR, decAccu, incPC | wrIR, wrAccu, rdMem | wrIR, wrAccu | clrMPC
 12   | 12,   3,     7      | 12,   3     | 12,   6,       13    | 12,   8,      4     | 12,   8 	| 1
 4096 | 4232                | 4104        | 12352                | 4368                | 4352 		| 2</code>
-      <p>Beim jmp-Befehl mit dem Opcode 3 muss lediglich der Adressteil des Befehls in den PC geladen werden:</p>
+      <p>For the jmp-command (opcode 3) only the address part of the command needs to be loaded into the PC:</p>
       <code>wrIR, rdPC | wrIR | clrMPC
 12,   9    | 12	  | 1
 4608       | 4096 | 2</code>
-      <p>Um den Test-Befehl zu realisieren muss das entsprechende Datum an den Datenbus gelegt werden, damit die
-         Nullentdeckung arbeiten kann. Die oben erwähnten Prinzipien sind einzuhalten:
+      <p>
+          For realizing the tst-command (opcode 4) the data which should be tested must be written to the data bus. The
+          zero-detection can detect the zero and the PC can get adjusted accordingly. The principles mentioned above
+          need to be considered:
       </p>
       <code>wrIR, incPC | wrIR, wrMem | wrIR, wrMem, incPCz | clrMPC
 12,   13    | 12,   3     | 12,   3,     14     | 1
 12288       | 4104        | 20488               | 2</code>
-      <p>Es fehlt der hlt-Befehl mit Opcode 5. Hier soll der Rücksprung auf MPC=0 und ein Hochzählen des MPC
-         gleichermaßen vermieden werden. Das kann erreicht werden, wenn immer wieder der MPC geladen wird:
+      <p>
+          The last command is hlt with opcode 5. For this command setting the MPC to 0 and an increasing of the PC
+          has to be prevented. This can be achieved by loading the MPC over and over:
       </p>
       <code>wrIR, readMPC, notCount
 12, 2, 0
 4101</code>
-      <p>Das Signal 0, das nicht das <i>Operationswerk</i> beeinflusst, könnte z.B. zum Stoppen des Taktgenerators dienen</p>
+      <p>The micro program could be improved if the signal 0 which is not used in the <em>execution unit</em> would
+          stop the clock signal.</p>
       <p><a href="mp0.txt">mp0.txt</a></p>
   </div>
 </div>
