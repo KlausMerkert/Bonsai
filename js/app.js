@@ -78,6 +78,7 @@ var bonsaiApp = angular.module(
     )
     .config(['$routeProvider', '$locationProvider', function ($routeProvider, $locationProvider) {
         $routeProvider.when('/', {templateUrl: '/partials/introduction.html', controller: 'bonsaiPageCtrl'});
+        $routeProvider.when('/imprint/', {templateUrl: '/partials/imprint.html', controller: 'bonsaiPageCtrl'});
         var registerMenuRoutes = function(menu) {
             for (var i = 0; i < menu.length; i++) {
                 if (menu[i].link && menu[i].partial) {
@@ -126,6 +127,9 @@ var bonsaiApp = angular.module(
             if (path == '/') {
                 return 'introduction.html';
             }
+            if (path == '/imprint/') {
+                return 'imprint.html';
+            }
             var findPartialInMenu = function(path, menu) {
                 for (var i = 0; i < menu.length; i++) {
                     if (menu[i].link == path) {
@@ -162,7 +166,7 @@ var bonsaiApp = angular.module(
                         currentMenu = menu;
                     }
                 });
-                if (path == '/') {
+                if ((path == '/') || (path == '/imprint/')) {
                     currentMenu = menu;
                 }
                 var navigationPath = [];

@@ -6,7 +6,7 @@
     },
     {
         "key"        : "_impressum_",
-        "value"      : "About",
+        "value"      : "Imprint",
         "description": ""
     },
     {
