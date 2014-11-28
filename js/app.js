@@ -152,8 +152,7 @@ var bonsaiApp = angular.module(
                         $rootScope.viewsCount = data.count;
                     }
                     if (data.last_change) {
-                        console.log(data.last_change);
-                        $rootScope.lastChange = data.last_change;
+                        $rootScope.lastChange = new Date(data.last_change * 1000);
                     }
                 });
                 var pathParts = path.split('/');
