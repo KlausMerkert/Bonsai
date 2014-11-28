@@ -220,3 +220,210 @@
     </div>
 
 </div>
+
+<div ng-if="language == 'en'">
+    <h2 class="pageTitle">Documentation</h2>
+
+    <div class="textwidth">
+        <p class="quote" lang="en">
+            Because this Bonsai simulation is essentially a toolbox of CPU components the documentation consists
+            of working examples which build the Bonsai-coputer step for step. All examples are interactive. If an
+            error is produced it is displayed right below the example.
+        </p>
+    </div>
+
+    <div id="register-en" class="pagebar">
+        <div class="textwidth">
+            <h2>Register</h2>
+
+            <p>
+                An register is a really simple component. It saves integers which can be usat at several places in
+                the CPU. In the following example the register saves the value of 7. The small gray boxes at the right
+                can be used to increase (by 1), decrease (by 1) or clear the register which sets its value to 0.
+            </p>
+            <simulation example="singleregister"></simulation>
+            <p>
+                You can edit the registers value by clicking on the number.<br />
+                Register save positive integers up to a specific maximum value. Try to figure out what is the maximum
+                value in this example. Is there also a minimum value?
+            </p>
+        </div>
+    </div>
+
+    <div id="registertransfer-de" class="pagebar">
+        <div class="textwidth">
+            <h2>Register and Buses</h2>
+
+            <p>
+                Register can transfer their values by using buses. The connection to a bus is called gate and the gate
+                can be configured to read from a bus or to write to it.<br />
+                As long as a Register is writing to a bus its value can be read by other components like a second
+                register. Only one component can write to a bus at a time. The number of components which read from a
+                bus is not limited.<br />
+                Every gate can also be inactive which means that it does not write and does not read from the bus.<br />
+                A bus with no component which writes to it is inactive. An inactive bus has no value.
+            </p>
+
+            <p>
+                The state a bus is in can be seen at its color. An inactive bus is pale. A bus with a value of 0 has
+                a more saturated color and if the value is bigger than 0 it also gets a bluish shadow.
+            </p>
+
+            <p>
+                The <em>gates</em> of a register can be influenced by <em>control wire inputs</em> (the small red and
+                green squares at the side of the gate).<br />
+                Red stands for writing to a bus (which can lead to conflicts if another component also writes to the
+                same bus) while green indicates reading. The <em>control wire inputs</em> can be activated by
+                mouse click.<br/>
+                The writing or reading state can be preserved by clicking the small sqare and dragging the mouse outside
+                the square while holding the mouse button.<br />
+                A click in the body if the gate toggles its states in the order read - write - inactive - read - write
+                ...
+            </p>
+            <simulation example="registertransfer"></simulation>
+
+            <p>Example file for download: <a href="/downloads/RegisterUndBusse.txt">RegisterUndBusse.txt</a></p>
+        </div>
+    </div>
+
+    <div id="memory-en" class="pagebar">
+        <div class="textwidth">
+            <h2>Memory</h2>
+
+            <p>
+                The <em>memory</em> stores integers in its cells. For each <em>address</em> one integer can be stored.
+                Memory cells can get values by setting the data gate to read and they can write their value to the
+                attached bus by setting this gate to write. The gate for the address can only read or be inactive.
+            </p>
+            <simulation example="memory"></simulation>
+            <p>Example file for download: <a href="/downloads/memory.txt">memory.txt</a></p>
+        </div>
+    </div>
+
+    <div id="gates-en" class="pagebar">
+        <div class="textwidth">
+            <h2>Switches, Logic-Gates, LEDs</h2>
+
+            <p>
+                The <i>AND-gate</i> has two inputs and one output. At the inputs only the values 0 and one are valid.
+                That means that the attached bus should have a bit width of 1 which makes it a control wire.<br />
+                <i>Switches</i> output 0 or 1 depending on their state. A <em>LED-component</em>
+                (<a href="http://de.wikipedia.org/wiki/Leuchtdiode">LED</a>) has only one input which accepts only 0
+                or 1 just like the input of the logic gate. An input of 1 leads to an illuminating LED while it stays
+                dark for a 0.<br />
+                Logic-Gates, switches and LEDs are connected with <em>control wires</em> which are buses which can only
+                trasport values of 0 or 1.
+            </p>
+
+            <p>
+                Why is the AND-gate called
+                <a href="http://de.wikipedia.org/wiki/Und-Gatter">AND-gate</a>?<br />
+                That is because the output of an AND-gate is only 1 if the first <strong>and</strong> the second
+                input are 1. In all other cases the output is 0.
+            </p>
+
+            <p>
+                An AND-gate can be seen as a <em>detector</em> for a 1. For this application you consider the first
+                input a <em>gate control</em> and the second input the <em>data gate</em>. A 1 at the data gate only
+                passes the detector if the gate control input is 1. Try this!
+            </p>
+
+            <p>
+                The Bonsai uses two AND-gates, one OR-gate and one NOT-OR-gate (NOR).</p>
+            <simulation example="gates"></simulation>
+            <p>
+                This software lets you save and load 'circuits' in a special form of the
+                <a href="http://de.wikipedia.org/wiki/JavaScript_Object_Notation">JSON</a>-format.<br />
+                You can access this feature by clicking on the wheel in the upper left corner which activates the
+                edit-mode. A simble example is in the file <a href="/downloads/switchled.txt">switchled.txt</a>. You
+                can download this file and change its structure with a text editor.<br />
+                The structure is pretty self-explanatory: there is a list of components for each component type in
+                the Bonsai simulation. The lists may be empty but the components should all have a complete set of
+                attributes. For a more complete example go to the <a ng-href="/circuit/">finished Bonsai</a> and
+                save its structure to a file. The file is pretty long but all types of components are present in this
+                example.
+            </p>
+
+            <p>Examples: <a href="/downloads/gates.txt">gates.txt</a>, <a href="/downloads/norRSFF.txt">norRSFF.txt</a>,
+                <a href="/downloads/switchled.txt">switchled.txt</a></p>
+        </div>
+    </div>
+
+    <div class="pagebar">
+        <div class="textwidth">
+            <h2 id="filter-en">Filter</h2>
+
+            <p>
+                The bonsai simulation has a filter component which can be used to extract information out of a number.
+                In the bonsai this is used to extract the decimal for the command and the remainder for the address.
+                <br />
+                Formally a <em>filter</em> is a function which maps a number n to a value f(n). You can edit the
+                formula for the function f(n) by clicking on the filter component. The formula needs to be valid
+                JavaScript.
+            </p>
+            <simulation example="filter"></simulation>
+            <p><a href="/downloads/filter.txt">filter.txt</a></p>
+        </div>
+    </div>
+
+    <div id="manual-en" class="pagebar">
+        <div class="textwidth">
+            <h2>Execution Unit</h2>
+
+            <p>
+                The execution unit lets you store and execute a machine program. The control signals need to be set
+                'from outside'.</p>
+            <simulation example="manual"></simulation>
+            <h4>Parts of the Execution Unit:</h4>
+            <ul>
+                <li>Memory for saving the machine program and the data</li>
+                <li>program counter (PC) for saving the current position in the program</li>
+                <li>instruction register (IR) for supplying opcode and address of the current command</li>
+                <li>Akku for the simple calculations +1 and -1</li>
+                <li>Logic for detecting 0 values for realizing together with logic-gates an increasing of the PC under
+                    certain conditions (if value is 0 which is for the tst command)
+                </li>
+                <li>Address bus</li>
+                <li>Data bus</li>
+            </ul>
+        </div>
+    </div>
+
+    <div id="bitregister-en" class="pagebar">
+        <div class="textwidth">
+            <h2>Bit-Register</h2>
+
+            <p>The Bit-Register is a special representation of a register. It exposes the bits of its value at a big
+                gate with many connectors for control wires. This part is only special in the simulation because a real
+                register would have a wire for each bit at every gate.<br />
+                A real difference at this component is that its gate to the wide bus is triggered by a flank and that
+                this input can not continue to read like the gates of other registers. This is necessary because
+                changes of the wide bus need not to be accepted for the Bonsai to work. In the real world there are
+                both kinds of microchips and both kinds are also used in CPUs to optimize their structure.</p>
+            <simulation example="trafficlights"></simulation>
+        </div>
+    </div>
+
+    <div id="traffic-en" class="pagebar">
+        <div class="textwidth">
+            <h2>Traffic Lights</h2>
+
+            <p>
+                With a Bit-Register, a memory, a address register and a clock generator a simple control unit for
+                traffic lights can be built.
+            </p>
+            <simulation example="trafficlight"></simulation>
+            <p>In which way could the extended 'traffic light cotroller' supplement the execution unit?</p>
+        </div>
+    </div>
+
+    <div id="control-en" class="pagebar">
+        <div class="textwidth">
+            <h2>Execution Unit with Control Board</h2>
+
+            <p>This is highly improved.</p>
+            <simulation example="control"></simulation>
+        </div>
+    </div>
+
+</div>
