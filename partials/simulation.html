@@ -106,15 +106,20 @@
     </div>
     <div class="editor pane" ng-repeat="editor in cpu.memories"
          ng-show="selectedEditor === $index + 1" style="position: relative;">
-        <div style="line-height: 20px;">
-            <label for="content-{{editor.name}}" style="position: relative; top: -4px;">{{ editor.name }}</label>
-            <button type="button" ng-click="saveFile($index)" class="save-button"
-                    style="margin: 4px 1px 1px 1em;"></button>
-            <button type="button" ng-click="openFilePickerForMemory(editor.name, $index)" class="load-button"
-                    style="margin: 4px 1px 1px 1px;"></button>
-            <button type="button" ng-show="hasBinaryProgram()" class="compile-button"
-                    style="margin: 4px 1px 1px 1px;" ng-click="loadFromAssembler($index)">
-            </button>
+        <div style="line-height: 20px; max-height: 20px; margin-top: 2px;">
+            <label for="content-{{editor.name}}"
+                   style="margin: 0 6px 0 2px; height: 20px; line-height: 20px; overflow: visible; display: inline-block;">
+                {{ editor.name }}
+            </label>
+            <div style="display: inline-block; height: 20px; width: 68px; position: absolute;">
+                <button type="button" ng-click="saveFile($index)" class="save-button"
+                        style="position: absolute; top: 0; left: 0;"></button>
+                <button type="button" ng-click="openFilePickerForMemory(editor.name, $index)" class="load-button"
+                        style="position: absolute; top: 0; left: 24px;"></button>
+                <button type="button" ng-show="hasBinaryProgram()" class="compile-button"
+                        style="position: absolute; top: 0; left: 48px;" ng-click="loadFromAssembler($index)">
+                </button>
+            </div>
             <input type="file" id="filename-{{editor.name}}" style="display: none;"
                    ng-model="editor.filename"
                    onchange="angular.element(this).scope().readFile()" />
