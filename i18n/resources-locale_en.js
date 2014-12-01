@@ -130,6 +130,21 @@
         "description": ""
     },
     {
+        "key"        : "_compileHeading_",
+        "value"      : "Compiler",
+        "description": ""
+    },
+    {
+        "key"        : "_startProgram_",
+        "value"      : "Start of the program:",
+        "description": ""
+    },
+    {
+        "key"        : "_startData_",
+        "value"      : "start of data:",
+        "description": ""
+    },
+    {
         "key"        : "_compile_",
         "value"      : "Compile:",
         "description": ""

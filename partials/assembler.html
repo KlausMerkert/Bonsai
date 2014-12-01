@@ -118,10 +118,21 @@
     </div>
     <div style="clear: both;"></div>
     <div class="assembler-pane">
-        <h3 data-i18n="_compile_" style="display: inline-block;"></h3>
-        <button style="padding: 0 0 0 1px; line-height: 9px;" ng-click="compile()">
-            <img src="/images/Compile-Icon.svg" alt="save" style="height: 17px;" />
-        </button>
+        <h3 data-i18n="_compileHeading_"></h3>
+        <div>
+            <label for="start-program" data-i18n="_startProgram_" style="font-size: 80%;"></label>
+            <input type="number" id="start-program" ng-model="startProgram" />
+        </div>
+        <div>
+            <label for="start-data" data-i18n="_startData_" style="font-size: 80%;"></label>
+            <input type="number" id="start-data" ng-model="startData" />
+        </div>
+        <div>
+            <span data-i18n="_compile_" style="font-size: 80%;"></span>
+            <button style="padding: 0 0 0 1px; line-height: 9px;" ng-click="compile()">
+                <img src="/images/Compile-Icon.svg" alt="save" style="height: 17px;" />
+            </button>
+        </div>
         <div>
             <div style="display: inline-block; vertical-align: top; padding: 2px 1px 0 1px;">
                 <div ng-repeat="lineNumber in getLineNumbers(compiledProgram)"
