@@ -498,8 +498,11 @@ bonsaiApp.controller('bonsaiAssemblerCtrl',
                 }
             });
             $scope.compiledProgram = compiled;
-            BinaryProgram.setProgram(compiled);
         };
+
+        $scope.$watch('compiledProgram', function(newValue) {
+            BinaryProgram.setProgram(newValue);
+        });
 
         $scope.startProgram = 0;
         $scope.startData = 0;
