@@ -94,7 +94,11 @@ bonsaiApp.directive('simulation', function () {
                     return { top: _y, left: _x };
                 };
                 if ($scope.editMode) {
-                    var offset = getOffset(document.getElementById('CpuCanvas'));
+                    var componentsDiv = $event.target;
+                    while (!angular.element(componentsDiv).hasClass('components') && (componentsDiv != document.body)) {
+                        componentsDiv = componentsDiv.parentNode;
+                    }
+                    var offset = getOffset(componentsDiv);
                     $scope.MouseX = $event.clientX - offset.left - 1;
                     $scope.MouseY = $event.clientY - offset.top - 3;
                 }

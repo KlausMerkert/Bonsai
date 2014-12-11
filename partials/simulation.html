@@ -26,7 +26,7 @@
                onchange="angular.element(this).scope().loadCpu()" />
         <span style="position: relative; top: -2px; float: right; margin: 1px;">({{ MouseX }}, {{ MouseY }})</span>
     </div>
-    <div class="components pane" id="CpuCanvas" ng-show="!selectedEditor" ng-mousemove="getMousePosition($event)">
+    <div class="components pane" ng-show="!selectedEditor" ng-mousemove="getMousePosition($event)">
         <div ng-repeat="bus in cpu.buses">
             <bus bus="bus.object" bus-name="{{bus.name}}" max-value="bus.max" base="bus.base"
                  color="bus.color" top="bus.top" left="bus.left" routes="bus.routes"></bus>
