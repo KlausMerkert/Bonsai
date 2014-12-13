@@ -83,24 +83,13 @@ bonsaiApp.directive('simulation', function () {
             });
 
             $scope.getMousePosition = function($event) {
-                var getOffset = function( el ) {
-                    var _x = 0;
-                    var _y = 0;
-                    while( el && !isNaN( el.offsetLeft ) && !isNaN( el.offsetTop ) ) {
-                        _x += el.offsetLeft - el.scrollLeft;
-                        _y += el.offsetTop - el.scrollTop;
-                        el = el.offsetParent;
-                    }
-                    return { top: _y, left: _x };
-                };
                 if ($scope.editMode) {
                     var componentsDiv = $event.target;
                     while (!angular.element(componentsDiv).hasClass('components') && (componentsDiv != document.body)) {
                         componentsDiv = componentsDiv.parentNode;
                     }
-                    var offset = getOffset(componentsDiv);
-                    $scope.MouseX = $event.clientX - offset.left - 1;
-                    $scope.MouseY = $event.clientY - offset.top - 3;
+                    $scope.MouseX = $event.clientX - Math.round(componentsDiv.getBoundingClientRect().left) - 2;
+                    $scope.MouseY = $event.clientY - Math.round(componentsDiv.getBoundingClientRect().top) - 3;
                 }
             };
 
