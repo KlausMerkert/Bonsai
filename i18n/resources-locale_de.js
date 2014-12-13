@@ -130,8 +130,8 @@
         "description": ""
     },
     {
-        "key"        : "_compileHeading_",
-        "value"      : "Compiler",
+        "key"        : "_assembleHeading_",
+        "value"      : "Assembler",
         "description": ""
     },
     {
@@ -145,8 +145,8 @@
         "description": ""
     },
     {
-        "key"        : "_compile_",
-        "value"      : "Übersetzen (compile):",
+        "key"        : "_assemble_",
+        "value"      : "Übersetzen (assemble):",
         "description": ""
     },
     {

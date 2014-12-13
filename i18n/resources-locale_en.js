@@ -130,8 +130,8 @@
         "description": ""
     },
     {
-        "key"        : "_compileHeading_",
-        "value"      : "Compiler",
+        "key"        : "_assembleHeading_",
+        "value"      : "Assembler",
         "description": ""
     },
     {
@@ -141,12 +141,12 @@
     },
     {
         "key"        : "_startData_",
-        "value"      : "start of data:",
+        "value"      : "Start of data:",
         "description": ""
     },
     {
-        "key"        : "_compile_",
-        "value"      : "Compile:",
+        "key"        : "_assemble_",
+        "value"      : "Assemble:",
         "description": ""
     },
     {
