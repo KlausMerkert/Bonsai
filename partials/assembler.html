@@ -42,7 +42,8 @@
         </div>
         <div style="float: left;">
             <div style="width: 0; height: 0; overflow: visible;">
-                <div class="editor" style="word-wrap: break-word; width: 390px; max-width: 390px; min-height: 250px;">
+                <div class="editor" id="formattedData"
+                     style="word-wrap: break-word; width: 390px; max-width: 390px; min-height: 250px;">
                     <div ng-repeat="dataLine in listedData" style="width: 100%;"
                          ng-style="{'background-color': dataLine.correct ? '' : 'rgba(255, 0, 0, 0.2)' }">
                         <span ng-show="dataLine.show" style="font-weight: bold; color: rgb(9, 76, 121);">
@@ -52,7 +53,7 @@
                     </div>
                 </div>
             </div>
-            <textarea ng-model="data" class="editor" id="data"
+            <textarea ng-model="data" class="editor" id="data" ng-trim="false" ng-style="{'height': dataHeight}"
                       style="background-color: rgba(0, 0, 0, 0); color: rgba(0, 0, 0, 0.5); width: 390px; max-width: 390px; min-height: 250px; white-space: pre-wrap; word-wrap: break-word;"></textarea>
         </div>
     </div>
@@ -125,7 +126,7 @@
                 <label for="start-program" data-i18n="_startProgram_"
                        style="font-size: 80%; display: table-cell;"></label>
                 <div style="display: table-cell;">
-                    <input type="number" id="start-program"
+                    <input type="number" id="start-program" placeholder="{{ startProgramFallback }}"
                            ng-model="startProgram" style="width: 4em;" class="editor" />
                 </div>
             </div>
@@ -133,7 +134,7 @@
                 <label for="start-data" data-i18n="_startData_"
                        style="font-size: 80%; display: table-cell;"></label>
                 <div style="display: table-cell;">
-                    <input type="number" id="start-data"
+                    <input type="number" id="start-data" placeholder="{{ startDataFallback }}"
                            ng-model="startData" style="width: 4em;" class="editor" />
                 </div>
             </div>
@@ -152,13 +153,14 @@
             </div>
         </div>
         <div>
-            <div style="display: inline-block; vertical-align: top; float: left; padding: 3px 2px 0 0;">
+            <div id="formattedCompiledProgram"
+                 style="display: inline-block; vertical-align: top; float: left; padding: 3px 2px 0 0;">
                 <div ng-repeat="lineNumber in getLineNumbers(compiledProgram)"
                      style="font-family: monospace, sans-serif; font-size: 12px; line-height: 16px; color: rgb(106, 106, 106); text-align: right;">
                     {{ lineNumber }}
                 </div>
             </div>
-            <textarea ng-model="compiledProgram" class="editor"
+            <textarea ng-model="compiledProgram" class="editor" ng-style="{'height': compiledHeight}"
                       style="width: 390px; max-width: 390px; min-height: 250px; white-space: pre-wrap; word-wrap: break-word; resize: none; overflow: hidden; font-size: 12px; line-height: 16px;"></textarea>
         </div>
     </div>

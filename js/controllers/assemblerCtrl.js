@@ -167,12 +167,24 @@ bonsaiApp.controller('bonsaiAssemblerCtrl',
 
         $scope.$watch('formattedProgram', function (newValue) {
             if (angular.isArray(newValue)) {
-                $scope.startData = $scope.startProgram + newValue.length + $scope.startDataOffset;
+                $scope.startDataFallback = $scope.startProgram + newValue.length;
             } else {
-                $scope.startData = $scope.startProgram + $scope.startDataOffset;
+                $scope.startDataFallback = $scope.startProgram;
             }
             $timeout(function () {
                 $scope.programHeight = document.getElementById('formattedProgram').clientHeight - 4 + 'px';
+            }, 0);
+        });
+
+        $scope.$watch('data', function () {
+            $timeout(function () {
+                $scope.dataHeight = document.getElementById('formattedData').clientHeight - 4 + 'px';
+            }, 0);
+        });
+
+        $scope.$watch('compiledProgram', function () {
+            $timeout(function () {
+                $scope.compiledHeight = document.getElementById('formattedCompiledProgram').clientHeight - 4 + 'px';
             }, 0);
         });
 
@@ -231,16 +243,7 @@ bonsaiApp.controller('bonsaiAssemblerCtrl',
             if (newValue < 0) {
                 $scope.startProgram = oldValue;
             } else {
-                $scope.startData = newValue + $scope.formattedProgram.length + $scope.startDataOffset;
-            }
-        });
-
-        $scope.$watch('startData', function (newValue, oldValue) {
-            if (newValue - $scope.startProgram - $scope.formattedProgram.length < 0) {
-                $scope.startData = oldValue;
-                $scope.startDataOffset = 0;
-            } else {
-                $scope.startDataOffset = newValue - $scope.startProgram - $scope.formattedProgram.length;
+                $scope.startDataFallback = newValue + $scope.formattedProgram.length;
             }
         });
 
@@ -452,28 +455,42 @@ bonsaiApp.controller('bonsaiAssemblerCtrl',
         };
 
         $scope.compile = function () {
-            var dataOffset = $scope.startProgram + $scope.formattedProgram.length + $scope.startDataOffset;
+            var startProgram = parseInt($scope.startProgram);
+            if (isNaN(startProgram)) {
+                startProgram = parseInt($scope.startProgramFallback);
+            }
+            var startData = parseInt($scope.startData);
+            if (isNaN(startData)) {
+                startData = startProgram + $scope.formattedProgram.length;
+            }
             var compiled = '';
-            for (var i = 0; i < $scope.startProgram; i++) {
+            for (var i = 0; i < Math.min(startProgram, startData); i++) {
                 compiled = compiled + "\n";
+            }
+            for (i = 0; i < startProgram - startData; i++) {
+                if (i < $scope.listedData.length) {
+                    compiled = compiled + $scope.listedData[i].number.toString() + "\n";
+                } else {
+                    compiled = compiled + "\n";
+                }
             }
             angular.forEach($scope.formattedProgram, function (programLine) {
                 var address = parseInt(programLine.address);
                 var opcode = '0';
                 if (programLine.command == 'inc') {
                     opcode = '1';
-                    address = address + dataOffset;
+                    address = address + startData;
                 }
                 if (programLine.command == 'dec') {
                     opcode = '2';
-                    address = address + dataOffset;
+                    address = address + startData;
                 }
                 if (programLine.command == 'jmp') {
                     opcode = '3';
                 }
                 if (programLine.command == 'tst') {
                     opcode = '4';
-                    address = address + dataOffset;
+                    address = address + startData;
                 }
                 if (programLine.command == 'hlt') {
                     opcode = '5';
@@ -486,27 +503,27 @@ bonsaiApp.controller('bonsaiAssemblerCtrl',
                 while (address.length < 4) {
                     address = '0' + address;
                 }
-                compiled = compiled + opcode + address + "\n"
+                compiled = compiled + opcode + address + "\n";
             });
-            for (i = $scope.startProgram + $scope.formattedProgram.length; i < dataOffset; i++) {
+            for (i = startProgram + $scope.formattedProgram.length; i < startData; i++) {
                 compiled = compiled + "\n";
             }
-            angular.forEach($scope.listedData, function (dataLine, index) {
-                compiled = compiled + dataLine.number.toString();
-                if (index < $scope.listedData.length - 1) {
-                    compiled = compiled + "\n";
+            for (i = 0; i < $scope.listedData.length; i++) {
+                if (startData + i >= startProgram + $scope.formattedProgram.length) {
+                    compiled = compiled + $scope.listedData[i].number.toString() + "\n";
                 }
-            });
-            $scope.compiledProgram = compiled;
+            }
+            $scope.compiledProgram = compiled.slice(0, compiled.length - 1);
         };
 
         $scope.$watch('compiledProgram', function(newValue) {
             BinaryProgram.setProgram(newValue);
         });
 
-        $scope.startProgram = 0;
-        $scope.startData = 0;
-        $scope.startDataOffset = 0;
+        $scope.startProgram = '';
+        $scope.startProgramFallback = 0;
+        $scope.startData = '';
+        $scope.startDataFallback = 0;
 
         $scope.delayTime = 0;
         $scope.errors = [];
