@@ -48,9 +48,9 @@ bonsaiApp.directive('bus', function () {
             $scope.displayWidth = function (highlight) {
                 if ($scope.localBus.getWidth() > 1) {
                     if (highlight) {
-                        return '3px';
+                        return '4px';
                     } else {
-                        return '2px';
+                        return '3px';
                     }
                 } else {
                     if (highlight) {

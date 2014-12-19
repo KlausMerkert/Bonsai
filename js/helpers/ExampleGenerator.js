@@ -355,7 +355,7 @@ ExampleGenerator.prototype.generateBonsai = function () {
                     {
                         'type': 'vertical',
                         'top': '164px',
-                        'left': '129px',
+                        'left': '128px',
                         'width': '0',
                         'height': '31px'
                     },
@@ -369,7 +369,7 @@ ExampleGenerator.prototype.generateBonsai = function () {
                     {
                         'type': 'vertical',
                         'top': '195px',
-                        'left': '318px',
+                        'left': '317px',
                         'width': '0',
                         'height': '17px'
                     },
@@ -392,15 +392,15 @@ ExampleGenerator.prototype.generateBonsai = function () {
                 'routes': [
                     {
                         'type': 'topleft',
-                        'top': '21px',
+                        'top': '20px',
                         'left': '51px',
                         'width': '301px',
                         'height': '7px'
                     },
                     {
                         'type': 'vertical',
-                        'top': '21px',
-                        'left': '224px',
+                        'top': '20px',
+                        'left': '223px',
                         'width': '0',
                         'height': '10px'
                     }
@@ -486,14 +486,14 @@ ExampleGenerator.prototype.generateBonsai = function () {
                 'routes': [
                     {
                         'type': 'topright',
-                        'top': '21px',
+                        'top': '20px',
                         'left': '384px',
                         'width': '11px',
                         'height': '7px'
                     },
                     {
                         'type': 'topleft',
-                        'top': '21px',
+                        'top': '20px',
                         'left': '396px',
                         'width': '11px',
                         'height': '7px'
@@ -510,9 +510,9 @@ ExampleGenerator.prototype.generateBonsai = function () {
                 'routes': [
                     {
                         'type': 'topright',
-                        'top': '21px',
+                        'top': '20px',
                         'left': '439px',
-                        'width': '23px',
+                        'width': '22px',
                         'height': '207px'
                     }
                 ]
