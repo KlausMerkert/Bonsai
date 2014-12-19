@@ -686,11 +686,6 @@ ExampleGenerator.prototype.generateBonsai = function () {
         ],
         'leds': [
             {
-                'wireId': 'or1_ausgang',
-                'name': 'or1_ausgang indication led',
-                'top': 35,
-                'left': 262
-            }, {
                 'wireId': 'compWire',
                 'name': 'comp indication led',
                 'top': 259,
