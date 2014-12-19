@@ -221,6 +221,7 @@ bonsaiApp.run(function ($timeout, $http, $templateCache) {
             '/partials/component_Register.html',
             '/partials/simulation.html',
             '/partials/circuit.html',
+            '/partials/element_slider.html',
             '/partials/assembler.html'
         ];
         angular.forEach(prefetchingTemplates, function (templateUrl) {
