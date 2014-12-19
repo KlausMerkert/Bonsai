@@ -200,3 +200,33 @@ bonsaiApp.run(function ($rootScope, $window, $document, $location, localize, Pag
     }
     $rootScope.menu = menu;
 });
+
+bonsaiApp.run(function ($timeout, $http, $templateCache) {
+    $timeout(function () {
+        // Template prefetching
+        var prefetchingTemplates = [
+            '/partials/component_AndGate.html',
+            '/partials/component_BitRegister.html',
+            '/partials/component_Bus.html',
+            '/partials/component_Clock.html',
+            '/partials/component_CompareToZero.html',
+            '/partials/component_ControlWire.html',
+            '/partials/component_Delay.html',
+            '/partials/component_Filter.html',
+            '/partials/component_Led.html',
+            '/partials/component_ManualSwitch.html',
+            '/partials/component_Memory.html',
+            '/partials/component_NorGate.html',
+            '/partials/component_OrGate.html',
+            '/partials/component_Register.html',
+            '/partials/simulation.html',
+            '/partials/circuit.html',
+            '/partials/assembler.html'
+        ];
+        angular.forEach(prefetchingTemplates, function (templateUrl) {
+            $http.get(templateUrl).success(function (templateData) {
+                $templateCache.put(templateUrl, templateData);
+            });
+        });
+    }, 0);
+});
