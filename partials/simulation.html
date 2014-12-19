@@ -20,8 +20,8 @@
     <div class="toolbar" ng-show="editMode" ng-mousedown="$event.preventDefault();">
         <!--<button type="button" ng-click="clearCpu()" data-i18n="_clearCpuButton_">clear CPU</button>-->
         <button type="button" ng-click="saveCpu()" class="save-button" style="margin: 1px; float: left;"></button>
-        <button type="button" ng-click="openFilePicker()" class="load-button" style="margin: 1px; float: left;"></button>
-        <input type="file" id="cpu-filename" style="display: none;"
+        <button type="button" ng-click="openFilePicker($event)" class="load-button" style="margin: 1px; float: left;"></button>
+        <input type="file" class="cpu-filename" style="display: none;"
                ng-model="cpuFileName"
                onchange="angular.element(this).scope().loadCpu()" />
         <span style="position: relative; top: -2px; float: right; margin: 1px;">({{ MouseX }}, {{ MouseY }})</span>

@@ -147,26 +147,43 @@ bonsaiApp.directive('simulation', function () {
                 $scope.cpu = {};
             };
 
-            $scope.openFilePicker = function () {
-                $scope.cpuFileName = undefined;
-                var input = document.getElementById('cpu-filename');
-                // This hack resets the input.
-                try {
-                    input.value = '';
-                    if(input.value){
-                        input.type = "text";
-                        input.type = "file";
+            $scope.getCpuFilenameInput = function (element) {
+                while (element != document.body) {
+                    for (var i = 0; i < element.parentNode.childNodes.length; i++) {
+                        if ((element.parentNode.childNodes[i].type == 'file') &&
+                            angular.element(element.parentNode.childNodes[i]).hasClass('cpu-filename')) {
+                            return element.parentNode.childNodes[i];
+                        }
                     }
-                } catch(e) {}
-                // End of the reset hack.
-                input.click();
+                    element = element.parentNode;
+                }
+                return null;
+            };
+
+            $scope.openFilePicker = function ($event) {
+                $scope.cpuFileName = undefined;
+                $scope.cpuFileNameInput = $scope.getCpuFilenameInput($event.target);
+                if ($scope.cpuFileNameInput) {
+                    // This hack resets the input.
+                    try {
+                        $scope.cpuFileNameInput.value = '';
+                        if ($scope.cpuFileNameInput.value) {
+                            $scope.cpuFileNameInput.type = "text";
+                            $scope.cpuFileNameInput.type = "file";
+                        }
+                    } catch (e) {
+                    }
+                    // End of the reset hack.
+                    $scope.cpuFileNameInput.click();
+                } else {
+                    console.log("Could not find the matching file input element. File loading aborted.");
+                }
             };
 
             $scope.loadCpu = function () {
                 $scope.$apply(function () {
                     $scope.clearCpu();
-                    var input = document.getElementById('cpu-filename');
-                    var file = input.files[0];
+                    var file = $scope.cpuFileNameInput.files[0];
                     var reader = new FileReader();
                     reader.addEventListener("loadend", function () {
                         $scope.$apply(function () {
