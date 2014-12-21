@@ -26,6 +26,9 @@ bonsaiApp.directive('slider', function () {
             $scope.width = rect.right - rect.left - 4;
 
             $scope.$watch('model', function (newValue) {
+                var rect = sliderBarElement.getBoundingClientRect();
+                $scope.leftOffset = rect.left;
+                $scope.width = rect.right - rect.left - 4;
                 var min = parseFloat($scope.valueMin);
                 if (isNaN(min)) {
                     min = 0;
