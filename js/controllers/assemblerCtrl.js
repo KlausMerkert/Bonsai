@@ -247,7 +247,11 @@ bonsaiApp.controller('bonsaiAssemblerCtrl',
             }
         });
 
-        $scope.$watch('nextExecutionPosition', function (newValue) {
+        $scope.$watch('nextExecutionPosition', function (newValue, oldValue) {
+            if ((typeof oldValue == 'undefined') && (typeof newValue != 'undefined')) {
+                $scope.executionPosition = -1;
+                $scope.nextExecutionPosition = 0;
+            }
             if (!(angular.isNumber(newValue) || typeof newValue == 'undefined')) {
                 $scope.executionPosition = undefined;
                 $scope.nextExecutionPosition = undefined;
