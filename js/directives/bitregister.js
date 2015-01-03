@@ -18,15 +18,11 @@ bonsaiApp.directive('bitregister', function ($interval) {
                 $scope.value = newValue;
             };
 
-            $scope.wideGateState = 0;
             $scope.wireRead = true;
             $scope.wideBusStateChangeCallback = function (newStateValue) {
-                if (!($scope.gateColorIteration > 0)) {
-                    $scope.wideGateState = newStateValue;
-                }
+                $scope.$broadcast('busChangeCallback',
+                    {bus: $scope.register.getWideBusConnection().bus, value: newStateValue});
             };
-            $scope.gateColor = 'rgb(200, 200, 200)';
-            $scope.gateColorIteration = 0;
 
             $scope.register = new BitRegister(
                 $scope.dataChangeCallback,
@@ -139,27 +135,6 @@ bonsaiApp.directive('bitregister', function ($interval) {
                 }
             });
 
-            $scope.$watch('wideGateState', function (newState) {
-                if (newState === -1) {
-                    $scope.gateColor = 'rgb(122, 222, 103)';
-                    $scope.gateColorIteration = 20;
-                    $interval(function () {
-                        $scope.gateColor =
-                            'rgb(' + Math.floor(122 + (200 - 122) * (20 - $scope.gateColorIteration) / 20) +
-                            ', ' + Math.floor((222 - 200) * $scope.gateColorIteration / 20 + 200) +
-                            ', ' + Math.floor(103 + (200 - 103) * (20 - $scope.gateColorIteration) / 20) + ')';
-                        if ($scope.gateColorIteration <= 0) {
-                            $scope.register.setWideBusState(0);
-                        }
-                        $scope.gateColorIteration--;
-                    }, 30, 21);
-                } else if (newState === 1) {
-                    $scope.gateColor = 'rgb(255, 103, 97)';
-                } else {
-                    $scope.gateColor = 'rgb(200, 200, 200)';
-                }
-            });
-
             $scope.$watch('value', function(newValue) {
                 if (typeof newValue != 'undefined') {
                     if (newValue != $scope.register.getValue()) {
@@ -267,28 +242,28 @@ bonsaiApp.directive('bitregister', function ($interval) {
             };
 
             $scope.$on('gateRead', function (event, bus) {
-                if ($scope.wideBusConnection.bus == bus) {
+                if (($scope.wideBusConnection) == ($scope.wideBusConnection.bus == bus)) {
                     $scope.setWideBusState(-1);
                 }
                 event.stopPropagation();
             });
 
             $scope.$on('gateReadDisconnected', function (event, bus) {
-                if ($scope.wideBusConnection.bus == bus) {
+                if (($scope.wideBusConnection) == ($scope.wideBusConnection.bus == bus)) {
                     $scope.setWideBusState(0);
                 }
                 event.stopPropagation();
             });
 
             $scope.$on('gateWrite', function (event, bus) {
-                if ($scope.wideBusConnection.bus == bus) {
+                if (($scope.wideBusConnection) == ($scope.wideBusConnection.bus == bus)) {
                     $scope.setWideBusState(1);
                 }
                 event.stopPropagation();
             });
 
             $scope.$on('gateWriteDisconnected', function (event, bus) {
-                if ($scope.wideBusConnection.bus == bus) {
+                if (($scope.wideBusConnection) == ($scope.wideBusConnection.bus == bus)) {
                     $scope.setWideBusState(0);
                 }
                 event.stopPropagation();
