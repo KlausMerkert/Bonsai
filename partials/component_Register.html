@@ -1,29 +1,8 @@
 <div class="component nospace" ng-style="{'top': topCSS, 'left': leftCSS}">
     <div class="register">
         <div style="width: 0; height: 0; overflow: visible; display: inline-block; position: absolute;"
-             ng-repeat="connection in register.getBuses()">
-            <div ng-click="toggleState(connection)" ng-mousedown="$event.preventDefault();"
-                 ng-class="{'connection': true, 'toprow': $even, 'bottomrow': $odd, 'read': connection.state == -1, 'write': connection.state == 1, 'grayback': connection.state == 0}"
-                 style="left: 1.3em;">
-                <div ng-show="(connection.state == 1 && $even) || (connection.state == -1 && $odd)"
-                     style="position: relative; top: -0.1em; left: 0.01em;" class="unselectable">&uarr;</div>
-                <div ng-show="connection.state == 0"
-                     style="position: relative; top: 0.05em; left: 0.01em;" class="unselectable">&bull;</div>
-                <div ng-show="(connection.state == -1 && $even) || (connection.state == 1 && $odd)"
-                     style="position: relative; top: -0.1em; left: 0.01em;" class="unselectable">&darr;</div>
-            </div>
-            <div class="nospace" style="position: absolute;" ng-class="{toprow: $even, bottomrow: $odd}">
-                <div ng-class="{'busconnector': true, 'busconnectortoprow': $even, 'busconnectorbottomrow': $odd}"
-                     style="left: 26px;"></div>
-                <div ng-class="{'wireconnector': true, 'write': true, 'wireconnectortoprowwrite': $even, 'wireconnectorbottomrowwrite': $odd}"
-                     style="left: 35px;"
-                     ng-mousedown="activateWriteWire(connection, $event)"
-                     ng-mouseup="deactivateWriteWire(connection)"></div>
-                <div ng-class="{'wireconnector': true, 'read': true, 'wireconnectortoprowread': $even, 'wireconnectorbottomrowread': $odd}"
-                     style="left: 2.19em;"
-                     ng-mousedown="activateReadWire(connection, $event)"
-                     ng-mouseup="deactivateReadWire(connection)"></div>
-            </div>
+             ng-repeat="connection in register.getBuses()" ng-class="{'toprow': $even, 'bottomrow': $odd}">
+            <gate-state connection="connection" downwards="$odd"></gate-state>
         </div>
         <div style="width: 0; height: 0; overflow: visible; display: inline-block; position: absolute;">
             <div class="wireconnector grayback" style="left: 58px; top: 0;"

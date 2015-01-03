@@ -54,11 +54,11 @@
 }
 
 .register .toprow, .bitregister .connection {
-    top: -22px;
+    top: -16px;
 }
 
 .register .bottomrow {
-    top: 20px;
+    top: 26px;
 }
 
 .register .grayback:active {

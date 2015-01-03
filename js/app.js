@@ -205,6 +205,7 @@ bonsaiApp.run(function ($timeout, $http, $templateCache) {
     $timeout(function () {
         // Template prefetching
         var prefetchingTemplates = [
+            '/partials/component_GateState.html',
             '/partials/component_AndGate.html',
             '/partials/component_BitRegister.html',
             '/partials/component_Bus.html',

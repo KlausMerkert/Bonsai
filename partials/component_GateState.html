@@ -1,0 +1,22 @@
+<div ng-click="toggleState()" ng-mousedown="$event.preventDefault();"
+     ng-class="{'read': connection.state == -1, 'write': connection.state == 1, 'grayback': connection.state == 0}"
+     class="connection" style="left: 1.3em;">
+    <div ng-show="(connection.state == 1 && !downwards) || (connection.state == -1 && downwards)"
+         style="position: relative; top: -0.1em; left: 0.01em;" class="unselectable">&uarr;</div>
+    <div ng-show="connection.state == 0"
+         style="position: relative; top: 0.05em; left: 0.01em;" class="unselectable">&bull;</div>
+    <div ng-show="(connection.state == -1 && !downwards) || (connection.state == 1 && downwards)"
+         style="position: relative; top: -0.1em; left: 0.01em;" class="unselectable">&darr;</div>
+</div>
+<div class="nospace" style="position: absolute; top: 0;">
+    <div ng-class="{'busconnectortoprow': !downwards, 'busconnectorbottomrow': downwards}"
+         class="busconnector" style="left: 26px;"></div>
+    <div ng-class="{'wireconnectortoprowwrite': !downwards, 'wireconnectorbottomrowwrite': downwards}"
+         class="wireconnector write" style="left: 35px;"
+         ng-mousedown="activateWriteWire($event)"
+         ng-mouseup="deactivateWriteWire()"></div>
+    <div ng-class="{'wireconnectortoprowread': !downwards, 'wireconnectorbottomrowread': downwards}"
+         class="wireconnector read" style="left: 2.19em;"
+         ng-mousedown="activateReadWire($event)"
+         ng-mouseup="deactivateReadWire()"></div>
+</div>
