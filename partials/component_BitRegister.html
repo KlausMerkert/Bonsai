@@ -2,8 +2,7 @@
     <div class="bitregister" ng-style="{'height': (getBits().length * 12) + 'px'}">
         <div style="width: 0; height: 0; overflow: visible; display: inline-block; position: absolute;">
             <div style="position: absolute; top: -22px; left: -19px;">
-                <gate-read-flank-write-state connection="wideBusConnection"
-                                             downwards="false"></gate-read-flank-write-state>
+                <gate-read-flank-write-state connection="wideBusConnection"></gate-read-flank-write-state>
             </div>
             <div ng-click="toggleBitConnectionState()" ng-mousedown="$event.preventDefault();"
                  class="bitconnections" style="position: absolute; left: -22px; top: -2px; width: 18px;"
