@@ -28,7 +28,11 @@ Memory.prototype.setAddressBusConnection = function (bus, readWire) {
     };
 };
 
-Memory.prototype.getAdressBus = function () {
+Memory.prototype.getAddressBusConnection = function () {
+    return this.addressBus;
+};
+
+Memory.prototype.getAddressBus = function () {
     return this.addressBus.bus;
 };
 
@@ -43,6 +47,10 @@ Memory.prototype.setDataBusConnection = function (bus, writeWire, readWire) {
         writeWire: writeWire,
         readWire: readWire
     };
+};
+
+Memory.prototype.getDataBusConnection = function () {
+    return this.dataBus;
 };
 
 Memory.prototype.setContent = function (newContent) {

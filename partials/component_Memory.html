@@ -1,48 +1,11 @@
 <div class="component nospace" ng-style="{'top': topCSS, 'left': leftCSS}">
     <div class="memory" ng-style="{height: showContext ? '82px' : '12px'}">
         <div style="width: 0; height: 0; overflow: visible; display: inline-block; position: absolute;">
-            <div ng-click="toggleAddressBusRead()" ng-mousedown="$event.preventDefault();"
-                 class="connection toprow"
-                 ng-class="{'read': memory.getAddressBusState() == -1, 'write': memory.getAddressBusState() == 1, 'grayback': memory.getAddressBusState() == 0}"
-                 style="left: 32px;">
-                <div ng-show="memory.getAddressBusState() == 1"
-                     style="position: relative; top: -2px; left: 0;" class="unselectable">&uarr;</div>
-                <div ng-show="memory.getAddressBusState() == 0"
-                     style="position: relative; top: 0; left: 0;" class="unselectable">&bull;</div>
-                <div ng-show="memory.getAddressBusState() == -1"
-                     style="position: relative; top: -2px; left: 0;" class="unselectable">&darr;</div>
+            <div style="position: absolute; top: -22px; left: 11px;">
+                <gate-state connection="addressBusConnection" disable-write="true"></gate-state>
             </div>
-            <div class="nospace toprow" style="position: absolute;">
-                <div class="busconnector busconnectortoprow"
-                     style="left: 37px;"></div>
-                <div class="wireconnector read wireconnectortoprowread"
-                     style="left: 46px;"
-                     ng-mousedown="activateAddressBusRead($event)" ng-mouseup="deactivateAddressBusRead()"></div>
-            </div>
-        </div>
-        <div style="width: 0; height: 0; overflow: visible; display: inline-block; position: absolute;">
-            <div ng-click="toggleDataBusState()" ng-mousedown="$event.preventDefault();"
-                 class="connection"
-                 ng-class="{'read': memory.getDataBusState() == -1, 'write': memory.getDataBusState() == 1, 'grayback': memory.getDataBusState() == 0}"
-                 ng-style="{top: showContext ? '84px' : '14px'}"
-                 style="left: 109px;">
-                <div ng-show="memory.getDataBusState() == -1"
-                     style="position: relative; top: -2px; left: 0;" class="unselectable">&uarr;</div>
-                <div ng-show="memory.getDataBusState() == 0"
-                     style="position: relative; top: 0; left: 0;" class="unselectable">&bull;</div>
-                <div ng-show="memory.getDataBusState() == 1"
-                     style="position: relative; top: -2px; left: 0;" class="unselectable">&darr;</div>
-            </div>
-            <div class="nospace" style="position: absolute;"
-                 ng-style="{top: showContext ? '84px' : '14px'}">
-                <div class="busconnector busconnectorbottomrow"
-                     style="left: 114px;"></div>
-                <div class="wireconnector write wireconnectorbottomrowwrite"
-                     style="left: 123px;"
-                     ng-mousedown="activateDataBusWrite($event)" ng-mouseup="deactivateDataBusWrite()"></div>
-                <div class="wireconnector read wireconnectorbottomrowread"
-                     style="left: 123px;"
-                     ng-mousedown="activateDataBusRead($event)" ng-mouseup="deactivateDataBusRead()"></div>
+            <div style="position: absolute; left:88px;" ng-style="{'top': showContext ? '84px' : '14px'}">
+                <gate-state connection="dataBusConnection" downwards="true"></gate-state>
             </div>
         </div>
         <table style="margin-top: 2px;">

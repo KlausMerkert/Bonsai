@@ -6,7 +6,9 @@ bonsaiApp.directive('gateState', function () {
         transclude: false,
         scope: {
             connection: '=',
-            downwards: '='
+            downwards: '=',
+            disableWrite: '=',
+            disableRead: '='
         },
         controller: function ($scope) {
             $scope.activateWriteWire = function ($event) {
