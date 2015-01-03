@@ -95,7 +95,7 @@ bonsaiApp.config(['$routeProvider', '$locationProvider', function ($routeProvide
     $routeProvider.
         when('/bonsai/', {templateUrl: '/partials/main.html', controller: 'bonsaiCpuCtrl'}).
         when('/assembler/', {templateUrl: '/partials/assembler.html', controller: 'bonsaiAssemblerCtrl'}).
-        when('/bonsai/assembler/', {templateUrl: '/partials/assembler.html', controller: 'bonsaiAssemblerCtrl'});
+        when('/bonsai/assembler/', {templateUrl: '/partials/assembler_noassemble.html', controller: 'bonsaiAssemblerCtrl'});
     $routeProvider.otherwise({templateUrl: '/partials/introduction.html', controller: 'bonsaiPageCtrl'});
     // use the HTML5 History API
     $locationProvider.html5Mode(true).hashPrefix('!');

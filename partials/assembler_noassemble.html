@@ -1,0 +1,140 @@
+<div ng-init="author = 'Johannes Merkert'"></div>
+
+<div class="textwidth">
+    <h2 class="pageTitle" data-i18n="_assemblerHeading_" ng-if="menu.length > 0"></h2>
+    <div class="assembler-pane">
+        <h3><label for="program" data-i18n="_program_"></label></h3>
+        <div style="float: left; padding: 3px 2px 0 0;">
+            <div ng-repeat="line in formattedProgram"
+                 style="font-family: monospace, sans-serif; font-size: 12px; line-height: 16px; color: rgb(106, 106, 106); text-align: right;">
+                {{ $index }}
+            </div>
+        </div>
+        <div style="float: left;">
+            <div style="width: 0; height: 0; overflow: visible;">
+                <div class="editor" id="formattedProgram"
+                     style="word-wrap: break-word; width: 390px; max-width: 390px; min-height: 250px;">
+                    <div ng-repeat="line in formattedProgram" style="width: 100%;"
+                         ng-style="{'background-color': line.correct ? '' : 'rgba(255, 0, 0, 0.2)' }">
+                        <span style="font-weight: bold; color: rgb(168, 0, 56);">{{ line.command }}</span><span
+                            style="font-weight: bold; color: rgba(128, 128, 128, 0.5);">{{ line.completion }}</span>
+                        <span>{{ line.address }}</span>
+                        <span ng-hide="isNumber(line.address)">&nbsp;</span>
+                        <img ng-show="$index == nextExecutionPosition"
+                             style="height: 12px;"
+                             src="/images/currentLine.svg" />
+                    </div>
+                    <div>&nbsp;</div>
+                </div>
+            </div>
+            <textarea ng-model="program" class="editor" ng-trim="false"
+                      ng-style="{'height': programHeight}" id="program"
+                      style="background-color: rgba(0, 0, 0, 0); color: rgba(0, 0, 0, 0.5); width: 390px; max-width: 390px; min-height: 250px; white-space: pre-wrap; word-wrap: break-word; resize: none; overflow: hidden;"></textarea>
+        </div>
+    </div>
+    <div class="assembler-pane">
+        <h3><label for="data" data-i18n="_data_"></label></h3>
+        <div style="float: left; padding: 3px 2px 0 0;">
+            <div ng-repeat="lineNo in getLineNumbers(data)"
+                 style="font-family: monospace, sans-serif; font-size: 12px; line-height: 16px; color: rgb(106, 106, 106); text-align: right;">
+                {{ $index }}
+            </div>
+        </div>
+        <div style="float: left;">
+            <div style="width: 0; height: 0; overflow: visible;">
+                <div class="editor" id="formattedData"
+                     style="word-wrap: break-word; width: 390px; max-width: 390px; min-height: 250px;">
+                    <div ng-repeat="dataLine in listedData" style="width: 100%;"
+                         ng-style="{'background-color': dataLine.correct ? '' : 'rgba(255, 0, 0, 0.2)' }">
+                        <span ng-show="dataLine.show" style="font-weight: bold; color: rgb(9, 76, 121);">
+                            {{ dataLine.number }}
+                        </span>
+                        <span ng-hide="dataLine.show">&nbsp;</span>
+                    </div>
+                </div>
+            </div>
+            <textarea ng-model="data" class="editor" id="data" ng-trim="false" ng-style="{'height': dataHeight}"
+                      style="background-color: rgba(0, 0, 0, 0); color: rgba(0, 0, 0, 0.5); width: 390px; max-width: 390px; min-height: 250px; white-space: pre-wrap; word-wrap: break-word;"></textarea>
+        </div>
+    </div>
+    <div style="clear: both;"></div>
+    <div class="assembler-pane">
+        <h3 data-i18n="_executeProgram_"></h3>
+        <button style="padding: 0 2px; line-height: 14px;"
+                ng-click="startAutomaticExecution()" ng-hide="executionRunning">
+            <span style="width: 14px; height: 14px; overflow: hidden; display: inline-block;">
+                ▶
+            </span>
+        </button>
+        <button style="padding: 0 2px; line-height: 14px;"
+                ng-click="pauseAutomaticExecution()" ng-show="executionRunning">
+            <span style="width: 14px; height: 14px; overflow: hidden; display: inline-block; font-size: 60%; position: relative; top: 1px; left: -2px;">
+                &#9616;&#9616;
+            </span>
+        </button>
+        <button style="padding: 0 2px; line-height: 14px;"
+                ng-click="step()">
+            <span style="width: 14px; height: 14px; overflow: hidden; display: inline-block; position: relative; top: 3px; font-size: 120%;">
+                ↷
+            </span>
+        </button>
+        <button style="padding: 0 2px; line-height: 14px;"
+                ng-click="stopAndReset()">
+            <span style="width: 14px; height: 14px; overflow: hidden; display: inline-block;">
+                ◼
+            </span>
+        </button>
+        <label for="programCounter" data-i18n="_programCounter_" style="font-size: 80%;"></label>
+        <input id="programCounter" type="number" min="0"
+               ng-model="nextExecutionPosition" style="width: 4em;" class="editor" />
+        <div>
+            <div data-i18n="_executionSpeed_" style="font-size: 80%;"></div>
+            <slider model="delayTime" value-min="5000" value-max="0" display-min="0.2" display-max="2000"
+                    scaling-function="fourRoot" display-scaling-function="square"></slider>
+        </div>
+    </div>
+    <div class="assembler-pane">
+        <h3 data-i18n="_loadAndSave_"></h3>
+        <button style="padding: 0 0 0 1px; line-height: 9px;" ng-click="openFilePicker()">
+            <img src="/images/Load-Icon.svg" alt="load" style="height: 17px;" />
+        </button>
+        <input type="file" id="filename" style="display: none;"
+               ng-model="assemblerFileName"
+               onchange="angular.element(this).scope().load()" />
+        <button style="padding: 0 0 0 1px; line-height: 9px;" ng-click="save()">
+            <img src="/images/Save-Icon.svg" alt="save" style="height: 17px;" />
+        </button>
+    </div>
+    <div style="clear: both;"></div>
+    <div class="assembler-pane" ng-show="errors.length > 0">
+        <h3 style="float: left;" data-i18n="_errors_"></h3>
+        <a style="float: right; font-size: 50%; cursor: pointer" ng-click="errors = []" data-i18n="_clearErrors_"></a>
+        <div style="clear: both;"></div>
+        <ul style="padding: 0; margin: 0; font-size: 80%;">
+            <li ng-repeat="error in errors" style="list-style-type: none; margin: 0;">
+                <span data-i18n="_errorInLine_"></span>
+                {{ error.lineNo }}:
+                <span style="color: rgb(110, 16, 46); font-weight: bold;" data-i18n="{{ error.message }}"></span>
+            </li>
+        </ul>
+    </div>
+    <div style="clear: both;"></div>
+</div>
+
+<div ng-if="language == 'de' && menu.length > 0">
+    <div class="pagebar">
+        <div class="textwidth">
+            <p>Wenn ein Maschinenprogramm assembliert wurde, kann dieses in einen Speicher in der
+            <a ng-href="/circuit/">Simulation</a> eingeladen werden.</p>
+        </div>
+    </div>
+</div>
+
+<div ng-if="language == 'en' && menu.length > 0">
+    <div class="pagebar">
+        <div class="textwidth">
+            <p>If machine code was created it can be loaded into a memory in the
+            <a ng-href="/circuit/">simulation</a>. Just look for the load button in the toolbar.</p>
+        </div>
+    </div>
+</div>
