@@ -1,6 +1,6 @@
 'use strict';
 
-bonsaiApp.directive('gateState', function () {
+bonsaiApp.directive('gateReadFlankWriteState', function () {
     return {
         restrict: 'E',
         transclude: false,
@@ -8,16 +8,15 @@ bonsaiApp.directive('gateState', function () {
             connection: '=',
             downwards: '='
         },
-        controller: function ($scope) {
+        controller: function ($scope, $timeout) {
             $scope.activateWriteWire = function ($event) {
-                $event.preventDefault();
+                if ($event) { $event.preventDefault(); }
                 if ($scope.connection.writeWire) {
                     $scope.connection.writeWire.unregisterReader($scope.connection.writeWireConnector);
                     try {
                         $scope.connection.writeWire.write($scope.connection.writeWireConnector, 1);
                         $scope.$emit('gateWrite', $scope.connection.bus);
                     } catch (exception) {
-                        $scope.connection.writeWire.stopWriting($scope.connection.writeWireConnector);
                         $scope.connection.writeWire.registerReaderAndRead($scope.connection.writeWireConnector);
                         throw exception;
                     }
@@ -29,7 +28,7 @@ bonsaiApp.directive('gateState', function () {
             $scope.deactivateWriteWire = function () {
                 if ($scope.connection.writeWire) {
                     try {
-                        $scope.connection.writeWire.write($scope.connection.writeWireConnector, 0);
+                        $scope.connection.writeWire.write(connection.writeWireConnector, 0);
                     } catch (exception) {
                         throw exception;
                     } finally {
@@ -41,40 +40,34 @@ bonsaiApp.directive('gateState', function () {
             };
 
             $scope.activateReadWire = function ($event) {
-                $event.preventDefault();
+                if ($event) { $event.preventDefault(); }
                 if ($scope.connection.readWire) {
                     $scope.connection.readWire.unregisterReader($scope.connection.readWireConnector);
                     try {
                         $scope.connection.readWire.write($scope.connection.readWireConnector, 1);
                         $scope.$emit('gateRead', $scope.connection.bus);
+                        $timeout(function () {
+                            $scope.connection.readWire.write($scope.connection.readWireConnector, 0);
+                            $scope.connection.readWire.stopWriting($scope.connection.readWireConnector);
+                            $scope.connection.readWire.registerReaderAndRead($scope.connection.readWireConnector);
+                            $scope.$emit('gateReadDisconnected', $scope.connection.bus);
+                        }, 0);
                     } catch (exception) {
-                        $scope.connection.readWire.stopWriting($scope.connection.readWireConnector);
                         $scope.connection.readWire.registerReaderAndRead($scope.connection.readWireConnector);
                         throw exception;
                     }
                 } else {
                     $scope.$emit('gateRead', $scope.connection.bus);
+                    $timeout(function () {
+                        $scope.$emit('gateReadDisconnected', $scope.connection.bus);
+                    }, 0);
                 }
-            };
-
-            $scope.deactivateReadWire = function () {
-                if ($scope.connection.readWire) {
-                    try {
-                        $scope.connection.readWire.write($scope.connection.readWireConnector, 0);
-                    } catch (exception) {
-                        throw exception;
-                    } finally {
-                        $scope.connection.readWire.stopWriting($scope.connection.readWireConnector);
-                        $scope.connection.readWire.registerReaderAndRead($scope.connection.readWireConnector);
-                    }
-                }
-                $scope.$emit('gateReadDisconnected', $scope.connection.bus);
             };
 
             $scope.toggleState = function () {
 
             };
         },
-        templateUrl: '/partials/component_GateState.html'
+        templateUrl: '/partials/component_GateReadFlankWriteState.html'
     };
 });

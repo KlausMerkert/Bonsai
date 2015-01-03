@@ -53,7 +53,7 @@
     overflow: hidden;
 }
 
-.register .toprow, .bitregister .connection {
+.register .toprow, .bitregister .toprow {
     top: -16px;
 }
 

@@ -82,6 +82,7 @@ bonsaiApp.directive('bitregister', function ($interval) {
                     initialState = 1;
                 }
                 $scope.initialWideBusGateState = initialState;
+                $scope.wideBusConnection = $scope.register.getWideBusConnection();
             };
 
             this.addWireConnection = function (wire) {
@@ -265,79 +266,33 @@ bonsaiApp.directive('bitregister', function ($interval) {
                 $scope.register.setBitGateToDisconnected();
             };
 
-            $scope.activateWriteWire = function ($event) {
-                if ($event) { $event.preventDefault(); }
-                var connection = $scope.register.getWideBusConnection();
-                if (connection.writeWire) {
-                    connection.writeWire.unregisterReader(connection.writeWireConnector);
-                    try {
-                        connection.writeWire.write(connection.writeWireConnector, 1);
-                        $scope.setState(1);
-                    } catch (exception) {
-                        connection.writeWire.registerReaderAndRead(connection.writeWireConnector);
-                        throw exception;
-                    }
-                } else {
+            $scope.$on('gateRead', function (event, bus) {
+                if ($scope.wideBusConnection.bus == bus) {
+                    $scope.setWideBusState(-1);
+                }
+                event.stopPropagation();
+            });
+
+            $scope.$on('gateReadDisconnected', function (event, bus) {
+                if ($scope.wideBusConnection.bus == bus) {
+                    $scope.setWideBusState(0);
+                }
+                event.stopPropagation();
+            });
+
+            $scope.$on('gateWrite', function (event, bus) {
+                if ($scope.wideBusConnection.bus == bus) {
                     $scope.setWideBusState(1);
                 }
-            };
+                event.stopPropagation();
+            });
 
-            $scope.deactivateWriteWire = function () {
-                var connection = $scope.register.getWideBusConnection();
-                if (connection.writeWire) {
-                    try {
-                        connection.writeWire.write(connection.writeWireConnector, 0);
-                    } catch (exception) {
-                        throw exception;
-                    } finally {
-                        connection.writeWire.stopWriting(connection.writeWireConnector);
-                        connection.writeWire.registerReaderAndRead(connection.writeWireConnector);
-                    }
+            $scope.$on('gateWriteDisconnected', function (event, bus) {
+                if ($scope.wideBusConnection.bus == bus) {
+                    $scope.setWideBusState(0);
                 }
-                $scope.setWideBusState(0);
-            };
-
-            $scope.activateReadWire = function ($event) {
-                if ($event) { $event.preventDefault(); }
-                var connection = $scope.register.getWideBusConnection();
-                if (connection.readWire) {
-                    connection.readWire.unregisterReader(connection.readWireConnector);
-                    try {
-                        connection.readWire.write(connection.readWireConnector, 1);
-                        $scope.setWideBusState(-1);
-                        $interval(function () {
-                            connection.readWire.write(connection.readWireConnector, 0);
-                            connection.readWire.stopWriting(connection.readWireConnector);
-                            connection.readWire.registerReaderAndRead(connection.readWireConnector);
-                            $scope.setWideBusState(0);
-                        }, 0, 1);
-                    } catch (exception) {
-                        connection.readWire.registerReaderAndRead(connection.readWireConnector);
-                        throw exception;
-                    }
-                } else {
-                    $scope.setWideBusState(-1);
-                    $interval(function () {
-                        $scope.setWideBusState(0);
-                    }, 0, 1);
-                }
-            };
-
-            $scope.toggleWideBusState = function () {
-                var stateFound = false;
-                var desiredState = $scope.register.wideBusConnection.state + 1;
-                while (!stateFound) {
-                    if (desiredState > 1) {
-                        desiredState = -1;
-                    }
-                    try {
-                        $scope.setWideBusState(desiredState);
-                        stateFound = true;
-                    } catch (exception) {
-                        desiredState++;
-                    }
-                }
-            };
+                event.stopPropagation();
+            });
 
             $scope.toggleBitConnectionState = function () {
                 var stateFound = false;
