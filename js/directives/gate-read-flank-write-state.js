@@ -96,8 +96,32 @@ bonsaiApp.directive('gateReadFlankWriteState', function () {
                 }
             };
 
-            $scope.toggleState = function () {
+            $scope.openSelector = function () {
+                $scope.showSelector = true;
+            };
 
+            $scope.selectTop = function () {
+                $scope.showSelector = undefined;
+                if (!$scope.downwards) {
+                    $scope.activateWriteWire();
+                } else {
+                    $scope.activateReadWire();
+                }
+            };
+
+            $scope.selectMiddle = function () {
+                $scope.showSelector = undefined;
+                $scope.deactivateReadWire();
+                $scope.deactivateWriteWire();
+            };
+
+            $scope.selectBottom = function() {
+                $scope.showSelector = undefined;
+                if (!$scope.downwards) {
+                    $scope.activateReadWire();
+                } else {
+                    $scope.activateWriteWire();
+                }
             };
         },
         templateUrl: '/partials/component_GateReadFlankWriteState.html'

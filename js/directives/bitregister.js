@@ -242,28 +242,28 @@ bonsaiApp.directive('bitregister', function ($interval) {
             };
 
             $scope.$on('gateRead', function (event, bus) {
-                if (($scope.wideBusConnection) == ($scope.wideBusConnection.bus == bus)) {
+                if (($scope.wideBusConnection) && ($scope.wideBusConnection.bus == bus)) {
                     $scope.setWideBusState(-1);
                 }
                 event.stopPropagation();
             });
 
             $scope.$on('gateReadDisconnected', function (event, bus) {
-                if (($scope.wideBusConnection) == ($scope.wideBusConnection.bus == bus)) {
+                if (($scope.wideBusConnection) && ($scope.wideBusConnection.bus == bus)) {
                     $scope.setWideBusState(0);
                 }
                 event.stopPropagation();
             });
 
             $scope.$on('gateWrite', function (event, bus) {
-                if (($scope.wideBusConnection) == ($scope.wideBusConnection.bus == bus)) {
+                if (($scope.wideBusConnection) && ($scope.wideBusConnection.bus == bus)) {
                     $scope.setWideBusState(1);
                 }
                 event.stopPropagation();
             });
 
             $scope.$on('gateWriteDisconnected', function (event, bus) {
-                if (($scope.wideBusConnection) == ($scope.wideBusConnection.bus == bus)) {
+                if (($scope.wideBusConnection) && ($scope.wideBusConnection.bus == bus)) {
                     $scope.setWideBusState(0);
                 }
                 event.stopPropagation();

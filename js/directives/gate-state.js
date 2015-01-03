@@ -12,7 +12,9 @@ bonsaiApp.directive('gateState', function () {
         },
         controller: function ($scope) {
             $scope.activateWriteWire = function ($event) {
-                $event.preventDefault();
+                if ($event) {
+                    $event.preventDefault();
+                }
                 if ($scope.connection.writeWire) {
                     $scope.connection.writeWire.unregisterReader($scope.connection.writeWireConnector);
                     try {
@@ -43,7 +45,9 @@ bonsaiApp.directive('gateState', function () {
             };
 
             $scope.activateReadWire = function ($event) {
-                $event.preventDefault();
+                if ($event) {
+                    $event.preventDefault();
+                }
                 if ($scope.connection.readWire) {
                     $scope.connection.readWire.unregisterReader($scope.connection.readWireConnector);
                     try {
@@ -73,8 +77,32 @@ bonsaiApp.directive('gateState', function () {
                 $scope.$emit('gateReadDisconnected', $scope.connection.bus);
             };
 
-            $scope.toggleState = function () {
+            $scope.openSelector = function () {
+                $scope.showSelector = true;
+            };
 
+            $scope.selectTop = function () {
+                $scope.showSelector = undefined;
+                if (!$scope.downwards) {
+                    $scope.activateWriteWire();
+                } else {
+                    $scope.activateReadWire();
+                }
+            };
+
+            $scope.selectMiddle = function () {
+                $scope.showSelector = undefined;
+                $scope.deactivateReadWire();
+                $scope.deactivateWriteWire();
+            };
+
+            $scope.selectBottom = function() {
+                $scope.showSelector = undefined;
+                if (!$scope.downwards) {
+                    $scope.activateReadWire();
+                } else {
+                    $scope.activateWriteWire();
+                }
             };
         },
         templateUrl: '/partials/component_GateState.html'

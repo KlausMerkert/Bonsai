@@ -1,4 +1,4 @@
-<div ng-click="toggleState()" ng-mousedown="$event.preventDefault();"
+<div ng-click="openSelector()" ng-mousedown="$event.preventDefault();"
      ng-class="{'read': connection.state == -1, 'write': connection.state == 1, 'grayback': connection.state == 0}"
      class="connection" style="left: 1.3em;">
     <div ng-show="(connection.state == 1 && !downwards) || (connection.state == -1 && downwards)"
@@ -21,4 +21,22 @@
          class="wireconnector read" style="left: 2.19em;"
          ng-mousedown="activateReadWire($event)"
          ng-mouseup="deactivateReadWire()"></div>
+</div>
+<div class="nospace" style="position: absolute; left: 12px;" ng-show="showSelector"
+     ng-style="{'top': (disableWrite || disableRead) ? '-6px' : '-36px'}">
+    <div class="touch-button" ng-class="{'write': !downwards, 'read': downwards}"
+         ng-hide="(disableWrite && !downwards) || (disableRead && downwards)"
+         style="margin-bottom: -1px; border-top-left-radius: 6px; border-top-right-radius: 6px;"
+         ng-click="selectTop()" ng-mousedown="$event.preventDefault()">
+        <div style="position: relative; top: 3px; left: 9px;" class="unselectable">&uarr;</div>
+    </div>
+    <div class="touch-button grayback" ng-click="selectMiddle()" ng-mousedown="$event.preventDefault()">
+        <div style="position: relative; top: 6px; left: 10px;" class="unselectable">&bull;</div>
+    </div>
+    <div class="touch-button" ng-class="{'write': downwards, 'read': !downwards}"
+         ng-hide="(disableRead && !downwards) || (disableWrite && downwards)"
+         style="margin-top: -1px; border-bottom-left-radius: 6px; border-bottom-right-radius: 6px;"
+         ng-click="selectBottom()" ng-mousedown="$event.preventDefault()">
+        <div style="position: relative; top: 2px; left: 9px;" class="unselectable">&darr;</div>
+    </div>
 </div>

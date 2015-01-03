@@ -374,3 +374,17 @@
     position: absolute;
     left: 14px;
 }
+
+.touch-button {
+    border: 1px solid rgb(30, 30, 30);
+    width: 30px;
+    height: 30px;
+    font-size: 24px;
+    position: relative;
+    z-index: 2000;
+    cursor: pointer;
+}
+
+.touch-button:active {
+    background-color: rgb(255, 255, 255);
+}
