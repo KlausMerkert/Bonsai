@@ -2,12 +2,16 @@
      ng-class="{'read': connection.state == -1, 'write': connection.state == 1, 'grayback': connection.state == 0}"
      ng-style="{'background-color': gateColor}"
      class="connection" style="left: 1.3em;">
-    <div ng-show="(connection.state == 1 && !downwards) || (connection.state == -1 && downwards)"
-         style="position: relative; top: -0.1em; left: 0.01em;" class="unselectable">&uarr;</div>
-    <div ng-show="connection.state == 0"
-         style="position: relative; top: 0.05em; left: 0.01em;" class="unselectable">&bull;</div>
-    <div ng-show="(connection.state == -1 && !downwards) || (connection.state == 1 && downwards)"
-         style="position: relative; top: -0.1em; left: 0.01em;" class="unselectable">&darr;</div>
+    <div style="position: relative; left: -50%; float: right; overflow: visible; margin: 0;">
+        <div style="position: relative; left: 50%;">
+            <div ng-show="(connection.state == 1 && !downwards) || (connection.state == -1 && downwards)"
+                 style="position: relative; top: -0.1em;" class="unselectable">&uarr;</div>
+            <div ng-show="connection.state == 0"
+                 style="position: relative; top: 0.05em;" class="unselectable">&bull;</div>
+            <div ng-show="(connection.state == -1 && !downwards) || (connection.state == 1 && downwards)"
+                 style="position: relative; top: -0.1em;" class="unselectable">&darr;</div>
+        </div>
+    </div>
     <div style="position: absolute; top: 8px; left: 10px;" class="flanktriggered"></div>
 </div>
 <div class="nospace" style="position: absolute; top: 0;">
@@ -27,15 +31,27 @@
          ng-hide="(disableWrite && !downwards) || (disableRead && downwards)"
          style="margin-bottom: -1px; border-top-left-radius: 6px; border-top-right-radius: 6px;"
          ng-click="selectTop()" ng-mousedown="$event.preventDefault()">
-        <div style="position: relative; top: 6px; left: 9px;" class="unselectable">&uarr;</div>
+        <div style="position: relative; left: -50%; float: right; overflow: visible; margin: 0;">
+            <div style="position: relative; left: 50%;">
+                <div style="padding-top: 6px;" class="unselectable">&uarr;</div>
+            </div>
+        </div>
     </div>
     <div class="touch-button grayback" ng-click="selectMiddle()" ng-mousedown="$event.preventDefault()">
-        <div style="position: relative; top: 10px; left: 10px;" class="unselectable">&bull;</div>
+        <div style="position: relative; left: -50%; float: right; overflow: visible; margin: 0;">
+            <div style="position: relative; left: 50%;">
+                <div style="padding-top: 10px;" class="unselectable">&bull;</div>
+            </div>
+        </div>
     </div>
     <div class="touch-button" ng-class="{'write': downwards, 'read': !downwards}"
          ng-hide="(disableRead && !downwards) || (disableWrite && downwards)"
          style="margin-top: -1px; border-bottom-left-radius: 6px; border-bottom-right-radius: 6px;"
          ng-click="selectBottom()" ng-mousedown="$event.preventDefault()">
-        <div style="position: relative; top: 5px; left: 9px;" class="unselectable">&darr;</div>
+        <div style="position: relative; left: -50%; float: right; overflow: visible; margin: 0;">
+            <div style="position: relative; left: 50%;">
+                <div style="padding-top: 5px;" class="unselectable">&darr;</div>
+            </div>
+        </div>
     </div>
 </div>
