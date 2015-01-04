@@ -565,14 +565,14 @@ ExampleGenerator.prototype.generateBonsai = function () {
                     {
                         'type': 'topleft',
                         'top': '278px',
-                        'left': '770px',
+                        'left': '753px',
                         'width': '30px',
                         'height': '22px'
                     },
                     {
                         'type': 'horizontal',
                         'top': '300px',
-                        'left': '760px',
+                        'left': '743px',
                         'width': '19px',
                         'height': '0px'
                     },
@@ -601,7 +601,7 @@ ExampleGenerator.prototype.generateBonsai = function () {
                         'type': 'bottomleft',
                         'top': '269px',
                         'left': '711px',
-                        'width': '22px',
+                        'width': '11px',
                         'height': '31px'
                     }
                 ]
@@ -660,7 +660,7 @@ ExampleGenerator.prototype.generateBonsai = function () {
                 'wireId': 'runClock',
                 'value': 0,
                 'top': 297,
-                'left': 865
+                'left': 845
             }
         ],
         'leds': [
@@ -904,7 +904,7 @@ ExampleGenerator.prototype.generateBonsai = function () {
                 'busLeftId': 'clockdelayed',
                 'busRightId': 'clock',
                 'top': 300,
-                'left': 738,
+                'left': 724,
                 'direction': 'left'
             }
         ],
@@ -935,7 +935,7 @@ ExampleGenerator.prototype.generateBonsai = function () {
                 'runWireId': 'runClock',
                 'frequency': 2,
                 'top': 300,
-                'left': 780
+                'left': 763
             }
         ],
         'labels': [
