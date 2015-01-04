@@ -234,6 +234,8 @@ bonsaiApp.directive('bitregister', function ($interval) {
                 } else {
                     $scope.register.setBitGateToDisconnected();
                 }
+                $scope.bitConnection = $scope.register.getBitConnection();
+                $scope.$broadcast('connectionStateChange', $scope.bitConnection);
             });
 
             $scope.$watch('bitWidth', function (newWidth) {

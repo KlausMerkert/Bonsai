@@ -11,7 +11,7 @@ bonsaiApp.directive('bitGateState', function () {
             disableWrite: '=',
             disableRead: '='
         },
-        controller: function ($scope) {
+        controller: function ($scope, $timeout) {
             $scope.range = function (count) {
                 var arr = [];
                 for (var i = 0; i < count; i++) {
@@ -85,6 +85,23 @@ bonsaiApp.directive('bitGateState', function () {
                 }
                 $scope.$emit('gateReadDisconnected', $scope.connection.wires);
             };
+
+            $scope.$on('connectionStateChange', function (event, connection) {
+                $timeout(function () {
+                    if ($scope.connection == connection) {
+                        if (connection.state == 1) {
+                            $scope.deactivateReadWire();
+                            $scope.activateWriteWire();
+                        } else if (connection.state == -1) {
+                            $scope.deactivateWriteWire();
+                            $scope.activateReadWire();
+                        } else {
+                            $scope.deactivateWriteWire();
+                            $scope.deactivateReadWire();
+                        }
+                    }
+                }, 0);
+            });
 
             $scope.activateBit = function (index, $event) {
                 if ($event) {
