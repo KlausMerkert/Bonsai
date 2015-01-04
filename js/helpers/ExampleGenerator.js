@@ -807,6 +807,7 @@ ExampleGenerator.prototype.generateBonsai = function () {
                     'readWireId': 'clock'
                 },
                 'bitWidth': 15,
+                'wireGateState': 1,
                 'wiregates': [
                     {'wireId': 's0'},
                     {'wireId': 's1'},
