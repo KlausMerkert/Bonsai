@@ -32,6 +32,8 @@ bonsaiApp.directive('bitregister', function ($interval) {
                 $scope.bitWidth
             );
 
+            $scope.bitConnection = {wires: [], state: 0};
+
             this.setBusConnection = function (bus, setWrite, setRead, initialState) {
                 $scope.register.setWideBusConnection(bus, setWrite, setRead);
                 if (bus) {
@@ -113,6 +115,7 @@ bonsaiApp.directive('bitregister', function ($interval) {
                     );
                     wire.registerReaderAndRead(connection.connector);
                 }
+                $scope.bitConnection = $scope.register.getBitConnection();
             };
         },
         link: function ($scope, element, attrs) {
@@ -125,6 +128,7 @@ bonsaiApp.directive('bitregister', function ($interval) {
 
             $scope.setWiresWires = function () {
                 $scope.register.setBitConnectionControlWires($scope.setWiresRead, $scope.setWiresWrite);
+                $scope.bitConnection = $scope.register.getBitConnection();
             };
             $scope.$watch('setWiresRead', $scope.setWiresWires);
             $scope.$watch('setWiresWrite', $scope.setWiresWires);
@@ -171,6 +175,7 @@ bonsaiApp.directive('bitregister', function ($interval) {
                         $scope.register.bitWiresConnection.readWireConnector
                     );
                 }
+                $scope.bitConnection = $scope.register.getBitConnection();
                 $scope.wiresReadInitialized = true;
                 $scope.checkForFinishedInitialization();
             });
@@ -203,12 +208,14 @@ bonsaiApp.directive('bitregister', function ($interval) {
                         $scope.register.bitWiresConnection.writeWireConnector
                     );
                 }
+                $scope.bitConnection = $scope.register.getBitConnection();
                 $scope.wiresWriteInitialized = true;
                 $scope.checkForFinishedInitialization();
             });
 
             $scope.$watch('bitWidth', function (newWidth) {
                 $scope.register.setBitWidth(newWidth);
+                $scope.bitConnection = $scope.register.getBitConnection();
             });
 
             $scope.getBits = function () {
@@ -219,107 +226,55 @@ bonsaiApp.directive('bitregister', function ($interval) {
                 return bits;
             };
 
-            $scope.setWideBusState = function (desiredState) {
-                window.getSelection().removeAllRanges(); // Hack to unselect the arrows to keep the color visible.
-                $scope.register.setWideBusState(desiredState);
-            };
-
-            $scope.activateWireRead = function () {
-                $scope.register.setBitGateToRead();
-            };
-
-            $scope.deactivateWireRead = function () {
-                $scope.register.setBitGateToDisconnected();
-            };
-
-            $scope.activateWireWrite = function ($event) {
-                if ($event) { $event.preventDefault(); }
-                $scope.register.setBitGateToWrite();
-            };
-
-            $scope.deactivateWireWrite = function () {
-                $scope.register.setBitGateToDisconnected();
-            };
-
             $scope.$on('gateRead', function (event, bus) {
                 if (($scope.wideBusConnection) && ($scope.wideBusConnection.bus == bus)) {
-                    $scope.setWideBusState(-1);
+                    $scope.register.setWideBusState(-1);
+                }
+                if (($scope.bitConnection) && ($scope.bitConnection.wires == bus)) {
+                    $scope.register.setBitGateToRead();
                 }
                 event.stopPropagation();
             });
 
             $scope.$on('gateReadDisconnected', function (event, bus) {
                 if (($scope.wideBusConnection) && ($scope.wideBusConnection.bus == bus)) {
-                    $scope.setWideBusState(0);
+                    $scope.register.setWideBusState(0);
+                }
+                if (($scope.bitConnection) && ($scope.bitConnection.wires == bus)) {
+                    $scope.register.setBitGateToDisconnected();
                 }
                 event.stopPropagation();
             });
 
             $scope.$on('gateWrite', function (event, bus) {
                 if (($scope.wideBusConnection) && ($scope.wideBusConnection.bus == bus)) {
-                    $scope.setWideBusState(1);
+                    $scope.register.setWideBusState(1);
+                }
+                if (($scope.bitConnection) && ($scope.bitConnection.wires == bus)) {
+                    $scope.register.setBitGateToWrite();
                 }
                 event.stopPropagation();
             });
 
             $scope.$on('gateWriteDisconnected', function (event, bus) {
                 if (($scope.wideBusConnection) && ($scope.wideBusConnection.bus == bus)) {
-                    $scope.setWideBusState(0);
+                    $scope.register.setWideBusState(0);
+                }
+                if (($scope.bitConnection) && ($scope.bitConnection.wires == bus)) {
+                    $scope.register.setBitGateToDisconnected();
                 }
                 event.stopPropagation();
             });
 
-            $scope.toggleBitConnectionState = function () {
-                var stateFound = false;
-                var desiredState = $scope.register.bitWiresConnection.state - 1;
-                while (!stateFound) {
-                    if (desiredState < -1) {
-                        desiredState = 1;
-                    }
-                    try {
-                        $scope.register.setBitConnectionState(desiredState);
-                        stateFound = true;
-                    } catch (exception) {
-                        desiredState--;
-                    }
-                }
-            };
+            $scope.$on('gateActivateBit', function (event, index) {
+                $scope.register.setBit(index, 1);
+                event.stopPropagation();
+            });
 
-            $scope.activateBit = function (index, $event) {
-                if ($event) { $event.preventDefault(); }
-                var wires = $scope.register.getWires();
-                if ((wires.length > index) && (wires[index].wire)) {
-                    wires[index].wire.unregisterReader(wires[index].connector);
-                    try {
-                        wires[index].wire.write(wires[index].connector, 1);
-                        $scope.register.setBit(index, 1);
-                    } catch (exception) {
-                        wires[index].wire.registerReaderAndRead(wires[index].connector);
-                        throw exception;
-                    }
-                } else {
-                    $scope.register.setBit(index, ($scope.register.getBit(index) + 1) % 2);
-                }
-            };
-
-            $scope.deactivateBit = function (index) {
-                var wires = $scope.register.getWires();
-                if (wires.length > index) {
-                    if (wires[index].wire) {
-                        try {
-                            wires[index].wire.write(wires[index].connector, 0);
-                            $scope.register.setBit(index, 0);
-                        } catch (exception) {
-                            throw exception;
-                        } finally {
-                            wires[index].wire.stopWriting(wires[index].connector);
-                            wires[index].wire.registerReaderAndRead(wires[index].connector);
-                        }
-                    } else {
-                        $scope.register.setBit(index, 0);
-                    }
-                }
-            };
+            $scope.$on('gateDeactivateBit', function (event, index) {
+                $scope.register.setBit(index, 0);
+                event.stopPropagation();
+            });
 
             $scope.toggleBit = function (index) {
                 $scope.register.setBit(index, ($scope.register.getBit(index) + 1) % 2)

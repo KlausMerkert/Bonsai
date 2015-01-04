@@ -4,30 +4,8 @@
             <div style="position: absolute; top: -22px; left: -19px;">
                 <gate-read-flank-write-state connection="wideBusConnection"></gate-read-flank-write-state>
             </div>
-            <div ng-click="toggleBitConnectionState()" ng-mousedown="$event.preventDefault();"
-                 class="bitconnections" style="position: absolute; left: -22px; top: -2px; width: 18px;"
-                 ng-class="{'read': register.bitWiresConnection.state == -1, 'write': register.bitWiresConnection.state == 1, 'grayback': register.bitWiresConnection.state == 0}"
-                 ng-style="{'height': (getBits().length * 12 + 2) + 'px'}">
-                <div ng-repeat="bit in getBits() track by $index"
-                     style="padding: 0; margin: 0; height: 12px; cursor: pointer; position: absolute; left: 1px;"
-                     ng-style="{'top': ($index * 12) + 'px'}">
-                    <span ng-show="register.bitWiresConnection.state == -1">&#8594;</span>
-                    <span style="padding: 0 5px; position: relative; top: 2px;"
-                          ng-show="register.bitWiresConnection.state == 0">&bull;</span>
-                    <span ng-show="register.bitWiresConnection.state == 1">&#8592;</span>
-                </div>
-            </div>
-            <div class="nospace" style="position: absolute;">
-                <div class="wireconnector write"
-                     style="position: absolute; left: -19px; top: -6px;"
-                     ng-mousedown="activateWireWrite($event)" ng-mouseup="deactivateWireWrite()"></div>
-                <div class="wireconnector read"
-                     style="position: absolute; left: -11px; top: -6px;"
-                     ng-mousedown="activateWireRead($event)" ng-mouseup="deactivateWireRead()"></div>
-                <div ng-repeat="bit in getBits() track by $index"
-                     class="wireconnector grayback" style="left: -26px;"
-                     ng-style="{'top': ($index * 12 + 4) + 'px'}"
-                     ng-mousedown="activateBit($index, $event)" ng-mouseup="deactivateBit($index)"></div>
+            <div style="position: absolute; top: 0; left: 0;">
+                <bit-gate-state connection="bitConnection" count="getBits().length"></bit-gate-state>
             </div>
         </div>
         <div ng-repeat="bit in getBits() track by $index"

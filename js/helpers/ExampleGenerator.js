@@ -536,7 +536,7 @@ ExampleGenerator.prototype.generateBonsai = function () {
                         'type': 'bottomleft',
                         'top': '293px',
                         'left': '538px',
-                        'width': '63px',
+                        'width': '42px',
                         'height': '15px'
                     }
                 ]
@@ -649,14 +649,6 @@ ExampleGenerator.prototype.generateBonsai = function () {
                     }
                 ]
             }, {
-                'id': 'SteuerwortWriteWire',
-                'name': 'Steuerwort write wire',
-                'max': 1
-            }, {
-                'id': 'SteuerwortReadWire',
-                'name': 'Steuerwort read wire',
-                'max': 1
-            }, {
                 'id': 'runClock',
                 'name': 'Clock run wire',
                 'max': 1
@@ -664,19 +656,6 @@ ExampleGenerator.prototype.generateBonsai = function () {
         ],
         'manualswitches': [
             {
-                'name': 'SteuerwortWriteWireSwitch',
-                'wireId': 'SteuerwortWriteWire',
-                'value': 1,
-                'top': 10,
-                'left': 865
-            }, {
-                'name': 'SteuerwortReadWireSwitch',
-                'wireId': 'SteuerwortReadWire',
-                'value': 0,
-                'top': 30,
-                'left': 865,
-                'color': 'rgb(0, 100, 0)'
-            }, {
                 'name': 'ClockRuneSwitch',
                 'wireId': 'runClock',
                 'value': 0,
@@ -819,8 +798,6 @@ ExampleGenerator.prototype.generateBonsai = function () {
             {
                 'name': 'Steuerwort',
                 'value': 0,
-                'wiresReadWireId': 'SteuerwortReadWire',
-                'wiresWriteWireId': 'SteuerwortWriteWire',
                 'base' : 10,
                 'top' : 50,
                 'left': 800,

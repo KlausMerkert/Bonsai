@@ -1,0 +1,51 @@
+<div ng-click="openSelector()" ng-mousedown="$event.preventDefault();"
+     class="bitconnections" style="position: absolute; left: -22px; top: -2px; width: 18px;"
+     ng-class="{'read': connection.state == -1, 'write': connection.state == 1, 'grayback': connection.state == 0}"
+     ng-style="{'height': (count * 12 + 2) + 'px'}">
+    <div ng-repeat="index in range(count)"
+         style="padding: 0; margin: 0; height: 12px; cursor: pointer; position: absolute; left: 1px;"
+         ng-style="{'top': (index * 12) + 'px'}">
+        <span ng-show="connection.state == -1">&#8594;</span>
+        <span style="padding: 0 5px; position: relative; top: 2px;"
+              ng-show="connection.state == 0">&bull;</span>
+        <span ng-show="connection.state == 1">&#8592;</span>
+    </div>
+</div>
+<div class="nospace" style="position: absolute;">
+    <div class="wireconnector write"
+         style="position: absolute; left: -19px; top: -6px;"
+         ng-mousedown="activateWriteWire($event)" ng-mouseup="deactivateWriteWire()"></div>
+    <div class="wireconnector read"
+         style="position: absolute; left: -11px; top: -6px;"
+         ng-mousedown="activateReadWire($event)" ng-mouseup="deactivateReadWire()"></div>
+    <div ng-repeat="index in range(count)"
+         class="wireconnector grayback" style="left: -26px;"
+         ng-style="{'top': (index * 12 + 4) + 'px'}"
+         ng-mousedown="activateBit(index, $event)" ng-mouseup="deactivateBit(index)"></div>
+</div>
+<div class="nospace" style="position: absolute; top: -6px;" ng-show="showSelector"
+     ng-style="{'left': (disableWrite || disableRead) ? '-30px' : '-59px'}">
+    <div style="width: 94px; height: 30px;">
+        <div class="touch-button" ng-class="{'write': !right, 'read': right}"
+             ng-hide="(disableWrite && !right) || (disableRead && right)"
+             ng-style="{'height': (count * 12 + 22) + 'px'}"
+             style="margin-right: -4px; border-top-left-radius: 6px; border-bottom-left-radius: 6px; display: inline-block;"
+             ng-click="selectLeft()" ng-mousedown="$event.preventDefault()">
+            <div ng-style="{'top': (count * 6 + 4) + 'px'}"
+                 style="position: relative; left: 4px;" class="unselectable">&#8592;</div>
+        </div>
+        <div class="touch-button grayback" ng-click="selectMiddle()" ng-mousedown="$event.preventDefault()"
+             style="display: inline-block;" ng-style="{'height': (count * 12 + 22) + 'px'}">
+            <div ng-style="{'top': (count * 6 + 7) + 'px'}"
+                 style="position: relative; left: 11px;" class="unselectable">&bull;</div>
+        </div>
+        <div class="touch-button" ng-class="{'write': right, 'read': !right}"
+             ng-hide="(disableRead && !right) || (disableWrite && right)"
+             ng-style="{'height': (count * 12 + 22) + 'px'}"
+             style="margin-left: -4px; border-top-right-radius: 6px; border-bottom-right-radius: 6px; display: inline-block;"
+             ng-click="selectRight()" ng-mousedown="$event.preventDefault()">
+            <div ng-style="{'top': (count * 6 + 4) + 'px'}"
+                 style="position: relative; left: 4px;" class="unselectable">&#8594;</div>
+        </div>
+    </div>
+</div>

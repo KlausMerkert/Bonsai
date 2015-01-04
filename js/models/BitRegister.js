@@ -79,6 +79,10 @@ BitRegister.prototype.setBitConnectionControlWires = function (readWire, writeWi
     this.bitWiresConnection.writeWire = writeWire;
 };
 
+BitRegister.prototype.getBitConnection = function () {
+    return this.bitWiresConnection;
+};
+
 BitRegister.prototype.getWires = function () {
     var bitConnections = [];
     for (var i = 0; i < this.bitWiresConnection.wires.length; i++) {
