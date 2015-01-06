@@ -150,8 +150,10 @@ bonsaiApp.directive('bitGateState', function () {
                 $scope.showSelector = undefined;
                 if (!$scope.right) {
                     $scope.activateWriteWire();
+                    $scope.deactivateReadWire();
                 } else {
                     $scope.activateReadWire();
+                    $scope.deactivateWriteWire();
                 }
             };
 
@@ -165,8 +167,10 @@ bonsaiApp.directive('bitGateState', function () {
                 $scope.showSelector = undefined;
                 if (!$scope.right) {
                     $scope.activateReadWire();
+                    $scope.deactivateWriteWire();
                 } else {
                     $scope.activateWriteWire();
+                    $scope.deactivateReadWire();
                 }
             };
         },

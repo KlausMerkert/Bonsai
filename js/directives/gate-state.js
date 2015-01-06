@@ -85,8 +85,10 @@ bonsaiApp.directive('gateState', function () {
                 $scope.showSelector = undefined;
                 if (!$scope.downwards) {
                     $scope.activateWriteWire();
+                    $scope.deactivateReadWire();
                 } else {
                     $scope.activateReadWire();
+                    $scope.deactivateWriteWire();
                 }
             };
 
@@ -100,8 +102,10 @@ bonsaiApp.directive('gateState', function () {
                 $scope.showSelector = undefined;
                 if (!$scope.downwards) {
                     $scope.activateReadWire();
+                    $scope.deactivateWriteWire();
                 } else {
                     $scope.activateWriteWire();
+                    $scope.deactivateReadWire();
                 }
             };
         },
