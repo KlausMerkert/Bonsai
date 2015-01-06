@@ -13,7 +13,7 @@
         <div style="float: left;">
             <div style="width: 0; height: 0; overflow: visible;">
                 <div class="editor" id="formattedProgram"
-                     style="word-wrap: break-word; width: 390px; max-width: 390px; min-height: 250px;">
+                     style="word-wrap: break-word; min-width: 160px; max-width: 160px; min-height: 250px;">
                     <div ng-repeat="line in formattedProgram" style="width: 100%;"
                          ng-style="{'background-color': line.correct ? '' : 'rgba(255, 0, 0, 0.2)' }">
                         <span style="font-weight: bold; color: rgb(168, 0, 56);">{{ line.command }}</span><span
@@ -29,7 +29,7 @@
             </div>
             <textarea ng-model="program" class="editor" ng-trim="false"
                       ng-style="{'height': programHeight}" id="program"
-                      style="background-color: rgba(0, 0, 0, 0); color: rgba(0, 0, 0, 0.5); width: 390px; max-width: 390px; min-height: 250px; white-space: pre-wrap; word-wrap: break-word; resize: none; overflow: hidden;"></textarea>
+                      style="background-color: rgba(0, 0, 0, 0); color: rgba(0, 0, 0, 0.5); min-width: 160px; max-width: 160px; min-height: 250px; white-space: pre-wrap; word-wrap: break-word; resize: none; overflow: hidden;"></textarea>
         </div>
     </div>
     <div class="assembler-pane">
@@ -43,7 +43,7 @@
         <div style="float: left;">
             <div style="width: 0; height: 0; overflow: visible;">
                 <div class="editor" id="formattedData"
-                     style="word-wrap: break-word; width: 390px; max-width: 390px; min-height: 250px;">
+                     style="word-wrap: break-word; min-width: 160px; max-width: 160px; min-height: 250px;">
                     <div ng-repeat="dataLine in listedData" style="width: 100%;"
                          ng-style="{'background-color': dataLine.correct ? '' : 'rgba(255, 0, 0, 0.2)' }">
                         <span ng-show="dataLine.show" style="font-weight: bold; color: rgb(9, 76, 121);">
@@ -54,7 +54,52 @@
                 </div>
             </div>
             <textarea ng-model="data" class="editor" id="data" ng-trim="false" ng-style="{'height': dataHeight}"
-                      style="background-color: rgba(0, 0, 0, 0); color: rgba(0, 0, 0, 0.5); width: 390px; max-width: 390px; min-height: 250px; white-space: pre-wrap; word-wrap: break-word;"></textarea>
+                      style="background-color: rgba(0, 0, 0, 0); color: rgba(0, 0, 0, 0.5); min-width: 160px; max-width: 160px; min-height: 250px; white-space: pre-wrap; word-wrap: break-word;"></textarea>
+        </div>
+    </div>
+    <div class="assembler-pane">
+        <h3 data-i18n="_assembleHeading_"></h3>
+        <div style="display: table; line-height: 24px; margin-bottom: 6px;">
+            <div style="display: table-row;">
+                <label for="start-program" data-i18n="_startProgram_"
+                       style="font-size: 80%; display: table-cell;"></label>
+                <div style="display: table-cell;">
+                    <input type="number" id="start-program" placeholder="{{ startProgramFallback }}"
+                           ng-model="startProgram" style="width: 4em;" class="editor" />
+                </div>
+            </div>
+            <div style="display: table-row;">
+                <label for="start-data" data-i18n="_startData_"
+                       style="font-size: 80%; display: table-cell;"></label>
+                <div style="display: table-cell;">
+                    <input type="number" id="start-data" placeholder="{{ startDataFallback }}"
+                           ng-model="startData" style="width: 4em;" class="editor" />
+                </div>
+            </div>
+            <div style="display: table-row;">
+                <span data-i18n="_assemble_" style="font-size: 80%; display: table-cell;"></span>
+                <div style="display: table-cell;">
+                    <div style="position: relative;">
+                        <div style="position: relative; top: 4px;">
+                            <button style="padding: 0 0 0 1px; line-height: 9px;"
+                                    ng-click="compile()">
+                                <img src="/images/Compile-Icon.svg" alt="save" style="height: 17px;" />
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div ng-show="compiledProgram">
+            <div id="formattedCompiledProgram"
+                 style="display: inline-block; vertical-align: top; float: left; padding: 3px 2px 0 0;">
+                <div ng-repeat="lineNumber in getLineNumbers(compiledProgram)"
+                     style="font-family: monospace, sans-serif; font-size: 12px; line-height: 16px; color: rgb(106, 106, 106); text-align: right;">
+                    {{ lineNumber }}
+                </div>
+            </div>
+            <textarea ng-model="compiledProgram" class="editor" ng-style="{'height': compiledHeight}"
+                      style="min-width: 160px; max-width: 160px; min-height: 250px; white-space: pre-wrap; word-wrap: break-word; resize: none; overflow: hidden; font-size: 12px; line-height: 16px;"></textarea>
         </div>
     </div>
     <div style="clear: both;"></div>
@@ -117,52 +162,6 @@
                 <span style="color: rgb(110, 16, 46); font-weight: bold;" data-i18n="{{ error.message }}"></span>
             </li>
         </ul>
-    </div>
-    <div style="clear: both;"></div>
-    <div class="assembler-pane">
-        <h3 data-i18n="_assembleHeading_"></h3>
-        <div style="display: table; line-height: 24px; margin-bottom: 6px;">
-            <div style="display: table-row;">
-                <label for="start-program" data-i18n="_startProgram_"
-                       style="font-size: 80%; display: table-cell;"></label>
-                <div style="display: table-cell;">
-                    <input type="number" id="start-program" placeholder="{{ startProgramFallback }}"
-                           ng-model="startProgram" style="width: 4em;" class="editor" />
-                </div>
-            </div>
-            <div style="display: table-row;">
-                <label for="start-data" data-i18n="_startData_"
-                       style="font-size: 80%; display: table-cell;"></label>
-                <div style="display: table-cell;">
-                    <input type="number" id="start-data" placeholder="{{ startDataFallback }}"
-                           ng-model="startData" style="width: 4em;" class="editor" />
-                </div>
-            </div>
-            <div style="display: table-row;">
-                <span data-i18n="_assemble_" style="font-size: 80%; display: table-cell;"></span>
-                <div style="display: table-cell;">
-                    <div style="position: relative;">
-                        <div style="position: relative; top: 4px;">
-                            <button style="padding: 0 0 0 1px; line-height: 9px;"
-                                    ng-click="compile()">
-                                <img src="/images/Compile-Icon.svg" alt="save" style="height: 17px;" />
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div>
-            <div id="formattedCompiledProgram"
-                 style="display: inline-block; vertical-align: top; float: left; padding: 3px 2px 0 0;">
-                <div ng-repeat="lineNumber in getLineNumbers(compiledProgram)"
-                     style="font-family: monospace, sans-serif; font-size: 12px; line-height: 16px; color: rgb(106, 106, 106); text-align: right;">
-                    {{ lineNumber }}
-                </div>
-            </div>
-            <textarea ng-model="compiledProgram" class="editor" ng-style="{'height': compiledHeight}"
-                      style="width: 390px; max-width: 390px; min-height: 250px; white-space: pre-wrap; word-wrap: break-word; resize: none; overflow: hidden; font-size: 12px; line-height: 16px;"></textarea>
-        </div>
     </div>
     <div style="clear: both;"></div>
 </div>
