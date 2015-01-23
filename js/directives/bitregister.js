@@ -215,27 +215,29 @@ bonsaiApp.directive('bitregister', function ($interval) {
             });
 
             $scope.$watch('wireGateState', function (newValue, oldValue) {
-                var state = parseInt(newValue);
-                if (!state) {
-                    state = 0;
+                if (newValue != oldValue) {
+                    var state = parseInt(newValue);
+                    if (!state) {
+                        state = 0;
+                    }
+                    if (state < 0) {
+                        state = -1;
+                    } else if (state > 0) {
+                        state = 1;
+                    }
+                    if (!parseInt(oldValue) || parseInt(oldValue) < -1 || parseInt(oldValue) > 1) {
+                        $scope.wireGateState = state;
+                    }
+                    if (state == 1) {
+                        $scope.register.setBitGateToWrite();
+                    } else if (state == -1) {
+                        $scope.register.setBitGateToRead();
+                    } else {
+                        $scope.register.setBitGateToDisconnected();
+                    }
+                    $scope.bitConnection = $scope.register.getBitConnection();
+                    $scope.$broadcast('connectionStateChange', $scope.bitConnection);
                 }
-                if (state < 0) {
-                    state = -1;
-                } else if (state > 0) {
-                    state = 1;
-                }
-                if (!parseInt(oldValue) || parseInt(oldValue) < -1 || parseInt(oldValue) > 1) {
-                    $scope.wireGateState = state;
-                }
-                if (state == 1) {
-                    $scope.register.setBitGateToWrite();
-                } else if (state == -1) {
-                    $scope.register.setBitGateToRead();
-                } else {
-                    $scope.register.setBitGateToDisconnected();
-                }
-                $scope.bitConnection = $scope.register.getBitConnection();
-                $scope.$broadcast('connectionStateChange', $scope.bitConnection);
             });
 
             $scope.$watch('bitWidth', function (newWidth) {
