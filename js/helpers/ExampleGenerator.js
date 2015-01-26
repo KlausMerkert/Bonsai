@@ -796,7 +796,7 @@ ExampleGenerator.prototype.generateBonsai = function () {
             },
             {
                 "name": "IR",
-                "value": 40008,
+                "value": 0,
                 "base": 10,
                 "top": 50,
                 "left": 344,
@@ -814,7 +814,7 @@ ExampleGenerator.prototype.generateBonsai = function () {
             },
             {
                 "name": "Akku",
-                "value": 42,
+                "value": 0,
                 "base": 10,
                 "top": 250,
                 "left": 10,
