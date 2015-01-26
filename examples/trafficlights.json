@@ -1,136 +1,271 @@
-{    "buses": [
+{
+  "buses": [
+    {
+      "id": "s0",
+      "name": "red",
+      "max": 1
+    },
+    {
+      "id": "s1",
+      "name": "yellow",
+      "max": 1,
+      "color": "rgb(100, 100, 255)"
+    },
+    {
+      "id": "s2",
+      "name": "green",
+      "max": 1,
+      "color": "rgb(100, 255, 100)"
+    },
+    {
+      "id": "MicroAddressBus",
+      "name": "MikroAdressbus",
+      "max": 99,
+      "base": 10,
+      "color": "rgb(155, 100, 0)",
+      "top": -3,
+      "left": 510,
+      "routes": [
         {
-            "id": "s0",
-            "name": "red",
-            "max": 1
+          "type": "topright",
+          "top": "21px",
+          "left": "521px",
+          "width": "20px",
+          "height": "7px"
         },
         {
-            "id": "s1",
-            "name": "yellow",
-            "max": 1,
-            "color": "rgb(100, 100, 255)"
-        },
-        {
-            "id": "s2",
-            "name": "green",
-            "max": 1,
-            "color": "rgb(100, 255, 100)"
-        },
-        {
-            "id": "MicroDataBus",
-            "name": "MicroDataBus",
-            "base": 10,
-            "max": 32767,
-            "color": "rgb(200, 0, 200)",
-            "left": 685,
-            "top": -3,
-            "routes": [
-                {
-                    "type": "topright",
-                    "top": "21px",
-                    "left": "710px",
-                    "width": "20px",
-                    "height": "7px"
-                },
-                {
-                    "type": "topleft",
-                    "top": "21px",
-                    "left": "596px",
-                    "width": "112px",
-                    "height": "7px"
-                }
-            ]
-        },
-        {
-            "id": "SteuerwortWriteWire",
-            "name": "Steuerwort write wire",
-            "max": 1
-        },
-        {
-            "id": "SteuerwortReadWire",
-            "name": "Steuerwort read wire",
-            "max": 1
+          "type": "topleft",
+          "top": "21px",
+          "left": "434px",
+          "width": "86px",
+          "height": "7px"
         }
-    ],
-    "manualswitches": [
+      ]
+    },
+    {
+      "id": "MicroDataBus",
+      "name": "MicroDataBus",
+      "base": 10,
+      "max": 7,
+      "color": "rgb(200, 0, 200)",
+      "left": 685,
+      "top": -3,
+      "routes": [
         {
-            "name": "SteuerwortWriteWireSwitch",
-            "wireId": "SteuerwortWriteWire",
-            "value": 1,
-            "top": 10,
-            "left": 765
+          "type": "bottomright",
+          "top": "164px",
+          "left": "648px",
+          "width": "23px",
+          "height": "7px"
         },
         {
-            "name": "SteuerwortReadWireSwitch",
-            "wireId": "SteuerwortReadWire",
-            "value": 0,
-            "top": 26,
-            "left": 765
-        }
-    ],
-    "leds": [
-        {
-            "wireId": "s0",
-            "name": "s0 led",
-            "top": 62,
-            "left": 682,
-            "color": "rgb(255, 0, 0)",
-            "value": 0
+          "type": "topright",
+          "top": "21px",
+          "left": "710px",
+          "width": "20px",
+          "height": "7px"
         },
         {
-            "wireId": "s1",
-            "name": "s1 led",
-            "top": 74,
-            "left": 682,
-            "color": "rgb(255, 255, 0)",
-            "value": 0
+          "type": "topleft",
+          "top": "21px",
+          "left": "671px",
+          "width": "37px",
+          "height": "141px"
         },
         {
-            "wireId": "s2",
-            "name": "s2 led",
-            "top": 86,
-            "left": 682,
-            "value": 0
+          "type": "bottomleft",
+          "top": "164px",
+          "left": "618px",
+          "width": "28px",
+          "height": "7px"
         }
-    ],
-    "registers": [
+      ]
+    },
+    {
+      "id": "SteuerwortWriteWire",
+      "name": "Steuerwort write wire",
+      "max": 1
+    },
+    {
+      "id": "SteuerwortReadWire",
+      "name": "Steuerwort read wire",
+      "max": 1
+    },
+    {
+      "id": "clock",
+      "name": "Takt",
+      "max": 1,
+      "color": "rgb(100, 100, 255)",
+      "routes": [
         {
-            "name": "Steuerwort",
-            "value": 0,
-            "base": 10,
-            "top": 50,
-            "left": 562,
-            "gates": [
-                {
-                    "busId": "MicroDataBus"
-                }
-            ]
-        }
-    ],
-    "bitregisters": [
+          "type": "topright",
+          "top": "45px",
+          "left": "743px",
+          "width": "20px",
+          "height": "133px"
+        },
         {
-            "name": "Steuerwort",
-            "value": 0,
-            "wiresReadWireId": "SteuerwortReadWire",
-            "wiresWriteWireId": "SteuerwortWriteWire",
-            "base": 10,
-            "top": 50,
-            "left": 700,
-            "widegate": {
-                "busId": "MicroDataBus"
-            },
-            "bitWidth": 3,
-            "wiregates": [
-                {
-                    "wireId": "s0"
-                },
-                {
-                    "wireId": "s1"
-                },
-                {
-                    "wireId": "s2"
-                }
-            ]
+          "type": "bottomright",
+          "top": "179px",
+          "left": "585px",
+          "width": "178px",
+          "height": "20px"
+        },
+        {
+          "type": "topright",
+          "top": "58px",
+          "left": "468px",
+          "width": "10px",
+          "height": "22px"
+        },
+        {
+          "type": "bottomright",
+          "top": "80px",
+          "left": "448px",
+          "width": "30px",
+          "height": "15px"
+        },
+        {
+          "type": "bottomleft",
+          "top": "110px",
+          "left": "385px",
+          "width": "10px",
+          "height": "9px"
+        },
+        {
+          "type": "topleft",
+          "top": "95px",
+          "left": "385px",
+          "width": "62px",
+          "height": "15px"
+        },
+        {
+          "type": "topleft",
+          "top": "119px",
+          "left": "385px",
+          "width": "10px",
+          "height": "50px"
+        },
+        {
+          "type": "bottomleft",
+          "top": "169px",
+          "left": "385px",
+          "width": "200px",
+          "height": "30px"
+        }      
+      ]
+    }
+  ],
+  "manualswitches": [
+    {
+      "name": "SteuerwortWriteWireSwitch",
+      "wireId": "SteuerwortWriteWire",
+      "value": 1,
+      "top": 10,
+      "left": 765
+    },
+    {
+      "name": "SteuerwortReadWireSwitch",
+      "wireId": "SteuerwortReadWire",
+      "value": 0,
+      "top": 26,
+      "left": 765
+    }
+  ],
+  "leds": [
+    {
+      "wireId": "s0",
+      "name": "s0 led",
+      "top": 62,
+      "left": 682,
+      "color": "rgb(255, 0, 0)",
+      "value": 0
+    },
+    {
+      "wireId": "s1",
+      "name": "s1 led",
+      "top": 74,
+      "left": 682,
+      "color": "rgb(255, 255, 0)",
+      "value": 0
+    },
+    {
+      "wireId": "s2",
+      "name": "s2 led",
+      "top": 86,
+      "left": 682,
+      "value": 0
+    }
+  ],
+  "memories": [
+    {
+      "name": "Ablaufplan",
+      "base": 10,
+      "content": "1\n3\n4\n2\n1\n3\n4\n2",
+      "top": 50,
+      "left": 500,
+      "addressgate": {
+        "busId": "MicroAddressBus",
+        "initialState": -1
+      },
+      "datagate": {
+        "busId": "MicroDataBus",
+        "initialState": 1
+      },
+      "undefinedString": "---",
+      "showContext": true
+    }
+  ],
+  "registers": [
+    {
+      "name": "Steuerwort",
+      "value": 0,
+      "base": 10,
+      "top": 50,
+      "left": 400,
+      "gates": [
+        {
+          "busId": "MicroAddressBus",
+          "initialState": 1
         }
-    ]
+      ],
+      "incWireId": "clock"
+    }
+  ],
+  "bitregisters": [
+    {
+      "name": "Steuerwort",
+      "value": 0,
+      "wiresReadWireId": "SteuerwortReadWire",
+      "wiresWriteWireId": "SteuerwortWriteWire",
+      "base": 10,
+      "top": 50,
+      "left": 700,
+      "widegate": {
+        "busId": "MicroDataBus",
+        "readWireId": "clock"
+      },
+      "bitWidth": 3,
+      "wiregates": [
+        {
+          "wireId": "s0"
+        },
+        {
+          "wireId": "s1"
+        },
+        {
+          "wireId": "s2"
+        }
+      ]
+    }
+  ],
+  "clocks": [
+    {
+      "name": "Takt",
+      "wireId": "clock",
+      "frequency": 1,
+      "top": 120,
+      "left": 397
+    }
+  ]
 }
