@@ -149,11 +149,11 @@ bonsaiApp.directive('bitGateState', function () {
             $scope.selectLeft = function () {
                 $scope.showSelector = undefined;
                 if (!$scope.right) {
-                    $scope.activateWriteWire();
                     $scope.deactivateReadWire();
+                    $scope.activateWriteWire();
                 } else {
-                    $scope.activateReadWire();
                     $scope.deactivateWriteWire();
+                    $scope.activateReadWire();
                 }
             };
 
@@ -166,11 +166,11 @@ bonsaiApp.directive('bitGateState', function () {
             $scope.selectRight = function() {
                 $scope.showSelector = undefined;
                 if (!$scope.right) {
-                    $scope.activateReadWire();
                     $scope.deactivateWriteWire();
+                    $scope.activateReadWire();
                 } else {
-                    $scope.activateWriteWire();
                     $scope.deactivateReadWire();
+                    $scope.activateWriteWire();
                 }
             };
         },
