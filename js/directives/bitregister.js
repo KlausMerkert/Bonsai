@@ -215,7 +215,7 @@ bonsaiApp.directive('bitregister', function ($interval) {
             });
 
             $scope.$watch('wireGateState', function (newValue, oldValue) {
-                if (newValue != oldValue) {
+                if ((newValue != oldValue) || (!$scope.wireGateStateInitialized)) {
                     var state = parseInt(newValue);
                     if (!state) {
                         state = 0;
@@ -236,7 +236,9 @@ bonsaiApp.directive('bitregister', function ($interval) {
                         $scope.register.setBitGateToDisconnected();
                     }
                     $scope.bitConnection = $scope.register.getBitConnection();
+                    $scope.wireGateStateInitialized = true;
                     $scope.$broadcast('connectionStateChange', $scope.bitConnection);
+                    $scope.checkForFinishedInitialization();
                 }
             });
 
@@ -340,7 +342,8 @@ bonsaiApp.directive('bitregister', function ($interval) {
             $scope.checkForFinishedInitialization = function () {
                 if (($scope.controllerIsRead) &&
                     ($scope.wiresReadInitialized) &&
-                    ($scope.wiresWriteInitialized)) {
+                    ($scope.wiresWriteInitialized) &&
+                    ($scope.wireGateStateInitialized)) {
                     $scope.$emit('componentInitialized', $scope.register);
                 }
             };
