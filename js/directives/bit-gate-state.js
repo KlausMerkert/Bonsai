@@ -24,7 +24,8 @@ bonsaiApp.directive('bitGateState', function () {
                 if ($event) {
                     $event.preventDefault();
                 }
-                if ($scope.connection.writeWire) {
+                if ($scope.connection.writeWire &&
+                    !($scope.connection.writeWire.isActive())) {
                     $scope.connection.writeWire.unregisterReader($scope.connection.writeWireConnector);
                     try {
                         $scope.connection.writeWire.write($scope.connection.writeWireConnector, 1);
@@ -40,7 +41,9 @@ bonsaiApp.directive('bitGateState', function () {
             };
 
             $scope.deactivateWriteWire = function () {
-                if ($scope.connection.writeWire) {
+                if ($scope.connection.writeWire &&
+                    !($scope.connection.writeWire.isActive() &&
+                      $scope.connection.writeWire.isReader($scope.connection.writeWireConnector))) {
                     try {
                         $scope.connection.writeWire.write($scope.connection.writeWireConnector, 0);
                     } catch (exception) {
@@ -57,7 +60,8 @@ bonsaiApp.directive('bitGateState', function () {
                 if ($event) {
                     $event.preventDefault();
                 }
-                if ($scope.connection.readWire) {
+                if ($scope.connection.readWire &&
+                    !($scope.connection.readWire.isActive())) {
                     $scope.connection.readWire.unregisterReader($scope.connection.readWireConnector);
                     try {
                         $scope.connection.readWire.write($scope.connection.readWireConnector, 1);
@@ -73,7 +77,9 @@ bonsaiApp.directive('bitGateState', function () {
             };
 
             $scope.deactivateReadWire = function () {
-                if ($scope.connection.readWire) {
+                if ($scope.connection.readWire &&
+                    !($scope.connection.readWire.isActive() &&
+                      $scope.connection.readWire.isReader($scope.connection.readWireConnector))) {
                     try {
                         $scope.connection.readWire.write($scope.connection.readWireConnector, 0);
                     } catch (exception) {

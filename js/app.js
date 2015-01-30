@@ -101,7 +101,7 @@ bonsaiApp.config(['$routeProvider', '$locationProvider', function ($routeProvide
     $locationProvider.html5Mode(true).hashPrefix('!');
 }]);
 
-/*bonsaiApp.factory('$exceptionHandler', function ($injector) {
+bonsaiApp.factory('$exceptionHandler', function ($injector) {
     return function (exception, cause) {
         if (exception.localization) {
             $injector.get('$rootScope').$broadcast('error', exception);
@@ -112,7 +112,7 @@ bonsaiApp.config(['$routeProvider', '$locationProvider', function ($routeProvide
             throw exception;
         }
     };
-});*/
+});
 
 bonsaiApp.run(function ($rootScope, $window, $document, $location, localize, PageCounter) {
     // root scope functions
