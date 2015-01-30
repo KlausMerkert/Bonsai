@@ -19,6 +19,12 @@
     background-color: rgb(204, 204, 204);
     font-family: monospace, sans-serif;
     font-size: 12px;
+    font-weight: normal;
+    font-feature-settings: normal;
+    font-stretch: normal;
+    font-style: normal;
+    font-variant: normal;
+    font-synthesis: none;
     line-height: 16px;
     padding: 2px;
     margin: 0;
