@@ -218,9 +218,9 @@ bonsaiApp.directive('bitregister', function ($interval) {
                 if ((newValue != oldValue) || (!$scope.wireGateStateInitialized)) {
                     $scope.bitConnection = $scope.register.getBitConnection();
                     if (!(($scope.bitConnection.writeWire.isActive() &&
-                         $scope.bitConnection.writeWire.isReader($scope.bitConnection.writeWireConnector)) ||
-                        ($scope.bitConnection.readWire.isActive() &&
-                         $scope.bitConnection.readWire.isReader($scope.bitConnection.readWireConnector)))) {
+                           $scope.bitConnection.writeWire.isReader($scope.bitConnection.writeWireConnector)) ||
+                          ($scope.bitConnection.readWire.isActive() &&
+                           $scope.bitConnection.readWire.isReader($scope.bitConnection.readWireConnector)))) {
                         var state = parseInt(newValue);
                         if (!state) {
                             state = 0;
