@@ -913,7 +913,10 @@ ExampleGenerator.prototype.generateBonsai = function () {
         ],
         "memories": [
             {
-                "name": "Datenspeicher",
+                "name": "memory",
+                "de": {
+                    "name": "Datenspeicher"
+                },
                 "base": 10,
                 "content": "30003\n10007\n20008\n40008\n30001\n50000\n\n3\n2",
                 "top": 50,
@@ -931,7 +934,10 @@ ExampleGenerator.prototype.generateBonsai = function () {
                 "showContext": true
             },
             {
-                "name": "Befehlsdecoder",
+                "name": "instruction decoder",
+                "de": {
+                    "name": "Befehlsdecoder"
+                },
                 "base": 10,
                 "content": "0\n10\n20\n30\n40\n50",
                 "top": 250,
@@ -948,7 +954,10 @@ ExampleGenerator.prototype.generateBonsai = function () {
                 "showContext": false
             },
             {
-                "name": "Mikroprogrammspeicher",
+                "name": "micro program memory",
+                "de": {
+                    "name": "Mikroprogrammspeicher"
+                },
                 "base": 10,
                 "content": "1024\n3080\n1032\n4096\n4100\n\n\n\n\n\n4096\n4232\n4104\n12320\n4368\n4352\n2\n\n\n\n4096\n4232\n4104\n12352\n4368\n4352\n2\n\n\n\n4608\n4096\n2\n\n\n\n\n\n\n\n12288\n4104\n20488\n2\n\n\n\n\n\n\n4101",
                 "top": 50,
@@ -1017,9 +1026,17 @@ ExampleGenerator.prototype.generateBonsai = function () {
         ],
         "labels": [
             {
-                "text": "Akku",
+                "text": "accu",
                 "top": 226,
-                "left": 10
+                "left": 10,
+                "de": {
+                    "text": "Akku"
+                },
+                "en": {
+                    "text": "accu",
+                    "top": 0,
+                    "left": 0
+                }
             },
             {
                 "text": "MPC",
@@ -1027,9 +1044,13 @@ ExampleGenerator.prototype.generateBonsai = function () {
                 "left": 582
             },
             {
-                "text": "Befehlsdecoder",
+                "text": "instruction decoder",
                 "top": 226,
-                "left": 482
+                "left": 462,
+                "de": {
+                    "text": "Befehlsdecoder",
+                    "left": 15
+                }
             },
             {
                 "text": "PC",
@@ -1042,14 +1063,21 @@ ExampleGenerator.prototype.generateBonsai = function () {
                 "left": 352
             },
             {
-                "text": "Programmspeicher",
+                "text": "program memory",
                 "top": 26,
-                "left": 70
+                "left": 70,
+                "de": {
+                    "text": "Programmspeicher"
+                }
             },
             {
-                "text": "Mikroprogrammspeicher",
+                "text": "micro program memory",
                 "top": 26,
-                "left": 637
+                "left": 639,
+                "de": {
+                    "text": "Mikroprogrammspeicher",
+                    "left": 2
+                }
             }
         ]
     };

@@ -7,7 +7,46 @@ bonsaiApp.directive('simulation', function () {
         scope: {
             example: '@'
         },
-        controller: ['$scope', 'ExampleStorage', 'BinaryProgram', function ($scope, ExampleStorage, BinaryProgram) {
+        controller: [
+            '$scope', '$rootScope', 'ExampleStorage', 'BinaryProgram',
+            function ($scope, $rootScope, ExampleStorage, BinaryProgram) {
+            $scope.language = $rootScope.language;
+            $scope.$on('langChange', function (event, newLang) {
+                $scope.language = newLang;
+            });
+
+            $scope.getI18nName = function (data) {
+                if (data[$scope.language] && 'name' in data[$scope.language]) {
+                    return data[$scope.language]['name'];
+                } else {
+                    return data['name'];
+                }
+            };
+
+            $scope.getI18nText = function (data) {
+                if (data[$scope.language] && 'text' in data[$scope.language]) {
+                    return data[$scope.language]['text'];
+                } else {
+                    return data['text'];
+                }
+            };
+
+            $scope.getI18nTopOffset = function (data) {
+                if (data[$scope.language] && 'top' in data[$scope.language] && data[$scope.language]['top']) {
+                    return data[$scope.language]['top'];
+                } else {
+                    return 0;
+                }
+            };
+
+            $scope.getI18nLeftOffset = function (data) {
+                if (data[$scope.language] && 'left' in data[$scope.language] && data[$scope.language]['left']) {
+                    return data[$scope.language]['left'];
+                } else {
+                    return 0;
+                }
+            };
+
             $scope.calculateComponentCount = function (cpu) {
                 var componentCount = 0;
                 angular.forEach(cpu, function (value, key) {
