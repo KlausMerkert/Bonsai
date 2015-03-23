@@ -136,7 +136,7 @@
                      class="line-number">{{ $index }}</div>
             </div>
         </div>
-        <textarea style="position: absolute; top: 25px; left: 1.5em; white-space: nowrap; overflow: auto;"
+        <textarea style="position: absolute; top: 25px; left: 1.5em; overflow: auto;"
                   onscroll="this.previousSibling.previousSibling.firstChild.nextSibling.style.top = -this.scrollTop + 'px'"
                   name="content-{{editor.name}}" id="content-{{editor.name}}"
                   ng-model="editor.content">{{ editor.content }}</textarea>
