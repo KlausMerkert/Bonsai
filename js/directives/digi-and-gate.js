@@ -30,7 +30,7 @@ bonsaiApp.directive('digiandgate', function () {
                 } else if (wire === $scope.inB) {
                     return [{top: ($scope.top + 29), left: ($scope.left - 1)}];
                 } else if (wire === $scope.out) {
-                    return [{top: ($scope.top + 40), left: ($scope.left + 9)}];
+                    return [{top: ($scope.top + 16), left: ($scope.left + 33)}];
                 } else {
                     console.log("This Wire is not connected: " + wire.getName());
                 }

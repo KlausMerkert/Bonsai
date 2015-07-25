@@ -53,6 +53,7 @@ bonsaiApp.directive('digiswitch', function () {
             };
 
             $scope.$watch('wire', function (newWire, oldWire) {
+                console.log(newWire);
                 if (newWire) {
                     newWire.enrollToDirective(
                         $scope.switch,
