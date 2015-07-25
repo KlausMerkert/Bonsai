@@ -1,0 +1,13 @@
+<div class="component nospace" ng-style="{'top': topCSS, 'left': leftCSS}">
+    <div class="switch" ng-click="toggle()">
+        <div style="width: 0; height: 0; overflow: visible; display: inline-block; position: absolute;">
+            <div class="nospace" style="position: absolute;">
+                <div class="wireconnector" style="left: 18px; top: 4px;"></div>
+            </div>
+        </div>
+        <div style="background-color: rgba(98, 98, 98, 0.3); position: absolute; top: 2px; left: 2px; width: 16px; height: 10px; border-radius: 5px; z-index: 0;"></div>
+        <div ng-style="{'background-color': value ? colorCSS : 'rgba(40, 40, 40, 0.3)',
+                        'margin-left': value ? '7px' : '1px'}"
+             style="width: 10px; height: 10px; margin: 1px; border-radius: 5px; position: relative; z-index: 1;"></div>
+    </div>
+</div>
