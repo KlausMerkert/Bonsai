@@ -10,9 +10,10 @@ bonsaiApp.directive('digiandgate', function () {
             out: '=',
             top: '=',
             left: '=',
+            label: '=',
             gateName: '@'
         },
-        link: function ($scope, element, attrs) {
+        link: function ($scope, element, attrs) {  	
             $scope.logicGate = new AndGate($scope.inA, $scope.inB, $scope.out);
 
             $scope.topCSS = ($scope.top - 3) + 'px';
@@ -35,6 +36,12 @@ bonsaiApp.directive('digiandgate', function () {
                     console.log("This Wire is not connected: " + wire.getName());
                 }
             };
+            
+            $scope.$watch('label', function(newLabel, oldLabel) {
+            	  if (typeof($scope.label) == "undefined") {
+								    $scope.label = '&';            	  
+            	  }
+            });
 
             $scope.$watch('inA', function (newInA, oldInA) {
                 if (newInA) {

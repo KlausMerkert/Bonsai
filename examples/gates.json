@@ -79,6 +79,7 @@
     "digiAndGates": [
         {
             "name": "Dand",
+            "label": "&",
             "inAId": "S1w",
             "inBId": "S2w",
             "outId": "DandOut",

@@ -37,7 +37,7 @@
         </div>
         <div ng-repeat="andGate in cpu.digiAndGates">
             <digiandgate in-a="andGate.inA" in-b="andGate.inB" out="andGate.out" gate-name="{{andGate.name}}"
-                         top="andGate.top" left="andGate.left"></digiandgate>
+                         label="andGate.label" top="andGate.top" left="andGate.left"></digiandgate>
         </div>
         <div ng-repeat="switch in cpu.manualswitches">
             <manualswitch wire="switch.wire" switch-name="{{switch.name}}" value="switch.value"
