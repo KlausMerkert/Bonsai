@@ -58,6 +58,21 @@
             "id": "DandOut",
             "name": "DandOut",
             "max": 1
+        },
+        {
+            "id": "S3w",
+            "name": "S3w",
+            "max": 1
+        },
+        {
+            "id": "S4w",
+            "name": "S4w",
+            "max": 1
+        },
+        {
+            "id": "DorOut",
+            "name": "DorOut",
+            "max": 1
         }
     ],
     "digiSwitches": [
@@ -74,6 +89,20 @@
             "value": 0,
             "top": 39,
             "left": 10
+        },
+        {
+            "name": "S3",
+            "wireId": "S3w",
+            "value": 0,
+            "top": 64,
+            "left": 10
+        },
+        {
+            "name": "S4",
+            "wireId": "S4w",
+            "value": 0,
+            "top": 89,
+            "left": 10
         }
     ],
     "digiAndGates": [
@@ -84,6 +113,17 @@
             "inBId": "S2w",
             "outId": "DandOut",
             "top": 10,
+            "left": 50
+        }
+    ],
+    "digiOrGates": [
+        {
+            "name": "Dor",
+            "label": "o",
+            "inAId": "S3w",
+            "inBId": "S4w",
+            "outId": "DorOut",
+            "top": 60,
             "left": 50
         }
     ],
@@ -157,6 +197,14 @@
             "name": "DandLed",
             "wireId": "DandOut",
             "top": 25,
+            "left": 100,
+            "value": 0,
+            "color": "rgb(255, 0, 0)"
+        },
+        {
+            "name": "DorLed",
+            "wireId": "DorOut",
+            "top": 75,
             "left": 100,
             "value": 0,
             "color": "rgb(255, 0, 0)"

@@ -1,5 +1,24 @@
 'use strict';
 
+
+function cleanProgramLine(origLine)
+{
+	var correctedLine;
+	var origLineNoNumber = origLine.replace(/^.+\:/,"").trim();
+	if ( (origLineNoNumber[0]!=';') && (origLineNoNumber.length>3))	{   // ignore empty and comment lines
+	   correctedLine = origLineNoNumber.substring(0,3).toLowerCase();
+	   if (origLineNoNumber[3] != ' ') { // add missing blanks
+	      correctedLine += ' ';
+	   }
+	   correctedLine += origLineNoNumber.substring(3);
+	   
+	}
+	else
+	   correctedLine = origLineNoNumber;
+		
+	return correctedLine;
+}
+
 bonsaiApp.controller('bonsaiAssemblerCtrl',
     function ($scope, $timeout, $rootScope, BinaryProgram) {
         $scope.splitLines = function (string) {
@@ -416,17 +435,17 @@ bonsaiApp.controller('bonsaiAssemblerCtrl',
                             var dataMatches = lines[i].match(/^[ \t]*#(.*)?$/);
                             if (dataMatches) {
                                 if ($scope.data.length > 0) {
-                                    $scope.data = $scope.data + "\n" + dataMatches[1];
+                                    $scope.data = $scope.data + "\n" + dataMatches[1].trim();  // remove blanks
                                 } else {
-                                    $scope.data = dataMatches[1];
+                                    $scope.data = dataMatches[1].trim();
                                 }
                             } else {
                                 if ($scope.program.length > 0) {
                                     if (!(i == lines.length -1 && lines[i].length == 0)) {
-                                        $scope.program = $scope.program + "\n" + lines[i];
+                                        $scope.program = $scope.program + "\n" + cleanProgramLine(lines[i]);
                                     }
                                 } else {
-                                    $scope.program = lines[i];
+                                    $scope.program = cleanProgramLine(lines[i]);
                                 }
                             }
                         }
@@ -438,7 +457,13 @@ bonsaiApp.controller('bonsaiAssemblerCtrl',
         };
 
         $scope.save = function () {
-            var content = $scope.program + "\n";
+            var content = "";
+            var prgLines = $scope.splitLines($scope.program);
+            for (var i = 0; i < prgLines.length; i++) {
+                content = content + i.toString() + ": " + prgLines[i];
+                content = content + "\n";
+			}
+
             var dataLines = $scope.splitLines($scope.data);
             for (var i = 0; i < dataLines.length; i++) {
                 content = content + '#' + dataLines[i];

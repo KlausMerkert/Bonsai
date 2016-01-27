@@ -262,6 +262,22 @@ BusMatcher.prototype.matchDigiAndGates = function () {
     }
 };
 
+BusMatcher.prototype.matchDigiOrGates = function () {
+    if (this.cpu.digiOrGates) {
+        for (var i = 0; i < this.cpu.digiOrGates.length; i++) {
+            if (this.cpu.digiOrGates[i].inAId) {
+                this.cpu.digiOrGates[i].inA = this.findBus(this.cpu.digiOrGates[i].inAId);
+            }
+            if (this.cpu.digiOrGates[i].inBId) {
+                this.cpu.digiOrGates[i].inB = this.findBus(this.cpu.digiOrGates[i].inBId);
+            }
+            if (this.cpu.digiOrGates[i].outId) {
+                this.cpu.digiOrGates[i].out = this.findBus(this.cpu.digiOrGates[i].outId);
+            }
+        }
+    }
+};
+
 BusMatcher.prototype.matchAllComponents = function () {
     this.matchManualSwitches();
     this.matchClocks();
@@ -277,5 +293,6 @@ BusMatcher.prototype.matchAllComponents = function () {
     this.matchFilters();
     this.matchDigiSwitches();
     this.matchDigiAndGates();
+    this.matchDigiOrGates();
 };
 
