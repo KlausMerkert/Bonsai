@@ -1,6 +1,6 @@
 'use strict';
 
-bonsaiApp.directive('notgate', function () {
+bonsaiApp.directive('diginotgate', function () {
     return {
         restrict: 'E',
         transclude: false,
