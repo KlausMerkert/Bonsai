@@ -103,6 +103,21 @@
             "id": "DnorOut",
             "name": "DnorOut",
             "max": 1
+        },
+        {
+            "id": "S9w",
+            "name": "S9w",
+            "max": 1
+        },
+        {
+            "id": "S10w",
+            "name": "S10w",
+            "max": 1
+        },
+        {
+            "id": "DexorOut",
+            "name": "DexorOut",
+            "max": 1
         }
     ],
     "digiSwitches": [
@@ -161,6 +176,20 @@
             "value": 0,
             "top": 189,
             "left": 10
+        },
+        {
+            "name": "S9",
+            "wireId": "S9w",
+            "value": 0,
+            "top": 214,
+            "left": 10
+        },
+        {
+            "name": "S10",
+            "wireId": "S10w",
+            "value": 0,
+            "top": 239,
+            "left": 10
         }
     ],
     "digiAndGates": [
@@ -204,6 +233,17 @@
             "inBId": "S8w",
             "outId": "DnorOut",
             "top": 160,
+            "left": 50
+        }
+    ],
+    "digiExorGates": [
+        {
+            "name": "Dexor",
+            "label": "5",
+            "inAId": "S9w",
+            "inBId": "S10w",
+            "outId": "DexorOut",
+            "top": 210,
             "left": 50
         }
     ],
@@ -301,6 +341,14 @@
             "name": "DnorLed",
             "wireId": "DnorOut",
             "top": 175,
+            "left": 100,
+            "value": 0,
+            "color": "rgb(255, 0, 0)"
+        },
+        {
+            "name": "DexorLed",
+            "wireId": "DexorOut",
+            "top": 225,
             "left": 100,
             "value": 0,
             "color": "rgb(255, 0, 0)"

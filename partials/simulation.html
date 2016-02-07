@@ -51,6 +51,10 @@
             <diginorgate in-a="norGate.inA" in-b="norGate.inB" out="norGate.out" gate-name="{{norGate.name}}"
                          label="norGate.label" top="norGate.top" left="norGate.left"></diginorgate>
         </div>
+        <div ng-repeat="exorGate in cpu.digiExorGates">
+            <digiexorgate in-a="exorGate.inA" in-b="exorGate.inB" out="exorGate.out" gate-name="{{exorGate.name}}"
+                         label="exorGate.label" top="exorGate.top" left="exorGate.left"></digiexorgate>
+        </div>
         <div ng-repeat="switch in cpu.manualswitches">
             <manualswitch wire="switch.wire" switch-name="{{switch.name}}" value="switch.value"
                           top="switch.top" left="switch.left" color="switch.color"></manualswitch>
