@@ -1,6 +1,6 @@
 'use strict';
 
-bonsaiApp.directive('digiorgate', function () {
+bonsaiApp.directive('diginorgate', function () {
     return {
         restrict: 'E',
         transclude: false,
@@ -14,7 +14,7 @@ bonsaiApp.directive('digiorgate', function () {
             gateName: '@'
         },
         link: function ($scope, element, attrs) {  	
-            $scope.logicGate = new OrGate($scope.inA, $scope.inB, $scope.out);
+            $scope.logicGate = new NorGate($scope.inA, $scope.inB, $scope.out);
 
             $scope.topCSS = ($scope.top - 3) + 'px';
             $scope.leftCSS = $scope.left + 'px';
@@ -39,7 +39,7 @@ bonsaiApp.directive('digiorgate', function () {
             
             $scope.$watch('label', function(newLabel, oldLabel) {
             	  if (typeof($scope.label) == "undefined") {
-								    $scope.label = '2';            	  
+								    $scope.label = '4';            	  
             	  }
             });
 
@@ -96,6 +96,6 @@ bonsaiApp.directive('digiorgate', function () {
             $scope.controllerIsRead = true;
             $scope.checkForFinishedInitialization();
         },
-        templateUrl: '/partials/component_DigiOrGate.html'
+        templateUrl: '/partials/component_DigiNorGate.html'
     };
 });

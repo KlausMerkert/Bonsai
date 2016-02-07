@@ -39,7 +39,7 @@ bonsaiApp.directive('digiandgate', function () {
             
             $scope.$watch('label', function(newLabel, oldLabel) {
             	  if (typeof($scope.label) == "undefined") {
-								    $scope.label = '&';            	  
+								    $scope.label = '1';            	  
             	  }
             });
 

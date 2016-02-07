@@ -85,8 +85,23 @@
             "max": 1
         },
         {
-            "id": "DNandOut",
-            "name": "DNandOut",
+            "id": "DnandOut",
+            "name": "DnandOut",
+            "max": 1
+        },
+        {
+            "id": "S7w",
+            "name": "S7w",
+            "max": 1
+        },
+        {
+            "id": "S8w",
+            "name": "S8w",
+            "max": 1
+        },
+        {
+            "id": "DnorOut",
+            "name": "DnorOut",
             "max": 1
         }
     ],
@@ -132,12 +147,26 @@
             "value": 0,
             "top": 139,
             "left": 10
+        },
+        {
+            "name": "S7",
+            "wireId": "S7w",
+            "value": 0,
+            "top": 164,
+            "left": 10
+        },
+        {
+            "name": "S8",
+            "wireId": "S8w",
+            "value": 0,
+            "top": 189,
+            "left": 10
         }
     ],
     "digiAndGates": [
         {
             "name": "Dand",
-            "label": "&",
+            "label": "1",
             "inAId": "S1w",
             "inBId": "S2w",
             "outId": "DandOut",
@@ -148,7 +177,7 @@
     "digiOrGates": [
         {
             "name": "Dor",
-            "label": "o",
+            "label": "2",
             "inAId": "S3w",
             "inBId": "S4w",
             "outId": "DorOut",
@@ -162,8 +191,19 @@
             "label": "3",
             "inAId": "S5w",
             "inBId": "S6w",
-            "outId": "DNandOut",
+            "outId": "DnandOut",
             "top": 110,
+            "left": 50
+        }
+    ],
+    "digiNorGates": [
+        {
+            "name": "Dnor",
+            "label": "4",
+            "inAId": "S7w",
+            "inBId": "S8w",
+            "outId": "DnorOut",
+            "top": 160,
             "left": 50
         }
     ],
@@ -251,8 +291,16 @@
         },
         {
             "name": "DnandLed",
-            "wireId": "DNandOut",
+            "wireId": "DnandOut",
             "top": 125,
+            "left": 100,
+            "value": 0,
+            "color": "rgb(255, 0, 0)"
+        },
+        {
+            "name": "DnorLed",
+            "wireId": "DnorOut",
+            "top": 175,
             "left": 100,
             "value": 0,
             "color": "rgb(255, 0, 0)"
