@@ -118,6 +118,16 @@
             "id": "DexorOut",
             "name": "DexorOut",
             "max": 1
+        },
+         {
+            "id": "S11w",
+            "name": "S11w",
+            "max": 1
+        },
+        {
+            "id": "DnotOut",
+            "name": "DnotOut",
+            "max": 1
         }
     ],
     "digiSwitches": [
@@ -190,6 +200,13 @@
             "value": 0,
             "top": 239,
             "left": 10
+        },
+        {
+            "name": "S11",
+            "wireId": "S11w",
+            "value": 0,
+            "top": 275,
+            "left": 10
         }
     ],
     "digiAndGates": [
@@ -245,6 +262,22 @@
             "outId": "DexorOut",
             "top": 210,
             "left": 50
+        }
+    ],
+    "digiNotGates": [
+        {
+            "name": "Dnot",
+            "label": "6",
+            "inAId": "S11w",
+            "outId": "DnotOut",
+            "top": 235,
+            "left": 50
+        },
+        {
+            "name": "abc",
+            "label": "x",
+            "top": 235,
+            "left": 350
         }
     ],
     "manualswitches": [
@@ -349,6 +382,14 @@
             "name": "DexorLed",
             "wireId": "DexorOut",
             "top": 225,
+            "left": 100,
+            "value": 0,
+            "color": "rgb(255, 0, 0)"
+        },
+        {
+            "name": "DnotLed",
+            "wireId": "DnotOut",
+            "top": 275,
             "left": 100,
             "value": 0,
             "color": "rgb(255, 0, 0)"

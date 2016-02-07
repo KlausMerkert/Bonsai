@@ -326,6 +326,19 @@ BusMatcher.prototype.matchDigiExorGates = function () {
     }
 };
 
+BusMatcher.prototype.matchDigiNotGates = function () {
+    if (this.cpu.digiNotGates) {
+        for (var i = 0; i < this.cpu.digiNotGates.length; i++) {
+            if (this.cpu.digiNotGates[i].inAId) {
+                this.cpu.digiNotGates[i].inA = this.findBus(this.cpu.digiNotGates[i].inAId);
+            }
+            if (this.cpu.digiNotGates[i].outId) {
+                this.cpu.digiNotGates[i].out = this.findBus(this.cpu.digiNotGates[i].outId);
+            }
+        }
+    }
+};
+
 
 BusMatcher.prototype.matchAllComponents = function () {
     this.matchManualSwitches();
@@ -346,5 +359,6 @@ BusMatcher.prototype.matchAllComponents = function () {
     this.matchDigiNandGates();
     this.matchDigiNorGates();
     this.matchDigiExorGates();
+    this.matchDigiNotGates();
 };
 
