@@ -328,7 +328,7 @@
             "max": 99999,
             "base": 10,
             "color": "rgb(255, 0, 0)",
-            "top": 170,
+            "top": 166,
             "left": 175,
             "routes": [
                 {
@@ -367,7 +367,7 @@
             "max": 9999,
             "base": 10,
             "color": "rgb(0, 140, 0)",
-            "top": -3,
+            "top": -7,
             "left": 175,
             "routes": [
                 {
@@ -393,7 +393,7 @@
             "max": 32767,
             "color": "rgb(200, 0, 200)",
             "left": 685,
-            "top": -3,
+            "top": -7,
             "routes": [
                 {
                     "type": "topright",
@@ -410,7 +410,7 @@
             "max": 99999,
             "base": 10,
             "color": "rgb(0, 140, 0)",
-            "top": -3,
+            "top": -7,
             "left": 377,
             "routes": [
                 {
@@ -435,7 +435,7 @@
             "max": 99999,
             "base": 10,
             "color": "rgb(0, 140, 0)",
-            "top": -3,
+            "top": -7,
             "left": 443,
             "routes": [
                 {
@@ -747,22 +747,22 @@
     "labels": [
         {
             "text": "Akku",
-            "top": 230,
+            "top": 226,
             "left": 10
         },
         {
             "text": "PC",
-            "top": 30,
+            "top": 26,
             "left": 195
         },
         {
             "text": "IR",
-            "top": 30,
+            "top": 26,
             "left": 372
         },
         {
             "text": "Programmspeicher",
-            "top": 30,
+            "top": 26,
             "left": 70
         }
     ]

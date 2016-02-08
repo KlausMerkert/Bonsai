@@ -5,7 +5,7 @@
             "max": 99999,
             "base": 10,
             "color": "rgb(255, 0, 0)",
-            "top": 170,
+            "top": 166,
             "left": 175,
             "routes": [
                 {
@@ -30,7 +30,7 @@
             "max": 9999,
             "base": 10,
             "color": "rgb(0, 140, 0)",
-            "top": -3,
+            "top": -7,
             "left": 275,
             "routes": [
                 {
@@ -125,32 +125,32 @@
     "labels": [
         {
             "text": "A",
-            "top": 30,
+            "top": 26,
             "left": 20
         },
         {
             "text": "B",
-            "top": 30,
+            "top": 26,
             "left": 200
         },
         {
             "text": "C",
-            "top": 30,
+            "top": 26,
             "left": 370
         },
         {
             "text": "D",
-            "top": 230,
+            "top": 226,
             "left": 20
         },
         {
             "text": "Bus 0",
-            "top": 25,
+            "top": 21,
             "left": 300
         },
         {
             "text": "Bus 1",
-            "top": 200,
+            "top": 196,
             "left": 300
         }
 

@@ -5,7 +5,7 @@
             "max": 99999,
             "base": 10,
             "color": "rgb(255, 0, 0)",
-            "top": 170,
+            "top": 166,
             "left": 150,
             "routes": [
                 {
@@ -30,7 +30,7 @@
             "max": 9999,
             "base": 10,
             "color": "rgb(0, 140, 0)",
-            "top": -3,
+            "top": -7,
             "left": 150,
             "routes": [
                 {
@@ -108,22 +108,22 @@
     "labels": [
         {
             "text": "A",
-            "top": 30,
+            "top": 26,
             "left": 300
         },
         {
             "text": "D",
-            "top": 230,
+            "top": 226,
             "left": 300
         },
         {
             "text": "Adressbus",
-            "top": 25,
+            "top": 21,
             "left": 200
         },
         {
             "text": "Datenbus",
-            "top": 200,
+            "top": 196,
             "left": 200
         }
     ]
