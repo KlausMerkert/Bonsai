@@ -1,0 +1,291 @@
+{
+  "buses": [
+    {
+      "id": "S1w",
+      "name": "S1w",
+      "max": 1
+    },
+    {
+      "id": "S2w",
+      "name": "S2w",
+      "max": 1
+    },
+    {
+      "id": "DandOut",
+      "name": "DandOut",
+      "max": 1
+    },
+    {
+      "id": "S3w",
+      "name": "S3w",
+      "max": 1
+    },
+    {
+      "id": "S4w",
+      "name": "S4w",
+      "max": 1
+    },
+    {
+      "id": "DorOut",
+      "name": "DorOut",
+      "max": 1
+    },
+    {
+      "id": "S5w",
+      "name": "S5w",
+      "max": 1
+    },
+    {
+      "id": "S6w",
+      "name": "S6w",
+      "max": 1
+    },
+    {
+      "id": "DnandOut",
+      "name": "DnandOut",
+      "max": 1
+    },
+    {
+      "id": "S7w",
+      "name": "S7w",
+      "max": 1
+    },
+    {
+      "id": "S8w",
+      "name": "S8w",
+      "max": 1
+    },
+    {
+      "id": "DnorOut",
+      "name": "DnorOut",
+      "max": 1
+    },
+    {
+      "id": "S9w",
+      "name": "S9w",
+      "max": 1
+    },
+    {
+      "id": "S10w",
+      "name": "S10w",
+      "max": 1
+    },
+    {
+      "id": "DexorOut",
+      "name": "DexorOut",
+      "max": 1
+    },
+    {
+      "id": "S11w",
+      "name": "S11w",
+      "max": 1
+    },
+    {
+      "id": "DnotOut",
+      "name": "DnotOut",
+      "max": 1
+    }
+  ],
+   "digiSwitches": [
+    {
+      "name": "S1",
+      "wireId": "S1w",
+      "value": 0,
+      "top": 14,
+      "left": 10
+    },
+    {
+      "name": "S2",
+      "wireId": "S2w",
+      "value": 0,
+      "top": 39,
+      "left": 10
+    },
+    {
+      "name": "S3",
+      "wireId": "S3w",
+      "value": 0,
+      "top": 64,
+      "left": 10
+    },
+    {
+      "name": "S4",
+      "wireId": "S4w",
+      "value": 0,
+      "top": 89,
+      "left": 10
+    },
+    {
+      "name": "S5",
+      "wireId": "S5w",
+      "value": 0,
+      "top": 114,
+      "left": 10
+    },
+    {
+      "name": "S6",
+      "wireId": "S6w",
+      "value": 0,
+      "top": 139,
+      "left": 10
+    },
+    {
+      "name": "S7",
+      "wireId": "S7w",
+      "value": 0,
+      "top": 164,
+      "left": 10
+    },
+    {
+      "name": "S8",
+      "wireId": "S8w",
+      "value": 0,
+      "top": 189,
+      "left": 10
+    },
+    {
+      "name": "S9",
+      "wireId": "S9w",
+      "value": 0,
+      "top": 214,
+      "left": 10
+    },
+    {
+      "name": "S10",
+      "wireId": "S10w",
+      "value": 0,
+      "top": 239,
+      "left": 10
+    },
+    {
+      "name": "S11",
+      "wireId": "S11w",
+      "value": 0,
+      "top": 265,
+      "left": 10
+    }
+  ],
+  "digiAndGates": [
+    {
+      "name": "Dand",
+      "label": "1",
+      "inAId": "S1w",
+      "inBId": "S2w",
+      "outId": "DandOut",
+      "top": 10,
+      "left": 50
+    }
+  ],
+  "digiOrGates": [
+    {
+      "name": "Dor",
+      "label": "2",
+      "inAId": "S3w",
+      "inBId": "S4w",
+      "outId": "DorOut",
+      "top": 60,
+      "left": 50
+    }
+  ],
+  "digiNandGates": [
+    {
+      "name": "Dnand",
+      "label": "3",
+      "inAId": "S5w",
+      "inBId": "S6w",
+      "outId": "DnandOut",
+      "top": 110,
+      "left": 50
+    }
+  ],
+  "digiNorGates": [
+    {
+      "name": "Dnor",
+      "label": "4",
+      "inAId": "S7w",
+      "inBId": "S8w",
+      "outId": "DnorOut",
+      "top": 160,
+      "left": 50
+    }
+  ],
+  "digiExorGates": [
+    {
+      "name": "Dexor",
+      "label": "5",
+      "inAId": "S9w",
+      "inBId": "S10w",
+      "outId": "DexorOut",
+      "top": 210,
+      "left": 50
+    }
+  ],
+  "digiNotGates": [
+    {
+      "name": "Dnot",
+      "label": "6",
+      "inAId": "S11w",
+      "outId": "DnotOut",
+      "top": 260,
+      "left": 57
+    }
+  ],
+  "leds": [
+    {
+      "name": "DandLed",
+      "wireId": "DandOut",
+      "top": 25,
+      "left": 100,
+      "value": 0,
+      "color": "rgb(255, 0, 0)"
+    },
+    {
+      "name": "DorLed",
+      "wireId": "DorOut",
+      "top": 75,
+      "left": 100,
+      "value": 0,
+      "color": "rgb(255, 0, 0)"
+    },
+    {
+      "name": "DnandLed",
+      "wireId": "DnandOut",
+      "top": 125,
+      "left": 100,
+      "value": 1,
+      "color": "rgb(255, 0, 0)"
+    },
+    {
+      "name": "DnorLed",
+      "wireId": "DnorOut",
+      "top": 175,
+      "left": 100,
+      "value": 1,
+      "color": "rgb(255, 0, 0)"
+    },
+    {
+      "name": "DexorLed",
+      "wireId": "DexorOut",
+      "top": 225,
+      "left": 100,
+      "value": 0,
+      "color": "rgb(255, 0, 0)"
+    },
+    {
+      "name": "DnotLed",
+      "wireId": "DnotOut",
+      "top": 265,
+      "left": 100,
+      "value": 1,
+      "color": "rgb(255, 0, 0)"
+    }
+  ],
+  "registers": [],
+  "bitregisters": [],
+  "memories": [],
+  "zerocomparators": [],
+  "delays": [],
+  "filters": [],
+  "clocks": [],
+  "labels": []
+}
