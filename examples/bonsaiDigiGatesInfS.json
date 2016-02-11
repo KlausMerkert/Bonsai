@@ -92,77 +92,77 @@
       "wireId": "S1w",
       "value": 0,
       "top": 14,
-      "left": 10
+      "left": 60
     },
     {
       "name": "S2",
       "wireId": "S2w",
       "value": 0,
       "top": 39,
-      "left": 10
+      "left": 60
     },
     {
       "name": "S3",
       "wireId": "S3w",
       "value": 0,
-      "top": 64,
-      "left": 10
+      "top": 74,
+      "left": 60
     },
     {
       "name": "S4",
       "wireId": "S4w",
       "value": 0,
-      "top": 89,
-      "left": 10
+      "top": 99,
+      "left": 60
     },
     {
       "name": "S5",
       "wireId": "S5w",
       "value": 0,
-      "top": 114,
-      "left": 10
+      "top": 134,
+      "left": 60
     },
     {
       "name": "S6",
       "wireId": "S6w",
       "value": 0,
-      "top": 139,
-      "left": 10
+      "top": 159,
+      "left": 60
     },
     {
       "name": "S7",
       "wireId": "S7w",
       "value": 0,
-      "top": 164,
-      "left": 10
+      "top": 194,
+      "left": 60
     },
     {
       "name": "S8",
       "wireId": "S8w",
       "value": 0,
-      "top": 189,
-      "left": 10
+      "top": 219,
+      "left": 60
     },
     {
       "name": "S9",
       "wireId": "S9w",
       "value": 0,
-      "top": 214,
-      "left": 10
+      "top": 254,
+      "left": 60
     },
     {
       "name": "S10",
       "wireId": "S10w",
       "value": 0,
-      "top": 239,
-      "left": 10
+      "top": 279,
+      "left": 60
     },
     {
       "name": "S11",
       "wireId": "S11w",
       "value": 0,
-      "top": 265,
-      "left": 10
+      "top": 315,
+      "left": 60
     }
   ],
   "digiAndGates": [
@@ -173,7 +173,7 @@
       "inBId": "S2w",
       "outId": "DandOut",
       "top": 10,
-      "left": 50
+      "left": 120
     }
   ],
   "digiOrGates": [
@@ -183,8 +183,8 @@
       "inAId": "S3w",
       "inBId": "S4w",
       "outId": "DorOut",
-      "top": 60,
-      "left": 50
+      "top": 70,
+      "left": 120
     }
   ],
   "digiNandGates": [
@@ -194,8 +194,8 @@
       "inAId": "S5w",
       "inBId": "S6w",
       "outId": "DnandOut",
-      "top": 110,
-      "left": 50
+      "top": 130,
+      "left": 120
     }
   ],
   "digiNorGates": [
@@ -205,8 +205,8 @@
       "inAId": "S7w",
       "inBId": "S8w",
       "outId": "DnorOut",
-      "top": 160,
-      "left": 50
+      "top": 190,
+      "left": 120
     }
   ],
   "digiExorGates": [
@@ -216,8 +216,8 @@
       "inAId": "S9w",
       "inBId": "S10w",
       "outId": "DexorOut",
-      "top": 210,
-      "left": 50
+      "top": 250,
+      "left": 120
     }
   ],
   "digiNotGates": [
@@ -226,8 +226,8 @@
       "label": "6",
       "inAId": "S11w",
       "outId": "DnotOut",
-      "top": 260,
-      "left": 57
+      "top": 310,
+      "left": 127
     }
   ],
   "leds": [
@@ -235,47 +235,47 @@
       "name": "DandLed",
       "wireId": "DandOut",
       "top": 25,
-      "left": 100,
+      "left": 180,
       "value": 0,
       "color": "rgb(255, 0, 0)"
     },
     {
       "name": "DorLed",
       "wireId": "DorOut",
-      "top": 75,
-      "left": 100,
+      "top": 85,
+      "left": 180,
       "value": 0,
       "color": "rgb(255, 0, 0)"
     },
     {
       "name": "DnandLed",
       "wireId": "DnandOut",
-      "top": 125,
-      "left": 100,
+      "top": 145,
+      "left": 180,
       "value": 1,
       "color": "rgb(255, 0, 0)"
     },
     {
       "name": "DnorLed",
       "wireId": "DnorOut",
-      "top": 175,
-      "left": 100,
+      "top": 205,
+      "left": 180,
       "value": 1,
       "color": "rgb(255, 0, 0)"
     },
     {
       "name": "DexorLed",
       "wireId": "DexorOut",
-      "top": 225,
-      "left": 100,
+      "top": 265,
+      "left": 180,
       "value": 0,
       "color": "rgb(255, 0, 0)"
     },
     {
       "name": "DnotLed",
       "wireId": "DnotOut",
-      "top": 265,
-      "left": 100,
+      "top": 315,
+      "left": 180,
       "value": 1,
       "color": "rgb(255, 0, 0)"
     }
@@ -287,5 +287,21 @@
   "delays": [],
   "filters": [],
   "clocks": [],
-  "labels": []
+  "labels": [
+  {
+      "text": "Lampe",
+      "top": 10,
+      "left": 200
+    },
+  {
+      "text": "Schalter 1",
+      "top": 0,
+      "left": 5
+    },
+  {
+      "text": "Schalter 2",
+      "top": 25,
+      "left": 5
+    }
+  ]
 }
