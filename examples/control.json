@@ -26,7 +26,7 @@
                     "type": "horizontal",
                     "top": "98px",
                     "left": "210px",
-                    "width": "540px",
+                    "width": "440px",
                     "height": "0"
                 },
                 {
@@ -55,7 +55,7 @@
                     "type": "horizontal",
                     "top": "110px",
                     "left": "210px",
-                    "width": "540px",
+                    "width": "440px",
                     "height": "0"
                 },
                 {
@@ -84,7 +84,7 @@
                     "type": "horizontal",
                     "top": "122px",
                     "left": "270px",
-                    "width": "480px",
+                    "width": "380px",
                     "height": "0"
                 },
                 {
@@ -113,7 +113,7 @@
                     "type": "horizontal",
                     "top": "134px",
                     "left": "270px",
-                    "width": "480px",
+                    "width": "380px",
                     "height": "0"
                 },
                 {
@@ -142,7 +142,7 @@
                     "type": "horizontal",
                     "top": "146px",
                     "left": "268px",
-                    "width": "428px",
+                    "width": "328px",
                     "height": "0"
                 },
                 {
@@ -171,7 +171,7 @@
                     "type": "horizontal",
                     "top": "158px",
                     "left": "280px",
-                    "width": "460px",
+                    "width": "360px",
                     "height": "0"
                 },
                 {
@@ -200,7 +200,7 @@
                     "type": "bottomleft",
                     "top": "100px",
                     "left": "279px",
-                    "width": "450px",
+                    "width": "350px",
                     "height": "70px"
                 },
                 {
@@ -222,7 +222,7 @@
                     "type": "bottomleft",
                     "top": "112px",
                     "left": "285px",
-                    "width": "450px",
+                    "width": "350px",
                     "height": "70px"
                 },
                 {
@@ -251,7 +251,7 @@
                     "type": "bottomleft",
                     "top": "155px",
                     "left": "448px",
-                    "width": "257px",
+                    "width": "157px",
                     "height": "39px"
                 }
             ]
@@ -273,7 +273,7 @@
                     "type": "bottomleft",
                     "top": "167px",
                     "left": "440px",
-                    "width": "257px",
+                    "width": "157px",
                     "height": "39px"
                 }
             ]
@@ -295,7 +295,7 @@
                     "type": "bottomleft",
                     "top": "164px",
                     "left": "300px",
-                    "width": "395px",
+                    "width": "295px",
                     "height": "54px"
                 }
             ]
@@ -317,7 +317,7 @@
                     "type": "bottomleft",
                     "top": "148px",
                     "left": "344px",
-                    "width": "359px",
+                    "width": "259px",
                     "height": "82px"
                 }
             ]
@@ -392,14 +392,14 @@
             "base": 10,
             "max": 32767,
             "color": "rgb(200, 0, 200)",
-            "left": 685,
+            "left": 585,
             "top": -7,
             "routes": [
                 {
                     "type": "topright",
                     "top": "21px",
-                    "left": "710px",
-                    "width": "20px",
+                    "left": "580px",
+                    "width": "50px",
                     "height": "7px"
                 }
             ]
@@ -507,14 +507,14 @@
             "wireId": "SteuerwortWriteWire",
             "value": 1,
             "top": 10,
-            "left": 765
+            "left": 665
         },
         {
             "name": "SteuerwortReadWireSwitch",
             "wireId": "SteuerwortReadWire",
             "value": 0,
             "top": 26,
-            "left": 765
+            "left": 665
         }
     ],
     "leds": [
@@ -536,7 +536,7 @@
             "wireId": "s0",
             "name": "s0 led",
             "top": 62,
-            "left": 682,
+            "left": 582,
             "color": "rgb(255, 0, 0)",
             "value": 0
         },
@@ -544,7 +544,7 @@
             "wireId": "s1",
             "name": "s1 led",
             "top": 74,
-            "left": 682,
+            "left": 582,
             "color": "rgb(255, 255, 0)",
             "value": 0
         },
@@ -552,7 +552,7 @@
             "wireId": "s2",
             "name": "s2 led",
             "top": 86,
-            "left": 682,
+            "left": 582,
             "value": 0
         }
     ],
@@ -639,9 +639,10 @@
             "wiresWriteWireId": "SteuerwortWriteWire",
             "base": 10,
             "top": 50,
-            "left": 700,
+            "left": 600,
             "widegate": {
-                "busId": "MicroDataBus"
+                "busId": "MicroDataBus",
+                "initialState": -1
             },
             "bitWidth": 15,
             "wiregates": [
