@@ -48,9 +48,17 @@
                 einen Steuereingang.
                 Will man den Zustand dauerhaft erhalten, so zieht man die Maus mit gedrückter linker Taste aus dem
                 Steuereingang heraus und lässt
-                erst dort los. Ein Klick in das Innere schaltet die Zustände in der Reihenfolge Lesen - Schreiben -
-                inaktiv - Lesen - ..
-                durch.</p>
+                erst dort los. 
+                Ein Klick in das Innere eines Tores öffnet ein Fenster, das stark vergrößert eine Auswahl des Zustand
+                ermöglicht.</p>
+            
+            <p>Nach einem Klick auf das Zahnrad kann man die json-Datei zur Schaltung abspeichern oder eine
+            eigene laden. In diesem Zustand werden rechts oben die Cursor-Koordinaten angezeigt. 
+            In der json-Datei kann man Teile eines Busses durch folgende Systematik beschreiben: <i>top</i> und <i>left</i> bestimmen
+            die Lage der linken oberen Ecke eines Rechtecks, dessen Größe durch <i>width</i> und <i>height</i> festgelegt ist. 
+            <i>topright, topleft, bottomright, bottomleft, vertical</i> und <i>horizontal</i> beschreiben wie der Bogen bzw. die Linie
+            im Rechteck liegt. </p>
+
             <simulation example="registertransfer"></simulation>
             <p><a href="/downloads/RegisterUndBusse.txt">RegisterUndBusse.txt</a></p>
         </div>
@@ -177,9 +185,43 @@
         <div class="textwidth">
             <h2>Operationswerk mit Controlboard</h2>
 
-            <p>aaa</p>
+            <p>Mit dem <i>Operationswerk</i> ist es möglich, alle 'Bonsai-Befehle' abzuarbeiten.</p> 
+            <h4>Befehl-hole-Phase</h4>            
+            <p>Wir wollen zunächst den Befehl in das <i>Instruction Register IR</i> holen,
+               auf den der <i>Program Counter PC</i> zeigt. Dazu soll der PC auf den grünen
+               Adressbus schreiben. Verfolgt man die rote Steuerleitung zurück zum Controlboard,
+               so landet man bei Bit 10. Ein Mausklick auf die dortige '0' verwandelt sie in eine 
+               rote '1'. Gleichzeitig sieht man an dem Schatten der Steuerleitung, dass sie aktiv
+               (sie enthält nicht mehr 0) ist. Das Tor am PC hat sich zum Adressbus geöffnet. Der 
+               Adressbus zeigt jetzt den Inhalt des PC an. Defaultmäßig liest der Speicher die Adresse
+               auf dem Adressbus. Der Speicher enthält im Beispiel den Befehl '30003' in der Zelle 0.
+               Um den Befehl vom Speicher über den roten Datenbus in das Befehlsregister zu
+               transportieren machen wir zusätzlich die Steuersignale 3, <i>writeMem</i>, und 11, <i>readIR</i>,
+               aktiv. Was passiert, wenn man nun zuerst <i>writeMem</i> zurücknimmt? Gut, es ist besser,
+               zuerst das Lese-Signal und dann das Schreib-Signal zurückzunehmen. Da der Speicher
+               nicht mehr angesprochen wird, kann auch 10, <i>writePC</i>, entfallen.</p>
+               
+            <h4>Befehl-ausführe-Phase</h4>
+            <p>Wir schreiben den <i>jmp</i>-Befehl 30017 direkt in das Befehlsregister und wollen ihn
+               mit Hilfe des Controlboards ausführen. Dazu lassen wir <i>IR</i> mit Signal
+               12, <i>writeIR</i>, auf den Adressbus schreiben. Die beiden Filter tun ihre
+               Wirkung, am Speicher liegt die <i>Adresse</i> 17, rechts am ?? 
+               (kriegen wir später &#128521;) der
+               <i>Opcode</i> 3 an. Warum wäre jetzt Signal 9 eine gute Wahl? In welcher Reihenfolge 
+               werden die Signale abgebaut? Was soll der <i>jmp</i>-Befehl eigentlich im Operationswerk 
+               bewirken?</p>
+            
             <simulation example="control"></simulation>
-            <p>bb</p>
+            
+            <p>Man sieht, dass eine geschickte Abfolge von <i>Steuersignalen</i> jeden Bonsai-Befehl
+               ausführen kann. Dabei kann man oft Signale zusammenfassen. Sie dürfen gleichzeitig
+               in einem <i>Steuerwort</i> aktiv sein. Wir wollen nun die Steuerworte für die Befehl-hole-Phase
+               <br />10 | 10, 3, 11 | 10, 3 <br />
+               in dezimaler Form angeben. Dazu lassen wir das Bit-Register
+               'Controlboard' auf den violetten Bus schreiben. Das erreichen wir durch einen Klick auf den
+               roten Kontrolleingang am oberen Tor und Wegziehen mit gedrückter Maustaste. Die gesuchten
+               Steuerworte ergeben sich dann zu 1024 | 3080 | 1032. 
+            </p>
         </div>
     </div>
 
@@ -214,7 +256,7 @@
         </div>
     </div>
 
-    <div id="registertransfer-de" class="pagebar">
+    <div id="registertransfer-en" class="pagebar">
         <div class="textwidth">
             <h2>Register and Buses</h2>
 

@@ -281,7 +281,7 @@
     },
     {
         "key"        : "_AddressBusConnectionCanNotBeSetToWrite_middle",
-        "value"      : ": Es ergibt keinen Sinn auf vom Speicher auf einen Aressbus zu schreiben (",
+        "value"      : ": Es ergibt keinen Sinn auf vom Speicher auf einen Adressbus zu schreiben (",
         "description": ""
     },
     {
@@ -296,7 +296,7 @@
     },
     {
         "key"        : "_NoAdressBusConnected_middle",
-        "value"      : ": Kein Aressbus angeschlossen. Über den Adressbus muss eine Adresse gelesen werden können, um Daten an diese Adresse schreiben oder von dort lesen zu können.",
+        "value"      : ": Kein Adressbus angeschlossen. Über den Adressbus muss eine Adresse gelesen werden können, um Daten an diese Adresse schreiben oder von dort lesen zu können.",
         "description": ""
     },
     {
@@ -496,7 +496,7 @@
     },
     {
         "key"        : "_WriteToUndefinedAddress_end",
-        "value"      : ") gelesen wurde ist 'undefined'. Um zu schreiben muss eine existierende Adresse angelegt werden.",
+        "value"      : ") gelesen wurde ist 'undefined'. Um zu schreiben, muss eine existierende Adresse angelegt werden.",
         "description": ""
     },
     {
@@ -511,7 +511,7 @@
     },
     {
         "key"        : "_ValueIsMaxNoInc_end",
-        "value"      : ", was bereits der Maximalwert ist. Ein weiteres erhöhen über den Maximalwert ist nicht erlaubt.",
+        "value"      : ", was bereits der Maximalwert ist. Ein weiteres Erhöhen über den Maximalwert ist nicht erlaubt.",
         "description": ""
     },
     {
