@@ -190,7 +190,7 @@
   "digiNandGates": [
     {
       "name": "Dnand",
-      "label": "3",
+      
       "inAId": "S5w",
       "inBId": "S6w",
       "outId": "DnandOut",

@@ -212,7 +212,10 @@
     "digiAndGates": [
         {
             "name": "Dand",
-            "label": "1",
+            "label": "&",
+            "toplabel": 4,
+            "leftlabel": 10,
+            "fontsize": 26,
             "inAId": "S1w",
             "inBId": "S2w",
             "outId": "DandOut",
@@ -223,7 +226,10 @@
     "digiOrGates": [
         {
             "name": "Dor",
-            "label": "2",
+            "label": "≥1",
+            "toplabel": 4,
+            "leftlabel": 2,
+            "fontsize": 26,
             "inAId": "S3w",
             "inBId": "S4w",
             "outId": "DorOut",
@@ -234,7 +240,11 @@
     "digiNandGates": [
         {
             "name": "Dnand",
-            "label": "3",
+            "label": "&",
+            "toplabel": 4,
+            "leftlabel": 10,
+            "fontsize": 26,
+            "circle": true,
             "inAId": "S5w",
             "inBId": "S6w",
             "outId": "DnandOut",
@@ -245,7 +255,11 @@
     "digiNorGates": [
         {
             "name": "Dnor",
-            "label": "4",
+            "label": "≥1",
+            "toplabel": 4,
+            "leftlabel": 2,
+            "fontsize": 26,
+            "circle": true,
             "inAId": "S7w",
             "inBId": "S8w",
             "outId": "DnorOut",
@@ -256,7 +270,10 @@
     "digiExorGates": [
         {
             "name": "Dexor",
-            "label": "5",
+            "label": "=1",
+            "toplabel": 4,
+            "leftlabel": 6,
+            "fontsize": 26,
             "inAId": "S9w",
             "inBId": "S10w",
             "outId": "DexorOut",
@@ -267,7 +284,8 @@
     "digiNotGates": [
         {
             "name": "Dnot",
-            "label": "6",
+            "label": "1",
+           
             "inAId": "S11w",
             "outId": "DnotOut",
             "top": 260,
@@ -344,7 +362,7 @@
             "name": "DandLed",
             "wireId": "DandOut",
             "top": 25,
-            "left": 100,
+            "left": 108,
             "value": 0,
             "color": "rgb(255, 0, 0)"
         },
@@ -352,7 +370,7 @@
             "name": "DorLed",
             "wireId": "DorOut",
             "top": 75,
-            "left": 100,
+            "left": 108,
             "value": 0,
             "color": "rgb(255, 0, 0)"
         },
@@ -360,7 +378,7 @@
             "name": "DnandLed",
             "wireId": "DnandOut",
             "top": 125,
-            "left": 100,
+            "left": 108,
             "value": 0,
             "color": "rgb(255, 0, 0)"
         },
@@ -368,7 +386,7 @@
             "name": "DnorLed",
             "wireId": "DnorOut",
             "top": 175,
-            "left": 100,
+            "left": 108,
             "value": 0,
             "color": "rgb(255, 0, 0)"
         },
@@ -376,7 +394,7 @@
             "name": "DexorLed",
             "wireId": "DexorOut",
             "top": 225,
-            "left": 100,
+            "left": 108,
             "value": 0,
             "color": "rgb(255, 0, 0)"
         },
@@ -384,7 +402,7 @@
             "name": "DnotLed",
             "wireId": "DnotOut",
             "top": 265,
-            "left": 100,
+            "left": 108,
             "value": 0,
             "color": "rgb(255, 0, 0)"
         }

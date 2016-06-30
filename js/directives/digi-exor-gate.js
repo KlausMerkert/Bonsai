@@ -11,6 +11,10 @@ bonsaiApp.directive('digiexorgate', function () {
             top: '=',
             left: '=',
             label: '=',
+            toplabel: '=',
+            leftlabel: '=',
+            fontsize: '=',
+            circle: '=',
             gateName: '@'
         },
         link: function ($scope, element, attrs) {  	
@@ -40,6 +44,30 @@ bonsaiApp.directive('digiexorgate', function () {
             $scope.$watch('label', function(newLabel, oldLabel) {
             	  if (typeof($scope.label) == "undefined") {
 								    $scope.label = '5';            	  
+            	  }
+            });
+            
+            $scope.$watch('toplabel', function(newLabel, oldLabel) {
+            	  if (typeof($scope.toplabel) == "undefined") {
+								    $scope.toplabel = 4;            	  
+            	  }
+            });
+            
+             $scope.$watch('leftlabel', function(newLabel, oldLabel) {
+            	  if (typeof($scope.leftlabel) == "undefined") {
+								    $scope.leftlabel = 2;            	  
+            	  }
+            });
+            
+             $scope.$watch('fontsize', function(newLabel, oldLabel) {
+            	  if (typeof($scope.fontsize) == "undefined") {
+								    $scope.fontsize = 26;            	  
+            	  }
+            });
+            
+            $scope.$watch('circle', function(newLabel, oldLabel) {
+            	  if (typeof($scope.circle) == "undefined") {
+								    $scope.circle = false;            	  
             	  }
             });
 
@@ -96,6 +124,6 @@ bonsaiApp.directive('digiexorgate', function () {
             $scope.controllerIsRead = true;
             $scope.checkForFinishedInitialization();
         },
-        templateUrl: '/partials/component_DigiExorGate.html'
+        templateUrl: '/partials/component_DigiGate.html'
     };
 });

@@ -37,27 +37,39 @@
         </div>
         <div ng-repeat="andGate in cpu.digiAndGates">
             <digiandgate in-a="andGate.inA" in-b="andGate.inB" out="andGate.out" gate-name="{{andGate.name}}"
-                         label="andGate.label" top="andGate.top" left="andGate.left"></digiandgate>
+                         label="andGate.label" 
+                         toplabel="andGate.toplabel" leftlabel="andGate.leftlabel" fontsize="andGate.fontsize" circle="andGate.circle"                         
+                         top="andGate.top" left="andGate.left"></digiandgate>
         </div>
         <div ng-repeat="orGate in cpu.digiOrGates">
             <digiorgate in-a="orGate.inA" in-b="orGate.inB" out="orGate.out" gate-name="{{orGate.name}}"
-                         label="orGate.label" top="orGate.top" left="orGate.left"></digiorgate>
+                         label="orGate.label" 
+                         toplabel="orGate.toplabel" leftlabel="orGate.leftlabel" fontsize="orGate.fontsize" circle="orGate.circle"                         
+                         top="orGate.top" left="orGate.left"></digiorgate>
         </div>
          <div ng-repeat="nandGate in cpu.digiNandGates">
             <diginandgate in-a="nandGate.inA" in-b="nandGate.inB" out="nandGate.out" gate-name="{{nandGate.name}}"
-                         label="nandGate.label" top="nandGate.top" left="nandGate.left"></diginandgate>
+                         label="nandGate.label" 
+                         toplabel="nandGate.toplabel" leftlabel="nandGate.leftlabel" fontsize="nandGate.fontsize" circle="nandGate.circle"
+                         top="nandGate.top" left="nandGate.left"></diginandgate>
         </div>
          <div ng-repeat="norGate in cpu.digiNorGates">
             <diginorgate in-a="norGate.inA" in-b="norGate.inB" out="norGate.out" gate-name="{{norGate.name}}"
-                         label="norGate.label" top="norGate.top" left="norGate.left"></diginorgate>
+                         label="norGate.label" 
+                         toplabel="norGate.toplabel" leftlabel="norGate.leftlabel" fontsize="norGate.fontsize" circle="norGate.circle"                         
+                         top="norGate.top" left="norGate.left"></diginorgate>
         </div>
         <div ng-repeat="exorGate in cpu.digiExorGates">
             <digiexorgate in-a="exorGate.inA" in-b="exorGate.inB" out="exorGate.out" gate-name="{{exorGate.name}}"
-                         label="exorGate.label" top="exorGate.top" left="exorGate.left"></digiexorgate>
+                         label="exorGate.label" 
+                         toplabel="exorGate.toplabel" leftlabel="exorGate.leftlabel" fontsize="exorGate.fontsize" circle="exorGate.circle"                         
+                         top="exorGate.top" left="exorGate.left"></digiexorgate>
         </div>
         <div ng-repeat="notGate in cpu.digiNotGates">
             <diginotgate in-a="notGate.inA" out="notGate.out" gate-name="{{notGate.name}}"
-                         label="notGate.label" top="notGate.top" left="notGate.left"></diginotgate>
+                         label="notGate.label" 
+                         toplabel="notGate.toplabel" leftlabel="notGate.leftlabel" fontsize="notGate.fontsize" circle="notGate.circle"                         
+                         top="notGate.top" left="notGate.left"></diginotgate>
         </div>
         <div ng-repeat="switch in cpu.manualswitches">
             <manualswitch wire="switch.wire" switch-name="{{switch.name}}" value="switch.value"
