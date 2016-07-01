@@ -46,7 +46,7 @@ bonsaiApp.directive('diginotgate', function () {
             
              $scope.$watch('toplabel', function(newLabel, oldLabel) {
             	  if (typeof($scope.toplabel) == "undefined") {
-								    $scope.toplabel = -6;            	  
+								    $scope.toplabel = -7;            	  
             	  }
             });
             
