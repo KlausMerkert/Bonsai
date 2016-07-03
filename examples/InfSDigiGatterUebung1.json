@@ -1,0 +1,155 @@
+{
+  "buses": [
+    {
+      "id": "S1w",
+      "name": "S1w",
+      "max": 1
+    },
+    {
+      "id": "S2w",
+      "name": "S2w",
+      "max": 1
+    },
+	{
+      "id": "S3w",
+      "name": "S3w",
+      "max": 1
+    },
+    {
+      "id": "DandOut",
+      "name": "DandOut",
+      "max": 1,
+	  "routes": [
+        {
+          "type": "bottomright",
+          "top": "39px",
+          "left": "115px",
+          "width": "10px",
+          "height": "52px"
+        },
+        {
+          "type": "horizontal",
+          "top": "39px",
+          "left": "125px",
+          "width": "23px",
+          "height": "0px"
+        }
+      ]
+    },
+    {
+      "id": "DnotOut",
+      "name": "DnotOut",
+      "max": 1
+    },
+    {
+      "id": "DoderOut",
+      "name": "DoderOut",
+      "max": 1
+    }
+  ],
+   "digiSwitches": [
+    {
+      "name": "S1",
+      "wireId": "S1w",
+      "value": 0,
+      "top": 14,
+      "left": 20
+    },
+    {
+      "name": "S2",
+      "wireId": "S2w",
+      "value": 0,
+      "top": 79,
+      "left": 20
+    },
+    {
+      "name": "S3",
+      "wireId": "S3w",
+      "value": 0,
+      "top": 104,
+      "left": 20
+    }
+  ],
+  "digiNotGates": [
+    {
+      "name": "Dnot",
+      "label": "1",
+      "inAId": "S1w",
+      "outId": "DnotOut",
+      "left": 57,
+      "toplabel": -7,
+      "top": 9,
+      "left": 70,
+      "circle": true
+    }
+  ],
+  "digiNandGates": [
+    {
+      "name": "Dnand",
+      "label": "&",
+      "toplabel": 4,
+      "leftlabel": 10,
+      "fontsize": 26,
+      "circle": true,
+      "inAId": "S2w",
+      "inBId": "S3w",
+      "outId": "DandOut",
+      "top": 75,
+      "left": 70
+    }
+  ],
+  "digiOrGates": [
+    {
+      "name": "Dor",
+      "label": "≥1",
+      "toplabel": 4,
+      "leftlabel": 2,
+      "fontsize": 26,
+      "inAId": "DnotOut",
+      "inBId": "DandOut",
+      "outId": "DoderOut",
+      "top": 10,
+      "left": 150,
+      "circle": false
+    }
+  ],
+  "leds": [
+    {
+      "name": "DandLed",
+      "wireId": "DoderOut",
+      "top": 25,
+      "left": 230,
+      "value": 0,
+      "color": "rgb(255, 0, 0)"
+    }
+  ],
+  "registers": [],
+  "bitregisters": [],
+  "memories": [],
+  "zerocomparators": [],
+  "delays": [],
+  "filters": [],
+  "clocks": [],
+  "labels": [
+  {
+      "text": "Lampe",
+      "top": 10,
+      "left": 250
+    },
+  {
+      "text": "a",
+      "top": 0,
+      "left": 5
+    },
+  {
+      "text": "b",
+      "top": 61,
+      "left": 5
+    },
+  {
+      "text": "c",
+      "top": 89,
+      "left": 5
+    }
+  ]
+}
