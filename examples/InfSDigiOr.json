@@ -1,0 +1,84 @@
+{
+  "buses": [
+    {
+      "id": "S1w",
+      "name": "S1w",
+      "max": 1
+    },
+    {
+      "id": "S2w",
+      "name": "S2w",
+      "max": 1
+    },
+    {
+      "id": "DorOut",
+      "name": "DorOut",
+      "max": 1
+    }
+  ],
+   "digiSwitches": [
+    {
+      "name": "S1",
+      "wireId": "S1w",
+      "value": 0,
+      "top": 14,
+      "left": 60
+    },
+    {
+      "name": "S2",
+      "wireId": "S2w",
+      "value": 0,
+      "top": 39,
+      "left": 60
+    }
+  ],
+  "digiOrGates": [
+    {
+      "name": "Dor",
+      "label": "≥1",
+      "toplabel": 4,
+      "leftlabel": 2,
+      "fontsize": 26,
+      "inAId": "S1w",
+      "inBId": "S2w",
+      "outId": "DorOut",
+      "top": 10,
+      "left": 120,
+      "circle": false
+    }
+  ],
+  "leds": [
+    {
+      "name": "DorLed",
+      "wireId": "DorOut",
+      "top": 25,
+      "left": 180,
+      "value": 0,
+      "color": "rgb(255, 0, 0)"
+    }
+  ],
+  "registers": [],
+  "bitregisters": [],
+  "memories": [],
+  "zerocomparators": [],
+  "delays": [],
+  "filters": [],
+  "clocks": [],
+  "labels": [
+  {
+      "text": "Lampe",
+      "top": 10,
+      "left": 200
+    },
+  {
+      "text": "Schalter 1",
+      "top": 0,
+      "left": 5
+    },
+  {
+      "text": "Schalter 2",
+      "top": 25,
+      "left": 5
+    }
+  ]
+}
