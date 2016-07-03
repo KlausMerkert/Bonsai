@@ -1,0 +1,188 @@
+{
+  "buses": [
+    {
+      "id": "S5w",
+      "name": "S5w",
+      "max": 1
+    },
+    {
+      "id": "S6w",
+      "name": "S6w",
+      "max": 1
+    },
+    {
+      "id": "DnandOut",
+      "name": "DnandOut",
+      "max": 1
+    },
+    {
+      "id": "S7w",
+      "name": "S7w",
+      "max": 1
+    },
+    {
+      "id": "S8w",
+      "name": "S8w",
+      "max": 1
+    },
+    {
+      "id": "DnorOut",
+      "name": "DnorOut",
+      "max": 1
+    },
+    {
+      "id": "S9w",
+      "name": "S9w",
+      "max": 1
+    },
+    {
+      "id": "S10w",
+      "name": "S10w",
+      "max": 1
+    },
+    {
+      "id": "DexorOut",
+      "name": "DexorOut",
+      "max": 1
+    }
+  ],
+   "digiSwitches": [
+    {
+      "name": "S5",
+      "wireId": "S5w",
+      "value": 0,
+      "top": 14,
+      "left": 60
+    },
+    {
+      "name": "S6",
+      "wireId": "S6w",
+      "value": 0,
+      "top": 39,
+      "left": 60
+    },
+    {
+      "name": "S7",
+      "wireId": "S7w",
+      "value": 0,
+      "top": 74,
+      "left": 60
+    },
+    {
+      "name": "S8",
+      "wireId": "S8w",
+      "value": 0,
+      "top": 99,
+      "left": 60
+    },
+    {
+      "name": "S9",
+      "wireId": "S9w",
+      "value": 0,
+      "top": 134,
+      "left": 60
+    },
+    {
+      "name": "S10",
+      "wireId": "S10w",
+      "value": 0,
+      "top": 159,
+      "left": 60
+    }
+  ],
+  "digiNandGates": [
+    {
+      "name": "Dnand",
+      "label": "1",
+      "toplabel": 4,
+      "leftlabel": 10,
+      "fontsize": 26,
+      "circle": true,
+      "inAId": "S5w",
+      "inBId": "S6w",
+      "outId": "DnandOut",
+      "top": 10,
+      "left": 120
+    }
+  ],
+  "digiNorGates": [
+    {
+      "name": "Dnor",
+      "label": "2",
+      "toplabel": 4,
+      "leftlabel": 10,
+      "fontsize": 26,
+      "circle": true,
+      "inAId": "S7w",
+      "inBId": "S8w",
+      "outId": "DnorOut",
+      "top": 70,
+      "left": 120
+    }
+  ],
+  "digiExorGates": [
+    {
+      "name": "Dexor",
+      "label": "3",
+      "toplabel": 4,
+      "leftlabel": 10,
+      "fontsize": 26,
+      "inAId": "S9w",
+      "inBId": "S10w",
+      "outId": "DexorOut",
+      "top": 130,
+      "left": 120,
+      "circle": false
+    }
+  ],
+  "leds": [
+    {
+      "name": "DnandLed",
+      "wireId": "DnandOut",
+      "top": 25,
+      "left": 180,
+      "value": 0,
+      "color": "rgb(255, 0, 0)"
+    },
+    {
+      "name": "DnorLed",
+      "wireId": "DnorOut",
+      "top": 85,
+      "left": 180,
+      "value": 0,
+      "color": "rgb(255, 0, 0)"
+    },
+    {
+      "name": "DexorLed",
+      "wireId": "DexorOut",
+      "top": 145,
+      "left": 180,
+      "value": 1,
+      "color": "rgb(255, 0, 0)"
+    }
+  ],
+  "registers": [],
+  "bitregisters": [],
+  "memories": [],
+  "zerocomparators": [],
+  "delays": [],
+  "filters": [],
+  "clocks": [],
+  "labels": [
+  {
+      "text": "Lampe",
+      "top": 10,
+      "left": 200
+    },
+  {
+      "text": "Schalter 1",
+      "top": 0,
+      "left": 5
+    },
+  {
+      "text": "Schalter 2",
+      "top": 25,
+      "left": 5
+    }
+  ]
+}
