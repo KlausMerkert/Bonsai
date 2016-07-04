@@ -1,0 +1,61 @@
+{
+  "buses": [
+    {
+      "id": "S1w",
+      "name": "S1w",
+      "max": 1
+    },
+    {
+      "id": "DnotOut",
+      "name": "DnotOut",
+      "max": 1
+    }
+  ],
+   "digiSwitches": [
+    {
+      "name": "S1",
+      "wireId": "S1w",
+      "value": 0,
+      "top": 15,
+      "left": 60
+    }
+  ],
+  "digiNotGates": [
+    {
+      "name": "Dnot",
+      "label": "1",
+      "inAId": "S1w",
+      "outId": "DnotOut",
+      "top": 10,
+      "left": 120,
+      "toplabel": -7,
+      "leftlabel": 6,
+      "fontsize": 14,
+      "circle": true
+    }
+  ],
+  "leds": [
+    {
+      "name": "DnotLed",
+      "wireId": "DnotOut",
+      "top": 15,
+      "left": 180,
+      "value": 0,
+      "color": "rgb(255, 0, 0)"
+    }
+  ],
+  "registers": [],
+  "bitregisters": [],
+  "memories": [],
+  "zerocomparators": [],
+  "delays": [],
+  "filters": [],
+  "clocks": [],
+  "labels": [
+  {
+      "text": "Schalter",
+      "top": 0,
+      "left": 5
+    }
+  ]
+}
