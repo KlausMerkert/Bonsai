@@ -65,6 +65,12 @@
                          toplabel="exorGate.toplabel" leftlabel="exorGate.leftlabel" fontsize="exorGate.fontsize" circle="exorGate.circle"                         
                          top="exorGate.top" left="exorGate.left"></digiexorgate>
         </div>
+        <div ng-repeat="haGate in cpu.digiHAGates">                                                       
+            <digiHAgate in-a="haGate.inA" in-b="haGate.inB" outS="haGate.outS" outUe="haGate.outUe" gate-name="{{haGate.name}}"
+                         label="haGate.label" 
+                         toplabel="haGate.toplabel" leftlabel="haGate.leftlabel" fontsize="haGate.fontsize"                      
+                         top="haGate.top" left="haGate.left"></digiHAgate>
+        </div>
         <div ng-repeat="notGate in cpu.digiNotGates">
             <diginotgate in-a="notGate.inA" out="notGate.out" gate-name="{{notGate.name}}"
                          label="notGate.label" 
