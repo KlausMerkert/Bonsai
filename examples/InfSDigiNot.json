@@ -53,12 +53,12 @@
   "clocks": [],
   "labels": [
   {
-      "text": "Lampe",
+      "text": "Lampe A",
       "top": 0,
       "left": 200
     },
   {
-      "text": "Schalter",
+      "text": "Schalter a",
       "top": 0,
       "left": 5
     }
