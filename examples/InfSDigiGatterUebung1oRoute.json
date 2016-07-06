@@ -67,14 +67,14 @@
       "circle": true
     }
   ],
-  "digiNandGates": [
+  "digiAndGates": [
     {
-      "name": "Dnand",
+      "name": "Dand",
       "label": "&",
       "toplabel": 4,
       "leftlabel": 10,
       "fontsize": 26,
-      "circle": true,
+      "circle": false,
       "inAId": "S2w",
       "inBId": "S3w",
       "outId": "DandOut",
