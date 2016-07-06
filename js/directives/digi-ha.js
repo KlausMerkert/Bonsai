@@ -1,6 +1,6 @@
 'use strict';
 
-bonsaiApp.directive('digiHAgate', function () {     
+bonsaiApp.directive('digihagate', function () {
     return {
         restrict: 'E',
         transclude: false,
@@ -138,6 +138,6 @@ bonsaiApp.directive('digiHAgate', function () {
             $scope.controllerIsRead = true;
             $scope.checkForFinishedInitialization();
         },
-        templateUrl: '/partials/component_Digi_HAGate.html'                             
+        templateUrl: '/partials/component_DigiHAGate.html'
     };
 });
