@@ -15,7 +15,6 @@ bonsaiApp.directive('digihagate', function () {
             toplabel: '=',
             leftlabel: '=',
             fontsize: '=',
-            circle: '=',
             gateName: '@'
         },
         link: function ($scope, element, attrs) {  	
@@ -36,9 +35,9 @@ bonsaiApp.directive('digihagate', function () {
                 } else if (wire === $scope.inB) {
                     return [{top: ($scope.top + 29), left: ($scope.left - 1)}];
                 } else if (wire === $scope.outS) {
-                   	return [{top: ($scope.top + 10), left: ($scope.left + 33)}]; 
+                   	return [{top: ($scope.top + 4), left: ($scope.left + 33)}]; 
                 } else if (wire === $scope.outUe) {
-                   	return [{top: ($scope.top + 22), left: ($scope.left + 33)}]; 
+                   	return [{top: ($scope.top + 29), left: ($scope.left + 33)}]; 
                 } else {
                     console.log("This Wire is not connected: " + wire.getName());
                 }
@@ -68,11 +67,6 @@ bonsaiApp.directive('digihagate', function () {
             	  }
             });
             
-            $scope.$watch('circle', function(newLabel, oldLabel) {
-            	  if (typeof($scope.circle) == "undefined") {
-								    $scope.circle = false;            	  
-            	  }
-            });
 
             $scope.$watch('inA', function (newInA, oldInA) {
                 if (newInA) {
@@ -98,25 +92,25 @@ bonsaiApp.directive('digihagate', function () {
                 $scope.checkForFinishedInitialization();
             });
 
-            $scope.$watch('outS', function (newOut, oldOut) {                              
-                if (newOut) {
-                    newOut.enrollToDirective($scope.logicGate, $scope.getConnectionPositions);
+            $scope.$watch('outS', function (newOutS, oldOutS) {                              
+                if (newOutS) {
+                    newOutS.enrollToDirective($scope.logicGate, $scope.getConnectionPositions);
                 }
-                if (oldOut && (newOut != oldOut)) {
-                    oldOut.resign($scope.logicGate);
+                if (oldOutS && (newOutS != oldOutS)) {
+                    oldOutS.resign($scope.logicGate);
                 }
-                $scope.outEnrolled = true;
+                $scope.outSEnrolled = true;
                 $scope.checkForFinishedInitialization();
             });
             
-            $scope.$watch('outUe', function (newOut, oldOut) {                              
-                if (newOut) {
-                    newOut.enrollToDirective($scope.logicGate, $scope.getConnectionPositions);
+            $scope.$watch('outUe', function (newOutUe, oldOutUe) {                              
+                if (newOutUe) {
+                    newOutUe.enrollToDirective($scope.logicGate, $scope.getConnectionPositions);
                 }
-                if (oldOut && (newOut != oldOut)) {
-                    oldOut.resign($scope.logicGate);
+                if (oldOutUe && (newOutUe != oldOutUe)) {
+                    oldOutUe.resign($scope.logicGate);
                 }
-                $scope.outEnrolled = true;
+                $scope.outUeEnrolled = true;
                 $scope.checkForFinishedInitialization();
             });
 
@@ -124,7 +118,8 @@ bonsaiApp.directive('digihagate', function () {
                 if ($scope.controllerIsRead &&
                     $scope.inAEnrolled &&
                     $scope.inBEnrolled &&
-                    $scope.outEnrolled &&
+                    $scope.outSEnrolled &&
+                    $scope.outUeEnrolled &&
                     !$scope.initializationSuccessful) {
                     $scope.initializationSuccessful = true;
                     $scope.$emit('componentInitialized', $scope.logicGate);

@@ -6,5 +6,5 @@
 - aus /partials/component_DigiGate.html wird /partials/component_DigiHAGate.html erzeugt, top-Positionen der Ausgänge sind geschätzt
 - in /partials/simulation.html wird ein <div ng-repeat="HAGate in cpu.digiHAGates"> eingefügt, simulation.html enthält die Darstellung einer Schaltung
 - in /js/helpers/BusMatcher.js wird BusMatcher.prototype.matchDigiExorGates kopiert (böse!) und zu BusMatcher.prototype.matchDigiHAGates verändert
-- eine Testdatei testHA.json wird erstellt und mit http://localhost:8004/bonsai/?example=testHA getestet
 - in index.html müssen die neuerstellten Dateien geladen werden
+- eine Testdatei testHA.json wird erstellt und mit http://localhost:8004/bonsai/?example=testHA getestet
