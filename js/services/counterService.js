@@ -9,7 +9,7 @@ angular.module('ServerServices', [])
         return {
             count: function (path, partial) {
                 return $http({
-                    url: 'http://bonsai.counter.pinyto.de/counter.php',
+                    url: 'https://bonsai.counter.merkert.info/counter.php',
                     method: "POST",
                     data: 'path=' + path + '&partial=' + partial,
                     headers: {'Content-Type': 'application/x-www-form-urlencoded'}
