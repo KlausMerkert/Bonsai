@@ -24,7 +24,7 @@ HAGate.prototype.setValue = function () {
     var stateInB = false;
     if ((this.inWireB) && (this.inWireB.isActive()) && (this.inWireB.isNotZero())) {
         stateInB = true;
-    };
+    }
     if (stateInA && stateInB) {
         if (this.outWireS) {
             this.outWireS.write(this, 1);
@@ -33,7 +33,7 @@ HAGate.prototype.setValue = function () {
         if (this.outWireS) {
             this.outWireS.write(this, 0);
         }
-    };
+    }
     if ((stateInA && !stateInB) || (!stateInA && stateInB)) {
         if (this.outWireUe) {
             this.outWireUe.write(this, 1);
@@ -42,5 +42,5 @@ HAGate.prototype.setValue = function () {
         if (this.outWireUe) {
             this.outWireUe.write(this, 0);
         }
-    };
+    }
 };
