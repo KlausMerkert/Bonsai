@@ -1,0 +1,103 @@
+{
+  "buses": [
+    {
+      "id": "S1w",
+      "name": "S1w",
+      "max": 1
+    },
+    {
+      "id": "S2w",
+      "name": "S2w",
+      "max": 1
+    },
+    {
+      "id": "DorOut",
+      "name": "DorOut",
+      "max": 1
+    },
+	{
+      "id": "DnotOut",
+      "name": "DnotOut",
+      "max": 1
+    }
+  ],
+   "digiSwitches": [
+    {
+      "name": "S1",
+      "wireId": "S1w",
+      "value": 0,
+      "top": 14,
+      "left": 60
+    },
+    {
+      "name": "S2",
+      "wireId": "S2w",
+      "value": 0,
+      "top": 39,
+      "left": 60
+    }
+  ],
+  "digiOrGates": [
+    {
+      "name": "Dor",
+      "label": "≥1",
+      "toplabel": 4,
+      "leftlabel": 2,
+      "fontsize": 26,
+      "inAId": "S1w",
+      "inBId": "S2w",
+      "outId": "DorOut",
+      "top": 10,
+      "left": 120,
+      "circle": false
+    }
+  ],
+  "digiNotGates": [
+    {
+      "name": "Dnot",
+      "label": "1",
+      "inAId": "DorOut",
+      "outId": "DnotOut",
+      "top": 20,
+      "left": 200,
+      "toplabel": -7,
+      "leftlabel": 6,
+      "fontsize": 14,
+      "circle": true
+    }
+  ],
+  "leds": [
+    {
+      "name": "DnotOut",
+      "wireId": "DnotOut",
+      "top": 24,
+      "left": 250,
+      "value": 0,
+      "color": "rgb(255, 0, 0)"
+    }
+  ],
+  "registers": [],
+  "bitregisters": [],
+  "memories": [],
+  "zerocomparators": [],
+  "delays": [],
+  "filters": [],
+  "clocks": [],
+  "labels": [
+  {
+      "text": "Lampe A",
+      "top": 10,
+      "left": 270
+    },
+  {
+      "text": "Schalter a",
+      "top": 0,
+      "left": 5
+    },
+  {
+      "text": "Schalter b",
+      "top": 25,
+      "left": 5
+    }
+  ]
+}
