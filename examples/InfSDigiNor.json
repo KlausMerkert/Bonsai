@@ -1,0 +1,84 @@
+{
+  "buses": [
+    {
+      "id": "S5w",
+      "name": "S5w",
+      "max": 1
+    },
+    {
+      "id": "S6w",
+      "name": "S6w",
+      "max": 1
+    },
+    {
+      "id": "DnorLed",
+      "name": "DnorLed",
+      "max": 1
+    }
+  ],
+   "digiSwitches": [
+    {
+      "name": "S5",
+      "wireId": "S5w",
+      "value": 0,
+      "top": 14,
+      "left": 60
+    },
+    {
+      "name": "S6",
+      "wireId": "S6w",
+      "value": 0,
+      "top": 39,
+      "left": 60
+    }
+  ],
+  "digiNorGates": [
+    {
+      "name": "Dnor",
+      "label": "≥1",
+      "toplabel": 4,
+      "leftlabel": 2,
+      "fontsize": 26,
+      "circle": true,
+      "inAId": "S5w",
+      "inBId": "S6w",
+      "outId": "DnorLed",
+      "top": 10,
+      "left": 120
+    }
+  ],
+  "leds": [
+    {
+      "name": "DnorLed",
+      "wireId": "DnorLed",
+      "top": 25,
+      "left": 180,
+      "value": 0,
+      "color": "rgb(255, 0, 0)"
+    }
+  ],
+  "registers": [],
+  "bitregisters": [],
+  "memories": [],
+  "zerocomparators": [],
+  "delays": [],
+  "filters": [],
+  "clocks": [],
+  "labels": [
+  {
+      "text": "Lampe A",
+      "top": 10,
+      "left": 200
+    },
+  {
+      "text": "Schalter a",
+      "top": 0,
+      "left": 5
+    },
+  {
+      "text": "Schalter b",
+      "top": 25,
+      "left": 5
+    }
+  ]
+}
