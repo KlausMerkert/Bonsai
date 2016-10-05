@@ -1,0 +1,86 @@
+{
+  "buses": [
+    {
+      "id": "aw",
+      "name": "aw",
+      "max": 1
+    },
+    {
+      "id": "bw",
+      "name": "bw",
+      "max": 1
+    },
+    {
+      "id": "cw",
+      "name": "cw",
+      "max": 1
+    },
+    {
+      "id": "Sw",
+      "name": "Summe",
+      "max": 1
+    },
+    {
+      "id": "Uew",
+      "name": "Uebertrag",
+      "max": 1
+    }
+  ],
+   "digiSwitches": [
+    {
+      "name": "Sa",
+      "wireId": "aw",
+      "value": 0,
+      "top": 14,
+      "left": 60
+    },
+    {
+      "name": "Sb",
+      "wireId": "bw",
+      "value": 0,
+      "top": 39,
+      "left": 60
+    },
+    {
+      "name": "Sc",
+      "wireId": "cw",
+      "value": 0,
+      "top": 64,
+      "left": 60
+    }
+  ],
+  "leds": [
+    {
+      "name": "LedS",
+      "wireId": "Sw",
+      "top": 14,
+      "left": 190,
+      "value": 0,
+      "color": "rgb(255, 0, 0)"
+    },
+    {
+      "name": "LedUe",
+      "wireId": "Uew",
+      "top": 39,
+      "left": 190,
+      "value": 0,
+      "color": "rgb(255, 0, 0)"
+    }
+  ],
+  "digiFAGates": [
+    {
+      "name": "FA",
+      "label": "FA",
+      "toplabel": 4,
+      "leftlabel": 3,
+      "fontsize": 26,
+      "inAId": "aw",
+      "inBId": "bw",
+      "inCId": "cw",
+      "outSId": "Sw",
+      "outUeId": "Uew",
+      "top": 10,
+      "left": 120
+    }
+  ]
+}

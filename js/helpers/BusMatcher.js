@@ -12,6 +12,7 @@ BusMatcher.prototype.createBuses = function () {
     if (this.cpu.buses) {
         for (var i = 0; i < this.cpu.buses.length; i++) {
             this.cpu.buses[i].object = new Bus();
+            this.cpu.buses[i].object.setName(this.cpu.buses[i].id);
         }
     }
 };
@@ -19,7 +20,7 @@ BusMatcher.prototype.createBuses = function () {
 BusMatcher.prototype.findBus = function(id) {
     for (var i = 0; i < this.cpu.buses.length; i++) {
         if (this.cpu.buses[i].id == id) {
-            return this.cpu.buses[i].object;
+            return this.cpu.buses[i].object; 
         }
     }
     throw BusNotFound(
@@ -339,6 +340,49 @@ BusMatcher.prototype.matchDigiNotGates = function () {
     }
 };
 
+BusMatcher.prototype.matchDigiHAGates = function () {
+    if (this.cpu.digiHAGates) {
+        for (var i = 0; i < this.cpu.digiHAGates.length; i++) {
+            if (this.cpu.digiHAGates[i].inAId) {
+                this.cpu.digiHAGates[i].inA = this.findBus(this.cpu.digiHAGates[i].inAId);
+            }
+            if (this.cpu.digiHAGates[i].inBId) {
+                this.cpu.digiHAGates[i].inB = this.findBus(this.cpu.digiHAGates[i].inBId);
+            }
+            if (this.cpu.digiHAGates[i].outSId) {
+                this.cpu.digiHAGates[i].outS = this.findBus(this.cpu.digiHAGates[i].outSId);
+            }
+            if (this.cpu.digiHAGates[i].outUeId) {
+                this.cpu.digiHAGates[i].outUe = this.findBus(this.cpu.digiHAGates[i].outUeId);
+            }          
+        }
+    }
+};
+
+BusMatcher.prototype.matchDigiFAGates = function () {
+    if (this.cpu.digiFAGates) {
+        for (var i = 0; i < this.cpu.digiFAGates.length; i++) {
+            if (this.cpu.digiFAGates[i].inAId) {
+                this.cpu.digiFAGates[i].inA = this.findBus(this.cpu.digiFAGates[i].inAId);
+            }
+            if (this.cpu.digiFAGates[i].inBId) {
+                this.cpu.digiFAGates[i].inB = this.findBus(this.cpu.digiFAGates[i].inBId);
+            }
+            if (this.cpu.digiFAGates[i].inCId) {
+                this.cpu.digiFAGates[i].inC = this.findBus(this.cpu.digiFAGates[i].inCId);
+            }
+            if (this.cpu.digiFAGates[i].outSId) {
+                this.cpu.digiFAGates[i].outS = this.findBus(this.cpu.digiFAGates[i].outSId);
+            }
+            if (this.cpu.digiFAGates[i].outUeId) {
+                this.cpu.digiFAGates[i].outUe = this.findBus(this.cpu.digiFAGates[i].outUeId);
+            }          
+        }
+    }
+};
+
+
+
 
 BusMatcher.prototype.matchAllComponents = function () {
     this.matchManualSwitches();
@@ -359,6 +403,8 @@ BusMatcher.prototype.matchAllComponents = function () {
     this.matchDigiNandGates();
     this.matchDigiNorGates();
     this.matchDigiExorGates();
-    this.matchDigiNotGates();
+    this.matchDigiNotGates();    
+    this.matchDigiHAGates();
+    this.matchDigiFAGates();
 };
 

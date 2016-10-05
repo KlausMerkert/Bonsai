@@ -1,0 +1,11 @@
+- ein Halbaddierer ist ein Gatter mit zwei Eingängen und zwei Ausgängen (exor und and)
+- als Vorlage wurde die Directive digi-and-gate.js genommen, kopiert (böse!) und unter js/directives/digi-ha.js abgespeichert
+- in digi-ha.js Name geändert und weitere Änderungen ...
+- in der Funktion zu link wird eine neues and-Gate erzeugt, hier muss ein neuer Halbaddierer erzeugt werden
+- aus den Model-Dateien /js/models/digi-and-gate.js und /js/models/ExorGate.js wird /js/models/HAGate.js erzeugt
+- aus /partials/component_DigiGate.html wird /partials/component_DigiHAGate.html erzeugt, top-Positionen der Ausgänge sind geschätzt
+- in /partials/simulation.html wird ein <div ng-repeat="HAGate in cpu.digiHAGates"> eingefügt, simulation.html enthält die Darstellung einer Schaltung
+- in /js/helpers/BusMatcher.js wird BusMatcher.prototype.matchDigiExorGates kopiert (böse!) und zu BusMatcher.prototype.matchDigiHAGates verändert
+- in index.html müssen die neuerstellten Dateien geladen werden
+- eine Testdatei testHA.json wird erstellt und mit http://localhost:8004/bonsai/?example=testHA getestet
+Achtung: -,: und _ werden zu CamelCase normalisiert, also z.B. out-s --> outS oder out-ue --> outUe, siehe: https://docs.angularjs.org/guide/directive 'Normalization'

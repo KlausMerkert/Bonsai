@@ -1,0 +1,70 @@
+{
+  "buses": [
+    {
+      "id": "S1w",
+      "name": "S1w",
+      "max": 1
+    },
+    {
+      "id": "S2w",
+      "name": "S2w",
+      "max": 1
+    },
+    {
+      "id": "Summe",
+      "name": "Summe",
+      "max": 1
+    },
+    {
+      "id": "Uebertrag",
+      "name": "Uebertrag",
+      "max": 1
+    }
+  ],
+   "digiSwitches": [
+    {
+      "name": "S1",
+      "wireId": "S1w",
+      "value": 0,
+      "top": 14,
+      "left": 60
+    },
+    {
+      "name": "S2",
+      "wireId": "S2w",
+      "value": 0,
+      "top": 39,
+      "left": 60
+    }
+  ],
+  "leds": [
+    {
+      "name": "LedS",
+      "wireId": "Summe",
+      "top": 14,
+      "left": 190,
+      "value": 0,
+      "color": "rgb(255, 0, 0)"
+    },
+    {
+      "name": "LedUe",
+      "wireId": "Uebertrag",
+      "top": 39,
+      "left": 190,
+      "value": 0,
+      "color": "rgb(255, 0, 0)"
+    }
+  ],
+  "digiAndGates": [
+    {
+      "name": "Dand",
+      "label": "1",
+      "inAId": "S1w",
+      "inBId": "S2w",
+      "outId": "Summe",
+      "outSId": "Uebertrag",
+      "top": 10,
+      "left": 120
+    }
+  ]
+}
