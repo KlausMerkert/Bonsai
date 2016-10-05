@@ -338,10 +338,10 @@ BusMatcher.prototype.matchDigiHAGates = function () {
                 this.cpu.digiHAGates[i].inB = this.findBus(this.cpu.digiHAGates[i].inBId);
             }
             if (this.cpu.digiHAGates[i].outSId) {
-                this.cpu.digiHAGates[i].outs = this.findBus(this.cpu.digiHAGates[i].outSId);
+                this.cpu.digiHAGates[i].outS = this.findBus(this.cpu.digiHAGates[i].outSId);
             }
             if (this.cpu.digiHAGates[i].outUeId) {
-                this.cpu.digiHAGates[i].outue = this.findBus(this.cpu.digiHAGates[i].outUeId);
+                this.cpu.digiHAGates[i].outUe = this.findBus(this.cpu.digiHAGates[i].outUeId);
             }          
         }
     }
@@ -363,7 +363,7 @@ BusMatcher.prototype.matchDigiFAGates = function () {
                 this.cpu.digiFAGates[i].outs = this.findBus(this.cpu.digiFAGates[i].outSId);
             }
             if (this.cpu.digiFAGates[i].outUeId) {
-                this.cpu.digiFAGates[i].outue = this.findBus(this.cpu.digiFAGates[i].outUeId);
+                this.cpu.digiFAGates[i].outUe = this.findBus(this.cpu.digiFAGates[i].outUeId);
             }          
         }
     }

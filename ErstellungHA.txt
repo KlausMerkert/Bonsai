@@ -8,3 +8,4 @@
 - in /js/helpers/BusMatcher.js wird BusMatcher.prototype.matchDigiExorGates kopiert (böse!) und zu BusMatcher.prototype.matchDigiHAGates verändert
 - in index.html müssen die neuerstellten Dateien geladen werden
 - eine Testdatei testHA.json wird erstellt und mit http://localhost:8004/bonsai/?example=testHA getestet
+Achtung: -,: und _ werden zu CamelCase normalisiert, also z.B. out-s --> outS oder out-ue --> outUe, siehe: https://docs.angularjs.org/guide/directive 'Normalization'
