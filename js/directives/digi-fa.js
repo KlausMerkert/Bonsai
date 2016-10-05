@@ -5,11 +5,11 @@ bonsaiApp.directive('digifagate', function () {
         restrict: 'E',
         transclude: false,
         scope: {
-            ina: '=',
-            inb: '=',
-            inx: '=',
-            outs: '=', 
-            outue: '=', 
+            inA: '=',
+            inB: '=',
+            inC: '=',
+            outS: '=', 
+            outUe: '=', 
             top: '=',
             left: '=',
             label: '=',
@@ -19,11 +19,8 @@ bonsaiApp.directive('digifagate', function () {
             gateName: '@'
         },
         link: function ($scope, element, attrs) {  	
-            console.log("aus digi-fa.js ina =",$scope.ina);
-            console.log("aus digi-fa.js inb =",$scope.inb);
-            console.log("aus digi-fa.js inx =",$scope.inx);
-            console.log("aus digi-fa.js gateName =",$scope.gateName);
-            $scope.logicGate = new FAGate($scope.ina, $scope.inb, $scope.inx, $scope.outs, $scope.outue);
+            // console.log("aus digi-fa.js outS =",$scope.outS);
+            $scope.logicGate = new FAGate($scope.inA, $scope.inB, $scope.inC, $scope.outS, $scope.outUe);
 
             $scope.topCSS = ($scope.top - 3) + 'px';
             $scope.leftCSS = $scope.left + 'px';
@@ -35,15 +32,15 @@ bonsaiApp.directive('digifagate', function () {
             });
 
             $scope.getConnectionPositions = function (wire) {
-                if (wire === $scope.ina) {
+                if (wire === $scope.inA) {
                     return [{top: $scope.top + 4, left: ($scope.left - 1)}];
-                } else if (wire === $scope.inb) {
+                } else if (wire === $scope.inB) {
                     return [{top: ($scope.top + 29), left: ($scope.left - 1)}];
-                } else if (wire === $scope.inx) {
+                } else if (wire === $scope.inC) {
                     return [{top: ($scope.top + 54), left: ($scope.left - 1)}];
-                } else if (wire === $scope.outs) {
+                } else if (wire === $scope.outS) {
                     return [{top: ($scope.top + 4), left: ($scope.left + 33)}]; 
-                } else if (wire === $scope.outue) {
+                } else if (wire === $scope.outUe) {
                    	return [{top: ($scope.top + 29), left: ($scope.left + 33)}]; 
                 } else {
                     console.log("This Wire is not connected: " + wire.getName());
@@ -75,7 +72,7 @@ bonsaiApp.directive('digifagate', function () {
             });
             
 
-            $scope.$watch('ina', function (newInA, oldInA) {
+            $scope.$watch('inA', function (newInA, oldInA) {
                 if (newInA) {
                     newInA.enrollToDirective($scope.logicGate, $scope.getConnectionPositions);
                     newInA.registerReaderAndRead($scope.logicGate);
@@ -83,11 +80,11 @@ bonsaiApp.directive('digifagate', function () {
                 if (oldInA && (newInA != oldInA)) {
                     oldInA.resign($scope.logicGate);
                 }
-                $scope.inaEnrolled = true;
+                $scope.inAEnrolled = true;
                 $scope.checkForFinishedInitialization();
             });
 
-            $scope.$watch('inb', function (newInB, oldInB) {
+            $scope.$watch('inB', function (newInB, oldInB) {
                 if (newInB) {
                     newInB.enrollToDirective($scope.logicGate, $scope.getConnectionPositions);
                     newInB.registerReaderAndRead($scope.logicGate);
@@ -95,11 +92,11 @@ bonsaiApp.directive('digifagate', function () {
                 if (oldInB && (newInB != oldInB)) {
                     oldInB.resign($scope.logicGate);
                 }
-                $scope.inbEnrolled = true;
+                $scope.inBEnrolled = true;
                 $scope.checkForFinishedInitialization();
             });
             
-            $scope.$watch('inx', function (newInC, oldInC) {
+            $scope.$watch('inC', function (newInC, oldInC) {
                 if (newInC) {
                     newInC.enrollToDirective($scope.logicGate, $scope.getConnectionPositions);
                     newInC.registerReaderAndRead($scope.logicGate);
@@ -107,39 +104,39 @@ bonsaiApp.directive('digifagate', function () {
                 if (oldInC && (newInC != oldInC)) {
                     oldInC.resign($scope.logicGate);
                 }
-                $scope.inxEnrolled = true;
+                $scope.inCEnrolled = true;
                 $scope.checkForFinishedInitialization();
             });
 
-            $scope.$watch('outs', function (newOut, oldOut) {                              
+            $scope.$watch('outS', function (newOut, oldOut) {                              
                 if (newOut) {
                     newOut.enrollToDirective($scope.logicGate, $scope.getConnectionPositions);
                 }
                 if (oldOut && (newOut != oldOut)) {
                     oldOut.resign($scope.logicGate);
                 }
-                $scope.outsEnrolled = true;
+                $scope.outSEnrolled = true;
                 $scope.checkForFinishedInitialization();
             });
             
-            $scope.$watch('outue', function (newOutUe, oldOutUe) {                              
+            $scope.$watch('outUe', function (newOutUe, oldOutUe) {                              
                 if (newOutUe) {
                     newOutUe.enrollToDirective($scope.logicGate, $scope.getConnectionPositions);
                 }
                 if (oldOutUe && (newOutUe != oldOutUe)) {
                     oldOutUe.resign($scope.logicGate);
                 }
-                $scope.outueEnrolled = true;
+                $scope.outUeEnrolled = true;
                 $scope.checkForFinishedInitialization();
             });
 
             $scope.checkForFinishedInitialization = function () {
                 if ($scope.controllerIsRead &&
-                    $scope.inaEnrolled &&
-                    $scope.inbEnrolled &&
-                    $scope.inxEnrolled &&
-                    $scope.outsEnrolled &&
-                    $scope.outueEnrolled &&
+                    $scope.inAEnrolled &&
+                    $scope.inBEnrolled &&
+                    $scope.inCEnrolled &&
+                    $scope.outSEnrolled &&
+                    $scope.outUeEnrolled &&
                     !$scope.initializationSuccessful) {
                     $scope.initializationSuccessful = true;
                     $scope.$emit('componentInitialized', $scope.logicGate);

@@ -9,15 +9,15 @@ function FAGate (inWireA, inWireB, inWireC, outWireS, outWireUe) {
     this.name = "unnamed FA";
 }
 
-HAGate.prototype.getName = function () {
+FAGate.prototype.getName = function () {
     return this.name;
 };
 
-HAGate.prototype.setName = function (name) {
+FAGate.prototype.setName = function (name) {
     this.name = name;
 };
 
-HAGate.prototype.setValue = function () {
+FAGate.prototype.setValue = function () {
     var stateInA = false;
     if ((this.inWireA) && (this.inWireA.isActive()) && (this.inWireA.isNotZero())) {
         stateInA = true;
@@ -26,22 +26,26 @@ HAGate.prototype.setValue = function () {
     if ((this.inWireB) && (this.inWireB.isActive()) && (this.inWireB.isNotZero())) {
         stateInB = true;
     }
-    if (stateInA && stateInB) {
-        if (this.outWireUe) {
-            this.outWireUe.write(this, 1);
-        }
-    } else {
-        if (this.outWireUe) {
-            this.outWireUe.write(this, 0);
-        }
-    };
-    if ((stateInA && !stateInB) || (!stateInA && stateInB)) {
+    var stateInC = false;
+    if ((this.inWireC) && (this.inWireC.isActive()) && (this.inWireC.isNotZero())) {
+        stateInC = true;
+    }
+    if ( !(!(stateInA === stateInB) === stateInC) ) {
         if (this.outWireS) {
             this.outWireS.write(this, 1);
         }
     } else {
         if (this.outWireS) {
             this.outWireS.write(this, 0);
+        }
+    };
+    if ( stateInC && ( (stateInA && !stateInB)||(!stateInA && stateInB) ) || (stateInA && stateInB) ) {
+        if (this.outWireUe) {
+            this.outWireUe.write(this, 1);
+        }
+    } else {
+        if (this.outWireUe) {
+            this.outWireUe.write(this, 0);
         }
     };
 };

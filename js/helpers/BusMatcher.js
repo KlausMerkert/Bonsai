@@ -20,7 +20,6 @@ BusMatcher.prototype.createBuses = function () {
 BusMatcher.prototype.findBus = function(id) {
     for (var i = 0; i < this.cpu.buses.length; i++) {
         if (this.cpu.buses[i].id == id) {
-        	  // console.log(id);
             return this.cpu.buses[i].object; 
         }
     }
@@ -328,6 +327,19 @@ BusMatcher.prototype.matchDigiExorGates = function () {
     }
 };
 
+BusMatcher.prototype.matchDigiNotGates = function () {
+    if (this.cpu.digiNotGates) {
+        for (var i = 0; i < this.cpu.digiNotGates.length; i++) {
+            if (this.cpu.digiNotGates[i].inAId) {
+                this.cpu.digiNotGates[i].inA = this.findBus(this.cpu.digiNotGates[i].inAId);
+            }
+            if (this.cpu.digiNotGates[i].outId) {
+                this.cpu.digiNotGates[i].out = this.findBus(this.cpu.digiNotGates[i].outId);
+            }
+        }
+    }
+};
+
 BusMatcher.prototype.matchDigiHAGates = function () {
     if (this.cpu.digiHAGates) {
         for (var i = 0; i < this.cpu.digiHAGates.length; i++) {
@@ -351,16 +363,16 @@ BusMatcher.prototype.matchDigiFAGates = function () {
     if (this.cpu.digiFAGates) {
         for (var i = 0; i < this.cpu.digiFAGates.length; i++) {
             if (this.cpu.digiFAGates[i].inAId) {
-                this.cpu.digiFAGates[i].ina = this.findBus(this.cpu.digiFAGates[i].inAId);
+                this.cpu.digiFAGates[i].inA = this.findBus(this.cpu.digiFAGates[i].inAId);
             }
             if (this.cpu.digiFAGates[i].inBId) {
-                this.cpu.digiFAGates[i].inb = this.findBus(this.cpu.digiFAGates[i].inBId);
+                this.cpu.digiFAGates[i].inB = this.findBus(this.cpu.digiFAGates[i].inBId);
             }
-            if (this.cpu.digiFAGates[i].inXId) {
-                this.cpu.digiFAGates[i].inx = this.findBus(this.cpu.digiFAGates[i].inXId);
+            if (this.cpu.digiFAGates[i].inCId) {
+                this.cpu.digiFAGates[i].inC = this.findBus(this.cpu.digiFAGates[i].inCId);
             }
             if (this.cpu.digiFAGates[i].outSId) {
-                this.cpu.digiFAGates[i].outs = this.findBus(this.cpu.digiFAGates[i].outSId);
+                this.cpu.digiFAGates[i].outS = this.findBus(this.cpu.digiFAGates[i].outSId);
             }
             if (this.cpu.digiFAGates[i].outUeId) {
                 this.cpu.digiFAGates[i].outUe = this.findBus(this.cpu.digiFAGates[i].outUeId);
@@ -369,18 +381,7 @@ BusMatcher.prototype.matchDigiFAGates = function () {
     }
 };
 
-BusMatcher.prototype.matchDigiNotGates = function () {
-    if (this.cpu.digiNotGates) {
-        for (var i = 0; i < this.cpu.digiNotGates.length; i++) {
-            if (this.cpu.digiNotGates[i].inAId) {
-                this.cpu.digiNotGates[i].inA = this.findBus(this.cpu.digiNotGates[i].inAId);
-            }
-            if (this.cpu.digiNotGates[i].outId) {
-                this.cpu.digiNotGates[i].out = this.findBus(this.cpu.digiNotGates[i].outId);
-            }
-        }
-    }
-};
+
 
 
 BusMatcher.prototype.matchAllComponents = function () {
@@ -402,8 +403,8 @@ BusMatcher.prototype.matchAllComponents = function () {
     this.matchDigiNandGates();
     this.matchDigiNorGates();
     this.matchDigiExorGates();
+    this.matchDigiNotGates();    
     this.matchDigiHAGates();
     this.matchDigiFAGates();
-    this.matchDigiNotGates();
 };
 
