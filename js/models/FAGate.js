@@ -1,11 +1,12 @@
 'use strict';
 
-function HAGate (inWireA, inWireB, outWireS, outWireUe) {
+function FAGate (inWireA, inWireB, inWireC, outWireS, outWireUe) {
     this.inWireA = inWireA;
     this.inWireB = inWireB;
+    this.inWireC = inWireC;
     this.outWireS = outWireS;
     this.outWireUe = outWireUe;
-    this.name = "unnamed HA";
+    this.name = "unnamed FA";
 }
 
 HAGate.prototype.getName = function () {

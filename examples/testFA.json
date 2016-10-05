@@ -1,13 +1,18 @@
 {
   "buses": [
     {
-      "id": "S1w",
-      "name": "S1w",
+      "id": "aw",
+      "name": "aw",
       "max": 1
     },
     {
-      "id": "S2w",
-      "name": "S2w",
+      "id": "bw",
+      "name": "bw",
+      "max": 1
+    },
+    {
+      "id": "cw",
+      "name": "cw",
       "max": 1
     },
     {
@@ -23,17 +28,24 @@
   ],
    "digiSwitches": [
     {
-      "name": "S1",
-      "wireId": "S1w",
+      "name": "Sa",
+      "wireId": "aw",
       "value": 0,
       "top": 14,
       "left": 60
     },
     {
-      "name": "S2",
-      "wireId": "S2w",
+      "name": "Sb",
+      "wireId": "bw",
       "value": 0,
       "top": 39,
+      "left": 60
+    },
+    {
+      "name": "Sc",
+      "wireId": "cw",
+      "value": 0,
+      "top": 64,
       "left": 60
     }
   ],
@@ -55,15 +67,16 @@
       "color": "rgb(255, 0, 0)"
     }
   ],
-  "digiHAGates": [
+  "digiFAGates": [
     {
-      "name": "HA",
-      "label": "HA",
+      "name": "FA",
+      "label": "FA",
       "toplabel": 4,
       "leftlabel": 3,
       "fontsize": 26,
-      "inAId": "S1w",
-      "inBId": "S2w",
+      "inAId": "aw",
+      "inBId": "bw",
+      "inXID": "cw",
       "outSId": "Sw",
       "outUeId": "Uew",
       "top": 10,

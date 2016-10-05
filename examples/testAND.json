@@ -11,12 +11,12 @@
       "max": 1
     },
     {
-      "id": "Sw",
+      "id": "Summe",
       "name": "Summe",
       "max": 1
     },
     {
-      "id": "Uew",
+      "id": "Uebertrag",
       "name": "Uebertrag",
       "max": 1
     }
@@ -40,7 +40,7 @@
   "leds": [
     {
       "name": "LedS",
-      "wireId": "Sw",
+      "wireId": "Summe",
       "top": 14,
       "left": 190,
       "value": 0,
@@ -48,24 +48,21 @@
     },
     {
       "name": "LedUe",
-      "wireId": "Uew",
+      "wireId": "Uebertrag",
       "top": 39,
       "left": 190,
       "value": 0,
       "color": "rgb(255, 0, 0)"
     }
   ],
-  "digiHAGates": [
+  "digiAndGates": [
     {
-      "name": "HA",
-      "label": "HA",
-      "toplabel": 4,
-      "leftlabel": 3,
-      "fontsize": 26,
+      "name": "Dand",
+      "label": "1",
       "inAId": "S1w",
       "inBId": "S2w",
-      "outSId": "Sw",
-      "outUeId": "Uew",
+      "outId": "Summe",
+      "outSId": "Uebertrag",
       "top": 10,
       "left": 120
     }

@@ -12,6 +12,7 @@ BusMatcher.prototype.createBuses = function () {
     if (this.cpu.buses) {
         for (var i = 0; i < this.cpu.buses.length; i++) {
             this.cpu.buses[i].object = new Bus();
+            this.cpu.buses[i].object.setName(this.cpu.buses[i].id);
         }
     }
 };
@@ -19,7 +20,8 @@ BusMatcher.prototype.createBuses = function () {
 BusMatcher.prototype.findBus = function(id) {
     for (var i = 0; i < this.cpu.buses.length; i++) {
         if (this.cpu.buses[i].id == id) {
-            return this.cpu.buses[i].object;
+        	  // console.log(id);
+            return this.cpu.buses[i].object; 
         }
     }
     throw BusNotFound(
@@ -336,11 +338,33 @@ BusMatcher.prototype.matchDigiHAGates = function () {
                 this.cpu.digiHAGates[i].inB = this.findBus(this.cpu.digiHAGates[i].inBId);
             }
             if (this.cpu.digiHAGates[i].outSId) {
-                this.cpu.digiHAGates[i].outS = this.findBus(this.cpu.digiHAGates[i].outSId);
+                this.cpu.digiHAGates[i].outs = this.findBus(this.cpu.digiHAGates[i].outSId);
             }
             if (this.cpu.digiHAGates[i].outUeId) {
-                this.cpu.digiHAGates[i].outUe = this.findBus(this.cpu.digiHAGates[i].outUeId);
+                this.cpu.digiHAGates[i].outue = this.findBus(this.cpu.digiHAGates[i].outUeId);
+            }          
+        }
+    }
+};
+
+BusMatcher.prototype.matchDigiFAGates = function () {
+    if (this.cpu.digiFAGates) {
+        for (var i = 0; i < this.cpu.digiFAGates.length; i++) {
+            if (this.cpu.digiFAGates[i].inAId) {
+                this.cpu.digiFAGates[i].ina = this.findBus(this.cpu.digiFAGates[i].inAId);
             }
+            if (this.cpu.digiFAGates[i].inBId) {
+                this.cpu.digiFAGates[i].inb = this.findBus(this.cpu.digiFAGates[i].inBId);
+            }
+            if (this.cpu.digiFAGates[i].inXId) {
+                this.cpu.digiFAGates[i].inx = this.findBus(this.cpu.digiFAGates[i].inXId);
+            }
+            if (this.cpu.digiFAGates[i].outSId) {
+                this.cpu.digiFAGates[i].outs = this.findBus(this.cpu.digiFAGates[i].outSId);
+            }
+            if (this.cpu.digiFAGates[i].outUeId) {
+                this.cpu.digiFAGates[i].outue = this.findBus(this.cpu.digiFAGates[i].outUeId);
+            }          
         }
     }
 };
@@ -379,6 +403,7 @@ BusMatcher.prototype.matchAllComponents = function () {
     this.matchDigiNorGates();
     this.matchDigiExorGates();
     this.matchDigiHAGates();
+    this.matchDigiFAGates();
     this.matchDigiNotGates();
 };
 

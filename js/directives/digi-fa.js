@@ -1,12 +1,13 @@
 'use strict';
 
-bonsaiApp.directive('digihagate', function () {
+bonsaiApp.directive('digifagate', function () {
     return {
         restrict: 'E',
         transclude: false,
         scope: {
-            inA: '=',
-            inB: '=',
+            ina: '=',
+            inb: '=',
+            inx: '=',
             outs: '=', 
             outue: '=', 
             top: '=',
@@ -18,8 +19,11 @@ bonsaiApp.directive('digihagate', function () {
             gateName: '@'
         },
         link: function ($scope, element, attrs) {  	
-            // console.log("aus digi-ha.js outs =",$scope.outs);
-            $scope.logicGate = new HAGate($scope.inA, $scope.inB, $scope.outs, $scope.outue);
+            console.log("aus digi-fa.js ina =",$scope.ina);
+            console.log("aus digi-fa.js inb =",$scope.inb);
+            console.log("aus digi-fa.js inx =",$scope.inx);
+            console.log("aus digi-fa.js gateName =",$scope.gateName);
+            $scope.logicGate = new FAGate($scope.ina, $scope.inb, $scope.inx, $scope.outs, $scope.outue);
 
             $scope.topCSS = ($scope.top - 3) + 'px';
             $scope.leftCSS = $scope.left + 'px';
@@ -31,10 +35,12 @@ bonsaiApp.directive('digihagate', function () {
             });
 
             $scope.getConnectionPositions = function (wire) {
-                if (wire === $scope.inA) {
+                if (wire === $scope.ina) {
                     return [{top: $scope.top + 4, left: ($scope.left - 1)}];
-                } else if (wire === $scope.inB) {
+                } else if (wire === $scope.inb) {
                     return [{top: ($scope.top + 29), left: ($scope.left - 1)}];
+                } else if (wire === $scope.inx) {
+                    return [{top: ($scope.top + 54), left: ($scope.left - 1)}];
                 } else if (wire === $scope.outs) {
                     return [{top: ($scope.top + 4), left: ($scope.left + 33)}]; 
                 } else if (wire === $scope.outue) {
@@ -69,7 +75,7 @@ bonsaiApp.directive('digihagate', function () {
             });
             
 
-            $scope.$watch('inA', function (newInA, oldInA) {
+            $scope.$watch('ina', function (newInA, oldInA) {
                 if (newInA) {
                     newInA.enrollToDirective($scope.logicGate, $scope.getConnectionPositions);
                     newInA.registerReaderAndRead($scope.logicGate);
@@ -77,11 +83,11 @@ bonsaiApp.directive('digihagate', function () {
                 if (oldInA && (newInA != oldInA)) {
                     oldInA.resign($scope.logicGate);
                 }
-                $scope.inAEnrolled = true;
+                $scope.inaEnrolled = true;
                 $scope.checkForFinishedInitialization();
             });
 
-            $scope.$watch('inB', function (newInB, oldInB) {
+            $scope.$watch('inb', function (newInB, oldInB) {
                 if (newInB) {
                     newInB.enrollToDirective($scope.logicGate, $scope.getConnectionPositions);
                     newInB.registerReaderAndRead($scope.logicGate);
@@ -89,7 +95,19 @@ bonsaiApp.directive('digihagate', function () {
                 if (oldInB && (newInB != oldInB)) {
                     oldInB.resign($scope.logicGate);
                 }
-                $scope.inBEnrolled = true;
+                $scope.inbEnrolled = true;
+                $scope.checkForFinishedInitialization();
+            });
+            
+            $scope.$watch('inx', function (newInC, oldInC) {
+                if (newInC) {
+                    newInC.enrollToDirective($scope.logicGate, $scope.getConnectionPositions);
+                    newInC.registerReaderAndRead($scope.logicGate);
+                }
+                if (oldInC && (newInC != oldInC)) {
+                    oldInC.resign($scope.logicGate);
+                }
+                $scope.inxEnrolled = true;
                 $scope.checkForFinishedInitialization();
             });
 
@@ -117,8 +135,9 @@ bonsaiApp.directive('digihagate', function () {
 
             $scope.checkForFinishedInitialization = function () {
                 if ($scope.controllerIsRead &&
-                    $scope.inAEnrolled &&
-                    $scope.inBEnrolled &&
+                    $scope.inaEnrolled &&
+                    $scope.inbEnrolled &&
+                    $scope.inxEnrolled &&
                     $scope.outsEnrolled &&
                     $scope.outueEnrolled &&
                     !$scope.initializationSuccessful) {
@@ -134,6 +153,6 @@ bonsaiApp.directive('digihagate', function () {
             $scope.controllerIsRead = true;
             $scope.checkForFinishedInitialization();
         },
-        templateUrl: '/partials/component_DigiHAGate.html'
+        templateUrl: '/partials/component_DigiFAGate.html'
     };
 });
