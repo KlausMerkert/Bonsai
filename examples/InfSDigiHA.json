@@ -1,0 +1,95 @@
+{
+  "buses": [
+    {
+      "id": "S1w",
+      "name": "S1w",
+      "max": 1
+    },
+    {
+      "id": "S2w",
+      "name": "S2w",
+      "max": 1
+    },
+    {
+      "id": "Sw",
+      "name": "Summe",
+      "max": 1
+    },
+    {
+      "id": "Uew",
+      "name": "Uebertrag",
+      "max": 1
+    }
+  ],
+  "digiSwitches": [
+    {
+      "name": "S1",
+      "wireId": "S1w",
+      "value": 0,
+      "top": 14,
+      "left": 60
+    },
+    {
+      "name": "S2",
+      "wireId": "S2w",
+      "value": 0,
+      "top": 39,
+      "left": 60
+    }
+  ],
+  "leds": [
+    {
+      "name": "LedS",
+      "wireId": "Sw",
+      "top": 14,
+      "left": 190,
+      "value": 0,
+      "color": "rgb(255, 0, 0)"
+    },
+    {
+      "name": "LedUe",
+      "wireId": "Uew",
+      "top": 39,
+      "left": 190,
+      "value": 0,
+      "color": "rgb(255, 0, 0)"
+    }
+  ],
+  "digiHAGates": [
+    {
+      "name": "HA",
+      "label": "HA",
+      "toplabel": 4,
+      "leftlabel": 3,
+      "fontsize": 26,
+      "inAId": "S1w",
+      "inBId": "S2w",
+      "outSId": "Sw",
+      "outUeId": "Uew",
+      "top": 10,
+      "left": 120
+    }
+  ],
+  "labels": [
+  {
+      "text": "S",
+      "top": 0,
+      "left": 210
+    },
+  {
+      "text": "Ü",
+      "top": 25,
+      "left": 210
+    },
+  {
+      "text": "a0",
+      "top": 0,
+      "left": 30
+    },
+  {
+      "text": "b0",
+      "top": 25,
+      "left": 30
+    }
+  ]
+}
