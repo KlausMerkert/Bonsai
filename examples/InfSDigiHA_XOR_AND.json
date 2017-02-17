@@ -1,0 +1,156 @@
+{
+  "buses": [
+    {
+      "id": "S1w",
+      "name": "S1w",
+      "max": 1,
+	  "routes": [
+        {
+          "type": "topright",
+          "top": "50px",
+          "left": "85px",
+          "width": "30px",
+          "height": "15px"
+        },
+		{
+          "type": "bottomleft",
+          "top": "65px",
+          "left": "115px",
+          "width": "50px",
+          "height": "14px"
+        },
+		{
+          "type": "topleft",
+          "top": "14px",
+          "left": "115px",
+          "width": "50px",
+          "height": "39px"
+        }
+      ]
+    },
+    {
+      "id": "S2w",
+      "name": "S2w",
+      "max": 1,
+	  "routes": [
+        {
+          "type": "topright",
+          "top": "75px",
+          "left": "83px",
+          "width": "50px",
+          "height": "15px"
+        },
+		{
+          "type": "bottomleft",
+          "top": "90px",
+          "left": "133px",
+          "width": "50px",
+          "height": "14px"
+        },
+		{
+          "type": "topleft",
+          "top": "39px",
+          "left": "133px",
+          "width": "50px",
+          "height": "45px"
+        }
+      ]
+    },
+	{
+      "id": "DuebertragOut",
+      "name": "DuebertragOut",
+      "max": 1
+    },
+    {
+      "id": "DsumOut",
+      "name": "DsumOut",
+      "max": 1
+    }
+  ],
+  "digiSwitches": [
+    {
+      "name": "S1",
+      "wireId": "S1w",
+      "value": 0,
+      "top": 50,
+      "left": 60
+    },
+    {
+      "name": "S2",
+      "wireId": "S2w",
+      "value": 0,
+      "top": 75,
+      "left": 60
+    }
+  ],
+  "leds": [
+    {
+      "name": "LedS",
+      "wireId": "DsumOut",
+      "top": 24,
+      "left": 250,
+      "value": 0,
+      "color": "rgb(255, 0, 0)"
+    },
+	{
+      "name": "LedUe",
+      "wireId": "DuebertragOut",
+      "top": 90,
+      "left": 250,
+      "value": 0,
+      "color": "rgb(255, 0, 0)"
+    }
+  ],
+  "digiExorGates": [
+    {
+      "name": "Dexor",
+      "label": "=1",
+      "toplabel": 4,
+      "leftlabel": 6,
+      "fontsize": 26,
+      "circle": false,
+      "inAId": "S1w",
+      "inBId": "S2w",
+      "outId": "DsumOut",
+      "top": 10,
+      "left": 170
+    }
+  ],
+    "digiAndGates": [
+    {
+      "name": "Dand",
+      "label": "&",
+      "toplabel": 4,
+      "leftlabel": 10,
+      "fontsize": 26,
+      "inAId": "S1w",
+      "inBId": "S2w",
+      "outId": "DuebertragOut",
+      "top": 75,
+      "left": 170,
+      "circle": false
+    }
+  ],
+  "labels": [
+  {
+      "text": "S",
+      "top": 11,
+      "left": 262
+    },
+  {
+      "text": "Ü",
+      "top": 77,
+      "left": 262
+    },
+  {
+      "text": "a0",
+      "top": 35,
+      "left": 30
+    },
+  {
+      "text": "b0",
+      "top": 60,
+      "left": 30
+    }
+  ]
+}
