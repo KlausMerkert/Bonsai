@@ -1,0 +1,155 @@
+{
+  "buses": [
+    {
+      "id": "S1w",
+      "name": "S1w",
+      "max": 1
+    },
+    {
+      "id": "S2w",
+      "name": "S2w",
+      "max": 1
+    },
+	{
+      "id": "S3w",
+      "name": "S3w",
+      "max": 1
+    },
+    {
+      "id": "Ue1w",
+      "name": "Uebertrag HA1",
+      "max": 1
+    },
+	{
+      "id": "Ue2w",
+      "name": "Uebertrag HA2",
+      "max": 1
+    },
+    {
+      "id": "Sha1w",
+      "name": "Summe HA1",
+      "max": 1
+    },
+    {
+      "id": "Sha2w",
+      "name": "Summe HA2",
+      "max": 1
+    },
+    {
+      "id": "Sorw",
+      "name": "Summe Uebertrag 1 +2",
+      "max": 1
+    }
+  ],
+  "digiSwitches": [
+    {
+      "name": "S1",
+      "wireId": "S1w",
+      "value": 0,
+      "top": 14,
+      "left": 60
+    },
+    {
+      "name": "S2",
+      "wireId": "S2w",
+      "value": 0,
+      "top": 39,
+      "left": 60
+    },
+    {
+      "name": "S3",
+      "wireId": "S3w",
+      "value": 0,
+      "top": 65,
+      "left": 60
+    }
+  ],
+  "leds": [
+    {
+      "name": "LedS",
+      "wireId": "Sha2w",
+      "top": 14,
+      "left": 330,
+      "value": 0,
+      "color": "rgb(255, 0, 0)"
+    },
+    {
+      "name": "LedUe",
+      "wireId": "Sorw",
+      "top": 39,
+      "left": 330,
+      "value": 0,
+      "color": "rgb(255, 0, 0)"
+    }
+  ],
+  "digiHAGates": [
+    {
+      "name": "HA1",
+      "label": "HA",
+      "toplabel": 4,
+      "leftlabel": 3,
+      "fontsize": 26,
+      "inAId": "S2w",
+      "inBId": "S3w",
+      "outSId": "Sha1w",
+      "outUeId": "Ue1w",
+      "top": 35,
+      "left": 120
+    },
+	{
+      "name": "HA2",
+      "label": "HA",
+      "toplabel": 4,
+      "leftlabel": 3,
+      "fontsize": 26,
+      "inAId": "S1w",
+      "inBId": "Sha1w",
+      "outSId": "Sha2w",
+      "outUeId": "Ue2w",
+      "top": 10,
+      "left": 200
+    }
+  ],
+  "digiOrGates": [
+    {
+      "name": "Dor",
+      "label": "≥1",
+      "toplabel": 4,
+      "leftlabel": 2,
+      "fontsize": 26,
+      "inAId": "Ue2w",
+      "inBId": "Ue1w",
+      "outId": "Sorw",
+      "top": 35,
+      "left": 270,
+      "circle": false
+    }
+  ],
+  "labels": [
+  {
+      "text": "S",
+      "top": 0,
+      "left": 350
+    },
+  {
+      "text": "Ü",
+      "top": 25,
+      "left": 350
+    },
+  {
+      "text": "a0",
+      "top": 0,
+      "left": 30
+    },
+  {
+      "text": "b0",
+      "top": 25,
+      "left": 30
+    },
+  {
+      "text": "ü",
+      "top": 50,
+      "left": 30
+    }
+  ]
+}
