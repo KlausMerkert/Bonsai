@@ -70,7 +70,7 @@
   "digiFAGates": [
     {
       "name": "FA",
-      "label": "FA",
+      "label": "VA",
       "toplabel": 4,
       "leftlabel": 3,
       "fontsize": 26,
