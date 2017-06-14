@@ -1,0 +1,485 @@
+{
+  "buses": [
+    {
+      "id": "a0w",
+      "name": "a0w",
+      "max": 1,
+	  "routes": [
+        {
+          "type": "topright",
+          "top": "30px",
+          "left": "120px",
+          "width": "20px",
+          "height": "27px"
+        },
+        {
+          "type": "bottomleft",
+          "top": "57px",
+          "left": "140px",
+          "width": "30px",
+          "height": "16px"
+        }
+      ]
+    },
+	{
+      "id": "a1w",
+      "name": "a1w",
+      "max": 1,
+	  "routes": [
+        {
+          "type": "topright",
+          "top": "30px",
+          "left": "90px",
+          "width": "20px",
+          "height": "2px"
+        },
+        {
+          "type": "bottomleft",
+          "top": "32px",
+          "left": "110px",
+          "width": "100px",
+          "height": "10px"
+        },
+		{
+          "type": "topright",
+          "top": "42px",
+          "left": "210px",
+          "width": "10px",
+          "height": "28px"
+        },
+        {
+          "type": "bottomleft",
+          "top": "70px",
+          "left": "220px",
+          "width": "30px",
+          "height": "53px"
+        }
+      ]
+    },
+	{
+      "id": "a2w",
+      "name": "a2w",
+      "max": 1,
+	  "routes": [
+        {
+          "type": "topright",
+          "top": "30px",
+          "left": "60px",
+          "width": "20px",
+          "height": "10px"
+        },
+        {
+          "type": "bottomleft",
+          "top": "41px",
+          "left": "80px",
+          "width": "200px",
+          "height": "10px"
+        },
+		{
+          "type": "topright",
+          "top": "51px",
+          "left": "280px",
+          "width": "10px",
+          "height": "28px"
+        },
+        {
+          "type": "bottomleft",
+          "top": "79px",
+          "left": "290px",
+          "width": "30px",
+          "height": "69px"
+        }
+      ]
+    },
+	{
+      "id": "a3w",
+      "name": "a3w",
+      "max": 1,
+	  "routes": [
+        {
+          "type": "topright",
+          "top": "30px",
+          "left": "30px",
+          "width": "20px",
+          "height": "19px"
+        },
+        {
+          "type": "bottomleft",
+          "top": "49px",
+          "left": "50px",
+          "width": "300px",
+          "height": "10px"
+        },
+		{
+          "type": "topright",
+          "top": "59px",
+          "left": "350px",
+          "width": "10px",
+          "height": "108px"
+        },
+        {
+          "type": "bottomleft",
+          "top": "167px",
+          "left": "360px",
+          "width": "30px",
+          "height": "6px"
+        }
+      ]
+    },
+    {
+      "id": "b0w",
+      "name": "b0w",
+      "max": 1,
+	  "routes": [
+        {
+          "type": "bottomright",
+          "top": "210px",
+          "left": "130px",
+          "width": "10px",
+          "height": "20px"
+        },
+        {
+          "type": "topleft",
+          "top": "98px",
+          "left": "140px",
+          "width": "30px",
+          "height": "111px"
+        }
+      ]
+    },
+	{
+      "id": "b1w",
+      "name": "b1w",
+      "max": 1,
+	  "routes": [
+        {
+          "type": "bottomright",
+          "top": "210px",
+          "left": "100px",
+          "width": "10px",
+          "height": "20px"
+        },
+        {
+          "type": "topleft",
+          "top": "148px",
+          "left": "110px",
+          "width": "130px",
+          "height": "61px"
+        }
+      ]
+    },
+	{
+      "id": "b2w",
+      "name": "b2w",
+      "max": 1,
+	  "routes": [
+        {
+          "type": "bottomright",
+          "top": "210px",
+          "left": "70px",
+          "width": "10px",
+          "height": "20px"
+        },
+        {
+          "type": "topleft",
+          "top": "173px",
+          "left": "80px",
+          "width": "230px",
+          "height": "36px"
+        }
+      ]
+    },
+	{
+      "id": "b3w",
+      "name": "b3w",
+      "max": 1,
+	  "routes": [
+        {
+          "type": "bottomright",
+          "top": "210px",
+          "left": "40px",
+          "width": "10px",
+          "height": "20px"
+        },
+        {
+          "type": "topleft",
+          "top": "198px",
+          "left": "50px",
+          "width": "330px",
+          "height": "11px"
+        }
+      ]
+    },
+    {
+      "id": "S0w",
+      "name": "Summe HA",
+      "max": 1
+    },
+	{
+      "id": "S1w",
+      "name": "Summe VA1",
+      "max": 1
+    },
+	{
+      "id": "S2w",
+      "name": "Summe VA2",
+      "max": 1
+    },
+	{
+      "id": "S3w",
+      "name": "Summe VA3",
+      "max": 1
+    },
+    {
+      "id": "Ue0w",
+      "name": "Uebertrag HA",
+      "max": 1
+    },
+    {
+      "id": "Ue1w",
+      "name": "Uebertrag VA1",
+      "max": 1
+    },
+    {
+      "id": "Ue2w",
+      "name": "Uebertrag VA2",
+      "max": 1
+    },
+    {
+      "id": "Ue3w",
+      "name": "Uebertrag VA3",
+      "max": 1
+    }
+  ],
+  "digiSwitches": [
+    {
+      "name": "a0",
+      "wireId": "a0w",
+      "value": 0,
+      "top": 30,
+      "left": 110
+    },
+	{
+      "name": "a1",
+      "wireId": "a1w",
+      "value": 0,
+      "top": 30,
+      "left": 80
+    },
+	{
+      "name": "a2",
+      "wireId": "a2w",
+      "value": 0,
+      "top": 30,
+      "left": 50
+    },
+	{
+      "name": "a3",
+      "wireId": "a3w",
+      "value": 0,
+      "top": 30,
+      "left": 20
+    },
+    {
+      "name": "b0",
+      "wireId": "b0w",
+      "value": 0,
+      "top": 230,
+      "left": 110
+    },
+    {
+      "name": "b1",
+      "wireId": "b1w",
+      "value": 0,
+      "top": 230,
+      "left": 80
+    },
+    {
+      "name": "b2",
+      "wireId": "b2w",
+      "value": 0,
+      "top": 230,
+      "left": 50
+    },
+    {
+      "name": "b3",
+      "wireId": "b3w",
+      "value": 0,
+      "top": 230,
+      "left": 20
+    }
+  ],
+  "leds": [
+    {
+      "name": "S0w",
+      "wireId": "S0w",
+      "top": 72,
+      "left": 500,
+      "value": 0,
+      "color": "rgb(255, 0, 0)"
+    },
+	{
+      "name": "S1w",
+      "wireId": "S1w",
+      "top": 98,
+      "left": 500,
+      "value": 0,
+      "color": "rgb(255, 0, 0)"
+    },
+	{
+      "name": "S2w",
+      "wireId": "S2w",
+      "top": 123,
+      "left": 500,
+      "value": 0,
+      "color": "rgb(255, 0, 0)"
+    },
+	{
+      "name": "S3w",
+      "wireId": "S3w",
+      "top": 148,
+      "left": 500,
+      "value": 0,
+      "color": "rgb(255, 0, 0)"
+    },
+	{
+      "name": "Ue3w",
+      "wireId": "Ue3w",
+      "top": 173,
+      "left": 500,
+      "value": 0,
+      "color": "rgb(255, 0, 0)"
+    }
+  ],
+  "digiHAGates": [
+	{
+      "name": "HA",
+      "label": "HA",
+      "toplabel": 4,
+      "leftlabel": 3,
+      "fontsize": 26,
+      "inAId": "a0w",
+      "inBId": "b0w",
+      "outSId": "S0w",
+      "outUeId": "Ue0w",
+      "top": 69,
+      "left": 170
+    }
+  ],
+    "digiFAGates": [
+    {
+      "name": "FA1",
+      "label": "VA",
+      "toplabel": 4,
+      "leftlabel": 3,
+      "fontsize": 26,
+      "inAId": "Ue0w",
+      "inBId": "a1w",
+      "inCId": "b1w",
+      "outSId": "S1w",
+      "outUeId": "Ue1w",
+      "top": 94,
+      "left": 240
+    },
+	{
+      "name": "FA2",
+      "label": "VA",
+      "toplabel": 4,
+      "leftlabel": 3,
+      "fontsize": 26,
+      "inAId": "Ue1w",
+      "inBId": "a2w",
+      "inCId": "b2w",
+      "outSId": "S2w",
+      "outUeId": "Ue2w",
+      "top": 119,
+      "left": 310
+    },
+	{
+      "name": "FA3",
+      "label": "VA",
+      "toplabel": 4,
+      "leftlabel": 3,
+      "fontsize": 26,
+      "inAId": "Ue2w",
+      "inBId": "a3w",
+      "inCId": "b3w",
+      "outSId": "S3w",
+      "outUeId": "Ue3w",
+      "top": 144,
+      "left": 380
+    }
+  ],
+  "labels": [
+	{
+      "text": "S0",
+      "top": 57,
+      "left": 510
+    },
+	{
+      "text": "S1",
+      "top": 81,
+      "left": 510
+    },
+	{
+      "text": "S2",
+      "top": 107,
+      "left": 510
+    },
+	{
+      "text": "S3",
+      "top": 132,
+      "left": 510
+    },
+	{
+      "text": "Ü",
+      "top": 158,
+      "left": 510
+    },
+	{
+      "text": "a0",
+      "top": 0,
+      "left": 118
+    },
+	{
+      "text": "a1",
+      "top": 0,
+      "left": 88
+    },
+	{
+      "text": "a2",
+      "top": 0,
+      "left": 58
+    },
+	{
+      "text": "a3",
+      "top": 0,
+      "left": 28
+    },
+	{
+      "text": "b0",
+      "top": 200,
+      "left": 118
+    },
+	{
+      "text": "b1",
+      "top": 200,
+      "left": 88
+    },
+	{
+      "text": "b2",
+      "top": 200,
+      "left": 58
+    },
+	{
+      "text": "b3",
+      "top": 200,
+      "left": 28
+    },
+	{
+      "text": "4-Bit Paralleladdierer",
+      "top": 0,
+      "left": 240
+    }
+  ]
+}
