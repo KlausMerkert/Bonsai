@@ -30,6 +30,9 @@ bonsaiApp.directive('delay', function () {
             $scope.$watch('busLeft', function (newValue) {
                 if (newValue) {
                     newValue.enrollToDirective($scope.delayObject, $scope.getConnectionPositions);
+                    if ($scope.direction != 'left') {
+                         $scope.busLeft.registerReaderAndRead($scope.delayObject);
+                    }
                 }
                 $scope.delayObject.setLeftBus(newValue);
                 $scope.leftWireEnrolled = true;
@@ -38,6 +41,9 @@ bonsaiApp.directive('delay', function () {
             $scope.$watch('busRight', function (newValue) {
                 if (newValue) {
                     newValue.enrollToDirective($scope.delayObject, $scope.getConnectionPositions);
+                    if ($scope.direction == 'left') {
+                         $scope.busRight.registerReaderAndRead($scope.delayObject);
+                    }
                 }
                 $scope.delayObject.setRightBus(newValue);
                 $scope.rightWireEnrolled = true;
